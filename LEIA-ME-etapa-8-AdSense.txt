@@ -1,0 +1,19 @@
+ETAPA 8 - GOOGLE ADSENSE
+
+Arquivos preparados para verificação e análise do Portal Notarial no Google AdSense.
+
+O código fornecido foi inserido no <head> das páginas HTML principais:
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777" crossorigin="anonymous"></script>
+
+Também foi criado o arquivo ads.txt com a linha:
+google.com, pub-1578115877344777, DIRECT, f08c47fec0942fa0
+
+O que publicar na raiz do repositório:
+- todos os arquivos .html deste pacote, substituindo os atuais;
+- ads.txt.
+
+Depois de publicar, verificar:
+https://portalnotarial.com.br/ads.txt
+https://portalnotarial.com.br/
+
+Se o site abrir normalmente e o ads.txt exibir a linha acima, voltar ao Google AdSense e solicitar a revisão do site.
