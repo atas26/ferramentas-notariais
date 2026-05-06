@@ -457,15 +457,31 @@ el('btnCopiar').addEventListener('click', copiarResultado);
 configuraContador();
 calcular(false);
 
-function configuraContador(){
+async function configuraContador(){
   const contador = el('visitCounterText');
   if (!contador) return;
-  const pagina = (window.location.pathname || 'pagina-local').replace(/\/$/, '') || 'pagina-local';
-  const chave = `portal-notarial-visitas:${pagina}`;
-  let visitas = Number(localStorage.getItem(chave) || '0');
-  visitas += 1;
-  localStorage.setItem(chave, String(visitas));
-  contador.textContent = `Visitas: ${visitas}`;
+
+  contador.textContent = 'Visitas: ...';
+
+  try {
+    const namespace = 'portal-notarial';
+    const nomeContador = 'calculadora-tarifas-conta-notarial';
+    const resposta = await fetch(`https://api.counterapi.dev/v1/${namespace}/${nomeContador}/up`, {
+      method: 'GET',
+      cache: 'no-store'
+    });
+
+    if (!resposta.ok) throw new Error('Falha ao atualizar contador');
+
+    const dados = await resposta.json();
+    const visitas = Number(dados.count ?? dados.value ?? 0);
+
+    if (!Number.isFinite(visitas) || visitas < 0) throw new Error('Resposta inválida do contador');
+
+    contador.textContent = `Visitas: ${visitas.toLocaleString('pt-BR')}`;
+  } catch (error) {
+    contador.textContent = 'Visitas: indisponível';
+  }
 }
 
 function mascaraMoeda(campo){
