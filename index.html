@@ -142,6 +142,19 @@
       white-space: nowrap;
     }
 
+    .site-logo {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+      line-height: 1;
+    }
+
+    .site-logo img {
+      width: 300px;
+      height: auto;
+      display: block;
+    }
+
 
 
     .nav-right {
@@ -422,7 +435,7 @@
     .visit-counter {
       position: fixed;
       right: 14px;
-      bottom: 64px;
+      bottom: 14px;
       z-index: 60;
       padding: 6px 10px;
       border: 1px solid rgba(255,255,255,0.14);
@@ -536,6 +549,10 @@
         padding: 14px 16px;
       }
 
+      .site-logo img {
+        width: 210px;
+      }
+
       .page {
         padding-top: 126px;
       }
@@ -586,7 +603,7 @@
 
       .visit-counter {
         right: 10px;
-        bottom: 76px;
+        bottom: 10px;
       }
     }
   </style>
@@ -603,8 +620,8 @@
 
     <nav class="navbar" aria-label="Navegação principal">
       <div class="nav-inner">
-        <a class="brand" href="/">
-          Portal Notarial
+        <a class="brand site-logo" href="/" aria-label="Portal Notarial — Início">
+          <img src="portal-notarial-logo.svg" alt="Portal Notarial" width="300" height="73" loading="eager" decoding="async">
         </a>
 
         <div class="nav-right">
@@ -715,7 +732,6 @@
 
     <footer>
       <div class="footer-inner">
-        <div>Portal Notarial | 2026</div>
         <div class="footer-links" aria-label="Links do rodapé">
           <a href="sobre.html">Sobre</a>
           <a href="contato.html">Contato</a>
@@ -735,16 +751,40 @@
   </div>
 
   <script>
-    const counterKey = "portal-notarial-local-visits";
-    const currentValue = Number(localStorage.getItem(counterKey) || "0") + 1;
-
-    localStorage.setItem(counterKey, String(currentValue));
-
     const counterElement = document.getElementById("visitCounter");
 
-    if (counterElement) {
-      counterElement.textContent = `Visitas: ${currentValue}`;
+    async function updateVisitCounter() {
+      if (!counterElement) return;
+
+      const fallbackKey = "portal-notarial-local-visits";
+      const fallbackValue = Number(localStorage.getItem(fallbackKey) || "0") + 1;
+      localStorage.setItem(fallbackKey, String(fallbackValue));
+
+      try {
+        const response = await fetch("https://countapi.mileshilliard.com/api/v1/hit/portalnotarial-home", {
+          method: "GET",
+          cache: "no-store"
+        });
+
+        if (!response.ok) {
+          throw new Error("contador indisponível");
+        }
+
+        const data = await response.json();
+        const total = Number(data && data.value);
+
+        if (Number.isFinite(total)) {
+          counterElement.textContent = `Visitas: ${total}`;
+          return;
+        }
+
+        throw new Error("resposta inválida do contador");
+      } catch (error) {
+        counterElement.textContent = `Visitas locais: ${fallbackValue}`;
+      }
     }
+
+    updateVisitCounter();
 
     const frasesNotariais = [
       {
