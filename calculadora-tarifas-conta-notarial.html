@@ -412,7 +412,7 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,118,255,.08)}
 </main>
 
 <span class="visit" title="Visitas" aria-label="Marcador discreto de visitas">
-  <span id="visitCounterText">Visitas: 1</span>
+  <span id="visitCounterText">Visitas: ...</span>
 </span>
 
 <script>
@@ -464,17 +464,27 @@ async function configuraContador(){
   contador.textContent = 'Visitas: ...';
 
   try {
+    // Contador global da página. Não usa localStorage, caminho da URL, domínio, navegador ou dispositivo.
+    // O parâmetro antiCache força uma nova requisição em celulares e computadores, evitando resposta antiga de cache.
     const namespace = 'portal-notarial';
     const nomeContador = 'calculadora-tarifas-conta-notarial';
-    const resposta = await fetch(`https://api.counterapi.dev/v1/${namespace}/${nomeContador}/up`, {
+    const antiCache = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    const url = `https://api.counterapi.dev/v1/${namespace}/${nomeContador}/up?nocache=${antiCache}`;
+
+    const resposta = await fetch(url, {
       method: 'GET',
-      cache: 'no-store'
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-store, no-cache, max-age=0, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
     });
 
     if (!resposta.ok) throw new Error('Falha ao atualizar contador');
 
     const dados = await resposta.json();
-    const visitas = Number(dados.count ?? dados.value ?? 0);
+    const visitas = Number(dados.value ?? dados.count ?? dados.data?.value ?? dados.data?.count ?? 0);
 
     if (!Number.isFinite(visitas) || visitas < 0) throw new Error('Resposta inválida do contador');
 
