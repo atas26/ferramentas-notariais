@@ -267,6 +267,7 @@ input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,
   padding:5px 8px;
 }
 .visit:hover{opacity:.9}
+.visit img{display:block;height:18px;width:auto}
 .hidden{display:none !important}
 @media (max-width:980px){
   .grid{grid-template-columns:1fr}
@@ -475,7 +476,7 @@ input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,
 </main>
 
 <span class="visit" title="Visitas" aria-label="Marcador discreto de visitas">
-  <span id="visitCounterText">Visitas: 1</span>
+  <img id="visitCounter" alt="Visitas" loading="lazy" referrerpolicy="no-referrer-when-downgrade" />
 </span>
 
 <script>
@@ -607,14 +608,13 @@ atualizaCamposTributo();
 calcular(false);
 
 function configuraContador(){
-  const contador = el('visitCounterText');
+  const contador = el('visitCounter');
   if (!contador) return;
-  const pagina = (window.location.pathname || 'pagina-local').replace(/\/$/, '') || 'pagina-local';
-  const chave = `portal-notarial-visitas:${pagina}`;
-  let visitas = Number(localStorage.getItem(chave) || '0');
-  visitas += 1;
-  localStorage.setItem(chave, String(visitas));
-  contador.textContent = `Visitas: ${visitas}`;
+  const host = window.location.hostname || 'portalnotarial.com.br';
+  const path = (window.location.pathname || '/calculadora-escritura-tributo-registro-sp.html').replace(/\/$/, '') || '/calculadora-escritura-tributo-registro-sp.html';
+  const pagina = `${host}${path}`;
+  contador.src = `https://hits.sh/${encodeURIComponent(pagina)}.svg?label=Visitas&color=e5e7eb&labelColor=ffffff&style=flat-square`;
+  contador.onerror = () => { contador.style.display = 'none'; };
 }
 
 function atualizaCamposTributo(){
