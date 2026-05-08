@@ -1188,22 +1188,23 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
 
     function makeTermRegex(term, global = false) {
       if (!term) return null;
-      const prefixSearch = term.length >= 3 && !/^\d+$/.test(term);
-      const suffix = prefixSearch ? '[a-z0-9]*' : '';
-      return new RegExp('(^|[^a-z0-9])(' + escapeRegExp(term) + suffix + ')(?=[^a-z0-9]|$)', global ? 'g' : '');
+      return new RegExp(escapeRegExp(term), global ? 'g' : '');
     }
 
     function countTermOccurrences(hay, term) {
+      if (!term || !hay) return 0;
       const re = makeTermRegex(term, true);
       if (!re) return 0;
       let count = 0;
-      while (re.exec(hay) !== null) count += 1;
+      while (re.exec(hay) !== null) {
+        count += 1;
+        if (re.lastIndex === 0) re.lastIndex++;
+      }
       return count;
     }
 
     function hasTerm(hay, term) {
-      const re = makeTermRegex(term, false);
-      return re ? re.test(hay) : false;
+      return Boolean(term && hay && hay.includes(term));
     }
 
     function recordSearchText(record) {
@@ -1393,17 +1394,11 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
         if (parts.length > 1) {
           re = new RegExp(parts.map(escapeRegExp).join('[\\s\\.,;:/()\\[\\]º°ª\\-]+'), 'g');
         } else {
-          const suffix = parts[0].length >= 3 && !/^\d+$/.test(parts[0]) ? '[a-z0-9]*' : '';
-          re = new RegExp('(^|[^a-z0-9])(' + escapeRegExp(parts[0]) + suffix + ')(?=[^a-z0-9]|$)', 'g');
+          re = new RegExp(escapeRegExp(parts[0]), 'g');
         }
         let match;
         while ((match = re.exec(normalizedText)) !== null) {
-          if (parts.length > 1) {
-            addRange(match.index, match.index + match[0].length);
-          } else {
-            const prefixSize = match[1] ? match[1].length : 0;
-            addRange(match.index + prefixSize, match.index + prefixSize + match[2].length);
-          }
+          addRange(match.index, match.index + match[0].length);
           if (match.index === re.lastIndex) re.lastIndex++;
         }
       }
