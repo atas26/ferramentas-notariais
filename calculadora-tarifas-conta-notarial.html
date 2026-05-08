@@ -212,6 +212,15 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,118,255,.08)}
 .row-item span:last-child{font-weight:800;color:var(--slate-950);white-space:nowrap}
 .status{margin-top:12px;padding:12px 14px;font-size:13px;line-height:1.5;background:var(--amber-50);border:1px solid var(--amber-200);color:var(--amber-900);display:none}
 .status.show{display:block}
+.tarifa-vigencia{
+  margin-top:12px;
+  font-size:13px;
+  line-height:1.5;
+  color:var(--slate-700);
+  background:var(--stone-100);
+  border:1px solid var(--stone-200);
+  padding:10px 12px;
+}
 .footer{
   margin-top:24px;
   padding-top:18px;
@@ -403,9 +412,11 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,118,255,.08)}
       <div class="breakdown">
         <div class="row-item"><span>Valor base</span><span id="valorResultado">R$ 0,00</span></div>
         <div class="row-item"><span>Tarifa R$</span><span id="tarifaResultado">R$ 0,00</span></div>
+        <div class="row-item"><span>Faixa correspondente</span><span id="faixaResultado">-</span></div>
         <div class="row-item"><span>Tarifa %</span><span id="percentualResultado">-</span></div>
         <div class="row-item"><span>Total</span><span id="totalLinhaResultado">R$ 0,00</span></div>
       </div>
+      <div class="tarifa-vigencia">Tarifa aplicada a partir de 01/04/2026.</div>
       <div class="status" id="statusCalculo"></div>
     </aside>
   </section>
@@ -530,6 +541,7 @@ function calcular(rolar = true){
     tarifa,
     total,
     faixa: faixaTarifa.faixa || '-',
+    faixaRotulo: faixaTarifa.rotulo || '-',
     percentual: criterioPercentual,
     tarifaMinima,
     criterioTarifa: `${faixaTarifa.rotulo}; percentual: ${criterioPercentual}; valor mínimo da tarifa: ${formatMoeda(tarifaMinima)}`
@@ -542,6 +554,7 @@ function calcular(rolar = true){
 function renderResultado(r){
   el('valorResultado').textContent = formatMoeda(r.valorBase);
   el('tarifaResultado').textContent = formatMoeda(r.tarifa);
+  el('faixaResultado').textContent = r.faixaRotulo || r.faixa || '-';
   el('percentualResultado').textContent = r.percentual || '-';
   el('totalResultado').textContent = formatMoeda(r.total);
   el('totalLinhaResultado').textContent = formatMoeda(r.total);
@@ -563,6 +576,7 @@ async function copiarResultado(){
     'Calculadora de tarifas conta notarial',
     `Valor base da operação: ${formatMoeda(r.valorBase)}`,
     `Tarifa R$: ${formatMoeda(r.tarifa)} (${r.criterioTarifa})`,
+    `Faixa correspondente: ${r.faixaRotulo || r.faixa || '-'}`,
     `Tarifa %: ${r.percentual || '-'}`,
     `Valor estimado: ${formatMoeda(r.total)}`,
     'Observação: valores meramente estimativos.'
