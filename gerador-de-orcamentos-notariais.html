@@ -6,7 +6,6 @@
 <title>Gerador de orçamento de atos notariais | Portal Notarial</title>
 <meta name="description" content="Gerador de orçamento estimativo de atos notariais, tributo e registro imobiliário no Estado de São Paulo, com base no valor informado pelo usuário." />
 <meta name="robots" content="index, follow" />
-<meta name="google-adsense-account" content="ca-pub-1578115877344777" />
 <link rel="canonical" href="https://portalnotarial.com.br/gerador-orcamento-atos-notariais.html" />
 <meta property="og:locale" content="pt_BR" />
 <meta property="og:type" content="website" />
@@ -235,32 +234,31 @@ tr:last-child td{border-bottom:none}
   .lead{max-width:none}
   .pn-info-grid{grid-template-columns:1fr}
 }
+
 .print-area{display:none}
-.print-area table{width:100%;border-collapse:collapse;font-size:12px}
-.print-area th,.print-area td{padding:8px 10px;border-bottom:1px solid #d7dce3;text-align:left;vertical-align:top}
-.print-area th{background:#f8fafc;color:#334155;font-weight:700}
-.print-area .money-cell{text-align:right;white-space:nowrap;font-weight:800}
-.print-head{display:flex;justify-content:space-between;gap:18px;border-bottom:2px solid #172033;padding-bottom:12px;margin-bottom:18px}
-.print-brand{font-size:18px;font-weight:800;color:#172033}
-.print-url{font-size:12px;color:#475569;margin-top:3px}
-.print-title{font-family:'Fraunces','Georgia',serif;font-size:26px;line-height:1.15;font-weight:400;margin:0 0 12px;color:#0f172a}
-.print-meta{font-size:12px;color:#475569;text-align:right}
-.print-section{margin-top:16px}
-.print-section h3{font-size:13px;margin:0 0 8px;color:#0f172a;text-transform:uppercase;letter-spacing:.08em}
-.print-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:12px}
-.print-field{border-bottom:1px solid #e5e7eb;padding:0 0 6px}
-.print-field span{display:block;color:#64748b;font-size:10px;text-transform:uppercase;letter-spacing:.06em}
-.print-field strong{font-size:12px;color:#0f172a;font-weight:700}
-.print-total{margin-top:16px;padding:12px 14px;border:2px solid #172033;display:flex;justify-content:space-between;align-items:center;font-size:16px;font-weight:800}
-.print-note{margin-top:14px;font-size:11px;line-height:1.5;color:#475569}
 @media print{
-  @page{size:A4;margin:14mm}
+  .hero,.pn-editorial,.grid,.footer,.visit{display:none!important}
   body{background:white;color:#0f172a}
-  body *{visibility:hidden!important}
-  .print-area,.print-area *{visibility:visible!important}
-  .print-area{display:block!important;position:absolute;left:0;top:0;width:100%;padding:0;font-family:'IBM Plex Sans',Arial,sans-serif}
-  .actions,.visit,.pn-editorial,.footer,.hero,.grid{display:none!important}
+  .page{max-width:none;padding:0;margin:0}
+  .print-area{display:block!important;font-family:'IBM Plex Sans',Arial,sans-serif;font-size:12px;line-height:1.45;padding:18mm;color:#0f172a}
+  .print-head{display:flex;justify-content:space-between;gap:24px;border-bottom:1px solid #cbd5e1;padding-bottom:12px;margin-bottom:18px}
+  .print-brand{font-size:18px;font-weight:800;color:#0f172a}
+  .print-url{font-size:11px;color:#475569;margin-top:3px}
+  .print-meta{text-align:right;font-size:11px;color:#475569}
+  .print-title{font-family:'Fraunces','Georgia',serif;font-size:26px;line-height:1.1;margin:0 0 18px;color:#0f172a}
+  .print-section{margin:0 0 16px;break-inside:avoid}
+  .print-section h3{font-size:13px;margin:0 0 8px;color:#0f172a;text-transform:uppercase;letter-spacing:.08em}
+  .print-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .print-field{border:1px solid #e2e8f0;border-radius:8px;padding:8px;background:#fff}
+  .print-field span{display:block;font-size:10px;color:#64748b;margin-bottom:2px}
+  .print-field strong{font-size:12px;color:#0f172a;font-weight:700}
+  .print-area table{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px}
+  .print-area th,.print-area td{border:1px solid #e2e8f0;padding:8px;text-align:left;vertical-align:top}
+  .print-area th{background:#f8fafc;color:#334155;font-weight:700}
+  .print-total{display:flex;justify-content:space-between;gap:16px;border:1px solid #0f172a;border-radius:8px;padding:12px 14px;margin:16px 0;font-size:16px;font-weight:800}
+  .print-note{border-left:3px solid #64748b;background:#f8fafc;padding:10px 12px;font-size:11px;color:#334155}
 }
+
 </style>
 </head>
 <body>
@@ -279,7 +277,7 @@ tr:last-child td{border-bottom:none}
     <div class="pn-info-grid">
       <div class="pn-info-card">
         <h3>Dados do atendimento</h3>
-        <p>Informe o escrevente responsável e o solicitante para que o orçamento seja gerado com os dados básicos do atendimento.</p>
+        <p>Informe o escrevente responsável, o contato do escrevente, o cartório e o solicitante para que o orçamento seja gerado com os dados básicos do atendimento.</p>
       </div>
       <div class="pn-info-card">
         <h3>Base de cálculo</h3>
@@ -307,10 +305,19 @@ tr:last-child td{border-bottom:none}
           </div>
 
           <div class="form-field">
+            <label for="contatoEscrevente">Contato escrevente</label>
+            <input id="contatoEscrevente" inputmode="tel" autocomplete="tel" placeholder="Telefone de contato do escrevente" />
+          </div>
+
+          <div class="form-field">
+            <label for="cartorio">Cartório</label>
+            <input id="cartorio" autocomplete="organization" placeholder="Nome do cartório" />
+          </div>
+
+          <div class="form-field">
             <label for="solicitadoPor">Solicitado por</label>
             <input id="solicitadoPor" autocomplete="name" placeholder="Nome completo do solicitante" />
           </div>
-
 
           <div class="form-field full">
             <label for="naturezaAto">Natureza do ato</label>
@@ -547,7 +554,7 @@ document.querySelectorAll('input[name="temRegistro"]').forEach((radio) => {
   radio.addEventListener('change', () => calcular(false));
 });
 
-['escrevente','solicitadoPor','outroAto'].forEach((id) => {
+['escrevente','contatoEscrevente','cartorio','solicitadoPor','outroAto'].forEach((id) => {
   const campo = el(id);
   if (campo) campo.addEventListener('input', () => montarTextoOrcamento());
 });
@@ -696,6 +703,8 @@ function calcular(rolar = true){
     criterioRegistro: incluiRegistro ? `Tabela de Registro de Imóveis: ${faixaRegistro.rotulo}` : 'Registro de Imóveis não incluído',
     naturezaAto: naturezaAtoSelecionada(),
     escrevente: el('escrevente').value.trim(),
+    contatoEscrevente: el('contatoEscrevente').value.trim(),
+    cartorio: el('cartorio').value.trim(),
     solicitadoPor: el('solicitadoPor').value.trim(),
     aviso
   };
@@ -737,6 +746,8 @@ function montarTextoOrcamento(){
     ...ultimoResultado,
     naturezaAto: naturezaAtoSelecionada(),
     escrevente: el('escrevente').value.trim() || 'Não informado',
+    contatoEscrevente: el('contatoEscrevente').value.trim() || 'Não informado',
+    cartorio: el('cartorio').value.trim() || 'Não informado',
     solicitadoPor: el('solicitadoPor').value.trim() || 'Não informado'
   };
 
@@ -745,6 +756,8 @@ function montarTextoOrcamento(){
     '',
     `Data: ${hojeFormatado()}`,
     `Escrevente responsável: ${r.escrevente}`,
+    `Contato escrevente: ${r.contatoEscrevente}`,
+    `Cartório: ${r.cartorio}`,
     `Solicitado por: ${r.solicitadoPor}`,
     `Natureza do ato: ${r.naturezaAto}`,
     `Valor base de cálculo: ${formatMoeda(r.valorBase)}`,
@@ -775,6 +788,8 @@ function atualizarAreaImpressao(r){
     ...r,
     naturezaAto: naturezaAtoSelecionada(),
     escrevente: el('escrevente').value.trim() || 'Não informado',
+    contatoEscrevente: el('contatoEscrevente').value.trim() || 'Não informado',
+    cartorio: el('cartorio').value.trim() || 'Não informado',
     solicitadoPor: el('solicitadoPor').value.trim() || 'Não informado'
   };
 
@@ -804,6 +819,8 @@ function atualizarAreaImpressao(r){
       <h3>Dados do atendimento</h3>
       <div class="print-grid">
         <div class="print-field"><span>Escrevente responsável</span><strong>${escapeHtml(dados.escrevente)}</strong></div>
+        <div class="print-field"><span>Contato escrevente</span><strong>${escapeHtml(dados.contatoEscrevente)}</strong></div>
+        <div class="print-field"><span>Cartório</span><strong>${escapeHtml(dados.cartorio)}</strong></div>
         <div class="print-field"><span>Solicitado por</span><strong>${escapeHtml(dados.solicitadoPor)}</strong></div>
         <div class="print-field"><span>Natureza do ato</span><strong>${escapeHtml(dados.naturezaAto)}</strong></div>
         <div class="print-field"><span>Registro imobiliário</span><strong>${dados.incluiRegistro ? 'Incluído' : 'Não incluído'}</strong></div>
@@ -859,7 +876,7 @@ function gerarPDF(){
 }
 
 function limpar(){
-  ['escrevente','solicitadoPor','outroAto','valorBase','aliquotaITBI','valorOutros'].forEach((id) => el(id).value = '');
+  ['escrevente','contatoEscrevente','cartorio','solicitadoPor','outroAto','valorBase','aliquotaITBI','valorOutros'].forEach((id) => el(id).value = '');
   el('naturezaAto').value = '';
   el('aliquotaITCMD').value = '4%';
   document.querySelector('input[name="tipoTributo"][value="itbi"]').checked = true;
