@@ -1166,6 +1166,7 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
       });
       const terms = tokenizeSearch(original).filter(term => term.length > 1 || /\d/.test(term));
       const strongTerms = terms.filter(term => !SEARCH_STOPWORDS.has(term) || /\d/.test(term));
+      const searchTerms = uniqueList(strongTerms.length ? strongTerms : terms);
       const phrases = [];
       for (let size = Math.min(4, terms.length); size >= 2; size--) {
         for (let i = 0; i <= terms.length - size; i++) {
@@ -1174,32 +1175,35 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
           if (useful) phrases.push(slice.join(' '));
         }
       }
-      // Termos que funcionam mais como contexto do que como requisito rígido.
-      // Ex.: "digital ata notarial usucapião" deve priorizar "ata notarial" e
-      // "usucapião", mesmo que o artigo use "eletrônico" em vez de "digital".
-      const softTerms = new Set(['digital','eletronico','eletronica','eletronicos','eletronicas','online','remoto','remota']);
-      const requiredTerms = (strongTerms.length ? strongTerms : terms).filter(term => !softTerms.has(term));
       return {
         raw: original,
         normalized,
         terms: uniqueList(terms),
-        strongTerms: uniqueList(strongTerms.length ? strongTerms : terms),
-        requiredTerms: uniqueList(requiredTerms.length ? requiredTerms : (strongTerms.length ? strongTerms : terms)),
+        strongTerms: searchTerms,
+        requiredTerms: searchTerms,
         phrases: uniqueList([...quoted, ...phrases]),
         fullPhrase: normalized
       };
     }
 
+    function makeTermRegex(term, global = false) {
+      if (!term) return null;
+      const prefixSearch = term.length >= 3 && !/^\d+$/.test(term);
+      const suffix = prefixSearch ? '[a-z0-9]*' : '';
+      return new RegExp('(^|[^a-z0-9])(' + escapeRegExp(term) + suffix + ')(?=[^a-z0-9]|$)', global ? 'g' : '');
+    }
+
     function countTermOccurrences(hay, term) {
-      if (!term) return 0;
-      const re = new RegExp('(^|[^a-z0-9])' + escapeRegExp(term) + '(?=[^a-z0-9]|$)', 'g');
-      return (hay.match(re) || []).length;
+      const re = makeTermRegex(term, true);
+      if (!re) return 0;
+      let count = 0;
+      while (re.exec(hay) !== null) count += 1;
+      return count;
     }
 
     function hasTerm(hay, term) {
-      if (!term) return false;
-      const re = new RegExp('(^|[^a-z0-9])' + escapeRegExp(term) + '(?=[^a-z0-9]|$)');
-      return re.test(hay);
+      const re = makeTermRegex(term, false);
+      return re ? re.test(hay) : false;
     }
 
     function recordSearchText(record) {
@@ -1226,6 +1230,12 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
         return exactHit ? 1000 + (number.includes(plan.normalized) ? 300 : 0) : 0;
       }
 
+      const requiredTerms = plan.requiredTerms || plan.strongTerms || [];
+      for (const term of requiredTerms) {
+        const found = hasTerm(hay, term) || hasTerm(number, term) || number.includes(term) || hasTerm(chapter, term) || hasTerm(themes, term);
+        if (!found) return 0;
+      }
+
       let score = 0;
       let phraseHits = 0;
       let bestPhraseSize = 0;
@@ -1245,39 +1255,20 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
         }
       }
 
-      let matchedTerms = 0;
-      for (const term of plan.strongTerms) {
+      for (const term of requiredTerms) {
         const inNumber = hasTerm(number, term) || number.includes(term);
         const inChapter = hasTerm(chapter, term);
         const inTheme = hasTerm(themes, term);
         const occurrences = countTermOccurrences(hay, term);
-        if (occurrences > 0 || inNumber || inChapter || inTheme) {
-          matchedTerms += 1;
-          if (inNumber) score += 220;
-          if (inChapter) score += 80;
-          if (inTheme) score += 55;
-          score += 40 + Math.min(occurrences, 12) * 12;
-        }
+        if (inNumber) score += 220;
+        if (inChapter) score += 80;
+        if (inTheme) score += 55;
+        score += 40 + Math.min(occurrences, 12) * 12;
       }
 
-      let matchedRequired = 0;
-      for (const term of (plan.requiredTerms || plan.strongTerms)) {
-        const occurrences = countTermOccurrences(hay, term);
-        if (occurrences > 0 || hasTerm(number, term) || hasTerm(chapter, term) || hasTerm(themes, term)) matchedRequired += 1;
-      }
-      const requiredTotal = (plan.requiredTerms || plan.strongTerms).length;
-      const coverage = requiredTotal ? matchedRequired / requiredTotal : 0;
-      if (requiredTotal > 1) {
-        if (coverage === 1) score += 260;
-        else if (coverage >= 0.70) score += 150;
-        else if (coverage >= 0.40) score += 55;
-      }
-
+      if (requiredTerms.length > 1) score += 260 + requiredTerms.length * 40;
       if (phraseHits > 0) score += 80 + bestPhraseSize * 25;
-      if (score === 0 && matchedTerms === 0 && phraseHits === 0) return 0;
 
-      // Busca composta: cada termo digitado passa a participar do resultado.
-      // Registros com mais termos encontrados continuam aparecendo antes dos demais.
       return score;
     }
 
@@ -1371,7 +1362,8 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
         if (parts.length > 1) {
           re = new RegExp(parts.map(escapeRegExp).join('[\\s\\.,;:/()\\[\\]º°ª\\-]+'), 'g');
         } else {
-          re = new RegExp('(^|[^a-z0-9])(' + escapeRegExp(parts[0]) + ')(?=[^a-z0-9]|$)', 'g');
+          const suffix = parts[0].length >= 3 && !/^\d+$/.test(parts[0]) ? '[a-z0-9]*' : '';
+          re = new RegExp('(^|[^a-z0-9])(' + escapeRegExp(parts[0]) + suffix + ')(?=[^a-z0-9]|$)', 'g');
         }
         let match;
         while ((match = re.exec(normalizedText)) !== null) {
@@ -1418,7 +1410,7 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
       const q = state.query;
       container.innerHTML = state.results.slice(0, 120).map(rec => {
         const capitulo = rec.capitulo || rec.areas[0] || 'Capítulo não identificado';
-        const tags = `<span class="tag teal">${escapeHtml(capitulo)}</span>`;
+        const tags = `<span class="tag teal">${highlight(capitulo, q)}</span>`;
         return `
           <article id="${rec.id}" class="result-card" data-id="${rec.id}">
             <div class="result-top">
