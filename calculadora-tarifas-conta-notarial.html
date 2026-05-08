@@ -210,6 +210,16 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,118,255,.08)}
 .row-item:last-child{border-bottom:none}
 .row-item span:first-child{color:var(--slate-700)}
 .row-item span:last-child{font-weight:800;color:var(--slate-950);white-space:nowrap}
+.row-item.faixa-row{align-items:flex-start}
+.row-item.faixa-row span:first-child{min-width:120px}
+.row-item.faixa-row span:last-child{
+  white-space:normal;
+  min-width:0;
+  max-width:210px;
+  text-align:right;
+  line-height:1.35;
+  overflow-wrap:break-word;
+}
 .status{margin-top:12px;padding:12px 14px;font-size:13px;line-height:1.5;background:var(--amber-50);border:1px solid var(--amber-200);color:var(--amber-900);display:none}
 .status.show{display:block}
 .tarifa-vigencia{
@@ -412,7 +422,7 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,118,255,.08)}
       <div class="breakdown">
         <div class="row-item"><span>Valor base</span><span id="valorResultado">R$ 0,00</span></div>
         <div class="row-item"><span>Tarifa R$</span><span id="tarifaResultado">R$ 0,00</span></div>
-        <div class="row-item"><span>Faixa correspondente</span><span id="faixaResultado">-</span></div>
+        <div class="row-item faixa-row"><span>Faixa correspondente</span><span id="faixaResultado">-</span></div>
         <div class="row-item"><span>Tarifa %</span><span id="percentualResultado">-</span></div>
         <div class="row-item"><span>Total</span><span id="totalLinhaResultado">R$ 0,00</span></div>
       </div>
