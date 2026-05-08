@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Portal Notarial | Ferramentas para atos notariais e normas extrajudiciais</title>
-  <meta name="description" content="Ferramentas para consulta de competência notarial eletrônica, Código Nacional de Normas, Normas da Corregedoria de São Paulo, escritura, tributo, registro e conta notarial." />
+  <meta name="description" content="Ferramentas para consulta de competência notarial eletrônica, Código Nacional de Normas, Normas da Corregedoria de São Paulo, escritura, tributo, registro, conta notarial, links úteis e validação técnica de documentos eletrônicos." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://portalnotarial.com.br/" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Portal Notarial" />
   <meta property="og:title" content="Portal Notarial | Ferramentas para atos notariais e normas extrajudiciais" />
-  <meta property="og:description" content="Ferramentas para consulta de competência notarial eletrônica, Código Nacional de Normas, Normas da Corregedoria de São Paulo, escritura, tributo, registro e conta notarial." />
+  <meta property="og:description" content="Ferramentas para consulta de competência notarial eletrônica, Código Nacional de Normas, Normas da Corregedoria de São Paulo, escritura, tributo, registro, conta notarial, links úteis e validação técnica de documentos eletrônicos." />
   <meta property="og:url" content="https://portalnotarial.com.br/" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Portal Notarial | Ferramentas para atos notariais e normas extrajudiciais" />
-  <meta name="twitter:description" content="Ferramentas para consulta de competência notarial eletrônica, Código Nacional de Normas, Normas da Corregedoria de São Paulo, escritura, tributo, registro e conta notarial." />
+  <meta name="twitter:description" content="Ferramentas para consulta de competência notarial eletrônica, Código Nacional de Normas, Normas da Corregedoria de São Paulo, escritura, tributo, registro, conta notarial, links úteis e validação técnica de documentos eletrônicos." />
 
 <style>
     :root {
@@ -25,6 +25,9 @@
       --verde: rgb(0, 144, 157);
       --amarelo: rgb(245, 196, 66);
       --roxo: rgb(168, 85, 247);
+      --ciano: rgb(34, 211, 238);
+      --laranja: rgb(249, 115, 22);
+      --rosa: rgb(236, 72, 153);
       --fundo: #071323;
       --fundo-2: #0a1d31;
       --texto: #f8fafc;
@@ -319,7 +322,7 @@
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       border-top: 1px solid var(--linha);
       border-left: 1px solid var(--linha);
       background: rgba(255,255,255,0.02);
@@ -368,6 +371,18 @@
       background: var(--roxo);
     }
 
+    .card:nth-child(6)::after {
+      background: var(--ciano);
+    }
+
+    .card:nth-child(7)::after {
+      background: var(--laranja);
+    }
+
+    .card:nth-child(8)::after {
+      background: var(--rosa);
+    }
+
     .card:hover {
       background: rgba(255,255,255,0.12);
       transform: translateY(-4px);
@@ -402,6 +417,18 @@
 
     .card:nth-child(5) h3 {
       color: var(--roxo);
+    }
+
+    .card:nth-child(6) h3 {
+      color: var(--ciano);
+    }
+
+    .card:nth-child(7) h3 {
+      color: var(--laranja);
+    }
+
+    .card:nth-child(8) h3 {
+      color: var(--rosa);
     }
 
     .card p {
@@ -658,7 +685,7 @@
           </h1>
 
           <p class="lead">
-            Ferramentas de apoio para a rotina de tabelionatos de notas e da advocacia, com acesso rápido a consultas sobre competência notarial eletrônica, Código Nacional de Normas, Normas da Corregedoria Geral da Justiça de São Paulo, cálculo de escritura, tributo e registro imobiliário e tarifas da conta notarial.
+            Ferramentas de apoio para a rotina de tabelionatos de notas, da advocacia e de imobiliárias, com acesso rápido a consultas sobre competência notarial eletrônica, Código Nacional de Normas, Normas da Corregedoria Geral da Justiça de São Paulo, cálculo de escritura, tributo e registro imobiliário, tarifas da conta notarial, links úteis e validação técnica de documentos eletrônicos.
           </p>
         </section>
       </div>
@@ -719,6 +746,43 @@
             <h3>Calculadora de tarifas conta notarial</h3>
             <p>
               Calcule de forma simples e rápida o valor da tarifa.
+            </p>
+          </div>
+          <div class="card-bottom" aria-hidden="true">
+            <div class="arrow">→</div>
+          </div>
+        </a>
+
+
+        <a class="card" href="https://portalnotarial.com.br/links-uteis.html" aria-label="Abrir páginas de serviços e links úteis">
+          <div>
+            <h3>Páginas de serviços e links úteis</h3>
+            <p>
+              Acesso rápido a páginas, serviços, órgãos e temas de uso frequente na rotina notarial.
+            </p>
+          </div>
+          <div class="card-bottom" aria-hidden="true">
+            <div class="arrow">→</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://verificador.portalnotarial.com.br/c" aria-label="Abrir verificador técnico de documentos eletrônicos">
+          <div>
+            <h3>Verificador técnico de documentos eletrônicos</h3>
+            <p>
+              Triagem e validação de documentos eletrônicos, com verificação de formato, hash, PDF/A e assinatura digital.
+            </p>
+          </div>
+          <div class="card-bottom" aria-hidden="true">
+            <div class="arrow">→</div>
+          </div>
+        </a>
+
+        <a class="card" href="calculadora-escritura-tributo-registro-sp.html" aria-label="Abrir gerador de orçamento de atos notariais">
+          <div>
+            <h3>Gerador de orçamento de atos notariais</h3>
+            <p>
+              Gere orçamento estimativo com escritura, tributo, registro imobiliário e valores adicionais informados.
             </p>
           </div>
           <div class="card-bottom" aria-hidden="true">
