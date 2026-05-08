@@ -1144,11 +1144,15 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
 
     function tokenizeSearch(text) {
       const normalized = normalize(text)
-        .replace(/[^a-z0-9\s.-]/g, ' ')
         .replace(/\b(art)\s*[.]?\s*(\d+)/g, 'art $2')
+        .replace(/[^a-z0-9\s-]/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
-      return normalized ? normalized.split(' ').filter(Boolean) : [];
+      if (!normalized) return [];
+      return uniqueList(normalized.split(' ')
+        .map(term => term.trim())
+        .filter(term => term && (term.length > 1 || /\d/.test(term)))
+        .filter(term => !SEARCH_STOPWORDS.has(term) || /\d/.test(term)));
     }
 
     function uniqueList(values) {
@@ -1157,54 +1161,32 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
 
     function buildSearchPlan(query) {
       const original = String(query || '').trim();
-      const normalized = normalize(original);
-      const quoted = [];
-      original.replace(/[“”\"]([^“”\"]+)[“”\"]/g, (_, phrase) => {
-        const p = normalize(phrase);
-        if (p) quoted.push(p);
-        return _;
-      });
-      const terms = tokenizeSearch(original).filter(term => term.length > 1 || /\d/.test(term));
-      const strongTerms = terms.filter(term => !SEARCH_STOPWORDS.has(term) || /\d/.test(term));
-      const searchTerms = uniqueList(strongTerms.length ? strongTerms : terms);
-      const phrases = [];
-      for (let size = Math.min(4, terms.length); size >= 2; size--) {
-        for (let i = 0; i <= terms.length - size; i++) {
-          const slice = terms.slice(i, i + size);
-          const useful = slice.some(term => !SEARCH_STOPWORDS.has(term) || /\d/.test(term));
-          if (useful) phrases.push(slice.join(' '));
-        }
-      }
+      const normalized = normalize(original)
+        .replace(/\b(art)\s*[.]?\s*(\d+)/g, 'art $2')
+        .replace(/[^a-z0-9\s-]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      const terms = tokenizeSearch(original);
       return {
         raw: original,
         normalized,
-        terms: uniqueList(terms),
-        strongTerms: searchTerms,
-        requiredTerms: searchTerms,
-        phrases: uniqueList([...quoted, ...phrases]),
+        terms,
+        strongTerms: terms,
+        requiredTerms: terms,
+        phrases: normalized ? [normalized] : [],
         fullPhrase: normalized
       };
     }
 
-    function makeTermRegex(term, global = false) {
-      if (!term) return null;
-      return new RegExp(escapeRegExp(term), global ? 'g' : '');
-    }
-
     function countTermOccurrences(hay, term) {
-      if (!term || !hay) return 0;
-      const re = makeTermRegex(term, true);
-      if (!re) return 0;
+      if (!hay || !term) return 0;
       let count = 0;
-      while (re.exec(hay) !== null) {
+      let pos = hay.indexOf(term);
+      while (pos !== -1) {
         count += 1;
-        if (re.lastIndex === 0) re.lastIndex++;
+        pos = hay.indexOf(term, pos + Math.max(term.length, 1));
       }
       return count;
-    }
-
-    function hasTerm(hay, term) {
-      return Boolean(term && hay && hay.includes(term));
     }
 
     function recordSearchText(record) {
@@ -1217,82 +1199,47 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
       ].join(' '));
     }
 
-    function getSearchHitData(record, plan) {
-      const hay = recordSearchText(record);
-      const number = normalize(record.numero);
-      const chapter = normalize(record.capitulo || '');
-      const themes = normalize([...(record.areas || []), ...(record.temas || [])].join(' '));
-      const terms = plan.requiredTerms || plan.strongTerms || [];
-
-      const hits = terms.map(term => {
-        const inNumber = hasTerm(number, term) || number.includes(term);
-        const inChapter = hasTerm(chapter, term);
-        const inTheme = hasTerm(themes, term);
-        const occurrences = countTermOccurrences(hay, term);
-        const found = inNumber || inChapter || inTheme || occurrences > 0;
-        return { term, found, inNumber, inChapter, inTheme, occurrences };
-      });
-
+    function recordSearchFields(record) {
       return {
-        hay,
-        number,
-        chapter,
-        themes,
-        terms,
-        hits,
-        matchedCount: hits.filter(hit => hit.found).length,
-        allTermsFound: hits.every(hit => hit.found),
-        firstTermFound: hits.length ? hits[0].found : true
+        number: normalize(record.numero),
+        chapter: normalize(record.capitulo || ''),
+        text: normalize(record.texto),
+        areas: normalize((record.areas || []).join(' ')),
+        themes: normalize((record.temas || []).join(' '))
       };
     }
 
-    function scoreRecord(record, q, mode = 'strict') {
+    function scoreRecord(record, q) {
       const plan = buildSearchPlan(q);
       if (!plan.normalized) return 1;
 
-      const hitData = getSearchHitData(record, plan);
-      const { hay, number, chapter, themes, terms, hits } = hitData;
+      const fields = recordSearchFields(record);
+      const hay = [fields.number, fields.chapter, fields.text, fields.areas, fields.themes].join(' ');
 
       if (state.exact) {
-        const exactHit = hay.includes(plan.normalized) || plan.phrases.some(phrase => hay.includes(phrase));
-        return exactHit ? 1000 + (number.includes(plan.normalized) ? 300 : 0) : 0;
+        return hay.includes(plan.normalized) ? 100000 : 0;
       }
 
-      if (mode === 'strict' && !hitData.allTermsFound) return 0;
-      if (mode === 'fallback' && !hitData.firstTermFound) return 0;
+      if (!plan.requiredTerms.length) return 1;
+
+      // Regra principal: cada novo termo digitado refina o resultado.
+      // Ex.: "inventário" -> contém inventário.
+      // Ex.: "inventário menor" -> contém inventário e menor.
+      // Ex.: "inventário menor tabelionato" -> contém os três termos.
+      const allTermsFound = plan.requiredTerms.every(term => hay.includes(term));
+      if (!allTermsFound) return 0;
 
       let score = 0;
-      let phraseHits = 0;
-      let bestPhraseSize = 0;
+      if (plan.fullPhrase && hay.includes(plan.fullPhrase)) score += 5000;
 
-      if (hitData.allTermsFound) score += 900 + terms.length * 120;
-      else score += hitData.matchedCount * 220;
-
-      if (plan.fullPhrase && hay.includes(plan.fullPhrase)) {
-        score += 420 + Math.min(plan.terms.length * 30, 180);
+      for (const term of plan.requiredTerms) {
+        if (fields.number.includes(term)) score += 1200;
+        if (fields.chapter.includes(term)) score += 700;
+        if (fields.areas.includes(term)) score += 550;
+        if (fields.themes.includes(term)) score += 500;
+        if (fields.text.includes(term)) score += 180;
+        score += Math.min(countTermOccurrences(hay, term), 20) * 20;
       }
-
-      for (const phrase of plan.phrases) {
-        if (!phrase || phrase === plan.fullPhrase) continue;
-        if (hay.includes(phrase)) {
-          const size = phrase.split(' ').length;
-          phraseHits += 1;
-          bestPhraseSize = Math.max(bestPhraseSize, size);
-          score += 120 + (size * 40);
-          if (chapter.includes(phrase) || themes.includes(phrase)) score += 70;
-        }
-      }
-
-      for (const hit of hits) {
-        if (!hit.found) continue;
-        if (hit.inNumber) score += 220;
-        if (hit.inChapter) score += 80;
-        if (hit.inTheme) score += 55;
-        score += 40 + Math.min(hit.occurrences, 12) * 12;
-      }
-
-      if (terms.length > 1 && hitData.allTermsFound) score += 260 + terms.length * 40;
-      if (phraseHits > 0) score += 80 + bestPhraseSize * 25;
 
       return score;
     }
@@ -1300,21 +1247,11 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
     function searchRecords() {
       const q = state.query;
       const hasQuery = Boolean(String(q || '').trim());
-      let base = state.articles.slice();
+      let rows = state.articles.map(rec => ({ ...rec, score: scoreRecord(rec, q) }));
 
-      if (state.area !== 'todos') base = base.filter(rec => rec.areas.includes(state.area));
-      if (state.type !== 'todos') base = base.filter(rec => rec.tipo === state.type);
-
-      let rows;
-      if (hasQuery) {
-        rows = base.map(rec => ({ ...rec, score: scoreRecord(rec, q, 'strict') })).filter(rec => rec.score > 0);
-
-        if (!rows.length && !state.exact) {
-          rows = base.map(rec => ({ ...rec, score: scoreRecord(rec, q, 'fallback') })).filter(rec => rec.score > 0);
-        }
-      } else {
-        rows = base.map(rec => ({ ...rec, score: 1 }));
-      }
+      if (hasQuery) rows = rows.filter(rec => rec.score > 0);
+      if (state.area !== 'todos') rows = rows.filter(rec => rec.areas.includes(state.area));
+      if (state.type !== 'todos') rows = rows.filter(rec => rec.tipo === state.type);
 
       if (hasQuery) rows.sort((a,b) => b.score - a.score || a.ordem - b.ordem);
       else if (state.sort === 'numero') rows.sort((a,b) => a.ordem - b.ordem);
@@ -1329,21 +1266,10 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
 
       const plan = buildSearchPlan(q);
       const normRaw = normalize(raw);
-      let pos = plan.fullPhrase ? normRaw.indexOf(plan.fullPhrase) : -1;
-
-      if (pos < 0) {
-        const orderedPhrases = [...plan.phrases].sort((a, b) => b.length - a.length);
-        for (const phrase of orderedPhrases) {
-          const p = normRaw.indexOf(phrase);
-          if (p >= 0 && (pos < 0 || p < pos)) pos = p;
-        }
-      }
-
-      if (pos < 0) {
-        for (const term of plan.strongTerms) {
-          const p = normRaw.indexOf(term);
-          if (p >= 0 && (pos < 0 || p < pos)) pos = p;
-        }
+      let pos = -1;
+      for (const term of plan.requiredTerms) {
+        const p = normRaw.indexOf(term);
+        if (p >= 0 && (pos < 0 || p < pos)) pos = p;
       }
 
       let start = pos > 180 ? pos - 180 : 0;
@@ -1353,67 +1279,33 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
       return snippet;
     }
 
+    function accentInsensitivePattern(term) {
+      const groups = {
+        a: '[aáàâãäåAÁÀÂÃÄÅ]',
+        e: '[eéèêëEÉÈÊË]',
+        i: '[iíìîïIÍÌÎÏ]',
+        o: '[oóòôõöOÓÒÔÕÖ]',
+        u: '[uúùûüUÚÙÛÜ]',
+        c: '[cçCÇ]',
+        n: '[nñNÑ]'
+      };
+      return normalize(term).split('').map(ch => groups[ch] || escapeRegExp(ch)).join('');
+    }
+
     function highlight(text, q) {
-      const raw = String(text || '');
-      if (!q) return escapeHtml(raw);
+      let out = escapeHtml(text);
       const plan = buildSearchPlan(q);
-      const candidates = uniqueList([plan.fullPhrase, ...plan.phrases, ...plan.strongTerms])
-        .filter(item => item && (item.length > 1 || /\d/.test(item)))
-        .sort((a, b) => b.length - a.length)
-        .slice(0, 30);
+      if (!plan.requiredTerms.length) return out;
 
-      const normalizedChars = [];
-      const indexMap = [];
-      for (let i = 0; i < raw.length; i++) {
-        let normalizedChar = raw[i]
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .replace(/[º°]/g, '')
-          .toLowerCase();
-        if (/\s/.test(normalizedChar)) normalizedChar = ' ';
-        for (const ch of normalizedChar) {
-          normalizedChars.push(ch);
-          indexMap.push(i);
-        }
-      }
-      const normalizedText = normalizedChars.join('');
-      const ranges = [];
+      const terms = [...plan.requiredTerms]
+        .filter(t => t.length > 1 || /\d/.test(t))
+        .sort((a, b) => b.length - a.length);
 
-      function addRange(startNorm, endNorm) {
-        if (startNorm < 0 || endNorm <= startNorm || typeof indexMap[startNorm] === 'undefined' || typeof indexMap[endNorm - 1] === 'undefined') return;
-        const start = indexMap[startNorm];
-        const end = indexMap[endNorm - 1] + 1;
-        if (ranges.some(r => start < r.end && end > r.start)) return;
-        ranges.push({ start, end });
-      }
+      terms.slice(0, 12).forEach((term, index) => {
+        const re = new RegExp('(' + accentInsensitivePattern(term) + ')', 'gi');
+        out = out.replace(re, '<mark class="search-mark search-mark-' + (index % 4) + '">$1</mark>');
+      });
 
-      for (const candidate of candidates) {
-        const parts = normalize(candidate).split(' ').filter(Boolean);
-        if (!parts.length) continue;
-        let re;
-        if (parts.length > 1) {
-          re = new RegExp(parts.map(escapeRegExp).join('[\\s\\.,;:/()\\[\\]º°ª\\-]+'), 'g');
-        } else {
-          re = new RegExp(escapeRegExp(parts[0]), 'g');
-        }
-        let match;
-        while ((match = re.exec(normalizedText)) !== null) {
-          addRange(match.index, match.index + match[0].length);
-          if (match.index === re.lastIndex) re.lastIndex++;
-        }
-      }
-
-      if (!ranges.length) return escapeHtml(raw);
-      ranges.sort((a, b) => a.start - b.start || b.end - a.end);
-      let out = '';
-      let cursor = 0;
-      for (const range of ranges) {
-        if (range.start < cursor) continue;
-        out += escapeHtml(raw.slice(cursor, range.start));
-        out += '<mark>' + escapeHtml(raw.slice(range.start, range.end)) + '</mark>';
-        cursor = range.end;
-      }
-      out += escapeHtml(raw.slice(cursor));
       return out;
     }
 
@@ -1436,7 +1328,7 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
       const q = state.query;
       container.innerHTML = state.results.slice(0, 120).map(rec => {
         const capitulo = rec.capitulo || rec.areas[0] || 'Capítulo não identificado';
-        const tags = `<span class="tag teal">${highlight(capitulo, q)}</span>`;
+        const tags = `<span class="tag teal">${escapeHtml(capitulo)}</span>`;
         return `
           <article id="${rec.id}" class="result-card" data-id="${rec.id}">
             <div class="result-top">
