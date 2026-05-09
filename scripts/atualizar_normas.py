@@ -16,7 +16,7 @@ GITHUB_TOKEN = os.getenv("GITHUB_TOKEN")
 GITHUB_OWNER = os.getenv("GITHUB_OWNER", "atas26")
 GITHUB_REPO = os.getenv("GITHUB_REPO", "ferramentas-notariais")
 GITHUB_BRANCH = os.getenv("GITHUB_BRANCH", "main")
-PARSER_VERSION = "cnj-hierarchy-v2"
+PARSER_VERSION = "cnj-hierarchy-v5"
 
 TJSP_URL = os.getenv(
     "TJSP_URL",
@@ -168,8 +168,7 @@ def formatar_paragrafos(linhas):
         if linha.startswith(inicios):
             if atual:
                 paragrafos.append(atual)
-                atual = ""
-            paragrafos.append(linha)
+            atual = linha
             continue
 
         if atual:
@@ -357,7 +356,7 @@ def ordem_artigo(numero):
 
 def eh_linha_de_hierarquia_cnj(linha):
     return bool(
-        re.match(r"^PARTE\s+", linha, re.I)
+        re.match(r"^PARTE\s+(GERAL|ESPECIAL)\s*$", linha, re.I)
         or re.match(r"^LIVRO\s+[IVXLCDM]+\b", linha, re.I)
         or re.match(r"^T[ÍI]TULO\s+[IVXLCDM]+\b", linha, re.I)
         or re.match(r"^CAP[ÍI]TULO\s+[IVXLCDM]+\b", linha, re.I)
@@ -369,14 +368,24 @@ def eh_linha_de_hierarquia_cnj(linha):
 def eh_titulo_descritivo_cnj(linha):
     if not linha:
         return False
-    if re.match(r"^Art\.\s*\d+", linha):
+
+    texto = str(linha or "").strip()
+
+    if re.match(r"^Art\.\s*\d+", texto):
         return False
-    if eh_linha_de_hierarquia_cnj(linha):
+
+    if eh_linha_de_hierarquia_cnj(texto):
         return False
-    if re.match(r"^\d+$", linha):
+
+    if re.match(r"^PARTE\s+(?!GERAL\s*$|ESPECIAL\s*$).+", texto, re.I):
         return False
-    if len(linha) > 120:
+
+    if re.match(r"^\d+$", texto):
         return False
+
+    if len(texto) > 120:
+        return False
+
     return True
 
 
@@ -455,7 +464,7 @@ def parse_cnj(texto):
             else:
                 continue
 
-        if re.match(r"^PARTE\s+", linha, re.I):
+        if re.match(r"^PARTE\s+(GERAL|ESPECIAL)\s*$", linha, re.I):
             fechar_artigo()
             h.update({
                 "parte": linha.upper(),
@@ -533,26 +542,30 @@ def parse_cnj(texto):
             pendente = "subsecao" if not h["subsecaoTitulo"] else None
             continue
 
-        if pendente and eh_titulo_descritivo_cnj(linha):
-            if pendente == "livro":
-                h["livroTitulo"] = linha.upper()
-            elif pendente == "titulo":
-                h["tituloTitulo"] = linha.upper()
-            elif pendente == "capitulo":
-                h["capituloTitulo"] = linha.upper()
-            elif pendente == "secao":
-                h["secaoTitulo"] = linha
-            elif pendente == "subsecao":
-                h["subsecaoTitulo"] = linha
+        if pendente:
+            if eh_titulo_descritivo_cnj(linha):
+                if pendente == "livro":
+                    h["livroTitulo"] = linha.upper()
+                elif pendente == "titulo":
+                    h["tituloTitulo"] = linha.upper()
+                elif pendente == "capitulo":
+                    h["capituloTitulo"] = linha.upper()
+                elif pendente == "secao":
+                    h["secaoTitulo"] = linha
+                elif pendente == "subsecao":
+                    h["subsecaoTitulo"] = linha
+                pendente = None
+                continue
             pendente = None
-            continue
 
-        achou_artigo = re.match(r"^Art\.\s*(\d+[A-Z]?)(?:\.|º|\.º)?\s*(.*)", linha)
+        achou_artigo = re.match(r"^Art\.\s*(\d+)(?:\s*[-–]\s*([A-Z]))?(?:\.|º|\.º)?\s*(.*)", linha)
 
         if achou_artigo:
             fechar_artigo()
 
-            numero = achou_artigo.group(1)
+            numero_base = achou_artigo.group(1)
+            letra = (achou_artigo.group(2) or "").upper()
+            numero = f"{numero_base}-{letra}" if letra else numero_base
             ordem = ordem_artigo(numero)
             capitulo = combinar_heading(h.get("capituloNumero"), h.get("capituloTitulo")) or "Código Nacional de Normas"
 
