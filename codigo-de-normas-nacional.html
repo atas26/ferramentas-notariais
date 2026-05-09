@@ -289,7 +289,16 @@
     mark.search-mark-3 { background: #fecaca; }
     details { margin-top: 14px; border-top: 1px solid var(--line-soft); padding-top: 12px; }
     summary { cursor: pointer; color: var(--primary); font-weight: 700; font-size: 13px; }
-    .full-text { margin-top: 12px; white-space: pre-line; color: #1e293b; font-size: 14px; line-height: 1.72; }
+    .full-text { margin-top: 10px; white-space: normal; color: #1e293b; font-size: 14px; line-height: 1.54; }
+    .full-text p { margin: 0 0 8px; }
+    .full-text p:last-child { margin-bottom: 0; }
+    .hierarchy-block { margin: 0 0 12px; padding: 0 0 10px; border-bottom: 1px solid var(--line-soft); color: #0f172a; }
+    .hierarchy-block .hierarchy-line { margin: 0 0 4px; line-height: 1.32; }
+    .hierarchy-block .hierarchy-line.upper { text-transform: uppercase; font-weight: 700; letter-spacing: .015em; }
+    .hierarchy-block .hierarchy-line.title { font-weight: 500; }
+    .hierarchy-block .hierarchy-line.section { font-weight: 600; }
+    .hierarchy-block .hierarchy-line.section-title { font-weight: 400; color: #334155; }
+    .hierarchy-block .hierarchy-gap { height: 6px; }
     .empty { padding: 24px; color: var(--muted); font-size: 14px; line-height: 1.55; }
 
     .footer { border-top: 1px solid var(--line); padding: 22px 0 40px; color: var(--muted); font-size: 12px; }
@@ -436,7 +445,7 @@
         </div>
       </div>
       <div class="pn-note">Para uso jurídico formal, confira a redação vigente no portal oficial de atos normativos do Conselho Nacional de Justiça.</div>
-      <span class="pn-meta">Última atualização indicada na base automatizada: aguardando carregamento.</span>
+      <span class="pn-meta">Base atualizada automaticamente.</span>
     </section>
 
     <section class="layout">
@@ -527,7 +536,7 @@
 
   <footer class="footer">
     <div class="wrap footer-row">
-      <span>Ferramenta de estudo e consulta. Não substitui a conferência no portal de atos normativos do CNJ. Base carregada automaticamente de dados/normas-nacional.json.</span>
+      <span>Base atualizada automaticamente.</span>
       <span class="footer-support">
         Projeto apoiado por <a href="https://escriturapublica.substack.com/" target="_blank" rel="noopener noreferrer">Escritura Pública</a>
         <span id="visitMarker" class="visit-marker" title="Marcador discreto de visitas" aria-label="Marcador discreto de visitas"><span class="visit-fallback">visitas</span></span>
@@ -544,7 +553,7 @@
     const DATA_URL = 'dados/normas-nacional.json';
     const BASE_LABEL = 'Código Nacional de Normas';
     const DEFAULT_BASE_DATE = '30/04/2026';
-    const FOOTER_BASE_TEXT = 'Ferramenta de estudo e consulta. Não substitui a conferência no portal de atos normativos do CNJ. Base carregada automaticamente de dados/normas-nacional.json.';
+    const FOOTER_BASE_TEXT = 'Base atualizada automaticamente:';
     const CORS_PROXY_URL = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(OFFICIAL_PAGE_URL);
     const STORAGE_KEY = 'prov149_artigos_v5_incorporado';
     const FAV_KEY = 'prov149_favoritos_v4_estudo';
@@ -1428,6 +1437,62 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
       return out;
     }
 
+    function hierarchyLines(rec) {
+      if (Array.isArray(rec.estrutura) && rec.estrutura.length) {
+        return rec.estrutura.map(item => {
+          if (typeof item === 'string') return { text: item, type: 'upper' };
+          return item || null;
+        }).filter(item => item && item.text);
+      }
+
+      const lines = [];
+      const add = (text, type = 'upper') => {
+        const value = String(text || '').trim();
+        if (!value) return;
+        const last = lines[lines.length - 1];
+        if (last && last.text === value) return;
+        lines.push({ text: value, type });
+      };
+
+      add(rec.parte, 'upper');
+      if (rec.livro) add(rec.livro, 'upper');
+      if (rec.livroTitulo) add(rec.livroTitulo, 'title');
+      if (rec.titulo) add(rec.titulo, 'upper');
+      if (rec.tituloTitulo) add(rec.tituloTitulo, 'title');
+      if (rec.capituloNumero) add(rec.capituloNumero, 'upper');
+      if (rec.capituloTitulo) add(rec.capituloTitulo, 'title');
+      else if (rec.capitulo && !/^código nacional de normas$/i.test(String(rec.capitulo || ''))) add(rec.capitulo, 'title');
+      if (rec.secao) add(rec.secao, 'section');
+      if (rec.secaoTitulo) add(rec.secaoTitulo, 'section-title');
+      if (rec.subsecao) add(rec.subsecao, 'section');
+      if (rec.subsecaoTitulo) add(rec.subsecaoTitulo, 'section-title');
+
+      return lines;
+    }
+
+    function renderHierarchy(rec, q) {
+      const lines = hierarchyLines(rec);
+      if (!lines.length) return '';
+
+      const html = [];
+      lines.forEach((line, index) => {
+        const type = line.type || 'upper';
+        const needsGap = index > 0 && ['livro', 'titulo', 'capitulo'].some(word => normalizeSearch(line.text).startsWith(word));
+        if (needsGap) html.push('<div class="hierarchy-gap"></div>');
+        html.push(`<div class="hierarchy-line ${escapeHtml(type)}">${highlight(line.text, q)}</div>`);
+      });
+
+      return `<div class="hierarchy-block">${html.join('')}</div>`;
+    }
+
+    function renderNormativeText(text, q) {
+      const raw = String(text || '').trim();
+      if (!raw) return '';
+      const parts = raw.split(/\n{2,}/).map(part => part.trim()).filter(Boolean);
+      if (!parts.length) return '';
+      return parts.map(part => `<p>${highlight(part, q)}</p>`).join('');
+    }
+
     function renderResults() {
       state.results = searchRecords();
       const container = $('#results');
@@ -1456,7 +1521,7 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
                 <div class="tags">${tags || '<span class="tag gray">sem tema inferido</span>'}</div>
               </div>
             </div>
-            <div class="full-text">${highlight(rec.texto, q)}</div>
+            <div class="full-text">${renderHierarchy(rec, q)}${renderNormativeText(rec.texto, q)}</div>
           </article>`;
       }).join('') + (state.results.length > 120 ? `<div class="empty">Foram encontrados ${state.results.length} resultados. Exibidos os 120 primeiros. Refine a busca para reduzir a lista.</div>` : '');
     }
@@ -1660,11 +1725,11 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
       const dateLabel = formatBaseDate(payload.updatedAt) || '-';
       const source = payload.source || DATA_URL;
       document.querySelectorAll('.pn-meta').forEach(el => {
-        el.textContent = `Última atualização indicada na base automatizada: ${dateLabel}${total ? ' · ' + total + ' itens' : ''}.`;
+        el.textContent = `${FOOTER_BASE_TEXT} ${dateLabel}.`;
       });
       const footerInfo = document.querySelector('.footer-row > span:first-child');
       if (footerInfo) {
-        footerInfo.textContent = `${FOOTER_BASE_TEXT} Última carga: ${dateLabel}${total ? ' · ' + total + ' itens' : ''}.`;
+        footerInfo.textContent = `${FOOTER_BASE_TEXT} ${dateLabel}.`;
       }
       const updated = $('#statUpdated');
       if (updated) updated.textContent = dateLabel;
