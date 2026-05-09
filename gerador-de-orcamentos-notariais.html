@@ -84,7 +84,7 @@ h1{
   width:100%;
 }
 .lead{max-width:none;margin:0;font-size:18px;line-height:1.55;color:var(--slate-700)}
-.grid{display:grid;grid-template-columns:minmax(0,1fr) 410px;gap:26px;align-items:start}
+.grid{display:block}
 .panel,.result-card{background:var(--stone-50);border:1px solid var(--stone-200);border-radius:0;box-shadow:none}
 .panel{padding:28px;background:#fbfcfe}
 .panel h2,.result-card h2{margin:0 0 14px;font-size:22px;font-weight:700;color:var(--slate-950)}
@@ -151,7 +151,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 
 .btn-primary{background:var(--accent);color:white}.btn-primary:hover{background:#005fce}
 .btn-secondary{background:white;color:var(--slate-800);border-color:var(--stone-300)}.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
 .btn-ghost{background:transparent;color:var(--slate-600);border-color:transparent}.btn-ghost:hover{color:var(--slate-950);box-shadow:none}
-.result-card{padding:28px;min-height:100%;position:sticky;top:18px}
+.result-card{padding:28px;min-height:auto;position:static;margin-top:26px}
 .result-total{
   border:none;
   border-radius:12px;
@@ -236,29 +236,30 @@ tr:last-child td{border-bottom:none}
 }
 
 .print-area{display:none}
+.print-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;border-bottom:1px solid #d7dce3;padding-bottom:14px;margin-bottom:18px}
+.print-brand{font-size:18px;font-weight:800;color:#0f172a}
+.print-url,.print-meta{font-size:12px;color:#475569;line-height:1.5}
+.print-meta{text-align:right}
+.print-title{font-family:'Fraunces','Georgia',serif;font-size:28px;line-height:1.15;margin:0 0 18px;color:#0f172a;font-weight:500}
+.print-section{margin:0 0 18px;break-inside:avoid}
+.print-section h3{font-size:14px;margin:0 0 10px;color:#0f172a}
+.print-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:12px}
+.print-field{border:1px solid #e5e7eb;padding:9px 10px;border-radius:8px;background:#fff}
+.print-field span{display:block;color:#64748b;font-size:11px;margin-bottom:3px}
+.print-field strong{font-size:12px;color:#0f172a;font-weight:700}
+.print-total{display:flex;justify-content:space-between;gap:14px;margin-top:16px;padding:14px 16px;background:#f8fafc;border:1px solid #d7dce3;border-radius:10px;font-size:18px;font-weight:800;color:#0f172a}
+.print-note{margin-top:14px;border-left:3px solid rgb(0,118,255);background:#f8fafc;padding:11px 12px;color:#334155;font-size:12px;line-height:1.55}
 @media print{
-  .hero,.pn-editorial,.grid,.footer,.visit{display:none!important}
+  @page{size:A4;margin:14mm}
   body{background:white;color:#0f172a}
-  .page{max-width:none;padding:0;margin:0}
-  .print-area{display:block!important;font-family:'IBM Plex Sans',Arial,sans-serif;font-size:12px;line-height:1.45;padding:18mm;color:#0f172a}
-  .print-head{display:flex;justify-content:space-between;gap:24px;border-bottom:1px solid #cbd5e1;padding-bottom:12px;margin-bottom:18px}
-  .print-brand{font-size:18px;font-weight:800;color:#0f172a}
-  .print-url{font-size:11px;color:#475569;margin-top:3px}
-  .print-meta{text-align:right;font-size:11px;color:#475569}
-  .print-title{font-family:'Fraunces','Georgia',serif;font-size:26px;line-height:1.1;margin:0 0 18px;color:#0f172a}
-  .print-section{margin:0 0 16px;break-inside:avoid}
-  .print-section h3{font-size:13px;margin:0 0 8px;color:#0f172a;text-transform:uppercase;letter-spacing:.08em}
-  .print-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-  .print-field{border:1px solid #e2e8f0;border-radius:8px;padding:8px;background:#fff}
-  .print-field span{display:block;font-size:10px;color:#64748b;margin-bottom:2px}
-  .print-field strong{font-size:12px;color:#0f172a;font-weight:700}
-  .print-area table{width:100%;border-collapse:collapse;font-size:11px;margin-top:6px}
-  .print-area th,.print-area td{border:1px solid #e2e8f0;padding:8px;text-align:left;vertical-align:top}
-  .print-area th{background:#f8fafc;color:#334155;font-weight:700}
-  .print-total{display:flex;justify-content:space-between;gap:16px;border:1px solid #0f172a;border-radius:8px;padding:12px 14px;margin:16px 0;font-size:16px;font-weight:800}
-  .print-note{border-left:3px solid #64748b;background:#f8fafc;padding:10px 12px;font-size:11px;color:#334155}
+  body *{visibility:hidden!important}
+  .print-area,.print-area *{visibility:visible!important}
+  .print-area{display:block!important;position:absolute;left:0;top:0;width:100%;padding:0;background:white}
+  .actions,.visit,.pn-editorial,.footer,.hero,.grid{display:none!important}
+  table{font-size:11px}
+  th,td{padding:8px 9px}
+  .money-cell{white-space:nowrap;text-align:right}
 }
-
 </style>
 </head>
 <body>
@@ -296,32 +297,32 @@ tr:last-child td{border-bottom:none}
       <section class="panel" aria-labelledby="dados-orcamento">
         <span class="section-kicker">Orçamento</span>
         <h2 class="question-title" id="dados-orcamento">Dados do ato</h2>
-        <p>Preencha os campos abaixo e clique em gerar orçamento. O texto será montado automaticamente no painel de resultado.</p>
+        <p>Preencha os campos abaixo e clique em gerar orçamento. O resultado será exibido abaixo do formulário.</p>
 
         <div class="form-grid">
           <div class="form-field">
             <label for="escrevente">Escrevente responsável</label>
-            <input id="escrevente" autocomplete="name" placeholder="Nome do escrevente" />
+            <input id="escrevente" autocomplete="name" placeholder="Nome do escrevente" required />
           </div>
 
           <div class="form-field">
             <label for="contatoEscrevente">Contato escrevente</label>
-            <input id="contatoEscrevente" inputmode="tel" autocomplete="tel" placeholder="Telefone de contato do escrevente" />
+            <input id="contatoEscrevente" inputmode="tel" autocomplete="tel" placeholder="Telefone de contato do escrevente" required />
           </div>
 
           <div class="form-field">
             <label for="cartorio">Cartório</label>
-            <input id="cartorio" autocomplete="organization" placeholder="Nome do cartório" />
+            <input id="cartorio" autocomplete="organization" placeholder="Nome do cartório" required />
           </div>
 
           <div class="form-field">
             <label for="solicitadoPor">Solicitado por</label>
-            <input id="solicitadoPor" autocomplete="name" placeholder="Nome completo do solicitante" />
+            <input id="solicitadoPor" autocomplete="name" placeholder="Nome completo do solicitante" required />
           </div>
 
           <div class="form-field full">
             <label for="naturezaAto">Natureza do ato</label>
-            <select id="naturezaAto">
+            <select id="naturezaAto" required>
               <option value="">Selecione</option>
               <option>Divórcio ou Extinção de União Estável</option>
               <option>Doação</option>
@@ -341,7 +342,7 @@ tr:last-child td{border-bottom:none}
 
           <div class="form-field full">
             <label for="valorBase">Valor base de cálculo</label>
-            <input id="valorBase" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" />
+            <input id="valorBase" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" required />
             <span class="hint">Use o valor venal de referência, quando aplicável, o valor fiscal (IPTU) ou o valor do negócio, o que for maior.</span>
           </div>
 
@@ -349,11 +350,11 @@ tr:last-child td{border-bottom:none}
             <label>Natureza do tributo</label>
             <div class="segmented" role="radiogroup" aria-label="Natureza do tributo">
               <label class="radio-card">
-                <input type="radio" name="tipoTributo" value="itbi" checked />
+                <input type="radio" name="tipoTributo" value="itbi" checked required />
                 <span><strong>Onerosa</strong><small>ITBI municipal</small></span>
               </label>
               <label class="radio-card">
-                <input type="radio" name="tipoTributo" value="itcmd" />
+                <input type="radio" name="tipoTributo" value="itcmd" required />
                 <span><strong>Não onerosa</strong><small>ITCMD estadual</small></span>
               </label>
             </div>
@@ -361,7 +362,7 @@ tr:last-child td{border-bottom:none}
 
           <div class="form-field" id="campoAliquotaITBI">
             <label for="aliquotaITBI">Alíquota do ITBI municipal</label>
-            <input id="aliquotaITBI" inputmode="decimal" autocomplete="off" placeholder="Ex.: 3" />
+            <input id="aliquotaITBI" inputmode="decimal" autocomplete="off" placeholder="Ex.: 3" required />
             <span class="hint">Preencha apenas o número. Exemplo: 3 para 3%.</span>
           </div>
 
@@ -374,18 +375,18 @@ tr:last-child td{border-bottom:none}
             <label>Há registro imobiliário?</label>
             <div class="segmented" role="radiogroup" aria-label="Há registro imobiliário">
               <label class="radio-card">
-                <input type="radio" name="temRegistro" value="sim" checked />
+                <input type="radio" name="temRegistro" value="sim" checked required />
                 <span><strong>Sim</strong><small>Incluir Registro de Imóveis</small></span>
               </label>
               <label class="radio-card">
-                <input type="radio" name="temRegistro" value="nao" />
+                <input type="radio" name="temRegistro" value="nao" required />
                 <span><strong>Não</strong><small>Não incluir registro no total</small></span>
               </label>
             </div>
           </div>
 
           <div class="form-field full">
-            <label for="valorOutros">Valor de outros serviços autorizados expressamente pelo usuário.</label>
+            <label for="valorOutros">Outros serviços autorizados</label>
             <input id="valorOutros" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" />
             <span class="hint">Certidões, diligências ou valores externos autorizados pelas partes e necessários à realização do ato notarial, nos termos da nota 11 da Tabela de Custas e Emolumentos da Lei Estadual nº 11.331/2002.</span>
           </div>
@@ -398,25 +399,25 @@ tr:last-child td{border-bottom:none}
           <button type="button" class="btn btn-secondary" id="btnImprimir">Imprimir</button>
           <button type="button" class="btn btn-ghost" id="btnLimpar">Limpar</button>
         </div>
+
+        <aside class="result-card" id="resultado" aria-labelledby="resultado-titulo" hidden style="display:none">
+          <h2 id="resultado-titulo">Resultado</h2>
+          <div class="result-total">
+            <span class="label">Total estimado</span>
+            <span class="value" id="totalResultado">R$ 0,00</span>
+          </div>
+          <div class="breakdown">
+            <div class="row-item"><span>Valor base</span><span id="valorResultado">R$ 0,00</span></div>
+            <div class="row-item"><span>Tabelionato de Notas</span><span id="escrituraResultado">R$ 0,00</span></div>
+            <div class="row-item"><span>Tributo</span><span id="tributoResultado">R$ 0,00</span></div>
+            <div class="row-item"><span>Registro de Imóveis</span><span id="registroResultado">R$ 0,00</span></div>
+            <div class="row-item"><span>Outros serviços autorizados</span><span id="outrosResultado">R$ 0,00</span></div>
+            <div class="row-item"><span>Total</span><span id="totalLinhaResultado">R$ 0,00</span></div>
+          </div>
+          <div class="status" id="statusCalculo"></div>
+        </aside>
       </section>
     </div>
-
-    <aside class="result-card" id="resultado" aria-labelledby="resultado-titulo">
-      <h2 id="resultado-titulo">Resultado</h2>
-      <div class="result-total">
-        <span class="label">Total estimado</span>
-        <span class="value" id="totalResultado">R$ 0,00</span>
-      </div>
-      <div class="breakdown">
-        <div class="row-item"><span>Valor base</span><span id="valorResultado">R$ 0,00</span></div>
-        <div class="row-item"><span>Tabelionato de Notas</span><span id="escrituraResultado">R$ 0,00</span></div>
-        <div class="row-item"><span>Tributo</span><span id="tributoResultado">R$ 0,00</span></div>
-        <div class="row-item"><span>Registro de Imóveis</span><span id="registroResultado">R$ 0,00</span></div>
-        <div class="row-item"><span>Outros serviços autorizados</span><span id="outrosResultado">R$ 0,00</span></div>
-        <div class="row-item"><span>Total</span><span id="totalLinhaResultado">R$ 0,00</span></div>
-      </div>
-      <div class="status" id="statusCalculo"></div>
-    </aside>
   </section>
 
   <section class="print-area" id="areaImpressao" aria-hidden="true"></section>
@@ -547,32 +548,29 @@ dinheiroInputs.forEach((id) => {
 });
 
 document.querySelectorAll('input[name="tipoTributo"]').forEach((radio) => {
-  radio.addEventListener('change', () => { atualizaCamposTributo(); calcular(false); });
+  radio.addEventListener('change', () => atualizaCamposTributo());
 });
 
 document.querySelectorAll('input[name="temRegistro"]').forEach((radio) => {
-  radio.addEventListener('change', () => calcular(false));
-});
-
-['escrevente','contatoEscrevente','cartorio','solicitadoPor','outroAto'].forEach((id) => {
-  const campo = el(id);
-  if (campo) campo.addEventListener('input', () => montarTextoOrcamento());
+  radio.addEventListener('change', () => {});
 });
 
 el('naturezaAto').addEventListener('change', () => {
   el('campoOutroAto').classList.toggle('hidden', el('naturezaAto').value !== 'outro');
-  montarTextoOrcamento();
+  atualizaObrigatoriedadeCondicional();
 });
 
-el('btnCalcular').addEventListener('click', calcular);
+el('btnCalcular').addEventListener('click', () => calcular(true));
 el('btnLimpar').addEventListener('click', limpar);
 el('btnImprimir').addEventListener('click', imprimirOrcamento);
 el('btnGerarPDF').addEventListener('click', gerarPDF);
 el('btnCopiar').addEventListener('click', copiarResultado);
 
+configuraCamposObrigatorios();
 configuraContador();
 atualizaCamposTributo();
 calcular(false);
+ocultarResultado();
 
 function configuraContador(){
   const contador = el('visitCounterText');
@@ -600,10 +598,97 @@ function configuraContador(){
     });
 }
 
+function configuraCamposObrigatorios(){
+  ['escrevente','contatoEscrevente','cartorio','solicitadoPor','naturezaAto','valorBase'].forEach((id) => {
+    const campo = el(id);
+    if (campo) campo.required = true;
+  });
+
+  document.querySelectorAll('input[name="tipoTributo"], input[name="temRegistro"]').forEach((campo) => {
+    campo.required = true;
+  });
+
+  atualizaObrigatoriedadeCondicional();
+}
+
 function atualizaCamposTributo(){
   const tipo = tipoTributoSelecionado();
   el('campoAliquotaITBI').classList.toggle('hidden', tipo !== 'itbi');
   el('campoAliquotaITCMD').classList.toggle('hidden', tipo !== 'itcmd');
+  atualizaObrigatoriedadeCondicional();
+}
+
+function atualizaObrigatoriedadeCondicional(){
+  const outroAto = el('outroAto');
+  if (outroAto) {
+    outroAto.required = el('naturezaAto').value === 'outro';
+  }
+
+  const tipo = tipoTributoSelecionado();
+  const aliquotaITBI = el('aliquotaITBI');
+  const aliquotaITCMD = el('aliquotaITCMD');
+
+  if (aliquotaITBI) aliquotaITBI.required = tipo === 'itbi';
+  if (aliquotaITCMD) aliquotaITCMD.required = tipo === 'itcmd';
+}
+
+function validarCamposObrigatorios(){
+  atualizaObrigatoriedadeCondicional();
+
+  const campos = ['escrevente','contatoEscrevente','cartorio','solicitadoPor','naturezaAto','valorBase'];
+
+  if (el('naturezaAto').value === 'outro') {
+    campos.push('outroAto');
+  }
+
+  if (tipoTributoSelecionado() === 'itbi') {
+    campos.push('aliquotaITBI');
+  } else {
+    campos.push('aliquotaITCMD');
+  }
+
+  for (const id of campos) {
+    const campo = el(id);
+    if (!campo) continue;
+    campo.setCustomValidity('');
+
+    if (!String(campo.value || '').trim()) {
+      campo.setCustomValidity('Preencha este campo obrigatório.');
+      campo.reportValidity();
+      campo.scrollIntoView({ behavior:'smooth', block:'center' });
+      window.setTimeout(() => campo.focus({ preventScroll:true }), 200);
+      return false;
+    }
+  }
+
+  const valorBase = parseMoeda(el('valorBase').value);
+  if (!valorBase || valorBase <= 0) {
+    const campo = el('valorBase');
+    campo.setCustomValidity('Informe o valor base de cálculo.');
+    campo.reportValidity();
+    campo.scrollIntoView({ behavior:'smooth', block:'center' });
+    window.setTimeout(() => campo.focus({ preventScroll:true }), 200);
+    return false;
+  }
+
+  if (tipoTributoSelecionado() === 'itbi') {
+    const aliquota = parsePercentual(el('aliquotaITBI').value);
+    if (!aliquota || aliquota <= 0) {
+      const campo = el('aliquotaITBI');
+      campo.setCustomValidity('Informe a alíquota do ITBI municipal.');
+      campo.reportValidity();
+      campo.scrollIntoView({ behavior:'smooth', block:'center' });
+      window.setTimeout(() => campo.focus({ preventScroll:true }), 200);
+      return false;
+    }
+  }
+
+  campos.forEach((id) => {
+    const campo = el(id);
+    if (campo) campo.setCustomValidity('');
+  });
+
+  return true;
 }
 
 function tipoTributoSelecionado(){
@@ -659,7 +744,9 @@ function buscaFaixa(valorBase, tabela){
   return faixa || { valor:0, rotulo:'sem faixa configurada' };
 }
 
-function calcular(rolar = true){
+function calcular(rolar = true, validar = rolar){
+  if (validar && !validarCamposObrigatorios()) return false;
+
   const valorBase = parseMoeda(el('valorBase').value);
   const valorOutros = parseMoeda(el('valorOutros').value);
   const tipo = tipoTributoSelecionado();
@@ -710,7 +797,28 @@ function calcular(rolar = true){
   };
 
   renderResultado(ultimoResultado);
-  if (rolar && window.innerWidth < 900) el('resultado').scrollIntoView({ behavior:'smooth', block:'start' });
+  atualizarAreaImpressao(ultimoResultado);
+  if (rolar) mostrarResultado(true);
+  return true;
+}
+
+function mostrarResultado(rolar = true){
+  const resultado = el('resultado');
+  if (!resultado) return;
+  resultado.hidden = false;
+  resultado.style.display = 'block';
+  if (rolar) {
+    window.setTimeout(() => {
+      resultado.scrollIntoView({ behavior:'smooth', block:'start' });
+    }, 0);
+  }
+}
+
+function ocultarResultado(){
+  const resultado = el('resultado');
+  if (!resultado) return;
+  resultado.style.display = 'none';
+  resultado.hidden = true;
 }
 
 function renderResultado(r){
@@ -721,8 +829,6 @@ function renderResultado(r){
   el('outrosResultado').textContent = formatMoeda(r.valorOutros);
   el('totalResultado').textContent = formatMoeda(r.total);
   el('totalLinhaResultado').textContent = formatMoeda(r.total);
-
-  atualizarAreaImpressao(r);
 
   const status = el('statusCalculo');
   status.className = 'status';
@@ -741,7 +847,7 @@ function renderResultado(r){
 }
 
 function montarTextoOrcamento(){
-  if (!ultimoResultado) return '';
+  if (!ultimoResultado) calcular(false);
   const r = {
     ...ultimoResultado,
     naturezaAto: naturezaAtoSelecionada(),
@@ -782,7 +888,7 @@ function montarTextoOrcamento(){
 
 function atualizarAreaImpressao(r){
   const area = el('areaImpressao');
-  if (!area) return;
+  if (!area || !r) return;
 
   const dados = {
     ...r,
@@ -861,22 +967,27 @@ function atualizarAreaImpressao(r){
 }
 
 function imprimirOrcamento(){
-  calcular(false);
+  if (!calcular(false, true)) return;
+  mostrarResultado(false);
   window.print();
 }
 
 function gerarPDF(){
-  calcular(false);
+  if (!calcular(false, true)) return;
+  mostrarResultado(false);
   const tituloAnterior = document.title;
   document.title = 'orcamento-estimativo-ato-notarial';
-  setTimeout(() => {
+  window.setTimeout(() => {
     window.print();
     document.title = tituloAnterior;
   }, 50);
 }
 
 function limpar(){
-  ['escrevente','contatoEscrevente','cartorio','solicitadoPor','outroAto','valorBase','aliquotaITBI','valorOutros'].forEach((id) => el(id).value = '');
+  ['escrevente','contatoEscrevente','cartorio','solicitadoPor','outroAto','valorBase','aliquotaITBI','valorOutros'].forEach((id) => {
+    const campo = el(id);
+    if (campo) campo.value = '';
+  });
   el('naturezaAto').value = '';
   el('aliquotaITCMD').value = '4%';
   document.querySelector('input[name="tipoTributo"][value="itbi"]').checked = true;
@@ -884,10 +995,17 @@ function limpar(){
   el('campoOutroAto').classList.add('hidden');
   atualizaCamposTributo();
   calcular(false);
+  ocultarResultado();
+  const campoInicial = el('escrevente');
+  if (campoInicial) {
+    campoInicial.scrollIntoView({ behavior:'smooth', block:'center' });
+    window.setTimeout(() => campoInicial.focus({ preventScroll:true }), 250);
+  }
 }
 
 async function copiarResultado(){
-  if (!ultimoResultado) calcular(false);
+  if (!calcular(false, true)) return;
+  mostrarResultado(false);
   const texto = montarTextoOrcamento();
 
   try {
