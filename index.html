@@ -28,6 +28,7 @@
       --ciano: rgb(34, 211, 238);
       --laranja: rgb(249, 115, 22);
       --rosa: rgb(236, 72, 153);
+      --lima: rgb(132, 204, 22);
       --fundo: #071323;
       --fundo-2: #0a1d31;
       --texto: #f8fafc;
@@ -383,6 +384,10 @@
       background: var(--rosa);
     }
 
+    .card:nth-child(9)::after {
+      background: var(--lima);
+    }
+
     .card:hover {
       background: rgba(255,255,255,0.12);
       transform: translateY(-4px);
@@ -429,6 +434,10 @@
 
     .card:nth-child(8) h3 {
       color: var(--rosa);
+    }
+
+    .card:nth-child(9) h3 {
+      color: var(--lima);
     }
 
     .card p {
@@ -766,7 +775,7 @@
           </div>
         </a>
 
-        <a class="card" href="https://verificador.portalnotarial.com.br" aria-label="Abrir verificador técnico de documentos eletrônicos">
+        <a class="card" href="https://verificador.portalnotarial.com.br/c" aria-label="Abrir verificador técnico de documentos eletrônicos">
           <div>
             <h3>Verificador técnico de documentos eletrônicos</h3>
             <p>
@@ -778,11 +787,23 @@
           </div>
         </a>
 
-        <a class="card" href="https://portalnotarial.com.br/gerador-de-orcamentos-notariais" aria-label="Abrir gerador de orçamento de atos notariais">
+        <a class="card" href="calculadora-escritura-tributo-registro-sp.html" aria-label="Abrir gerador de orçamento de atos notariais">
           <div>
             <h3>Gerador de orçamento de atos notariais</h3>
             <p>
               Gere orçamento estimativo com escritura, tributo, registro imobiliário e valores adicionais informados.
+            </p>
+          </div>
+          <div class="card-bottom" aria-hidden="true">
+            <div class="arrow">→</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://triagem.portalnotarial.com.br" aria-label="Abrir Triagem Notarial">
+          <div>
+            <h3>Triagem Notarial</h3>
+            <p>
+              Organize as informações e os documentos antes de solicitar o ato notarial.
             </p>
           </div>
           <div class="card-bottom" aria-hidden="true">
