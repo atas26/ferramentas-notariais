@@ -5,18 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Portal Notarial | Ferramentas para atos notariais e normas extrajudiciais</title>
-  <meta name="description" content="Ferramentas para consulta de competência notarial eletrônica, Código Nacional de Normas, Normas da Corregedoria de São Paulo, escritura, tributo, registro, conta notarial, links úteis e validação técnica de documentos eletrônicos." />
+  <meta name="description" content="Central de ferramentas para triagem notarial, aplicação da tabela de emolumentos, validação técnica de documentos eletrônicos, cálculos, orçamento, normas e links úteis para a rotina notarial." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://portalnotarial.com.br/" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Portal Notarial" />
   <meta property="og:title" content="Portal Notarial | Ferramentas para atos notariais e normas extrajudiciais" />
-  <meta property="og:description" content="Ferramentas para consulta de competência notarial eletrônica, Código Nacional de Normas, Normas da Corregedoria de São Paulo, escritura, tributo, registro, conta notarial, links úteis e validação técnica de documentos eletrônicos." />
+  <meta property="og:description" content="Central de ferramentas para triagem notarial, aplicação da tabela de emolumentos, validação técnica de documentos eletrônicos, cálculos, orçamento, normas e links úteis para a rotina notarial." />
   <meta property="og:url" content="https://portalnotarial.com.br/" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Portal Notarial | Ferramentas para atos notariais e normas extrajudiciais" />
-  <meta name="twitter:description" content="Ferramentas para consulta de competência notarial eletrônica, Código Nacional de Normas, Normas da Corregedoria de São Paulo, escritura, tributo, registro, conta notarial, links úteis e validação técnica de documentos eletrônicos." />
+  <meta name="twitter:description" content="Central de ferramentas para triagem notarial, aplicação da tabela de emolumentos, validação técnica de documentos eletrônicos, cálculos, orçamento, normas e links úteis para a rotina notarial." />
 
 <style>
     :root {
@@ -322,79 +322,102 @@
       padding: 20px 22px 86px;
     }
 
+    .tools-group {
+      margin-top: 28px;
+    }
+
+    .tools-group:first-child {
+      margin-top: 0;
+    }
+
+    .tools-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin: 0 0 14px;
+    }
+
+    .tools-heading h2 {
+      margin: 0;
+      color: var(--texto);
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+    }
+
+    .tools-heading p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--texto-fraco);
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: right;
+    }
+
     .cards {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      border-top: 1px solid var(--linha);
-      border-left: 1px solid var(--linha);
-      background: rgba(255,255,255,0.02);
+      gap: 16px;
+    }
+
+    .cards.cards-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .cards.cards-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .card {
-      min-height: 340px;
-      border-right: 1px solid var(--linha);
-      border-bottom: 1px solid var(--linha);
-      background: rgba(255,255,255,0.065);
+      min-height: 320px;
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--cor) 28%, transparent), transparent 42%),
+        linear-gradient(145deg, rgba(255,255,255,0.078), rgba(255,255,255,0.035));
       padding: 28px;
       text-decoration: none;
       color: var(--branco);
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      transition: background 0.18s ease, transform 0.18s ease;
+      transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 16px 42px rgba(0,0,0,0.13);
+      --cor: var(--verde);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: 0.38;
     }
 
     .card::after {
       content: "";
       position: absolute;
-      inset: auto 0 0 0;
+      inset: auto 28px 0 28px;
       height: 5px;
-      background: var(--verde);
-      transform: scaleX(0);
+      border-radius: 999px 999px 0 0;
+      background: var(--cor);
+      transform: scaleX(0.26);
       transform-origin: left;
       transition: transform 0.22s ease;
     }
 
-    .card:nth-child(2)::after {
-      background: var(--vermelho);
-    }
-
-    .card:nth-child(3)::after {
-      background: var(--azul);
-    }
-
-    .card:nth-child(4)::after {
-      background: var(--amarelo);
-    }
-
-    .card:nth-child(5)::after {
-      background: var(--roxo);
-    }
-
-    .card:nth-child(6)::after {
-      background: var(--ciano);
-    }
-
-    .card:nth-child(7)::after {
-      background: var(--laranja);
-    }
-
-    .card:nth-child(8)::after {
-      background: var(--rosa);
-    }
-
-    .card:nth-child(9)::after {
-      background: var(--lima);
-    }
-
-    .card:nth-child(10)::after {
-      background: var(--indigo);
-    }
-
     .card:hover {
-      background: rgba(255,255,255,0.12);
+      background:
+        radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--cor) 34%, transparent), transparent 42%),
+        linear-gradient(145deg, rgba(255,255,255,0.105), rgba(255,255,255,0.05));
+      border-color: color-mix(in srgb, var(--cor) 36%, rgba(255,255,255,0.16));
       transform: translateY(-4px);
     }
 
@@ -402,51 +425,39 @@
       transform: scaleX(1);
     }
 
+    .card:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--cor) 72%, white);
+      outline-offset: 4px;
+    }
+
+    .card > div {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-kicker {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      max-width: 100%;
+      margin-bottom: 18px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.075);
+      color: var(--texto-fraco);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.055em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
     .card h3 {
       margin: 0;
-      font-size: clamp(25px, 2.2vw, 38px);
+      color: var(--cor);
+      font-size: clamp(27px, 2.65vw, 45px);
       line-height: 0.98;
       letter-spacing: -0.055em;
-    }
-
-    .card:nth-child(1) h3 {
-      color: var(--verde);
-    }
-
-    .card:nth-child(2) h3 {
-      color: var(--vermelho);
-    }
-
-    .card:nth-child(3) h3 {
-      color: #8bb2ff;
-    }
-
-    .card:nth-child(4) h3 {
-      color: var(--amarelo);
-    }
-
-    .card:nth-child(5) h3 {
-      color: var(--roxo);
-    }
-
-    .card:nth-child(6) h3 {
-      color: var(--ciano);
-    }
-
-    .card:nth-child(7) h3 {
-      color: var(--laranja);
-    }
-
-    .card:nth-child(8) h3 {
-      color: var(--rosa);
-    }
-
-    .card:nth-child(9) h3 {
-      color: var(--lima);
-    }
-
-    .card:nth-child(10) h3 {
-      color: var(--indigo);
     }
 
     .card p {
@@ -454,6 +465,42 @@
       color: var(--texto-suave);
       line-height: 1.62;
       font-size: 15px;
+    }
+
+    .card--atendimento {
+      --cor: var(--lima);
+    }
+
+    .card--emolumentos {
+      --cor: var(--indigo);
+    }
+
+    .card--validacao {
+      --cor: var(--ciano);
+    }
+
+    .card--calculo {
+      --cor: var(--amarelo);
+    }
+
+    .card--orcamento {
+      --cor: var(--laranja);
+    }
+
+    .card--tarifa {
+      --cor: var(--roxo);
+    }
+
+    .card--normas {
+      --cor: var(--azul);
+    }
+
+    .card--consulta {
+      --cor: var(--vermelho);
+    }
+
+    .card--apoio {
+      --cor: var(--verde);
     }
 
     .card-bottom {
@@ -469,12 +516,13 @@
       border: 1px solid var(--linha);
       display: grid;
       place-items: center;
-      transition: background 0.18s ease, color 0.18s ease;
+      transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
     }
 
     .card:hover .arrow {
       background: var(--branco);
       color: #020617;
+      border-color: var(--branco);
     }
 
     .visit-counter {
@@ -651,6 +699,38 @@
         bottom: 10px;
       }
     }
+
+
+    @media (max-width: 980px) {
+      .tools-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .tools-heading p {
+        text-align: left;
+      }
+
+      .cards.cards-3,
+      .cards.cards-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 620px) {
+      .tools-group {
+        margin-top: 24px;
+      }
+
+      .cards.cards-3,
+      .cards.cards-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .card h3 {
+        font-size: clamp(29px, 10vw, 42px);
+      }
+    }
   </style>
 
   <!-- Google AdSense -->
@@ -710,127 +790,170 @@
     </header>
 
     <main class="tools" id="ferramentas">
-      <section class="cards" aria-label="Ferramentas disponíveis">
-        <a class="card" href="competencia-e-notariado.html" aria-label="Abrir ferramenta de competência em ato notarial eletrônico">
-          <div>
-            <h3>Competência em ato notarial eletrônico</h3>
-            <p>
-              Identificação do tabelião de notas competente para a prática de ato notarial eletrônico ou híbrido.
-            </p>
-          </div>
-          <div class="card-bottom" aria-hidden="true">
-            <div class="arrow">→</div>
-          </div>
-        </a>
+      <section class="tools-group" aria-labelledby="grupo-principais">
+        <div class="tools-heading">
+          <h2 id="grupo-principais">Ferramentas principais</h2>
+          <p>Entradas mais usadas para preparar atendimento, calcular emolumentos, validar documentos e estimar custos.</p>
+        </div>
 
-        <a class="card" href="codigo-de-normas-nacional.html" aria-label="Abrir consulta ao Código Nacional de Normas">
-          <div>
-            <h3>Código Nacional de Normas</h3>
-            <p>
-              Consulta estruturada ao Código Nacional de Normas da Corregedoria Nacional de Justiça, com busca por dispositivo, tema e especialidade.
-            </p>
-          </div>
-          <div class="card-bottom" aria-hidden="true">
-            <div class="arrow">→</div>
-          </div>
-        </a>
+        <div class="cards" aria-label="Ferramentas principais">
+          <a class="card card--atendimento" href="https://triagem.portalnotarial.com.br" aria-label="Abrir Triagem Notarial">
+            <div>
+              <span class="card-kicker">Atendimento</span>
+              <h3>Triagem Notarial</h3>
+              <p>
+                Organize as informações e os documentos antes de solicitar o ato notarial.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
 
-        <a class="card" href="codigo-de-normas-de-sao-paulo.html" aria-label="Abrir consulta às Normas da Corregedoria de São Paulo">
-          <div>
-            <h3>Normas da Corregedoria de São Paulo</h3>
-            <p>
-              Consulta às Normas de Serviço da Corregedoria Geral da Justiça de São Paulo, organizada para localização rápida de capítulos.
-            </p>
-          </div>
-          <div class="card-bottom" aria-hidden="true">
-            <div class="arrow">→</div>
-          </div>
-        </a>
+          <a class="card card--emolumentos" href="https://portalnotarial.com.br/aplicador-de-emolumentos.html" aria-label="Abrir aplicador inteligente da tabela de emolumentos">
+            <div>
+              <span class="card-kicker">Emolumentos</span>
+              <h3>Aplicador inteligente da tabela de emolumentos</h3>
+              <p>
+                Selecione o ato, informe os valores necessários e obtenha o enquadramento emolumentar estimado.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
 
-        <a class="card" href="calculadora-escritura-tributo-registro-sp.html" aria-label="Abrir calculadora de escritura, tributo e registro">
-          <div>
-            <h3>Calculadora de escritura, tributo e registro</h3>
-            <p>
-              Calcule com rapidez e facilidade o valor da escritura, tributo e registro imobiliário.
-            </p>
-          </div>
-          <div class="card-bottom" aria-hidden="true">
-            <div class="arrow">→</div>
-          </div>
-        </a>
+          <a class="card card--validacao" href="https://verificador.portalnotarial.com.br/c" aria-label="Abrir verificador técnico de documentos eletrônicos">
+            <div>
+              <span class="card-kicker">Validação</span>
+              <h3>Verificador técnico de documentos eletrônicos</h3>
+              <p>
+                Triagem e validação de documentos eletrônicos, com verificação de formato, hash, PDF/A e assinatura digital.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
 
-        <a class="card" href="calculadora-tarifas-conta-notarial.html" aria-label="Abrir calculadora de tarifas da conta notarial">
-          <div>
-            <h3>Calculadora de tarifas conta notarial</h3>
-            <p>
-              Calcule de forma simples e rápida o valor da tarifa.
-            </p>
-          </div>
-          <div class="card-bottom" aria-hidden="true">
-            <div class="arrow">→</div>
-          </div>
-        </a>
+          <a class="card card--calculo" href="calculadora-escritura-tributo-registro-sp.html" aria-label="Abrir calculadora de escritura, tributo e registro">
+            <div>
+              <span class="card-kicker">Cálculo</span>
+              <h3>Calculadora de escritura, tributo e registro</h3>
+              <p>
+                Calcule com rapidez e facilidade o valor da escritura, tributo e registro imobiliário.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
+        </div>
+      </section>
 
+      <section class="tools-group" aria-labelledby="grupo-calculos">
+        <div class="tools-heading">
+          <h2 id="grupo-calculos">Cálculos e orçamento</h2>
+          <p>Ferramentas de apoio para estimativas, orçamento e tarifas relacionadas à conta notarial.</p>
+        </div>
 
-        <a class="card" href="https://portalnotarial.com.br/links-uteis.html" aria-label="Abrir páginas de serviços e links úteis">
-          <div>
-            <h3>Páginas de serviços e links úteis</h3>
-            <p>
-              Acesso rápido a páginas, serviços, órgãos e temas de uso frequente na rotina notarial.
-            </p>
-          </div>
-          <div class="card-bottom" aria-hidden="true">
-            <div class="arrow">→</div>
-          </div>
-        </a>
+        <div class="cards cards-2" aria-label="Ferramentas de cálculo e orçamento">
+          <a class="card card--orcamento" href="calculadora-escritura-tributo-registro-sp.html" aria-label="Abrir gerador de orçamento de atos notariais">
+            <div>
+              <span class="card-kicker">Orçamento</span>
+              <h3>Gerador de orçamento de atos notariais</h3>
+              <p>
+                Gere orçamento estimativo com escritura, tributo, registro imobiliário e valores adicionais informados.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
 
-        <a class="card" href="https://verificador.portalnotarial.com.br/c" aria-label="Abrir verificador técnico de documentos eletrônicos">
-          <div>
-            <h3>Verificador técnico de documentos eletrônicos</h3>
-            <p>
-              Triagem e validação de documentos eletrônicos, com verificação de formato, hash, PDF/A e assinatura digital.
-            </p>
-          </div>
-          <div class="card-bottom" aria-hidden="true">
-            <div class="arrow">→</div>
-          </div>
-        </a>
+          <a class="card card--tarifa" href="calculadora-tarifas-conta-notarial.html" aria-label="Abrir calculadora de tarifas da conta notarial">
+            <div>
+              <span class="card-kicker">Tarifas</span>
+              <h3>Calculadora de tarifas conta notarial</h3>
+              <p>
+                Calcule de forma simples e rápida o valor da tarifa.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
+        </div>
+      </section>
 
-        <a class="card" href="calculadora-escritura-tributo-registro-sp.html" aria-label="Abrir gerador de orçamento de atos notariais">
-          <div>
-            <h3>Gerador de orçamento de atos notariais</h3>
-            <p>
-              Gere orçamento estimativo com escritura, tributo, registro imobiliário e valores adicionais informados.
-            </p>
-          </div>
-          <div class="card-bottom" aria-hidden="true">
-            <div class="arrow">→</div>
-          </div>
-        </a>
+      <section class="tools-group" aria-labelledby="grupo-normas">
+        <div class="tools-heading">
+          <h2 id="grupo-normas">Normas e consultas</h2>
+          <p>Consultas estruturadas para pesquisa normativa, competência notarial eletrônica e localização rápida de dispositivos.</p>
+        </div>
 
-        <a class="card" href="https://triagem.portalnotarial.com.br" aria-label="Abrir Triagem Notarial">
-          <div>
-            <h3>Triagem Notarial</h3>
-            <p>
-              Organize as informações e os documentos antes de solicitar o ato notarial.
-            </p>
-          </div>
-          <div class="card-bottom" aria-hidden="true">
-            <div class="arrow">→</div>
-          </div>
-        </a>
+        <div class="cards cards-3" aria-label="Ferramentas de normas e consultas">
+          <a class="card card--apoio" href="competencia-e-notariado.html" aria-label="Abrir ferramenta de competência em ato notarial eletrônico">
+            <div>
+              <span class="card-kicker">Competência</span>
+              <h3>Competência em ato notarial eletrônico</h3>
+              <p>
+                Identificação do tabelião de notas competente para a prática de ato notarial eletrônico ou híbrido.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
 
-        <a class="card" href="https://portalnotarial.com.br/aplicador-de-emolumentos.html" aria-label="Abrir aplicador inteligente da tabela de emolumentos">
-          <div>
-            <h3>Aplicador inteligente da tabela de emolumentos</h3>
-            <p>
-              Selecione o ato, informe os valores necessários e obtenha o enquadramento emolumentar estimado.
-            </p>
-          </div>
-          <div class="card-bottom" aria-hidden="true">
-            <div class="arrow">→</div>
-          </div>
-        </a>
+          <a class="card card--consulta" href="codigo-de-normas-nacional.html" aria-label="Abrir consulta ao Código Nacional de Normas">
+            <div>
+              <span class="card-kicker">Normas nacionais</span>
+              <h3>Código Nacional de Normas</h3>
+              <p>
+                Consulta estruturada ao Código Nacional de Normas da Corregedoria Nacional de Justiça, com busca por dispositivo, tema e especialidade.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
+
+          <a class="card card--normas" href="codigo-de-normas-de-sao-paulo.html" aria-label="Abrir consulta às Normas da Corregedoria de São Paulo">
+            <div>
+              <span class="card-kicker">Normas SP</span>
+              <h3>Normas da Corregedoria de São Paulo</h3>
+              <p>
+                Consulta às Normas de Serviço da Corregedoria Geral da Justiça de São Paulo, organizada para localização rápida de capítulos.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="tools-group" aria-labelledby="grupo-apoio">
+        <div class="tools-heading">
+          <h2 id="grupo-apoio">Apoio operacional</h2>
+          <p>Atalho para serviços, órgãos e páginas de uso recorrente na rotina notarial.</p>
+        </div>
+
+        <div class="cards cards-2" aria-label="Ferramentas de apoio operacional">
+          <a class="card card--apoio" href="https://portalnotarial.com.br/links-uteis.html" aria-label="Abrir páginas de serviços e links úteis">
+            <div>
+              <span class="card-kicker">Links úteis</span>
+              <h3>Páginas de serviços e links úteis</h3>
+              <p>
+                Acesso rápido a páginas, serviços, órgãos e temas de uso frequente na rotina notarial.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
+        </div>
       </section>
     </main>
 
