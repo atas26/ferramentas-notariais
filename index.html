@@ -29,6 +29,7 @@
       --laranja: rgb(249, 115, 22);
       --rosa: rgb(236, 72, 153);
       --lima: rgb(132, 204, 22);
+      --indigo: rgb(99, 102, 241);
       --fundo: #071323;
       --fundo-2: #0a1d31;
       --texto: #f8fafc;
@@ -388,6 +389,10 @@
       background: var(--lima);
     }
 
+    .card:nth-child(10)::after {
+      background: var(--indigo);
+    }
+
     .card:hover {
       background: rgba(255,255,255,0.12);
       transform: translateY(-4px);
@@ -438,6 +443,10 @@
 
     .card:nth-child(9) h3 {
       color: var(--lima);
+    }
+
+    .card:nth-child(10) h3 {
+      color: var(--indigo);
     }
 
     .card p {
@@ -804,6 +813,18 @@
             <h3>Triagem Notarial</h3>
             <p>
               Organize as informações e os documentos antes de solicitar o ato notarial.
+            </p>
+          </div>
+          <div class="card-bottom" aria-hidden="true">
+            <div class="arrow">→</div>
+          </div>
+        </a>
+
+        <a class="card" href="https://portalnotarial.com.br/aplicador-de-emolumentos.html" aria-label="Abrir aplicador inteligente da tabela de emolumentos">
+          <div>
+            <h3>Aplicador inteligente da tabela de emolumentos</h3>
+            <p>
+              Selecione o ato, informe os valores necessários e obtenha o enquadramento emolumentar estimado.
             </p>
           </div>
           <div class="card-bottom" aria-hidden="true">
