@@ -1,0 +1,1690 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aplicador inteligente da tabela de emolumentos - São Paulo</title>
+  <meta name="description" content="Ferramenta informativa para enquadramento de atos notariais na Tabela I do Estado de São Paulo, capital, com ISS de 2%.">
+  <meta name="robots" content="index,follow">
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --panel:#ffffff;
+      --text:#172033;
+      --muted:#64748b;
+      --line:#d8dee9;
+      --brand:#0076ff;
+      --brand-dark:#005bd1;
+      --soft:#eef5ff;
+      --warn:#fff7ed;
+      --warn-border:#fed7aa;
+      --ok:#ecfdf5;
+      --bad:#fff1f2;
+      --shadow:0 18px 55px rgba(15,23,42,.09);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0,118,255,.12), transparent 32rem),
+        linear-gradient(180deg,#f8fbff 0%,var(--bg) 55%,#eef2f7 100%);
+      color:var(--text);
+      line-height:1.48;
+    }
+
+    .wrap{
+      width:min(1220px,calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    header{
+      padding:34px 0 18px;
+    }
+
+    .hero{
+      background:rgba(255,255,255,.86);
+      border:1px solid rgba(216,222,233,.8);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:26px;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:22px;
+      align-items:stretch;
+      backdrop-filter: blur(12px);
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      background:var(--soft);
+      color:var(--brand-dark);
+      border:1px solid #cfe2ff;
+      border-radius:999px;
+      padding:6px 12px;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.02em;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(30px,4vw,52px);
+      line-height:1.02;
+      letter-spacing:-.045em;
+    }
+
+    .lead{
+      margin:16px 0 0;
+      max-width:none;
+      width:100%;
+      color:#334155;
+      font-size:18px;
+    }
+
+    .scope{
+      margin:14px 0 0;
+      max-width:none;
+      width:100%;
+      color:#475569;
+      font-size:14px;
+      background:#f8fafc;
+      border:1px solid #e2e8f0;
+      border-radius:14px;
+      padding:10px 12px;
+    }
+
+    .hero-card{
+      background:linear-gradient(180deg,#0f172a,#1e293b);
+      color:white;
+      border-radius:24px;
+      padding:20px;
+      min-height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero-card:after{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      right:-80px;
+      bottom:-90px;
+      border-radius:50%;
+      background:rgba(0,118,255,.42);
+      filter:blur(2px);
+    }
+
+    .hero-card h2{
+      margin:0 0 8px;
+      font-size:22px;
+      letter-spacing:-.02em;
+      position:relative;
+      z-index:1;
+    }
+
+    .hero-card p{
+      margin:0;
+      color:#dbeafe;
+      position:relative;
+      z-index:1;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:18px;
+      position:relative;
+      z-index:1;
+    }
+
+    .chip{
+      font-size:12px;
+      padding:6px 9px;
+      background:rgba(255,255,255,.1);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:999px;
+      color:#e2e8f0;
+    }
+
+    main{
+      padding:18px 0 54px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:430px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 12px 36px rgba(15,23,42,.06);
+    }
+
+    .panel-head{
+      padding:18px 18px 12px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .panel-head h2{
+      margin:0;
+      font-size:20px;
+      letter-spacing:-.02em;
+    }
+
+    .panel-head p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .panel-body{
+      padding:18px;
+    }
+
+    label{
+      display:block;
+      font-size:13px;
+      font-weight:750;
+      color:#273244;
+      margin:0 0 7px;
+    }
+
+    input,select,button,textarea{
+      font:inherit;
+    }
+
+    input,select,textarea{
+      width:100%;
+      border:1px solid #cbd5e1;
+      background:#fff;
+      color:var(--text);
+      border-radius:14px;
+      padding:12px 12px;
+      outline:none;
+      transition:border-color .15s, box-shadow .15s;
+    }
+
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--brand);
+      box-shadow:0 0 0 4px rgba(0,118,255,.12);
+    }
+
+    textarea{
+      min-height:88px;
+      resize:vertical;
+    }
+
+    .field{
+      margin-bottom:14px;
+    }
+
+    .two{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .hint{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:6px;
+    }
+
+    .checkrow{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:11px 12px;
+      border:1px solid #dbe3ef;
+      background:#f8fafc;
+      border-radius:14px;
+      margin-bottom:10px;
+    }
+
+    .checkrow input{
+      width:auto;
+      margin-top:3px;
+    }
+
+    .checkrow label{
+      margin:0;
+      font-weight:650;
+      font-size:13px;
+    }
+
+    .actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    button{
+      border:0;
+      border-radius:15px;
+      padding:12px 14px;
+      cursor:pointer;
+      font-weight:800;
+      transition:transform .08s, filter .15s, background .15s;
+    }
+
+    button:active{transform:translateY(1px)}
+
+    .primary{
+      background:var(--brand);
+      color:white;
+    }
+
+    .primary:hover{background:var(--brand-dark)}
+
+    .secondary{
+      background:#e2e8f0;
+      color:#0f172a;
+    }
+
+    .ghost{
+      background:#fff;
+      border:1px solid #cbd5e1;
+      color:#0f172a;
+    }
+
+    .mini-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .mini-actions button{
+      padding:9px 11px;
+      border-radius:12px;
+      font-size:13px;
+    }
+
+    .result-top{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:16px;
+      align-items:center;
+    }
+
+    .total-box{
+      background:linear-gradient(180deg,var(--brand),var(--brand-dark));
+      color:white;
+      border-radius:20px;
+      padding:18px;
+      min-width:230px;
+      text-align:right;
+    }
+
+    .total-box .label{
+      color:#dbeafe;
+      font-size:13px;
+      margin:0 0 4px;
+    }
+
+    .total-box .money{
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:-.035em;
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 11px;
+      border-radius:999px;
+      background:var(--ok);
+      color:#047857;
+      font-size:13px;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .status.warn{
+      background:var(--warn);
+      color:#9a3412;
+      border:1px solid var(--warn-border);
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .empty{
+      min-height:520px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+      padding:34px;
+    }
+
+    .empty .mark{
+      width:62px;
+      height:62px;
+      border-radius:22px;
+      display:grid;
+      place-items:center;
+      margin:0 auto 14px;
+      background:var(--soft);
+      color:var(--brand);
+      font-size:30px;
+    }
+
+    .empty h2{
+      margin:0 0 10px;
+      letter-spacing:-.02em;
+    }
+
+    .empty p{
+      margin:0;
+      color:var(--muted);
+      max-width:560px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:14px;
+    }
+
+    th,td{
+      text-align:left;
+      vertical-align:top;
+      border-bottom:1px solid #e5eaf2;
+      padding:11px 8px;
+    }
+
+    th{
+      color:#334155;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.045em;
+      background:#f8fafc;
+    }
+
+    td.num,th.num{
+      text-align:right;
+      white-space:nowrap;
+    }
+
+    .pill{
+      display:inline-flex;
+      border-radius:999px;
+      background:#eef2ff;
+      color:#3730a3;
+      padding:4px 8px;
+      font-size:12px;
+      font-weight:750;
+    }
+
+    .note{
+      border:1px solid #dbeafe;
+      background:#f8fbff;
+      border-radius:17px;
+      padding:13px 14px;
+      color:#334155;
+      margin-top:14px;
+      font-size:14px;
+    }
+
+    .note.warn{
+      background:var(--warn);
+      border-color:var(--warn-border);
+      color:#7c2d12;
+    }
+
+    .fundamentos{
+      display:grid;
+      gap:8px;
+      margin-top:14px;
+    }
+
+    .fundamento{
+      background:#f8fafc;
+      border:1px solid #e5eaf2;
+      border-radius:14px;
+      padding:10px 12px;
+      color:#334155;
+      font-size:14px;
+    }
+
+    details{
+      margin-top:14px;
+      border:1px solid #dbe3ef;
+      border-radius:16px;
+      background:#fff;
+      overflow:hidden;
+    }
+
+    summary{
+      cursor:pointer;
+      padding:13px 14px;
+      font-weight:800;
+      background:#f8fafc;
+    }
+
+    .details-body{
+      padding:14px;
+      color:#334155;
+      font-size:14px;
+    }
+
+    .manual-list{
+      display:grid;
+      gap:10px;
+    }
+
+    .manual-row{
+      border:1px solid #e5eaf2;
+      border-radius:14px;
+      padding:12px;
+      background:#fbfdff;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:10px;
+      align-items:center;
+    }
+
+    .manual-row button{
+      padding:7px 9px;
+      border-radius:10px;
+      background:#fee2e2;
+      color:#991b1b;
+    }
+
+    footer{
+      color:#64748b;
+      font-size:13px;
+      padding:0 0 44px;
+    }
+
+    .src{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .src p{
+      margin:0 0 8px;
+    }
+
+    .src p:last-child{
+      margin-bottom:0;
+    }
+
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      border:0;
+    }
+
+    .visit-counter{
+      position:fixed;
+      right:12px;
+      bottom:10px;
+      z-index:1000;
+      background:rgba(255,255,255,.86);
+      border:1px solid rgba(203,213,225,.9);
+      color:#64748b;
+      padding:6px 9px;
+      border-radius:999px;
+      font-size:12px;
+      line-height:1;
+      box-shadow:0 8px 20px rgba(15,23,42,.08);
+      backdrop-filter:blur(8px);
+    }
+
+    .visit-counter span{
+      font-weight:800;
+      color:#475569;
+    }
+
+    .print-url{
+      display:none;
+    }
+
+    .hidden{display:none!important}
+
+    @media (max-width:980px){
+      .hero,.grid,.result-top{
+        grid-template-columns:1fr;
+      }
+      .total-box{
+        text-align:left;
+      }
+    }
+
+    @media (max-width:620px){
+      .wrap{
+        width:min(100% - 22px,1220px);
+      }
+      .hero,.panel-body,.panel-head{
+        padding:16px;
+      }
+      .two,.actions{
+        grid-template-columns:1fr;
+      }
+      table{
+        min-width:720px;
+      }
+      .table-scroll{
+        overflow-x:auto;
+      }
+    }
+
+    @media print{
+      body{background:#fff}
+      header,.left-panel,.mini-actions,footer,.visit-counter{display:none}
+      .wrap{width:100%}
+      .grid{display:block}
+      .panel{box-shadow:none;border:0}
+      .print-url{
+        display:block;
+        margin:0 0 14px;
+        font-size:13px;
+        color:#334155;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <section class="hero" aria-labelledby="titulo">
+        <div>
+          <div class="eyebrow">Aplicador da Tabela de Custas e Emolumentos Extrajudicial - Tabelionato de Notas (Capital)</div>
+          <h1 id="titulo">Aplicador inteligente da tabela de emolumentos - São Paulo</h1>
+          <p class="lead">
+            Selecione o ato, informe os valores necessários e obtenha o enquadramento provável, com memória de cálculo, base aplicada, percentual, total estimado e fundamentos.
+          </p>
+          <p class="scope">
+            Os valores correspondem à Tabela I do Tabelionato de Notas da capital do Estado de São Paulo para 2026, com ISS de 2%. Em município com alíquota diversa, o total bruto deve ser recalculado.
+          </p>
+        </div>
+      </section>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap grid">
+      <section class="panel left-panel">
+        <div class="panel-head">
+          <h2>Consulta</h2>
+          <p>Use a busca para localizar o ato. Os campos aparecem conforme a hipótese selecionada.</p>
+        </div>
+        <div class="panel-body">
+          <div class="field">
+            <label for="busca">Buscar ato</label>
+            <input id="busca" type="search" placeholder="Exemplo: alienação fiduciária, usufruto, ata, inventário">
+          </div>
+
+          <div class="field">
+            <label for="ato">Tipo de ato</label>
+            <select id="ato"></select>
+            <div class="hint" id="atoHint">Selecione uma hipótese para iniciar.</div>
+          </div>
+
+          <form id="formulario" novalidate>
+            <div id="campos"></div>
+
+            <div class="checkrow">
+              <input type="checkbox" id="foraCartorio">
+              <div>
+                <label for="foraCartorio">Ato sem valor declarado praticado fora do horário normal ou fora do tabelionato</label>
+                <div class="hint">Aplica dobra apenas aos atos sem valor declarado, quando cabível.</div>
+              </div>
+            </div>
+
+            <div class="checkrow">
+              <input type="checkbox" id="atoIncompleto">
+              <div>
+                <label for="atoIncompleto">Ato declarado incompleto por culpa ou a pedido da parte</label>
+                <div class="hint">Aplica 1/3 dos emolumentos, conforme a nota explicativa correspondente.</div>
+              </div>
+            </div>
+
+            <div class="actions">
+              <button class="primary" type="submit">Calcular</button>
+              <button class="secondary" type="button" id="limpar">Limpar</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="panel" id="resultadoPanel">
+        <div class="empty" id="empty">
+          <div>
+            <div class="mark">§</div>
+            <h2>Resultado do enquadramento</h2>
+            <p>
+              O cálculo aparecerá aqui com a composição dos atos, a faixa aplicada, os redutores e os fundamentos normativos cadastrados.
+            </p>
+          </div>
+        </div>
+
+        <div id="resultado" class="hidden">
+          <div class="panel-head result-top">
+            <div>
+              <div class="status" id="statusRegra">Regra aplicada</div>
+              <h2 id="resTitulo">Resultado</h2>
+              <p id="resResumo"></p>
+            </div>
+            <div class="total-box">
+              <div class="label">Total estimado</div>
+              <div class="money" id="resTotal">R$ 0,00</div>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <div class="print-url">https://portalnotarial.com.br</div>
+            <div class="table-scroll">
+              <table aria-label="Memória de cálculo">
+                <thead>
+                  <tr>
+                    <th>Ato</th>
+                    <th>Base</th>
+                    <th>Faixa ou item</th>
+                    <th class="num">Tabela cheia</th>
+                    <th class="num">Percentual</th>
+                    <th class="num">Subtotal</th>
+                  </tr>
+                </thead>
+                <tbody id="linhas"></tbody>
+              </table>
+            </div>
+
+            <div class="note" id="memoria"></div>
+
+            <details open>
+              <summary>Fundamentos aplicados</summary>
+              <div class="details-body fundamentos" id="fundamentos"></div>
+            </details>
+
+            <details open>
+              <summary>Observações técnicas</summary>
+              <div class="details-body" id="observacoes"></div>
+            </details>
+
+            <div class="mini-actions">
+              <button class="ghost" type="button" id="gerarPdf">Gerar PDF</button>
+              <button class="ghost" type="button" id="imprimir">Imprimir</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="src">
+        <p>Base informativa. Lei Estadual nº 11.331 de 26 de dezembro de 2002, texto consolidado pela Lei nº 18.009 de 2024, Tabela I do Tabelionato de Notas da capital para 2026 com ISS de 2%, notas explicativas e enunciados notariais (CNB-SP).</p>
+        <p>Uso recomendado. Triagem e conferência interna. O resultado não substitui a conferência caso a caso pelo escrevente ou tabelião.</p>
+        <p>Projeto apoiado por <a href="https://escriturapublica.substack.com" target="_blank" rel="noopener">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener">Atesta</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="visit-counter" id="visitCounter">Visitas: <span id="visitCount">0</span></div>
+
+  <script>
+    "use strict";
+
+    const TABELA_VALOR_DECLARADO = [
+      {faixa:"a", min:0, max:1524.00, total:356.90},
+      {faixa:"b", min:1524.01, max:5761.00, total:533.35},
+      {faixa:"c", min:5761.01, max:9603.00, total:832.77},
+      {faixa:"d", min:9603.01, max:19210.00, total:1189.68},
+      {faixa:"e", min:19210.01, max:38420.00, total:1608.08},
+      {faixa:"f", min:38420.01, max:76840.00, total:1907.60},
+      {faixa:"g", min:76840.01, max:115260.00, total:2264.49},
+      {faixa:"h", min:115260.01, max:153680.00, total:2682.90},
+      {faixa:"i", min:153680.01, max:192100.00, total:3039.89},
+      {faixa:"j", min:192100.01, max:230520.00, total:3400.86},
+      {faixa:"k", min:230520.01, max:268940.00, total:3815.19},
+      {faixa:"l", min:268940.01, max:307360.00, total:4176.24},
+      {faixa:"m", min:307360.01, max:330146.00, total:4594.65},
+      {faixa:"n", min:330146.01, max:384200.00, total:4890.01},
+      {faixa:"o", min:384200.01, max:768400.00, total:5427.43},
+      {faixa:"p", min:768400.01, max:1152600.00, total:6026.36},
+      {faixa:"q", min:1152600.01, max:1536800.00, total:6682.74},
+      {faixa:"r", min:1536800.01, max:2345066.00, total:7384.26},
+      {faixa:"s", min:2345066.01, max:3908444.00, total:10255.96},
+      {faixa:"t", min:3908444.01, max:5862665.00, total:13332.69},
+      {faixa:"u", min:5862665.01, max:7816887.00, total:16409.51},
+      {faixa:"v", min:7816887.01, max:9771109.00, total:19486.25},
+      {faixa:"w", min:9771109.01, max:11725331.00, total:22562.98},
+      {faixa:"x", min:11725331.01, max:13679552.00, total:25639.80},
+      {faixa:"y", min:13679552.01, max:15633774.00, total:28716.54},
+      {faixa:"z", min:15633774.01, max:17587996.00, total:31793.33},
+      {faixa:"z1", min:17587996.01, max:19542217.00, total:34870.18},
+      {faixa:"z2", min:19542217.01, max:23450661.00, total:41023.73},
+      {faixa:"z3", min:23450661.01, max:27359105.00, total:47177.25},
+      {faixa:"z4", min:27359105.01, max:31267548.00, total:53330.81},
+      {faixa:"z5", min:31267548.01, max:35175992.00, total:59484.31},
+      {faixa:"z6", min:35175992.01, max:Infinity, total:65637.95}
+    ];
+
+    const FIXOS = {
+      regularizacaoPrimeiroTitulo: {item:"1.2", nome:"Primeiro título aquisitivo em regularização fundiária de interesse social", total:260.14, semValor:false},
+      habitacionalFgtsZeis: {item:"1.3", nome:"Aquisição e garantias reais em programa habitacional de interesse social", total:433.56, semValor:false},
+      primeiraAlienacaoHis: {item:"1.4", nome:"Primeira alienação imobiliária em HIS com garantia", total:520.33, semValor:false},
+      procPrevidenciaria: {item:"2.1", nome:"Procuração previdenciária", total:0, semValor:true},
+      procForo: {item:"2.2.1", nome:"Procuração para foro em geral até 4 outorgantes", total:123.09, semValor:true},
+      procForoAdicional: {item:"2.2.2", nome:"Outorgante adicional em procuração para foro", total:30.75, semValor:true},
+      procAnalfabeto: {item:"2.2.3", nome:"Acréscimo por outorgante analfabeto", total:61.49, semValor:true},
+      procSemValor: {item:"2.3.1", nome:"Outras procurações sem valor econômico até 4 outorgantes", total:164.14, semValor:true},
+      procSemValorAdicional: {item:"2.3.2", nome:"Outorgante adicional em procuração sem valor econômico", total:41.05, semValor:true},
+      procComValor: {item:"2.4.1", nome:"Outras procurações com valor econômico até 4 outorgantes", total:328.18, semValor:true},
+      procComValorAdicional: {item:"2.4.2", nome:"Outorgante adicional em procuração com valor econômico", total:82.04, semValor:true},
+      autenticacao: {item:"3", nome:"Autenticação de cópia", total:5.18, semValor:true},
+      firmaSemValor: {item:"4.1.1", nome:"Reconhecimento de firma por semelhança sem valor econômico", total:8.94, semValor:true},
+      firmaComValor: {item:"4.1.2", nome:"Reconhecimento de firma por semelhança com valor econômico", total:13.67, semValor:true},
+      firmaAutentica: {item:"4.2.1", nome:"Reconhecimento de firma por autenticidade", total:22.89, semValor:true},
+      certidao: {item:"5", nome:"Certidão, traslado ou pública forma", total:93.53, semValor:true},
+      escrituraEspecialSemValor: {item:"6.1", nome:"Escritura sem valor declarado para reconhecimento de filho, adoção, fins previdenciários ou dependência econômica", total:118.96, semValor:true},
+      escrituraSemValor: {item:"6.2", nome:"Demais escrituras sem valor declarado", total:615.30, semValor:true},
+      chancela: {item:"7", nome:"Registro de chancela mecânica", total:1788.62, semValor:true},
+      testamentoSemPatrimonio: {item:"8.1", nome:"Testamento público sem conteúdo patrimonial", total:135.37, semValor:true},
+      testamentoPublico: {item:"8.2", nome:"Testamento público com ou sem revogação", total:2461.46, semValor:true},
+      testamentoCerrado: {item:"8.3", nome:"Testamento cerrado", total:2461.46, semValor:true},
+      revogacaoTestamento: {item:"8.4", nome:"Revogação de testamento", total:410.22, semValor:true},
+      ataPrimeiraFolha: {item:"9.1", nome:"Ata notarial sem reflexo econômico, primeira folha", total:638.76, semValor:true},
+      ataPaginaAdicional: {item:"9.2", nome:"Ata notarial sem reflexo econômico, página adicional", total:322.57, semValor:true},
+      convencaoCondominio: {item:"10", nome:"Escritura de convenção de condomínio", total:2369.52, semValor:true}
+    };
+
+    const INPUTS = {
+      negocio: {label:"Valor do negócio ou preço declarado", type:"money", hint:"Informe o valor declarado pelas partes."},
+      venal: {label:"Valor venal ou valor tributário", type:"money", hint:"IPTU, ITR, avaliação rural aceita pelo órgão competente ou valor fiscal aplicável."},
+      itbi: {label:"Base de cálculo do ITBI", type:"money", hint:"Informe zero se não houver base de ITBI aplicável."},
+      divida: {label:"Valor da dívida, débito garantido ou financiamento", type:"money", hint:"Usado para hipoteca, alienação fiduciária, mútuo ou garantia."},
+      negocio2: {label:"Valor do segundo imóvel atribuído pelas partes", type:"money", hint:"Para permuta. Valor declarado do imóvel da outra alienação."},
+      venal2: {label:"Valor venal do segundo imóvel", type:"money", hint:"Para permuta. Valor tributário do segundo imóvel."},
+      itbi2: {label:"Base de ITBI do segundo imóvel", type:"money", hint:"Para permuta. Informe zero se não aplicável."},
+      partilha: {label:"Valor dos bens partilháveis", type:"money", hint:"No inventário, informe o monte partilhável, excluída eventual meação quando aplicável."},
+      excesso: {label:"Valor da cessão por excesso ou renúncia translativa", type:"money", hint:"Valor do quinhão transferido em cessão autônoma."},
+      pensao: {label:"Valor mensal da pensão", type:"money", hint:"Usado em divórcio ou separação com alimentos."},
+      mesesPensao: {label:"Número de prestações da pensão", type:"number", hint:"Use 12 quando a obrigação for por prazo indeterminado."},
+      aluguel: {label:"Valor mensal do aluguel", type:"money", hint:"Para locação. Será multiplicado pelo número de meses."},
+      mesesLocacao: {label:"Número de meses do contrato de locação", type:"number", hint:"Use 12 quando o prazo for indeterminado."},
+      folhas: {label:"Número de folhas da ata", type:"number", hint:"A primeira folha usa o item 9.1. As demais usam o item 9.2."},
+      qtd: {label:"Quantidade de atos", type:"number", hint:"Número de reconhecimentos, autenticações, certidões ou atos repetidos."},
+      outorgantes: {label:"Número de outorgantes", type:"number", hint:"O casal conta como um outorgante."},
+      analfabetos: {label:"Número de outorgantes analfabetos", type:"number", hint:"Aplica o acréscimo do item 2.2.3 quando cabível."},
+      imoveisGarantia: {label:"Número de imóveis dados em garantia", type:"number", hint:"Se não houver valor individual por imóvel, a dívida é dividida pelo número de bens."},
+      valorImovel1: {label:"Valor garantido pelo imóvel 1", type:"money", hint:"Para hipoteca com valor individualizado por bem."},
+      valorImovel2: {label:"Valor garantido pelo imóvel 2", type:"money", hint:"Informe zero se houver apenas um imóvel."},
+      valorImovel3: {label:"Valor garantido pelo imóvel 3", type:"money", hint:"Informe zero se houver apenas dois imóveis."},
+      valorTerreno: {label:"Valor do terreno", type:"money", hint:"Para aquisição de terreno com financiamento de construção."},
+      valorFinanciamento: {label:"Valor do financiamento da construção", type:"money", hint:"A base será a soma do terreno e do financiamento."},
+      valorPactuacao: {label:"Valor total das avenças patrimoniais", type:"money", hint:"Multas, indenizações e obrigações pecuniárias pactuadas."},
+      valorPrecatorio: {label:"Valor do crédito de precatório cedido", type:"money", hint:"Valor efetivamente pago ao cedente, sem aplicação do desconto da Nota 1.6."},
+      tipoCessao: {label:"Tipo de compra e venda com cessão", type:"select", options:[
+        {value:"comum", label:"Compra e venda integral e cessão com 40% de desconto"},
+        {value:"loteador", label:"Primeira compra e venda de lote com cessão, ambos com 40% de desconto"},
+        {value:"revenda", label:"Revenda após quitação, compra com 40% e cessão integral"},
+        {value:"historiada", label:"Cessão historiada, compra e venda integral sem desconto"}
+      ]},
+      tipoHipoteca: {label:"Modalidade de hipoteca", type:"select", options:[
+        {value:"sem_valor_unitario", label:"Vários imóveis sem valor individual por bem"},
+        {value:"com_valor_unitario", label:"Vários imóveis com valor garantido por bem"}
+      ]},
+      tipoFinanciada: {label:"Modalidade de financiamento", type:"select", options:[
+        {value:"predio_acabado", label:"Prédio acabado, base é o valor total do imóvel"},
+        {value:"terreno_construcao", label:"Terreno com financiamento de construção, base é a soma"}
+      ]},
+      tipoUsufruto: {label:"Modalidade do negócio", type:"select", options:[
+        {value:"bipartida", label:"Venda bipartida ou doação com instituição do usufruto"},
+        {value:"consolidacao", label:"Transmissão simultânea da nua-propriedade e do usufruto ao mesmo adquirente"}
+      ]},
+      tipoRerratificacao: {label:"Conteúdo da rerratificação", type:"select", options:[
+        {value:"sem_valor", label:"Rerratificação sem valor declarado"},
+        {value:"com_valor", label:"Rerratificação com valor declarado"}
+      ]},
+      tipoManual: {label:"Item de tabela para composição manual", type:"select", options:[
+        {value:"valor100", label:"Escritura com valor declarado, 100%"},
+        {value:"valor60", label:"Escritura com valor declarado, 60%"},
+        {value:"valor50", label:"Escritura com valor declarado, 50%"},
+        {value:"valor25", label:"Escritura com valor declarado, 25%"},
+        {value:"valor20", label:"Escritura com valor declarado, 20%"},
+        {value:"semValor", label:"Escritura sem valor declarado, item 6.2"},
+        {value:"certidao", label:"Certidão, traslado ou pública forma, item 5"},
+        {value:"ataPrimeiraFolha", label:"Ata primeira folha, item 9.1"},
+        {value:"ataPaginaAdicional", label:"Ata página adicional, item 9.2"}
+      ]}
+    };
+
+    const REGRAS = [
+      {id:"compra_venda", nome:"Compra e venda simples", grupo:"Escrituras com valor declarado", inputs:["negocio","venal","itbi"], resumo:"Um ato com valor declarado. Base pelo maior valor entre negócio, valor tributário e base de ITBI.", tags:["compra","venda","imóvel"]},
+      {id:"compra_venda_af", nome:"Compra e venda com alienação fiduciária", grupo:"Escrituras com valor declarado", inputs:["negocio","venal","itbi","divida"], resumo:"Dois atos. Compra e venda com 60% e alienação fiduciária com 60%, observada a situação atual do Enunciado nº 26.", tags:["alienação fiduciária","garantia","60%"]},
+      {id:"compra_venda_mutuo_garantia", nome:"Compra e venda com mútuo e garantia", grupo:"Atos compostos", inputs:["negocio","venal","itbi","divida"], resumo:"Um ato principal sobre o negócio de maior valor e dois acessórios com 1/4 dos emolumentos cada.", tags:["mútuo","garantia","acessório"]},
+      {id:"mutuo_hipoteca", nome:"Mútuo ou abertura de crédito com hipoteca, no mesmo instrumento", grupo:"Garantias", inputs:["divida","imoveisGarantia"], resumo:"Negócio principal com 40% de desconto e a hipoteca conforme a Tabela 1 sobre o valor garantido por imóvel.", tags:["mútuo","abertura de crédito","hipoteca"]},
+      {id:"financiada_entidade", nome:"Aquisição residencial financiada por entidade financeira", grupo:"Reduções legais", inputs:["tipoFinanciada","negocio","venal","itbi","valorTerreno","valorFinanciamento"], resumo:"Tabela de escritura com valor declarado com redução de 20%, cobrando apenas um ato de maior valor.", tags:["SFH","financiamento","20%"]},
+      {id:"compromisso", nome:"Compromisso de venda e compra", grupo:"Reduções legais", inputs:["negocio","venal","itbi"], resumo:"50% do valor das escrituras com valor declarado.", tags:["compromisso","50%"]},
+      {id:"compra_venda_cessao", nome:"Compra e venda com cessão de direitos", grupo:"Atos compostos", inputs:["tipoCessao","negocio","venal","itbi","negocio2"], resumo:"Dois negócios jurídicos, com variação conforme lote, revenda ou cessão historiada.", tags:["cessão","direitos","lote"]},
+      {id:"doacao", nome:"Doação simples", grupo:"Escrituras com valor declarado", inputs:["negocio","venal","itbi"], resumo:"Um ato com valor declarado. Base pelo maior valor aplicável.", tags:["doação"]},
+      {id:"doacao_reserva_usufruto", nome:"Doação com reserva de usufruto", grupo:"Usufruto", inputs:["negocio","venal","itbi"], resumo:"Dois atos. Doação da nua-propriedade sobre 2/3 do imóvel e reserva de usufruto sobre 1/3 com 25% dos emolumentos.", tags:["doação","usufruto","nua propriedade"]},
+      {id:"venda_bipartida_usufruto", nome:"Venda bipartida ou instituição de usufruto", grupo:"Usufruto", inputs:["tipoUsufruto","negocio","venal","itbi"], resumo:"Dois atos na bipartida ou ato único na consolidação simultânea ao mesmo adquirente.", tags:["usufruto","bipartida","consolidação"]},
+      {id:"permuta", nome:"Permuta de imóveis", grupo:"Atos por pagamento", inputs:["negocio","venal","itbi","negocio2","venal2","itbi2"], resumo:"Cálculo por alienação realizada, tomando o maior valor entre negócio, venal e ITBI para cada imóvel.", tags:["permuta","por pagamento"]},
+      {id:"quitacao", nome:"Escritura de quitação", grupo:"Reduções legais", inputs:["negocio","venal","itbi"], resumo:"1/5 do valor fixado para escrituras com valor declarado.", tags:["quitação","20%"]},
+      {id:"hipoteca", nome:"Hipoteca ou penhor", grupo:"Garantias", inputs:["tipoHipoteca","divida","imoveisGarantia","valorImovel1","valorImovel2","valorImovel3"], resumo:"Base no débito confessado. Modalidade com ou sem valor individualizado por imóvel.", tags:["hipoteca","penhor","garantia"]},
+      {id:"servidao", nome:"Instituição de servidão", grupo:"Direitos reais", inputs:["negocio","venal","itbi"], resumo:"Base de cálculo correspondente a 20% do valor do imóvel serviente.", tags:["servidão","20% base"]},
+      {id:"locacao", nome:"Locação", grupo:"Contratos", inputs:["aluguel","mesesLocacao"], resumo:"Base pela soma dos aluguéis. Se por prazo indeterminado, usar 12 meses.", tags:["locação","aluguel"]},
+      {id:"direitos_possessorios", nome:"Constituição, transferência, modificação ou renúncia de direitos possessórios", grupo:"Posse", inputs:["negocio","venal","itbi"], resumo:"Aplica desconto de 40%, por admitir forma particular.", tags:["posse","possessórios","60%"]},
+      {id:"inventario_partilha", nome:"Inventário e partilha sem excesso", grupo:"Inventário", inputs:["partilha"], resumo:"Um ato pela partilha. Informe a base partilhável correta.", tags:["inventário","partilha"]},
+      {id:"inventario_excesso", nome:"Inventário com excesso de quinhão ou meação", grupo:"Inventário", inputs:["partilha","excesso"], resumo:"Um ato pela partilha e um ato autônomo pela cessão decorrente do excesso.", tags:["inventário","excesso","cessão"]},
+      {id:"renuncia_hereditaria", nome:"Renúncia pura e simples de direitos hereditários", grupo:"Inventário", inputs:["qtd"], resumo:"Um ato sem valor declarado por renúncia formalizada.", tags:["renúncia","herança"]},
+      {id:"renuncia_translativa", nome:"Renúncia translativa ou in favorem", grupo:"Inventário", inputs:["partilha","excesso"], resumo:"Cessão autônoma sobre o valor do quinhão transferido, somada à cobrança da partilha.", tags:["renúncia","translativa","in favorem"]},
+      {id:"divorcio_sem_bens", nome:"Divórcio ou separação sem bens", grupo:"Família", inputs:[], resumo:"Demais escrituras sem valor declarado, item 6.2.", tags:["divórcio","separação"]},
+      {id:"divorcio_partilha", nome:"Divórcio ou separação com partilha", grupo:"Família", inputs:["partilha"], resumo:"Um ato com valor declarado pela partilha informada.", tags:["divórcio","partilha"]},
+      {id:"divorcio_pensao", nome:"Divórcio ou separação com pensão alimentícia", grupo:"Família", inputs:["partilha","pensao","mesesPensao"], resumo:"Soma dos bens e das prestações da pensão. Se indeterminada, usar 12 prestações.", tags:["divórcio","pensão","alimentos"]},
+      {id:"separacao_fato", nome:"Escritura de declaração de separação de fato", grupo:"Família", inputs:[], resumo:"Ato protocolar sem valor declarado, item 6.2, podendo ser unilateral ou bilateral.", tags:["separação de fato"]},
+      {id:"pacto_antenupcial_simples", nome:"Pacto antenupcial ou união estável sem avenças patrimoniais", grupo:"Família", inputs:[], resumo:"Demais escrituras sem valor declarado, item 6.2.", tags:["pacto antenupcial","união estável"]},
+      {id:"pacto_antenupcial_patrimonial", nome:"Pacto antenupcial ou união estável com avenças patrimoniais", grupo:"Família", inputs:["valorPactuacao"], resumo:"Cobrança pela tabela de escritura com valor declarado, conforme o valor total das avenças.", tags:["pacto antenupcial","Enunciado 66"]},
+      {id:"ata_sem_reflexo", nome:"Ata notarial sem reflexo econômico", grupo:"Atas notariais", inputs:["folhas"], resumo:"Primeira folha pelo item 9.1 e páginas adicionais pelo item 9.2.", tags:["ata","sem reflexo"]},
+      {id:"ata_usucapiao_adjudicacao", nome:"Ata notarial de usucapião ou adjudicação compulsória", grupo:"Atas notariais", inputs:["negocio","venal","itbi"], resumo:"Ata com conteúdo econômico, aplicada pela Tabela 1 sobre o maior valor cabível.", tags:["usucapião","adjudicação","ata"]},
+      {id:"ata_incompleta", nome:"Ata notarial iniciada e não concluída por desistência", grupo:"Atas notariais", inputs:["negocio","venal","itbi"], resumo:"1/3 dos emolumentos estimados para o ato solicitado.", tags:["ata","desistência","1/3"]},
+      {id:"proc_previdenciaria", nome:"Procuração para fins previdenciários", grupo:"Procurações", inputs:[], resumo:"Isenta de pagamento de quaisquer despesas, na hipótese estrita do item 2.1.", tags:["procuração","previdenciária"]},
+      {id:"proc_foro", nome:"Procuração para foro em geral", grupo:"Procurações", inputs:["outorgantes","analfabetos"], resumo:"Até quatro outorgantes pelo item 2.2.1. Acima de quatro, acrescenta por outorgante adicional.", tags:["procuração","foro"]},
+      {id:"proc_sem_valor", nome:"Outras procurações sem valor econômico", grupo:"Procurações", inputs:["outorgantes"], resumo:"Até quatro outorgantes pelo item 2.3.1. Acima de quatro, acréscimo por outorgante adicional.", tags:["procuração","sem valor"]},
+      {id:"proc_com_valor", nome:"Outras procurações com valor econômico", grupo:"Procurações", inputs:["outorgantes"], resumo:"Até quatro outorgantes pelo item 2.4.1. Acima de quatro, acréscimo por outorgante adicional.", tags:["procuração","com valor"]},
+      {id:"renuncia_mandato", nome:"Renúncia de mandato a pedido do mandatário ou substabelecido", grupo:"Procurações", inputs:["outorgantes"], resumo:"Aplica-se a Tabela 2 conforme a natureza do mandato. O motor usa o item 2.3 como padrão.", tags:["renúncia","mandato"]},
+      {id:"testamento_sem_patrimonio", nome:"Testamento público sem conteúdo patrimonial", grupo:"Testamentos", inputs:[], resumo:"Item 8.1 da tabela.", tags:["testamento"]},
+      {id:"testamento_publico", nome:"Testamento público com conteúdo patrimonial", grupo:"Testamentos", inputs:[], resumo:"Item 8.2 da tabela. A redução por patrimônio até 3.000 UFESP deve ser conferida manualmente.", tags:["testamento","patrimônio"]},
+      {id:"testamento_cerrado", nome:"Testamento cerrado", grupo:"Testamentos", inputs:[], resumo:"Item 8.3 da tabela.", tags:["testamento cerrado"]},
+      {id:"revogacao_testamento", nome:"Revogação de testamento", grupo:"Testamentos", inputs:[], resumo:"Item 8.4 da tabela.", tags:["revogação testamento"]},
+      {id:"escritura_sem_valor", nome:"Demais escrituras sem valor declarado", grupo:"Escrituras sem valor", inputs:[], resumo:"Item 6.2 da tabela.", tags:["sem valor"]},
+      {id:"reconhecimento_filho", nome:"Reconhecimento de filho, adoção, fins previdenciários ou dependência econômica", grupo:"Escrituras sem valor", inputs:[], resumo:"Item 6.1 da tabela.", tags:["reconhecimento de filho","adoção"]},
+      {id:"comodato", nome:"Comodato", grupo:"Contratos", inputs:[], resumo:"Escritura sem valor declarado, item 6.2.", tags:["comodato"]},
+      {id:"cessao_precatorio", nome:"Cessão de crédito oriundo de precatório do Estado de São Paulo", grupo:"Escrituras com valor declarado", inputs:["valorPrecatorio"], resumo:"Cobrança pelo valor integral, sem o desconto da Nota 1.6, sobre o valor do crédito efetivamente pago ao cedente.", tags:["precatório","cessão","Enunciado 33"]},
+      {id:"retificacao_erro_tabeliao", nome:"Retificação por erro imputável ao tabelião", grupo:"Retificação", inputs:[], resumo:"Cobrança vedada quando o ato teve de ser refeito, renovado ou retificado por erro imputável ao tabelião.", tags:["retificação","erro"]},
+      {id:"ata_retificativa", nome:"Ata retificativa lavrada por tabelião diverso", grupo:"Retificação", inputs:[], resumo:"Cobra-se como ato sem valor declarado, item 6.2.", tags:["ata","retificação"]},
+      {id:"rerratificacao", nome:"Escritura de rerratificação a pedido das partes", grupo:"Retificação", inputs:["tipoRerratificacao","negocio","venal","itbi"], resumo:"Cobrança conforme o teor, com ou sem valor declarado.", tags:["rerratificação"]},
+      {id:"firma_sem_valor", nome:"Reconhecimento de firma por semelhança em documento sem valor econômico", grupo:"Firmas e autenticações", inputs:["qtd"], resumo:"Item 4.1.1, por ato praticado.", tags:["firma"]},
+      {id:"firma_com_valor", nome:"Reconhecimento de firma por semelhança em documento com valor econômico", grupo:"Firmas e autenticações", inputs:["qtd"], resumo:"Item 4.1.2, por ato praticado.", tags:["firma"]},
+      {id:"firma_autentica", nome:"Reconhecimento de firma por autenticidade", grupo:"Firmas e autenticações", inputs:["qtd"], resumo:"Item 4.2.1, por ato praticado.", tags:["firma autêntica"]},
+      {id:"autenticacao", nome:"Autenticação de cópia", grupo:"Firmas e autenticações", inputs:["qtd"], resumo:"Item 3, por página de documento reproduzido.", tags:["autenticação"]},
+      {id:"certidao", nome:"Certidão, traslado ou pública forma", grupo:"Certidões", inputs:["qtd"], resumo:"Item 5, por certidão, traslado ou pública forma.", tags:["certidão","traslado"]},
+      {id:"convencao_condominio", nome:"Escritura de convenção de condomínio", grupo:"Condomínio", inputs:[], resumo:"Item 10 da tabela.", tags:["condomínio"]},
+      {id:"manual", nome:"Composição manual assistida", grupo:"Avançado", inputs:["tipoManual","negocio","qtd"], resumo:"Permite simular um item isolado por valor ou ato fixo.", tags:["manual","avançado"]}
+    ];
+
+    const FUNDAMENTOS_BASE = [
+      "Lei Estadual nº 11.331 de 2002, art. 7º. Para atos com conteúdo financeiro, prevalece a maior base entre valor do negócio, valor tributário e base de ITBI, quando aplicável.",
+      "Tabela I dos Tabelionatos de Notas, base 2026, capital, com ISS de 2%.",
+      "Resultado informativo para triagem interna. A conferência final depende do caso concreto e dos documentos apresentados."
+    ];
+
+    const FUNDAMENTOS = {
+      compra_venda:["Tabela I, item 1 e subitem 1.1."],
+      compra_venda_af:["Nota 1.6 da Tabela I.", "Enunciado nº 26, repristinado em razão da suspensão do Enunciado nº 54 por liminares do STF nos MS nº 39805 PR e 39930."],
+      compra_venda_mutuo_garantia:["Nota 3.3 da Tabela I.", "Nota 3.4 da Tabela I. Compra e venda com mútuo e outorga de garantia como um ato principal e dois acessórios.", "O ato principal é identificado dinamicamente como o de maior valor entre os três negócios envolvidos."],
+      mutuo_hipoteca:["Enunciado nº 16, §3º.", "Nota 1.6 da Tabela I para o negócio principal por admitir forma particular."],
+      financiada_entidade:["Nota 2.6 da Tabela I. Aquisição residencial financiada por entidade financeira com redução de 20%.", "Alínea c da Nota 2.6 para prédio acabado, com base no valor total do prédio.", "Alínea d da Nota 2.6 para terreno mais financiamento de construção, com base na soma."],
+      compromisso:["Nota 2.1 da Tabela I."],
+      compra_venda_cessao:["Nota 3.2 da Tabela I.", "Enunciado nº 24."],
+      doacao:["Tabela I, item 1 e subitem 1.1."],
+      doacao_reserva_usufruto:["Nota 1.3 da Tabela I.", "Nota 3.5 da Tabela I.", "Enunciado nº 5.", "Enunciado nº 25."],
+      venda_bipartida_usufruto:["Enunciado nº 29.", "Enunciado nº 29, §2º para a consolidação simultânea da propriedade plena, hipótese de ato único."],
+      permuta:["Nota 3.1.1 da Tabela I.", "Enunciado nº 23. O cálculo é feito por alienação, com base no maior valor entre o atribuído pelas partes, o valor venal de IPTU e a base de ITBI de cada imóvel."],
+      quitacao:["Nota 2.2 da Tabela I."],
+      hipoteca:["Nota 1.1 e Nota 1.1.1 da Tabela I.", "Enunciado nº 16, §1º para repartição proporcional na ausência de valor individualizado.", "Enunciado nº 16, §2º para o cálculo por valor garantido por imóvel."],
+      servidao:["Nota 1.5 da Tabela I.", "Enunciado nº 32."],
+      locacao:["Nota 1.2 da Tabela I."],
+      direitos_possessorios:["Nota 1.6 da Tabela I.", "Enunciado nº 19."],
+      inventario_partilha:["Nota 3.1.1 da Tabela I.", "Enunciado nº 7."],
+      inventario_excesso:["Enunciado nº 9 e §1º."],
+      renuncia_hereditaria:["Enunciado nº 8."],
+      renuncia_translativa:["Enunciado nº 8 in fine.", "Enunciado nº 9 para a cobrança da cessão sobre o valor do quinhão transferido."],
+      divorcio_sem_bens:["Tabela I, item 6.2."],
+      divorcio_partilha:["Tabela I, item 1.", "Nota 3.1.1 da Tabela I."],
+      divorcio_pensao:["Enunciado nº 3."],
+      separacao_fato:["Enunciado nº 56.", "Tabela I, item 6.2.", "Art. 52-A da Resolução nº 35 do CNJ."],
+      pacto_antenupcial_simples:["Tabela I, item 6.2."],
+      pacto_antenupcial_patrimonial:["Enunciado nº 66.", "Tabela I, item 1."],
+      ata_sem_reflexo:["Tabela I, itens 9.1 e 9.2."],
+      ata_usucapiao_adjudicacao:["Enunciado nº 2."],
+      ata_incompleta:["Enunciado nº 1.", "Nota 9.1 da Tabela I."],
+      proc_previdenciaria:["Tabela I, item 2.1.", "Enunciado nº 11."],
+      proc_foro:["Tabela I, itens 2.2.1, 2.2.2 e 2.2.3.", "Enunciado nº 11."],
+      proc_sem_valor:["Tabela I, itens 2.3.1 e 2.3.2."],
+      proc_com_valor:["Tabela I, itens 2.4.1 e 2.4.2."],
+      renuncia_mandato:["Enunciado nº 12."],
+      testamento_sem_patrimonio:["Tabela I, item 8.1."],
+      testamento_publico:["Tabela I, item 8.2.", "Nota 2.7 da Tabela I."],
+      testamento_cerrado:["Tabela I, item 8.3."],
+      revogacao_testamento:["Tabela I, item 8.4."],
+      escritura_sem_valor:["Tabela I, item 6.2."],
+      reconhecimento_filho:["Tabela I, item 6.1."],
+      comodato:["Tabela I, item 6.2.", "Enunciado nº 31."],
+      cessao_precatorio:["Enunciado nº 33, parágrafo único.", "Tabela I, item 1, sem aplicação do desconto da Nota 1.6."],
+      retificacao_erro_tabeliao:["Nota 9.3 da Tabela I.", "Enunciado nº 28."],
+      ata_retificativa:["Enunciado nº 28, parágrafo único.", "Tabela I, item 6.2."],
+      rerratificacao:["Enunciado nº 28, parágrafo único, parte final."],
+      firma_sem_valor:["Tabela I, item 4.1.1.", "Enunciado nº 13."],
+      firma_com_valor:["Tabela I, item 4.1.2.", "Enunciado nº 13."],
+      firma_autentica:["Tabela I, item 4.2.1.", "Enunciado nº 13."],
+      autenticacao:["Tabela I, item 3.", "Nota 10 da Tabela I."],
+      certidao:["Tabela I, item 5.", "Nota 4.1 da Tabela I."],
+      convencao_condominio:["Tabela I, item 10."],
+      manual:["Regra manual cadastrada pelo usuário da ferramenta."]
+    };
+
+    const OBSERVACOES = {
+      compra_venda_af:"O Enunciado nº 26 foi repristinado em razão da suspensão liminar do Enunciado nº 54 pelo STF nos Mandados de Segurança nº 39805 PR e 39930, até eventual decisão definitiva. Aplica-se desconto de 40% sobre os emolumentos da compra e venda e da alienação fiduciária, por admitir-se forma particular. Antes do uso externo, conferir eventual atualização do quadro decisório.",
+      compra_venda_mutuo_garantia:"O ato principal é identificado dinamicamente como o de maior valor entre compra e venda, mútuo e garantia. Quando o financiamento preencher os requisitos da Nota 2.6, use a hipótese específica de aquisição residencial financiada por entidade financeira.",
+      mutuo_hipoteca:"Hipótese do Enunciado nº 16, §3º, aplicável quando a escritura pública não é elemento essencial do negócio principal, como mútuo e abertura de crédito.",
+      financiada_entidade:"A ferramenta não verifica se o caso concreto cumpre todos os requisitos da Nota 2.6, em especial a destinação residencial e a natureza da entidade financeira. Essa checagem deve ser feita pelo responsável pelo ato.",
+      permuta:"Para cada imóvel, informe o maior valor entre o atribuído pelas partes, o venal de IPTU e a base de ITBI. Eventual torna não enseja cobrança adicional.",
+      hipoteca:"Modalidade sem valor unitário aplica o Enunciado nº 16, §1º, repartindo o débito pelo número de bens. Modalidade com valor unitário aplica o Enunciado nº 16, §2º, com base no valor garantido por imóvel.",
+      venda_bipartida_usufruto:"Na consolidação simultânea da propriedade plena em nome do mesmo adquirente, cobra-se um único ato sobre o valor total do imóvel, conforme Enunciado nº 29, §2º.",
+      inventario_excesso:"Em caso de pluralidade de cedentes e cessionários, cada relação individualmente discriminável constitui fato gerador autônomo, conforme Enunciado nº 9, §1º. Lance as cessões adicionais separadamente.",
+      renuncia_translativa:"A renúncia translativa ou in favorem é tratada como cessão. A cobrança da transferência se faz sobre o valor do quinhão, sem prejuízo da cobrança pela escritura de inventário, conforme Enunciado nº 8 in fine combinado com o Enunciado nº 9.",
+      renuncia_mandato:"O Enunciado nº 12 manda aplicar a Tabela 2. O motor usa o item 2.3 como padrão para a renúncia, mas a hipótese concreta pode reclamar enquadramento em 2.2 ou 2.4, conforme a natureza do mandato original.",
+      ata_usucapiao_adjudicacao:"A indicação do valor venal não afasta o confronto com o valor atribuído pelos possuidores ou adjudicantes, conforme Enunciado nº 2. Prevalece o maior valor entre os parâmetros aplicáveis.",
+      ata_retificativa:"A ata retificativa só cabe quando lavrada por tabelião diverso do que praticou o ato original. Se a retificação for por erro imputável ao próprio tabelião, use a hipótese específica de retificação por erro, que afasta a cobrança.",
+      rerratificacao:"O valor a declarar deve corresponder ao do negócio jurídico rerratificado, com aplicação dos parâmetros do art. 7º da Lei nº 11.331 de 2002.",
+      cessao_precatorio:"A escritura de cessão de crédito de precatório do Estado de São Paulo é cobrada pelo valor integral, sem o desconto de 40% da Nota 1.6, conforme Enunciado nº 33, parágrafo único. A base é o valor efetivamente pago ao cedente.",
+      pacto_antenupcial_patrimonial:"A presença de cláusulas de conteúdo financeiro afasta a natureza exclusivamente declaratória do pacto antenupcial ou da união estável, atraindo a cobrança pela tabela de escrituras com valor declarado, conforme Enunciado nº 66.",
+      testamento_publico:"A redução de 50% para patrimônio não superior a 3.000 UFESP depende de conferência externa do valor da UFESP e do patrimônio declarado.",
+      retificacao_erro_tabeliao:"A gratuidade se restringe ao erro imputável ao respectivo tabelião. Retificação por outra causa deve ser enquadrada como rerratificação a pedido das partes ou como ata retificativa, conforme o caso.",
+      proc_foro:"Quando o mesmo instrumento contiver, além da procuração, substabelecimento ou revogação, cada ato adicional é cobrado por inteiro, conforme Nota 7.1. Lance os atos adicionais separadamente.",
+      proc_sem_valor:"Quando o mesmo instrumento contiver, além da procuração, substabelecimento ou revogação, cada ato adicional é cobrado por inteiro, conforme Nota 7.1.",
+      proc_com_valor:"Quando o mesmo instrumento contiver, além da procuração, substabelecimento ou revogação, cada ato adicional é cobrado por inteiro, conforme Nota 7.1.",
+      manual:"A composição manual não substitui regra específica. Use apenas para simulação ou conferência de hipótese ainda não cadastrada."
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    const moeda = new Intl.NumberFormat("pt-BR", {style:"currency", currency:"BRL"});
+    const numero = new Intl.NumberFormat("pt-BR", {minimumFractionDigits:2, maximumFractionDigits:2});
+
+    function parseBR(valor){
+      if(valor === null || valor === undefined) return 0;
+      const s = String(valor).trim();
+      if(!s) return 0;
+      const limpo = s
+        .replace(/[^\d,.-]/g,"")
+        .replace(/\.(?=\d{3}(\D|$))/g,"")
+        .replace(",",".");
+      const n = Number(limpo);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function formatCampoMoeda(input){
+      const n = parseBR(input.value);
+      input.value = n ? moeda.format(n) : "";
+    }
+
+    function formatCampoMoedaAoDigitar(input){
+      const digitos = input.value.replace(/\D/g, "");
+      if(!digitos){
+        input.value = "";
+        return;
+      }
+      const n = Number(digitos) / 100;
+      input.value = moeda.format(n);
+    }
+
+    function maior(...valores){
+      return Math.max(0, ...valores.map(v => Number(v) || 0));
+    }
+
+    function localizarFaixa(base){
+      const valor = Number(base) || 0;
+      return TABELA_VALOR_DECLARADO.find(r => valor >= r.min && valor <= r.max) || TABELA_VALOR_DECLARADO[TABELA_VALOR_DECLARADO.length - 1];
+    }
+
+    function faixaTexto(faixa){
+      const ate = faixa.max === Infinity ? "acima de " + moeda.format(faixa.min) : moeda.format(faixa.min) + " até " + moeda.format(faixa.max);
+      return faixa.faixa + " | " + ate;
+    }
+
+    function valorDeclarado(nome, base, percentual = 100, obs = ""){
+      const faixa = localizarFaixa(base);
+      const tabelaCheia = faixa.total;
+      const subtotal = tabelaCheia * (percentual / 100);
+      return {
+        nome,
+        base,
+        item: faixaTexto(faixa),
+        tabelaCheia,
+        percentual,
+        subtotal,
+        semValor:false,
+        obs
+      };
+    }
+
+    function fixo(chave, quantidade = 1, percentual = 100, nomeExtra = ""){
+      const item = FIXOS[chave];
+      const qtd = Math.max(1, Number(quantidade) || 1);
+      const tabelaCheia = item.total * qtd;
+      const subtotal = tabelaCheia * (percentual / 100);
+      return {
+        nome: nomeExtra || item.nome,
+        base:null,
+        item:item.item + (qtd > 1 ? " | " + qtd + " atos" : ""),
+        tabelaCheia,
+        percentual,
+        subtotal,
+        semValor:item.semValor
+      };
+    }
+
+    function getValores(){
+      const ids = Object.keys(INPUTS).concat(["foraCartorio","atoIncompleto"]);
+      const v = {};
+      ids.forEach(id => {
+        const el = $(id);
+        if(!el) return;
+        if(el.type === "checkbox") v[id] = el.checked;
+        else if(el.tagName === "SELECT") v[id] = el.value;
+        else if(el.dataset.kind === "money") v[id] = parseBR(el.value);
+        else v[id] = el.value === "" ? 0 : Number(el.value);
+      });
+      return v;
+    }
+
+    function baseImovel(v){
+      return maior(v.negocio, v.venal, v.itbi);
+    }
+
+    function baseImovel2(v){
+      return maior(v.negocio2, v.venal2, v.itbi2);
+    }
+
+    function camposDaRegra(regra){
+      const box = $("campos");
+      box.innerHTML = "";
+      regra.inputs.forEach(id => {
+        const cfg = INPUTS[id];
+        const div = document.createElement("div");
+        div.className = "field";
+        const label = document.createElement("label");
+        label.setAttribute("for", id);
+        label.textContent = cfg.label;
+        div.appendChild(label);
+
+        let input;
+        if(cfg.type === "select"){
+          input = document.createElement("select");
+          cfg.options.forEach(op => {
+            const opt = document.createElement("option");
+            opt.value = op.value;
+            opt.textContent = op.label;
+            input.appendChild(opt);
+          });
+        } else {
+          input = document.createElement("input");
+          input.type = cfg.type === "money" ? "text" : cfg.type;
+          input.inputMode = cfg.type === "money" ? "decimal" : "numeric";
+          if(cfg.type === "money"){
+            input.placeholder = "R$ 0,00";
+            input.dataset.kind = "money";
+            if(["negocio","venal","itbi","divida"].includes(id)){
+              input.addEventListener("input", () => formatCampoMoedaAoDigitar(input));
+            }
+            input.addEventListener("blur", () => formatCampoMoeda(input));
+          } else {
+            input.min = "0";
+            input.step = "1";
+            input.placeholder = "0";
+          }
+        }
+
+        input.id = id;
+        input.name = id;
+        div.appendChild(input);
+
+        if(cfg.hint){
+          const hint = document.createElement("div");
+          hint.className = "hint";
+          hint.textContent = cfg.hint;
+          div.appendChild(hint);
+        }
+
+        box.appendChild(div);
+      });
+
+      preencherPadroes(regra.id);
+    }
+
+    function preencherPadroes(regraId){
+      const set = (id, val) => { const el = $(id); if(el) el.value = val; };
+      if(["ata_sem_reflexo"].includes(regraId)) set("folhas", 1);
+      if(["firma_sem_valor","firma_com_valor","firma_autentica","autenticacao","certidao","renuncia_hereditaria","manual"].includes(regraId)) set("qtd", 1);
+      if(["proc_foro","proc_sem_valor","proc_com_valor","renuncia_mandato"].includes(regraId)) set("outorgantes", 1);
+      if(["proc_foro"].includes(regraId)) set("analfabetos", 0);
+      if(["hipoteca","mutuo_hipoteca"].includes(regraId)) set("imoveisGarantia", 1);
+      if(["divorcio_pensao"].includes(regraId)) set("mesesPensao", 12);
+      if(["locacao"].includes(regraId)) set("mesesLocacao", 12);
+    }
+
+    function calcularPartes(regra, v){
+      const b = baseImovel(v);
+      let partes = [];
+
+      switch(regra.id){
+        case "compra_venda":
+        case "doacao":
+          partes.push(valorDeclarado(regra.nome, b, 100));
+          break;
+
+        case "compra_venda_af":
+          partes.push(valorDeclarado("Compra e venda", b, 60));
+          partes.push(valorDeclarado("Alienação fiduciária em garantia", v.divida, 60));
+          break;
+
+        case "compra_venda_mutuo_garantia": {
+          const itens = [
+            {nome:"Compra e venda", base:b},
+            {nome:"Mútuo", base:v.divida || 0},
+            {nome:"Outorga de garantia", base:v.divida || 0}
+          ];
+          let idxPrincipal = 0;
+          for(let i = 1; i < itens.length; i++){
+            if(itens[i].base > itens[idxPrincipal].base) idxPrincipal = i;
+          }
+          itens.forEach((item, i) => {
+            if(i === idxPrincipal){
+              partes.push(valorDeclarado(item.nome + ", ato principal", item.base, 100));
+            } else {
+              partes.push(valorDeclarado(item.nome + ", ato acessório", item.base, 25));
+            }
+          });
+          break;
+        }
+
+        case "mutuo_hipoteca": {
+          const qtd = Math.max(1, Number(v.imoveisGarantia) || 1);
+          partes.push(valorDeclarado("Mútuo ou abertura de crédito, negócio principal", v.divida || 0, 60));
+          const basePorImovel = (v.divida || 0) / qtd;
+          for(let i = 1; i <= qtd; i++){
+            partes.push(valorDeclarado("Hipoteca, imóvel " + i, basePorImovel, 100));
+          }
+          break;
+        }
+
+        case "financiada_entidade": {
+          let base;
+          if(v.tipoFinanciada === "terreno_construcao"){
+            base = (v.valorTerreno || 0) + (v.valorFinanciamento || 0);
+          } else {
+            base = baseImovel(v);
+          }
+          partes.push(valorDeclarado("Aquisição residencial financiada, ato único", base, 80));
+          break;
+        }
+
+        case "compromisso":
+          partes.push(valorDeclarado("Compromisso de venda e compra", b, 50));
+          break;
+
+        case "compra_venda_cessao": {
+          const valorCessao = v.negocio2 || b;
+          if(v.tipoCessao === "loteador"){
+            partes.push(valorDeclarado("Compra e venda de lote", b, 60));
+            partes.push(valorDeclarado("Cessão de direitos", valorCessao, 60));
+          } else if(v.tipoCessao === "revenda"){
+            partes.push(valorDeclarado("Compra e venda", b, 60));
+            partes.push(valorDeclarado("Cessão considerada revenda", valorCessao, 100));
+          } else if(v.tipoCessao === "historiada"){
+            partes.push(valorDeclarado("Compra e venda com cessão historiada", b, 100));
+          } else {
+            partes.push(valorDeclarado("Compra e venda", b, 100));
+            partes.push(valorDeclarado("Cessão de direitos", valorCessao, 60));
+          }
+          break;
+        }
+
+        case "doacao_reserva_usufruto": {
+          const total = b;
+          partes.push(valorDeclarado("Doação da nua-propriedade", total * 2/3, 100));
+          partes.push(valorDeclarado("Reserva de usufruto, ato acessório", total * 1/3, 25));
+          break;
+        }
+
+        case "venda_bipartida_usufruto": {
+          const total = b;
+          if(v.tipoUsufruto === "consolidacao"){
+            partes.push(valorDeclarado("Transmissão simultânea com consolidação da propriedade plena", total, 100));
+          } else {
+            partes.push(valorDeclarado("Transmissão da nua-propriedade", total * 2/3, 100));
+            partes.push(valorDeclarado("Aquisição ou instituição do usufruto", total * 1/3, 100));
+          }
+          break;
+        }
+
+        case "permuta": {
+          const baseA = b;
+          const baseB = baseImovel2(v);
+          partes.push(valorDeclarado("Alienação 1 da permuta", baseA, 100));
+          partes.push(valorDeclarado("Alienação 2 da permuta", baseB, 100));
+          break;
+        }
+
+        case "quitacao":
+          partes.push(valorDeclarado("Quitação", b, 20));
+          break;
+
+        case "hipoteca": {
+          if(v.tipoHipoteca === "com_valor_unitario"){
+            const valores = [v.valorImovel1, v.valorImovel2, v.valorImovel3].filter(x => Number(x) > 0);
+            if(valores.length === 0){
+              partes.push(valorDeclarado("Hipoteca ou penhor, imóvel 1", v.divida || 0, 100));
+            } else {
+              valores.forEach((val, i) => {
+                partes.push(valorDeclarado("Hipoteca, imóvel " + (i+1), val, 100));
+              });
+            }
+          } else {
+            const qtd = Math.max(1, Number(v.imoveisGarantia) || 1);
+            const basePorImovel = (v.divida || 0) / qtd;
+            for(let i = 1; i <= qtd; i++){
+              partes.push(valorDeclarado("Hipoteca ou penhor, imóvel " + i, basePorImovel, 100));
+            }
+          }
+          break;
+        }
+
+        case "servidao":
+          partes.push(valorDeclarado("Instituição de servidão", b * 0.20, 100));
+          break;
+
+        case "locacao":
+          partes.push(valorDeclarado("Locação", (v.aluguel || 0) * (v.mesesLocacao || 12), 100));
+          break;
+
+        case "direitos_possessorios":
+          partes.push(valorDeclarado("Direitos possessórios", b, 60));
+          break;
+
+        case "inventario_partilha":
+          partes.push(valorDeclarado("Inventário e partilha", v.partilha, 100));
+          break;
+
+        case "inventario_excesso":
+          partes.push(valorDeclarado("Inventário e partilha", v.partilha, 100));
+          partes.push(valorDeclarado("Cessão por excesso de quinhão ou meação", v.excesso, 100));
+          break;
+
+        case "renuncia_hereditaria":
+          partes.push(fixo("escrituraSemValor", v.qtd || 1, 100, "Renúncia pura e simples de direitos hereditários"));
+          break;
+
+        case "renuncia_translativa":
+          partes.push(valorDeclarado("Inventário e partilha", v.partilha, 100));
+          partes.push(valorDeclarado("Cessão por renúncia translativa ou in favorem", v.excesso, 100));
+          break;
+
+        case "divorcio_sem_bens":
+          partes.push(fixo("escrituraSemValor"));
+          break;
+
+        case "divorcio_partilha":
+          partes.push(valorDeclarado("Divórcio ou separação com partilha", v.partilha, 100));
+          break;
+
+        case "divorcio_pensao": {
+          const basePensao = (v.pensao || 0) * (v.mesesPensao || 12);
+          partes.push(valorDeclarado("Divórcio ou separação, bens e pensão", (v.partilha || 0) + basePensao, 100));
+          break;
+        }
+
+        case "separacao_fato":
+          partes.push(fixo("escrituraSemValor", 1, 100, "Declaração de separação de fato, ato protocolar"));
+          break;
+
+        case "pacto_antenupcial_simples":
+          partes.push(fixo("escrituraSemValor", 1, 100, "Pacto antenupcial ou união estável, sem avenças patrimoniais"));
+          break;
+
+        case "pacto_antenupcial_patrimonial":
+          partes.push(valorDeclarado("Pacto antenupcial ou união estável com avenças patrimoniais", v.valorPactuacao || 0, 100));
+          break;
+
+        case "ata_sem_reflexo": {
+          const folhas = Math.max(1, Number(v.folhas) || 1);
+          partes.push(fixo("ataPrimeiraFolha", 1));
+          if(folhas > 1) partes.push(fixo("ataPaginaAdicional", folhas - 1));
+          break;
+        }
+
+        case "ata_usucapiao_adjudicacao":
+          partes.push(valorDeclarado("Ata notarial com conteúdo econômico", b, 100));
+          break;
+
+        case "ata_incompleta":
+          partes.push(valorDeclarado("Ata notarial estimada, reduzida a 1/3", b, 33.333333));
+          break;
+
+        case "proc_previdenciaria":
+          partes.push(fixo("procPrevidenciaria"));
+          break;
+
+        case "proc_foro": {
+          const outorgantes = Math.max(1, Number(v.outorgantes) || 1);
+          const adicionais = Math.max(0, outorgantes - 4);
+          partes.push(fixo("procForo"));
+          if(adicionais) partes.push(fixo("procForoAdicional", adicionais));
+          if(v.analfabetos) partes.push(fixo("procAnalfabeto", v.analfabetos));
+          break;
+        }
+
+        case "proc_sem_valor": {
+          const outorgantes = Math.max(1, Number(v.outorgantes) || 1);
+          const adicionais = Math.max(0, outorgantes - 4);
+          partes.push(fixo("procSemValor"));
+          if(adicionais) partes.push(fixo("procSemValorAdicional", adicionais));
+          break;
+        }
+
+        case "proc_com_valor": {
+          const outorgantes = Math.max(1, Number(v.outorgantes) || 1);
+          const adicionais = Math.max(0, outorgantes - 4);
+          partes.push(fixo("procComValor"));
+          if(adicionais) partes.push(fixo("procComValorAdicional", adicionais));
+          break;
+        }
+
+        case "renuncia_mandato": {
+          const outorgantes = Math.max(1, Number(v.outorgantes) || 1);
+          const adicionais = Math.max(0, outorgantes - 4);
+          partes.push(fixo("procSemValor", 1, 100, "Renúncia de mandato, Tabela 2.3 como padrão"));
+          if(adicionais) partes.push(fixo("procSemValorAdicional", adicionais));
+          break;
+        }
+
+        case "testamento_sem_patrimonio":
+          partes.push(fixo("testamentoSemPatrimonio"));
+          break;
+
+        case "testamento_publico":
+          partes.push(fixo("testamentoPublico"));
+          break;
+
+        case "testamento_cerrado":
+          partes.push(fixo("testamentoCerrado"));
+          break;
+
+        case "revogacao_testamento":
+          partes.push(fixo("revogacaoTestamento"));
+          break;
+
+        case "escritura_sem_valor":
+        case "comodato":
+          partes.push(fixo("escrituraSemValor", 1, 100, regra.nome));
+          break;
+
+        case "reconhecimento_filho":
+          partes.push(fixo("escrituraEspecialSemValor"));
+          break;
+
+        case "cessao_precatorio":
+          partes.push(valorDeclarado("Cessão de crédito de precatório, sem desconto da Nota 1.6", v.valorPrecatorio || 0, 100));
+          break;
+
+        case "retificacao_erro_tabeliao":
+          partes.push({nome:"Retificação por erro imputável ao tabelião", base:null, item:"Nota 9.3", tabelaCheia:0, percentual:0, subtotal:0, semValor:true});
+          break;
+
+        case "ata_retificativa":
+          partes.push(fixo("escrituraSemValor", 1, 100, "Ata retificativa por tabelião diverso, ato sem valor declarado"));
+          break;
+
+        case "rerratificacao": {
+          if(v.tipoRerratificacao === "com_valor"){
+            partes.push(valorDeclarado("Rerratificação com valor declarado", b, 100));
+          } else {
+            partes.push(fixo("escrituraSemValor", 1, 100, "Rerratificação sem valor declarado"));
+          }
+          break;
+        }
+
+        case "firma_sem_valor":
+          partes.push(fixo("firmaSemValor", v.qtd || 1));
+          break;
+
+        case "firma_com_valor":
+          partes.push(fixo("firmaComValor", v.qtd || 1));
+          break;
+
+        case "firma_autentica":
+          partes.push(fixo("firmaAutentica", v.qtd || 1));
+          break;
+
+        case "autenticacao":
+          partes.push(fixo("autenticacao", v.qtd || 1));
+          break;
+
+        case "certidao":
+          partes.push(fixo("certidao", v.qtd || 1));
+          break;
+
+        case "convencao_condominio":
+          partes.push(fixo("convencaoCondominio"));
+          break;
+
+        case "manual":
+          partes = calcularManual(v);
+          break;
+
+        default:
+          throw new Error("Regra não cadastrada.");
+      }
+
+      if(v.foraCartorio){
+        partes = partes.map(p => {
+          if(!p.semValor || p.subtotal === 0) return p;
+          return {...p, subtotal:p.subtotal * 2, percentual:p.percentual * 2, obs:(p.obs || "") + " Dobra por ato sem valor declarado fora do horário normal ou fora do tabelionato."};
+        });
+      }
+
+      if(v.atoIncompleto){
+        partes = partes.map(p => ({...p, subtotal:p.subtotal / 3, percentual:p.percentual / 3, obs:(p.obs || "") + " Redução a 1/3 por ato incompleto."}));
+      }
+
+      return partes;
+    }
+
+    function calcularManual(v){
+      const qtd = Math.max(1, Number(v.qtd) || 1);
+      const tipo = v.tipoManual;
+      if(tipo === "valor100") return [valorDeclarado("Composição manual, valor declarado 100%", v.negocio, 100)];
+      if(tipo === "valor60") return [valorDeclarado("Composição manual, valor declarado 60%", v.negocio, 60)];
+      if(tipo === "valor50") return [valorDeclarado("Composição manual, valor declarado 50%", v.negocio, 50)];
+      if(tipo === "valor25") return [valorDeclarado("Composição manual, valor declarado 25%", v.negocio, 25)];
+      if(tipo === "valor20") return [valorDeclarado("Composição manual, valor declarado 20%", v.negocio, 20)];
+      if(tipo === "semValor") return [fixo("escrituraSemValor", qtd)];
+      if(tipo === "certidao") return [fixo("certidao", qtd)];
+      if(tipo === "ataPrimeiraFolha") return [fixo("ataPrimeiraFolha", qtd)];
+      if(tipo === "ataPaginaAdicional") return [fixo("ataPaginaAdicional", qtd)];
+      return [];
+    }
+
+    function popularSelect(filtro = ""){
+      const select = $("ato");
+      const atual = select.value;
+      select.innerHTML = "";
+      const filtradas = REGRAS.filter(r => {
+        const alvo = (r.nome + " " + r.grupo + " " + r.tags.join(" ")).toLowerCase();
+        return alvo.includes(filtro.toLowerCase().trim());
+      });
+
+      const grupos = [...new Set(filtradas.map(r => r.grupo))];
+      grupos.forEach(g => {
+        const og = document.createElement("optgroup");
+        og.label = g;
+        filtradas.filter(r => r.grupo === g).forEach(r => {
+          const opt = document.createElement("option");
+          opt.value = r.id;
+          opt.textContent = r.nome;
+          og.appendChild(opt);
+        });
+        select.appendChild(og);
+      });
+
+      if(filtradas.some(r => r.id === atual)) select.value = atual;
+      const regra = regraAtual();
+      if(regra) {
+        $("atoHint").textContent = regra.resumo;
+        camposDaRegra(regra);
+      }
+    }
+
+    function regraAtual(){
+      return REGRAS.find(r => r.id === $("ato").value) || REGRAS[0];
+    }
+
+    function renderResultado(regra, partes){
+      const linhas = $("linhas");
+      linhas.innerHTML = "";
+
+      let total = 0;
+      partes.forEach(p => {
+        total += p.subtotal;
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>
+            <div>${escapeHtml(p.nome)}</div>
+            ${p.obs ? `<div class="hint">${escapeHtml(p.obs)}</div>` : ""}
+          </td>
+          <td>${p.base === null ? "<span class='muted'>não se aplica</span>" : moeda.format(p.base)}</td>
+          <td><span class="pill">${escapeHtml(p.item)}</span></td>
+          <td class="num">${moeda.format(p.tabelaCheia)}</td>
+          <td class="num">${numero.format(p.percentual)}%</td>
+          <td class="num">${moeda.format(p.subtotal)}</td>
+        `;
+        linhas.appendChild(tr);
+      });
+
+      $("resTitulo").textContent = regra.nome;
+      $("resResumo").textContent = regra.resumo;
+      $("resTotal").textContent = moeda.format(total);
+
+      const incompleto = $("atoIncompleto").checked;
+      const fora = $("foraCartorio").checked;
+      $("statusRegra").textContent = incompleto ? "Regra com redução a 1/3" : fora ? "Regra com dobra parcial" : "Regra aplicada";
+      $("statusRegra").className = incompleto || fora ? "status warn" : "status";
+
+      const qtd = partes.length;
+      const baseMsg = qtd === 1 ? "A composição possui 1 linha de cálculo." : "A composição possui " + qtd + " linhas de cálculo.";
+      $("memoria").textContent = baseMsg + " O total apresentado resulta da soma dos subtotais calculados pela faixa ou item de tabela correspondente.";
+
+      const fund = [...FUNDAMENTOS_BASE, ...(FUNDAMENTOS[regra.id] || [])];
+      $("fundamentos").innerHTML = fund.map(f => `<div class="fundamento">${escapeHtml(f)}</div>`).join("");
+
+      const obs = [
+        OBSERVACOES[regra.id] || "",
+        fora ? "A dobra por diligência ou ato fora do horário foi aplicada somente aos atos classificados nesta base como sem valor declarado." : "",
+        incompleto ? "A redução de 1/3 foi aplicada ao resultado estimado. Confira se o caso efetivamente se enquadra como ato incompleto." : ""
+      ].filter(Boolean);
+
+      $("observacoes").innerHTML = obs.length
+        ? obs.map(o => `<p>${escapeHtml(o)}</p>`).join("")
+        : "<p>Sem observação adicional cadastrada para esta hipótese.</p>";
+
+      $("empty").classList.add("hidden");
+      $("resultado").classList.remove("hidden");
+    }
+
+    function escapeHtml(s){
+      return String(s).replace(/[&<>"']/g, m => ({
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[m]));
+    }
+
+    $("busca").addEventListener("input", e => popularSelect(e.target.value));
+    $("ato").addEventListener("change", () => {
+      const regra = regraAtual();
+      $("atoHint").textContent = regra.resumo;
+      camposDaRegra(regra);
+    });
+
+    $("formulario").addEventListener("submit", e => {
+      e.preventDefault();
+      const regra = regraAtual();
+      const valores = getValores();
+      const partes = calcularPartes(regra, valores);
+      renderResultado(regra, partes);
+      setTimeout(() => {
+        $("statusRegra").scrollIntoView({behavior:"smooth", block:"start"});
+      }, 0);
+    });
+
+    $("limpar").addEventListener("click", () => {
+      $("formulario").reset();
+      $("busca").value = "";
+      popularSelect("");
+      $("empty").classList.remove("hidden");
+      $("resultado").classList.add("hidden");
+      setTimeout(() => {
+        $("busca").scrollIntoView({behavior:"smooth", block:"center"});
+        $("busca").focus();
+      }, 0);
+    });
+
+
+    function atualizarContadorVisitas(){
+      const contador = $("visitCount");
+      if(!contador) return;
+
+      const namespace = "portalnotarial";
+      const nomeContador = "aplicador-tabela-emolumentos-notas-capital";
+      const url = "https://api.counterapi.dev/v1/" + namespace + "/" + nomeContador + "/up";
+
+      fetch(url, {cache:"no-store"})
+        .then(resposta => {
+          if(!resposta.ok) throw new Error("Falha ao atualizar contador");
+          return resposta.json();
+        })
+        .then(dados => {
+          const valor = dados.count ?? dados.data ?? dados.value ?? dados?.counter?.count;
+          const numeroVisitas = Number(valor);
+          if(Number.isFinite(numeroVisitas)){
+            contador.textContent = numeroVisitas.toLocaleString("pt-BR");
+          }
+        })
+        .catch(() => {
+          contador.textContent = "0";
+        });
+    }
+
+    $("gerarPdf").addEventListener("click", () => window.print());
+    $("imprimir").addEventListener("click", () => window.print());
+
+    popularSelect("");
+    atualizarContadorVisitas();
+  </script>
+</body>
+</html>
