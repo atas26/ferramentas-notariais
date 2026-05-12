@@ -1350,6 +1350,11 @@
               font-family: Arial, Helvetica, sans-serif;
               isolation: isolate;
               border: 1px solid rgba(255, 255, 255, 0.06);
+              perspective: 1200px;
+              transform: translateZ(0);
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+              text-rendering: optimizeLegibility;
             }
 
             .pn-portal-motion::before {
@@ -1367,6 +1372,22 @@
 
             .pn-portal-motion * {
               box-sizing: border-box;
+            }
+
+            .pn-portal-star,
+            .pn-orbit,
+            .pn-main-card,
+            .pn-tool-row,
+            .pn-side-badge,
+            .pn-avatar,
+            .pn-tool-cloud,
+            .pn-cloud-pill,
+            .pn-flow-dot,
+            .pn-line-node {
+              will-change: transform, opacity;
+              backface-visibility: hidden;
+              -webkit-backface-visibility: hidden;
+              transform-style: preserve-3d;
             }
 
             .pn-connection-lines {
@@ -1399,13 +1420,14 @@
               stroke: var(--pn-blue-soft);
               stroke-width: 1.5;
               opacity: 0.9;
+              transform-box: fill-box;
+              transform-origin: center;
               animation: pnNodePulse 3.6s ease-in-out infinite;
             }
 
             .pn-flow-dot {
               fill: var(--pn-blue-soft);
-              opacity: 0.95;
-              filter: drop-shadow(0 0 4px rgba(96, 152, 255, 0.7));
+              opacity: 1;
             }
 
             .pn-portal-star {
@@ -1415,7 +1437,7 @@
               z-index: 8;
               width: 38px;
               height: 38px;
-              transform: translateX(-50%);
+              transform: translate3d(-50%, 0, 0);
               border-radius: 50%;
               background: var(--pn-blue);
               display: grid;
@@ -1465,13 +1487,12 @@
               padding: 22px 16px 16px;
               border: 1px solid var(--pn-line);
               border-radius: 18px;
-              background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
-              backdrop-filter: blur(14px);
-              -webkit-backdrop-filter: blur(14px);
+              background: linear-gradient(180deg, rgba(20, 38, 62, 0.92), rgba(12, 26, 46, 0.92));
               box-shadow:
                 0 22px 54px rgba(0, 0, 0, 0.45),
                 inset 0 1px 0 rgba(255, 255, 255, 0.08);
               overflow: hidden;
+              contain: layout paint style;
               animation: pnCardFloatActive 4.8s ease-in-out infinite;
             }
 
@@ -1548,9 +1569,7 @@
               width: 48px;
               height: 48px;
               border-radius: 50%;
-              background: rgba(10, 29, 49, 0.85);
-              backdrop-filter: blur(10px);
-              -webkit-backdrop-filter: blur(10px);
+              background: rgb(13, 33, 56);
               display: grid;
               place-items: center;
               border: 1px solid rgba(96, 152, 255, 0.28);
@@ -1561,6 +1580,7 @@
               color: var(--pn-blue-soft);
               font-size: 22px;
               font-weight: 700;
+              contain: layout paint style;
               animation: pnBadgeFloatActive 4.2s ease-in-out infinite;
             }
 
@@ -1603,6 +1623,7 @@
               box-shadow:
                 0 14px 34px rgba(0, 0, 0, 0.45),
                 0 0 18px rgba(11, 95, 255, 0.20);
+              contain: layout paint style;
               animation: pnAvatarFloatActive 4.6s ease-in-out infinite;
             }
 
@@ -1647,15 +1668,14 @@
               padding: 0 12px;
               border: 1px solid rgba(96, 152, 255, 0.20);
               border-radius: 999px;
-              background: rgba(10, 29, 49, 0.75);
-              backdrop-filter: blur(10px);
-              -webkit-backdrop-filter: blur(10px);
+              background: rgb(12, 30, 52);
               box-shadow:
                 0 10px 24px rgba(0, 0, 0, 0.35),
                 inset 0 1px 0 rgba(255, 255, 255, 0.06);
               font-size: 12px;
               color: var(--pn-text);
               opacity: 0.92;
+              contain: layout paint style;
               animation: pnPillPulseActive 4.4s ease-in-out infinite;
             }
 
@@ -1753,18 +1773,18 @@
             }
 
             @keyframes pnNodePulse {
-              0%, 100% { r: 3.5; opacity: 0.65; }
-              50% { r: 5; opacity: 1; }
+              0%, 100% { transform: scale(0.75); opacity: 0.65; }
+              50% { transform: scale(1.1); opacity: 1; }
             }
 
             @keyframes pnStarPulseActive {
-              0%, 100% { transform: translateX(-50%) scale(1); }
-              50% { transform: translateX(-50%) scale(1.16); }
+              0%, 100% { transform: translate3d(-50%, 0, 0) scale(1); }
+              50% { transform: translate3d(-50%, 0, 0) scale(1.16); }
             }
 
             @keyframes pnOrbitActive {
-              0%, 100% { transform: scale(1); opacity: 0.78; }
-              50% { transform: scale(1.08); opacity: 0.28; }
+              0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.78; }
+              50% { transform: translate3d(0, 0, 0) scale(1.08); opacity: 0.28; }
             }
 
             @keyframes pnCardFloatActive {
@@ -1793,12 +1813,12 @@
             }
 
             @keyframes pnPillPulseActive {
-              0%, 100% { opacity: 0.85; transform: translateX(0); }
-              50% { opacity: 1; transform: translateX(-14px); }
+              0%, 100% { opacity: 0.85; transform: translate3d(0, 0, 0); }
+              50% { opacity: 1; transform: translate3d(-14px, 0, 0); }
             }
 
             @keyframes pnRingActive {
-              to { transform: rotate(360deg); }
+              to { transform: translate3d(0, 0, 0) rotate(360deg); }
             }
 
             @media (max-width: 720px) {
