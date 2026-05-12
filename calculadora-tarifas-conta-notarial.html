@@ -7,6 +7,7 @@
   <title>Calculadora de tarifas da conta notarial | Portal Notarial</title>
   <meta name="description" content="Calculadora estimativa de tarifa da conta notarial por faixa de movimentação, a partir do valor base da operação informado pelo usuário." />
   <meta name="robots" content="index, follow" />
+  <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
   <link rel="canonical" href="https://portalnotarial.com.br/calculadora-tarifas-conta-notarial.html" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:type" content="website" />
@@ -355,6 +356,169 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,118,255,.08)}
 }
 </style>
 
+
+<style>
+.pn-hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:22px;
+}
+.pn-jump{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:12px 18px;
+  border-radius:10px;
+  background:var(--accent);
+  color:#fff;
+  font-weight:700;
+  font-size:14px;
+  border:1px solid var(--accent);
+}
+.pn-jump:hover{
+  background:#005fce;
+  text-decoration:none;
+}
+#calculadora{
+  scroll-margin-top:28px;
+}
+.pn-section{
+  background:#ffffff;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:24px;
+  margin:0 0 26px;
+  color:#172033;
+  box-shadow:0 1px 2px rgba(15,23,42,.04);
+}
+.pn-section h2{
+  margin:0 0 10px;
+  font-family:'Fraunces','Georgia',serif;
+  font-size:clamp(1.7rem,2.5vw,2.35rem);
+  line-height:1.12;
+  font-weight:400;
+  letter-spacing:-.03em;
+  color:#0f172a;
+}
+.pn-section p{
+  margin:0 0 14px;
+  color:#475569;
+  font-size:15px;
+  line-height:1.68;
+}
+.pn-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:var(--accent);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.pn-info-grid.pn-grid-4{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.pn-info-card strong{
+  display:block;
+  margin:0 0 8px;
+  color:#0f172a;
+  font-size:13px;
+  line-height:1.35;
+}
+.pn-steps{
+  counter-reset:step;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin-top:18px;
+}
+.pn-step{
+  border:1px solid #e7e5e4;
+  background:#fafaf9;
+  border-radius:12px;
+  padding:16px;
+}
+.pn-step::before{
+  counter-increment:step;
+  content:counter(step);
+  display:inline-grid;
+  place-items:center;
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  background:rgba(0,118,255,.10);
+  color:var(--accent);
+  font-weight:800;
+  font-size:13px;
+  margin-bottom:10px;
+}
+.pn-step h3{
+  margin:0 0 8px;
+  font-size:14px;
+  line-height:1.35;
+  color:#0f172a;
+}
+.pn-step p{
+  margin:0;
+  font-size:13px;
+  line-height:1.6;
+}
+.pn-faq{
+  margin-top:18px;
+  display:grid;
+  gap:10px;
+}
+.pn-faq details{
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  background:#fff;
+  overflow:hidden;
+}
+.pn-faq summary{
+  cursor:pointer;
+  padding:14px 16px;
+  font-weight:700;
+  color:#0f172a;
+  background:#f8fafc;
+}
+.pn-faq details p{
+  padding:0 16px 16px;
+  margin:0;
+  font-size:14px;
+  line-height:1.65;
+}
+.pn-footer-grid{
+  display:grid;
+  grid-template-columns:1.3fr 1fr;
+  gap:18px;
+  align-items:start;
+}
+.pn-footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 16px;
+}
+.pn-footer-links a{
+  color:var(--accent);
+  font-weight:600;
+}
+@media (max-width:980px){
+  .pn-info-grid.pn-grid-4,
+  .pn-steps,
+  .pn-footer-grid{
+    grid-template-columns:1fr;
+  }
+}
+@media print{
+  .pn-hero-actions{display:none;}
+  .pn-section{box-shadow:none;break-inside:avoid;}
+}
+</style>
+
 </head>
 <body>
 <main class="page" id="inicio">
@@ -363,29 +527,100 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,118,255,.08)}
       <span class="eyebrow">Valor estimado</span>
       <h1 id="titulo-principal">Calculadora de tarifas conta notarial</h1>
       <p class="lead">Informe o valor base da operação e obtenha o valor da tarifa.</p>
+      <div class="pn-hero-actions"><a class="pn-jump" href="#calculadora">Ir para a ferramenta</a></div>
     </div>
   </section>
 
 
-  <section class="pn-editorial" aria-labelledby="sobre-ferramenta">
-    <h2 id="sobre-ferramenta">Como usar esta calculadora</h2>
-    <p>A calculadora estima a tarifa da conta notarial a partir do valor base informado pelo usuário. O resultado é exibido por faixa de movimentação e mostra o valor estimado da tarifa em reais e o percentual utilizado na faixa aplicável.</p>
-    <div class="pn-info-grid">
+
+  <section class="pn-section" aria-labelledby="sobre-ferramenta">
+    <span class="pn-kicker">Informação</span>
+    <h2 id="sobre-ferramenta">Informações sobre a calculadora de tarifas da conta notarial</h2>
+    <p>A página estima a tarifa da conta notarial a partir do valor base da operação informado pelo usuário. O resultado indica a faixa correspondente, a tarifa em reais, o percentual da faixa e o total estimado.</p>
+    <p>A ferramenta foi pensada para consulta preliminar em navegador. Ela não substitui conferência operacional, orçamento oficial, análise jurídica, conferência bancária ou validação da regra vigente para o caso concreto.</p>
+
+    <div class="pn-info-grid pn-grid-4">
       <div class="pn-info-card">
-        <h3>Quando usar</h3>
-        <p>Use a ferramenta para obter uma estimativa inicial da tarifa relacionada à conta notarial antes da conferência operacional do caso.</p>
+        <strong>O que a ferramenta faz</strong>
+        <p>Calcula a tarifa estimada pela faixa de movimentação configurada na página e apresenta a regra aplicada ao valor base.</p>
       </div>
       <div class="pn-info-card">
-        <h3>Base de cálculo</h3>
-        <p>A página utiliza tabela de tarifas por faixa de movimentação configurada no próprio código, com vigência indicada a partir de 01/04/2026.</p>
+        <strong>Quando usar</strong>
+        <p>Use para simular previamente o custo de tarifa vinculado à conta notarial, antes da conferência final do atendimento.</p>
       </div>
       <div class="pn-info-card">
-        <h3>Limites do resultado</h3>
-        <p>O cálculo não inclui escritura, tributo, registro imobiliário, certidões, averbações ou outras diligências necessárias ao ato.</p>
+        <strong>Critérios e fontes</strong>
+        <p>O cálculo usa tabela interna por faixa, vigência indicada a partir de 01/04/2026, valor mínimo e percentual de cada faixa.</p>
+      </div>
+      <div class="pn-info-card">
+        <strong>Limites da ferramenta</strong>
+        <p>O resultado não inclui escritura, tributo, registro imobiliário, certidões, averbações, diligências ou despesas externas.</p>
       </div>
     </div>
-    <div class="pn-note">O resultado tem natureza estimativa. A utilização em caso concreto exige conferência dos dados, da tabela aplicável e das regras operacionais vigentes.</div>
+
+    <div class="pn-note">Confira o resultado antes de usar em atendimento. Em caso de divergência entre a simulação e a regra operacional vigente, prevalece a conferência específica do caso concreto.</div>
     <span class="pn-meta">Última atualização da ferramenta: 04/05/2026.</span>
+  </section>
+
+  <section class="pn-section" aria-labelledby="como-usar">
+    <span class="pn-kicker">Como usar</span>
+    <h2 id="como-usar">Como usar a ferramenta</h2>
+    <div class="pn-steps">
+      <article class="pn-step">
+        <h3>Informe o valor base</h3>
+        <p>Digite o valor da operação que servirá de referência para a conta notarial.</p>
+      </article>
+      <article class="pn-step">
+        <h3>Clique em calcular</h3>
+        <p>A calculadora localizará a faixa correspondente na tabela cadastrada no código.</p>
+      </article>
+      <article class="pn-step">
+        <h3>Confira a composição</h3>
+        <p>Verifique valor base, tarifa em reais, faixa correspondente, percentual e total estimado.</p>
+      </article>
+      <article class="pn-step">
+        <h3>Use como triagem</h3>
+        <p>Antes de informar ao usuário, confirme a regra vigente e os dados da operação.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="pn-section" aria-labelledby="interpretacao-limites">
+    <span class="pn-kicker">Resultado</span>
+    <h2 id="interpretacao-limites">Como interpretar o resultado</h2>
+    <p>O campo “Tarifa R$” mostra o valor estimado da tarifa. O campo “Faixa correspondente” indica o intervalo usado para enquadrar o valor base. O campo “Tarifa %” exibe o percentual previsto para a faixa, quando houver percentual aplicável.</p>
+    <p>Na lógica configurada, a tarifa corresponde ao maior valor entre o percentual calculado sobre o valor base e o valor mínimo da faixa. Na primeira faixa, sem percentual aplicável, a ferramenta apresenta o percentual como 0% e usa o valor mínimo da tarifa.</p>
+  </section>
+
+  <section class="pn-section" aria-labelledby="faq">
+    <span class="pn-kicker">FAQ</span>
+    <h2 id="faq">Perguntas frequentes</h2>
+    <div class="pn-faq">
+      <details>
+        <summary>A calculadora substitui orçamento oficial?</summary>
+        <p>Não. A calculadora fornece estimativa para triagem. O orçamento oficial depende da conferência do caso concreto e das regras vigentes.</p>
+      </details>
+      <details>
+        <summary>Qual valor deve ser informado?</summary>
+        <p>Informe o valor base da operação que será usado como referência para a tarifa da conta notarial.</p>
+      </details>
+      <details>
+        <summary>Por que aparece tarifa mínima?</summary>
+        <p>Porque a regra configurada considera, em cada faixa, o maior valor entre o percentual calculado e o valor mínimo da tarifa.</p>
+      </details>
+      <details>
+        <summary>A tarifa inclui escritura, tributo e registro?</summary>
+        <p>Não. A página calcula apenas a tarifa estimada da conta notarial. Escritura, tributo, registro, certidões e diligências são itens distintos.</p>
+      </details>
+      <details>
+        <summary>O resultado é definitivo?</summary>
+        <p>Não. O resultado é estimativo e deve ser conferido antes de uso em atendimento, orçamento ou ato formal.</p>
+      </details>
+      <details>
+        <summary>Como informar erro ou divergência?</summary>
+        <p>Use a página de contato do Portal Notarial para comunicar erro, divergência de valor ou necessidade de atualização.</p>
+      </details>
+    </div>
   </section>
 
   <section class="grid" id="calculadora">
@@ -431,9 +666,24 @@ input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(0,118,255,.08)}
     </aside>
   </section>
 
-  <footer class="footer">
-    <span>Projeto apoiado por Escritura Pública - <a href="https://escriturapublica.substack.com" target="_blank" rel="noopener noreferrer">https://escriturapublica.substack.com</a> | Atesta - <a href="https://www.atesta.com.br" target="_blank" rel="noopener noreferrer">https://www.atesta.com.br</a></span>
+
+  <footer class="footer" aria-label="Links institucionais">
+    <div class="pn-footer-grid">
+      <div>
+        <p>Projeto gratuito mantido como apoio à rotina notarial. As ferramentas são informativas e devem ser usadas com conferência das regras vigentes.</p>
+        <p>Projeto apoiado por <a href="https://escriturapublica.substack.com" target="_blank" rel="noopener noreferrer">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener noreferrer">Atesta</a></p>
+      </div>
+      <nav class="pn-footer-links" aria-label="Páginas institucionais">
+        <a href="https://portalnotarial.com.br/">Início</a>
+        <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
+        <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
+        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
+        <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
+      </nav>
+    </div>
   </footer>
+
 </main>
 
 <span class="visit" title="Visitas" aria-label="Marcador discreto de visitas">
