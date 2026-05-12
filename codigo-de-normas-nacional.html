@@ -7,6 +7,7 @@
   <title>Código Nacional de Normas | Consulta prática | Portal Notarial</title>
   <meta name="description" content="Consulta estruturada ao Código Nacional de Normas da Corregedoria Nacional de Justiça, com busca por artigo, expressão, tema e especialidade." />
   <meta name="robots" content="index, follow" />
+  <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
   <link rel="canonical" href="https://portalnotarial.com.br/codigo-de-normas-nacional.html" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:type" content="website" />
@@ -409,6 +410,101 @@
 @media print{
   .pn-editorial{box-shadow:none;break-inside:avoid;}
 }
+
+
+/* Ajustes editoriais e de navegação para reforço de conteúdo útil. */
+#consulta-normas{
+  scroll-margin-top:96px;
+}
+.pn-hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:22px;
+  position:relative;
+  z-index:2;
+}
+.button.primary{
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary);
+}
+.button.primary:hover{
+  background:var(--primary-dark);
+  border-color:var(--primary-dark);
+}
+.pn-steps{
+  margin:16px 0 0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:10px;
+}
+.pn-steps li{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr);
+  gap:10px;
+  align-items:start;
+  border:1px solid #e7e5e4;
+  background:#fafaf9;
+  border-radius:12px;
+  padding:12px 14px;
+  color:#475569;
+  font-size:13px;
+  line-height:1.6;
+}
+.pn-steps strong{
+  display:inline-grid;
+  place-items:center;
+  width:24px;
+  height:24px;
+  border-radius:999px;
+  background:rgba(0,118,255,.10);
+  color:var(--primary);
+  font-size:12px;
+  font-family:var(--mono);
+}
+.pn-faq{
+  display:grid;
+  gap:10px;
+  margin-top:18px;
+}
+.pn-faq details{
+  margin:0;
+  padding:0;
+  border:1px solid #e7e5e4;
+  border-radius:12px;
+  background:#fff;
+  overflow:hidden;
+}
+.pn-faq summary{
+  color:#0f172a;
+  background:#fafaf9;
+  padding:13px 14px;
+  font-size:13px;
+}
+.pn-faq p{
+  margin:0;
+  padding:13px 14px 15px;
+  font-size:13px;
+  line-height:1.6;
+  color:#475569;
+}
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  align-items:center;
+  justify-content:flex-end;
+}
+.footer-links a{
+  color:var(--primary);
+  font-weight:600;
+}
+@media (max-width:860px){
+  .pn-hero-actions{align-items:flex-start;}
+  .footer-links{justify-content:flex-start;}
+}
 </style>
 
 </head>
@@ -426,29 +522,78 @@
       </div>
     </section>
 
-
     <section class="pn-editorial" aria-labelledby="sobre-ferramenta">
-      <h2 id="sobre-ferramenta">Consulta estruturada ao Código Nacional de Normas</h2>
-      <p>Esta página organiza dispositivos do Código Nacional de Normas da Corregedoria Nacional de Justiça para busca por artigo, expressão, tema e especialidade. A ferramenta foi criada para consulta rápida, estudo e localização de dispositivos normativos.</p>
+      <h2 id="sobre-ferramenta">O que a ferramenta faz</h2>
+      <p>Esta página organiza dispositivos do Código Nacional de Normas da Corregedoria Nacional de Justiça para consulta por artigo, expressão, tema e especialidade. A ferramenta serve como apoio de pesquisa para localizar rapidamente regras do foro extrajudicial, sem substituir a leitura da redação oficial vigente.</p>
       <div class="pn-info-grid">
         <div class="pn-info-card">
           <h3>Quando usar</h3>
-          <p>Use a busca para localizar artigos do Código Nacional de Normas relacionados a atos notariais, registros públicos, apostilamento, tecnologia e demais temas do foro extrajudicial.</p>
+          <p>Use a consulta para localizar artigos sobre atos notariais, registros públicos, e-Notariado, apostilamento, tecnologia, centrais eletrônicas, fiscalização e demais temas do foro extrajudicial.</p>
         </div>
         <div class="pn-info-card">
-          <h3>Base normativa</h3>
-          <p>A base informada na página corresponde ao Provimento CNJ nº 149/2023, com atualização indicada no próprio arquivo da ferramenta.</p>
+          <h3>Como usar</h3>
+          <p>Digite uma palavra, expressão ou número de artigo no campo de busca. Use filtros por especialidade, tipo, ordem, expressão exata ou termos semelhantes quando a pesquisa retornar muitos resultados.</p>
         </div>
         <div class="pn-info-card">
-          <h3>Limites da consulta</h3>
-          <p>A consulta não substitui a conferência do ato normativo oficial, nem resolve conflito interpretativo, revogação superveniente ou aplicação a caso concreto.</p>
+          <h3>Como interpretar o resultado</h3>
+          <p>Os resultados exibem dispositivos indexados da base carregada. A ordem pode variar conforme a busca e os filtros. O texto encontrado deve ser conferido com a fonte oficial antes de uso formal.</p>
+        </div>
+        <div class="pn-info-card">
+          <h3>Critérios e fontes</h3>
+          <p>A base da página corresponde ao arquivo dados/normas-nacional.json, derivado do Código Nacional de Normas do Foro Extrajudicial, instituído pelo Provimento CNJ nº 149/2023 e alterações indicadas na ferramenta.</p>
+        </div>
+        <div class="pn-info-card">
+          <h3>Limites da ferramenta</h3>
+          <p>A consulta não resolve conflito interpretativo, não verifica revogação superveniente fora da base publicada e não substitui qualificação notarial, registral ou análise jurídica do caso concreto.</p>
+        </div>
+        <div class="pn-info-card">
+          <h3>Uso responsável</h3>
+          <p>A ferramenta é indicada para triagem, estudo e conferência inicial. Em procedimento formal, confirme a norma vigente, a especialidade aplicável e eventuais decisões, comunicados ou provimentos posteriores.</p>
         </div>
       </div>
-      <div class="pn-note">Para uso jurídico formal, confira a redação vigente no portal oficial de atos normativos do Conselho Nacional de Justiça.</div>
+      <div class="pn-note">Para uso jurídico formal, confira a redação vigente no portal oficial de atos normativos do Conselho Nacional de Justiça. A indexação facilita a pesquisa, mas não altera o conteúdo normativo nem produz interpretação vinculante.</div>
       <span class="pn-meta">Base atualizada automaticamente.</span>
     </section>
 
-    <section class="layout">
+    <section class="pn-editorial" aria-labelledby="como-usar-ferramenta">
+      <h2 id="como-usar-ferramenta">Como usar a consulta</h2>
+      <p>O fluxo foi pensado para pesquisa rápida em rotina de balcão, estudo, conferência interna ou preparação de ato extrajudicial.</p>
+      <ol class="pn-steps">
+        <li><strong>1</strong><span>Pesquise por artigo, expressão ou tema. Exemplos: art. 302, e-Notariado, ata notarial, escritura eletrônica, competência, apostilamento ou indisponibilidade.</span></li>
+        <li><strong>2</strong><span>Use os filtros de especialidade e tipo quando a pesquisa retornar muitos resultados.</span></li>
+        <li><strong>3</strong><span>Marque expressão exata quando quiser localizar uma sequência literal de palavras.</span></li>
+        <li><strong>4</strong><span>Use termos semelhantes para ampliar a busca quando houver variação entre singular, plural ou termos próximos.</span></li>
+        <li><strong>5</strong><span>Antes de aplicar o resultado, confira a redação oficial vigente e a existência de alterações posteriores.</span></li>
+      </ol>
+    </section>
+
+    <section class="pn-editorial" aria-labelledby="faq-ferramenta">
+      <h2 id="faq-ferramenta">Perguntas frequentes</h2>
+      <div class="pn-faq">
+        <details>
+          <summary>A página substitui a consulta ao texto oficial do CNJ?</summary>
+          <p>Não. A página é uma ferramenta de busca e organização. Para uso formal, consulte a redação oficial vigente no portal de atos normativos do Conselho Nacional de Justiça.</p>
+        </details>
+        <details>
+          <summary>A base é atualizada automaticamente?</summary>
+          <p>A página informa a data da base carregada quando o arquivo dados/normas-nacional.json é publicado corretamente. A atualização depende da manutenção desse arquivo no repositório.</p>
+        </details>
+        <details>
+          <summary>Por que a busca pode trazer muitos resultados?</summary>
+          <p>Termos amplos, como escritura, registro, procuração ou certidão, aparecem em vários livros e capítulos. Use expressão exata, filtros por especialidade ou termos combinados para reduzir o resultado.</p>
+        </details>
+        <details>
+          <summary>O resultado tem caráter oficial?</summary>
+          <p>Não. O conteúdo exibido é informativo e serve para localização. A aplicação da norma depende de conferência da redação oficial e análise do caso concreto.</p>
+        </details>
+        <details>
+          <summary>Posso usar a ferramenta em atendimento ao público?</summary>
+          <p>Sim, como apoio de pesquisa e triagem. O resultado deve ser revisado pelo responsável técnico antes de orientar conclusivamente o usuário ou praticar ato formal.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="layout" id="consulta-normas">
       <aside class="left-col panel sticky">
         <div class="panel-head">
           <h3>Filtros</h3>
@@ -538,9 +683,17 @@
     <div class="wrap footer-row">
       <span>Base atualizada automaticamente.</span>
       <span class="footer-support">
-        Projeto apoiado por <a href="https://escriturapublica.substack.com/" target="_blank" rel="noopener noreferrer">Escritura Pública</a>
+        Projeto apoiado por <a href="https://escriturapublica.substack.com/" target="_blank" rel="noopener noreferrer">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener noreferrer">Atesta</a>
         <span id="visitMarker" class="visit-marker" title="Marcador discreto de visitas" aria-label="Marcador discreto de visitas"><span class="visit-fallback">visitas</span></span>
       </span>
+      <nav class="footer-links" aria-label="Links institucionais">
+        <a href="https://portalnotarial.com.br/">Home</a>
+        <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
+        <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
+        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
+        <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
+      </nav>
     </div>
   </footer>
 
@@ -1074,7 +1227,7 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
         console.warn('Rota alternativa indisponível.', proxyErr);
       }
 
-      setStatus('A base atualizada não carregou. Confira se o arquivo JSON foi publicado e recarregue a página com Ctrl + F5.');
+      setStatus('');
       toast('Selecione o arquivo oficial');
       const input = $('#fileInput');
       if (input) input.click();
@@ -1528,7 +1681,7 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
       $('#statUpdated').textContent = state.loadedAt || '-';
 
       if (!state.articles.length) {
-        container.innerHTML = `<div class="empty">A base atualizada não carregou. Confira se o arquivo JSON foi publicado e recarregue a página com Ctrl + F5.</div>`;
+        container.innerHTML = "";
         return;
       }
       if (!state.results.length) {
