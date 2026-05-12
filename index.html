@@ -1071,6 +1071,273 @@
       color: var(--branco);
     }
 
+
+    .content-section {
+      position: relative;
+      z-index: 3;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 22px 72px;
+    }
+
+    .tools-group + .content-section {
+      margin-top: 72px;
+    }
+
+    .content-section + .content-section {
+      padding-top: 0;
+    }
+
+
+    #informacoes,
+    #como-usar,
+    #perguntas-frequentes {
+      scroll-margin-top: 118px;
+    }
+
+    .section-panel {
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 82% 0%, rgba(11, 95, 255, 0.16), transparent 42%),
+        linear-gradient(145deg, rgba(255,255,255,0.072), rgba(255,255,255,0.032));
+      box-shadow: 0 22px 54px rgba(0,0,0,0.14);
+      padding: 34px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .section-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: 0.34;
+    }
+
+    .section-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+      color: var(--texto-fraco);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .section-eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--azul);
+    }
+
+    .section-title {
+      margin: 0;
+      max-width: 860px;
+      color: var(--texto);
+      font-size: clamp(31px, 4vw, 58px);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+    }
+
+    .section-lead {
+      max-width: 920px;
+      margin: 18px 0 0;
+      color: var(--texto-suave);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .info-card {
+      min-height: 210px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      background: rgba(7, 19, 35, 0.44);
+      padding: 22px;
+      color: var(--texto-suave);
+    }
+
+    .info-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 14px;
+      background: rgba(11, 95, 255, 0.14);
+      border: 1px solid rgba(11, 95, 255, 0.26);
+      color: var(--branco);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .info-card h3,
+    .step-card h3,
+    .faq-item h3 {
+      margin: 0;
+      color: var(--texto);
+      font-size: 18px;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+    }
+
+    .info-card p,
+    .step-card p,
+    .faq-item p,
+    .note-panel p {
+      margin: 12px 0 0;
+      color: var(--texto-suave);
+      font-size: 14px;
+      line-height: 1.62;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
+      counter-reset: etapa;
+    }
+
+    .step-card {
+      min-height: 190px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      background: rgba(7, 19, 35, 0.44);
+      padding: 22px;
+      position: relative;
+      counter-increment: etapa;
+    }
+
+    .step-card::before {
+      content: counter(etapa, decimal-leading-zero);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 18px;
+      border-radius: 999px;
+      background: rgba(0, 144, 157, 0.16);
+      border: 1px solid rgba(0, 144, 157, 0.28);
+      color: var(--verde);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .note-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .note-panel {
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      background: rgba(7, 19, 35, 0.44);
+      padding: 24px;
+    }
+
+    .note-panel h3 {
+      margin: 0;
+      color: var(--texto);
+      font-size: 23px;
+      line-height: 1.15;
+      letter-spacing: -0.035em;
+    }
+
+    .note-list {
+      display: grid;
+      gap: 10px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .note-list li {
+      position: relative;
+      padding-left: 20px;
+      color: var(--texto-suave);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .note-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.68em;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--azul);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .faq-item {
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      background: rgba(7, 19, 35, 0.44);
+      padding: 22px;
+    }
+
+    .section-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .text-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 0 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
+      color: var(--texto-suave);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .text-button:hover {
+      color: var(--branco);
+      border-color: rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.07);
+    }
+
     @media (max-width: 1380px) {
       .cards {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1109,6 +1376,13 @@
         padding-top: 116px;
       }
 
+
+      #informacoes,
+      #como-usar,
+      #perguntas-frequentes {
+        scroll-margin-top: 158px;
+      }
+
       .hero {
         padding-top: 48px;
       }
@@ -1126,6 +1400,19 @@
       .card {
         min-height: 280px;
       }
+
+
+      .info-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .note-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 620px) {
@@ -1139,6 +1426,13 @@
 
       .page {
         padding-top: 126px;
+      }
+
+
+      #informacoes,
+      #como-usar,
+      #perguntas-frequentes {
+        scroll-margin-top: 172px;
       }
 
       .hero {
@@ -1188,6 +1482,28 @@
       .visit-counter {
         right: 10px;
         bottom: 10px;
+      }
+
+
+      .content-section {
+        padding: 0 16px 52px;
+      }
+
+      .section-panel {
+        border-radius: 24px;
+        padding: 24px;
+      }
+
+      .info-grid,
+      .steps-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .info-card,
+      .step-card,
+      .faq-item {
+        min-height: auto;
       }
     }
 
@@ -1270,6 +1586,8 @@
 
   </style>
 
+  <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
+
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777"
        crossorigin="anonymous"></script>
@@ -1288,6 +1606,9 @@
 
         <div class="nav-right">
           <div class="primary-links" aria-label="Links institucionais">
+            <a href="#informacoes">Informações</a>
+            <a href="#como-usar">Como usar</a>
+            <a href="#perguntas-frequentes">FAQ</a>
             <a href="sobre.html">Sobre</a>
             <a href="contato.html">Contato</a>
           </div>
@@ -2123,6 +2444,194 @@
           </a>
         </div>
       </section>
+
+
+      <section class="content-section" id="informacoes" aria-labelledby="titulo-informacoes">
+        <div class="section-panel">
+          <div class="section-content">
+            <span class="section-eyebrow">Informação</span>
+            <h2 class="section-title" id="titulo-informacoes">Informações sobre as ferramentas</h2>
+            <p class="section-lead">
+              O Portal Notarial reúne ferramentas gratuitas para organizar dados, consultar normas, estimar custos e apoiar a preparação de atos notariais. As páginas foram pensadas para uso direto no navegador, com linguagem objetiva e indicação dos limites de cada resultado.
+            </p>
+
+            <div class="info-grid" aria-label="Características das ferramentas">
+              <article class="info-card">
+                <div class="info-icon">01</div>
+                <h3>Ferramentas gratuitas</h3>
+                <p>As ferramentas podem ser acessadas sem cadastro prévio. A manutenção do portal é apoiada por publicidade, parcerias institucionais e aprimoramento contínuo.</p>
+              </article>
+
+              <article class="info-card">
+                <div class="info-icon">02</div>
+                <h3>Uso direto no navegador</h3>
+                <p>As consultas e calculadoras foram organizadas para uso rápido em computador ou celular, sem instalação de programa específico.</p>
+              </article>
+
+              <article class="info-card">
+                <div class="info-icon">03</div>
+                <h3>Apoio à rotina notarial</h3>
+                <p>O conteúdo auxilia tabelionatos, advogados, imobiliárias e usuários na etapa inicial de triagem, cálculo, pesquisa normativa e conferência técnica.</p>
+              </article>
+
+              <article class="info-card">
+                <div class="info-icon">04</div>
+                <h3>Fontes normativas indicadas</h3>
+                <p>As páginas procuram indicar as normas, tabelas ou critérios utilizados, para permitir conferência pelo usuário antes de qualquer providência formal.</p>
+              </article>
+
+              <article class="info-card">
+                <div class="info-icon">05</div>
+                <h3>Resultados estimativos</h3>
+                <p>Cálculos, orçamentos e enquadramentos não têm natureza oficial. O resultado depende dos dados informados e da conferência da norma vigente.</p>
+              </article>
+
+              <article class="info-card">
+                <div class="info-icon">06</div>
+                <h3>Privacidade e segurança</h3>
+                <p>O usuário deve evitar inserir dados desnecessários. Cada ferramenta pode ter funcionamento próprio, especialmente nas páginas com validação técnica de arquivos.</p>
+              </article>
+
+              <article class="info-card">
+                <div class="info-icon">07</div>
+                <h3>Atualização das informações</h3>
+                <p>Normas, tabelas, links e critérios podem mudar. A página de atualizações registra alterações relevantes feitas no portal.</p>
+              </article>
+
+              <article class="info-card">
+                <div class="info-icon">08</div>
+                <h3>Limites de uso</h3>
+                <p>As ferramentas não substituem qualificação notarial, análise registral, conferência tributária, orientação jurídica ou consulta à fonte oficial.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" id="como-usar" aria-labelledby="titulo-como-usar">
+        <div class="section-panel">
+          <div class="section-content">
+            <span class="section-eyebrow">Como usar</span>
+            <h2 class="section-title" id="titulo-como-usar">Como usar o Portal Notarial</h2>
+            <p class="section-lead">
+              A navegação foi estruturada para reduzir etapas na rotina de atendimento. Primeiro escolha a ferramenta, depois informe apenas os dados necessários e confira o resultado com as fontes e limites indicados na própria página.
+            </p>
+
+            <div class="steps-grid" aria-label="Etapas de uso do Portal Notarial">
+              <article class="step-card">
+                <h3>Escolha a ferramenta</h3>
+                <p>Use os grupos da página inicial para localizar triagem, cálculo, orçamento, normas, competência eletrônica, validação ou links de apoio.</p>
+              </article>
+
+              <article class="step-card">
+                <h3>Informe os dados necessários</h3>
+                <p>Preencha somente as informações exigidas para o funcionamento da página. Em caso de dúvida, mantenha a informação para conferência posterior.</p>
+              </article>
+
+              <article class="step-card">
+                <h3>Leia o resultado</h3>
+                <p>O resultado deve ser lido como apoio operacional. Ele não substitui a conferência do documento, da tabela, do tributo ou da regra aplicável.</p>
+              </article>
+
+              <article class="step-card">
+                <h3>Confira as fontes</h3>
+                <p>Quando houver indicação de base normativa ou tabela, consulte a fonte oficial antes de usar o resultado em atendimento formal.</p>
+              </article>
+
+              <article class="step-card">
+                <h3>Valide no caso concreto</h3>
+                <p>A decisão final deve ser confirmada pelo tabelionato competente, pelo profissional responsável ou pelo órgão oficial aplicável ao caso.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" id="criterios-e-limites" aria-labelledby="titulo-criterios">
+        <div class="section-panel">
+          <div class="section-content">
+            <span class="section-eyebrow">Critérios e limites</span>
+            <h2 class="section-title" id="titulo-criterios">Critérios, fontes e cautelas de uso</h2>
+            <p class="section-lead">
+              As ferramentas trabalham com normas públicas, tabelas oficiais, parâmetros informados pelo usuário e regras operacionais descritas nas próprias páginas. A utilidade está na organização do raciocínio, na redução de etapas repetitivas e na indicação de pontos de conferência.
+            </p>
+
+            <div class="note-grid">
+              <article class="note-panel">
+                <h3>O que o Portal Notarial entrega</h3>
+                <ul class="note-list">
+                  <li>Consulta estruturada de normas e temas relevantes para a atividade notarial.</li>
+                  <li>Estimativas de valores conforme dados informados pelo usuário.</li>
+                  <li>Triagem inicial de documentos e informações por tipo de ato.</li>
+                  <li>Organização de links e serviços públicos úteis à rotina extrajudicial.</li>
+                  <li>Indicação de cautelas técnicas para documentos eletrônicos, PDF/A, hash e assinatura digital.</li>
+                </ul>
+              </article>
+
+              <article class="note-panel">
+                <h3>O que precisa ser conferido fora da ferramenta</h3>
+                <ul class="note-list">
+                  <li>Norma vigente no momento da prática do ato.</li>
+                  <li>Documentos originais, identidade, capacidade e representação das partes.</li>
+                  <li>Tributos, isenções, recolhimentos e exigências do ente competente.</li>
+                  <li>Qualificação notarial, registral ou jurídica do caso concreto.</li>
+                  <li>Eventuais regras locais, atos normativos supervenientes e decisões administrativas.</li>
+                </ul>
+              </article>
+            </div>
+
+            <div class="section-actions">
+              <a class="text-button" href="fontes-normativas.html">Ver fontes normativas</a>
+              <a class="text-button" href="atualizacoes.html">Ver atualizações</a>
+              <a class="text-button" href="contato.html">Enviar correção ou sugestão</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" id="perguntas-frequentes" aria-labelledby="titulo-faq">
+        <div class="section-panel">
+          <div class="section-content">
+            <span class="section-eyebrow">FAQ</span>
+            <h2 class="section-title" id="titulo-faq">Perguntas frequentes</h2>
+            <p class="section-lead">
+              Estas respostas explicam o uso geral das ferramentas. Cada página pode conter observações próprias, de acordo com sua finalidade.
+            </p>
+
+            <div class="faq-grid">
+              <article class="faq-item">
+                <h3>As ferramentas substituem a análise do tabelião?</h3>
+                <p>Não. As ferramentas organizam informações e indicam critérios gerais. A qualificação do ato deve ser feita pelo tabelionato competente.</p>
+              </article>
+
+              <article class="faq-item">
+                <h3>Os cálculos são oficiais?</h3>
+                <p>Não. Os cálculos são estimativos e dependem dos dados informados, da tabela vigente, da incidência tributária e da conferência do caso concreto.</p>
+              </article>
+
+              <article class="faq-item">
+                <h3>O Portal armazena documentos?</h3>
+                <p>A página inicial não recebe arquivos. Ferramentas específicas, como validadores técnicos, devem ser usadas conforme os avisos de privacidade e funcionamento próprios.</p>
+              </article>
+
+              <article class="faq-item">
+                <h3>As ferramentas são gratuitas?</h3>
+                <p>Sim. O acesso às ferramentas do Portal Notarial é gratuito. A manutenção pode ser apoiada por publicidade e iniciativas de apoio ao projeto.</p>
+              </article>
+
+              <article class="faq-item">
+                <h3>Quais fontes são usadas?</h3>
+                <p>As páginas podem usar legislação, atos normativos, tabelas oficiais, normas administrativas e critérios operacionais indicados em cada ferramenta.</p>
+              </article>
+
+              <article class="faq-item">
+                <h3>Como informar erro ou link quebrado?</h3>
+                <p>Use a página de contato para enviar correção, sugestão, atualização de fonte ou indicação de link indisponível.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer>
@@ -2131,6 +2640,9 @@
           <a href="sobre.html">Sobre</a>
           <a href="contato.html">Contato</a>
           <a href="fontes-normativas.html">Fontes</a>
+          <a href="#informacoes">Informações</a>
+          <a href="#como-usar">Como usar</a>
+          <a href="#perguntas-frequentes">FAQ</a>
           <a href="atualizacoes.html">Atualizações</a>
           <a href="mapa-do-site.html">Mapa do site</a>
           <a href="politica-de-privacidade.html">Privacidade</a>
