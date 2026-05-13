@@ -348,6 +348,38 @@
       text-align: center;
     }
 
+
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .card-title-row h2 {
+      margin: 0;
+    }
+
+    .preview.is-editing {
+      background: #ffffff;
+      border-color: var(--azul);
+      box-shadow: 0 0 0 3px rgba(0, 118, 255, 0.10);
+    }
+
+    .preview[contenteditable="true"] {
+      outline: none;
+    }
+
+    .cartorio-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 2px;
+    }
+
     footer {
       color: var(--cinza);
       font-size: 12px;
@@ -528,11 +560,6 @@
             </div>
 
             <div class="field full">
-              <label for="emailCartorio">E-mail do cartório para resposta do banco</label>
-              <input id="emailCartorio" type="email" placeholder="Ex.: atendimento@cartorio.com.br" autocomplete="email" required />
-            </div>
-
-            <div class="field full">
               <label for="autorizado">Nome de quem poderá receber as informações</label>
               <input id="autorizado" type="text" placeholder="Nome completo" style="text-transform: uppercase;" required />
             </div>
@@ -572,7 +599,6 @@
               <input id="qualificacaoFuncional" type="text" placeholder="Ex.: tabelião, tabelião substituto, escrevente autorizado" required />
             </div>
 
-
             <div class="field">
               <label for="tabelionato">Tabelionato</label>
               <input id="tabelionato" type="text" placeholder="Nome do tabelionato" required />
@@ -582,6 +608,19 @@
               <label for="escrevente">Escrevente responsável</label>
               <input id="escrevente" type="text" placeholder="Nome do escrevente" style="text-transform: uppercase;" required />
             </div>
+
+            <div class="field">
+              <label for="emailCartorio">E-mail do cartório para resposta do banco</label>
+              <input id="emailCartorio" type="email" placeholder="Ex.: atendimento@cartorio.com.br" autocomplete="email" required />
+            </div>
+
+            <div class="field full">
+              <div class="cartorio-actions">
+                <button type="button" class="btn-secondary" id="btnSalvarCartorio">Salvar dados do cartório</button>
+                <button type="button" class="btn-danger" id="btnLimparCartorio">Limpar dados salvos</button>
+              </div>
+              <div class="small-note">Use esta opção para manter, neste navegador, e-mail, assinatura, qualificação, tabelionato e escrevente.</div>
+            </div>
           </div>
         </form>
       </div>
@@ -589,7 +628,10 @@
       <textarea id="textoOCR" style="display: none;" aria-hidden="true"></textarea>
 
       <div class="card full">
-        <h2>3. Prévia do ofício</h2>
+        <div class="card-title-row">
+          <h2>3. Prévia do ofício</h2>
+          <button type="button" class="btn-secondary" id="btnEditarOficio">Editar texto do ofício</button>
+        </div>
         <div class="preview" id="previewOficio">A prévia será gerada com os dados preenchidos.</div>
       </div>
 
@@ -624,10 +666,18 @@
       bancoOutros: document.getElementById('bancoOutros'),
       campoBancoOutros: document.getElementById('campoBancoOutros'),
       comunicadoPdf: document.getElementById('comunicadoPdf'),
-      campoComunicadoManual: document.getElementById('campoComunicadoManual')
+      campoComunicadoManual: document.getElementById('campoComunicadoManual'),
+      btnSalvarCartorio: document.getElementById('btnSalvarCartorio'),
+      btnLimparCartorio: document.getElementById('btnLimparCartorio'),
+      btnEditarOficio: document.getElementById('btnEditarOficio')
     };
 
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+    const CHAVE_DADOS_CARTORIO = 'oficiosBancosDadosCartorioV1';
+    const CAMPOS_DADOS_CARTORIO = ['emailCartorio', 'quemAssina', 'qualificacaoFuncional', 'tabelionato', 'escrevente'];
+    let edicaoManualOficio = false;
+    let edicaoOficioAtiva = false;
 
     ids.banco.addEventListener('change', function () {
       const mostrar = ids.banco.value === 'Outros';
@@ -638,6 +688,9 @@
     ids.btnForcarOCR.addEventListener('click', function () { lerCertidaoPorOCR(false); });
     ids.btnGerarPdf.addEventListener('click', gerarPdfFinal);
     ids.btnLimpar.addEventListener('click', limparTudo);
+    if (ids.btnSalvarCartorio) ids.btnSalvarCartorio.addEventListener('click', salvarDadosCartorio);
+    if (ids.btnLimparCartorio) ids.btnLimparCartorio.addEventListener('click', limparDadosCartorioSalvos);
+    if (ids.btnEditarOficio) ids.btnEditarOficio.addEventListener('click', alternarEdicaoOficio);
 
     ['input', 'change'].forEach(function (evento) {
       document.getElementById('formOficio').addEventListener(evento, atualizarPrevia);
@@ -1569,9 +1622,134 @@
       }).join('');
     }
 
-    function atualizarPrevia() {
+    function atualizarPrevia(forcar) {
+      if (!forcar && (edicaoOficioAtiva || edicaoManualOficio)) return;
       const dados = coletarDados();
       ids.previewOficio.innerHTML = montarHtmlOficio(dados);
+    }
+
+
+    function alternarEdicaoOficio() {
+      if (!ids.previewOficio || !ids.btnEditarOficio) return;
+
+      if (!edicaoOficioAtiva) {
+        if (!edicaoManualOficio) atualizarPrevia(true);
+        edicaoOficioAtiva = true;
+        ids.previewOficio.setAttribute('contenteditable', 'true');
+        ids.previewOficio.classList.add('is-editing');
+        ids.btnEditarOficio.textContent = 'Concluir edição';
+        ids.previewOficio.focus();
+        setStatus('Edição manual ativada. Ajuste o texto diretamente na prévia. Ao concluir, clique em “Concluir edição”.');
+        return;
+      }
+
+      edicaoOficioAtiva = false;
+      edicaoManualOficio = true;
+      ids.previewOficio.setAttribute('contenteditable', 'false');
+      ids.previewOficio.classList.remove('is-editing');
+      ids.btnEditarOficio.textContent = 'Editar texto do ofício';
+      setStatus('Edição manual aplicada. O PDF será gerado com o texto exibido na prévia.');
+    }
+
+    function montarEstruturaDaPreviaEditada() {
+      const blocos = [];
+      const filhos = Array.from(ids.previewOficio.children || []);
+
+      filhos.forEach(function (elemento) {
+        if (elemento.classList.contains('oficio-space')) {
+          blocos.push({ tipo: 'space' });
+          return;
+        }
+
+        const partes = extrairPartesHtmlEditado(elemento);
+        const texto = partesParaTexto(partes).trim();
+        if (!texto) return;
+
+        if (elemento.classList.contains('oficio-right')) {
+          blocos.push({ tipo: 'rightLine', partes: partes });
+          return;
+        }
+
+        if (elemento.classList.contains('oficio-paragraph')) {
+          blocos.push({ tipo: 'paragraphRich', partes: partes });
+          return;
+        }
+
+        if (elemento.classList.contains('oficio-list-item')) {
+          blocos.push({ tipo: 'listItemRich', partes: partes });
+          return;
+        }
+
+        if (elemento.classList.contains('oficio-signature')) {
+          const peso = parseInt(window.getComputedStyle(elemento).fontWeight, 10) || 400;
+          blocos.push({ tipo: peso >= 600 ? 'signature' : 'centerLine', partes: partes });
+          return;
+        }
+
+        if (elemento.classList.contains('oficio-assunto')) {
+          blocos.push({ tipo: 'assunto', partes: partes });
+          return;
+        }
+
+        if (elemento.classList.contains('oficio-section-title')) {
+          blocos.push({ tipo: 'heading', partes: partes });
+          return;
+        }
+
+        if (elemento.querySelector('strong, .oficio-bold, b')) {
+          blocos.push({ tipo: 'lineBold', partes: partes });
+          return;
+        }
+
+        blocos.push({ tipo: 'line', partes: partes });
+      });
+
+      return blocos.length ? blocos : montarEstruturaOficio(coletarDados());
+    }
+
+    function extrairPartesHtmlEditado(elemento) {
+      const partes = [];
+
+      function percorrer(no, negrito) {
+        if (no.nodeType === Node.TEXT_NODE) {
+          const texto = no.textContent.replace(/\s+/g, ' ');
+          if (texto) partes.push({ texto: texto, bold: !!negrito });
+          return;
+        }
+
+        if (no.nodeType !== Node.ELEMENT_NODE) return;
+
+        const tag = no.tagName.toLowerCase();
+        const peso = parseInt(window.getComputedStyle(no).fontWeight, 10) || 400;
+        const novoNegrito = negrito || tag === 'strong' || tag === 'b' || no.classList.contains('oficio-bold') || peso >= 600;
+
+        Array.from(no.childNodes).forEach(function (filho) {
+          percorrer(filho, novoNegrito);
+        });
+      }
+
+      Array.from(elemento.childNodes).forEach(function (filho) {
+        percorrer(filho, false);
+      });
+
+      return normalizarPartesEditadas(partes);
+    }
+
+    function normalizarPartesEditadas(partes) {
+      const resultado = [];
+      (partes || []).forEach(function (parte) {
+        const texto = String(parte.texto || '').replace(/\s+/g, ' ');
+        if (!texto.trim()) return;
+        const anterior = resultado[resultado.length - 1];
+        if (anterior && anterior.bold === parte.bold) {
+          anterior.texto += texto;
+        } else {
+          resultado.push({ texto: texto, bold: !!parte.bold });
+        }
+      });
+      return resultado.map(function (parte) {
+        return { texto: parte.texto.trim(), bold: parte.bold };
+      });
     }
 
     function validarCamposAntesDeGerar() {
@@ -1598,7 +1776,7 @@
         return false;
       }
 
-      atualizarPrevia();
+      if (!edicaoManualOficio && !edicaoOficioAtiva) atualizarPrevia();
       return true;
     }
 
@@ -1617,7 +1795,7 @@
 
       try {
         const dados = coletarDados();
-        const estruturaOficio = montarEstruturaOficio(dados);
+        const estruturaOficio = (edicaoManualOficio || edicaoOficioAtiva) ? montarEstruturaDaPreviaEditada() : montarEstruturaOficio(dados);
         const { PDFDocument, StandardFonts, rgb } = PDFLib;
         const pdfFinal = await PDFDocument.create();
         const fonteNormal = await pdfFinal.embedFont(StandardFonts.Helvetica);
@@ -1853,10 +2031,66 @@
         .replace(/^-+|-+$/g, '') + '.pdf';
     }
 
+
+    function salvarDadosCartorio() {
+      const email = document.getElementById('emailCartorio');
+      if (email && !validarCampoEmail(email)) {
+        email.reportValidity();
+        return;
+      }
+
+      const dados = {};
+      CAMPOS_DADOS_CARTORIO.forEach(function (id) {
+        const campo = document.getElementById(id);
+        dados[id] = campo ? campo.value.trim() : '';
+      });
+
+      localStorage.setItem(CHAVE_DADOS_CARTORIO, JSON.stringify(dados));
+      setStatus('Dados do cartório salvos neste navegador. Eles serão preenchidos automaticamente nas próximas utilizações.');
+    }
+
+    function carregarDadosCartorioSalvos() {
+      const bruto = localStorage.getItem(CHAVE_DADOS_CARTORIO);
+      if (!bruto) return;
+
+      try {
+        const dados = JSON.parse(bruto);
+        CAMPOS_DADOS_CARTORIO.forEach(function (id) {
+          const campo = document.getElementById(id);
+          if (campo && dados[id] && !campo.value) campo.value = dados[id];
+        });
+      } catch (erro) {
+        localStorage.removeItem(CHAVE_DADOS_CARTORIO);
+      }
+    }
+
+    function limparDadosCartorioSalvos() {
+      if (!confirm('Deseja apagar os dados do cartório salvos neste navegador?')) return;
+      localStorage.removeItem(CHAVE_DADOS_CARTORIO);
+      CAMPOS_DADOS_CARTORIO.forEach(function (id) {
+        const campo = document.getElementById(id);
+        if (campo) campo.value = '';
+      });
+      edicaoManualOficio = false;
+      edicaoOficioAtiva = false;
+      if (ids.previewOficio) {
+        ids.previewOficio.setAttribute('contenteditable', 'false');
+        ids.previewOficio.classList.remove('is-editing');
+      }
+      if (ids.btnEditarOficio) ids.btnEditarOficio.textContent = 'Editar texto do ofício';
+      atualizarPrevia(true);
+      setStatus('Dados do cartório apagados deste navegador.');
+    }
+
     function limparTudo() {
       if (!confirm('Deseja limpar os campos da página?')) return;
       document.getElementById('formOficio').reset();
       ids.textoOCR.value = '';
+      edicaoManualOficio = false;
+      edicaoOficioAtiva = false;
+      ids.previewOficio.setAttribute('contenteditable', 'false');
+      ids.previewOficio.classList.remove('is-editing');
+      if (ids.btnEditarOficio) ids.btnEditarOficio.textContent = 'Editar texto do ofício';
       ids.previewOficio.textContent = 'A prévia será gerada com os dados preenchidos.';
       ids.certidaoPdf.value = '';
       if (ids.comunicadoPdf) ids.comunicadoPdf.value = '';
@@ -1878,8 +2112,9 @@
 
     verificarBibliotecasAoIniciar();
     inicializarCamposPadrao();
+    carregarDadosCartorioSalvos();
     inicializarCampoComunicado();
-    atualizarPrevia();
+    atualizarPrevia(true);
   </script>
 </body>
 </html>
