@@ -1018,22 +1018,6 @@
       border-color: var(--texto);
     }
 
-    .visit-counter {
-      position: fixed;
-      right: 14px;
-      bottom: 14px;
-      z-index: 60;
-      padding: 6px 10px;
-      border: 1px solid rgba(11,23,39,0.10);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(12px);
-      color: var(--texto-fraco);
-      font-size: 11px;
-      line-height: 1;
-      pointer-events: none;
-      box-shadow: 0 6px 16px rgba(11,23,39,0.06);
-    }
 
     footer {
       position: relative;
@@ -1486,11 +1470,6 @@
         gap: 10px;
       }
 
-      .visit-counter {
-        right: 10px;
-        bottom: 10px;
-      }
-
 
       .content-section {
         padding: 0 16px 52px;
@@ -1594,6 +1573,15 @@
   </style>
 
   <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTD149ZWLC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TTD149ZWLC');
+  </script>
 
   <!-- Google AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777"
@@ -2658,48 +2646,9 @@
         </div>
       </div>
     </footer>
-
-    <div class="visit-counter" id="visitCounter">
-      Visitas: 0
-    </div>
   </div>
 
   <script>
-    const counterElement = document.getElementById("visitCounter");
-
-    async function updateVisitCounter() {
-      if (!counterElement) return;
-
-      const fallbackKey = "portal-notarial-local-visits";
-      const fallbackValue = Number(localStorage.getItem(fallbackKey) || "0") + 1;
-      localStorage.setItem(fallbackKey, String(fallbackValue));
-
-      try {
-        const response = await fetch("https://countapi.mileshilliard.com/api/v1/hit/portalnotarial-home", {
-          method: "GET",
-          cache: "no-store"
-        });
-
-        if (!response.ok) {
-          throw new Error("contador indisponível");
-        }
-
-        const data = await response.json();
-        const total = Number(data && data.value);
-
-        if (Number.isFinite(total)) {
-          counterElement.textContent = `Visitas: ${total}`;
-          return;
-        }
-
-        throw new Error("resposta inválida do contador");
-      } catch (error) {
-        counterElement.textContent = `Visitas locais: ${fallbackValue}`;
-      }
-    }
-
-    updateVisitCounter();
-
     const frasesNotariais = [
       {
         texto: "Quanto mais notário, menos juiz.",
