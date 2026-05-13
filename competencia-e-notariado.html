@@ -7,6 +7,7 @@
   <title>Competência notarial eletrônica e híbrida | Portal Notarial</title>
   <meta name="description" content="Ferramenta de apoio para identificar critérios de competência do tabelião de notas em atos eletrônicos e híbridos no e-Notariado." />
   <meta name="robots" content="index, follow" />
+  <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
   <link rel="canonical" href="https://portalnotarial.com.br/competencia-e-notariado.html" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:type" content="website" />
@@ -141,6 +142,92 @@
 @media print{
   .pn-editorial{box-shadow:none;break-inside:avoid;}
 }
+
+.pn-action-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:16px 0 4px;
+}
+.pn-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:38px;
+  padding:10px 16px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:700;
+  text-decoration:none;
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease, color .15s ease;
+}
+.pn-button:hover{
+  transform:translateY(-1px);
+  text-decoration:none;
+}
+.pn-button-primary{
+  background:rgb(0,118,255);
+  color:#ffffff;
+  border:1px solid rgb(0,118,255);
+}
+.pn-button-secondary{
+  background:#ffffff;
+  color:#0f172a;
+  border:1px solid #d6d3d1;
+}
+.pn-faq{
+  margin-top:18px;
+  border-top:1px solid #e7e5e4;
+  padding-top:18px;
+}
+.pn-faq h3{
+  margin:0 0 10px;
+  font-size:16px;
+  line-height:1.35;
+  font-weight:700;
+  color:#0f172a;
+}
+.pn-faq details{
+  border:1px solid #e7e5e4;
+  background:#ffffff;
+  border-radius:12px;
+  padding:12px 14px;
+  margin-top:8px;
+}
+.pn-faq summary{
+  cursor:pointer;
+  font-weight:700;
+  color:#0f172a;
+}
+.pn-faq details p{
+  margin:10px 0 0;
+  font-size:13px;
+  line-height:1.65;
+  color:#475569;
+}
+.pn-footer-final{
+  align-items:flex-start;
+}
+.pn-footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 14px;
+  line-height:1.6;
+}
+.pn-footer-support{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px;
+  line-height:1.6;
+}
+@media (max-width:768px){
+  .pn-action-row{flex-direction:column;}
+  .pn-button{width:100%;}
+  .pn-footer-support{justify-content:flex-start;}
+}
+
 </style>
 
 </head>
@@ -152,12 +239,15 @@
     <section aria-label="Informações sobre a ferramenta de competência notarial eletrônica e híbrida" style="background:#fff;border:1px solid #e7e5e4;padding:1.5rem;margin:0 0 1rem;">
       <h1 style="margin:0 0 .75rem;font-size:2rem;line-height:1.15;color:#0f172a;font-weight:500;">Competência notarial eletrônica e híbrida</h1>
       <p style="margin:0 0 1rem;">Esta ferramenta auxilia a identificação do tabelião de notas competente para ato notarial eletrônico ou híbrido a partir do tipo de ato e das respostas fornecidas pelo usuário. O resultado apresenta o critério geral aplicável à situação informada.</p>
+      <p style="margin:0 0 1rem;"><a href="#consulta" style="display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:10px 16px;border-radius:999px;background:rgb(0,118,255);color:#fff;text-decoration:none;font-weight:700;font-size:13px;">Ir para a ferramenta</a> <a href="https://portalnotarial.com.br/" style="display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:10px 16px;border-radius:999px;border:1px solid #d6d3d1;color:#0f172a;text-decoration:none;font-weight:700;font-size:13px;margin-left:8px;">Voltar à home</a></p>
+      <h2 style="margin:1rem 0 .35rem;font-size:1rem;color:#0f172a;">O que a ferramenta faz</h2>
+      <p style="margin:0 0 .85rem;">Organiza perguntas sobre o tipo de ato e indica o critério geral de competência do tabelião de notas para atos eletrônicos ou híbridos.</p>
       <h2 style="margin:1rem 0 .35rem;font-size:1rem;color:#0f172a;">Quando usar</h2>
-      <p style="margin:0 0 .85rem;">Use a consulta antes de lavrar ou solicitar escritura, procuração, ata notarial, reconhecimento de firma, autenticação ou outro ato eletrônico no e-Notariado.</p>
-      <h2 style="margin:1rem 0 .35rem;font-size:1rem;color:#0f172a;">Base normativa</h2>
-      <p style="margin:0 0 .85rem;">A lógica da ferramenta considera o Código Nacional de Normas da Corregedoria Nacional de Justiça e a Lei nº 8.935/1994, nos pontos indicados na própria página.</p>
-      <h2 style="margin:1rem 0 .35rem;font-size:1rem;color:#0f172a;">Limites do resultado</h2>
-      <p style="margin:0 0 .85rem;">O resultado não substitui a conferência de domicílio, localização do imóvel, documentos apresentados, capacidade das partes e demais requisitos do ato. Em caso concreto, a competência deve ser confirmada pelo tabelião responsável e pela norma vigente.</p>
+      <p style="margin:0 0 .85rem;">Use a consulta antes de lavrar ou solicitar escritura, procuração, ata notarial, reconhecimento de firma, autenticação, apostilamento ou outro ato eletrônico no e-Notariado.</p>
+      <h2 style="margin:1rem 0 .35rem;font-size:1rem;color:#0f172a;">Como interpretar o resultado</h2>
+      <p style="margin:0 0 .85rem;">O resultado indica o critério de competência aplicável, a base normativa e eventual observação interpretativa. Ele não substitui a conferência do caso concreto.</p>
+      <h2 style="margin:1rem 0 .35rem;font-size:1rem;color:#0f172a;">Critérios, fontes e limites</h2>
+      <p style="margin:0 0 .85rem;">A lógica considera o Código Nacional de Normas da Corregedoria Nacional de Justiça e a Lei nº 8.935/1994, nos pontos indicados na própria página. A competência deve ser confirmada pelo tabelião responsável e pela norma vigente.</p>
       <p style="margin:1rem 0 0;color:#64748b;font-size:.9rem;">Última atualização da ferramenta: 04/05/2026.</p>
     </section>
   </div>
@@ -705,16 +795,45 @@ function BlocoExplicativoCompetencia() {
     return React.createElement("section", { className: "pn-editorial pn-static-shell", "aria-labelledby": "sobre-ferramenta" },
         React.createElement("h2", { id: "sobre-ferramenta" }, "Competência notarial eletrônica e híbrida"),
         React.createElement("p", null, "Esta ferramenta auxilia a identificação do tabelião de notas competente para ato notarial eletrônico ou híbrido a partir do tipo de ato e das respostas fornecidas pelo usuário. O resultado apresenta o critério geral aplicável à situação informada."),
+        React.createElement("div", { className: "pn-action-row" },
+            React.createElement("a", { href: "#consulta", className: "pn-button pn-button-primary" }, "Ir para a ferramenta"),
+            React.createElement("a", { href: "https://portalnotarial.com.br/", className: "pn-button pn-button-secondary" }, "Voltar à home")),
         React.createElement("div", { className: "pn-info-grid" },
             React.createElement("div", { className: "pn-info-card" },
+                React.createElement("h3", null, "O que a ferramenta faz"),
+                React.createElement("p", null, "Organiza perguntas sobre o tipo de ato e indica o critério geral de competência do tabelião de notas para atos eletrônicos ou híbridos.")),
+            React.createElement("div", { className: "pn-info-card" },
                 React.createElement("h3", null, "Quando usar"),
-                React.createElement("p", null, "Use a consulta antes de lavrar ou solicitar escritura, procuração, ata notarial, reconhecimento de firma, autenticação ou outro ato eletrônico no e-Notariado.")),
+                React.createElement("p", null, "Use a consulta antes de lavrar ou solicitar escritura, procuração, ata notarial, reconhecimento de firma, autenticação, apostilamento ou outro ato no e-Notariado.")),
             React.createElement("div", { className: "pn-info-card" },
-                React.createElement("h3", null, "Base normativa"),
-                React.createElement("p", null, "A lógica da ferramenta considera o Código Nacional de Normas da Corregedoria Nacional de Justiça e a Lei nº 8.935/1994, nos pontos indicados na própria página.")),
+                React.createElement("h3", null, "Como usar"),
+                React.createElement("p", null, "Selecione o tipo de ato, responda às perguntas contextuais e confira o resultado com a base normativa exibida na própria tela.")),
             React.createElement("div", { className: "pn-info-card" },
-                React.createElement("h3", null, "Limites do resultado"),
-                React.createElement("p", null, "O resultado não substitui a conferência de domicílio, localização do imóvel, documentos apresentados, capacidade das partes e demais requisitos do ato."))),
+                React.createElement("h3", null, "Como interpretar o resultado"),
+                React.createElement("p", null, "O resultado indica o critério de competência aplicável, o detalhamento da regra e, quando necessário, uma observação interpretativa.")),
+            React.createElement("div", { className: "pn-info-card" },
+                React.createElement("h3", null, "Critérios e fontes"),
+                React.createElement("p", null, "A lógica considera o Código Nacional de Normas da Corregedoria Nacional de Justiça e a Lei nº 8.935/1994, nos dispositivos indicados em cada resposta.")),
+            React.createElement("div", { className: "pn-info-card" },
+                React.createElement("h3", null, "Limites da ferramenta"),
+                React.createElement("p", null, "A consulta não substitui a conferência de domicílio, localização do imóvel, documentos apresentados, capacidade das partes e demais requisitos do ato."))),
+        React.createElement("section", { className: "pn-faq", "aria-labelledby": "faq-ferramenta" },
+            React.createElement("h3", { id: "faq-ferramenta" }, "Perguntas frequentes"),
+            React.createElement("details", null,
+                React.createElement("summary", null, "A ferramenta substitui a análise do tabelião?"),
+                React.createElement("p", null, "Não. A ferramenta organiza critérios gerais e deve ser usada como apoio à consulta. A análise do caso concreto depende dos documentos, das partes e da norma vigente.")),
+            React.createElement("details", null,
+                React.createElement("summary", null, "O resultado tem caráter oficial?"),
+                React.createElement("p", null, "Não. O resultado é informativo. Para uso formal, confira a redação vigente das normas e a orientação da serventia responsável pelo ato.")),
+            React.createElement("details", null,
+                React.createElement("summary", null, "A ferramenta considera atos híbridos?"),
+                React.createElement("p", null, "Sim. O fluxo possui perguntas próprias para atos híbridos e indica a base normativa correspondente quando essa hipótese é selecionada.")),
+            React.createElement("details", null,
+                React.createElement("summary", null, "O domicílio precisa ser comprovado?"),
+                React.createElement("p", null, "Sim. Quando o critério utilizado for o domicílio, a comprovação deve observar os documentos e parâmetros aplicáveis ao caso.")),
+            React.createElement("details", null,
+                React.createElement("summary", null, "O que fazer em caso de divergência interpretativa?"),
+                React.createElement("p", null, "A divergência deve ser analisada pelo tabelião responsável, com base na redação normativa vigente, nos documentos apresentados e na natureza do ato."))),
         React.createElement("div", { className: "pn-note" }, "Em caso concreto, a competência deve ser confirmada pelo tabelião responsável pelo ato, com base nos documentos apresentados e na norma vigente."),
         React.createElement("span", { className: "pn-meta" }, "Última atualização da ferramenta: 04/05/2026."));
 }
@@ -903,12 +1022,21 @@ function CompetenciaENotariado() {
                     React.createElement("p", null,
                         React.createElement("span", { className: "font-mono text-slate-400 mr-2" }, "x."),
                         "Testamento eletr\u00F4nico n\u00E3o tem disciplina expressa nos arts. 302 a 306 do CNN; a ferramenta utiliza o domic\u00EDlio do testador como crit\u00E9rio operacional.")),
-                React.createElement("div", { className: "mt-8 pt-6 border-t border-stone-300 flex flex-col md:flex-row md:items-center md:justify-between gap-2 text-xs text-slate-500" },
-                    React.createElement("span", null,
-                        "Projeto apoiado por",
-                        ' ',
-                        React.createElement("a", { href: "https://escriturapublica.substack.com", target: "_blank", rel: "noopener noreferrer", className: "text-orange-700 hover:text-orange-900 transition" }, "Escritura P\u00FAblica")),
-                    React.createElement(VisitMarker, null))))));
+                React.createElement("div", { className: "mt-8 pt-6 border-t border-stone-300 flex flex-col md:flex-row md:items-start md:justify-between gap-2 text-xs text-slate-500 pn-footer-final" },
+                    React.createElement("div", { className: "pn-footer-links" },
+                        React.createElement("a", { href: "https://portalnotarial.com.br/", className: "text-orange-700 hover:text-orange-900 transition" }, "Home"),
+                        React.createElement("a", { href: "https://portalnotarial.com.br/sobre.html", className: "text-orange-700 hover:text-orange-900 transition" }, "Sobre"),
+                        React.createElement("a", { href: "https://portalnotarial.com.br/contato.html", className: "text-orange-700 hover:text-orange-900 transition" }, "Contato"),
+                        React.createElement("a", { href: "https://portalnotarial.com.br/politica-de-privacidade.html", className: "text-orange-700 hover:text-orange-900 transition" }, "Privacidade"),
+                        React.createElement("a", { href: "https://portalnotarial.com.br/termos-de-uso.html", className: "text-orange-700 hover:text-orange-900 transition" }, "Termos"),
+                        React.createElement("a", { href: "https://portalnotarial.com.br/aviso-legal.html", className: "text-orange-700 hover:text-orange-900 transition" }, "Aviso legal")),
+                    React.createElement("div", { className: "pn-footer-support" },
+                        React.createElement("span", null,
+                            "Apoio: ",
+                            React.createElement("a", { href: "https://escriturapublica.substack.com", target: "_blank", rel: "noopener noreferrer", className: "text-orange-700 hover:text-orange-900 transition" }, "Escritura P\u00FAblica"),
+                            " | ",
+                            React.createElement("a", { href: "https://www.atesta.com.br", target: "_blank", rel: "noopener noreferrer", className: "text-orange-700 hover:text-orange-900 transition" }, "Atesta")),
+                        React.createElement(VisitMarker, null)))))));
 }
 const rootElement = document.getElementById('root');
 try {
