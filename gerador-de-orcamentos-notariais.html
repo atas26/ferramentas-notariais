@@ -20,6 +20,14 @@
 
 <!-- Google AdSense -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777" crossorigin="anonymous"></script>
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTD149ZWLC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TTD149ZWLC');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -186,20 +194,6 @@ tr:last-child td{border-bottom:none}
 .copy-block label{display:block;margin-bottom:7px}
 .footer{margin-top:24px;padding-top:18px;border-top:1px solid var(--stone-200);color:var(--slate-600);font-size:12px}
 .footer a{color:var(--accent)}
-.visit{
-  position:fixed;
-  right:14px;
-  bottom:12px;
-  z-index:40;
-  opacity:.62;
-  transition:opacity .2s ease;
-  font-size:11px;
-  color:var(--slate-600);
-  background:rgba(255,255,255,.88);
-  border:1px solid var(--stone-200);
-  padding:5px 8px;
-}
-.visit:hover{opacity:.9}
 .hidden{display:none!important}
 .pn-editorial{
   background:#ffffff;
@@ -527,10 +521,6 @@ tr:last-child td{border-bottom:none}
   </footer>
 </main>
 
-<span class="visit" title="Visitas" aria-label="Marcador discreto de visitas">
-  <span id="visitCounterText">Visitas: ...</span>
-</span>
-
 <script>
 // =====================================================================
 // Tabelas de emolumentos 2026, reaproveitadas da calculadora-base.
@@ -667,36 +657,9 @@ el('btnGerarPDF').addEventListener('click', gerarPDF);
 el('btnCopiar').addEventListener('click', copiarResultado);
 
 configuraCamposObrigatorios();
-configuraContador();
 atualizaCamposTributo();
 calcular(false);
 ocultarResultado();
-
-function configuraContador(){
-  const contador = el('visitCounterText');
-  if (!contador) return;
-
-  const namespace = 'portalnotarial';
-  const path = (window.location.pathname || '/gerador-orcamento-atos-notariais.html').replace(/\/$/, '') || '/gerador-orcamento-atos-notariais.html';
-  const nomeContador = path
-    .replace(/^\/+/, '')
-    .replace(/\.html$/i, '')
-    .replace(/[^a-z0-9_-]/gi, '-')
-    .toLowerCase();
-
-  fetch(`https://api.counterapi.dev/v1/${namespace}/${nomeContador}/up`, { cache: 'no-store' })
-    .then((resposta) => {
-      if (!resposta.ok) throw new Error('Falha ao consultar contador.');
-      return resposta.json();
-    })
-    .then((dados) => {
-      const total = Number(dados.count ?? dados.data ?? dados.value);
-      contador.textContent = Number.isFinite(total) ? `Visitas: ${total}` : 'Visitas: —';
-    })
-    .catch(() => {
-      contador.textContent = 'Visitas: —';
-    });
-}
 
 function configuraCamposObrigatorios(){
   ['escrevente','contatoEscrevente','cartorio','solicitadoPor','naturezaAto','valorBase'].forEach((id) => {
