@@ -287,6 +287,34 @@
       display: block;
     }
 
+
+
+    .template-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .template-status {
+      margin-top: 8px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .preview-panel {
+      display: none;
+    }
+
+    .preview-panel.is-visible {
+      display: block;
+    }
+
     .preview {
       background: #f8fafc;
       border: 1px dashed #cbd5e1;
@@ -395,7 +423,35 @@
         visibility: visible !important;
       }
 
-      .preview {
+  
+
+    .template-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .template-status {
+      margin-top: 8px;
+      padding: 9px 11px;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .preview-panel {
+      display: none;
+    }
+
+    .preview-panel.is-visible {
+      display: block;
+    }
+
+    .preview {
         position: absolute;
         left: 0;
         top: 0;
@@ -460,6 +516,17 @@
             <label for="certidaoPdf">Certidão de óbito em PDF</label>
             <input type="file" id="certidaoPdf" accept="application/pdf" />
             <div class="small-note">Use a certidão escaneada ou digitalizada em PDF.</div>
+          </div>
+
+          <div class="field">
+            <label for="templatePdf">Template do cartório em PDF</label>
+            <input type="file" id="templatePdf" accept="application/pdf" />
+            <div class="small-note">Opcional. Use um papel timbrado em PDF para mesclar com o ofício.</div>
+            <div class="template-actions">
+              <button type="button" class="btn-secondary" id="btnSalvarTemplate">Salvar template como modelo</button>
+              <button type="button" class="btn-danger" id="btnLimparTemplate">Limpar template salvo</button>
+            </div>
+            <div class="template-status" id="templateStatus">Nenhum template salvo neste navegador.</div>
           </div>
 
         </div>
@@ -665,9 +732,12 @@
       <div class="card full">
         <div class="card-title-row">
           <h2>3. Prévia do ofício</h2>
-          <button type="button" class="btn-secondary" id="btnEditarOficio">Editar texto do ofício</button>
+          <button type="button" class="btn-secondary" id="btnEditarOficio">Visualizar/editar ofício</button>
         </div>
-        <div class="preview" id="previewOficio">A prévia será gerada com os dados preenchidos.</div>
+        <div class="preview-panel" id="previewPanel">
+          <div class="small-note">A prévia é editável. Ao concluir, clique em “Concluir edição”.</div>
+          <div class="preview" id="previewOficio">A prévia será gerada com os dados preenchidos.</div>
+        </div>
       </div>
 
       <div class="card full">
@@ -706,13 +776,21 @@
       btnSalvarCartorio: document.getElementById('btnSalvarCartorio'),
       btnLimparCartorio: document.getElementById('btnLimparCartorio'),
       btnEditarOficio: document.getElementById('btnEditarOficio'),
-      btnImprimir: document.getElementById('btnImprimir')
+      btnImprimir: document.getElementById('btnImprimir'),
+      templatePdf: document.getElementById('templatePdf'),
+      templateStatus: document.getElementById('templateStatus'),
+      btnSalvarTemplate: document.getElementById('btnSalvarTemplate'),
+      btnLimparTemplate: document.getElementById('btnLimparTemplate'),
+      previewPanel: document.getElementById('previewPanel')
     };
 
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
     const CHAVE_DADOS_CARTORIO = 'oficiosBancosDadosCartorioV1';
     const CAMPOS_DADOS_CARTORIO = ['emailCartorio', 'quemAssina', 'qualificacaoFuncional', 'tabelionato', 'escrevente'];
+    const DB_TEMPLATE_CARTORIO = 'oficiosBancosTemplateCartorioV1';
+    const STORE_TEMPLATE_CARTORIO = 'templates';
+    const ID_TEMPLATE_CARTORIO = 'modelo';
     let edicaoManualOficio = false;
     let edicaoOficioAtiva = false;
 
@@ -729,6 +807,13 @@
     if (ids.btnLimparCartorio) ids.btnLimparCartorio.addEventListener('click', limparDadosCartorioSalvos);
     if (ids.btnEditarOficio) ids.btnEditarOficio.addEventListener('click', alternarEdicaoOficio);
     if (ids.btnImprimir) ids.btnImprimir.addEventListener('click', imprimirOficio);
+    if (ids.btnSalvarTemplate) ids.btnSalvarTemplate.addEventListener('click', salvarTemplateCartorio);
+    if (ids.btnLimparTemplate) ids.btnLimparTemplate.addEventListener('click', limparTemplateCartorioSalvo);
+    if (ids.templatePdf) ids.templatePdf.addEventListener('change', function () {
+      if (ids.templatePdf.files && ids.templatePdf.files[0]) {
+        atualizarStatusTemplate('Template selecionado para este ofício: ' + ids.templatePdf.files[0].name + '. Clique em “Salvar template como modelo” para reutilizar nas próximas vezes.');
+      }
+    });
 
     ['input', 'change'].forEach(function (evento) {
       document.getElementById('formOficio').addEventListener(evento, atualizarPrevia);
@@ -1492,11 +1577,23 @@
       return partes[2] + '/' + partes[1] + '/' + partes[0];
     }
 
+    function formatarDataExtensoBR(iso) {
+      if (!iso) return '';
+      const partes = iso.split('-');
+      if (partes.length !== 3) return iso;
+      const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+      const dia = String(Number(partes[2]));
+      const mes = meses[Number(partes[1]) - 1];
+      const ano = partes[0];
+      if (!mes || !dia || !ano) return formatarDataBR(iso);
+      return dia + ' de ' + mes + ' de ' + ano;
+    }
+
     function coletarDados() {
       return {
         numeroOficio: getValor('numeroOficio'),
         anoOficio: getValor('anoOficio'),
-        dataOficio: formatarDataBR(getValor('dataOficio')),
+        dataOficio: formatarDataExtensoBR(getValor('dataOficio')),
         escrevente: getValor('escrevente').toUpperCase(),
         protocolo: getValor('protocolo'),
         banco: getBancoFinal(),
@@ -1551,7 +1648,8 @@
       const agencia = valorOuCampo(dados.agencia, 'NÚMERO DA AGÊNCIA');
       const conta = valorOuCampo(dados.conta, 'NÚMERO DA CONTA');
       const nomeFalecido = valorOuCampo(dados.nomeEspolio, 'NOME DO FALECIDO');
-      const residencia = valorOuCampo(dados.cidadeResidencia, 'CIDADE') + ', ' + valorOuCampo(dados.estadoResidencia, 'UF');
+      const cidadeResidencia = valorOuCampo(dados.cidadeResidencia, 'CIDADE');
+      const ufResidencia = valorOuCampo(dados.estadoResidencia, 'UF');
       const rgFalecido = valorOuCampo(dados.rgFalecido, 'RG');
       const orgaoFalecido = valorOuCampo(dados.orgaoFalecido, 'ÓRGÃO EXPEDIDOR');
       const cpfFalecido = valorOuCampo(dados.cpfFalecido, 'CPF');
@@ -1572,45 +1670,20 @@
         { tipo: 'rightLine', texto: 'São Paulo, ' + dataOficio },
         { tipo: 'space' },
         { tipo: 'lineBold', texto: banco },
-        { tipo: 'lineBold', texto: 'A/C: Ilustríssimo(a) Gerente,' },
+        { tipo: 'line', texto: 'A/C: Gerência da agência' },
         { tipo: 'space' },
         { tipo: 'line', texto: 'Senhor(a) Gerente,' },
         { tipo: 'space' },
-        { tipo: 'paragraphRich', partes: [
-          { texto: 'Fomos contratados para lavrar a ' },
-          { texto: 'ESCRITURA DE INVENTÁRIO E PARTILHA DO ESPÓLIO DE ' + nomeFalecido + ',', bold: true },
-          { texto: ' correntista desta instituição financeira.' }
-        ] },
-        { tipo: 'paragraph', texto: 'Com fundamento na fé pública conferida pela Lei nº 8.935/94, bem como no disposto no § 1º do art. 610 do Código de Processo Civil, no art. 11, § 2º, da Resolução CNJ nº 35/2007, e no Comunicado FB 049/2015 da FEBRABAN, solicitamos que Vossa Senhoria informe, por meio do e-mail ' + emailCartorio + ', ou ao(à) inventariante, herdeiro(a) ou representante legal abaixo identificado(a), os seguintes dados financeiros do(a) falecido(a):' },
-        { tipo: 'listItemRich', partes: [
-          { texto: '1. Saldo existente na(s) conta(s) corrente(s) e/ou poupança(s)', bold: true },
-          { texto: ' vinculadas ao CPF do(a) correntista, especialmente conta nº ' + conta + ', agência nº ' + agencia + ', bem como eventuais outras contas vinculadas.' }
-        ] },
-        { tipo: 'listItemRich', partes: [
-          { texto: '2. Aplicações financeiras e investimentos,', bold: true },
-          { texto: ' com discriminação de valores e modalidades existentes.' }
-        ] },
-        { tipo: 'listItemRich', partes: [
-          { texto: '3. Posição acionária de ações.', bold: true }
-        ] },
-        { tipo: 'listItemRich', partes: [
-          { texto: '4. Saldo em previdência privada, seguros de vida, fundo de garantia do tempo de serviço (FGTS), consórcios, capitalização e demais ativos financeiros existentes.', bold: true }
-        ] },
-        { tipo: 'paragraphRich', partes: [
-          { texto: 'As informações devem estar atualizadas até a data do falecimento, ocorrido em ' },
-          { texto: dataObito + '.', bold: true }
-        ] },
-        { tipo: 'paragraph', texto: 'O(A) falecido(a) era residente em ' + residencia + ', portador(a) da cédula de identidade RG nº ' + rgFalecido + ' ' + orgaoFalecido + ' e inscrito(a) no CPF-MF sob nº ' + cpfFalecido + '.' },
-        { tipo: 'paragraphRich', partes: [
-          { texto: 'O saldo/extrato bancário solicitado será retirado pelo(a) inventariante, herdeiro(a) ou representante legal, ' },
-          { texto: autorizado + ',', bold: true },
-          { texto: ' portador(a) da cédula de identidade RG nº ' + rgAutorizado + ' ' + orgaoAutorizado + ' e inscrito(a) no CPF-MF sob nº ' + cpfAutorizado + '.' }
-        ] },
-        { tipo: 'paragraphRich', partes: [
-          { texto: 'Em anexo, encaminhamos cópia da certidão de óbito do(a) correntista ' },
-          { texto: nomeFalecido, bold: true },
-          { texto: ' e do Comunicado FB 049/2015 da FEBRABAN para conferência e providências cabíveis.' }
-        ] },
+        { tipo: 'paragraph', texto: 'Este tabelionato foi contratado para lavrar a escritura pública de inventário e partilha do espólio de ' + nomeFalecido + ', correntista desta instituição.' },
+        { tipo: 'paragraph', texto: 'Com fundamento na Lei nº 8.935/94, no art. 610, § 1º, do Código de Processo Civil, no art. 11, § 2º, da Resolução CNJ nº 35/2007, e no Comunicado FB 049/2015 da FEBRABAN, solicita-se o envio das informações adiante listadas, ao endereço eletrônico ' + emailCartorio + ', ou a entrega ao(à) inventariante, herdeiro(a) ou representante legal abaixo identificado(a).' },
+        { tipo: 'listItem', texto: '1. Saldo em conta corrente ou poupança vinculada ao CPF do(a) correntista, em especial a conta nº ' + conta + ', agência nº ' + agencia + ', e demais contas mantidas na instituição em nome do(a) titular.' },
+        { tipo: 'listItem', texto: '2. Aplicações financeiras e investimentos, com discriminação de valores e modalidades.' },
+        { tipo: 'listItem', texto: '3. Posição acionária e demais valores mobiliários sob custódia, com valor de mercado na data do óbito.' },
+        { tipo: 'listItem', texto: '4. Saldo em previdência privada, seguros de vida, fundo de garantia do tempo de serviço (FGTS), consórcios, capitalização e demais ativos financeiros.' },
+        { tipo: 'paragraph', texto: 'As informações devem ser apuradas com referência à data do falecimento, ocorrido em ' + dataObito + '.' },
+        { tipo: 'paragraph', texto: 'O(A) falecido(a) era residente em ' + cidadeResidencia + ', ' + ufResidencia + ', portador(a) da cédula de identidade RG nº ' + rgFalecido + ' ' + orgaoFalecido + ' e inscrito(a) no CPF-MF sob nº ' + cpfFalecido + '.' },
+        { tipo: 'paragraph', texto: 'O saldo e o extrato bancário serão retirados pelo(a) inventariante, herdeiro(a) ou representante legal, ' + autorizado + ', portador(a) da cédula de identidade RG nº ' + rgAutorizado + ' ' + orgaoAutorizado + ' e inscrito(a) no CPF-MF sob nº ' + cpfAutorizado + '.' },
+        { tipo: 'paragraph', texto: 'Seguem em anexo cópia da certidão de óbito de ' + nomeFalecido + ' e do Comunicado FB 049/2015 da FEBRABAN.' },
         { tipo: 'space' },
         { tipo: 'line', texto: 'Atenciosamente,' },
         { tipo: 'space' },
@@ -1672,25 +1745,35 @@
 
 
     function alternarEdicaoOficio() {
-      if (!ids.previewOficio || !ids.btnEditarOficio) return;
+      if (!ids.previewOficio || !ids.btnEditarOficio || !ids.previewPanel) return;
 
-      if (!edicaoOficioAtiva) {
+      const painelVisivel = ids.previewPanel.classList.contains('is-visible');
+
+      if (!painelVisivel) {
         if (!edicaoManualOficio) atualizarPrevia(true);
+        ids.previewPanel.classList.add('is-visible');
         edicaoOficioAtiva = true;
         ids.previewOficio.setAttribute('contenteditable', 'true');
         ids.previewOficio.classList.add('is-editing');
         ids.btnEditarOficio.textContent = 'Concluir edição';
-        ids.previewOficio.focus();
-        setStatus('Edição manual ativada. Ajuste o texto diretamente na prévia. Ao concluir, clique em “Concluir edição”.');
+        window.setTimeout(function () { ids.previewOficio.focus(); }, 50);
+        setStatus('Prévia aberta para visualização e edição. Ajuste o texto diretamente na prévia e clique em “Concluir edição”.');
         return;
       }
 
-      edicaoOficioAtiva = false;
-      edicaoManualOficio = true;
-      ids.previewOficio.setAttribute('contenteditable', 'false');
-      ids.previewOficio.classList.remove('is-editing');
-      ids.btnEditarOficio.textContent = 'Editar texto do ofício';
-      setStatus('Edição manual aplicada. O PDF será gerado com o texto exibido na prévia.');
+      if (edicaoOficioAtiva) {
+        edicaoOficioAtiva = false;
+        edicaoManualOficio = true;
+        ids.previewOficio.setAttribute('contenteditable', 'false');
+        ids.previewOficio.classList.remove('is-editing');
+        ids.btnEditarOficio.textContent = 'Ocultar prévia';
+        setStatus('Edição manual aplicada. O PDF será gerado com o texto exibido na prévia.');
+        return;
+      }
+
+      ids.previewPanel.classList.remove('is-visible');
+      ids.btnEditarOficio.textContent = 'Visualizar/editar ofício';
+      setStatus('Prévia do ofício ocultada.');
     }
 
     function montarEstruturaDaPreviaEditada() {
@@ -1841,7 +1924,7 @@
       const doc = iframe.contentDocument || iframe.contentWindow.document;
       doc.open();
       doc.write('<!doctype html><html><head><meta charset="utf-8"><title>Imprimir ofício</title><style>' +
-        '@page{size:A4;margin:5cm 2cm 2cm 2cm;}' +
+        '@page{size:A4;margin:4.5cm 2cm 2cm 2cm;}' +
         'body{margin:0;font-family:Calibri,"Segoe UI",Arial,sans-serif;font-size:12pt;line-height:1.45;color:#000;}' +
         '.oficio-line{margin:0 0 6px;}' +
         '.oficio-right{margin:0 0 8px;text-align:right;}' +
@@ -1882,8 +1965,10 @@
         const pdfFinal = await PDFDocument.create();
         const fonteNormal = await pdfFinal.embedFont(StandardFonts.Helvetica);
         const fonteNegrito = await pdfFinal.embedFont(StandardFonts.HelveticaBold);
+        const templateBytes = await obterTemplateCartorioBytes();
+        const templateInfo = await prepararTemplateCartorio(pdfFinal, templateBytes);
 
-        adicionarOficioAoPdf(pdfFinal, estruturaOficio, fonteNormal, fonteNegrito, rgb);
+        adicionarOficioAoPdf(pdfFinal, estruturaOficio, fonteNormal, fonteNegrito, rgb, templateInfo);
         setProgress(35);
 
         await anexarPdf(pdfFinal, await certidao.arrayBuffer());
@@ -1907,21 +1992,28 @@
       }
     }
 
-    function adicionarOficioAoPdf(pdf, blocos, fonteNormal, fonteNegrito, rgb) {
+    function adicionarOficioAoPdf(pdf, blocos, fonteNormal, fonteNegrito, rgb, templateInfo) {
       const largura = 595.28;
       const altura = 841.89;
       const margemLateral = 55;
       const margemInferior = 55;
-      const margemSuperior = 141.73;
+      const margemSuperior = 127.56;
       const tamanho = 12;
       const entrelinha = 16;
       const larguraTexto = largura - margemLateral * 2;
       let page = pdf.addPage([largura, altura]);
+      aplicarTemplateNaPagina(page);
       let y = altura - margemSuperior;
+
+      function aplicarTemplateNaPagina(pagina) {
+        if (!templateInfo || !templateInfo.pagina) return;
+        pagina.drawPage(templateInfo.pagina, { x: 0, y: 0, width: largura, height: altura });
+      }
 
       function novaPaginaSeNecessario(espaco) {
         if (y < margemInferior + espaco) {
           page = pdf.addPage([largura, altura]);
+          aplicarTemplateNaPagina(page);
           y = altura - margemSuperior;
         }
       }
@@ -2045,6 +2137,134 @@
       if (data && !data.value) data.value = dataISO;
     }
 
+
+    function abrirDbTemplateCartorio() {
+      return new Promise(function (resolve, reject) {
+        if (!window.indexedDB) {
+          reject(new Error('IndexedDB não está disponível neste navegador.'));
+          return;
+        }
+
+        const requisicao = indexedDB.open(DB_TEMPLATE_CARTORIO, 1);
+        requisicao.onupgradeneeded = function () {
+          const db = requisicao.result;
+          if (!db.objectStoreNames.contains(STORE_TEMPLATE_CARTORIO)) {
+            db.createObjectStore(STORE_TEMPLATE_CARTORIO, { keyPath: 'id' });
+          }
+        };
+        requisicao.onsuccess = function () { resolve(requisicao.result); };
+        requisicao.onerror = function () { reject(requisicao.error || new Error('Falha ao abrir o banco local do template.')); };
+      });
+    }
+
+    function operarTemplateCartorio(modo, valor) {
+      return abrirDbTemplateCartorio().then(function (db) {
+        return new Promise(function (resolve, reject) {
+          const transacao = db.transaction(STORE_TEMPLATE_CARTORIO, modo === 'get' ? 'readonly' : 'readwrite');
+          const store = transacao.objectStore(STORE_TEMPLATE_CARTORIO);
+          let requisicao;
+
+          if (modo === 'put') requisicao = store.put(valor);
+          if (modo === 'delete') requisicao = store.delete(ID_TEMPLATE_CARTORIO);
+          if (modo === 'get') requisicao = store.get(ID_TEMPLATE_CARTORIO);
+
+          requisicao.onsuccess = function () { resolve(requisicao.result); };
+          requisicao.onerror = function () { reject(requisicao.error || new Error('Falha ao acessar o template salvo.')); };
+          transacao.oncomplete = function () { db.close(); };
+          transacao.onerror = function () { reject(transacao.error || new Error('Falha na operação local do template.')); };
+        });
+      });
+    }
+
+    function atualizarStatusTemplate(texto) {
+      if (ids.templateStatus) ids.templateStatus.textContent = texto;
+    }
+
+    async function salvarTemplateCartorio() {
+      const arquivo = ids.templatePdf && ids.templatePdf.files ? ids.templatePdf.files[0] : null;
+      if (!arquivo) {
+        alert('Selecione o template do cartório em PDF antes de salvar.');
+        return;
+      }
+
+      if (arquivo.type && arquivo.type !== 'application/pdf') {
+        alert('O template deve estar em PDF.');
+        return;
+      }
+
+      try {
+        const bytes = await arquivo.arrayBuffer();
+        await operarTemplateCartorio('put', {
+          id: ID_TEMPLATE_CARTORIO,
+          nome: arquivo.name,
+          tipo: arquivo.type || 'application/pdf',
+          tamanho: arquivo.size,
+          salvoEm: new Date().toISOString(),
+          bytes: bytes
+        });
+        atualizarStatusTemplate('Template salvo neste navegador: ' + arquivo.name);
+        setStatus('Template do cartório salvo neste navegador. Ele será aplicado aos próximos ofícios gerados neste computador.');
+        alert('Template salvo neste navegador.');
+      } catch (erro) {
+        console.error(erro);
+        alert('Não foi possível salvar o template neste navegador. Você ainda pode selecionar o arquivo manualmente antes de gerar o PDF.');
+      }
+    }
+
+    async function limparTemplateCartorioSalvo() {
+      if (!confirm('Deseja apagar o template do cartório salvo neste navegador?')) return;
+      try {
+        await operarTemplateCartorio('delete');
+        if (ids.templatePdf) ids.templatePdf.value = '';
+        atualizarStatusTemplate('Nenhum template salvo neste navegador.');
+        setStatus('Template do cartório apagado deste navegador.');
+      } catch (erro) {
+        console.error(erro);
+        alert('Não foi possível apagar o template salvo.');
+      }
+    }
+
+    async function carregarStatusTemplateSalvo() {
+      try {
+        const registro = await operarTemplateCartorio('get');
+        if (registro && registro.nome) {
+          atualizarStatusTemplate('Template salvo neste navegador: ' + registro.nome);
+        } else {
+          atualizarStatusTemplate('Nenhum template salvo neste navegador.');
+        }
+      } catch (erro) {
+        atualizarStatusTemplate('Nenhum template salvo neste navegador.');
+      }
+    }
+
+    async function obterTemplateCartorioBytes() {
+      const arquivo = ids.templatePdf && ids.templatePdf.files ? ids.templatePdf.files[0] : null;
+      if (arquivo) return await arquivo.arrayBuffer();
+
+      try {
+        const registro = await operarTemplateCartorio('get');
+        if (registro && registro.bytes) return registro.bytes;
+      } catch (erro) {
+        console.warn('Não foi possível carregar template salvo.', erro);
+      }
+
+      return null;
+    }
+
+    async function prepararTemplateCartorio(pdfFinal, bytesTemplate) {
+      if (!bytesTemplate) return null;
+      try {
+        const pdfTemplate = await PDFLib.PDFDocument.load(bytesTemplate, { ignoreEncryption: true });
+        const paginaOrigem = pdfTemplate.getPage(0);
+        const pagina = await pdfFinal.embedPage(paginaOrigem);
+        return { pagina: pagina };
+      } catch (erro) {
+        console.error(erro);
+        alert('Não foi possível aplicar o template do cartório. O ofício será gerado sem o template.');
+        return null;
+      }
+    }
+
     async function anexarPdf(pdfFinal, bytesPdf) {
       const pdfOrigem = await PDFLib.PDFDocument.load(bytesPdf, { ignoreEncryption: true });
       const paginas = await pdfFinal.copyPages(pdfOrigem, pdfOrigem.getPageIndices());
@@ -2162,7 +2382,8 @@
         ids.previewOficio.setAttribute('contenteditable', 'false');
         ids.previewOficio.classList.remove('is-editing');
       }
-      if (ids.btnEditarOficio) ids.btnEditarOficio.textContent = 'Editar texto do ofício';
+      if (ids.previewPanel) ids.previewPanel.classList.remove('is-visible');
+      if (ids.btnEditarOficio) ids.btnEditarOficio.textContent = 'Visualizar/editar ofício';
       atualizarPrevia(true);
       setStatus('Dados do cartório apagados deste navegador.');
     }
@@ -2175,7 +2396,8 @@
       edicaoOficioAtiva = false;
       ids.previewOficio.setAttribute('contenteditable', 'false');
       ids.previewOficio.classList.remove('is-editing');
-      if (ids.btnEditarOficio) ids.btnEditarOficio.textContent = 'Editar texto do ofício';
+      if (ids.btnEditarOficio) ids.btnEditarOficio.textContent = 'Visualizar/editar ofício';
+      if (ids.previewPanel) ids.previewPanel.classList.remove('is-visible');
       ids.previewOficio.textContent = 'A prévia será gerada com os dados preenchidos.';
       ids.certidaoPdf.value = '';
       if (ids.comunicadoPdf) ids.comunicadoPdf.value = '';
@@ -2199,6 +2421,7 @@
     inicializarCamposPadrao();
     carregarDadosCartorioSalvos();
     inicializarCampoComunicado();
+    carregarStatusTemplateSalvo();
     atualizarPrevia(true);
   </script>
 </body>
