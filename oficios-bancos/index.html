@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ofício para bancos</title>
+  <title>Gerador de ofício para bancos</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
@@ -380,6 +380,41 @@
       margin-top: 2px;
     }
 
+
+    @media print {
+      body {
+        background: #ffffff;
+      }
+
+      body * {
+        visibility: hidden !important;
+      }
+
+      .preview,
+      .preview * {
+        visibility: visible !important;
+      }
+
+      .preview {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        min-height: auto;
+        border: 0;
+        border-radius: 0;
+        background: #ffffff;
+        padding: 0;
+        color: #000000;
+        box-shadow: none;
+      }
+
+      .preview .oficio-paragraph,
+      .preview .oficio-list-item {
+        text-align: justify;
+      }
+    }
+
     footer {
       color: var(--cinza);
       font-size: 12px;
@@ -408,7 +443,7 @@
 
   <main class="shell">
     <section class="hero">
-      <h1>Gerador de ofício para instituições financeiras</h1>
+      <h1>Gerador de ofício para bancos (inventário e partilha)</h1>
       <p>
         Faça o upload da certidão de óbito, faça a leitura automática dos dados, revise os campos e gere um PDF único com o ofício, a certidão e o comunicado da Febraban.
       </p>
@@ -471,7 +506,7 @@
             </div>
 
             <div class="field">
-              <label for="protocolo">Protocolo do ato</label>
+              <label for="protocolo">Protocolo interno</label>
               <input id="protocolo" type="text" inputmode="numeric" maxlength="8" pattern="\d{1,8}" placeholder="Ex.: 12345678" required />
             </div>
 
@@ -495,7 +530,7 @@
 
             <div class="field" id="campoBancoOutros" style="display: none;">
               <label for="bancoOutros">Se “Outros”, informe o banco</label>
-              <input id="bancoOutros" type="text" placeholder="Nome da instituição financeira" />
+              <input id="bancoOutros" type="text" placeholder="Nome da instituição financeira" style="text-transform: uppercase;" />
             </div>
 
             <div class="field">
@@ -560,7 +595,7 @@
             </div>
 
             <div class="field full">
-              <label for="autorizado">Nome de quem poderá receber as informações</label>
+              <label for="autorizado">Nome de quem poderá receber as informações (inventariante, herdeiro, representante legal)</label>
               <input id="autorizado" type="text" placeholder="Nome completo" style="text-transform: uppercase;" required />
             </div>
 
@@ -590,7 +625,7 @@
             </div>
 
             <div class="field full">
-              <label for="quemAssina">Nome de quem assina o ofício</label>
+              <label for="quemAssina">Nome de quem assina o ofício (tabelião, substituto, escrevente autorizado)</label>
               <input id="quemAssina" type="text" placeholder="Nome completo de quem assina o ofício" style="text-transform: uppercase;" required />
             </div>
 
@@ -636,12 +671,13 @@
       </div>
 
       <div class="card full">
-        <h2>4. Gerar PDF final</h2>
+        <h2>4. Gerar PDF</h2>
         <p class="small-note">
           O PDF final será montado nesta ordem: ofício, certidão de óbito e comunicado da Febraban.
         </p>
         <div class="actions">
-          <button type="button" class="btn-primary" id="btnGerarPdf">Gerar PDF final</button>
+          <button type="button" class="btn-primary" id="btnGerarPdf">Gerar PDF</button>
+          <button type="button" class="btn-secondary" id="btnImprimir">Imprimir</button>
         </div>
       </div>
     </section>
@@ -669,7 +705,8 @@
       campoComunicadoManual: document.getElementById('campoComunicadoManual'),
       btnSalvarCartorio: document.getElementById('btnSalvarCartorio'),
       btnLimparCartorio: document.getElementById('btnLimparCartorio'),
-      btnEditarOficio: document.getElementById('btnEditarOficio')
+      btnEditarOficio: document.getElementById('btnEditarOficio'),
+      btnImprimir: document.getElementById('btnImprimir')
     };
 
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -691,6 +728,7 @@
     if (ids.btnSalvarCartorio) ids.btnSalvarCartorio.addEventListener('click', salvarDadosCartorio);
     if (ids.btnLimparCartorio) ids.btnLimparCartorio.addEventListener('click', limparDadosCartorioSalvos);
     if (ids.btnEditarOficio) ids.btnEditarOficio.addEventListener('click', alternarEdicaoOficio);
+    if (ids.btnImprimir) ids.btnImprimir.addEventListener('click', imprimirOficio);
 
     ['input', 'change'].forEach(function (evento) {
       document.getElementById('formOficio').addEventListener(evento, atualizarPrevia);
@@ -720,6 +758,7 @@
       inicializarCaixaAlta('autorizado');
       inicializarCaixaAlta('quemAssina');
       inicializarCaixaAlta('escrevente');
+      inicializarCaixaAlta('bancoOutros');
       inicializarValidadorEmail('emailCartorio');
     }
 
@@ -1527,7 +1566,7 @@
 
       return [
         { tipo: 'line', texto: 'Ofício nº ' + numeroAno },
-        { tipo: 'line', texto: 'Protocolo do ato: ' + protocoloComSufixo },
+        { tipo: 'line', texto: 'Protocolo interno: ' + protocoloComSufixo },
         { tipo: 'rightLine', texto: 'São Paulo, ' + dataOficio },
         { tipo: 'space' },
         { tipo: 'lineBold', texto: banco },
@@ -1780,6 +1819,17 @@
       return true;
     }
 
+
+    function imprimirOficio() {
+      if (!ids.previewOficio) return;
+      if (!edicaoManualOficio && !edicaoOficioAtiva) {
+        atualizarPrevia(true);
+      }
+      window.setTimeout(function () {
+        window.print();
+      }, 80);
+    }
+
     async function gerarPdfFinal() {
       if (!validarCamposAntesDeGerar()) return;
 
@@ -1978,7 +2028,7 @@
 
       if (window.location.protocol === 'file:') {
         mostrarCampoComunicadoManual(true);
-        throw new Error('Selecione o comunicado da Febraban no campo exibido na seção Arquivos e clique novamente em Gerar PDF final.');
+        throw new Error('Selecione o comunicado da Febraban no campo exibido na seção Arquivos e clique novamente em Gerar PDF.');
       }
 
       try {
@@ -2006,7 +2056,7 @@
           ids.campoComunicadoManual.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 50);
       }
-      setStatus('Selecione manualmente o comunicado da Febraban e clique novamente em “Gerar PDF final”.');
+      setStatus('Selecione manualmente o comunicado da Febraban e clique novamente em “Gerar PDF”.');
     }
 
     function baixarArquivo(bytes, nomeArquivo) {
