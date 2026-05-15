@@ -311,7 +311,7 @@
       border: 1px solid #cbd5e1;
       border-radius: 6px;
       padding: 4.5cm 2cm 2.5cm 2cm;
-      font-family: Carlito, Calibri, "Segoe UI", Arial, sans-serif;
+      font-family: Calibri, Carlito, "Segoe UI", Arial, sans-serif;
       line-height: 1.5;
       color: #000000;
       font-size: 12pt;
@@ -358,6 +358,12 @@
       margin: 0 0 12pt;
       text-align: justify;
       line-height: 1.5;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+    }
+
+    .preview .certidao-anotacao {
+      text-align: justify;
     }
 
     .preview .certidao-signature-line {
@@ -445,7 +451,7 @@
         padding: 0;
         color: #000000;
         box-shadow: none;
-        font-family: Carlito, Calibri, Arial, sans-serif;
+        font-family: Calibri, Carlito, Arial, sans-serif;
         font-size: 12pt;
         line-height: 1.5;
       }
@@ -1237,7 +1243,7 @@
 
       if (dados.haAnotacao) {
         const textoAnotacao = montarTextoAnotacoes(dados);
-        if (textoAnotacao) blocos.push({ tipo: 'paragraph', texto: textoAnotacao });
+        if (textoAnotacao) blocos.push({ tipo: 'paragraph', texto: textoAnotacao, classe: 'anotacao', justificar: false });
       }
 
       if (dados.tipoAssinatura === 'digital') {
@@ -1338,7 +1344,10 @@
         const texto = escaparHtml(bloco.texto);
         const textoComMarcadores = montarHtmlTextoCertidao(bloco.texto, bloco.semNegritoMarcadores);
         if (bloco.tipo === 'rightLine') return '<p class="certidao-right">' + textoComMarcadores + '</p>';
-        if (bloco.tipo === 'paragraph') return '<p class="certidao-paragraph">' + textoComMarcadores + '</p>';
+        if (bloco.tipo === 'paragraph') {
+          const classeParagrafo = bloco.classe === 'anotacao' ? 'certidao-paragraph certidao-anotacao' : 'certidao-paragraph';
+          return '<p class="' + classeParagrafo + '">' + textoComMarcadores + '</p>';
+        }
         if (bloco.tipo === 'title') return '<p class="certidao-title">' + texto + '</p>';
         if (bloco.tipo === 'signature') return '<p class="certidao-signature">' + textoComMarcadores + '</p>';
         if (bloco.tipo === 'digitalNote') return '<p class="certidao-digital-note">' + textoComMarcadores + '</p>';
@@ -1698,25 +1707,48 @@
         return fonteToken.widthOfTextAtSize(token.texto, tamanho);
       }
 
+      function dividirTokenMarcadorLongo(token, tamanho, larguraMaxima) {
+        if (/^\s+$/.test(token.texto || '')) return [token];
+        if (larguraTokenMarcador(token, tamanho) <= larguraMaxima) return [token];
+
+        const partes = [];
+        let atual = '';
+        Array.from(String(token.texto || '')).forEach(function (caractere) {
+          const teste = atual + caractere;
+          const candidato = { texto: teste, bold: token.bold };
+          if (!atual || larguraTokenMarcador(candidato, tamanho) <= larguraMaxima) {
+            atual = teste;
+            return;
+          }
+          partes.push({ texto: atual, bold: token.bold });
+          atual = caractere;
+        });
+        if (atual) partes.push({ texto: atual, bold: token.bold });
+        return partes.length ? partes : [token];
+      }
+
       function quebrarTokensMarcadores(texto, semNegritoMarcadores, tamanho, larguraMaxima) {
         const tokens = obterTokensMarcadores(texto, semNegritoMarcadores);
         const linhas = [];
         let linhaAtual = [];
         let larguraAtual = 0;
 
-        tokens.forEach(function (token) {
-          const largura = larguraTokenMarcador(token, tamanho);
-          if (linhaAtual.length && larguraAtual + largura > larguraMaxima && !/^\s+$/.test(token.texto)) {
-            while (linhaAtual.length && /^\s+$/.test(linhaAtual[linhaAtual.length - 1].texto)) linhaAtual.pop();
-            linhas.push(linhaAtual);
-            linhaAtual = [];
-            larguraAtual = 0;
-            if (/^\s+$/.test(token.texto)) return;
-          }
+        tokens.forEach(function (tokenOriginal) {
+          const tokensAjustados = dividirTokenMarcadorLongo(tokenOriginal, tamanho, larguraMaxima);
+          tokensAjustados.forEach(function (token) {
+            const largura = larguraTokenMarcador(token, tamanho);
+            if (linhaAtual.length && larguraAtual + largura > larguraMaxima && !/^\s+$/.test(token.texto)) {
+              while (linhaAtual.length && /^\s+$/.test(linhaAtual[linhaAtual.length - 1].texto)) linhaAtual.pop();
+              linhas.push(linhaAtual);
+              linhaAtual = [];
+              larguraAtual = 0;
+              if (/^\s+$/.test(token.texto)) return;
+            }
 
-          if (!linhaAtual.length && /^\s+$/.test(token.texto)) return;
-          linhaAtual.push(token);
-          larguraAtual += largura;
+            if (!linhaAtual.length && /^\s+$/.test(token.texto)) return;
+            linhaAtual.push(token);
+            larguraAtual += largura;
+          });
         });
 
         while (linhaAtual.length && /^\s+$/.test(linhaAtual[linhaAtual.length - 1].texto)) linhaAtual.pop();
@@ -1803,7 +1835,7 @@
           const alturaNecessariaMarcadores = linhasMarcadores.length * linhaBloco + 3;
           novaPaginaSeNecessario(alturaNecessariaMarcadores);
           linhasMarcadores.forEach(function (tokensLinha, indiceLinha) {
-            const justificarLinha = bloco.tipo === 'paragraph' && indiceLinha < linhasMarcadores.length - 1;
+            const justificarLinha = bloco.tipo === 'paragraph' && bloco.justificar !== false && indiceLinha < linhasMarcadores.length - 1;
             desenharLinhaMarcadores(tokensLinha, margemEsquerda, tamanhoBloco, larguraTexto, justificarLinha);
             y -= linhaBloco;
           });
@@ -1820,7 +1852,7 @@
           const larguraLinha = fonte.widthOfTextAtSize(linhaTexto, tamanhoBloco);
           if (alinhadoDireita) x = larguraPagina - margemDireita - larguraLinha;
           if (centralizado) x = margemEsquerda + (larguraTexto - larguraLinha) / 2;
-          const justificarLinha = bloco.tipo === 'paragraph' && !centralizado && !alinhadoDireita && indiceLinha < linhas.length - 1;
+          const justificarLinha = bloco.tipo === 'paragraph' && bloco.justificar !== false && !centralizado && !alinhadoDireita && indiceLinha < linhas.length - 1;
           desenharLinhaTextoJustificada(linhaTexto, fonte, tamanhoBloco, x, larguraTexto, justificarLinha);
           y -= linhaBloco;
         });
@@ -1869,20 +1901,40 @@
       });
     }
 
+    function dividirPalavraLongaPdf(palavra, fonte, tamanhoFonte, larguraMaxima) {
+      if (fonte.widthOfTextAtSize(palavra, tamanhoFonte) <= larguraMaxima) return [palavra];
+      const partes = [];
+      let atual = '';
+      Array.from(String(palavra || '')).forEach(function (caractere) {
+        const teste = atual + caractere;
+        if (!atual || fonte.widthOfTextAtSize(teste, tamanhoFonte) <= larguraMaxima) {
+          atual = teste;
+          return;
+        }
+        partes.push(atual);
+        atual = caractere;
+      });
+      if (atual) partes.push(atual);
+      return partes.length ? partes : [palavra];
+    }
+
     function quebrarTexto(texto, fonte, tamanhoFonte, larguraMaxima, preservarLinha) {
       if (preservarLinha && fonte.widthOfTextAtSize(texto, tamanhoFonte) <= larguraMaxima) return [texto];
       const palavras = String(texto || '').split(/\s+/).filter(Boolean);
       const linhas = [];
       let atual = '';
 
-      palavras.forEach(function (palavra) {
-        const teste = atual ? atual + ' ' + palavra : palavra;
-        if (fonte.widthOfTextAtSize(teste, tamanhoFonte) <= larguraMaxima) {
-          atual = teste;
-        } else {
-          if (atual) linhas.push(atual);
-          atual = palavra;
-        }
+      palavras.forEach(function (palavraOriginal) {
+        const fragmentos = dividirPalavraLongaPdf(palavraOriginal, fonte, tamanhoFonte, larguraMaxima);
+        fragmentos.forEach(function (palavra) {
+          const teste = atual ? atual + ' ' + palavra : palavra;
+          if (fonte.widthOfTextAtSize(teste, tamanhoFonte) <= larguraMaxima) {
+            atual = teste;
+          } else {
+            if (atual) linhas.push(atual);
+            atual = palavra;
+          }
+        });
       });
 
       if (atual) linhas.push(atual);
