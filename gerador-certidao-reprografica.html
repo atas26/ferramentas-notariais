@@ -1201,7 +1201,7 @@
 
       const partes = [];
       let posicao = 0;
-      const regex = new RegExp(MARCADOR_NEGRITO_INICIO + '([\s\S]*?)' + MARCADOR_NEGRITO_FIM + '|(\[[^\]]+\])', 'g');
+      const regex = new RegExp(MARCADOR_NEGRITO_INICIO + '([\\s\\S]*?)' + MARCADOR_NEGRITO_FIM + '|(\\[[^\\]]+\\])', 'g');
       let encontrado;
 
       while ((encontrado = regex.exec(valor)) !== null) {
@@ -1420,7 +1420,7 @@
 
       desenharCertidaoNoPdf(pdfDoc, blocos, fontes, templateInfo, assinaturaDigitalImagem);
       await anexarPdfDigitalizado(pdfDoc);
-      numerarPaginas(pdfDoc, fontes.regular);
+      numerarPaginas(pdfDoc, fontes.bold);
       aplicarEstruturaPdfA(pdfDoc);
       return await pdfDoc.save({ useObjectStreams: false });
     }
@@ -1766,7 +1766,7 @@
         const larguraTexto = fonte.widthOfTextAtSize(texto, tamanhoFonte);
         pagina.drawText(texto, {
           x: 595.28 - 56.69 - larguraTexto,
-          y: 32,
+          y: 806,
           size: tamanhoFonte,
           font: fonte,
           color: PDFLib.rgb(0, 0, 0)
