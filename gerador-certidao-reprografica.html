@@ -1029,6 +1029,18 @@
       return valor || '[' + campo + ']';
     }
 
+
+    function formatarCargoAssinaturaFisica(cargo) {
+      return String(cargo || '')
+        .toLowerCase()
+        .split(/\s+/)
+        .filter(Boolean)
+        .map(function (palavra) {
+          return palavra.charAt(0).toUpperCase() + palavra.slice(1);
+        })
+        .join(' ');
+    }
+
     function escaparHtml(valor) {
       return String(valor || '')
         .replace(/&/g, '&amp;')
@@ -1179,7 +1191,7 @@
       if (dados.tipoAssinatura === 'fisica') {
         blocos.push({ tipo: 'signatureLine' });
         blocos.push({ tipo: 'signature', texto: dados.quemAssina });
-        blocos.push({ tipo: 'centerLine', texto: dados.cargoAssina });
+        blocos.push({ tipo: 'centerLine', texto: formatarCargoAssinaturaFisica(dados.cargoAssina) });
       } else if (dados.tipoAssinatura === 'digital') {
         blocos.push({ tipo: 'digitalSignatureGraphic', dadosAssinatura: montarDadosAssinaturaDigitalGrafica(dados) });
       }
@@ -1381,7 +1393,7 @@
       setStatus('Preparando PDF final para impressão...');
 
       try {
-        const bytes = await montarPdfFinal();
+        const bytes = await montarPdfFinal(false);
         const blob = new Blob([bytes], { type: 'application/pdf' });
         const url = URL.createObjectURL(blob);
         const janela = window.open(url, '_blank');
@@ -1407,7 +1419,7 @@
       }
     }
 
-    async function montarPdfFinal() {
+    async function montarPdfFinal(usarTemplateCartorio = true) {
       if (typeof PDFLib === 'undefined') {
         throw new Error('A biblioteca PDF-lib não foi carregada. Verifique a conexão com a internet e recarregue a página.');
       }
@@ -1418,8 +1430,8 @@
       const fontes = await carregarFontes(pdfDoc);
       const assinaturaDigitalImagem = await carregarImagemAssinaturaDigital(pdfDoc);
       const blocos = edicaoManualCertidao ? montarBlocosDaPreviaEditada() : montarEstruturaCertidao(coletarDados());
-      const templateBytes = await obterTemplateCartorioBytes();
-      const templateInfo = await prepararTemplateCartorio(pdfDoc, templateBytes);
+      const templateBytes = usarTemplateCartorio ? await obterTemplateCartorioBytes() : null;
+      const templateInfo = usarTemplateCartorio ? await prepararTemplateCartorio(pdfDoc, templateBytes) : null;
 
       desenharCertidaoNoPdf(pdfDoc, blocos, fontes, templateInfo, assinaturaDigitalImagem);
       await anexarPdfDigitalizado(pdfDoc);
@@ -1769,7 +1781,7 @@
         const larguraTexto = fonte.widthOfTextAtSize(texto, tamanhoFonte);
         pagina.drawText(texto, {
           x: 595.28 - 56.69 - larguraTexto,
-          y: 680,
+          y: 752,
           size: tamanhoFonte,
           font: fonte,
           color: PDFLib.rgb(0, 0, 0)
