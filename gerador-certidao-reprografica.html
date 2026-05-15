@@ -1171,9 +1171,19 @@
       return /[.!?]$/.test(valor) ? valor : valor + '.';
     }
 
+    function contarAnotacoes(texto) {
+      const valor = String(texto || '').trim();
+      if (!valor) return 0;
+      const linhas = valor.split(/\n+/).map(function (linha) { return linha.trim(); }).filter(Boolean);
+      return linhas.length > 1 ? linhas.length : 1;
+    }
+
     function montarTextoAnotacoes(dados) {
-      let texto = textoComPontoFinal(dados.textoAnotacoes);
-      if (!texto) return '';
+      const textoOriginal = String(dados.textoAnotacoes || '').trim();
+      if (!textoOriginal) return '';
+      const rotulo = contarAnotacoes(textoOriginal) > 1 ? 'Anotações:' : 'Anotação:';
+      const textoNormalizado = textoOriginal.split(/\n+/).map(function (linha) { return linha.trim(); }).filter(Boolean).join(' ');
+      let texto = marcarNegrito(rotulo) + ' ' + textoComPontoFinal(textoNormalizado);
       if (dados.tipoAssinatura === 'fisica' && !/Dou fé\.$/i.test(texto)) texto += ' Dou fé.';
       return texto;
     }
