@@ -676,7 +676,27 @@
       </div>
 
       <div class="card full">
-        <h2>4. Dados do cartório</h2>
+        <h2>4. Anotações</h2>
+        <div class="form-grid" id="camposAnotacoes">
+          <div class="field">
+            <label for="haAnotacao">Há anotação?</label>
+            <select id="haAnotacao">
+              <option value="nao">Não</option>
+              <option value="sim">Sim</option>
+            </select>
+            <div class="small-note">Informe se a certidão terá anotação complementar.</div>
+          </div>
+
+          <div class="field full hidden-by-type" id="campoTextoAnotacoes">
+            <label for="textoAnotacoes">Anotações</label>
+            <textarea id="textoAnotacoes" placeholder="Digite o texto da anotação que constará na certidão."></textarea>
+            <div class="small-note">Na certidão física, o “Dou fé.” será deslocado para o final das anotações.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <h2>5. Dados do cartório</h2>
         <div class="form-grid" id="dadosGerais">
           <div class="field">
             <label for="cidade">Cidade</label>
@@ -735,7 +755,7 @@
 
       <div class="card full">
         <div class="card-title-row">
-          <h2>5. Prévia da certidão</h2>
+          <h2>6. Prévia da certidão</h2>
           <button type="button" class="btn-secondary" id="btnEditarCertidao">Visualizar/editar certidão</button>
         </div>
         <div class="preview-panel" id="previewPanel">
@@ -745,7 +765,7 @@
       </div>
 
       <div class="card full">
-        <h2>6. Tipo de assinatura</h2>
+        <h2>7. Tipo de assinatura</h2>
         <div class="signature-options" role="radiogroup" aria-label="Tipo da assinatura da certidão">
           <label class="signature-option" for="tipoAssinaturaDigital">
             <input type="radio" id="tipoAssinaturaDigital" name="tipoAssinatura" value="digital" />
@@ -759,7 +779,7 @@
       </div>
 
       <div class="card full">
-        <h2>7. Gerar PDF e impressão</h2>
+        <h2>8. Gerar PDF e impressão</h2>
         <p class="small-note">
           O PDF final será gerado em PDF/A, com a certidão na primeira página e, em seguida, as páginas do ato ou documento digitalizado. Todas as páginas serão numeradas no canto inferior direito.
         </p>
@@ -800,7 +820,10 @@
       btnSalvarDados: document.getElementById('btnSalvarDados'),
       btnLimparDadosSalvos: document.getElementById('btnLimparDadosSalvos'),
       tipoAssinaturaDigital: document.getElementById('tipoAssinaturaDigital'),
-      tipoAssinaturaFisica: document.getElementById('tipoAssinaturaFisica')
+      tipoAssinaturaFisica: document.getElementById('tipoAssinaturaFisica'),
+      haAnotacao: document.getElementById('haAnotacao'),
+      textoAnotacoes: document.getElementById('textoAnotacoes'),
+      campoTextoAnotacoes: document.getElementById('campoTextoAnotacoes')
     };
 
     const CHAVE_DADOS_CERTIDAO = 'certidaoReprograficaDadosV1';
@@ -827,6 +850,7 @@
       carregarDadosSalvos();
       carregarStatusTemplateSalvo();
       atualizarCamposPorTipo();
+      atualizarCampoAnotacoes();
       atualizarPrevia(true);
     });
 
@@ -836,6 +860,7 @@
       });
       campo.addEventListener('change', function () {
         if (campo.id === 'tipoCertidao') atualizarCamposPorTipo();
+        if (campo.id === 'haAnotacao') atualizarCampoAnotacoes();
         if (!edicaoManualCertidao && !previaAlteradaManualmente) atualizarPrevia(false);
       });
     });
@@ -957,6 +982,16 @@
       document.querySelectorAll('#dadosGerais input, #dadosGerais select, #dadosGerais textarea').forEach(function (campo) {
         if (campo.dataset.required === 'true') campo.required = true;
       });
+    }
+
+    function atualizarCampoAnotacoes() {
+      const exibir = getValor('haAnotacao') === 'sim';
+      if (ids.campoTextoAnotacoes) ids.campoTextoAnotacoes.classList.toggle('hidden-by-type', !exibir);
+      if (ids.textoAnotacoes) {
+        ids.textoAnotacoes.disabled = !exibir;
+        ids.textoAnotacoes.required = exibir;
+        if (!exibir) ids.textoAnotacoes.value = '';
+      }
     }
 
     async function lerPaginasDoAtoDigitalizado() {
@@ -1083,7 +1118,9 @@
         descricaoAtoIncompleto: valorOuCampo(getValor('descricaoAtoIncompleto'), 'DESCRIÇÃO DO ATO INCOMPLETO'),
         origemPedidoFicha: valorOuCampo(getValor('origemPedidoFicha'), 'ORIGEM DO PEDIDO'),
         processoJudicialFicha: getValor('processoJudicialFicha'),
-        codigoFicha: valorOuCampo(getValor('codigoFicha'), 'CÓDIGO')
+        codigoFicha: valorOuCampo(getValor('codigoFicha'), 'CÓDIGO'),
+        haAnotacao: getValor('haAnotacao') === 'sim',
+        textoAnotacoes: getValor('textoAnotacoes')
       };
     }
 
@@ -1112,7 +1149,7 @@
     }
 
     function montarFinalizacaoDigital(dados) {
-      return 'A presente certidão, escrita e assinada digitalmente por ' + marcarNegrito(dados.quemAssina) + ', ' + marcarNegrito(dados.cargoAssina) + ', é reprodução autêntica ' + obterObjetoReproducaoDigital(dados) + ', do que dou fé, sob a forma de documento eletrônico (Provimento CNJ nº 149/2023), devendo, para sua validade, ser conservado em meio eletrônico como prova de sua autoria e integridade. Dou fé.';
+      return 'A presente certidão, escrita e assinada digitalmente por ' + marcarNegrito(dados.quemAssina) + ', ' + dados.cargoAssina + ', é reprodução autêntica ' + obterObjetoReproducaoDigital(dados) + ', do que dou fé, sob a forma de documento eletrônico (Provimento CNJ nº 149/2023), devendo, para sua validade, ser conservado em meio eletrônico como prova de sua autoria e integridade. Dou fé.';
     }
 
     function montarConsultaValidadeDigital() {
@@ -1128,13 +1165,26 @@
       };
     }
 
+    function textoComPontoFinal(texto) {
+      const valor = String(texto || '').trim();
+      if (!valor) return '';
+      return /[.!?]$/.test(valor) ? valor : valor + '.';
+    }
+
+    function montarTextoAnotacoes(dados) {
+      let texto = textoComPontoFinal(dados.textoAnotacoes);
+      if (!texto) return '';
+      if (dados.tipoAssinatura === 'fisica' && !/Dou fé\.$/i.test(texto)) texto += ' Dou fé.';
+      return texto;
+    }
+
     function montarTextoPrincipal(dados) {
       if (dados.tipoCertidao === 'documentoArquivado') {
         return 'Com fundamento no artigo 6º, inciso II, da Lei 8.935/94, a pedido da parte interessada, certifico que revendo os documentos exigidos para a lavratura de atos notariais existentes neste Tabelionato, encontrei ' + dados.descricaoDocumentoArquivado + ', cujas reproduções fotostáticas integram a presente. Dou fé.';
       }
 
       if (dados.tipoCertidao === 'reconhecimentoFirmaCRV') {
-        return 'Com fundamento no artigo 6º, inciso II, da Lei 8.935/94, a pedido da parte interessada, certifico que revendo os livros existentes neste Tabelionato, encontrei o ato lavrado no Livro ' + dados.livro + ', às páginas ' + dados.paginas + ', cujo inteiro teor é o seguinte: TERMO DE RECONHECIMENTO DE FIRMA POR AUTENTICIDADE nº ' + dados.termoNumero + '. Aos ' + dados.dataTermoExtenso + ' (' + dados.dataTermoBR + '), compareceu ' + dados.nomeComparecente + ', RG nº ' + dados.rgComparecente + ', CPF nº ' + dados.cpfComparecente + ', solicitando o reconhecimento de sua firma POR AUTENTICIDADE no seguinte documento: CRV - RENAVAM nº ' + dados.renavam + ' - ' + dados.dadosVeiculo + ', comprador ' + dados.nomeComprador + ', CPF nº ' + dados.cpfComprador + ', Selo de autenticidade nº ' + dados.seloAutenticidade + '. Este Tabelionato comunicou o Detran/SP e a Secretaria da Fazenda Estadual no prazo legal, conforme Decreto nº 60.489, de 23.05.2014. Eu, ' + dados.escreventeReconhecimento + ', escrevente autorizado(a), fiz o reconhecimento solicitado. Dou fé.';
+        return 'Com fundamento no artigo 6º, inciso II, da Lei 8.935/94, a pedido da parte interessada, certifico que revendo os livros existentes neste Tabelionato, encontrei o ato lavrado no Livro ' + dados.livro + ', às páginas ' + dados.paginas + ', cujo inteiro teor é o seguinte: TERMO DE RECONHECIMENTO DE FIRMA POR AUTENTICIDADE nº ' + dados.termoNumero + '. Aos ' + dados.dataTermoExtenso + ' (' + dados.dataTermoBR + '), compareceu ' + dados.nomeComparecente + ', RG nº ' + dados.rgComparecente + ', CPF nº ' + dados.cpfComparecente + ', solicitando o reconhecimento de sua firma POR AUTENTICIDADE no seguinte documento: CRV - RENAVAM nº ' + dados.renavam + ' - ' + dados.dadosVeiculo + ', comprador ' + dados.nomeComprador + ', CPF nº ' + dados.cpfComprador + ', Selo de autenticidade nº ' + dados.seloAutenticidade + '. Este Tabelionato comunicou o Detran/SP e a Secretaria da Fazenda Estadual no prazo legal, conforme Decreto nº 60.489, de 23.05.2014. Eu, ' + marcarNegrito(dados.escreventeReconhecimento) + ', escrevente autorizado(a), fiz o reconhecimento solicitado. Dou fé.';
       }
 
       if (dados.tipoCertidao === 'atoEmAndamento') {
@@ -1157,9 +1207,9 @@
     }
 
     function montarEstruturaCertidao(dados) {
-      const textoPrincipal = dados.tipoAssinatura === 'digital' ? removerDouFeFinal(montarTextoPrincipal(dados)) : montarTextoPrincipal(dados);
+      const textoPrincipalOriginal = montarTextoPrincipal(dados);
+      const textoPrincipal = (dados.tipoAssinatura === 'digital' || dados.haAnotacao) ? removerDouFeFinal(textoPrincipalOriginal) : textoPrincipalOriginal;
       const blocoTextoPrincipal = { tipo: 'paragraph', texto: textoPrincipal };
-      if (dados.tipoCertidao === 'reconhecimentoFirmaCRV') blocoTextoPrincipal.semNegritoMarcadores = true;
       const blocos = [
         { tipo: 'title', texto: 'CERTIDÃO' },
         blocoTextoPrincipal
@@ -1172,7 +1222,12 @@
           blocos.push({ tipo: 'line', texto: linha.replace(/\.$/, '') + '.' });
         });
         const textoSituacao = 'Situação do ato: ' + dados.situacaoAndamento.replace(/\.$/, '') + '. Dou fé.';
-        blocos.push({ tipo: 'paragraph', texto: dados.tipoAssinatura === 'digital' ? removerDouFeFinal(textoSituacao) : textoSituacao });
+        blocos.push({ tipo: 'paragraph', texto: (dados.tipoAssinatura === 'digital' || dados.haAnotacao) ? removerDouFeFinal(textoSituacao) : textoSituacao });
+      }
+
+      if (dados.haAnotacao) {
+        const textoAnotacao = montarTextoAnotacoes(dados);
+        if (textoAnotacao) blocos.push({ tipo: 'paragraph', texto: textoAnotacao });
       }
 
       if (dados.tipoAssinatura === 'digital') {
@@ -1206,7 +1261,21 @@
         .replace(/\s+/g, ' ')
         .trim()
         .toUpperCase();
-      const excecoes = ['DESCRIÇÃO DO DOCUMENTO ARQUIVADO'];
+      const excecoes = [
+        'DESCRIÇÃO DO DOCUMENTO ARQUIVADO',
+        'LIVRO',
+        'PÁGINAS',
+        'NÚMERO DO TERMO',
+        'DATA DO TERMO',
+        'NOME DO COMPARECENTE',
+        'RG',
+        'CPF',
+        'CRV OU RENAVAM',
+        'DADOS DO VEÍCULO',
+        'NOME DO COMPRADOR',
+        'CPF DO COMPRADOR',
+        'SELO DE AUTENTICIDADE'
+      ];
       return normalizado && !excecoes.includes(normalizado);
     }
 
@@ -1330,6 +1399,7 @@
       }
 
       atualizarCamposPorTipo();
+      atualizarCampoAnotacoes();
       const campos = Array.from(document.querySelectorAll('input, select, textarea')).filter(function (campo) {
         return !campo.disabled && campo.required;
       });
@@ -1374,7 +1444,7 @@
       setStatus('Gerando PDF final...');
 
       try {
-        const bytes = await montarPdfFinal();
+        const bytes = await montarPdfFinal(false);
         baixarArquivo(bytes, nomeArquivoPdf());
         setStatus('PDF final gerado com sucesso. Páginas numeradas: ' + (paginasAtoDigitalizado + 1) + '.');
       } catch (erro) {
@@ -1393,7 +1463,7 @@
       setStatus('Preparando PDF final para impressão...');
 
       try {
-        const bytes = await montarPdfFinal(false);
+        const bytes = await montarPdfFinal();
         const blob = new Blob([bytes], { type: 'application/pdf' });
         const url = URL.createObjectURL(blob);
         const janela = window.open(url, '_blank');
@@ -2037,6 +2107,7 @@
       carregarDadosSalvos();
       carregarStatusTemplateSalvo();
       atualizarCamposPorTipo();
+      atualizarCampoAnotacoes();
       edicaoManualCertidao = false;
       edicaoCertidaoAtiva = false;
       previaAlteradaManualmente = false;
