@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de certidão reprográfica</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
+
+  <style>
+    @font-face {
+      font-family: 'Carlito';
+      src: url('https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/carlito/Carlito-Regular.ttf') format('truetype');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'Carlito';
+      src: url('https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/carlito/Carlito-Bold.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --azul: rgb(0, 118, 255);
+      --azul-escuro: #0f172a;
+      --cinza: #64748b;
+      --cinza-claro: #f6f8fb;
+      --borda: #dbe3ef;
+      --branco: #ffffff;
+      --vermelho: rgb(232, 57, 70);
+      --verde: #0f766e;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--cinza-claro);
+      color: var(--azul-escuro);
+    }
+
+    .shell {
+      max-width: 1120px;
+      margin: 34px auto;
+      padding: 0 20px 40px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #ffffff 0%, #eef6ff 100%);
+      border: 1px solid var(--borda);
+      border-radius: 22px;
+      padding: 28px;
+      margin-bottom: 22px;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 880px;
+      color: #42526b;
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    .alerta {
+      margin-top: 18px;
+      border: 1px solid rgba(232, 57, 70, 0.32);
+      background: rgba(232, 57, 70, 0.08);
+      color: #8a1f2c;
+      border-radius: 14px;
+      padding: 13px 15px;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .card.full {
+      grid-column: 1 / -1;
+    }
+
+    .card h2 {
+      margin: 0 0 16px;
+      font-size: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #263449;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      padding: 11px 12px;
+      font-size: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--azul-escuro);
+      background: #fff;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 98px;
+      resize: vertical;
+      line-height: 1.45;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--azul);
+      box-shadow: 0 0 0 3px rgba(0, 118, 255, 0.12);
+    }
+
+    .actions,
+    .cartorio-actions,
+    .template-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 18px;
+    }
+
+    .cartorio-actions,
+    .template-actions {
+      margin-top: 2px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-primary {
+      background: var(--azul);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: #e9eef6;
+      color: #172033;
+    }
+
+    .btn-danger {
+      background: rgba(232, 57, 70, 0.12);
+      color: #8a1f2c;
+    }
+
+    .status,
+    .template-status,
+    .file-status {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: #f8fafc;
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      color: #334155;
+      font-size: 14px;
+      line-height: 1.45;
+      white-space: pre-line;
+    }
+
+    .template-status,
+    .file-status {
+      font-size: 12px;
+      margin-top: 8px;
+      color: #475569;
+    }
+
+    .file-status.ok {
+      border-color: rgba(15, 118, 110, 0.32);
+      background: rgba(15, 118, 110, 0.06);
+      color: var(--verde);
+    }
+
+    .small-note {
+      font-size: 12px;
+      color: var(--cinza);
+      line-height: 1.4;
+      margin-top: 7px;
+    }
+
+    .signature-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .signature-option {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 14px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .signature-option input {
+      width: auto;
+      margin-top: 3px;
+      cursor: pointer;
+    }
+
+    .signature-option strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+      color: #172033;
+    }
+
+    .signature-option span {
+      display: block;
+      font-size: 12px;
+      line-height: 1.4;
+      color: var(--cinza);
+    }
+
+    .card-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .card-title-row h2 {
+      margin: 0;
+    }
+
+    .preview-panel {
+      display: none;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .preview-panel.is-visible {
+      display: block;
+    }
+
+    .preview {
+      width: 21cm;
+      max-width: 100%;
+      min-height: 29.7cm;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 4.5cm 2cm 2.5cm 2cm;
+      font-family: Carlito, Calibri, "Segoe UI", Arial, sans-serif;
+      line-height: 1.5;
+      color: #000000;
+      font-size: 12pt;
+      letter-spacing: normal;
+      word-spacing: normal;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.10);
+    }
+
+    .preview.is-editing {
+      background: #ffffff;
+      border-color: var(--azul);
+      box-shadow: 0 0 0 3px rgba(0, 118, 255, 0.10);
+    }
+
+    .preview[contenteditable="true"] {
+      outline: none;
+    }
+
+    .preview .certidao-line {
+      margin: 0 0 6pt;
+      line-height: 1.5;
+    }
+
+    .preview .certidao-right {
+      margin: 0 0 8pt;
+      text-align: right;
+      line-height: 1.5;
+    }
+
+    .preview .certidao-space {
+      height: 14pt;
+    }
+
+    .preview .certidao-title {
+      margin: 0 0 18pt;
+      font-size: 16pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .preview .certidao-paragraph {
+      margin: 0 0 12pt;
+      text-align: justify;
+      line-height: 1.5;
+    }
+
+    .preview .certidao-signature-line {
+      width: 8cm;
+      height: 18pt;
+      margin: 0 auto 6pt;
+      border-bottom: 1px solid #000000;
+    }
+
+    .preview .certidao-signature {
+      margin: 0 0 6pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .preview .certidao-digital-note {
+      margin: -2pt 0 6pt;
+      text-align: center;
+      line-height: 1.5;
+      font-size: 12pt;
+    }
+
+    .preview .certidao-center {
+      margin: 0 0 6pt;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .preview .certidao-digital-signature {
+      margin: -82px auto 6pt;
+      text-align: center;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .preview .certidao-digital-signature-image {
+      display: block;
+      width: 250px;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .hidden-by-type {
+      display: none !important;
+    }
+
+    footer {
+      color: var(--cinza);
+      font-size: 12px;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media print {
+      @page {
+        size: A4;
+        margin: 4.5cm 2cm 2.5cm 2cm;
+      }
+
+      body {
+        background: #ffffff;
+      }
+
+      body * {
+        visibility: hidden !important;
+      }
+
+      .preview,
+      .preview * {
+        visibility: visible !important;
+      }
+
+      .preview {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 17cm;
+        min-height: auto;
+        border: 0;
+        border-radius: 0;
+        background: #ffffff;
+        padding: 0;
+        color: #000000;
+        box-shadow: none;
+        font-family: Carlito, Calibri, Arial, sans-serif;
+        font-size: 12pt;
+        line-height: 1.5;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .grid,
+      .form-grid,
+      .signature-options {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 24px;
+      }
+
+      .card-title-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <h1>Gerador de certidão reprográfica</h1>
+      <p>
+        Preencha os dados da certidão, envie o ato ou documento digitalizado em PDF e gere um arquivo final com a certidão, as reproduções anexadas e a numeração automática das páginas.
+      </p>
+      <div class="alerta">
+        Revise a certidão antes de gerar o arquivo final. A ferramenta monta o texto com base nos dados informados, aplica o template do cartório quando houver e numera o conjunto final.
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card full">
+        <h2>1. Arquivos</h2>
+        <div class="form-grid">
+          <div class="field full">
+            <button type="button" class="btn-secondary" id="btnAlternarTemplate">Mostrar campos do template do cartório</button>
+          </div>
+
+          <div class="field full" id="templateCampos" style="display: none;">
+            <label for="templatePdf">Template do cartório em PDF</label>
+            <input type="file" id="templatePdf" accept="application/pdf" />
+            <div class="small-note">Opcional. Use um papel timbrado em PDF para mesclar com a primeira página da certidão.</div>
+            <div class="template-actions">
+              <button type="button" class="btn-secondary" id="btnSalvarTemplate">Salvar template como modelo</button>
+              <button type="button" class="btn-danger" id="btnLimparTemplate">Limpar template salvo</button>
+            </div>
+            <div class="template-status" id="templateStatus">Nenhum template salvo neste navegador.</div>
+          </div>
+
+          <div class="field full">
+            <label for="atoPdf">Ato notarial ou documento digitalizado em PDF</label>
+            <input type="file" id="atoPdf" accept="application/pdf" />
+            <div class="small-note">Envie o PDF que integrará a certidão como reprodução reprográfica. O sistema conta as páginas e soma com a página da certidão.</div>
+            <div class="file-status" id="atoStatus">Nenhum ato digitalizado selecionado.</div>
+          </div>
+        </div>
+        <div class="status" id="statusBox">Preencha os dados, envie o PDF do ato ou documento digitalizado e revise a prévia antes de gerar o PDF final.</div>
+      </div>
+
+      <div class="card full">
+        <h2>2. Tipo de certidão</h2>
+        <form id="formCertidao">
+          <div class="form-grid">
+            <div class="field full">
+              <label for="tipoCertidao">Modelo de certidão</label>
+              <select id="tipoCertidao" required>
+                <option value="atoGeral">Certidão de ato notarial em geral</option>
+                <option value="documentoArquivado">Certidão de documento arquivado</option>
+                <option value="reconhecimentoFirmaCRV">Certidão de reconhecimento de firma por autenticidade em CRV</option>
+                <option value="fichaFirmaIdentidade">Certidão de ficha de firma e identidade</option>
+              </select>
+              <div class="small-note">Escolha o modelo. Os campos abaixo serão ajustados conforme a certidão selecionada.</div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="card full">
+        <h2>3. Campos da certidão</h2>
+        <div class="form-grid" id="camposCertidao">
+          <div class="field" data-tipo="atoGeral reconhecimentoFirmaCRV atoIncompleto">
+            <label for="livro">Livro</label>
+            <input id="livro" type="text" maxlength="120" placeholder="Ex.: 0553-P ou 2551" data-required="true" />
+            <div class="small-note">Informe o livro em que o ato foi lavrado ou encontrado.</div>
+          </div>
+
+          <div class="field" data-tipo="atoGeral reconhecimentoFirmaCRV atoIncompleto">
+            <label for="paginas">Páginas</label>
+            <input id="paginas" type="text" maxlength="120" placeholder="Ex.: 082 ou 95 a 98" data-required="true" />
+            <div class="small-note">Informe a página ou o intervalo de páginas do ato.</div>
+          </div>
+
+          <div class="field full" data-tipo="documentoArquivado">
+            <label for="descricaoDocumentoArquivado">Documento arquivado</label>
+            <textarea id="descricaoDocumentoArquivado" placeholder="Ex.: as Guias de Recolhimento de ITCMD oriundas do ato notarial lavrado no Livro ..., às páginas ..." data-required="true"></textarea>
+            <div class="small-note">Descreva o documento arquivado que será certificado.</div>
+          </div>
+
+          <div class="field" data-tipo="reconhecimentoFirmaCRV">
+            <label for="termoNumero">Número do termo</label>
+            <input id="termoNumero" type="text" maxlength="120" placeholder="Ex.: 123456" data-required="true" />
+            <div class="small-note">Informe o número do termo de reconhecimento de firma.</div>
+          </div>
+
+          <div class="field" data-tipo="reconhecimentoFirmaCRV">
+            <label for="dataTermo">Data do termo</label>
+            <input id="dataTermo" type="date" data-required="true" />
+            <div class="small-note">Informe a data do termo de reconhecimento.</div>
+          </div>
+
+          <div class="field" data-tipo="reconhecimentoFirmaCRV">
+            <label for="nomeComparecente">Nome do comparecente</label>
+            <input id="nomeComparecente" type="text" maxlength="255" placeholder="Nome completo" style="text-transform: uppercase;" data-required="true" />
+            <div class="small-note">Informe quem solicitou o reconhecimento de firma.</div>
+          </div>
+
+          <div class="field" data-tipo="reconhecimentoFirmaCRV">
+            <label for="rgComparecente">RG do comparecente</label>
+            <input id="rgComparecente" type="text" maxlength="80" placeholder="Ex.: 00.000.000 SSP/SP" data-required="true" />
+            <div class="small-note">Informe o RG do comparecente.</div>
+          </div>
+
+          <div class="field" data-tipo="reconhecimentoFirmaCRV">
+            <label for="cpfComparecente">CPF do comparecente</label>
+            <input id="cpfComparecente" type="text" maxlength="14" inputmode="numeric" placeholder="000.000.000-00" data-cpf="true" data-required="true" />
+            <div class="small-note">Informe o CPF do comparecente.</div>
+          </div>
+
+          <div class="field" data-tipo="reconhecimentoFirmaCRV">
+            <label for="renavam">CRV ou RENAVAM</label>
+            <input id="renavam" type="text" maxlength="120" placeholder="Número do CRV ou RENAVAM" data-required="true" />
+            <div class="small-note">Informe o número do documento do veículo.</div>
+          </div>
+
+          <div class="field full" data-tipo="reconhecimentoFirmaCRV">
+            <label for="dadosVeiculo">Dados do veículo</label>
+            <textarea id="dadosVeiculo" placeholder="Ex.: Veículo marca/modelo ..., ano .../..., cor ..., combustível ..., placa ..., chassi ..." data-required="true"></textarea>
+            <div class="small-note">Informe marca, modelo, ano, cor, combustível, placa e chassi.</div>
+          </div>
+
+          <div class="field" data-tipo="reconhecimentoFirmaCRV">
+            <label for="nomeComprador">Nome do comprador</label>
+            <input id="nomeComprador" type="text" maxlength="255" placeholder="Nome completo do comprador" style="text-transform: uppercase;" data-required="true" />
+            <div class="small-note">Informe o comprador indicado no CRV.</div>
+          </div>
+
+          <div class="field" data-tipo="reconhecimentoFirmaCRV">
+            <label for="cpfComprador">CPF do comprador</label>
+            <input id="cpfComprador" type="text" maxlength="14" inputmode="numeric" placeholder="000.000.000-00" data-cpf="true" data-required="true" />
+            <div class="small-note">Informe o CPF do comprador.</div>
+          </div>
+
+          <div class="field" data-tipo="reconhecimentoFirmaCRV">
+            <label for="seloAutenticidade">Selo de autenticidade</label>
+            <input id="seloAutenticidade" type="text" maxlength="120" placeholder="Número do selo" data-required="true" />
+            <div class="small-note">Informe o selo vinculado ao reconhecimento.</div>
+          </div>
+
+          <div class="field" data-tipo="reconhecimentoFirmaCRV">
+            <label for="escreventeReconhecimento">Escrevente do reconhecimento</label>
+            <input id="escreventeReconhecimento" type="text" maxlength="255" placeholder="Nome do escrevente" style="text-transform: uppercase;" data-required="true" />
+            <div class="small-note">Informe quem realizou o reconhecimento de firma.</div>
+          </div>
+
+          <div class="field full" data-tipo="atoEmAndamento">
+            <label for="atoEmAndamentoDescricao">Ato em andamento</label>
+            <input id="atoEmAndamentoDescricao" type="text" maxlength="255" placeholder="Ex.: Escritura de Inventário de ..." data-required="true" />
+            <div class="small-note">Informe o ato que está em andamento.</div>
+          </div>
+
+          <div class="field" data-tipo="atoEmAndamento">
+            <label for="protocoloAndamento">Protocolo</label>
+            <input id="protocoloAndamento" type="text" maxlength="120" placeholder="Ex.: XXX.XXX" data-required="true" />
+            <div class="small-note">Informe o protocolo do ato.</div>
+          </div>
+
+          <div class="field" data-tipo="atoEmAndamento">
+            <label for="dataEntradaAndamento">Data de entrada do ato</label>
+            <input id="dataEntradaAndamento" type="date" data-required="true" />
+            <div class="small-note">Informe a data de entrada do ato.</div>
+          </div>
+
+          <div class="field full" data-tipo="atoEmAndamento">
+            <label for="partesAndamento">Partes ou pessoas vinculadas ao ato</label>
+            <textarea id="partesAndamento" placeholder="Ex.: Autor(a) da herança: ...&#10;Herdeiros: ...&#10;Inventariante: ..." data-required="true"></textarea>
+            <div class="small-note">Informe as pessoas relevantes, uma informação por linha.</div>
+          </div>
+
+          <div class="field full" data-tipo="atoEmAndamento">
+            <label for="situacaoAndamento">Situação do ato</label>
+            <textarea id="situacaoAndamento" placeholder="Descreva a situação atual, exigências pendentes ou conclusão operacional." data-required="true"></textarea>
+            <div class="small-note">Informe a situação certificada nesta data.</div>
+          </div>
+
+          <div class="field full" data-tipo="atoIncompleto">
+            <label for="descricaoAtoIncompleto">Descrição do ato incompleto</label>
+            <textarea id="descricaoAtoIncompleto" placeholder="Ex.: o ato de escritura pública de compra e venda, lavrado em 13 de outubro de 2009, no qual falta a assinatura da vendedora ..." data-required="true"></textarea>
+            <div class="small-note">Descreva o ato e a falta de assinatura constatada.</div>
+          </div>
+
+          <div class="field full" data-tipo="fichaFirmaIdentidade">
+            <label for="origemPedidoFicha">Origem do pedido</label>
+            <select id="origemPedidoFicha" data-required="true">
+              <option value="a pedido do titular das informações solicitadas">A pedido do titular das informações solicitadas</option>
+              <option value="a pedido do representante legal do titular das informações solicitadas">A pedido do representante legal do titular das informações solicitadas</option>
+              <option value="por decisão judicial">Por decisão judicial</option>
+            </select>
+            <div class="small-note">Informe a base do pedido para emissão da certidão.</div>
+          </div>
+
+          <div class="field" data-tipo="fichaFirmaIdentidade">
+            <label for="processoJudicialFicha">Processo judicial</label>
+            <input id="processoJudicialFicha" type="text" maxlength="160" placeholder="Ex.: proc. nº ..." />
+            <div class="small-note">Preencha apenas quando a origem do pedido for decisão judicial.</div>
+          </div>
+
+          <div class="field" data-tipo="fichaFirmaIdentidade">
+            <label for="codigoFicha">Código da ficha ou documento</label>
+            <input id="codigoFicha" type="text" maxlength="120" placeholder="Ex.: 123456" data-required="true" />
+            <div class="small-note">Informe o código de arquivamento da ficha e do documento.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <h2>4. Dados do cartório</h2>
+        <div class="form-grid" id="dadosGerais">
+          <div class="field">
+            <label for="cidade">Cidade</label>
+            <input id="cidade" type="text" maxlength="120" placeholder="Ex.: São Paulo" data-required="true" />
+            <div class="small-note">Informe a cidade que constará antes da data da certidão.</div>
+          </div>
+
+          <div class="field">
+            <label for="dataCertidao">Data da certidão</label>
+            <input id="dataCertidao" type="date" data-required="true" />
+            <div class="small-note">Informe a data de emissão da certidão.</div>
+          </div>
+
+          <div class="field full">
+            <label for="nomeCartorio">Nome do cartório</label>
+            <input id="nomeCartorio" type="text" maxlength="255" placeholder="Ex.: 26º Tabelionato de Notas de São Paulo" data-required="true" />
+            <div class="small-note">Informe o nome do cartório que emitirá a certidão.</div>
+          </div>
+
+          <div class="field full">
+            <label for="emolumentos">Emolumentos</label>
+            <textarea id="emolumentos" placeholder="Ex.: Emolumentos: R$ ..., Ao Estado: R$ ..., IPESP: R$ ..., ISS: R$ ..., Registro Civil: R$ ..., Tribunal de Justiça: R$ ..., Santa Casa: R$ ..., Total: R$ ...." data-required="true"></textarea>
+            <div class="small-note">Informe a linha de emolumentos como deverá sair na certidão.</div>
+          </div>
+
+          <div class="field">
+            <label for="quemAssina">Nome de quem assina</label>
+            <input id="quemAssina" type="text" maxlength="255" placeholder="Nome completo de quem assina" style="text-transform: uppercase;" data-required="true" />
+            <div class="small-note">Informe o nome completo de quem assinará a certidão.</div>
+          </div>
+
+          <div class="field">
+            <label for="cargoAssina">Cargo</label>
+            <select id="cargoAssina" data-required="true">
+              <option value="">Escolha uma opção</option>
+              <option value="Tabelião">Tabelião</option>
+              <option value="Substituto">Substituto</option>
+              <option value="Escrevente autorizado">Escrevente autorizado</option>
+              <option value="Escrevente">Escrevente</option>
+            </select>
+            <div class="small-note">Selecione o cargo de quem assina a certidão.</div>
+          </div>
+
+          <div class="field full">
+            <div class="cartorio-actions">
+              <button type="button" class="btn-secondary" id="btnSalvarDados">Salvar dados do cartório</button>
+              <button type="button" class="btn-danger" id="btnLimparDadosSalvos">Limpar dados salvos</button>
+            </div>
+            <div class="small-note">Esta opção preserva, neste navegador, cidade, nome do cartório, emolumentos, assinante e cargo.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <div class="card-title-row">
+          <h2>5. Prévia da certidão</h2>
+          <button type="button" class="btn-secondary" id="btnEditarCertidao">Visualizar/editar certidão</button>
+        </div>
+        <div class="preview-panel" id="previewPanel">
+          <div class="small-note">A prévia é editável. Ao concluir, clique em “Concluir edição”.</div>
+          <div class="preview" id="previewCertidao">A prévia será gerada com os dados preenchidos.</div>
+        </div>
+      </div>
+
+      <div class="card full">
+        <h2>6. Tipo de assinatura</h2>
+        <div class="signature-options" role="radiogroup" aria-label="Tipo da assinatura da certidão">
+          <label class="signature-option" for="tipoAssinaturaDigital">
+            <input type="radio" id="tipoAssinaturaDigital" name="tipoAssinatura" value="digital" />
+            <span><strong>Digital</strong></span>
+          </label>
+          <label class="signature-option" for="tipoAssinaturaFisica">
+            <input type="radio" id="tipoAssinaturaFisica" name="tipoAssinatura" value="fisica" />
+            <span><strong>Física</strong></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="card full">
+        <h2>7. Gerar PDF e impressão</h2>
+        <p class="small-note">
+          O PDF final será gerado em PDF/A, com a certidão na primeira página e, em seguida, as páginas do ato ou documento digitalizado. Todas as páginas serão numeradas no canto inferior direito.
+        </p>
+        <div class="actions">
+          <button type="button" class="btn-primary" id="btnGerarPdf">Gerar PDF</button>
+          <button type="button" class="btn-secondary" id="btnImprimir">Imprimir PDF final</button>
+          <button type="button" class="btn-secondary" id="btnNovaCertidao">Nova certidão</button>
+          <button type="button" class="btn-danger" id="btnLimpar">Limpar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Ferramenta em versão inicial. O usuário deve revisar todos os dados, o texto da certidão e as reproduções antes de gerar o PDF final.
+  </footer>
+
+  <script>
+    const ids = {
+      templatePdf: document.getElementById('templatePdf'),
+      templateStatus: document.getElementById('templateStatus'),
+      templateCampos: document.getElementById('templateCampos'),
+      btnAlternarTemplate: document.getElementById('btnAlternarTemplate'),
+      btnSalvarTemplate: document.getElementById('btnSalvarTemplate'),
+      btnLimparTemplate: document.getElementById('btnLimparTemplate'),
+      atoPdf: document.getElementById('atoPdf'),
+      atoStatus: document.getElementById('atoStatus'),
+      statusBox: document.getElementById('statusBox'),
+      formCertidao: document.getElementById('formCertidao'),
+      tipoCertidao: document.getElementById('tipoCertidao'),
+      previewPanel: document.getElementById('previewPanel'),
+      previewCertidao: document.getElementById('previewCertidao'),
+      btnEditarCertidao: document.getElementById('btnEditarCertidao'),
+      btnGerarPdf: document.getElementById('btnGerarPdf'),
+      btnImprimir: document.getElementById('btnImprimir'),
+      btnNovaCertidao: document.getElementById('btnNovaCertidao'),
+      btnLimpar: document.getElementById('btnLimpar'),
+      btnSalvarDados: document.getElementById('btnSalvarDados'),
+      btnLimparDadosSalvos: document.getElementById('btnLimparDadosSalvos'),
+      tipoAssinaturaDigital: document.getElementById('tipoAssinaturaDigital'),
+      tipoAssinaturaFisica: document.getElementById('tipoAssinaturaFisica')
+    };
+
+    const CHAVE_DADOS_CERTIDAO = 'certidaoReprograficaDadosV1';
+    const DB_TEMPLATE_CERTIDAO = 'certidaoReprograficaTemplateV1';
+    const STORE_TEMPLATE_CERTIDAO = 'templates';
+    const ID_TEMPLATE_CERTIDAO = 'modelo';
+    const URL_FONTE_CARLITO_REGULAR = 'https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/carlito/Carlito-Regular.ttf';
+    const URL_FONTE_CARLITO_BOLD = 'https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/carlito/Carlito-Bold.ttf';
+    const ASSINATURA_DIGITAL_CNB_BASE64 = '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';
+    const ASSINATURA_DIGITAL_CNB_DATA_URL = 'data:image/png;base64,' + ASSINATURA_DIGITAL_CNB_BASE64;
+    const SRGB_IEC61966_2_1_ICC_BASE64 = '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';
+
+    let edicaoManualCertidao = false;
+    let edicaoCertidaoAtiva = false;
+    let previaAlteradaManualmente = false;
+    let paginasAtoDigitalizado = 0;
+
+    document.addEventListener('DOMContentLoaded', function () {
+      inicializarDatas();
+      inicializarCaixaAlta();
+      inicializarCpf();
+      carregarDadosSalvos();
+      carregarStatusTemplateSalvo();
+      atualizarCamposPorTipo();
+      atualizarPrevia(true);
+    });
+
+    document.querySelectorAll('input, select, textarea').forEach(function (campo) {
+      campo.addEventListener('input', function () {
+        if (!edicaoManualCertidao && !previaAlteradaManualmente) atualizarPrevia(false);
+      });
+      campo.addEventListener('change', function () {
+        if (campo.id === 'tipoCertidao') atualizarCamposPorTipo();
+        if (!edicaoManualCertidao && !previaAlteradaManualmente) atualizarPrevia(false);
+      });
+    });
+
+    ids.previewCertidao.addEventListener('input', function () {
+      if (edicaoCertidaoAtiva) {
+        previaAlteradaManualmente = true;
+        edicaoManualCertidao = true;
+      }
+    });
+
+    ids.btnEditarCertidao.addEventListener('click', alternarEdicaoCertidao);
+    ids.btnGerarPdf.addEventListener('click', gerarPdfFinal);
+    ids.btnImprimir.addEventListener('click', imprimirPdfFinal);
+    ids.btnNovaCertidao.addEventListener('click', novaCertidao);
+    ids.btnLimpar.addEventListener('click', limparTudo);
+    ids.btnSalvarDados.addEventListener('click', salvarDadosCartorio);
+    ids.btnLimparDadosSalvos.addEventListener('click', limparDadosSalvos);
+    ids.btnAlternarTemplate.addEventListener('click', alternarCamposTemplate);
+    ids.btnSalvarTemplate.addEventListener('click', salvarTemplateCartorio);
+    ids.btnLimparTemplate.addEventListener('click', limparTemplateCartorioSalvo);
+    ids.atoPdf.addEventListener('change', lerPaginasDoAtoDigitalizado);
+
+    ids.templatePdf.addEventListener('change', function () {
+      if (ids.templatePdf.files && ids.templatePdf.files[0]) {
+        atualizarStatusTemplate('Template selecionado para esta certidão: ' + ids.templatePdf.files[0].name + '. Clique em “Salvar template como modelo” para reutilizar nas próximas vezes.');
+      }
+    });
+
+    function alternarCamposTemplate() {
+      const estaOculto = ids.templateCampos.style.display === 'none';
+      ids.templateCampos.style.display = estaOculto ? '' : 'none';
+      ids.btnAlternarTemplate.textContent = estaOculto ? 'Ocultar campos do template do cartório' : 'Mostrar campos do template do cartório';
+    }
+
+    function inicializarDatas() {
+      const hoje = new Date();
+      const yyyy = hoje.getFullYear();
+      const mm = String(hoje.getMonth() + 1).padStart(2, '0');
+      const dd = String(hoje.getDate()).padStart(2, '0');
+      const iso = yyyy + '-' + mm + '-' + dd;
+      const dataCertidao = document.getElementById('dataCertidao');
+      if (dataCertidao && !dataCertidao.value) dataCertidao.value = iso;
+    }
+
+    function inicializarCaixaAlta() {
+      ['quemAssina', 'nomeComparecente', 'nomeComprador', 'escreventeReconhecimento'].forEach(function (id) {
+        const campo = document.getElementById(id);
+        if (!campo) return;
+        campo.addEventListener('input', function () {
+          const posicao = campo.selectionStart;
+          campo.value = campo.value.toUpperCase();
+          try { campo.setSelectionRange(posicao, posicao); } catch (e) {}
+        });
+      });
+    }
+
+    function inicializarCpf() {
+      document.querySelectorAll('[data-cpf="true"]').forEach(function (campo) {
+        campo.addEventListener('input', function () {
+          let valor = campo.value.replace(/\D/g, '').slice(0, 11);
+          valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+          valor = valor.replace(/(\d{3})(\d)/, '$1.$2');
+          valor = valor.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+          campo.value = valor;
+          validarCpfCampo(campo);
+        });
+        campo.addEventListener('blur', function () {
+          if (!validarCpfCampo(campo)) campo.reportValidity();
+        });
+      });
+    }
+
+    function cpfValido(valor) {
+      const cpf = String(valor || '').replace(/\D/g, '');
+      if (cpf.length !== 11) return false;
+      if (/^(\d)\1{10}$/.test(cpf)) return false;
+
+      let soma = 0;
+      for (let i = 0; i < 9; i++) soma += Number(cpf.charAt(i)) * (10 - i);
+      let digito = 11 - (soma % 11);
+      if (digito >= 10) digito = 0;
+      if (digito !== Number(cpf.charAt(9))) return false;
+
+      soma = 0;
+      for (let i = 0; i < 10; i++) soma += Number(cpf.charAt(i)) * (11 - i);
+      digito = 11 - (soma % 11);
+      if (digito >= 10) digito = 0;
+      return digito === Number(cpf.charAt(10));
+    }
+
+    function validarCpfCampo(campo) {
+      if (!campo || campo.disabled) return true;
+      const digitos = campo.value.replace(/\D/g, '');
+      if (!digitos) {
+        campo.setCustomValidity('');
+        return true;
+      }
+      if (!cpfValido(digitos)) {
+        campo.setCustomValidity('Informe um CPF válido.');
+        return false;
+      }
+      campo.setCustomValidity('');
+      return true;
+    }
+
+    function atualizarCamposPorTipo() {
+      const tipo = getValor('tipoCertidao');
+      document.querySelectorAll('#camposCertidao [data-tipo]').forEach(function (grupo) {
+        const tipos = String(grupo.getAttribute('data-tipo') || '').split(/\s+/);
+        const visivel = tipos.includes(tipo);
+        grupo.classList.toggle('hidden-by-type', !visivel);
+        grupo.querySelectorAll('input, select, textarea').forEach(function (campo) {
+          campo.disabled = !visivel;
+          if (campo.dataset.required === 'true') campo.required = visivel;
+        });
+      });
+
+      document.querySelectorAll('#dadosGerais input, #dadosGerais select, #dadosGerais textarea').forEach(function (campo) {
+        if (campo.dataset.required === 'true') campo.required = true;
+      });
+    }
+
+    async function lerPaginasDoAtoDigitalizado() {
+      const arquivo = ids.atoPdf.files && ids.atoPdf.files[0] ? ids.atoPdf.files[0] : null;
+      paginasAtoDigitalizado = 0;
+
+      if (!arquivo) {
+        ids.atoStatus.classList.remove('ok');
+        ids.atoStatus.textContent = 'Nenhum ato digitalizado selecionado.';
+        return;
+      }
+
+      if (arquivo.type && arquivo.type !== 'application/pdf') {
+        ids.atoStatus.classList.remove('ok');
+        ids.atoStatus.textContent = 'O arquivo selecionado deve estar em PDF.';
+        return;
+      }
+
+      try {
+        if (typeof PDFLib === 'undefined') throw new Error('Biblioteca PDF-lib indisponível.');
+        const bytes = await arquivo.arrayBuffer();
+        const pdf = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+        paginasAtoDigitalizado = pdf.getPageCount();
+        const total = paginasAtoDigitalizado + 1;
+        ids.atoStatus.classList.add('ok');
+        ids.atoStatus.textContent = 'Arquivo selecionado: ' + arquivo.name + '\nPáginas do PDF anexado: ' + paginasAtoDigitalizado + '. Total estimado do arquivo final: ' + total + ' página(s).';
+        setStatus('O ato digitalizado foi lido. O PDF final terá ' + total + ' página(s), já considerando a primeira página da certidão.');
+      } catch (erro) {
+        console.error(erro);
+        ids.atoStatus.classList.remove('ok');
+        ids.atoStatus.textContent = 'Não foi possível ler o PDF selecionado. Verifique se o arquivo não está corrompido ou protegido.';
+        paginasAtoDigitalizado = 0;
+      }
+    }
+
+    function setStatus(texto) {
+      ids.statusBox.textContent = texto;
+    }
+
+    function getValor(id) {
+      const campo = document.getElementById(id);
+      return campo ? campo.value.trim() : '';
+    }
+
+    function getTipoAssinatura() {
+      const selecionado = document.querySelector('input[name="tipoAssinatura"]:checked');
+      return selecionado ? selecionado.value : '';
+    }
+
+    function formatarDataBR(iso) {
+      if (!iso) return '';
+      const partes = iso.split('-');
+      if (partes.length !== 3) return iso;
+      return partes[2] + '/' + partes[1] + '/' + partes[0];
+    }
+
+    function formatarDataExtensoBR(iso) {
+      if (!iso) return '';
+      const partes = iso.split('-');
+      if (partes.length !== 3) return iso;
+      const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+      const dia = String(Number(partes[2]));
+      const mes = meses[Number(partes[1]) - 1];
+      const ano = partes[0];
+      if (!mes || !dia || !ano) return formatarDataBR(iso);
+      return dia + ' de ' + mes + ' de ' + ano;
+    }
+
+    function valorOuCampo(valor, campo) {
+      return valor || '[' + campo + ']';
+    }
+
+    function escaparHtml(valor) {
+      return String(valor || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function coletarDados() {
+      return {
+        tipoCertidao: getValor('tipoCertidao'),
+        cidade: valorOuCampo(getValor('cidade'), 'CIDADE'),
+        dataCertidao: valorOuCampo(formatarDataExtensoBR(getValor('dataCertidao')), 'DATA'),
+        nomeCartorio: valorOuCampo(getValor('nomeCartorio'), 'NOME DO CARTÓRIO'),
+        emolumentos: valorOuCampo(getValor('emolumentos'), 'EMOLUMENTOS'),
+        quemAssina: valorOuCampo(getValor('quemAssina').toUpperCase(), 'NOME'),
+        cargoAssina: valorOuCampo(getValor('cargoAssina'), 'CARGO'),
+        tipoAssinatura: getTipoAssinatura(),
+        livro: valorOuCampo(getValor('livro'), 'LIVRO'),
+        paginas: valorOuCampo(getValor('paginas'), 'PÁGINAS'),
+        descricaoDocumentoArquivado: valorOuCampo(getValor('descricaoDocumentoArquivado'), 'DESCRIÇÃO DO DOCUMENTO ARQUIVADO'),
+        termoNumero: valorOuCampo(getValor('termoNumero'), 'NÚMERO DO TERMO'),
+        dataTermoExtenso: valorOuCampo(formatarDataExtensoBR(getValor('dataTermo')), 'DATA DO TERMO'),
+        dataTermoBR: valorOuCampo(formatarDataBR(getValor('dataTermo')), 'DATA DO TERMO'),
+        nomeComparecente: valorOuCampo(getValor('nomeComparecente').toUpperCase(), 'NOME DO COMPARECENTE'),
+        rgComparecente: valorOuCampo(getValor('rgComparecente'), 'RG'),
+        cpfComparecente: valorOuCampo(getValor('cpfComparecente'), 'CPF'),
+        renavam: valorOuCampo(getValor('renavam'), 'CRV OU RENAVAM'),
+        dadosVeiculo: valorOuCampo(getValor('dadosVeiculo'), 'DADOS DO VEÍCULO'),
+        nomeComprador: valorOuCampo(getValor('nomeComprador').toUpperCase(), 'NOME DO COMPRADOR'),
+        cpfComprador: valorOuCampo(getValor('cpfComprador'), 'CPF DO COMPRADOR'),
+        seloAutenticidade: valorOuCampo(getValor('seloAutenticidade'), 'SELO DE AUTENTICIDADE'),
+        escreventeReconhecimento: valorOuCampo(getValor('escreventeReconhecimento').toUpperCase(), 'ESCREVENTE'),
+        atoEmAndamentoDescricao: valorOuCampo(getValor('atoEmAndamentoDescricao'), 'ATO EM ANDAMENTO'),
+        protocoloAndamento: valorOuCampo(getValor('protocoloAndamento'), 'PROTOCOLO'),
+        dataEntradaAndamento: valorOuCampo(formatarDataBR(getValor('dataEntradaAndamento')), 'DATA DE ENTRADA'),
+        partesAndamento: valorOuCampo(getValor('partesAndamento'), 'PARTES OU PESSOAS VINCULADAS'),
+        situacaoAndamento: valorOuCampo(getValor('situacaoAndamento'), 'SITUAÇÃO DO ATO'),
+        descricaoAtoIncompleto: valorOuCampo(getValor('descricaoAtoIncompleto'), 'DESCRIÇÃO DO ATO INCOMPLETO'),
+        origemPedidoFicha: valorOuCampo(getValor('origemPedidoFicha'), 'ORIGEM DO PEDIDO'),
+        processoJudicialFicha: getValor('processoJudicialFicha'),
+        codigoFicha: valorOuCampo(getValor('codigoFicha'), 'CÓDIGO')
+      };
+    }
+
+    function removerDouFeFinal(texto) {
+      return String(texto || '').replace(/\s*Dou fé\.\s*$/i, '').trim();
+    }
+
+    function obterObjetoReproducaoDigital(dados) {
+      if (dados.tipoCertidao === 'documentoArquivado' || dados.tipoCertidao === 'fichaFirmaIdentidade') {
+        return 'do(s) documento(s)';
+      }
+      return 'do ato notarial';
+    }
+
+    function montarFinalizacaoDigital(dados) {
+      return 'A presente certidão, escrita e assinada digitalmente por ' + dados.quemAssina + ', ' + dados.cargoAssina + ', é reprodução autêntica ' + obterObjetoReproducaoDigital(dados) + ', do que dou fé, sob a forma de documento eletrônico (Provimento CNJ nº 149/2023), devendo, para sua validade, ser conservado em meio eletrônico como prova de sua autoria e integridade. Dou fé.';
+    }
+
+    function montarConsultaValidadeDigital() {
+      return 'Consulte a validade do ato notarial em www.docautentico.com.br/valida';
+    }
+
+    function montarDadosAssinaturaDigitalGrafica(dados) {
+      return {
+        nome: dados.quemAssina,
+        cargo: dados.cargoAssina,
+        data: dados.dataCertidao,
+        nota: 'Documento eletrônico – Provimento CNJ nº 149/2023'
+      };
+    }
+
+    function montarTextoPrincipal(dados) {
+      if (dados.tipoCertidao === 'documentoArquivado') {
+        return 'Com fundamento no artigo 6º, inciso II, da Lei 8.935/94, a pedido da parte interessada, certifico que revendo os documentos exigidos para a lavratura de atos notariais existentes neste Tabelionato, encontrei ' + dados.descricaoDocumentoArquivado + ', cujas reproduções fotostáticas integram a presente. Dou fé.';
+      }
+
+      if (dados.tipoCertidao === 'reconhecimentoFirmaCRV') {
+        return 'Com fundamento no artigo 6º, inciso II, da Lei 8.935/94, a pedido da parte interessada, certifico que revendo os livros existentes neste Tabelionato, encontrei o ato lavrado no Livro ' + dados.livro + ', às páginas ' + dados.paginas + ', cujo inteiro teor é o seguinte: TERMO DE RECONHECIMENTO DE FIRMA POR AUTENTICIDADE nº ' + dados.termoNumero + '. Aos ' + dados.dataTermoExtenso + ' (' + dados.dataTermoBR + '), compareceu ' + dados.nomeComparecente + ', RG nº ' + dados.rgComparecente + ', CPF nº ' + dados.cpfComparecente + ', solicitando o reconhecimento de sua firma POR AUTENTICIDADE no seguinte documento: CRV - RENAVAM nº ' + dados.renavam + ' - ' + dados.dadosVeiculo + ', comprador ' + dados.nomeComprador + ', CPF nº ' + dados.cpfComprador + ', Selo de autenticidade nº ' + dados.seloAutenticidade + '. Este Tabelionato comunicou o Detran/SP e a Secretaria da Fazenda Estadual no prazo legal, conforme Decreto nº 60.489, de 23.05.2014. Eu, ' + dados.escreventeReconhecimento + ', escrevente autorizado(a), fiz o reconhecimento solicitado. Dou fé.';
+      }
+
+      if (dados.tipoCertidao === 'atoEmAndamento') {
+        return 'Com fundamento no artigo 6º, inciso II, da Lei 8.935/94, a pedido da parte interessada, certifico que revendo os protocolos eletrônicos de atos notariais deste Tabelionato, encontrei ' + dados.atoEmAndamentoDescricao + ', em andamento, e na situação abaixo indicada nesta data, como segue:';
+      }
+
+      if (dados.tipoCertidao === 'atoIncompleto') {
+        return 'Com fundamento no artigo 6º, inciso II, da Lei 8.935/94, a pedido da parte interessada, certifico que revendo o Livro de Escrituras nº ' + dados.livro + ', páginas ' + dados.paginas + ', verifiquei constar ' + dados.descricaoAtoIncompleto + '. Por consequência, o ato notarial lavrado foi declarado incompleto e não produz efeitos. Dou fé.';
+      }
+
+      if (dados.tipoCertidao === 'fichaFirmaIdentidade') {
+        let origem = dados.origemPedidoFicha;
+        if (origem === 'por decisão judicial') {
+          origem = 'por decisão judicial oriunda do ' + valorOuCampo(dados.processoJudicialFicha, 'PROCESSO JUDICIAL');
+        }
+        return 'Com fundamento no artigo 6º, inciso II, da Lei 8.935/94 e no art. 28 do Provimento 134/2022 do Conselho Nacional de Justiça, ' + origem + ', certifico que, revendo as fichas de firma e documentos de identificação existentes neste ' + dados.nomeCartorio + ', encontrei a ficha e o documento arquivados sob o código ' + dados.codigoFicha + ', cuja reprodução fotostática integra a presente. Dou fé.';
+      }
+
+      return 'Com fundamento no artigo 6º, inciso II, da Lei 8.935/94, a pedido da parte interessada, certifico que revendo os livros existentes neste Tabelionato, encontrei o ato lavrado no livro ' + dados.livro + ', às páginas ' + dados.paginas + ', cuja reprodução fotostática integra a presente. Dou fé.';
+    }
+
+    function montarEstruturaCertidao(dados) {
+      const textoPrincipal = dados.tipoAssinatura === 'digital' ? removerDouFeFinal(montarTextoPrincipal(dados)) : montarTextoPrincipal(dados);
+      const blocoTextoPrincipal = { tipo: 'paragraph', texto: textoPrincipal };
+      if (dados.tipoCertidao === 'reconhecimentoFirmaCRV') blocoTextoPrincipal.semNegritoMarcadores = true;
+      const blocos = [
+        { tipo: 'title', texto: 'CERTIDÃO' },
+        blocoTextoPrincipal
+      ];
+
+      if (dados.tipoCertidao === 'atoEmAndamento') {
+        blocos.push({ tipo: 'line', texto: 'Protocolo: ' + dados.protocoloAndamento + '.' });
+        blocos.push({ tipo: 'line', texto: 'Data de entrada do ato: ' + dados.dataEntradaAndamento + '.' });
+        String(dados.partesAndamento || '').split(/\n+/).map(function (linha) { return linha.trim(); }).filter(Boolean).forEach(function (linha) {
+          blocos.push({ tipo: 'line', texto: linha.replace(/\.$/, '') + '.' });
+        });
+        const textoSituacao = 'Situação do ato: ' + dados.situacaoAndamento.replace(/\.$/, '') + '. Dou fé.';
+        blocos.push({ tipo: 'paragraph', texto: dados.tipoAssinatura === 'digital' ? removerDouFeFinal(textoSituacao) : textoSituacao });
+      }
+
+      if (dados.tipoAssinatura === 'digital') {
+        blocos.push({ tipo: 'paragraph', texto: montarFinalizacaoDigital(dados) });
+        blocos.push({ tipo: 'line', texto: montarConsultaValidadeDigital() });
+      }
+
+      blocos.push({ tipo: 'space' });
+      blocos.push({ tipo: 'paragraph', texto: dados.emolumentos, semNegritoMarcadores: true });
+      blocos.push({ tipo: 'space' });
+      blocos.push({ tipo: 'rightLine', texto: dados.cidade + ', ' + dados.dataCertidao, semNegritoMarcadores: true });
+      blocos.push({ tipo: 'space' });
+      blocos.push({ tipo: 'space' });
+      blocos.push({ tipo: 'space' });
+
+      if (dados.tipoAssinatura === 'fisica') {
+        blocos.push({ tipo: 'signatureLine' });
+        blocos.push({ tipo: 'signature', texto: dados.quemAssina });
+        blocos.push({ tipo: 'centerLine', texto: dados.cargoAssina });
+      } else if (dados.tipoAssinatura === 'digital') {
+        blocos.push({ tipo: 'digitalSignatureGraphic', dadosAssinatura: montarDadosAssinaturaDigitalGrafica(dados) });
+      }
+      return blocos;
+    }
+
+
+    function marcadorDeveFicarNegrito(texto) {
+      const normalizado = String(texto || '')
+        .replace(/^\[/, '')
+        .replace(/\]$/, '')
+        .replace(/\s+/g, ' ')
+        .trim()
+        .toUpperCase();
+      const excecoes = ['DESCRIÇÃO DO DOCUMENTO ARQUIVADO'];
+      return normalizado && !excecoes.includes(normalizado);
+    }
+
+    function dividirTextoComMarcadores(texto, semNegritoMarcadores) {
+      const valor = String(texto || '');
+      if (semNegritoMarcadores) return [{ texto: valor, bold: false }];
+      return valor.split(/(\[[^\]]+\])/g).filter(function (parte) { return parte !== ''; }).map(function (parte) {
+        const marcador = /^\[[^\]]+\]$/.test(parte);
+        return { texto: parte, bold: marcador && marcadorDeveFicarNegrito(parte) };
+      });
+    }
+
+    function montarHtmlTextoCertidao(texto, semNegritoMarcadores) {
+      return dividirTextoComMarcadores(texto, semNegritoMarcadores).map(function (parte) {
+        const valor = escaparHtml(parte.texto);
+        return parte.bold ? '<strong>' + valor + '</strong>' : valor;
+      }).join('');
+    }
+
+    function temMarcadorNegrito(texto, semNegritoMarcadores) {
+      return dividirTextoComMarcadores(texto, semNegritoMarcadores).some(function (parte) { return parte.bold; });
+    }
+
+    function montarHtmlCertidao(dados) {
+      return montarEstruturaCertidao(dados).map(function (bloco) {
+        if (bloco.tipo === 'space') return '<div class="certidao-space"></div>';
+        if (bloco.tipo === 'signatureLine') return '<div class="certidao-signature-line"></div>';
+        const texto = escaparHtml(bloco.texto);
+        const textoComMarcadores = montarHtmlTextoCertidao(bloco.texto, bloco.semNegritoMarcadores);
+        if (bloco.tipo === 'rightLine') return '<p class="certidao-right">' + textoComMarcadores + '</p>';
+        if (bloco.tipo === 'paragraph') return '<p class="certidao-paragraph">' + textoComMarcadores + '</p>';
+        if (bloco.tipo === 'title') return '<p class="certidao-title">' + texto + '</p>';
+        if (bloco.tipo === 'signature') return '<p class="certidao-signature">' + textoComMarcadores + '</p>';
+        if (bloco.tipo === 'digitalNote') return '<p class="certidao-digital-note">' + textoComMarcadores + '</p>';
+        if (bloco.tipo === 'digitalSignatureGraphic') {
+          return '<div class="certidao-digital-signature"><img class="certidao-digital-signature-image" src="' + ASSINATURA_DIGITAL_CNB_DATA_URL + '" alt="Representação gráfica da assinatura digital"></div>';
+        }
+        if (bloco.tipo === 'centerLine') return '<p class="certidao-center">' + textoComMarcadores + '</p>';
+        return '<p class="certidao-line">' + textoComMarcadores + '</p>';
+      }).join('');
+    }
+
+    function atualizarPrevia(forcar) {
+      if (!forcar && (edicaoManualCertidao || previaAlteradaManualmente)) return;
+      ids.previewCertidao.innerHTML = montarHtmlCertidao(coletarDados());
+    }
+
+    function alternarEdicaoCertidao() {
+      const painelVisivel = ids.previewPanel.classList.contains('is-visible');
+
+      if (!painelVisivel) {
+        if (!edicaoManualCertidao) atualizarPrevia(true);
+        ids.previewPanel.classList.add('is-visible');
+        edicaoCertidaoAtiva = true;
+        ids.previewCertidao.setAttribute('contenteditable', 'true');
+        ids.previewCertidao.classList.add('is-editing');
+        ids.btnEditarCertidao.textContent = 'Concluir edição';
+        window.setTimeout(function () { ids.previewCertidao.focus(); }, 50);
+        setStatus('Prévia aberta para visualização e edição. Ajuste o texto diretamente na prévia e clique em “Concluir edição”.');
+        return;
+      }
+
+      if (edicaoCertidaoAtiva) {
+        edicaoCertidaoAtiva = false;
+        ids.previewCertidao.setAttribute('contenteditable', 'false');
+        ids.previewCertidao.classList.remove('is-editing');
+        ids.btnEditarCertidao.textContent = 'Ocultar prévia';
+
+        if (previaAlteradaManualmente) {
+          edicaoManualCertidao = true;
+          setStatus('Edição manual aplicada. O PDF será gerado com o texto exibido na prévia.');
+        } else {
+          edicaoManualCertidao = false;
+          atualizarPrevia(true);
+          setStatus('Prévia conferida. O PDF será gerado com os campos preenchidos no formulário.');
+        }
+        return;
+      }
+
+      ids.previewPanel.classList.remove('is-visible');
+      ids.btnEditarCertidao.textContent = 'Visualizar/editar certidão';
+      setStatus('Prévia da certidão ocultada.');
+    }
+
+    function validarCamposAntesDeGerar() {
+      ['quemAssina', 'nomeComparecente', 'nomeComprador', 'escreventeReconhecimento'].forEach(function (id) {
+        const campo = document.getElementById(id);
+        if (campo) campo.value = campo.value.toUpperCase();
+      });
+
+      let cpfsValidos = true;
+      document.querySelectorAll('[data-cpf="true"]').forEach(function (campo) {
+        if (!validarCpfCampo(campo)) cpfsValidos = false;
+      });
+
+      if (!cpfsValidos) {
+        setStatus('Confira os CPFs informados antes de gerar o PDF final.');
+        return false;
+      }
+
+      atualizarCamposPorTipo();
+      const campos = Array.from(document.querySelectorAll('input, select, textarea')).filter(function (campo) {
+        return !campo.disabled && campo.required;
+      });
+
+      for (const campo of campos) {
+        if (!campo.reportValidity()) {
+          setStatus('Confira os campos obrigatórios antes de gerar o PDF final.');
+          return false;
+        }
+      }
+
+      if (!getTipoAssinatura()) {
+        alert('Selecione o tipo da assinatura da certidão.');
+        setStatus('Selecione o tipo da assinatura antes de gerar ou imprimir.');
+        const primeiroTipo = document.getElementById('tipoAssinaturaDigital');
+        if (primeiroTipo) primeiroTipo.focus();
+        return false;
+      }
+
+      if (!ids.atoPdf.files || !ids.atoPdf.files[0]) {
+        alert('Selecione o PDF do ato notarial ou documento digitalizado.');
+        setStatus('Selecione o PDF do ato ou documento digitalizado para que o sistema conte as páginas e monte o arquivo final.');
+        ids.atoPdf.focus();
+        return false;
+      }
+
+      if (!paginasAtoDigitalizado) {
+        setStatus('O PDF do ato digitalizado ainda não foi lido. Selecione novamente o arquivo antes de gerar o PDF final.');
+        return false;
+      }
+
+      if (!previaAlteradaManualmente) {
+        edicaoManualCertidao = false;
+        atualizarPrevia(true);
+      }
+      return true;
+    }
+
+    async function gerarPdfFinal() {
+      if (!validarCamposAntesDeGerar()) return;
+      ids.btnGerarPdf.disabled = true;
+      setStatus('Gerando PDF final...');
+
+      try {
+        const bytes = await montarPdfFinal();
+        baixarArquivo(bytes, nomeArquivoPdf());
+        setStatus('PDF final gerado com sucesso. Páginas numeradas: ' + (paginasAtoDigitalizado + 1) + '.');
+      } catch (erro) {
+        console.error(erro);
+        const mensagem = erro && erro.message ? erro.message : 'Erro desconhecido.';
+        alert('Erro ao gerar o PDF: ' + mensagem);
+        setStatus('Não foi possível gerar o PDF. Detalhe técnico: ' + mensagem);
+      } finally {
+        ids.btnGerarPdf.disabled = false;
+      }
+    }
+
+    async function imprimirPdfFinal() {
+      if (!validarCamposAntesDeGerar()) return;
+      ids.btnImprimir.disabled = true;
+      setStatus('Preparando PDF final para impressão...');
+
+      try {
+        const bytes = await montarPdfFinal();
+        const blob = new Blob([bytes], { type: 'application/pdf' });
+        const url = URL.createObjectURL(blob);
+        const janela = window.open(url, '_blank');
+        if (!janela) {
+          baixarArquivo(bytes, nomeArquivoPdf());
+          alert('O navegador bloqueou a janela de impressão. O PDF foi baixado para impressão manual.');
+          setStatus('O navegador bloqueou a janela de impressão. O PDF foi baixado.');
+          return;
+        }
+        janela.onload = function () {
+          janela.focus();
+          janela.print();
+        };
+        window.setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+        setStatus('PDF final aberto para impressão.');
+      } catch (erro) {
+        console.error(erro);
+        const mensagem = erro && erro.message ? erro.message : 'Erro desconhecido.';
+        alert('Erro ao preparar a impressão: ' + mensagem);
+        setStatus('Não foi possível preparar a impressão. Detalhe técnico: ' + mensagem);
+      } finally {
+        ids.btnImprimir.disabled = false;
+      }
+    }
+
+    async function montarPdfFinal() {
+      if (typeof PDFLib === 'undefined') {
+        throw new Error('A biblioteca PDF-lib não foi carregada. Verifique a conexão com a internet e recarregue a página.');
+      }
+
+      const { PDFDocument } = PDFLib;
+      const pdfDoc = await PDFDocument.create();
+      await registrarFontkit(pdfDoc);
+      const fontes = await carregarFontes(pdfDoc);
+      const assinaturaDigitalImagem = await carregarImagemAssinaturaDigital(pdfDoc);
+      const blocos = edicaoManualCertidao ? montarBlocosDaPreviaEditada() : montarEstruturaCertidao(coletarDados());
+      const templateBytes = await obterTemplateCartorioBytes();
+      const templateInfo = await prepararTemplateCartorio(pdfDoc, templateBytes);
+
+      desenharCertidaoNoPdf(pdfDoc, blocos, fontes, templateInfo, assinaturaDigitalImagem);
+      await anexarPdfDigitalizado(pdfDoc);
+      numerarPaginas(pdfDoc, fontes.regular);
+      aplicarEstruturaPdfA(pdfDoc);
+      return await pdfDoc.save({ useObjectStreams: false });
+    }
+
+    async function registrarFontkit(pdfDoc) {
+      if (window.fontkit && typeof pdfDoc.registerFontkit === 'function') {
+        pdfDoc.registerFontkit(window.fontkit);
+      }
+    }
+
+    async function carregarFontes(pdfDoc) {
+      if (!window.fontkit) {
+        throw new Error('Não foi possível gerar PDF/A: o fontkit não foi carregado para incorporar as fontes.');
+      }
+
+      const regularBytes = await fetch(URL_FONTE_CARLITO_REGULAR).then(function (res) {
+        if (!res.ok) throw new Error('Falha ao carregar a fonte regular.');
+        return res.arrayBuffer();
+      });
+      const boldBytes = await fetch(URL_FONTE_CARLITO_BOLD).then(function (res) {
+        if (!res.ok) throw new Error('Falha ao carregar a fonte em negrito.');
+        return res.arrayBuffer();
+      });
+
+      return {
+        regular: await pdfDoc.embedFont(regularBytes),
+        bold: await pdfDoc.embedFont(boldBytes)
+      };
+    }
+
+    function base64ParaUint8Array(base64) {
+      const binario = atob(base64);
+      const bytes = new Uint8Array(binario.length);
+      for (let i = 0; i < binario.length; i++) {
+        bytes[i] = binario.charCodeAt(i);
+      }
+      return bytes;
+    }
+
+    function escaparXmlPdfA(valor) {
+      return String(valor || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;');
+    }
+
+    function formatarDataXmpPdfA(data) {
+      const pad = function (numero) { return String(numero).padStart(2, '0'); };
+      const ano = data.getFullYear();
+      const mes = pad(data.getMonth() + 1);
+      const dia = pad(data.getDate());
+      const hora = pad(data.getHours());
+      const minuto = pad(data.getMinutes());
+      const segundo = pad(data.getSeconds());
+      const offsetMinutos = -data.getTimezoneOffset();
+      const sinal = offsetMinutos >= 0 ? '+' : '-';
+      const abs = Math.abs(offsetMinutos);
+      const offsetHora = pad(Math.floor(abs / 60));
+      const offsetMinuto = pad(abs % 60);
+      return ano + '-' + mes + '-' + dia + 'T' + hora + ':' + minuto + ':' + segundo + sinal + offsetHora + ':' + offsetMinuto;
+    }
+
+    function gerarIdentificadorPdfA() {
+      if (window.crypto && window.crypto.randomUUID) return window.crypto.randomUUID();
+      return 'certidao-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+    }
+
+    function montarMetadadosXmpPdfA(data) {
+      const dataXmp = formatarDataXmpPdfA(data);
+      const titulo = escaparXmlPdfA('Certidão reprográfica');
+      const ferramenta = escaparXmlPdfA('Gerador de certidão reprográfica');
+      const idDocumento = escaparXmlPdfA('uuid:' + gerarIdentificadorPdfA());
+
+      return '<?xpacket begin="\uFEFF" id="W5M0MpCehiHzreSzNTczkc9d"?>\n'
+        + '<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Gerador de certidão reprográfica">\n'
+        + '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">\n'
+        + '<rdf:Description rdf:about="" xmlns:pdfaid="http://www.aiim.org/pdfa/ns/id/">\n'
+        + '<pdfaid:part>2</pdfaid:part>\n'
+        + '<pdfaid:conformance>B</pdfaid:conformance>\n'
+        + '</rdf:Description>\n'
+        + '<rdf:Description rdf:about="' + idDocumento + '" xmlns:dc="http://purl.org/dc/elements/1.1/">\n'
+        + '<dc:title><rdf:Alt><rdf:li xml:lang="x-default">' + titulo + '</rdf:li></rdf:Alt></dc:title>\n'
+        + '<dc:format>application/pdf</dc:format>\n'
+        + '</rdf:Description>\n'
+        + '<rdf:Description rdf:about="' + idDocumento + '" xmlns:xmp="http://ns.adobe.com/xap/1.0/">\n'
+        + '<xmp:CreatorTool>' + ferramenta + '</xmp:CreatorTool>\n'
+        + '<xmp:CreateDate>' + dataXmp + '</xmp:CreateDate>\n'
+        + '<xmp:ModifyDate>' + dataXmp + '</xmp:ModifyDate>\n'
+        + '<xmp:MetadataDate>' + dataXmp + '</xmp:MetadataDate>\n'
+        + '</rdf:Description>\n'
+        + '<rdf:Description rdf:about="' + idDocumento + '" xmlns:pdf="http://ns.adobe.com/pdf/1.3/">\n'
+        + '<pdf:Producer>pdf-lib</pdf:Producer>\n'
+        + '</rdf:Description>\n'
+        + '</rdf:RDF>\n'
+        + '</x:xmpmeta>\n'
+        + '<?xpacket end="w"?>';
+    }
+
+    function aplicarEstruturaPdfA(pdfDoc) {
+      const { PDFName, PDFString } = PDFLib;
+      if (!PDFName || !PDFString || !pdfDoc.context || !pdfDoc.catalog) {
+        throw new Error('Não foi possível gerar PDF/A: recursos internos da biblioteca PDF indisponíveis.');
+      }
+
+      const agora = new Date();
+      if (typeof pdfDoc.setTitle === 'function') pdfDoc.setTitle('Certidão reprográfica');
+      if (typeof pdfDoc.setSubject === 'function') pdfDoc.setSubject('Certidão reprográfica');
+      if (typeof pdfDoc.setCreator === 'function') pdfDoc.setCreator('Gerador de certidão reprográfica');
+      if (typeof pdfDoc.setProducer === 'function') pdfDoc.setProducer('pdf-lib');
+      if (typeof pdfDoc.setCreationDate === 'function') pdfDoc.setCreationDate(agora);
+      if (typeof pdfDoc.setModificationDate === 'function') pdfDoc.setModificationDate(agora);
+
+      const metadataStream = pdfDoc.context.stream(montarMetadadosXmpPdfA(agora), {
+        Type: PDFName.of('Metadata'),
+        Subtype: PDFName.of('XML')
+      });
+      const metadataRef = pdfDoc.context.register(metadataStream);
+      pdfDoc.catalog.set(PDFName.of('Metadata'), metadataRef);
+
+      const iccStream = pdfDoc.context.flateStream(base64ParaUint8Array(SRGB_IEC61966_2_1_ICC_BASE64), {
+        N: 3,
+        Alternate: PDFName.of('DeviceRGB')
+      });
+      const iccRef = pdfDoc.context.register(iccStream);
+      const outputIntent = pdfDoc.context.obj({
+        Type: PDFName.of('OutputIntent'),
+        S: PDFName.of('GTS_PDFA1'),
+        OutputConditionIdentifier: PDFString.of('sRGB IEC61966-2.1'),
+        Info: PDFString.of('sRGB IEC61966-2.1'),
+        RegistryName: PDFString.of('http://www.color.org'),
+        DestOutputProfile: iccRef
+      });
+
+      pdfDoc.catalog.set(PDFName.of('OutputIntents'), pdfDoc.context.obj([outputIntent]));
+    }
+
+    async function carregarImagemAssinaturaDigital(pdfDoc) {
+      try {
+        return await pdfDoc.embedPng(base64ParaUint8Array(ASSINATURA_DIGITAL_CNB_BASE64));
+      } catch (erro) {
+        console.warn('Não foi possível carregar a imagem da assinatura digital.', erro);
+        return null;
+      }
+    }
+
+    function desenharCertidaoNoPdf(pdfDoc, blocos, fontes, templateInfo, assinaturaDigitalImagem) {
+      const larguraPagina = 595.28;
+      const alturaPagina = 841.89;
+      const margemEsquerda = 56.69;
+      const margemDireita = 56.69;
+      const margemSuperior = 127.56;
+      const margemInferior = 70.87;
+      const larguraTexto = larguraPagina - margemEsquerda - margemDireita;
+      const tamanhoFonte = 12;
+      const linha = 18;
+      let pagina = pdfDoc.addPage([larguraPagina, alturaPagina]);
+      aplicarTemplateNaPagina(pagina);
+      let y = alturaPagina - margemSuperior;
+
+      function aplicarTemplateNaPagina(paginaAtual) {
+        if (!templateInfo || !templateInfo.pagina) return;
+        paginaAtual.drawPage(templateInfo.pagina, { x: 0, y: 0, width: larguraPagina, height: alturaPagina });
+      }
+
+      function novaPaginaSeNecessario(alturaNecessaria) {
+        if (y - alturaNecessaria < margemInferior) {
+          pagina = pdfDoc.addPage([larguraPagina, alturaPagina]);
+          aplicarTemplateNaPagina(pagina);
+          y = alturaPagina - margemSuperior;
+        }
+      }
+
+      function obterTokensMarcadores(texto, semNegritoMarcadores) {
+        const partes = dividirTextoComMarcadores(texto, semNegritoMarcadores);
+        const tokens = [];
+        partes.forEach(function (parte) {
+          String(parte.texto || '').split(/(\s+)/).forEach(function (pedaco) {
+            if (!pedaco) return;
+            tokens.push({ texto: pedaco, bold: !!parte.bold });
+          });
+        });
+        return tokens;
+      }
+
+      function larguraTokenMarcador(token, tamanho) {
+        const fonteToken = token.bold ? fontes.bold : fontes.regular;
+        return fonteToken.widthOfTextAtSize(token.texto, tamanho);
+      }
+
+      function quebrarTokensMarcadores(texto, semNegritoMarcadores, tamanho, larguraMaxima) {
+        const tokens = obterTokensMarcadores(texto, semNegritoMarcadores);
+        const linhas = [];
+        let linhaAtual = [];
+        let larguraAtual = 0;
+
+        tokens.forEach(function (token) {
+          const largura = larguraTokenMarcador(token, tamanho);
+          if (linhaAtual.length && larguraAtual + largura > larguraMaxima && !/^\s+$/.test(token.texto)) {
+            while (linhaAtual.length && /^\s+$/.test(linhaAtual[linhaAtual.length - 1].texto)) linhaAtual.pop();
+            linhas.push(linhaAtual);
+            linhaAtual = [];
+            larguraAtual = 0;
+            if (/^\s+$/.test(token.texto)) return;
+          }
+
+          if (!linhaAtual.length && /^\s+$/.test(token.texto)) return;
+          linhaAtual.push(token);
+          larguraAtual += largura;
+        });
+
+        while (linhaAtual.length && /^\s+$/.test(linhaAtual[linhaAtual.length - 1].texto)) linhaAtual.pop();
+        if (linhaAtual.length) linhas.push(linhaAtual);
+        return linhas.length ? linhas : [[{ texto: '', bold: false }]];
+      }
+
+      function desenharLinhaMarcadores(tokens, xInicial, tamanho) {
+        let x = xInicial;
+        tokens.forEach(function (token) {
+          const fonteToken = token.bold ? fontes.bold : fontes.regular;
+          pagina.drawText(token.texto, { x: x, y: y, size: tamanho, font: fonteToken, color: PDFLib.rgb(0, 0, 0) });
+          x += fonteToken.widthOfTextAtSize(token.texto, tamanho);
+        });
+      }
+
+      blocos.forEach(function (bloco) {
+        if (bloco.tipo === 'space') {
+          novaPaginaSeNecessario(linha);
+          y -= linha;
+          return;
+        }
+
+        if (bloco.tipo === 'signatureLine') {
+          novaPaginaSeNecessario(24);
+          const larguraLinhaAssinatura = 226.77;
+          const xInicio = margemEsquerda + (larguraTexto - larguraLinhaAssinatura) / 2;
+          pagina.drawLine({
+            start: { x: xInicio, y: y - 8 },
+            end: { x: xInicio + larguraLinhaAssinatura, y: y - 8 },
+            thickness: 1,
+            color: PDFLib.rgb(0, 0, 0)
+          });
+          y -= 24;
+          return;
+        }
+
+        if (bloco.tipo === 'digitalSignatureGraphic') {
+          if (!assinaturaDigitalImagem) return;
+          const larguraImagem = 198;
+          const alturaImagem = larguraImagem * (assinaturaDigitalImagem.height / assinaturaDigitalImagem.width);
+          const xImagem = margemEsquerda + ((larguraTexto - larguraImagem) / 2);
+          novaPaginaSeNecessario(alturaImagem + 6);
+          pagina.drawImage(assinaturaDigitalImagem, {
+            x: xImagem,
+            y: y - alturaImagem + 85,
+            width: larguraImagem,
+            height: alturaImagem
+          });
+          y -= alturaImagem + 6;
+          return;
+        }
+
+        const texto = String(bloco.texto || '').replace(/\s+/g, ' ').trim();
+        if (!texto) return;
+        const tamanhoBloco = bloco.tipo === 'title' ? 16 : tamanhoFonte;
+        const linhaBloco = bloco.tipo === 'title' ? 24 : linha;
+        const fonte = ['title', 'signature'].includes(bloco.tipo) ? fontes.bold : fontes.regular;
+        const centralizado = ['signature', 'centerLine', 'title', 'digitalNote'].includes(bloco.tipo);
+        const alinhadoDireita = bloco.tipo === 'rightLine';
+
+        if (temMarcadorNegrito(texto, bloco.semNegritoMarcadores) && !centralizado && !alinhadoDireita) {
+          const linhasMarcadores = quebrarTokensMarcadores(texto, bloco.semNegritoMarcadores, tamanhoBloco, larguraTexto);
+          const alturaNecessariaMarcadores = linhasMarcadores.length * linhaBloco + 3;
+          novaPaginaSeNecessario(alturaNecessariaMarcadores);
+          linhasMarcadores.forEach(function (tokensLinha) {
+            desenharLinhaMarcadores(tokensLinha, margemEsquerda, tamanhoBloco);
+            y -= linhaBloco;
+          });
+          if (bloco.tipo === 'paragraph' || bloco.tipo === 'title') y -= 4;
+          return;
+        }
+
+        const linhas = quebrarTexto(texto, fonte, tamanhoBloco, larguraTexto, centralizado || alinhadoDireita);
+        const alturaNecessaria = linhas.length * linhaBloco + 3;
+        novaPaginaSeNecessario(alturaNecessaria);
+
+        linhas.forEach(function (linhaTexto) {
+          let x = margemEsquerda;
+          const larguraLinha = fonte.widthOfTextAtSize(linhaTexto, tamanhoBloco);
+          if (alinhadoDireita) x = larguraPagina - margemDireita - larguraLinha;
+          if (centralizado) x = margemEsquerda + (larguraTexto - larguraLinha) / 2;
+          pagina.drawText(linhaTexto, { x: x, y: y, size: tamanhoBloco, font: fonte, color: PDFLib.rgb(0, 0, 0) });
+          y -= linhaBloco;
+        });
+
+        if (bloco.tipo === 'paragraph' || bloco.tipo === 'title') y -= 4;
+      });
+    }
+
+    async function anexarPdfDigitalizado(pdfDoc) {
+      const arquivo = ids.atoPdf.files && ids.atoPdf.files[0] ? ids.atoPdf.files[0] : null;
+      if (!arquivo) return;
+      const bytes = await arquivo.arrayBuffer();
+      const origem = await PDFLib.PDFDocument.load(bytes, { ignoreEncryption: true });
+      const indices = origem.getPageIndices();
+      const paginasCopiadas = await pdfDoc.copyPages(origem, indices);
+      const larguraPagina = 595.28;
+      const alturaPagina = 841.89;
+
+      paginasCopiadas.forEach(function (paginaOrigem) {
+        const pagina = pdfDoc.addPage([larguraPagina, alturaPagina]);
+        const embed = paginaOrigem;
+        const tamanho = embed.getSize();
+        const escala = Math.min(larguraPagina / tamanho.width, alturaPagina / tamanho.height);
+        const largura = tamanho.width * escala;
+        const altura = tamanho.height * escala;
+        const x = (larguraPagina - largura) / 2;
+        const y = (alturaPagina - altura) / 2;
+        pagina.drawPage(embed, { x: x, y: y, width: largura, height: altura });
+      });
+    }
+
+    function numerarPaginas(pdfDoc, fonte) {
+      const paginas = pdfDoc.getPages();
+      const total = paginas.length;
+      const tamanhoFonte = 10;
+      paginas.forEach(function (pagina, indice) {
+        const texto = String(indice + 1) + '/' + String(total);
+        const larguraTexto = fonte.widthOfTextAtSize(texto, tamanhoFonte);
+        pagina.drawText(texto, {
+          x: 595.28 - 56.69 - larguraTexto,
+          y: 32,
+          size: tamanhoFonte,
+          font: fonte,
+          color: PDFLib.rgb(0, 0, 0)
+        });
+      });
+    }
+
+    function quebrarTexto(texto, fonte, tamanhoFonte, larguraMaxima, preservarLinha) {
+      if (preservarLinha && fonte.widthOfTextAtSize(texto, tamanhoFonte) <= larguraMaxima) return [texto];
+      const palavras = String(texto || '').split(/\s+/).filter(Boolean);
+      const linhas = [];
+      let atual = '';
+
+      palavras.forEach(function (palavra) {
+        const teste = atual ? atual + ' ' + palavra : palavra;
+        if (fonte.widthOfTextAtSize(teste, tamanhoFonte) <= larguraMaxima) {
+          atual = teste;
+        } else {
+          if (atual) linhas.push(atual);
+          atual = palavra;
+        }
+      });
+
+      if (atual) linhas.push(atual);
+      return linhas.length ? linhas : [''];
+    }
+
+    function montarBlocosDaPreviaEditada() {
+      const blocos = [];
+      const filhos = Array.from(ids.previewCertidao.children || []);
+      filhos.forEach(function (el) {
+        if (el.classList.contains('certidao-space')) {
+          blocos.push({ tipo: 'space' });
+          return;
+        }
+        if (el.classList.contains('certidao-signature-line')) {
+          blocos.push({ tipo: 'signatureLine' });
+          return;
+        }
+        const texto = el.innerText.replace(/\s+/g, ' ').trim();
+        if (!texto) return;
+        if (el.classList.contains('certidao-right')) blocos.push({ tipo: 'rightLine', texto: texto });
+        else if (el.classList.contains('certidao-paragraph')) blocos.push({ tipo: 'paragraph', texto: texto });
+        else if (el.classList.contains('certidao-title')) blocos.push({ tipo: 'title', texto: texto });
+        else if (el.classList.contains('certidao-signature')) blocos.push({ tipo: 'signature', texto: texto });
+        else if (el.classList.contains('certidao-digital-note')) blocos.push({ tipo: 'digitalNote', texto: texto });
+        else if (el.classList.contains('certidao-digital-signature')) {
+          blocos.push({ tipo: 'digitalSignatureGraphic' });
+        }
+        else if (el.classList.contains('certidao-center')) blocos.push({ tipo: 'centerLine', texto: texto });
+        else blocos.push({ tipo: 'line', texto: texto });
+      });
+      return blocos.length ? blocos : montarEstruturaCertidao(coletarDados());
+    }
+
+    function abrirDbTemplateCartorio() {
+      return new Promise(function (resolve, reject) {
+        const requisicao = indexedDB.open(DB_TEMPLATE_CERTIDAO, 1);
+        requisicao.onupgradeneeded = function () {
+          const db = requisicao.result;
+          if (!db.objectStoreNames.contains(STORE_TEMPLATE_CERTIDAO)) {
+            db.createObjectStore(STORE_TEMPLATE_CERTIDAO, { keyPath: 'id' });
+          }
+        };
+        requisicao.onsuccess = function () { resolve(requisicao.result); };
+        requisicao.onerror = function () { reject(requisicao.error || new Error('Falha ao abrir o banco local do template.')); };
+      });
+    }
+
+    function operarTemplateCartorio(modo, valor) {
+      return abrirDbTemplateCartorio().then(function (db) {
+        return new Promise(function (resolve, reject) {
+          const transacao = db.transaction(STORE_TEMPLATE_CERTIDAO, modo === 'get' ? 'readonly' : 'readwrite');
+          const store = transacao.objectStore(STORE_TEMPLATE_CERTIDAO);
+          let requisicao;
+
+          if (modo === 'put') requisicao = store.put(valor);
+          if (modo === 'delete') requisicao = store.delete(ID_TEMPLATE_CERTIDAO);
+          if (modo === 'get') requisicao = store.get(ID_TEMPLATE_CERTIDAO);
+
+          requisicao.onsuccess = function () { resolve(requisicao.result); };
+          requisicao.onerror = function () { reject(requisicao.error || new Error('Falha ao acessar o template salvo.')); };
+          transacao.oncomplete = function () { db.close(); };
+          transacao.onerror = function () { reject(transacao.error || new Error('Falha na operação local do template.')); };
+        });
+      });
+    }
+
+    function atualizarStatusTemplate(texto) {
+      ids.templateStatus.textContent = texto;
+    }
+
+    async function salvarTemplateCartorio() {
+      const arquivo = ids.templatePdf && ids.templatePdf.files ? ids.templatePdf.files[0] : null;
+      if (!arquivo) {
+        alert('Selecione o template do cartório em PDF antes de salvar.');
+        return;
+      }
+
+      if (arquivo.type && arquivo.type !== 'application/pdf') {
+        alert('O template deve estar em PDF.');
+        return;
+      }
+
+      try {
+        const bytes = await arquivo.arrayBuffer();
+        await operarTemplateCartorio('put', {
+          id: ID_TEMPLATE_CERTIDAO,
+          nome: arquivo.name,
+          tipo: arquivo.type || 'application/pdf',
+          tamanho: arquivo.size,
+          salvoEm: new Date().toISOString(),
+          bytes: bytes
+        });
+        atualizarStatusTemplate('Template salvo neste navegador: ' + arquivo.name);
+        setStatus('Template do cartório salvo neste navegador. Ele será aplicado às próximas certidões geradas neste computador.');
+        alert('Template salvo neste navegador.');
+      } catch (erro) {
+        console.error(erro);
+        alert('Não foi possível salvar o template neste navegador. Você ainda pode selecionar o arquivo manualmente antes de gerar o PDF.');
+      }
+    }
+
+    async function limparTemplateCartorioSalvo() {
+      if (!confirm('Deseja apagar o template do cartório salvo neste navegador?')) return;
+      try {
+        await operarTemplateCartorio('delete');
+        ids.templatePdf.value = '';
+        atualizarStatusTemplate('Nenhum template salvo neste navegador.');
+        setStatus('Template do cartório apagado deste navegador.');
+      } catch (erro) {
+        console.error(erro);
+        alert('Não foi possível apagar o template salvo.');
+      }
+    }
+
+    async function carregarStatusTemplateSalvo() {
+      try {
+        const registro = await operarTemplateCartorio('get');
+        if (registro && registro.nome) {
+          atualizarStatusTemplate('Template salvo neste navegador: ' + registro.nome);
+        } else {
+          atualizarStatusTemplate('Nenhum template salvo neste navegador.');
+        }
+      } catch (erro) {
+        atualizarStatusTemplate('Nenhum template salvo neste navegador.');
+      }
+    }
+
+    async function obterTemplateCartorioBytes() {
+      const arquivo = ids.templatePdf && ids.templatePdf.files ? ids.templatePdf.files[0] : null;
+      if (arquivo) return await arquivo.arrayBuffer();
+
+      try {
+        const registro = await operarTemplateCartorio('get');
+        if (registro && registro.bytes) return registro.bytes;
+      } catch (erro) {
+        console.warn('Não foi possível carregar template salvo.', erro);
+      }
+
+      return null;
+    }
+
+    async function prepararTemplateCartorio(pdfDoc, bytesTemplate) {
+      if (!bytesTemplate) return null;
+      try {
+        const pdfTemplate = await PDFLib.PDFDocument.load(bytesTemplate, { ignoreEncryption: true });
+        const paginaOrigem = pdfTemplate.getPage(0);
+        const pagina = await pdfDoc.embedPage(paginaOrigem);
+        return { pagina: pagina };
+      } catch (erro) {
+        console.error(erro);
+        alert('Não foi possível aplicar o template do cartório. A certidão será gerada sem o template.');
+        return null;
+      }
+    }
+
+    function baixarArquivo(bytes, nome) {
+      const blob = new Blob([bytes], { type: 'application/pdf' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = nome;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    }
+
+    function nomeArquivoPdf() {
+      const tipo = getValor('tipoCertidao') || 'certidao';
+      const data = getValor('dataCertidao') || 'sem-data';
+      return 'certidao-reprografica-' + tipo.replace(/[^0-9A-Za-z_-]+/g, '-') + '-' + data + '.pdf';
+    }
+
+    function salvarDadosCartorio() {
+      const dados = {
+        cidade: getValor('cidade'),
+        nomeCartorio: getValor('nomeCartorio'),
+        emolumentos: getValor('emolumentos'),
+        quemAssina: getValor('quemAssina').toUpperCase(),
+        cargoAssina: getValor('cargoAssina')
+      };
+      localStorage.setItem(CHAVE_DADOS_CERTIDAO, JSON.stringify(dados));
+      setStatus('Dados salvos neste navegador para uso em novas certidões.');
+      alert('Dados salvos para uso em novas certidões.');
+    }
+
+    function carregarDadosSalvos() {
+      try {
+        const salvo = JSON.parse(localStorage.getItem(CHAVE_DADOS_CERTIDAO) || '{}');
+        if (salvo.cidade) document.getElementById('cidade').value = salvo.cidade;
+        if (salvo.nomeCartorio) document.getElementById('nomeCartorio').value = salvo.nomeCartorio;
+        if (salvo.emolumentos) document.getElementById('emolumentos').value = salvo.emolumentos;
+        if (salvo.quemAssina) document.getElementById('quemAssina').value = salvo.quemAssina;
+        if (salvo.cargoAssina) document.getElementById('cargoAssina').value = salvo.cargoAssina;
+      } catch (e) {}
+    }
+
+    function limparDadosSalvos() {
+      localStorage.removeItem(CHAVE_DADOS_CERTIDAO);
+      setStatus('Dados salvos removidos deste navegador.');
+    }
+
+    function novaCertidao() {
+      limparTudo();
+      setStatus('Nova certidão iniciada. Dados salvos do cartório e template salvo foram preservados.');
+    }
+
+    function limparTudo() {
+      document.querySelectorAll('input[type="text"], input[type="number"], input[type="date"], input[type="time"], textarea').forEach(function (campo) {
+        campo.value = '';
+      });
+      document.querySelectorAll('select').forEach(function (campo) {
+        campo.selectedIndex = 0;
+      });
+      document.querySelectorAll('input[type="radio"]').forEach(function (campo) {
+        campo.checked = false;
+      });
+      ids.templatePdf.value = '';
+      ids.atoPdf.value = '';
+      paginasAtoDigitalizado = 0;
+      ids.atoStatus.classList.remove('ok');
+      ids.atoStatus.textContent = 'Nenhum ato digitalizado selecionado.';
+      inicializarDatas();
+      carregarDadosSalvos();
+      carregarStatusTemplateSalvo();
+      atualizarCamposPorTipo();
+      edicaoManualCertidao = false;
+      edicaoCertidaoAtiva = false;
+      previaAlteradaManualmente = false;
+      ids.previewCertidao.setAttribute('contenteditable', 'false');
+      ids.previewCertidao.classList.remove('is-editing');
+      ids.previewPanel.classList.remove('is-visible');
+      ids.btnEditarCertidao.textContent = 'Visualizar/editar certidão';
+      atualizarPrevia(true);
+      setStatus('Campos limpos. Preencha os dados para gerar nova certidão.');
+    }
+  </script>
+</body>
+</html>
