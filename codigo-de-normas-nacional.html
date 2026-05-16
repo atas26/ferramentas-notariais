@@ -712,6 +712,7 @@
     const OFFICIAL_PAGE_URL = 'https://atos.cnj.jus.br/atos/detalhar/5243';
     const OFFICIAL_PDF_URL = 'https://atos.cnj.jus.br/files/compilado1507262026032369c1572e90dfd.pdf';
     const DATA_URL = 'dados/normas-nacional.json';
+    const DATA_URLS = [DATA_URL, '/' + DATA_URL];
     const BASE_LABEL = 'Código Nacional de Normas';
     const DEFAULT_BASE_DATE = '30/04/2026';
     const FOOTER_BASE_TEXT = 'Base atualizada automaticamente:';
@@ -911,6 +912,10 @@
       {
             "label": "Provimento n. 219/2026",
             "url": "https://atos.cnj.jus.br/atos/detalhar/6806"
+      },
+      {
+            "label": "Provimento n. 224/2026",
+            "url": "https://atos.cnj.jus.br/atos/detalhar/5243"
       }
 ];
 
@@ -962,7 +967,8 @@
       "Provimento n. 215/2026": "03/03/2026",
       "Provimento n. 217/2026": "09/03/2026",
       "Provimento n. 218/2026": "13/03/2026",
-      "Provimento n. 219/2026": "20/03/2026"
+      "Provimento n. 219/2026": "20/03/2026",
+      "Provimento n. 224/2026": "12/05/2026"
 };
 
     const chips = [
@@ -988,7 +994,9 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
       exact: false,
       similar: false,
       sort: 'relevancia',
-      loadedAt: null
+      loadedAt: null,
+      dataSource: null,
+      dynamicAlteracoes: []
     };
 
     const $ = (sel) => document.querySelector(sel);
@@ -1741,13 +1749,39 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
       }).join('');
     }
 
+    function alteracaoSortKey(label) {
+      const match = String(label || '').match(/(\d{1,3})\s*\/\s*(\d{4})/);
+      if (!match) return 0;
+      return (Number(match[2]) * 1000) + Number(match[1]);
+    }
+
+    function mergeAlteracoesList() {
+      const merged = new Map();
+
+      [...alteracoes, ...(state.dynamicAlteracoes || [])].forEach(item => {
+        const label = typeof item === 'string' ? item : item.label;
+        if (!label) return;
+
+        const existing = merged.get(label) || {};
+        merged.set(label, {
+          label,
+          url: (typeof item === 'string' ? existing.url : (item.url || existing.url)) || OFFICIAL_PAGE_URL,
+          data: (typeof item === 'string' ? existing.data : (item.data || existing.data)) || datasAlteracoes[label] || ''
+        });
+      });
+
+      return Array.from(merged.values()).sort((a, b) => alteracaoSortKey(a.label) - alteracaoSortKey(b.label));
+    }
+
     function renderAlteracoes() {
       const list = $('#alteracoesList');
       if (!list) return;
-      list.innerHTML = [...alteracoes].reverse().map(a => {
-        const label = typeof a === 'string' ? a : a.label;
-        const url = typeof a === 'string' ? OFFICIAL_PAGE_URL : (a.url || OFFICIAL_PAGE_URL);
-        const data = datasAlteracoes[label] || '';
+
+      const rows = mergeAlteracoesList();
+      list.innerHTML = rows.reverse().map(a => {
+        const label = a.label;
+        const url = a.url || OFFICIAL_PAGE_URL;
+        const data = a.data || datasAlteracoes[label] || '';
         return `<li><a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}<span class="muted">${escapeHtml(data)}</span></a></li>`;
       }).join('');
     }
@@ -1857,6 +1891,68 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
     }
 
 
+    function validateArticlesPayload(payload) {
+      return Boolean(payload && Array.isArray(payload.articles) && payload.articles.length);
+    }
+
+    function embeddedPayloadFallback() {
+      const embedded = document.getElementById('embeddedCnnData');
+      if (!embedded) return null;
+      const raw = (embedded.textContent || '').trim();
+      if (!raw || raw === '{}') return null;
+      const payload = JSON.parse(raw);
+      return validateArticlesPayload(payload) ? payload : null;
+    }
+
+    function extractDynamicAlteracoes(payload) {
+      const found = new Map();
+      const articles = Array.isArray(payload && payload.articles) ? payload.articles : [];
+      const regex = /Provimento\s+(?:CNJ?|CN)\s*n\.?\s*(\d{1,3})(?:\s*\/\s*(\d{4}))?(?:\s*,?\s*de\s*(\d{1,2})[./](\d{1,2})[./](\d{4}))?/gi;
+
+      articles.forEach(article => {
+        const text = String(article && article.texto || '');
+        let match;
+        while ((match = regex.exec(text)) !== null) {
+          const number = Number(match[1]);
+          const year = match[2] || match[5];
+
+          if (!number || !year || number < 150) continue;
+
+          const label = `Provimento n. ${number}/${year}`;
+          const day = match[3] ? String(match[3]).padStart(2, '0') : '';
+          const month = match[4] ? String(match[4]).padStart(2, '0') : '';
+          const data = day && month ? `${day}/${month}/${year}` : (datasAlteracoes[label] || '');
+
+          if (!found.has(label)) {
+            found.set(label, {
+              label,
+              data,
+              url: datasAlteracoes[label] ? OFFICIAL_PAGE_URL : OFFICIAL_PAGE_URL
+            });
+          } else if (data && !found.get(label).data) {
+            found.get(label).data = data;
+          }
+        }
+      });
+
+      return Array.from(found.values());
+    }
+
+    function applyPayload(payload, sourceLabel) {
+      if (!validateArticlesPayload(payload)) {
+        throw new Error('JSON carregado, mas sem lista válida de artigos ou itens.');
+      }
+
+      state.articles = payload.articles;
+      state.loadedAt = formatBaseDate(payload.updatedAt || DEFAULT_BASE_DATE);
+      state.dataSource = sourceLabel || payload.source || DATA_URL;
+      state.dynamicAlteracoes = extractDynamicAlteracoes(payload);
+
+      if (typeof updateAreaFilterOptions === 'function') updateAreaFilterOptions();
+      updateBaseMetadata(payload);
+      renderAlteracoes();
+    }
+
     function formatBaseDate(value) {
       if (!value) return '-';
       const raw = String(value);
@@ -1890,25 +1986,44 @@ Art. 3.º Este Provimento entra em vigor na data de sua publicação.`;
     }
 
     async function loadEmbeddedData() {
-      try {
-        setStatus(`Carregando base atualizada de ${DATA_URL}...`, 12);
-        const response = await fetch(DATA_URL + '?v=' + Date.now(), { cache: 'no-store' });
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status} ao carregar ${DATA_URL}`);
+      const errors = [];
+
+      for (const url of DATA_URLS) {
+        try {
+          setStatus(`Carregando base atualizada de ${url}...`, 12);
+          const response = await fetch(url + '?v=' + Date.now(), {
+            cache: 'no-store',
+            headers: { 'Cache-Control': 'no-cache' }
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status} ao carregar ${url}`);
+          }
+
+          const payload = await response.json();
+          applyPayload(payload, url);
+          setStatus('');
+          return;
+        } catch (err) {
+          errors.push(err);
+          console.warn('Falha ao carregar base externa:', url, err);
         }
-        const payload = await response.json();
-        if (!payload.articles || !Array.isArray(payload.articles) || !payload.articles.length) {
-          throw new Error('JSON carregado, mas sem lista válida de artigos ou itens.');
-        }
-        state.articles = payload.articles;
-        state.loadedAt = formatBaseDate(payload.updatedAt || DEFAULT_BASE_DATE);
-        if (typeof updateAreaFilterOptions === 'function') updateAreaFilterOptions();
-        updateBaseMetadata(payload);
-        setStatus('');
-      } catch (err) {
-        console.error(err);
-        setStatus(`Não foi possível carregar ${DATA_URL}. Confira se o arquivo JSON foi publicado pelo GitHub Pages.`);
       }
+
+      try {
+        const fallback = embeddedPayloadFallback();
+        if (fallback) {
+          applyPayload(fallback, 'base incorporada no HTML');
+          setStatus('');
+          return;
+        }
+      } catch (err) {
+        errors.push(err);
+        console.warn('Falha ao carregar base incorporada:', err);
+      }
+
+      console.error(errors);
+      setStatus(`Não foi possível carregar ${DATA_URL}. Confira se o arquivo JSON foi publicado pelo GitHub Pages.`);
     }
 
     async function init() {
