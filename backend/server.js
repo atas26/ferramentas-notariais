@@ -185,7 +185,7 @@ async function carregarBasePep() {
     ultimaModificacaoArquivo = infoArquivo.mtime.toISOString();
 
     const stream = fs.createReadStream(CSV_PATH, {
-      encoding: "utf8"
+      encoding: "latin1"
     });
 
     const leitor = readline.createInterface({
