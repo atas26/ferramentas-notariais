@@ -187,7 +187,7 @@
   </style>
 </head>
 
-<body>
+<body data-api="https://consulta-pep-backend.onrender.com">
   <main class="container">
     <section class="card">
       <h1>Consulta PEP por CPF</h1>
@@ -237,14 +237,14 @@
       </div>
 
       <p class="rodape">
-        Fonte dos dados: Portal da Transparência da Controladoria-Geral da União.
+        Fonte dos dados, Portal da Transparência da Controladoria-Geral da União.
         A consulta é informativa e não substitui a qualificação jurídica, cadastral, notarial ou registral do caso concreto.
       </p>
     </section>
   </main>
 
   <script>
-    const API_BASE_URL = "https://consulta-pep.html.onrender.com";
+    const API_BASE_URL = document.body.dataset.api;
 
     const campoCpf = document.getElementById("cpf");
     const botaoConsultar = document.getElementById("botaoConsultar");
@@ -273,18 +273,15 @@
       if (/^(\d)\1{10}$/.test(numeros)) return false;
 
       let soma = 0;
-
       for (let i = 0; i < 9; i++) {
         soma += Number(numeros[i]) * (10 - i);
       }
 
       let digito1 = 11 - (soma % 11);
       if (digito1 >= 10) digito1 = 0;
-
       if (digito1 !== Number(numeros[9])) return false;
 
       soma = 0;
-
       for (let i = 0; i < 10; i++) {
         soma += Number(numeros[i]) * (11 - i);
       }
@@ -337,14 +334,22 @@
       for (const item of lista) {
         const linha = document.createElement("tr");
 
-        const cpf = obterValor(item, ["cpf"]);
-        const nome = obterValor(item, ["nome"]);
-        const funcao = obterValor(item, ["descricao_funcao", "descricaoFuncao", "sigla_funcao"]);
-        const nivel = obterValor(item, ["nivel_funcao", "nivelFuncao"]);
-        const orgao = obterValor(item, ["nome_orgao", "nomeOrgao"]);
-        const inicio = obterValor(item, ["dt_inicio_exercicio", "dataInicioExercicio"]);
-        const fim = obterValor(item, ["dt_fim_exercicio", "dataFimExercicio"]);
-        const carencia = obterValor(item, ["dt_fim_carencia", "dataFimCarencia"]);
+        const dadosPep = item && item.pep ? item.pep : item;
+        const dadosOrgao = item && item.orgaoExercicio ? item.orgaoExercicio : item;
+
+        const cpf = obterValor(dadosPep, ["cpf", "codigoFormatado"]);
+        const nome = obterValor(dadosPep, ["nome"]);
+        const funcao = obterValor(item, [
+          "descricaoFuncao",
+          "descricao_funcao",
+          "siglaFuncao",
+          "sigla_funcao"
+        ]);
+        const nivel = obterValor(item, ["nivelFuncao", "nivel_funcao"]);
+        const orgao = obterValor(dadosOrgao, ["nome", "nome_orgao", "nomeOrgao"]);
+        const inicio = obterValor(item, ["dataInicioExercicio", "dt_inicio_exercicio"]);
+        const fim = obterValor(item, ["dataFimExercicio", "dt_fim_exercicio"]);
+        const carencia = obterValor(item, ["dataFimCarencia", "dt_fim_carencia"]);
 
         linha.innerHTML = `
           <td>${cpf}</td>
@@ -366,8 +371,7 @@
         ? new Date(dadosConsulta.consultaRealizadaEm).toLocaleString("pt-BR")
         : "Não informada";
 
-      resumo.textContent =
-        `Consulta realizada em ${dataConsulta}. Total exibido nesta página: ${lista.length}.`;
+      resumo.textContent = `Consulta realizada em ${dataConsulta}. Total exibido nesta página, ${lista.length}.`;
     }
 
     async function consultarPep() {
@@ -406,7 +410,10 @@
         limparMensagem();
         renderizarTabela(dados.resultado, dados);
       } catch (erro) {
-        mostrarMensagem("erro", "Erro de conexão com o servidor. Verifique se o backend está publicado no Render.");
+        mostrarMensagem(
+          "erro",
+          "Erro de conexão com o servidor. Verifique se o backend está publicado no Render."
+        );
       } finally {
         botaoConsultar.disabled = false;
         botaoConsultar.textContent = "Consultar";
