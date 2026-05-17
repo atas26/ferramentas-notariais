@@ -125,12 +125,12 @@
     }
 
     .botao-pdf {
-      background: #111827;
+      background: var(--azul);
       color: #ffffff;
     }
 
     .botao-pdf:hover {
-      background: #374151;
+      background: var(--azul-escuro);
     }
 
     .mensagem {
@@ -226,6 +226,24 @@
       font-size: 13px;
       color: var(--cinza);
       line-height: 1.5;
+    }
+
+    .rodape p {
+      margin: 0 0 10px;
+    }
+
+    .rodape p:last-child {
+      margin-bottom: 0;
+    }
+
+    .rodape a {
+      color: var(--azul);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .rodape a:hover {
+      text-decoration: underline;
     }
 
     .marca-pdf {
@@ -374,11 +392,22 @@
         </table>
       </div>
 
-      <p class="rodape">
-        Fonte dos dados: Portal da Transparência da Controladoria-Geral da União.
-        A consulta é informativa e não substitui a qualificação jurídica, cadastral, notarial ou registral do caso concreto.
-        Quando a base pública contém CPF mascarado, o resultado indica compatibilidade com o trecho central do CPF, e não confirmação integral do CPF pesquisado.
-      </p>
+      <div class="rodape">
+        <p>
+          Fonte dos dados:
+          <a href="https://portaldatransparencia.gov.br/download-de-dados/pep" target="_blank" rel="noopener noreferrer">
+            Portal da Transparência da Controladoria-Geral da União
+          </a>.
+        </p>
+
+        <p>
+          A consulta é informativa e não substitui a qualificação jurídica, cadastral, notarial ou registral do caso concreto.
+        </p>
+
+        <p>
+          Quando a base pública contém CPF mascarado em razão da LGPD, o resultado indica compatibilidade com o trecho central do CPF, e não a confirmação integral do CPF pesquisado.
+        </p>
+      </div>
     </section>
   </main>
 
@@ -615,7 +644,7 @@
       if (dadosConsulta.tipoConsulta === "cpf_mascarado_compativel") {
         alertaCpfMascarado.style.display = "block";
         alertaCpfMascarado.textContent =
-          "A base pública de PEP contém CPF mascarado. O resultado indica compatibilidade com o trecho central do CPF pesquisado, e não confirmação integral dos dígitos ocultos.";
+          "A base pública de PEP contém CPFs mascarados em razão da LGPD. O resultado indica compatibilidade com o trecho central do CPF pesquisado, e não a confirmação integral dos dígitos ocultos.";
       } else {
         alertaCpfMascarado.style.display = "none";
         alertaCpfMascarado.textContent = "";
