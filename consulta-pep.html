@@ -1,731 +1,532 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+import express from "express";
+import cors from "cors";
+import rateLimit from "express-rate-limit";
+import fs from "fs";
+import fsp from "fs/promises";
+import path from "path";
+import readline from "readline";
+import { fileURLToPath } from "url";
 
-  <title>Consulta PEP por CPF</title>
+const app = express();
 
-  <style>
-    :root {
-      --azul: rgb(0, 118, 255);
-      --azul-escuro: #0f4fc7;
-      --texto: #1f2937;
-      --cinza: #6b7280;
-      --borda: #e5e7eb;
-      --fundo: #f8fafc;
-      --branco: #ffffff;
-      --erro: #b91c1c;
-      --info: #1d4ed8;
-      --sucesso: #166534;
-      --alerta-texto: #92400e;
-      --alerta-fundo: #fffbeb;
-      --alerta-borda: #fde68a;
+const PORT = process.env.PORT || 3000;
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "*";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const CSV_PATH = path.join(__dirname, "data", "pep.csv");
+
+let indicePorCpfCompleto = new Map();
+let indicePorMioloCpf = new Map();
+
+let totalRegistros = 0;
+let totalCpfsIndexados = 0;
+let totalMiolosIndexados = 0;
+let baseStatus = "iniciando";
+let baseErro = null;
+let baseCarregadaEm = null;
+let arquivoBase = "pep.csv";
+let ultimaModificacaoArquivo = null;
+let camposDetectados = [];
+
+app.use(express.json());
+
+app.use(
+  cors({
+    origin: FRONTEND_ORIGIN === "*" ? "*" : FRONTEND_ORIGIN
+  })
+);
+
+app.use(
+  rateLimit({
+    windowMs: 60 * 1000,
+    limit: 60,
+    standardHeaders: true,
+    legacyHeaders: false,
+    message: {
+      erro: "Muitas consultas em pouco tempo. Aguarde alguns instantes e tente novamente."
+    }
+  })
+);
+
+function somenteNumeros(valor) {
+  return String(valor || "").replace(/\D/g, "");
+}
+
+function limparCpf(cpf) {
+  return somenteNumeros(cpf);
+}
+
+function normalizarCpfBase(cpf) {
+  const numeros = somenteNumeros(cpf);
+
+  if (!numeros) {
+    return "";
+  }
+
+  if (numeros.length > 11) {
+    return numeros.slice(-11);
+  }
+
+  return numeros.padStart(11, "0");
+}
+
+function obterMioloCpf(cpf) {
+  const numeros = normalizarCpfBase(cpf);
+
+  if (numeros.length === 11) {
+    return numeros.slice(3, 9);
+  }
+
+  return "";
+}
+
+function cpfValido(cpf) {
+  const numeros = limparCpf(cpf);
+
+  if (numeros.length !== 11) return false;
+  if (/^(\d)\1{10}$/.test(numeros)) return false;
+
+  let soma = 0;
+
+  for (let i = 0; i < 9; i++) {
+    soma += Number(numeros[i]) * (10 - i);
+  }
+
+  let digito1 = 11 - (soma % 11);
+  if (digito1 >= 10) digito1 = 0;
+
+  if (digito1 !== Number(numeros[9])) return false;
+
+  soma = 0;
+
+  for (let i = 0; i < 10; i++) {
+    soma += Number(numeros[i]) * (11 - i);
+  }
+
+  let digito2 = 11 - (soma % 11);
+  if (digito2 >= 10) digito2 = 0;
+
+  return digito2 === Number(numeros[10]);
+}
+
+function normalizarCabecalho(texto) {
+  return String(texto || "")
+    .replace(/^\uFEFF/, "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "");
+}
+
+function separarLinhaCsv(linha, delimitador) {
+  const campos = [];
+  let atual = "";
+  let dentroDeAspas = false;
+
+  for (let i = 0; i < linha.length; i++) {
+    const caractere = linha[i];
+    const proximo = linha[i + 1];
+
+    if (caractere === '"') {
+      if (dentroDeAspas && proximo === '"') {
+        atual += '"';
+        i++;
+      } else {
+        dentroDeAspas = !dentroDeAspas;
+      }
+      continue;
     }
 
-    * {
-      box-sizing: border-box;
+    if (caractere === delimitador && !dentroDeAspas) {
+      campos.push(atual.trim());
+      atual = "";
+      continue;
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--fundo);
-      color: var(--texto);
-    }
+    atual += caractere;
+  }
 
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 32px 16px;
-    }
+  campos.push(atual.trim());
 
-    .card {
-      background: var(--branco);
-      border: 1px solid var(--borda);
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-    }
+  return campos;
+}
 
-    h1 {
-      margin: 0 0 8px;
-      font-size: 28px;
-      line-height: 1.2;
-    }
+function detectarDelimitador(linhaCabecalho) {
+  const porPontoEVirgula = separarLinhaCsv(linhaCabecalho, ";").length;
+  const porVirgula = separarLinhaCsv(linhaCabecalho, ",").length;
 
-    .descricao {
-      margin: 0 0 24px;
-      color: var(--cinza);
-      line-height: 1.5;
-    }
+  return porPontoEVirgula >= porVirgula ? ";" : ",";
+}
 
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 700;
+function obterValor(objeto, nomesPossiveis) {
+  for (const nome of nomesPossiveis) {
+    if (
+      objeto &&
+      objeto[nome] !== undefined &&
+      objeto[nome] !== null &&
+      String(objeto[nome]).trim() !== ""
+    ) {
+      return String(objeto[nome]).trim();
     }
+  }
 
-    input {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid var(--borda);
-      border-radius: 10px;
-      font-size: 16px;
-      outline: none;
-    }
+  return "";
+}
 
-    input:focus {
-      border-color: var(--azul);
-      box-shadow: 0 0 0 3px rgba(0, 118, 255, 0.12);
-    }
+function formatarCpfParaExibicao(cpf) {
+  const numeros = normalizarCpfBase(cpf);
 
-    .linha {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      align-items: end;
-    }
+  if (numeros.length !== 11) {
+    return cpf || "";
+  }
 
-    .acoes {
-      display: flex;
-      gap: 10px;
-      margin-top: 18px;
-      flex-wrap: wrap;
-    }
+  return numeros.replace(/^(\d{3})(\d{3})(\d{3})(\d{2})$/, "$1.$2.$3-$4");
+}
 
-    button {
-      border: 0;
-      border-radius: 10px;
-      background: var(--azul);
-      color: white;
-      padding: 15px 20px;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-    }
+function transformarRegistro(linha) {
+  const cpfOriginal = obterValor(linha, [
+    "cpf_pep",
+    "cpf",
+    "_coluna_0"
+  ]);
 
-    button:hover {
-      background: var(--azul-escuro);
-    }
+  const cpfNormalizado = normalizarCpfBase(cpfOriginal);
 
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
+  const nome = obterValor(linha, [
+    "nome_pep",
+    "nome",
+    "nome_pessoa",
+    "_coluna_1"
+  ]);
 
-    .botao-secundario {
-      background: #e5e7eb;
-      color: #111827;
-    }
+  const siglaFuncao = obterValor(linha, [
+    "sigla_funcao_pep",
+    "sigla_funcao",
+    "_coluna_2"
+  ]);
 
-    .botao-secundario:hover {
-      background: #d1d5db;
-    }
+  const descricaoFuncao = obterValor(linha, [
+    "descricao_funcao_pep",
+    "descricao_funcao",
+    "funcao",
+    "descricao_da_funcao",
+    "_coluna_3"
+  ]);
 
-    .botao-pdf {
-      background: var(--azul);
-      color: #ffffff;
-    }
+  const nivelFuncao = obterValor(linha, [
+    "nivel_funcao_pep",
+    "nivel_funcao",
+    "_coluna_4"
+  ]);
 
-    .botao-pdf:hover {
-      background: var(--azul-escuro);
-    }
+  const nomeOrgao = obterValor(linha, [
+    "nome_orgao_pep",
+    "nome_orgao",
+    "orgao",
+    "nome_do_orgao",
+    "_coluna_5"
+  ]);
 
-    .mensagem {
-      margin-top: 18px;
-      padding: 14px;
-      border-radius: 10px;
-      display: none;
-      line-height: 1.5;
-    }
+  const dataInicioExercicio = obterValor(linha, [
+    "dt_inicio_exercicio",
+    "data_inicio_exercicio",
+    "_coluna_6"
+  ]);
 
-    .mensagem.erro {
-      display: block;
-      background: #fef2f2;
-      color: var(--erro);
-      border: 1px solid #fecaca;
-    }
+  const dataFimExercicio = obterValor(linha, [
+    "dt_fim_exercicio",
+    "data_fim_exercicio",
+    "_coluna_7"
+  ]);
 
-    .mensagem.info {
-      display: block;
-      background: #eff6ff;
-      color: var(--info);
-      border: 1px solid #bfdbfe;
-    }
+  const dataFimCarencia = obterValor(linha, [
+    "dt_final_carencia",
+    "dt_fim_carencia",
+    "data_fim_carencia",
+    "_coluna_8"
+  ]);
 
-    .mensagem.sucesso {
-      display: block;
-      background: #f0fdf4;
-      color: var(--sucesso);
-      border: 1px solid #bbf7d0;
-    }
+  const atualizacao = obterValor(linha, [
+    "atualizacao",
+    "_coluna_9"
+  ]);
 
-    .resultado {
-      margin-top: 24px;
-      display: none;
-    }
+  return {
+    cpf: formatarCpfParaExibicao(cpfNormalizado),
+    cpf_original_arquivo: cpfOriginal,
+    cpf_normalizado: cpfNormalizado,
+    nome,
+    sigla_funcao: siglaFuncao,
+    descricao_funcao: descricaoFuncao,
+    nivel_funcao: nivelFuncao,
+    nome_orgao: nomeOrgao,
+    dt_inicio_exercicio: dataInicioExercicio,
+    dt_fim_exercicio: dataFimExercicio,
+    dt_fim_carencia: dataFimCarencia,
+    atualizacao
+  };
+}
 
-    .resultado.ativo {
-      display: block;
-    }
+function adicionarAoIndice(indice, chave, registro) {
+  if (!chave) {
+    return;
+  }
 
-    .resumo {
-      margin-bottom: 16px;
-      color: var(--cinza);
-      font-size: 14px;
-      line-height: 1.5;
-    }
+  if (!indice.has(chave)) {
+    indice.set(chave, []);
+  }
 
-    .alerta {
-      margin-bottom: 16px;
-      padding: 12px;
-      border-radius: 10px;
-      background: var(--alerta-fundo);
-      border: 1px solid var(--alerta-borda);
-      color: var(--alerta-texto);
-      font-size: 14px;
-      line-height: 1.5;
-      display: none;
-    }
+  indice.get(chave).push(registro);
+}
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: white;
-      border: 1px solid var(--borda);
-      border-radius: 12px;
-      overflow: hidden;
-    }
+function converterDataParaOrdenacao(data) {
+  const texto = String(data || "").trim();
 
-    th,
-    td {
-      padding: 12px;
-      border-bottom: 1px solid var(--borda);
-      text-align: left;
-      vertical-align: top;
-      font-size: 14px;
-    }
+  if (!texto || texto.toLowerCase() === "não informada" || texto.toLowerCase() === "na") {
+    return 0;
+  }
 
-    th {
-      background: #f1f5f9;
-      font-weight: 700;
-    }
+  const partes = texto.split("/");
 
-    tr:last-child td {
-      border-bottom: 0;
-    }
+  if (partes.length !== 3) {
+    return 0;
+  }
 
-    .fim-carencia {
-      font-weight: 700;
-    }
+  const dia = Number(partes[0]);
+  const mes = Number(partes[1]);
+  const ano = Number(partes[2]);
 
-    .rodape {
-      margin-top: 18px;
-      font-size: 13px;
-      color: var(--cinza);
-      line-height: 1.5;
-    }
+  if (!dia || !mes || !ano) {
+    return 0;
+  }
 
-    .rodape p {
-      margin: 0 0 10px;
-    }
+  return new Date(ano, mes - 1, dia).getTime();
+}
 
-    .rodape p:last-child {
-      margin-bottom: 0;
-    }
+function ordenarPorFimCarenciaDecrescente(lista) {
+  return [...lista].sort((a, b) => {
+    const dataA = converterDataParaOrdenacao(a.dt_fim_carencia);
+    const dataB = converterDataParaOrdenacao(b.dt_fim_carencia);
 
-    .rodape a {
-      color: var(--azul);
-      text-decoration: none;
-      font-weight: 700;
-    }
+    return dataB - dataA;
+  });
+}
 
-    .rodape a:hover {
-      text-decoration: underline;
-    }
+async function carregarBasePep() {
+  try {
+    baseStatus = "carregando";
+    baseErro = null;
 
-    .marca-pdf {
-      display: none;
-      margin-bottom: 18px;
-      font-size: 13px;
-      color: #374151;
-      line-height: 1.5;
-    }
+    await fsp.access(CSV_PATH);
 
-    @media (max-width: 700px) {
-      .linha {
-        grid-template-columns: 1fr;
+    const infoArquivo = await fsp.stat(CSV_PATH);
+
+    arquivoBase = path.basename(CSV_PATH);
+    ultimaModificacaoArquivo = infoArquivo.mtime.toISOString();
+
+    const stream = fs.createReadStream(CSV_PATH, {
+      encoding: "utf8"
+    });
+
+    const leitor = readline.createInterface({
+      input: stream,
+      crlfDelay: Infinity
+    });
+
+    let cabecalhos = null;
+    let delimitador = ";";
+
+    const novoIndiceCpfCompleto = new Map();
+    const novoIndiceMiolo = new Map();
+
+    let contadorRegistros = 0;
+
+    for await (const linhaOriginal of leitor) {
+      const linha = String(linhaOriginal || "").trim();
+
+      if (!linha) {
+        continue;
       }
 
-      button {
-        width: 100%;
-      }
+      if (!cabecalhos) {
+        delimitador = detectarDelimitador(linha);
+        cabecalhos = separarLinhaCsv(linha, delimitador).map(normalizarCabecalho);
+        camposDetectados = cabecalhos;
 
-      .acoes {
-        flex-direction: column;
-      }
-
-      table {
-        display: block;
-        overflow-x: auto;
-      }
-    }
-
-    @media print {
-      body {
-        background: #ffffff;
-      }
-
-      .container {
-        max-width: none;
-        padding: 0;
-      }
-
-      .card {
-        border: 0;
-        box-shadow: none;
-        border-radius: 0;
-        padding: 0;
-      }
-
-      .linha,
-      .acoes,
-      #mensagem {
-        display: none !important;
-      }
-
-      .marca-pdf {
-        display: block;
-      }
-
-      .resultado {
-        display: block !important;
-      }
-
-      table {
-        page-break-inside: auto;
-      }
-
-      tr {
-        page-break-inside: avoid;
-        page-break-after: auto;
-      }
-
-      th,
-      td {
-        font-size: 11px;
-        padding: 7px;
-      }
-
-      .rodape {
-        font-size: 11px;
-      }
-    }
-  </style>
-</head>
-
-<body data-api="https://consulta-pep-backend.onrender.com">
-  <main class="container">
-    <section class="card">
-      <div class="marca-pdf">
-        Portal Notarial<br>
-        Consulta PEP por CPF<br>
-        Fonte dos dados: Portal da Transparência da Controladoria-Geral da União.
-      </div>
-
-      <h1>Consulta PEP por CPF</h1>
-
-      <p class="descricao">
-        Consulta auxiliar de pessoas expostas politicamente com base nos dados do Portal da Transparência da CGU.
-      </p>
-
-      <div class="linha">
-        <div>
-          <label for="cpf">CPF pesquisado</label>
-          <input
-            id="cpf"
-            type="text"
-            placeholder="Digite o CPF"
-            autocomplete="off"
-            inputmode="numeric"
-            maxlength="14"
-          />
-        </div>
-
-        <button id="botaoConsultar" type="button">
-          Consultar
-        </button>
-      </div>
-
-      <div class="acoes">
-        <button id="botaoNovaConsulta" class="botao-secundario" type="button">
-          Nova consulta
-        </button>
-
-        <button id="botaoGerarPdf" class="botao-pdf" type="button" disabled>
-          Gerar PDF
-        </button>
-      </div>
-
-      <div id="mensagem" class="mensagem"></div>
-
-      <div id="resultado" class="resultado">
-        <div id="resumo" class="resumo"></div>
-        <div id="alertaCpfMascarado" class="alerta"></div>
-
-        <table>
-          <thead>
-            <tr>
-              <th>CPF na base</th>
-              <th>Nome</th>
-              <th>Função</th>
-              <th>Nível</th>
-              <th>Órgão</th>
-              <th>Início do exercício</th>
-              <th>Fim do exercício</th>
-              <th>Fim da carência</th>
-            </tr>
-          </thead>
-          <tbody id="tabelaResultado"></tbody>
-        </table>
-      </div>
-
-      <div class="rodape">
-        <p>
-          Fonte dos dados:
-          <a href="https://portaldatransparencia.gov.br/download-de-dados/pep" target="_blank" rel="noopener noreferrer">
-            Portal da Transparência da Controladoria-Geral da União
-          </a>.
-        </p>
-
-        <p>
-          A consulta é informativa e não substitui a qualificação jurídica, cadastral, notarial ou registral do caso concreto.
-        </p>
-
-        <p>
-          Quando a base pública contém CPF mascarado em razão da LGPD, o resultado indica compatibilidade com o trecho central do CPF, e não a confirmação integral do CPF pesquisado.
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <script>
-    const API_BASE_URL = document.body.dataset.api;
-
-    const campoCpf = document.getElementById("cpf");
-    const botaoConsultar = document.getElementById("botaoConsultar");
-    const botaoNovaConsulta = document.getElementById("botaoNovaConsulta");
-    const botaoGerarPdf = document.getElementById("botaoGerarPdf");
-    const mensagem = document.getElementById("mensagem");
-    const resultado = document.getElementById("resultado");
-    const resumo = document.getElementById("resumo");
-    const alertaCpfMascarado = document.getElementById("alertaCpfMascarado");
-    const tabelaResultado = document.getElementById("tabelaResultado");
-
-    let ultimaConsultaComResultado = false;
-
-    function limparCpf(cpf) {
-      return String(cpf || "").replace(/\D/g, "");
-    }
-
-    function formatarCpf(cpf) {
-      const numeros = limparCpf(cpf).slice(0, 11);
-
-      return numeros
-        .replace(/^(\d{3})(\d)/, "$1.$2")
-        .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
-        .replace(/\.(\d{3})(\d)/, ".$1-$2");
-    }
-
-    function cpfValido(cpf) {
-      const numeros = limparCpf(cpf);
-
-      if (numeros.length !== 11) return false;
-      if (/^(\d)\1{10}$/.test(numeros)) return false;
-
-      let soma = 0;
-
-      for (let i = 0; i < 9; i++) {
-        soma += Number(numeros[i]) * (10 - i);
-      }
-
-      let digito1 = 11 - (soma % 11);
-      if (digito1 >= 10) digito1 = 0;
-
-      if (digito1 !== Number(numeros[9])) return false;
-
-      soma = 0;
-
-      for (let i = 0; i < 10; i++) {
-        soma += Number(numeros[i]) * (11 - i);
-      }
-
-      let digito2 = 11 - (soma % 11);
-      if (digito2 >= 10) digito2 = 0;
-
-      return digito2 === Number(numeros[10]);
-    }
-
-    function mostrarMensagem(tipo, texto) {
-      mensagem.className = "mensagem " + tipo;
-      mensagem.textContent = texto;
-    }
-
-    function limparMensagem() {
-      mensagem.className = "mensagem";
-      mensagem.textContent = "";
-    }
-
-    function limparResultado() {
-      resultado.className = "resultado";
-      resumo.textContent = "";
-      tabelaResultado.innerHTML = "";
-      alertaCpfMascarado.style.display = "none";
-      alertaCpfMascarado.textContent = "";
-      ultimaConsultaComResultado = false;
-      botaoGerarPdf.disabled = true;
-    }
-
-    function obterValor(objeto, nomesPossiveis) {
-      for (const nome of nomesPossiveis) {
-        if (
-          objeto &&
-          objeto[nome] !== undefined &&
-          objeto[nome] !== null &&
-          String(objeto[nome]).trim() !== ""
-        ) {
-          return String(objeto[nome]).trim();
+        if (!cabecalhos.includes("cpf_pep") && !cabecalhos.includes("cpf")) {
+          throw new Error(
+            `Campo CPF não localizado no cabeçalho do CSV. Campos detectados: ${cabecalhos.join(", ")}`
+          );
         }
+
+        continue;
       }
 
-      return "Não informado";
+      const valores = separarLinhaCsv(linha, delimitador);
+      const objeto = {};
+
+      for (let i = 0; i < cabecalhos.length; i++) {
+        objeto[cabecalhos[i]] = valores[i] || "";
+        objeto[`_coluna_${i}`] = valores[i] || "";
+      }
+
+      const registro = transformarRegistro(objeto);
+      const cpfNormalizado = registro.cpf_normalizado;
+      const mioloDaBase = obterMioloCpf(cpfNormalizado);
+
+      contadorRegistros++;
+
+      if (cpfNormalizado.length === 11) {
+        adicionarAoIndice(novoIndiceCpfCompleto, cpfNormalizado, {
+          ...registro,
+          tipo_correspondencia: "cpf_completo"
+        });
+      }
+
+      if (mioloDaBase.length === 6) {
+        adicionarAoIndice(novoIndiceMiolo, mioloDaBase, {
+          ...registro,
+          tipo_correspondencia: "cpf_mascarado_compativel"
+        });
+      }
     }
 
-    function criarCelula(texto, classe) {
-      const td = document.createElement("td");
-      td.textContent = texto || "Não informado";
+    indicePorCpfCompleto = novoIndiceCpfCompleto;
+    indicePorMioloCpf = novoIndiceMiolo;
 
-      if (classe) {
-        td.classList.add(classe);
-      }
+    totalRegistros = contadorRegistros;
+    totalCpfsIndexados = novoIndiceCpfCompleto.size;
+    totalMiolosIndexados = novoIndiceMiolo.size;
 
-      return td;
-    }
+    baseCarregadaEm = new Date().toISOString();
+    baseStatus = "pronta";
 
-    function converterDataParaOrdenacao(data) {
-      const texto = String(data || "").trim();
+    console.log("Base PEP carregada.");
+    console.log(`Arquivo: ${arquivoBase}`);
+    console.log(`Registros lidos: ${totalRegistros}`);
+    console.log(`CPFs completos indexados: ${totalCpfsIndexados}`);
+    console.log(`Miolos de CPF indexados: ${totalMiolosIndexados}`);
+  } catch (erro) {
+    baseStatus = "erro";
+    baseErro = erro.message;
+    totalRegistros = 0;
+    totalCpfsIndexados = 0;
+    totalMiolosIndexados = 0;
+    indicePorCpfCompleto = new Map();
+    indicePorMioloCpf = new Map();
 
-      if (!texto || texto.toLowerCase() === "não informado" || texto.toLowerCase() === "não informada" || texto.toLowerCase() === "na") {
-        return 0;
-      }
+    console.error("Erro ao carregar a base PEP:", erro);
+  }
+}
 
-      const partes = texto.split("/");
+app.get("/", (req, res) => {
+  res.json({
+    status: "online",
+    servico: "Consulta PEP por CPF",
+    modo: "consulta local em base CSV oficial",
+    observacao: "CPFs do arquivo são normalizados para 11 dígitos, com zeros à esquerda quando necessário.",
+    fonte: "Arquivo PEP do Siscoaf",
+    baseStatus,
+    baseErro,
+    arquivoBase,
+    baseCarregadaEm,
+    ultimaModificacaoArquivo,
+    totalRegistros,
+    totalCpfsIndexados,
+    totalMiolosIndexados,
+    camposDetectados
+  });
+});
 
-      if (partes.length !== 3) {
-        return 0;
-      }
+app.get("/debug-base", (req, res) => {
+  res.json({
+    baseStatus,
+    baseErro,
+    caminhoEsperadoDoArquivo: CSV_PATH,
+    arquivoBase,
+    baseCarregadaEm,
+    ultimaModificacaoArquivo,
+    totalRegistros,
+    totalCpfsIndexados,
+    totalMiolosIndexados,
+    camposDetectados
+  });
+});
 
-      const dia = Number(partes[0]);
-      const mes = Number(partes[1]);
-      const ano = Number(partes[2]);
-
-      if (!dia || !mes || !ano) {
-        return 0;
-      }
-
-      return new Date(ano, mes - 1, dia).getTime();
-    }
-
-    function ordenarPorFimCarenciaDecrescente(lista) {
-      return [...lista].sort(function (a, b) {
-        const carenciaA = obterValor(a, ["dataFimCarencia", "dt_fim_carencia"]);
-        const carenciaB = obterValor(b, ["dataFimCarencia", "dt_fim_carencia"]);
-
-        return converterDataParaOrdenacao(carenciaB) - converterDataParaOrdenacao(carenciaA);
+app.get("/api/pep", (req, res) => {
+  try {
+    if (baseStatus === "carregando" || baseStatus === "iniciando") {
+      return res.status(503).json({
+        erro: "Base PEP ainda está sendo carregada. Tente novamente em alguns instantes.",
+        baseStatus
       });
     }
 
-    function obterOrgao(item) {
-      if (item && item.orgaoExercicio) {
-        return obterValor(item.orgaoExercicio, ["nome", "nome_orgao", "nomeOrgao"]);
-      }
-
-      return obterValor(item, [
-        "nome_orgao",
-        "nomeOrgao",
-        "orgao",
-        "nome_do_orgao"
-      ]);
+    if (baseStatus === "erro") {
+      return res.status(500).json({
+        erro: "Base PEP não foi carregada no servidor.",
+        detalhe: baseErro,
+        caminhoEsperadoDoArquivo: CSV_PATH
+      });
     }
 
-    function renderizarTabela(lista, dadosConsulta) {
-      tabelaResultado.innerHTML = "";
+    const cpf = normalizarCpfBase(req.query.cpf);
+    const pagina = String(req.query.pagina || "1").trim();
 
-      if (!Array.isArray(lista) || lista.length === 0) {
-        mostrarMensagem("info", "CPF não localizado na base PEP oficial carregada.");
-        resultado.className = "resultado";
-        ultimaConsultaComResultado = false;
-        botaoGerarPdf.disabled = true;
-        return;
-      }
-
-      const listaOrdenada = ordenarPorFimCarenciaDecrescente(lista);
-
-      for (const item of listaOrdenada) {
-        const linha = document.createElement("tr");
-
-        const dadosPep = item && item.pep ? item.pep : item;
-
-        const cpf = obterValor(dadosPep, ["cpf", "codigoFormatado"]);
-        const nome = obterValor(dadosPep, ["nome"]);
-
-        const funcao = obterValor(item, [
-          "descricaoFuncao",
-          "descricao_funcao",
-          "siglaFuncao",
-          "sigla_funcao"
-        ]);
-
-        const nivel = obterValor(item, [
-          "nivelFuncao",
-          "nivel_funcao"
-        ]);
-
-        const orgao = obterOrgao(item);
-
-        const inicio = obterValor(item, [
-          "dataInicioExercicio",
-          "dt_inicio_exercicio"
-        ]);
-
-        const fim = obterValor(item, [
-          "dataFimExercicio",
-          "dt_fim_exercicio"
-        ]);
-
-        const carencia = obterValor(item, [
-          "dataFimCarencia",
-          "dt_fim_carencia"
-        ]);
-
-        linha.appendChild(criarCelula(cpf));
-        linha.appendChild(criarCelula(nome));
-        linha.appendChild(criarCelula(funcao));
-        linha.appendChild(criarCelula(nivel));
-        linha.appendChild(criarCelula(orgao));
-        linha.appendChild(criarCelula(inicio));
-        linha.appendChild(criarCelula(fim));
-        linha.appendChild(criarCelula(carencia, "fim-carencia"));
-
-        tabelaResultado.appendChild(linha);
-      }
-
-      resultado.className = "resultado ativo";
-      ultimaConsultaComResultado = true;
-      botaoGerarPdf.disabled = false;
-
-      const dataConsulta = dadosConsulta.consultaRealizadaEm
-        ? new Date(dadosConsulta.consultaRealizadaEm).toLocaleString("pt-BR")
-        : "Não informada";
-
-      const dataBase = dadosConsulta.ultimaModificacaoArquivo
-        ? new Date(dadosConsulta.ultimaModificacaoArquivo).toLocaleString("pt-BR")
-        : "Não informada";
-
-      const tipoConsulta = dadosConsulta.tipoConsulta === "cpf_mascarado_compativel"
-        ? "CPF mascarado compatível"
-        : "CPF completo";
-
-      resumo.textContent =
-        `Consulta realizada em ${dataConsulta}. Base utilizada: ${dadosConsulta.arquivoBase || "pep.csv"}. Última modificação da base: ${dataBase}. Tipo de correspondência: ${tipoConsulta}. Ordenação: fim da carência em ordem decrescente. Total exibido: ${listaOrdenada.length}.`;
-
-      if (dadosConsulta.tipoConsulta === "cpf_mascarado_compativel") {
-        alertaCpfMascarado.style.display = "block";
-        alertaCpfMascarado.textContent =
-          "A base pública de PEP contém CPFs mascarados em razão da LGPD. O resultado indica compatibilidade com o trecho central do CPF pesquisado, e não a confirmação integral dos dígitos ocultos.";
-      } else {
-        alertaCpfMascarado.style.display = "none";
-        alertaCpfMascarado.textContent = "";
-      }
+    if (!cpf) {
+      return res.status(400).json({
+        erro: "Informe o CPF para consulta."
+      });
     }
 
-    async function consultarPep() {
-      const cpf = limparCpf(campoCpf.value);
-
-      limparMensagem();
-      limparResultado();
-
-      if (!cpf) {
-        mostrarMensagem("erro", "Informe o CPF para consultar.");
-        campoCpf.focus();
-        return;
-      }
-
-      if (!cpfValido(cpf)) {
-        mostrarMensagem("erro", "CPF inválido. Confira os números informados.");
-        campoCpf.focus();
-        return;
-      }
-
-      botaoConsultar.disabled = true;
-      botaoConsultar.textContent = "Consultando...";
-      mostrarMensagem("info", "Consulta em andamento.");
-
-      try {
-        const url = `${API_BASE_URL}/api/pep?cpf=${encodeURIComponent(cpf)}&pagina=1`;
-
-        const resposta = await fetch(url);
-        const dados = await resposta.json();
-
-        if (!resposta.ok) {
-          mostrarMensagem("erro", dados.erro || "Não foi possível realizar a consulta.");
-          return;
-        }
-
-        limparMensagem();
-        renderizarTabela(dados.resultado, dados);
-      } catch (erro) {
-        mostrarMensagem(
-          "erro",
-          "Erro de conexão com o servidor. Verifique se o backend está publicado no Render."
-        );
-      } finally {
-        botaoConsultar.disabled = false;
-        botaoConsultar.textContent = "Consultar";
-      }
+    if (!cpfValido(cpf)) {
+      return res.status(400).json({
+        erro: "CPF inválido. Confira os números informados."
+      });
     }
 
-    function novaConsulta() {
-      campoCpf.value = "";
-      limparMensagem();
-      limparResultado();
-      campoCpf.focus();
+    const mioloCpfPesquisado = obterMioloCpf(cpf);
+
+    let resultado = indicePorCpfCompleto.get(cpf) || [];
+    let tipoConsulta = "cpf_completo";
+
+    if (!resultado.length && mioloCpfPesquisado) {
+      resultado = indicePorMioloCpf.get(mioloCpfPesquisado) || [];
+      tipoConsulta = "cpf_mascarado_compativel";
     }
 
-    function gerarPdf() {
-      if (!ultimaConsultaComResultado) {
-        mostrarMensagem("erro", "Realize uma consulta com resultado antes de gerar o PDF.");
-        return;
-      }
+    resultado = ordenarPorFimCarenciaDecrescente(resultado);
 
-      window.print();
-    }
-
-    campoCpf.addEventListener("input", function () {
-      campoCpf.value = formatarCpf(campoCpf.value);
+    return res.json({
+      fonte: "Arquivo PEP do Siscoaf",
+      modoConsulta: "base CSV oficial carregada no backend",
+      observacao: "Os CPFs do arquivo foram normalizados para 11 dígitos, com zeros à esquerda quando necessário.",
+      consultaRealizadaEm: new Date().toISOString(),
+      baseCarregadaEm,
+      ultimaModificacaoArquivo,
+      arquivoBase,
+      parametroPesquisado: {
+        cpf,
+        mioloCpfPesquisado
+      },
+      tipoConsulta,
+      ordenacao: "Fim da carência em ordem decrescente",
+      pagina,
+      resultado
     });
-
-    botaoConsultar.addEventListener("click", consultarPep);
-    botaoNovaConsulta.addEventListener("click", novaConsulta);
-    botaoGerarPdf.addEventListener("click", gerarPdf);
-
-    campoCpf.addEventListener("keydown", function (evento) {
-      if (evento.key === "Enter") {
-        consultarPep();
-      }
+  } catch (erro) {
+    return res.status(500).json({
+      erro: "Erro interno ao consultar PEP.",
+      detalhe: erro.message
     });
-  </script>
-</body>
-</html>
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor iniciado na porta ${PORT}.`);
+  carregarBasePep();
+});
