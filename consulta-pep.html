@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Consulta PEP por CPF</title>
+
+  <style>
+    :root {
+      --azul: rgb(0, 118, 255);
+      --texto: #1f2937;
+      --cinza: #6b7280;
+      --borda: #e5e7eb;
+      --fundo: #f8fafc;
+      --branco: #ffffff;
+      --erro: #b91c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--fundo);
+      color: var(--texto);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 16px;
+    }
+
+    .card {
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    .descricao {
+      margin: 0 0 24px;
+      color: var(--cinza);
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--borda);
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--azul);
+      box-shadow: 0 0 0 3px rgba(0, 118, 255, 0.12);
+    }
+
+    .linha {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    button {
+      border: 0;
+      border-radius: 10px;
+      background: var(--azul);
+      color: white;
+      padding: 15px 20px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .mensagem {
+      margin-top: 18px;
+      padding: 14px;
+      border-radius: 10px;
+      display: none;
+      line-height: 1.5;
+    }
+
+    .mensagem.erro {
+      display: block;
+      background: #fef2f2;
+      color: var(--erro);
+      border: 1px solid #fecaca;
+    }
+
+    .mensagem.info {
+      display: block;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #bfdbfe;
+    }
+
+    .resultado {
+      margin-top: 24px;
+      display: none;
+    }
+
+    .resultado.ativo {
+      display: block;
+    }
+
+    .resumo {
+      margin-bottom: 16px;
+      color: var(--cinza);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      border-bottom: 1px solid var(--borda);
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f1f5f9;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .rodape {
+      margin-top: 18px;
+      font-size: 13px;
+      color: var(--cinza);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 700px) {
+      .linha {
+        grid-template-columns: 1fr;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <section class="card">
+      <h1>Consulta PEP por CPF</h1>
+
+      <p class="descricao">
+        Consulta auxiliar de pessoas expostas politicamente com base nos dados do Portal da Transparência da CGU.
+      </p>
+
+      <div class="linha">
+        <div>
+          <label for="cpf">CPF pesquisado</label>
+          <input
+            id="cpf"
+            type="text"
+            placeholder="Digite o CPF"
+            autocomplete="off"
+            inputmode="numeric"
+            maxlength="14"
+          />
+        </div>
+
+        <button id="botaoConsultar" type="button">
+          Consultar
+        </button>
+      </div>
+
+      <div id="mensagem" class="mensagem"></div>
+
+      <div id="resultado" class="resultado">
+        <div id="resumo" class="resumo"></div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>CPF</th>
+              <th>Nome</th>
+              <th>Função</th>
+              <th>Nível</th>
+              <th>Órgão</th>
+              <th>Início do exercício</th>
+              <th>Fim do exercício</th>
+              <th>Fim da carência</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaResultado"></tbody>
+        </table>
+      </div>
+
+      <p class="rodape">
+        Fonte dos dados: Portal da Transparência da Controladoria-Geral da União.
+        A consulta é informativa e não substitui a qualificação jurídica, cadastral, notarial ou registral do caso concreto.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    const API_BASE_URL = "https://SEU-SERVICO-DO-RENDER.onrender.com";
+
+    const campoCpf = document.getElementById("cpf");
+    const botaoConsultar = document.getElementById("botaoConsultar");
+    const mensagem = document.getElementById("mensagem");
+    const resultado = document.getElementById("resultado");
+    const resumo = document.getElementById("resumo");
+    const tabelaResultado = document.getElementById("tabelaResultado");
+
+    function limparCpf(cpf) {
+      return String(cpf || "").replace(/\D/g, "");
+    }
+
+    function formatarCpf(cpf) {
+      const numeros = limparCpf(cpf).slice(0, 11);
+
+      return numeros
+        .replace(/^(\d{3})(\d)/, "$1.$2")
+        .replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3")
+        .replace(/\.(\d{3})(\d)/, ".$1-$2");
+    }
+
+    function cpfValido(cpf) {
+      const numeros = limparCpf(cpf);
+
+      if (numeros.length !== 11) return false;
+      if (/^(\d)\1{10}$/.test(numeros)) return false;
+
+      let soma = 0;
+
+      for (let i = 0; i < 9; i++) {
+        soma += Number(numeros[i]) * (10 - i);
+      }
+
+      let digito1 = 11 - (soma % 11);
+      if (digito1 >= 10) digito1 = 0;
+
+      if (digito1 !== Number(numeros[9])) return false;
+
+      soma = 0;
+
+      for (let i = 0; i < 10; i++) {
+        soma += Number(numeros[i]) * (11 - i);
+      }
+
+      let digito2 = 11 - (soma % 11);
+      if (digito2 >= 10) digito2 = 0;
+
+      return digito2 === Number(numeros[10]);
+    }
+
+    function mostrarMensagem(tipo, texto) {
+      mensagem.className = "mensagem " + tipo;
+      mensagem.textContent = texto;
+    }
+
+    function limparMensagem() {
+      mensagem.className = "mensagem";
+      mensagem.textContent = "";
+    }
+
+    function limparResultado() {
+      resultado.className = "resultado";
+      resumo.textContent = "";
+      tabelaResultado.innerHTML = "";
+    }
+
+    function obterValor(objeto, nomesPossiveis) {
+      for (const nome of nomesPossiveis) {
+        if (
+          objeto &&
+          objeto[nome] !== undefined &&
+          objeto[nome] !== null &&
+          objeto[nome] !== ""
+        ) {
+          return objeto[nome];
+        }
+      }
+
+      return "Não informado";
+    }
+
+    function renderizarTabela(lista, dadosConsulta) {
+      tabelaResultado.innerHTML = "";
+
+      if (!Array.isArray(lista) || lista.length === 0) {
+        mostrarMensagem("info", "Nenhum resultado encontrado para o CPF informado.");
+        return;
+      }
+
+      for (const item of lista) {
+        const linha = document.createElement("tr");
+
+        const cpf = obterValor(item, ["cpf"]);
+        const nome = obterValor(item, ["nome"]);
+        const funcao = obterValor(item, ["descricao_funcao", "descricaoFuncao", "sigla_funcao"]);
+        const nivel = obterValor(item, ["nivel_funcao", "nivelFuncao"]);
+        const orgao = obterValor(item, ["nome_orgao", "nomeOrgao"]);
+        const inicio = obterValor(item, ["dt_inicio_exercicio", "dataInicioExercicio"]);
+        const fim = obterValor(item, ["dt_fim_exercicio", "dataFimExercicio"]);
+        const carencia = obterValor(item, ["dt_fim_carencia", "dataFimCarencia"]);
+
+        linha.innerHTML = `
+          <td>${cpf}</td>
+          <td>${nome}</td>
+          <td>${funcao}</td>
+          <td>${nivel}</td>
+          <td>${orgao}</td>
+          <td>${inicio}</td>
+          <td>${fim}</td>
+          <td>${carencia}</td>
+        `;
+
+        tabelaResultado.appendChild(linha);
+      }
+
+      resultado.className = "resultado ativo";
+
+      const dataConsulta = dadosConsulta.consultaRealizadaEm
+        ? new Date(dadosConsulta.consultaRealizadaEm).toLocaleString("pt-BR")
+        : "Não informada";
+
+      resumo.textContent =
+        `Consulta realizada em ${dataConsulta}. Total exibido nesta página: ${lista.length}.`;
+    }
+
+    async function consultarPep() {
+      const cpf = limparCpf(campoCpf.value);
+
+      limparMensagem();
+      limparResultado();
+
+      if (!cpf) {
+        mostrarMensagem("erro", "Informe o CPF para consultar.");
+        campoCpf.focus();
+        return;
+      }
+
+      if (!cpfValido(cpf)) {
+        mostrarMensagem("erro", "CPF inválido. Confira os números informados.");
+        campoCpf.focus();
+        return;
+      }
+
+      botaoConsultar.disabled = true;
+      botaoConsultar.textContent = "Consultando...";
+      mostrarMensagem("info", "Consulta em andamento.");
+
+      try {
+        const url = `${API_BASE_URL}/api/pep?cpf=${encodeURIComponent(cpf)}&pagina=1`;
+
+        const resposta = await fetch(url);
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+          mostrarMensagem("erro", dados.erro || "Não foi possível realizar a consulta.");
+          return;
+        }
+
+        limparMensagem();
+        renderizarTabela(dados.resultado, dados);
+      } catch (erro) {
+        mostrarMensagem("erro", "Erro de conexão com o servidor. Verifique se o backend está publicado no Render.");
+      } finally {
+        botaoConsultar.disabled = false;
+        botaoConsultar.textContent = "Consultar";
+      }
+    }
+
+    campoCpf.addEventListener("input", function () {
+      campoCpf.value = formatarCpf(campoCpf.value);
+    });
+
+    botaoConsultar.addEventListener("click", consultarPep);
+
+    campoCpf.addEventListener("keydown", function (evento) {
+      if (evento.key === "Enter") {
+        consultarPep();
+      }
+    });
+  </script>
+</body>
+</html>
