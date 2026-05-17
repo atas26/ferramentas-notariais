@@ -184,19 +184,22 @@
     }
 
     .actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       gap: 10px;
       margin-top: 18px;
+      flex-wrap: wrap;
+      align-items: center;
     }
 
     button {
       border: 0;
-      border-radius: 15px;
-      padding: 12px 14px;
+      border-radius: 13px;
+      padding: 10px 14px;
       cursor: pointer;
       font-weight: 800;
-      transition: transform .08s, filter .15s, background .15s;
+      transition: transform .08s, filter .15s, background .15s, border-color .15s;
+      width: auto;
+      min-width: 132px;
     }
 
     button:active {
@@ -218,8 +221,14 @@
     }
 
     .secondary {
-      background: #e2e8f0;
+      background: #fff;
       color: #0f172a;
+      border: 1px solid #cbd5e1;
+    }
+
+    .secondary:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
     }
 
     .ghost {
@@ -228,17 +237,23 @@
       color: #0f172a;
     }
 
+    .ghost:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+
     .mini-actions {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      margin-top: 14px;
+      margin-top: 12px;
     }
 
     .mini-actions button {
       padding: 9px 11px;
       border-radius: 12px;
       font-size: 13px;
+      min-width: 108px;
     }
 
     .status {
@@ -444,8 +459,13 @@
         padding: 16px;
       }
 
-      .actions {
-        grid-template-columns: 1fr;
+      .actions,
+      .mini-actions {
+        align-items: stretch;
+      }
+
+      button {
+        width: 100%;
       }
 
       table {
@@ -528,7 +548,7 @@
       <section class="panel left-panel">
         <div class="panel-head">
           <h2>Consulta</h2>
-          <p>Informe o CPF completo para pesquisar na base PEP carregada.</p>
+          <p>Informe o CPF para pesquisar na base PEP.</p>
         </div>
 
         <div class="panel-body">
@@ -552,6 +572,7 @@
 
           <div class="mini-actions">
             <button id="botaoGerarPdf" class="ghost" type="button" disabled>Gerar PDF</button>
+            <button id="botaoImprimir" class="ghost" type="button" disabled>Imprimir</button>
           </div>
 
           <div id="mensagem" class="mensagem"></div>
@@ -632,6 +653,7 @@
     const botaoConsultar = document.getElementById("botaoConsultar");
     const botaoNovaConsulta = document.getElementById("botaoNovaConsulta");
     const botaoGerarPdf = document.getElementById("botaoGerarPdf");
+    const botaoImprimir = document.getElementById("botaoImprimir");
     const mensagem = document.getElementById("mensagem");
     const resultado = document.getElementById("resultado");
     const empty = document.getElementById("empty");
@@ -700,6 +722,7 @@
       empty.classList.remove("hidden");
       ultimaConsultaComResultado = false;
       botaoGerarPdf.disabled = true;
+      botaoImprimir.disabled = true;
     }
 
     function obterValor(objeto, nomesPossiveis) {
@@ -775,6 +798,7 @@
         empty.classList.remove("hidden");
         ultimaConsultaComResultado = false;
         botaoGerarPdf.disabled = true;
+        botaoImprimir.disabled = true;
         return;
       }
 
@@ -808,6 +832,7 @@
       empty.classList.add("hidden");
       ultimaConsultaComResultado = true;
       botaoGerarPdf.disabled = false;
+      botaoImprimir.disabled = false;
 
       const dataConsulta = dadosConsulta.consultaRealizadaEm
         ? new Date(dadosConsulta.consultaRealizadaEm).toLocaleString("pt-BR")
@@ -886,6 +911,15 @@
       window.print();
     }
 
+    function imprimirResultado() {
+      if (!ultimaConsultaComResultado) {
+        mostrarMensagem("erro", "Realize uma consulta com resultado antes de imprimir.");
+        return;
+      }
+
+      window.print();
+    }
+
     campoCpf.addEventListener("input", function () {
       campoCpf.value = formatarCpf(campoCpf.value);
     });
@@ -893,6 +927,7 @@
     botaoConsultar.addEventListener("click", consultarPep);
     botaoNovaConsulta.addEventListener("click", novaConsulta);
     botaoGerarPdf.addEventListener("click", gerarPdf);
+    botaoImprimir.addEventListener("click", imprimirResultado);
 
     campoCpf.addEventListener("keydown", function (evento) {
       if (evento.key === "Enter") {
