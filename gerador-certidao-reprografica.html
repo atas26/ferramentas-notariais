@@ -4,6 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gerador de certidão reprográfica</title>
+  <meta name="description" content="Ferramenta auxiliar para montar certidão reprográfica notarial, anexar PDF digitalizado, revisar a prévia, gerar arquivo final e imprimir." />
+  <meta name="robots" content="index, follow" />
+  <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
+  <link rel="canonical" href="https://portalnotarial.com.br/gerador-certidao-reprografica.html" />
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777"
+       crossorigin="anonymous"></script>
+
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTD149ZWLC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-TTD149ZWLC');
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
@@ -85,6 +103,131 @@
       padding: 13px 15px;
       font-size: 14px;
       line-height: 1.45;
+    }
+
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .quick-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 14px;
+      text-decoration: none;
+      border: 1px solid var(--borda);
+    }
+
+    .quick-actions .primary-link {
+      background: var(--azul);
+      color: #ffffff;
+      border-color: var(--azul);
+    }
+
+    .quick-actions .secondary-link {
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    .info-section {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 22px;
+    }
+
+    .info-card {
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .info-card h2 {
+      margin: 0 0 10px;
+      font-size: 17px;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .info-card p,
+    .info-card li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .info-card p {
+      margin: 0;
+    }
+
+    .info-card ul,
+    .info-card ol {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .info-card.full {
+      grid-column: 1 / -1;
+    }
+
+    .faq-section {
+      margin-top: 22px;
+    }
+
+    .faq-section details {
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-top: 10px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.035);
+    }
+
+    .faq-section summary {
+      cursor: pointer;
+      font-weight: 800;
+      color: #172033;
+    }
+
+    .faq-section p {
+      margin: 10px 0 0;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+      text-align: left;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 14px;
+      margin-top: 12px;
+    }
+
+    .footer-links a {
+      color: #0f172a;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
     }
 
     .grid {
@@ -460,7 +603,8 @@
     @media (max-width: 820px) {
       .grid,
       .form-grid,
-      .signature-options {
+      .signature-options,
+      .info-section {
         grid-template-columns: 1fr;
       }
 
@@ -473,21 +617,460 @@
         flex-direction: column;
       }
     }
+
+
+    /* Ajuste visual para alinhar esta página ao padrão do Aplicador de Emolumentos.
+       A área .preview mantém fonte, tamanho, margens e impressão da certidão. */
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --text: #172033;
+      --muted: #64748b;
+      --line: #d8dee9;
+      --brand: #0076ff;
+      --brand-dark: #005bd1;
+      --soft: #eef5ff;
+      --warn: #fff7ed;
+      --warn-border: #fed7aa;
+      --ok: #ecfdf5;
+      --bad: #fff1f2;
+      --shadow: 0 18px 55px rgba(15, 23, 42, .09);
+      --radius: 22px;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0, 118, 255, .12), transparent 32rem),
+        linear-gradient(180deg, #f8fbff 0%, var(--bg) 55%, #eef2f7 100%);
+      color: var(--text);
+      line-height: 1.48;
+    }
+
+    .shell,
+    .footer-inner {
+      width: min(1220px, calc(100% - 32px));
+      max-width: none;
+      margin: 0 auto;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .shell {
+      padding-top: 34px;
+      padding-bottom: 54px;
+    }
+
+    .hero {
+      background: rgba(255, 255, 255, .86);
+      border: 1px solid rgba(216, 222, 233, .8);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 32px 28px 30px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+      align-items: stretch;
+      backdrop-filter: blur(12px);
+      margin-bottom: 22px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      background: var(--soft);
+      color: var(--brand-dark);
+      border: 1px solid #cfe2ff;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      margin-bottom: 14px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.02;
+      letter-spacing: -.045em;
+      color: var(--text);
+    }
+
+    .hero .lead {
+      margin: 20px 0 0;
+      max-width: none;
+      width: 100%;
+      color: #334155;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .hero .scope {
+      margin: 18px 0 0;
+      max-width: none;
+      width: 100%;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.65;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 14px 16px;
+    }
+
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .quick-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 850;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .quick-actions .primary-link {
+      background: var(--brand);
+      color: #ffffff;
+      border-color: var(--brand);
+      box-shadow: 0 12px 28px rgba(0, 118, 255, .22);
+    }
+
+    .quick-actions .secondary-link {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      color: #0f172a;
+    }
+
+    .info-section,
+    .faq-section .card.full {
+      margin-top: 22px;
+      margin-bottom: 22px;
+      background: rgba(255, 255, 255, .88);
+      border: 1px solid rgba(216, 222, 233, .84);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 30px 28px;
+    }
+
+    .info-section {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .info-card {
+      background: #ffffff;
+      border: 1px solid #dbe3ef;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: none;
+    }
+
+    .info-card h2 {
+      margin: 0 0 9px;
+      font-size: 16px;
+      line-height: 1.25;
+      color: #0f172a;
+      letter-spacing: -0.01em;
+    }
+
+    .info-card p,
+    .info-card li {
+      font-size: 14px;
+      color: #475569;
+      line-height: 1.65;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      align-items: start;
+      scroll-margin-top: 22px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 12px 36px rgba(15, 23, 42, .06);
+    }
+
+    .card h2 {
+      margin: 0 0 16px;
+      font-size: 20px;
+      line-height: 1.22;
+      letter-spacing: -.02em;
+      color: #0f172a;
+    }
+
+    .form-grid {
+      gap: 16px;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 750;
+      color: #273244;
+    }
+
+    input,
+    select,
+    textarea {
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 12px;
+      color: var(--text);
+      background: #ffffff;
+      transition: border-color .15s, box-shadow .15s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(0, 118, 255, .12);
+    }
+
+    button {
+      border-radius: 15px;
+      padding: 12px 14px;
+      font-weight: 800;
+      transition: transform .08s, filter .15s, background .15s;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .btn-primary {
+      background: var(--brand);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--brand-dark);
+    }
+
+    .btn-secondary {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .btn-danger {
+      background: var(--bad);
+      color: #991b1b;
+      border: 1px solid #fecdd3;
+    }
+
+    .status,
+    .template-status,
+    .file-status {
+      background: #f8fbff;
+      border: 1px solid #dbeafe;
+      border-radius: 17px;
+      color: #334155;
+    }
+
+    .signature-option {
+      border: 1px solid #dbe3ef;
+      border-radius: 16px;
+      background: #f8fafc;
+    }
+
+    .preview-panel {
+      border-top: 1px solid #e5eaf2;
+      margin-top: 8px;
+      padding-top: 18px;
+    }
+
+    .faq-section {
+      margin-top: 22px;
+    }
+
+    .faq-section .card.full {
+      grid-column: auto;
+    }
+
+    .faq-section details {
+      margin: 0 0 10px;
+      border: 1px solid #dbe3ef;
+      border-radius: 16px;
+      background: #ffffff;
+      overflow: hidden;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .faq-section summary {
+      padding: 14px 16px;
+      background: #f8fafc;
+      color: #0f172a;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .faq-section p {
+      margin: 0;
+      padding: 14px 16px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    footer {
+      color: #64748b;
+      font-size: 13px;
+      text-align: left;
+      padding: 0 0 44px;
+    }
+
+    .footer-inner {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 15px;
+    }
+
+    .footer-links {
+      justify-content: flex-start;
+      gap: 10px 16px;
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .footer-links a {
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    .preview {
+      font-family: Calibri, Carlito, "Segoe UI", Arial, sans-serif;
+      font-size: 12pt;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 980px) {
+      .info-section {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .shell,
+      .footer-inner {
+        width: min(100% - 22px, 1220px);
+      }
+
+      .hero,
+      .info-section,
+      .card,
+      .faq-section .card.full {
+        padding: 16px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .form-grid,
+      .signature-options,
+      .actions,
+      .cartorio-actions,
+      .template-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .actions button,
+      .cartorio-actions button,
+      .template-actions button {
+        width: 100%;
+      }
+    }
+
+    @media print {
+      .preview {
+        font-family: Calibri, Carlito, Arial, sans-serif;
+        font-size: 12pt;
+        line-height: 1.5;
+      }
+    }
+
   </style>
 </head>
 <body>
   <main class="shell">
-    <section class="hero">
-      <h1>Gerador de certidão reprográfica</h1>
-      <p>
-        Preencha os dados da certidão, envie o ato ou documento digitalizado em PDF e gere um arquivo final com a certidão, as reproduções anexadas e a numeração automática das páginas.
-      </p>
-      <div class="alerta">
-        Revise a certidão antes de gerar o arquivo final. A ferramenta monta o texto com base nos dados informados, aplica o template do cartório quando houver e numera o conjunto final.
+    <section class="hero" aria-labelledby="titulo">
+      <div>
+        <div class="eyebrow">Certidão reprográfica</div>
+        <h1 id="titulo">Gerador de certidão reprográfica</h1>
+        <p class="lead">
+          Preencha os dados da certidão, envie o ato ou documento digitalizado em PDF e gere um arquivo final com a certidão, as reproduções anexadas e a numeração automática das páginas.
+        </p>
+        <p class="scope">
+          Revise a certidão antes de gerar o arquivo final. A ferramenta monta o texto com base nos dados informados, aplica o template do cartório quando houver e numera o conjunto final.
+        </p>
+
+        <div class="quick-actions" aria-label="Ações rápidas">
+          <a class="primary-link" href="#ferramenta">Ir para a ferramenta</a>
+          <a class="secondary-link" href="https://portalnotarial.com.br/">Voltar à home</a>
+        </div>
       </div>
     </section>
 
-    <section class="grid">
+    <section class="info-section" aria-label="Informações sobre a ferramenta">
+      <article class="info-card">
+        <h2>O que a ferramenta faz</h2>
+        <p>A ferramenta monta a certidão reprográfica a partir dos dados informados pelo usuário, permite anexar o PDF do ato ou documento digitalizado, aplica template do cartório quando houver e gera um arquivo final com numeração de páginas.</p>
+      </article>
+
+      <article class="info-card">
+        <h2>Quando usar</h2>
+        <p>Use em rotinas internas de preparação de certidão reprográfica, quando houver necessidade de reunir texto certificante, reprodução do ato ou documento digitalizado e conferência prévia antes da impressão ou emissão do arquivo final.</p>
+      </article>
+
+      <article class="info-card">
+        <h2>Como usar</h2>
+        <ol>
+          <li>Envie o PDF do ato ou documento digitalizado.</li>
+          <li>Escolha o modelo de certidão.</li>
+          <li>Preencha os campos exibidos na tela.</li>
+          <li>Revise a prévia da certidão.</li>
+          <li>Escolha o tipo de assinatura e gere o PDF final.</li>
+        </ol>
+      </article>
+
+      <article class="info-card">
+        <h2>Como interpretar o resultado</h2>
+        <p>O resultado é um arquivo operacional gerado com base nos dados inseridos. Antes do uso, confira nomes, datas, livro, páginas, emolumentos, anotações, reprodução anexada, assinatura, template e numeração final.</p>
+      </article>
+
+      <article class="info-card">
+        <h2>Critérios e fontes</h2>
+        <p>A geração usa os campos preenchidos pelo usuário, o PDF anexado, o modelo de certidão selecionado, o template eventualmente salvo no navegador e as regras internas previstas no próprio código da página.</p>
+      </article>
+
+      <article class="info-card">
+        <h2>Limites da ferramenta</h2>
+        <p>A ferramenta não confere autenticidade documental, não valida assinatura digital, não consulta bases externas, não substitui conferência notarial e não afasta a responsabilidade pela revisão final do texto e dos anexos.</p>
+      </article>
+    </section>
+
+    <section class="grid" id="ferramenta">
       <div class="card full">
         <h2>1. Arquivos</h2>
         <div class="form-grid">
@@ -797,10 +1380,52 @@
         </div>
       </div>
     </section>
+
+    <section class="faq-section" aria-labelledby="faq-title">
+      <div class="card full">
+        <h2 id="faq-title">Perguntas frequentes</h2>
+
+        <details>
+          <summary>A ferramenta substitui a conferência do cartório?</summary>
+          <p>Não. A ferramenta apenas organiza os dados informados e monta o arquivo final. A conferência do texto, do PDF anexado, dos emolumentos, da assinatura e da adequação ao caso concreto continua sendo necessária.</p>
+        </details>
+
+        <details>
+          <summary>O PDF anexado é enviado para algum servidor?</summary>
+          <p>O processamento do arquivo ocorre no navegador, com as bibliotecas externas carregadas pela página. O usuário deve observar as políticas internas do cartório para tratamento, armazenamento e descarte dos arquivos utilizados.</p>
+        </details>
+
+        <details>
+          <summary>O template do cartório fica salvo onde?</summary>
+          <p>Quando o usuário escolhe salvar o template como modelo, o arquivo fica armazenado no navegador utilizado. A limpeza do navegador ou o uso de outro dispositivo pode exigir novo envio do template.</p>
+        </details>
+
+        <details>
+          <summary>A prévia pode ser editada?</summary>
+          <p>Sim. A página permite visualizar e editar a prévia antes da geração do PDF. As alterações manuais devem ser revisadas antes da emissão do arquivo final.</p>
+        </details>
+
+        <details>
+          <summary>A ferramenta valida os dados preenchidos?</summary>
+          <p>A ferramenta possui validações operacionais de campos e formatos, mas não verifica a correção jurídica ou documental das informações inseridas.</p>
+        </details>
+      </div>
+    </section>
   </main>
 
   <footer>
-    Ferramenta em versão inicial. O usuário deve revisar todos os dados, o texto da certidão e as reproduções antes de gerar o PDF final.
+    <div class="footer-inner">
+      <div>Ferramenta em versão inicial. O usuário deve revisar todos os dados, o texto da certidão e as reproduções antes de gerar o PDF final.</div>
+      <nav class="footer-links" aria-label="Links institucionais">
+        <a href="https://portalnotarial.com.br/">Início</a>
+        <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
+        <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+        <a href="https://portalnotarial.com.br/mapa-do-site.html">Mapa do site</a>
+        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
+        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
+        <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
+      </nav>
+    </div>
   </footer>
 
   <script>
