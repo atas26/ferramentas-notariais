@@ -189,6 +189,7 @@
       margin-top: 18px;
       flex-wrap: wrap;
       align-items: center;
+      justify-content: flex-start;
     }
 
     button {
@@ -198,8 +199,8 @@
       cursor: pointer;
       font-weight: 800;
       transition: transform .08s, filter .15s, background .15s, border-color .15s;
-      width: auto;
-      min-width: 132px;
+      width: 150px;
+      min-width: 150px;
     }
 
     button:active {
@@ -240,20 +241,6 @@
     .ghost:hover {
       background: #f8fafc;
       border-color: #94a3b8;
-    }
-
-    .mini-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    .mini-actions button {
-      padding: 9px 11px;
-      border-radius: 12px;
-      font-size: 13px;
-      min-width: 108px;
     }
 
     .status {
@@ -459,13 +446,13 @@
         padding: 16px;
       }
 
-      .actions,
-      .mini-actions {
+      .actions {
         align-items: stretch;
       }
 
       button {
         width: 100%;
+        min-width: 0;
       }
 
       table {
@@ -480,7 +467,7 @@
 
       header,
       .left-panel,
-      .mini-actions,
+      .actions,
       footer {
         display: none;
       }
@@ -568,9 +555,6 @@
           <div class="actions">
             <button id="botaoConsultar" class="primary" type="button">Consultar</button>
             <button id="botaoNovaConsulta" class="secondary" type="button">Nova consulta</button>
-          </div>
-
-          <div class="mini-actions">
             <button id="botaoGerarPdf" class="ghost" type="button" disabled>Gerar PDF</button>
             <button id="botaoImprimir" class="ghost" type="button" disabled>Imprimir</button>
           </div>
