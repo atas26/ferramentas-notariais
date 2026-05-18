@@ -183,14 +183,14 @@ def formatar_paragrafos(linhas):
 
 
 CAPITULOS_SP = {
-    "XIII": "Capítulo XIII - Disposições gerais, função correcional, livros, classificadores e emolumentos",
-    "XIV": "Capítulo XIV - Pessoal dos serviços extrajudiciais",
-    "XV": "Capítulo XV - Tabelionato de Protesto",
-    "XVI": "Capítulo XVI - Tabelionato de Notas",
-    "XVII": "Capítulo XVII - Registro Civil das Pessoas Naturais",
-    "XVIII": "Capítulo XVIII - Registro Civil das Pessoas Jurídicas",
-    "XIX": "Capítulo XIX - Registro de Títulos e Documentos",
-    "XX": "Capítulo XX - Registro de Imóveis",
+    "XIII": "Capítulo XIII\nDisposições gerais\nFunção correcional\nLivros\nClassificadores\nEmolumentos",
+    "XIV": "Capítulo XIV\nPessoal dos serviços extrajudiciais",
+    "XV": "Capítulo XV\nTabelionato de Protesto",
+    "XVI": "Capítulo XVI\nTabelionato de Notas",
+    "XVII": "Capítulo XVII\nRegistro Civil das Pessoas Naturais",
+    "XVIII": "Capítulo XVIII\nRegistro Civil das Pessoas Jurídicas",
+    "XIX": "Capítulo XIX\nRegistro de Títulos e Documentos",
+    "XX": "Capítulo XX\nRegistro de Imóveis",
 }
 
 AREAS_SP = {
@@ -605,6 +605,238 @@ def parse_cnj(texto):
     return artigos
 
 
+
+# Parser revisado para as Normas CGJ-SP.
+# Motivo: o texto extraído em fluxo simples mistura notas de rodapé e listas internas.
+# Esta versão usa coordenadas do PDF para separar corpo, notas e cabeçalhos.
+def parse_sp_pdf(pdf_bytes):
+    print("Organizando Normas da Corregedoria de São Paulo com parser por coordenadas...")
+
+    def is_header_footer_sp_coord(t):
+        if re.match(r"^Cap\.\s*[–-]\s*[XVI]+$", t):
+            return True
+        if re.match(r"^\d+$", t):
+            return True
+        if t in {
+            "PROVIMENTO Nº 58/89",
+            "Sumário",
+            "CORREGEDORIA GERAL DA JUSTIÇA DO ESTADO DE SÃO PAULO",
+        }:
+            return True
+        return False
+
+    def is_section_line_sp_coord(t):
+        return bool(
+            re.match(r"^(SEÇÃO|Seção)\s+[IVXLCDM]+\b", t, re.I)
+            or re.match(r"^(Subseção|SUBSEÇÃO|Sub subseção)\s+[IVXLCDM]+\b", t, re.I)
+        )
+
+    def item_num_sp_coord(t):
+        m = re.match(r"^(\d+(?:\.[A-Z])?(?:\.[0-9A-Z]+)*\.?|\d+[A-Z](?:\.\d+)*)\s+", t)
+        if not m:
+            return None
+        n = m.group(1).rstrip(".")
+        prefix = m.group(1)
+        if "." not in prefix and not re.match(r"^\d+[A-Z]$", n):
+            return None
+        return n
+
+    def val_item_sp_coord(n):
+        vals = []
+        for part in re.split(r"\.", n):
+            m = re.match(r"^(\d+)([A-Z])?$", part)
+            if m:
+                v = int(m.group(1))
+                if m.group(2):
+                    v += (ord(m.group(2)) - 64) / 100
+                vals.append(v)
+            elif re.match(r"^[A-Z]$", part):
+                vals.append((ord(part) - 64) / 100)
+        if not vals:
+            return 0
+        v = vals[0]
+        divisor = 1000
+        for x in vals[1:]:
+            v += x / divisor
+            divisor *= 1000
+        return v
+
+    def ref_nums_sp_coord(text):
+        refs = set()
+        # Captura chamadas de nota no corpo do item. Evita confundir o número inicial do item
+        # e números de sublistas como "1 - finalidade do tratamento".
+        for m in re.finditer(
+            r"(?<!^)(?<![\d./-])(\d{1,4})(?!\.[A-Z0-9])(?=(?:[ \t]*\n\n)|\s*(?:[.;:,)]|$))",
+            text,
+        ):
+            if m.start(1) <= 1:
+                continue
+            refs.add(str(int(m.group(1))))
+        return refs
+
+    doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+    all_notes = {}
+    artigos = []
+    capitulo_atual = None
+    secao_atual = ""
+    item_atual = None
+    pending_sec = None
+    pending_chap_title = False
+    last_top_by_cap = {}
+
+    def fechar_item():
+        nonlocal item_atual
+        if not item_atual:
+            return
+        item_atual["texto"] = formatar_paragrafos(item_atual.pop("_linhas"))
+        item_atual.pop("_num", None)
+        artigos.append(item_atual)
+        item_atual = None
+
+    for page_index in range(20, len(doc)):
+        linhas = []
+        for bloco in doc[page_index].get_text("dict").get("blocks", []):
+            for linha_pdf in bloco.get("lines", []):
+                texto_linha = limpar_linha(" ".join(span.get("text", "") for span in linha_pdf.get("spans", [])))
+                if texto_linha:
+                    linhas.append((linha_pdf["bbox"][1], linha_pdf["bbox"][0], texto_linha))
+
+        linhas.sort(key=lambda z: z[0])
+
+        foot_start = None
+        for y, x, linha in linhas:
+            if (
+                y > 650
+                and re.match(r"^\d{1,4}\s+\S", linha)
+                and not re.match(r"^\d+\.", linha)
+                and not re.match(r"^\d+$", linha)
+            ):
+                foot_start = y
+                break
+
+        corpo = []
+        rodape = []
+        for y, x, linha in linhas:
+            if is_header_footer_sp_coord(linha):
+                continue
+            if foot_start is not None and y >= foot_start - 1:
+                rodape.append(linha)
+            elif y < 785:
+                corpo.append((x, linha))
+
+        nota_atual = None
+        for linha in rodape:
+            m = re.match(r"^(\d{1,4})\s+(.*)", linha)
+            if m and not re.match(r"^\d+\.", linha):
+                nota_atual = str(int(m.group(1)))
+                all_notes[nota_atual] = m.group(2).strip()
+            elif nota_atual:
+                all_notes[nota_atual] += " " + linha
+
+        for x, linha in corpo:
+            achou_capitulo = re.match(r"^CAPÍTULO\s+([XVI]+)\b", linha, re.I)
+            if achou_capitulo:
+                romano = achou_capitulo.group(1).upper()
+                if romano in CAPITULOS_SP:
+                    fechar_item()
+                    capitulo_atual = romano
+                    secao_atual = ""
+                    pending_sec = None
+                    pending_chap_title = True
+                continue
+
+            if not capitulo_atual:
+                continue
+
+            if is_section_line_sp_coord(linha):
+                fechar_item()
+                pending_sec = linha.title()
+                secao_atual = pending_sec
+                continue
+
+            numero = item_num_sp_coord(linha)
+
+            if pending_sec and not numero:
+                if len(linha) < 120:
+                    secao_atual = pending_sec + "\n" + linha.title()
+                    pending_sec = None
+                    continue
+
+            if pending_chap_title and not numero:
+                continue
+
+            if numero:
+                top_match = re.match(r"^(\d+)", numero)
+                top = int(top_match.group(1)) if top_match else 0
+                last_top = last_top_by_cap.get(capitulo_atual, 0)
+                current_num = item_atual.get("_num") if item_atual else ""
+                current_top_match = re.match(r"^(\d+)", current_num) if current_num else None
+                current_top = int(current_top_match.group(1)) if current_top_match else 0
+
+                is_subitem_of_current = bool(
+                    item_atual
+                    and top == current_top
+                    and (
+                        numero.startswith(current_num + ".")
+                        or re.match(rf"^{current_top}\.[A-Z](?:\.|$)", numero)
+                    )
+                )
+                is_top_level_start = ("." not in numero and x < 150) or re.match(r"^\d+\.[A-Z]$", numero)
+
+                accept_new_item = False
+                if last_top == 0:
+                    accept_new_item = True
+                elif is_subitem_of_current:
+                    accept_new_item = True
+                elif top > last_top and is_top_level_start:
+                    accept_new_item = True
+                elif top == last_top and re.match(r"^\d+\.[A-Z]$", numero):
+                    accept_new_item = True
+
+                if not accept_new_item and item_atual is not None:
+                    item_atual["_linhas"].append(linha)
+                    continue
+
+                if "." not in numero or re.match(r"^\d+\.[A-Z]$", numero):
+                    last_top_by_cap[capitulo_atual] = max(last_top, top)
+
+                fechar_item()
+                pending_chap_title = False
+                pending_sec = None
+                item_id = f"sp-cap-{capitulo_atual.lower()}-item-{numero.lower().replace('.', '-')}"
+
+                item_atual = {
+                    "id": item_id,
+                    "numero": f"Cap. {capitulo_atual}, item {numero}",
+                    "ordem": ORDEM_SP[capitulo_atual] + val_item_sp_coord(numero),
+                    "tipo": "item",
+                    "capitulo": CAPITULOS_SP[capitulo_atual],
+                    "secao": secao_atual,
+                    "areas": [AREAS_SP[capitulo_atual]],
+                    "temas": [],
+                    "norma": True,
+                    "notas": [],
+                    "_num": numero,
+                    "_linhas": [linha],
+                }
+
+            elif item_atual is not None:
+                if re.match(r"^[A-ZÁÉÍÓÚÂÊÔÃÕÇ0-9 ,;()\-/]+$", linha) and len(linha) < 140:
+                    continue
+                item_atual["_linhas"].append(linha)
+
+    fechar_item()
+
+    for artigo in artigos:
+        refs = ref_nums_sp_coord(artigo.get("texto", ""))
+        artigo["notas"] = [
+            f"{n} {all_notes[n]}"
+            for n in sorted(refs, key=lambda v: int(v))
+            if n in all_notes
+        ]
+
+    return artigos
+
 def github_get_file(path):
     url = f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/contents/{path}"
 
@@ -701,8 +933,7 @@ def main():
     print("Iniciando atualização das normas.")
 
     pdf_sp = baixar_arquivo(TJSP_URL)
-    texto_sp = extrair_texto_pdf(pdf_sp)
-    artigos_sp = parse_sp(texto_sp)
+    artigos_sp = parse_sp_pdf(pdf_sp)
 
     atualizar_base(
         "Normas CGJ-SP",
@@ -710,7 +941,7 @@ def main():
         "dados/normas-sp.json",
         pdf_sp,
         artigos_sp,
-        parser_version="sp-default",
+        parser_version="sp-pymupdf-footnotes-v3-hierarchy-lines",
     )
 
     cnj_pdf_url = descobrir_pdf_compilado_cnj()
