@@ -4,6 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gerador de ofício para bancos</title>
+  <meta name="description" content="Ferramenta para gerar ofício de solicitação de informações bancárias em inventário e partilha, com leitura auxiliar de certidão de óbito, preenchimento de campos, prévia editável, template em PDF e emissão do arquivo final para conferência do usuário." />
+  <meta name="robots" content="index,follow" />
+  <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777"
+     crossorigin="anonymous"></script>
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTD149ZWLC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TTD149ZWLC');
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
@@ -11,6 +25,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@pdf-lib/fontkit@1.1.1/dist/fontkit.umd.min.js"></script>
 
   <style>
+
     @font-face {
       font-family: 'Carlito';
       src: url('https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/carlito/Carlito-Regular.ttf') format('truetype');
@@ -26,741 +41,1097 @@
       font-style: normal;
       font-display: swap;
     }
-    :root {
-      --azul: rgb(0, 118, 255);
-      --azul-escuro: #0f172a;
-      --cinza: #64748b;
-      --cinza-claro: #f6f8fb;
-      --borda: #dbe3ef;
-      --branco: #ffffff;
-      --vermelho: rgb(232, 57, 70);
+
+    :root{
+      --bg:#f5f7fb;
+      --panel:#ffffff;
+      --text:#172033;
+      --muted:#64748b;
+      --line:#d8dee9;
+      --brand:#0076ff;
+      --brand-dark:#005bd1;
+      --soft:#eef5ff;
+      --warn:#fff7ed;
+      --warn-border:#fed7aa;
+      --ok:#ecfdf5;
+      --bad:#fff1f2;
+      --danger:#e83946;
+      --shadow:0 18px 55px rgba(15,23,42,.09);
+      --radius:22px;
     }
 
-    * {
-      box-sizing: border-box;
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0,118,255,.12), transparent 32rem),
+        linear-gradient(180deg,#f8fbff 0%,var(--bg) 55%,#eef2f7 100%);
+      color:var(--text);
+      line-height:1.48;
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--cinza-claro);
-      color: var(--azul-escuro);
+    a{color:var(--brand-dark)}
+
+    .shell{
+      width:min(1220px,calc(100% - 32px));
+      margin:0 auto;
+      padding:34px 0 54px;
     }
 
-    header {
-      background: var(--branco);
-      border-bottom: 1px solid var(--borda);
-      padding: 22px 20px;
+    .hero{
+      background:rgba(255,255,255,.86);
+      border:1px solid rgba(216,222,233,.8);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:32px 28px 30px;
+      margin:0 0 22px;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:0;
+      align-items:stretch;
+      backdrop-filter:blur(12px);
     }
 
-    .header-inner {
-      max-width: 1120px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 16px;
+    .eyebrow{
+      display:inline-flex;
+      width:max-content;
+      gap:8px;
+      align-items:center;
+      background:var(--soft);
+      color:var(--brand-dark);
+      border:1px solid #cfe2ff;
+      border-radius:999px;
+      padding:6px 12px;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.02em;
+      margin:0 0 14px;
     }
 
-    .brand {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+    .hero h1,
+    h1{
+      margin:0;
+      font-size:clamp(30px,4vw,52px);
+      line-height:1.02;
+      letter-spacing:-.045em;
+      color:#0f172a;
     }
 
-    .brand strong {
-      font-size: 18px;
-      letter-spacing: 0.2px;
+    .hero p{
+      margin:20px 0 0;
+      max-width:none;
+      width:100%;
+      color:#334155;
+      font-size:18px;
+      line-height:1.7;
     }
 
-    .brand span {
-      font-size: 13px;
-      color: var(--cinza);
+    .alerta{
+      margin-top:18px;
+      max-width:none;
+      width:100%;
+      color:#475569;
+      font-size:14px;
+      line-height:1.65;
+      background:#f8fafc;
+      border:1px solid #e2e8f0;
+      border-left:4px solid var(--brand);
+      border-radius:14px;
+      padding:14px 16px;
     }
 
-    .shell {
-      max-width: 1120px;
-      margin: 34px auto;
-      padding: 0 20px 40px;
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
     }
 
-    .hero {
-      background: linear-gradient(135deg, #ffffff 0%, #eef6ff 100%);
-      border: 1px solid var(--borda);
-      border-radius: 22px;
-      padding: 28px;
-      margin-bottom: 22px;
-      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.06);
+    .hero-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:10px 14px;
+      border-radius:14px;
+      font-size:14px;
+      font-weight:850;
+      text-decoration:none;
+      border:1px solid transparent;
     }
 
-    .hero h1 {
-      margin: 0 0 10px;
-      font-size: 28px;
-      line-height: 1.2;
+    .hero-link:hover{
+      text-decoration:none;
+      filter:brightness(.98);
     }
 
-    .hero p {
-      margin: 0;
-      max-width: 760px;
-      color: #42526b;
-      line-height: 1.55;
-      font-size: 15px;
+    .hero-link.primary-link{
+      background:var(--brand);
+      color:#fff;
+      box-shadow:0 12px 28px rgba(0,118,255,.22);
     }
 
-    .alerta {
-      margin-top: 18px;
-      border: 1px solid rgba(232, 57, 70, 0.32);
-      background: rgba(232, 57, 70, 0.08);
-      color: #8a1f2c;
-      border-radius: 14px;
-      padding: 13px 15px;
-      font-size: 14px;
-      line-height: 1.45;
+    .hero-link.secondary-link{
+      background:#fff;
+      border-color:#cbd5e1;
+      color:#0f172a;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
+    .adsense-section{
+      margin-top:22px;
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(216,222,233,.84);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:30px 28px;
+      scroll-margin-top:26px;
     }
 
-    .card {
-      background: var(--branco);
-      border: 1px solid var(--borda);
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.04);
+    .section-kicker{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      background:var(--soft);
+      color:var(--brand-dark);
+      border-radius:999px;
+      padding:6px 12px;
+      font-size:12px;
+      font-weight:850;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin-bottom:14px;
     }
 
-    .card.full {
-      grid-column: 1 / -1;
+    .adsense-section h2{
+      margin:0 0 12px;
+      font-size:clamp(28px,3vw,42px);
+      line-height:1.08;
+      letter-spacing:-.035em;
+      color:#0f172a;
     }
 
-    .card h2 {
-      margin: 0 0 16px;
-      font-size: 18px;
+    .adsense-section p{
+      color:#334155;
+      margin:0;
+      font-size:16px;
+      line-height:1.7;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
+    .info-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:22px;
     }
 
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
+    .info-card{
+      background:#fff;
+      border:1px solid #dbe3ef;
+      border-radius:18px;
+      padding:18px;
     }
 
-    .field.full {
-      grid-column: 1 / -1;
+    .info-card h3{
+      margin:0 0 9px;
+      font-size:16px;
+      line-height:1.25;
+      color:#0f172a;
+      letter-spacing:-.01em;
     }
 
+    .info-card p{
+      font-size:14px;
+      color:#475569;
+      line-height:1.65;
+    }
+
+    .use-steps{
+      margin:20px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:12px;
+    }
+
+    .use-steps li{
+      display:grid;
+      grid-template-columns:34px 1fr;
+      gap:12px;
+      align-items:start;
+      background:#fff;
+      border:1px solid #dbe3ef;
+      border-radius:16px;
+      padding:14px;
+      color:#475569;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .use-steps strong{color:#0f172a}
+
+    .step-number{
+      width:34px;
+      height:34px;
+      display:grid;
+      place-items:center;
+      border-radius:12px;
+      background:var(--soft);
+      color:var(--brand-dark);
+      font-weight:900;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:18px;
+      align-items:start;
+      margin-top:22px;
+      scroll-margin-top:22px;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      padding:22px;
+      box-shadow:0 12px 36px rgba(15,23,42,.06);
+    }
+
+    .card.full{grid-column:1 / -1}
+
+    .card h2,
+    .card-title-row h2{
+      margin:0 0 16px;
+      font-size:20px;
+      letter-spacing:-.02em;
+      color:#0f172a;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .field{display:flex;flex-direction:column;gap:0}
+    .field.full{grid-column:1 / -1}
+
+    label{
+      display:block;
+      font-size:13px;
+      font-weight:750;
+      color:#273244;
+      margin:0 0 7px;
+    }
+
+    input,select,button,textarea{font:inherit}
+
+    input,select,textarea{
+      width:100%;
+      border:1px solid #cbd5e1;
+      background:#fff;
+      color:var(--text);
+      border-radius:14px;
+      padding:12px 12px;
+      outline:none;
+      transition:border-color .15s, box-shadow .15s;
+    }
+
+    input:focus,select:focus,textarea:focus{
+      border-color:var(--brand);
+      box-shadow:0 0 0 4px rgba(0,118,255,.12);
+    }
+
+    textarea{min-height:88px;resize:vertical}
+
+    .small-note,
+    .hint{
+      font-size:12px;
+      color:var(--muted);
+      line-height:1.45;
+      margin-top:6px;
+    }
+
+    .actions,
+    .cartorio-actions,
+    .template-actions{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      align-items:center;
+      margin-top:18px;
+    }
+
+    .cartorio-actions,
+    .template-actions{margin-top:10px}
+
+    .template-toggle{
+      width:100%;
+      margin:0 0 18px;
+      background:#e2e8f0;
+      color:#0f172a;
+      text-align:center;
+    }
+
+    .template-panel{
+      display:none;
+    }
+
+    .template-panel.is-visible{
+      display:block;
+    }
+
+    button{
+      border:0;
+      border-radius:15px;
+      padding:12px 14px;
+      cursor:pointer;
+      font-weight:800;
+      transition:transform .08s, filter .15s, background .15s, opacity .15s;
+    }
+
+    button:active{transform:translateY(1px)}
+    button:hover{filter:brightness(.98)}
+    button:disabled{opacity:.55;cursor:not-allowed;transform:none}
+
+    .btn-primary{
+      background:var(--brand);
+      color:#fff;
+      box-shadow:0 12px 28px rgba(0,118,255,.18);
+    }
+
+    .btn-primary:hover{background:var(--brand-dark)}
+
+    .btn-secondary{
+      background:#e2e8f0;
+      color:#0f172a;
+    }
+
+    .btn-danger{
+      background:#fee2e2;
+      color:#991b1b;
+    }
+
+    .status,
+    .template-status{
+      margin-top:14px;
+      padding:13px 14px;
+      background:#f8fbff;
+      border:1px solid #dbeafe;
+      border-radius:17px;
+      color:#334155;
+      font-size:14px;
+      line-height:1.55;
+      white-space:pre-line;
+    }
+
+    .template-status{
+      font-size:12px;
+      margin-top:8px;
+      color:#475569;
+      border-radius:14px;
+      background:#f8fafc;
+      border-color:#e2e8f0;
+    }
+
+    .signature-options{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .signature-option{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      border:1px solid #dbe3ef;
+      border-radius:16px;
+      padding:14px;
+      background:#f8fafc;
+      cursor:pointer;
+    }
+
+    .signature-option:hover{background:#fff}
+
+    .signature-option input{
+      width:auto;
+      margin-top:3px;
+      cursor:pointer;
+    }
+
+    .signature-option strong{
+      display:block;
+      margin-bottom:4px;
+      font-size:14px;
+      color:#172033;
+    }
+
+    .signature-option span{
+      display:block;
+      font-size:12px;
+      line-height:1.4;
+      color:var(--muted);
+    }
+
+    .card-title-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:16px;
+    }
+
+    .card-title-row h2{margin:0}
+
+    .preview-panel{
+      display:none;
+      overflow-x:auto;
+      padding-bottom:8px;
+    }
+
+    .preview-panel.is-visible{display:block}
+
+    .preview{
+      width:21cm;
+      max-width:100%;
+      min-height:29.7cm;
+      margin:0 auto;
+      background:#ffffff;
+      border:1px solid #cbd5e1;
+      border-radius:10px;
+      padding:6cm 2cm 2.5cm 2cm;
+      font-family:Carlito, Calibri, "Segoe UI", Arial, sans-serif;
+      line-height:1.5;
+      color:#000000;
+      font-size:12pt;
+      letter-spacing:normal;
+      word-spacing:normal;
+      box-shadow:0 16px 36px rgba(15,23,42,.10);
+    }
+
+    .preview.is-editing{
+      background:#fff;
+      border-color:var(--brand);
+      box-shadow:0 0 0 4px rgba(0,118,255,.12);
+    }
+
+    .preview[contenteditable="true"]{outline:none}
+
+    .preview .oficio-line{margin:0 0 6pt;line-height:1.5}
+    .preview .oficio-right{margin:0 0 8pt;text-align:right;line-height:1.5}
+    .preview .oficio-space{height:14pt}
+    .preview .oficio-title{margin:0 0 18pt;font-weight:700;text-transform:uppercase;text-align:center;line-height:1.5}
+    .preview .oficio-paragraph{margin:0 0 12pt;text-align:justify;line-height:1.5}
+    .preview .oficio-signature{margin:0 0 6pt;font-weight:700;text-transform:uppercase;text-align:center;line-height:1.5}
+    .preview .oficio-center{margin:0 0 6pt;text-align:center;line-height:1.5}
+    .preview .oficio-signature-line{width:8cm;height:18pt;margin:0 auto 6pt;border-bottom:1px solid #000}
+    .preview .oficio-digital-note{margin:-2pt 0 6pt;text-align:center;line-height:1.5;font-size:12pt}
+
+    .source-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:20px;
+    }
+
+    .source-box{
+      background:#fff;
+      border:1px solid #dbe3ef;
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .source-box h3{
+      margin:0 0 9px;
+      font-size:16px;
+      color:#0f172a;
+    }
+
+    .source-box ul{
+      margin:0;
+      padding-left:18px;
+      color:#475569;
+      font-size:14px;
+      line-height:1.65;
+    }
+
+    .faq-list{
+      display:grid;
+      gap:10px;
+      margin-top:20px;
+    }
+
+    details{
+      margin-top:14px;
+      border:1px solid #dbe3ef;
+      border-radius:16px;
+      background:#fff;
+      overflow:hidden;
+    }
+
+    .faq-list details{margin:0}
+
+    summary{
+      cursor:pointer;
+      padding:14px 16px;
+      font-weight:850;
+      background:#f8fafc;
+      color:#0f172a;
+    }
+
+    .faq-list .faq-body{
+      padding:14px 16px;
+      color:#475569;
+      font-size:14px;
+      line-height:1.65;
+    }
+
+    footer{
+      color:#64748b;
+      font-size:13px;
+      padding:0 0 44px;
+    }
+
+    footer .shell{
+      width:min(1220px,calc(100% - 32px));
+      margin:0 auto;
+      padding:0;
+    }
+
+    .src{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .src p{margin:0 0 8px}
+    .src p:last-child{margin-bottom:0}
+
+    .institutional-nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 16px;
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid #e2e8f0;
+    }
+
+    .institutional-nav a{
+      font-weight:800;
+      color:#0f172a;
+      text-decoration:none;
+    }
+
+    .institutional-nav a:hover{text-decoration:underline}
+
+    @media (max-width:980px){
+      .grid{grid-template-columns:1fr}
+      .info-grid,.source-grid{grid-template-columns:1fr}
+    }
+
+    @media (max-width:820px){
+      .form-grid,.signature-options{grid-template-columns:1fr}
+      .card-title-row{align-items:flex-start;flex-direction:column}
+    }
+
+    @media (max-width:620px){
+      .shell{width:min(100% - 22px,1220px);padding-top:22px}
+      .hero,.adsense-section,.card{padding:18px}
+      .actions,.cartorio-actions,.template-actions{grid-template-columns:1fr}
+      .hero h1,h1{font-size:30px}
+      .hero p{font-size:16px}
+    }
+
+    @media print{
+      @page{size:A4;margin:6cm 2cm 2.5cm 2cm}
+      body{background:#fff}
+      body *{visibility:hidden!important}
+      .preview,.preview *{visibility:visible!important}
+      .preview{
+        position:absolute;
+        left:0;
+        top:0;
+        width:17cm;
+        min-height:auto;
+        border:0;
+        border-radius:0;
+        background:#fff;
+        padding:0;
+        color:#000;
+        box-shadow:none;
+        font-family:Carlito, Calibri, Arial, sans-serif;
+        font-size:12pt;
+        line-height:1.5;
+      }
+    }
+  
+
+    /* Ajustes específicos do gerador de ofício para bancos. Mantém o layout-base do ofício de comparecimento e preserva a leitura por PDF.js/OCR. */
     .field.field-auto-filled input,
-    .field.field-auto-filled select {
-      border-color: #16a34a;
-      background: #f0fdf4;
-      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.10);
+    .field.field-auto-filled select{
+      border-color:#16a34a;
+      background:#f0fdf4;
+      box-shadow:0 0 0 4px rgba(22,163,74,.10);
     }
 
-    .field.field-auto-filled label::after {
-      content: "preenchido automaticamente";
-      display: inline-block;
-      margin-left: 8px;
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: #dcfce7;
-      color: #166534;
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      vertical-align: middle;
+    .field.field-auto-filled label::after{
+      content:"preenchido automaticamente";
+      display:inline-block;
+      margin-left:8px;
+      padding:2px 7px;
+      border-radius:999px;
+      background:#dcfce7;
+      color:#166534;
+      font-size:10px;
+      font-weight:850;
+      text-transform:uppercase;
+      letter-spacing:.02em;
+      vertical-align:middle;
     }
 
-    label {
-      font-size: 13px;
-      font-weight: 700;
-      color: #263449;
+    .progress-wrap{
+      width:100%;
+      height:10px;
+      background:#e2e8f0;
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:14px;
+      display:none;
     }
 
-    input,
-    select,
-    textarea {
-      width: 100%;
-      border: 1px solid var(--borda);
-      border-radius: 12px;
-      padding: 11px 12px;
-      font-size: 14px;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--azul-escuro);
-      background: #fff;
-      outline: none;
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background:var(--brand);
+      transition:width .2s ease;
     }
 
-    input:focus,
-    select:focus,
-    textarea:focus {
-      border-color: var(--azul);
-      box-shadow: 0 0 0 3px rgba(0, 118, 255, 0.12);
+    .fallback-file{
+      display:none;
+      margin-top:14px;
+      padding:14px;
+      border:1px dashed #cbd5e1;
+      border-radius:16px;
+      background:#f8fafc;
     }
 
-    textarea {
-      min-height: 190px;
-      resize: vertical;
-      line-height: 1.45;
+    .fallback-file.is-visible{
+      display:block;
     }
 
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 18px;
+    .preview{
+      padding:4.5cm 2cm 2.5cm 2cm;
+      line-height:1.15;
     }
 
-    button {
-      border: 0;
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: transform 0.15s ease, opacity 0.15s ease;
-    }
+    .preview .oficio-line{margin:0 0 3pt;line-height:1.15}
+    .preview .oficio-right{margin:0 0 5pt;text-align:right;line-height:1.15}
+    .preview .oficio-space{height:6pt}
+    .preview .oficio-assunto{margin:0 0 6pt;font-weight:700;line-height:1.15}
+    .preview .oficio-section-title{margin:8pt 0 4pt;font-weight:700;line-height:1.15}
+    .preview .oficio-paragraph{margin:0 0 6pt;text-align:justify;line-height:1.15}
+    .preview .oficio-list-item{margin:0 0 4pt 18pt;text-align:justify;line-height:1.15}
+    .preview .oficio-signature{margin:0 0 3pt;font-weight:700;text-transform:uppercase;text-align:center;line-height:1.15}
+    .preview .oficio-bold{font-weight:700}
+    .preview .oficio-validation{margin:0 0 3pt;text-align:center;line-height:1.15}
 
-    button:hover {
-      transform: translateY(-1px);
-    }
-
-    button:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .btn-primary {
-      background: var(--azul);
-      color: #fff;
-    }
-
-    .btn-secondary {
-      background: #e9eef6;
-      color: #172033;
-    }
-
-    .btn-danger {
-      background: rgba(232, 57, 70, 0.12);
-      color: #8a1f2c;
-    }
-
-    .status {
-      margin-top: 14px;
-      padding: 12px 14px;
-      background: #f8fafc;
-      border: 1px solid var(--borda);
-      border-radius: 12px;
-      color: #334155;
-      font-size: 14px;
-      line-height: 1.45;
-      white-space: pre-line;
-    }
-
-    .progress-wrap {
-      width: 100%;
-      height: 10px;
-      background: #e9eef6;
-      border-radius: 999px;
-      overflow: hidden;
-      margin-top: 12px;
-      display: none;
-    }
-
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: var(--azul);
-      transition: width 0.2s ease;
-    }
-
-    .small-note {
-      font-size: 12px;
-      color: var(--cinza);
-      line-height: 1.4;
-      margin-top: 7px;
-    }
-
-    .fallback-file {
-      display: none;
-      margin-top: 14px;
-      padding: 14px;
-      border: 1px dashed #cbd5e1;
-      border-radius: 14px;
-      background: #f8fafc;
-    }
-
-    .fallback-file.is-visible {
-      display: block;
-    }
-
-
-
-    .template-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .template-status {
-      margin-top: 8px;
-      padding: 9px 11px;
-      border-radius: 10px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      color: #475569;
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
-    .preview-panel {
-      display: none;
-      overflow-x: auto;
-      padding-bottom: 8px;
-    }
-
-    .preview-panel.is-visible {
-      display: block;
-    }
-
-    .preview {
-      width: 21cm;
-      max-width: 100%;
-      min-height: 29.7cm;
-      margin: 0 auto;
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      padding: 4.5cm 2cm 2.5cm 2cm;
-      font-family: Carlito, Calibri, "Segoe UI", Arial, sans-serif;
-      line-height: 1.15;
-      color: #000000;
-      font-size: 12pt;
-      letter-spacing: normal;
-      word-spacing: normal;
-      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.10);
-    }
-
-    .preview .oficio-line {
-      margin: 0 0 3pt;
-    }
-
-    .preview .oficio-right {
-      margin: 0 0 5pt;
-      text-align: right;
-    }
-
-    .preview .oficio-space {
-      height: 6pt;
-    }
-
-    .preview .oficio-assunto {
-      margin: 0 0 6pt;
-      font-weight: 700;
-    }
-
-    .preview .oficio-section-title {
-      margin: 8pt 0 4pt;
-      font-weight: 700;
-    }
-
-    .preview .oficio-paragraph {
-      margin: 0 0 6pt;
-      text-align: justify;
-      line-height: 1.15;
-    }
-
-    .preview .oficio-list-item {
-      margin: 0 0 4pt 18pt;
-      text-align: justify;
-      line-height: 1.15;
-    }
-
-    .preview .oficio-signature {
-      margin: 0 0 3pt;
-      font-weight: 700;
-      text-transform: uppercase;
-      text-align: center;
-    }
-
-    .preview .oficio-bold {
-      font-weight: 700;
-    }
-
-    .preview .oficio-validation {
-      margin: 0 0 3pt;
-      text-align: center;
-    }
-
-
-
-    .card-title-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
-
-    .card-title-row h2 {
-      margin: 0;
-    }
-
-    .preview.is-editing {
-      background: #ffffff;
-      border-color: var(--azul);
-      box-shadow: 0 0 0 3px rgba(0, 118, 255, 0.10);
-    }
-
-    .preview[contenteditable="true"] {
-      outline: none;
-    }
-
-    .cartorio-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-top: 2px;
-    }
-
-
-    @media print {
-      @page {
-        size: A4;
-        margin: 4.5cm 2cm 2.5cm 2cm;
+    @media print{
+      @page{size:A4;margin:4.5cm 2cm 2.5cm 2cm}
+      .preview{
+        line-height:1.15;
       }
-
-      body {
-        background: #ffffff;
-      }
-
-      body * {
-        visibility: hidden !important;
-      }
-
-      .preview,
-      .preview * {
-        visibility: visible !important;
-      }
-
-      .preview {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 17cm;
-        min-height: auto;
-        border: 0;
-        border-radius: 0;
-        background: #ffffff;
-        padding: 0;
-        color: #000000;
-        box-shadow: none;
-        font-family: Carlito, Calibri, Arial, sans-serif;
-        font-size: 12pt;
-        line-height: 1.15;
-      }
-
       .preview .oficio-paragraph,
-      .preview .oficio-list-item {
-        text-align: justify;
+      .preview .oficio-list-item{
+        text-align:justify;
       }
     }
 
-    footer {
-      color: var(--cinza);
-      font-size: 12px;
-      text-align: center;
-      padding: 20px;
-    }
-
-    @media (max-width: 820px) {
-      .grid,
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        font-size: 24px;
-      }
-
-      .header-inner {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
   </style>
 </head>
 <body>
-
   <main class="shell">
-    <section class="hero">
-      <h1>Gerador de ofício para bancos (inventário e partilha)</h1>
+    <section class="hero" aria-labelledby="titulo">
+      <div class="eyebrow">Ofícios notariais</div>
+      <h1 id="titulo">Gerador de ofício para bancos</h1>
       <p>
-        Faça o upload da certidão de óbito, faça a leitura automática dos dados, revise os campos e gere um PDF único com o ofício, a certidão e o comunicado da Febraban.
+        Preencha os dados do inventário, leia a certidão de óbito quando necessário, revise a prévia do ofício e gere um PDF único com o ofício, a certidão e o comunicado da Febraban.
       </p>
       <div class="alerta">
-        A leitura automática da certidão é apenas auxiliar. Confira todos os dados antes de gerar o PDF final.
+        A leitura automática da certidão é auxiliar. Confira todos os campos antes de gerar o PDF final.
+      </div>
+      <div class="hero-actions" aria-label="Atalhos da página">
+        <a class="hero-link primary-link" href="#ferramenta">Ir para a ferramenta</a>
+        <a class="hero-link secondary-link" href="#criterios-fontes">Ver critérios e fontes</a>
       </div>
     </section>
 
-    <section class="grid">
-      <div class="card full">
-        <h2>1. Arquivos</h2>
-        <div class="form-grid">
-          <div class="field">
-            <label for="certidaoPdf">Certidão de óbito em PDF</label>
-            <input type="file" id="certidaoPdf" accept="application/pdf" />
-            <div class="small-note">Use a certidão escaneada ou digitalizada em PDF.</div>
-          </div>
+    <section class="adsense-section" id="informacoes-ferramenta" aria-labelledby="infoTitulo">
+      <div class="section-kicker">Informações</div>
+      <h2 id="infoTitulo">O que a ferramenta faz</h2>
+      <p>
+        A ferramenta auxilia a preparação de ofício para instituições financeiras em inventário e partilha. Ela permite anexar a certidão de óbito, preencher os dados do falecido, do banco, do autorizado, do cartório e do assinante, revisar a prévia editável e gerar um PDF final.
+      </p>
 
-          <div class="field">
-            <label for="templatePdf">Template do cartório em PDF</label>
-            <input type="file" id="templatePdf" accept="application/pdf" />
-            <div class="small-note">Opcional. Use um papel timbrado em PDF para mesclar com o ofício.</div>
-            <div class="template-actions">
-              <button type="button" class="btn-secondary" id="btnSalvarTemplate">Salvar template como modelo</button>
-              <button type="button" class="btn-danger" id="btnLimparTemplate">Limpar template salvo</button>
-            </div>
-            <div class="template-status" id="templateStatus">Nenhum template salvo neste navegador.</div>
-          </div>
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>Quando usar</h3>
+          <p>Use quando for necessário solicitar informações bancárias para instrução de inventário e partilha, inclusive saldos, aplicações, investimentos e demais ativos vinculados ao CPF do falecido.</p>
+        </article>
+        <article class="info-card">
+          <h3>Como interpretar o resultado</h3>
+          <p>O resultado é a prévia do ofício e o PDF final montado a partir dos dados preenchidos. Antes de usar o arquivo, confira banco, agência, conta, CPF, datas, autorizado, e-mail de resposta, assinatura e anexos.</p>
+        </article>
+        <article class="info-card">
+          <h3>Limite operacional</h3>
+          <p>A ferramenta não consulta bancos, não valida a legitimidade do inventariante ou herdeiro e não substitui a conferência documental do caso concreto.</p>
+        </article>
+      </div>
+    </section>
 
-        </div>
+    <section class="adsense-section" id="como-usar" aria-labelledby="comoUsarTitulo">
+      <div class="section-kicker">Como usar</div>
+      <h2 id="comoUsarTitulo">Como usar a ferramenta</h2>
+      <p>
+        Envie a certidão de óbito em PDF, use a leitura automática quando houver camada de texto ou imagem legível, complete os campos, revise a prévia e gere o PDF final.
+      </p>
+      <ol class="use-steps">
+        <li><span class="step-number">1</span><span><strong>Envie os arquivos.</strong> Selecione a certidão de óbito em PDF e, se quiser, informe o template do cartório para aplicação no ofício.</span></li>
+        <li><span class="step-number">2</span><span><strong>Leia e revise os dados.</strong> Use a leitura automática como apoio, mas confira manualmente os campos preenchidos e complemente as informações que não constarem na certidão.</span></li>
+        <li><span class="step-number">3</span><span><strong>Gere o PDF.</strong> Revise a prévia do ofício, edite o texto se necessário e gere o arquivo final com os anexos.</span></li>
+      </ol>
+    </section>
 
-        <div class="fallback-file" id="campoComunicadoManual">
-          <div class="field">
-            <label for="comunicadoPdf">Comunicado da Febraban em PDF</label>
-            <input type="file" id="comunicadoPdf" accept="application/pdf" />
-            <div class="small-note">
+    <section class="grid" id="ferramenta">
+<div class="card full">
+<h2>1. Arquivos</h2>
+<div class="form-grid"><div class="field full">
+<label for="certidaoPdf">Certidão de óbito em PDF</label>
+<input accept="application/pdf" id="certidaoPdf" type="file"/>
+<div class="small-note">Use a certidão escaneada ou digitalizada em PDF.</div>
+</div></div>
+<button aria-controls="templateCampos" aria-expanded="false" class="template-toggle" id="btnToggleTemplate" type="button">Mostrar campos do template do cartório</button>
+<div class="template-panel" id="templateCampos">
+<div class="form-grid">
+<div class="field full">
+<label for="templatePdf">Template do cartório em PDF</label>
+<input accept="application/pdf" id="templatePdf" type="file"/>
+<div class="small-note">Opcional. Use um papel timbrado em PDF para mesclar com o ofício.</div>
+<div class="template-actions">
+<button class="btn-secondary" id="btnSalvarTemplate" type="button">Salvar template como modelo</button>
+<button class="btn-danger" id="btnLimparTemplate" type="button">Limpar template salvo</button>
+</div>
+<div class="template-status" id="templateStatus">Nenhum template salvo neste navegador.</div>
+</div></div>
+</div>
+
+
+<div class="fallback-file" id="campoComunicadoManual">
+<div class="field">
+<label for="comunicadoPdf">Comunicado da Febraban em PDF</label>
+<input accept="application/pdf" id="comunicadoPdf" type="file"/>
+<div class="small-note">
               Este campo aparece automaticamente no teste local. Na página publicada, o sistema procura automaticamente o arquivo comunicado-febraban.pdf e mantém este campo oculto.
             </div>
-          </div>
-        </div>
-
-        <div class="actions">
-          <button type="button" class="btn-primary" id="btnForcarOCR">Ler certidão automaticamente</button>
-          <button type="button" class="btn-danger" id="btnLimpar">Limpar</button>
-        </div>
-
-        <div class="progress-wrap" id="progressWrap">
-          <div class="progress-bar" id="progressBar"></div>
-        </div>
-
-        <div class="status" id="statusBox">Selecione a certidão de óbito e clique em “Ler certidão automaticamente”.</div>
-      </div>
-
-      <div class="card full">
-        <h2>2. Dados do ofício</h2>
-        <form id="formOficio">
-          <div class="form-grid">
-            <div class="field">
-              <label for="numeroOficio">Número do ofício</label>
-              <input id="numeroOficio" type="text" inputmode="numeric" maxlength="5" pattern="\d{1,5}" placeholder="Ex.: 354" required />
-            </div>
-
-            <div class="field">
-              <label for="anoOficio">Ano do ofício</label>
-              <input id="anoOficio" type="number" min="2000" max="2100" placeholder="Ex.: 2025" required />
-            </div>
-
-            <div class="field">
-              <label for="dataOficio">Data do ofício</label>
-              <input id="dataOficio" type="date" required />
-            </div>
-
-            <div class="field">
-              <label for="protocolo">Protocolo interno</label>
-              <input id="protocolo" type="text" inputmode="numeric" maxlength="8" pattern="\d{1,8}" placeholder="Ex.: 12345678" required />
-            </div>
-
-            <div class="field">
-              <label for="banco">Banco</label>
-              <select id="banco" required>
-                <option value="">Escolha uma opção</option>
-                <option>ITAÚ UNIBANCO S.A.</option>
-                <option>BANCO DO BRASIL S.A.</option>
-                <option>BANCO BRADESCO S.A.</option>
-                <option>CAIXA ECONÔMICA FEDERAL</option>
-                <option>BANCO SANTANDER (BRASIL) S.A.</option>
-                <option>BANCO SAFRA S.A.</option>
-                <option>BANCO BTG PACTUAL S.A.</option>
-                <option>BANCO INTER S.A.</option>
-                <option>BANCO BMG COMERCIAL S.A.</option>
-                <option>NU PAGAMENTOS S.A.</option>
-                <option>Outros</option>
-              </select>
-            </div>
-
-            <div class="field" id="campoBancoOutros" style="display: none;">
-              <label for="bancoOutros">Se “Outros”, informe o banco</label>
-              <input id="bancoOutros" type="text" placeholder="Nome da instituição financeira" style="text-transform: uppercase;" />
-            </div>
-
-            <div class="field">
-              <label for="agencia">Número da agência</label>
-              <input id="agencia" type="text" inputmode="numeric" maxlength="6" placeholder="Ex.: 1234 ou 1234-5" required />
-            </div>
-
-            <div class="field">
-              <label for="conta">Número da conta</label>
-              <input id="conta" type="text" inputmode="numeric" maxlength="15" placeholder="Ex.: 12345-6" required />
-            </div>
-
-            <div class="field full">
-              <label for="nomeEspolio">Nome do falecido</label>
-              <input id="nomeEspolio" type="text" placeholder="Nome completo do falecido" required />
-            </div>
-
-            <div class="field">
-              <label for="cidadeResidencia">Cidade de residência do falecido</label>
-              <input id="cidadeResidencia" type="text" placeholder="Ex.: São Paulo" required />
-            </div>
-
-            <div class="field">
-              <label for="estadoResidencia">UF de residência do falecido</label>
-              <select id="estadoResidencia" required>
-                <option value="">Escolha uma opção</option>
-                <option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="cidadeFalecimento">Cidade do falecimento</label>
-              <input id="cidadeFalecimento" type="text" placeholder="Ex.: São Paulo" required />
-            </div>
-
-            <div class="field">
-              <label for="estadoFalecimento">Estado do falecimento</label>
-              <select id="estadoFalecimento" required>
-                <option value="">Escolha uma opção</option>
-                <option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="dataFalecimento">Data do falecimento</label>
-              <input id="dataFalecimento" type="date" required />
-            </div>
-
-            <div class="field">
-              <label for="cpfFalecido">CPF do falecido</label>
-              <input id="cpfFalecido" type="text" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" required />
-            </div>
-
-            <div class="field">
-              <label for="rgFalecido">RG do falecido</label>
-              <input id="rgFalecido" type="text" placeholder="Número do RG" required />
-            </div>
-
-            <div class="field">
-              <label for="orgaoFalecido">Órgão expedidor</label>
-              <input id="orgaoFalecido" type="text" placeholder="Ex.: SSP/SP" style="text-transform: uppercase;" required />
-            </div>
-
-            <div class="field full">
-              <label for="autorizado">Nome de quem poderá receber as informações (inventariante, herdeiro, representante legal)</label>
-              <input id="autorizado" type="text" placeholder="Nome completo" style="text-transform: uppercase;" required />
-            </div>
-
-            <div class="field">
-              <label for="rgAutorizado">RG de quem poderá receber as informações</label>
-              <input id="rgAutorizado" type="text" placeholder="Número do RG" required />
-            </div>
-
-            <div class="field">
-              <label for="orgaoAutorizado">Órgão expedidor</label>
-              <input id="orgaoAutorizado" type="text" placeholder="Ex.: SSP/SP" style="text-transform: uppercase;" required />
-            </div>
-
-            <div class="field">
-              <label for="cpfAutorizado">CPF de quem poderá receber as informações</label>
-              <input id="cpfAutorizado" type="text" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" required />
-            </div>
-
-            <div class="field">
-              <label for="qualidadeAutorizado">Qualidade</label>
-              <select id="qualidadeAutorizado" required>
-                <option value="">Escolha uma opção</option>
-                <option>inventariante</option>
-                <option>herdeiro(a)</option>
-                <option>representante legal</option>
-              </select>
-            </div>
-
-            <div class="field full">
-              <label for="quemAssina">Nome de quem assina o ofício (tabelião, substituto, escrevente autorizado)</label>
-              <input id="quemAssina" type="text" placeholder="Nome completo de quem assina o ofício" style="text-transform: uppercase;" required />
-            </div>
-
-            <div class="field">
-              <label for="qualificacaoFuncional">Qualificação funcional</label>
-              <input id="qualificacaoFuncional" type="text" placeholder="Ex.: tabelião, tabelião substituto, escrevente autorizado" required />
-            </div>
-
-            <div class="field">
-              <label for="tabelionato">Tabelionato</label>
-              <input id="tabelionato" type="text" placeholder="Nome do tabelionato" required />
-            </div>
-
-            <div class="field">
-              <label for="escrevente">Escrevente responsável</label>
-              <input id="escrevente" type="text" placeholder="Nome do escrevente" style="text-transform: uppercase;" required />
-            </div>
-
-            <div class="field">
-              <label for="emailCartorio">E-mail do cartório para resposta do banco</label>
-              <input id="emailCartorio" type="email" placeholder="Ex.: atendimento@cartorio.com.br" autocomplete="email" required />
-            </div>
-
-            <div class="field full">
-              <div class="cartorio-actions">
-                <button type="button" class="btn-secondary" id="btnSalvarCartorio">Salvar dados do cartório</button>
-                <button type="button" class="btn-danger" id="btnLimparCartorio">Limpar dados salvos</button>
-              </div>
-              <div class="small-note">Use esta opção para manter, neste navegador, e-mail, assinatura, qualificação, tabelionato e escrevente.</div>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <textarea id="textoOCR" style="display: none;" aria-hidden="true"></textarea>
-
-      <div class="card full">
-        <div class="card-title-row">
-          <h2>3. Prévia do ofício</h2>
-          <button type="button" class="btn-secondary" id="btnEditarOficio">Visualizar/editar ofício</button>
-        </div>
-        <div class="preview-panel" id="previewPanel">
-          <div class="small-note">A prévia é editável. Ao concluir, clique em “Concluir edição”.</div>
-          <div class="preview" id="previewOficio">A prévia será gerada com os dados preenchidos.</div>
-        </div>
-      </div>
-
-      <div class="card full">
-        <h2>4. Gerar PDF</h2>
-        <p class="small-note">
+</div>
+</div>
+<div class="actions">
+<button class="btn-primary" id="btnForcarOCR" type="button">Ler certidão automaticamente</button>
+<button class="btn-danger" id="btnLimpar" type="button">Limpar</button>
+</div>
+<div class="progress-wrap" id="progressWrap">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+<div class="status" id="statusBox">Selecione a certidão de óbito e clique em “Ler certidão automaticamente”.</div>
+</div>
+<div class="card full">
+<h2>2. Dados do ofício</h2>
+<form id="formOficio">
+<div class="form-grid">
+<div class="field">
+<label for="numeroOficio">Número do ofício</label>
+<input id="numeroOficio" inputmode="numeric" maxlength="5" pattern="\d{1,5}" placeholder="Ex.: 354" required="" type="text"/>
+</div>
+<div class="field">
+<label for="anoOficio">Ano do ofício</label>
+<input id="anoOficio" max="2100" min="2000" placeholder="Ex.: 2025" required="" type="number"/>
+</div>
+<div class="field">
+<label for="dataOficio">Data do ofício</label>
+<input id="dataOficio" required="" type="date"/>
+</div>
+<div class="field">
+<label for="protocolo">Protocolo interno</label>
+<input id="protocolo" inputmode="numeric" maxlength="8" pattern="\d{1,8}" placeholder="Ex.: 12345678" required="" type="text"/>
+</div>
+<div class="field">
+<label for="banco">Banco</label>
+<select id="banco" required="">
+<option value="">Escolha uma opção</option>
+<option>ITAÚ UNIBANCO S.A.</option>
+<option>BANCO DO BRASIL S.A.</option>
+<option>BANCO BRADESCO S.A.</option>
+<option>CAIXA ECONÔMICA FEDERAL</option>
+<option>BANCO SANTANDER (BRASIL) S.A.</option>
+<option>BANCO SAFRA S.A.</option>
+<option>BANCO BTG PACTUAL S.A.</option>
+<option>BANCO INTER S.A.</option>
+<option>BANCO BMG COMERCIAL S.A.</option>
+<option>NU PAGAMENTOS S.A.</option>
+<option>Outros</option>
+</select>
+</div>
+<div class="field" id="campoBancoOutros" style="display: none;">
+<label for="bancoOutros">Se “Outros”, informe o banco</label>
+<input id="bancoOutros" placeholder="Nome da instituição financeira" style="text-transform: uppercase;" type="text"/>
+</div>
+<div class="field">
+<label for="agencia">Número da agência</label>
+<input id="agencia" inputmode="numeric" maxlength="6" placeholder="Ex.: 1234 ou 1234-5" required="" type="text"/>
+</div>
+<div class="field">
+<label for="conta">Número da conta</label>
+<input id="conta" inputmode="numeric" maxlength="15" placeholder="Ex.: 12345-6" required="" type="text"/>
+</div>
+<div class="field full">
+<label for="nomeEspolio">Nome do falecido</label>
+<input id="nomeEspolio" placeholder="Nome completo do falecido" required="" type="text"/>
+</div>
+<div class="field">
+<label for="cidadeResidencia">Cidade de residência do falecido</label>
+<input id="cidadeResidencia" placeholder="Ex.: São Paulo" required="" type="text"/>
+</div>
+<div class="field">
+<label for="estadoResidencia">UF de residência do falecido</label>
+<select id="estadoResidencia" required="">
+<option value="">Escolha uma opção</option>
+<option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option>
+</select>
+</div>
+<div class="field">
+<label for="cidadeFalecimento">Cidade do falecimento</label>
+<input id="cidadeFalecimento" placeholder="Ex.: São Paulo" required="" type="text"/>
+</div>
+<div class="field">
+<label for="estadoFalecimento">Estado do falecimento</label>
+<select id="estadoFalecimento" required="">
+<option value="">Escolha uma opção</option>
+<option>AC</option><option>AL</option><option>AP</option><option>AM</option><option>BA</option><option>CE</option><option>DF</option><option>ES</option><option>GO</option><option>MA</option><option>MT</option><option>MS</option><option>MG</option><option>PA</option><option>PB</option><option>PR</option><option>PE</option><option>PI</option><option>RJ</option><option>RN</option><option>RS</option><option>RO</option><option>RR</option><option>SC</option><option>SP</option><option>SE</option><option>TO</option>
+</select>
+</div>
+<div class="field">
+<label for="dataFalecimento">Data do falecimento</label>
+<input id="dataFalecimento" required="" type="date"/>
+</div>
+<div class="field">
+<label for="cpfFalecido">CPF do falecido</label>
+<input id="cpfFalecido" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" required="" type="text"/>
+</div>
+<div class="field">
+<label for="rgFalecido">RG do falecido</label>
+<input id="rgFalecido" placeholder="Número do RG" required="" type="text"/>
+</div>
+<div class="field">
+<label for="orgaoFalecido">Órgão expedidor</label>
+<input id="orgaoFalecido" placeholder="Ex.: SSP/SP" required="" style="text-transform: uppercase;" type="text"/>
+</div>
+<div class="field full">
+<label for="autorizado">Nome de quem poderá receber as informações (inventariante, herdeiro, representante legal)</label>
+<input id="autorizado" placeholder="Nome completo" required="" style="text-transform: uppercase;" type="text"/>
+</div>
+<div class="field">
+<label for="rgAutorizado">RG de quem poderá receber as informações</label>
+<input id="rgAutorizado" placeholder="Número do RG" required="" type="text"/>
+</div>
+<div class="field">
+<label for="orgaoAutorizado">Órgão expedidor</label>
+<input id="orgaoAutorizado" placeholder="Ex.: SSP/SP" required="" style="text-transform: uppercase;" type="text"/>
+</div>
+<div class="field">
+<label for="cpfAutorizado">CPF de quem poderá receber as informações</label>
+<input id="cpfAutorizado" inputmode="numeric" maxlength="14" placeholder="000.000.000-00" required="" type="text"/>
+</div>
+<div class="field">
+<label for="qualidadeAutorizado">Qualidade</label>
+<select id="qualidadeAutorizado" required="">
+<option value="">Escolha uma opção</option>
+<option>inventariante</option>
+<option>herdeiro(a)</option>
+<option>representante legal</option>
+</select>
+</div>
+<div class="field full">
+<label for="quemAssina">Nome de quem assina o ofício (tabelião, substituto, escrevente autorizado)</label>
+<input id="quemAssina" placeholder="Nome completo de quem assina o ofício" required="" style="text-transform: uppercase;" type="text"/>
+</div>
+<div class="field">
+<label for="qualificacaoFuncional">Qualificação funcional</label>
+<input id="qualificacaoFuncional" placeholder="Ex.: tabelião, tabelião substituto, escrevente autorizado" required="" type="text"/>
+</div>
+<div class="field">
+<label for="tabelionato">Tabelionato</label>
+<input id="tabelionato" placeholder="Nome do tabelionato" required="" type="text"/>
+</div>
+<div class="field">
+<label for="escrevente">Escrevente responsável</label>
+<input id="escrevente" placeholder="Nome do escrevente" required="" style="text-transform: uppercase;" type="text"/>
+</div>
+<div class="field">
+<label for="emailCartorio">E-mail do cartório para resposta do banco</label>
+<input autocomplete="email" id="emailCartorio" placeholder="Ex.: atendimento@cartorio.com.br" required="" type="email"/>
+</div>
+<div class="field full">
+<div class="cartorio-actions">
+<button class="btn-secondary" id="btnSalvarCartorio" type="button">Salvar dados do cartório</button>
+<button class="btn-danger" id="btnLimparCartorio" type="button">Limpar dados salvos</button>
+</div>
+<div class="small-note">Use esta opção para manter, neste navegador, e-mail, assinatura, qualificação, tabelionato e escrevente.</div>
+</div>
+</div>
+</form>
+</div>
+<textarea aria-hidden="true" id="textoOCR" style="display: none;"></textarea>
+<div class="card full">
+<div class="card-title-row">
+<h2>3. Prévia do ofício</h2>
+<button class="btn-secondary" id="btnEditarOficio" type="button">Visualizar/editar ofício</button>
+</div>
+<div class="preview-panel" id="previewPanel">
+<div class="small-note">A prévia é editável. Ao concluir, clique em “Concluir edição”.</div>
+<div class="preview" id="previewOficio">A prévia será gerada com os dados preenchidos.</div>
+</div>
+</div>
+<div class="card full">
+<h2>4. Tipo da assinatura do ofício</h2>
+<div class="signature-options" role="radiogroup" aria-label="Tipo da assinatura do ofício">
+<label class="signature-option" for="tipoAssinaturaDigital">
+<input id="tipoAssinaturaDigital" name="tipoAssinatura" type="radio" value="digital"/>
+<span><strong>Digital</strong></span>
+</label>
+<label class="signature-option" for="tipoAssinaturaFisica">
+<input id="tipoAssinaturaFisica" name="tipoAssinatura" type="radio" value="fisica"/>
+<span><strong>Física</strong></span>
+</label>
+</div>
+</div>
+<div class="card full">
+<h2>5. Gerar PDF</h2>
+<p class="small-note">
           O PDF final será montado nesta ordem: ofício, certidão de óbito e comunicado da Febraban.
         </p>
-        <div class="actions">
-          <button type="button" class="btn-primary" id="btnGerarPdf">Gerar PDF</button>
-          <button type="button" class="btn-secondary" id="btnImprimir">Imprimir</button>
-        </div>
+<div class="actions">
+<button class="btn-primary" id="btnGerarPdf" type="button">Gerar PDF</button>
+<button class="btn-secondary" id="btnImprimir" type="button">Imprimir</button>
+</div>
+</div>
+</section>
+
+    <section class="adsense-section" id="criterios-fontes" aria-labelledby="criteriosTitulo">
+      <div class="section-kicker">Critérios e fontes</div>
+      <h2 id="criteriosTitulo">Critérios utilizados</h2>
+      <p>
+        A ferramenta trabalha com os dados digitados pelo usuário, com a leitura do texto interno do PDF e, quando necessário, com OCR da certidão de óbito. O PDF final é montado no navegador com as bibliotecas externas carregadas na página.
+      </p>
+
+      <div class="source-grid">
+        <article class="source-box">
+          <h3>Fontes utilizadas pela ferramenta</h3>
+          <ul>
+            <li>Dados preenchidos pelo usuário no formulário.</li>
+            <li>Texto interno da certidão de óbito em PDF, quando disponível.</li>
+            <li>Leitura por OCR da certidão, quando o PDF não tiver texto interno suficiente.</li>
+            <li>Comunicado da Febraban em PDF, quando localizado na página publicada ou selecionado manualmente.</li>
+            <li>Template do cartório enviado ou salvo no navegador, quando utilizado.</li>
+          </ul>
+        </article>
+        <article class="source-box">
+          <h3>Base de redação do ofício</h3>
+          <ul>
+            <li>Lei nº 8.935/1994, conforme texto indicado no próprio ofício gerado.</li>
+            <li>Art. 610, § 1º, do Código de Processo Civil, conforme texto indicado no próprio ofício gerado.</li>
+            <li>Art. 11, § 2º, da Resolução CNJ nº 35/2007, conforme texto indicado no próprio ofício gerado.</li>
+            <li>Comunicado FB 049/2015 da Febraban, quando anexado ao PDF final.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="adsense-section" id="limites" aria-labelledby="limitesTitulo">
+      <div class="section-kicker">Limites</div>
+      <h2 id="limitesTitulo">Limites da ferramenta</h2>
+      <p>
+        A leitura automática pode falhar em certidões digitalizadas com baixa qualidade, fundo de segurança, cortes, baixa resolução ou texto pouco legível. Campos como RG, órgão expedidor, qualidade do autorizado, banco, agência, conta e e-mail devem ser conferidos e preenchidos pelo usuário.
+      </p>
+      <div class="source-grid">
+        <article class="source-box">
+          <h3>O que a ferramenta não faz</h3>
+          <ul>
+            <li>Não acessa sistemas bancários.</li>
+            <li>Não confirma saldo, investimento ou existência de conta.</li>
+            <li>Não confirma poderes do autorizado.</li>
+            <li>Não substitui a análise do título, dos documentos e da legitimidade dos interessados.</li>
+          </ul>
+        </article>
+        <article class="source-box">
+          <h3>Conferência recomendada</h3>
+          <ul>
+            <li>Confira a certidão de óbito anexada.</li>
+            <li>Confira CPF, RG, data do óbito e dados de residência.</li>
+            <li>Confira os dados da instituição financeira, agência e conta.</li>
+            <li>Confira e-mail do cartório, assinatura e qualificação funcional.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="adsense-section" id="faq" aria-labelledby="faqTitulo">
+      <div class="section-kicker">FAQ</div>
+      <h2 id="faqTitulo">Perguntas frequentes</h2>
+
+      <div class="faq-list">
+        <details>
+          <summary>A leitura automática da certidão substitui a conferência?</summary>
+          <div class="faq-body">Não. A leitura automática apenas ajuda a preencher alguns campos. O usuário deve conferir todos os dados antes de gerar ou usar o PDF.</div>
+        </details>
+        <details>
+          <summary>O comunicado da Febraban precisa estar anexado?</summary>
+          <div class="faq-body">A ferramenta tenta localizar automaticamente o arquivo comunicado-febraban.pdf na página publicada. Em teste local, ou se o arquivo não for localizado, o campo manual é exibido para seleção do PDF.</div>
+        </details>
+        <details>
+          <summary>O template do cartório é obrigatório?</summary>
+          <div class="faq-body">Não. O template é opcional. Quando selecionado ou salvo no navegador, ele é aplicado como fundo do ofício.</div>
+        </details>
+        <details>
+          <summary>Os dados ficam salvos em servidor?</summary>
+          <div class="faq-body">A ferramenta usa recursos do navegador para salvar dados do cartório e template, como localStorage e IndexedDB. Os arquivos selecionados são usados na montagem local do PDF.</div>
+        </details>
+        <details>
+          <summary>Posso editar o texto antes de gerar o PDF?</summary>
+          <div class="faq-body">Sim. A prévia é editável. Após concluir a edição, o PDF será gerado com o texto exibido na prévia.</div>
+        </details>
       </div>
     </section>
   </main>
 
   <footer>
-    Ferramenta em versão inicial. O usuário deve revisar todos os dados antes de gerar o PDF. Leitura automática com texto interno do PDF e OCR quando necessário.
+    <div class="shell">
+      <div class="src">
+        <p>Ferramenta em versão inicial. O usuário deve revisar todos os dados antes de gerar o PDF final.</p>
+        <p>Uso recomendado. Apoio à redação de ofício para instituições financeiras em inventário e partilha. O resultado não substitui a conferência do caso concreto.</p>
+        <p>Projeto apoiado por <a href="https://escriturapublica.substack.com" target="_blank" rel="noopener">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener">Atesta</a></p>
+        <nav class="institutional-nav" aria-label="Links institucionais">
+          <a href="https://portalnotarial.com.br/">Início</a>
+          <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
+          <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+          <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
+          <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
+          <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
+          <a href="https://portalnotarial.com.br/mapa-do-site.html">Mapa do site</a>
+        </nav>
+      </div>
+    </div>
   </footer>
 
   <script>
@@ -785,9 +1156,13 @@
       btnImprimir: document.getElementById('btnImprimir'),
       templatePdf: document.getElementById('templatePdf'),
       templateStatus: document.getElementById('templateStatus'),
+      btnToggleTemplate: document.getElementById('btnToggleTemplate'),
+      templateCampos: document.getElementById('templateCampos'),
       btnSalvarTemplate: document.getElementById('btnSalvarTemplate'),
       btnLimparTemplate: document.getElementById('btnLimparTemplate'),
-      previewPanel: document.getElementById('previewPanel')
+      previewPanel: document.getElementById('previewPanel'),
+      tipoAssinaturaDigital: document.getElementById('tipoAssinaturaDigital'),
+      tipoAssinaturaFisica: document.getElementById('tipoAssinaturaFisica')
     };
 
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
@@ -817,10 +1192,18 @@
     if (ids.btnImprimir) ids.btnImprimir.addEventListener('click', imprimirOficio);
     if (ids.btnSalvarTemplate) ids.btnSalvarTemplate.addEventListener('click', salvarTemplateCartorio);
     if (ids.btnLimparTemplate) ids.btnLimparTemplate.addEventListener('click', limparTemplateCartorioSalvo);
+    if (ids.btnToggleTemplate) ids.btnToggleTemplate.addEventListener('click', alternarCamposTemplateCartorio);
     if (ids.templatePdf) ids.templatePdf.addEventListener('change', function () {
       if (ids.templatePdf.files && ids.templatePdf.files[0]) {
         atualizarStatusTemplate('Template selecionado para este ofício: ' + ids.templatePdf.files[0].name + '. Clique em “Salvar template como modelo” para reutilizar nas próximas vezes.');
       }
+    });
+
+
+    document.querySelectorAll('input[name="tipoAssinatura"]').forEach(function (campo) {
+      campo.addEventListener('change', function () {
+        if (!edicaoManualOficio && !edicaoOficioAtiva) atualizarPrevia(true);
+      });
     });
 
     ['input', 'change'].forEach(function (evento) {
@@ -834,6 +1217,14 @@
         if (field) field.classList.remove('field-auto-filled');
       });
     });
+
+
+    function alternarCamposTemplateCartorio() {
+      if (!ids.templateCampos || !ids.btnToggleTemplate) return;
+      const aberto = ids.templateCampos.classList.toggle('is-visible');
+      ids.btnToggleTemplate.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+      ids.btnToggleTemplate.textContent = aberto ? 'Ocultar campos do template do cartório' : 'Mostrar campos do template do cartório';
+    }
 
     inicializarMascarasEValidadores();
     inicializarSincroniaResidenciaFalecimento();
@@ -1597,6 +1988,11 @@
       return dia + ' de ' + mes + ' de ' + ano;
     }
 
+    function getTipoAssinatura() {
+      const selecionado = document.querySelector('input[name="tipoAssinatura"]:checked');
+      return selecionado ? selecionado.value : '';
+    }
+
     function coletarDados() {
       return {
         numeroOficio: getValor('numeroOficio'),
@@ -1624,7 +2020,8 @@
         qualidadeAutorizado: getValor('qualidadeAutorizado'),
         quemAssina: getValor('quemAssina').toUpperCase(),
         qualificacaoFuncional: getValor('qualificacaoFuncional'),
-        tabelionato: getValor('tabelionato')
+        tabelionato: getValor('tabelionato'),
+        tipoAssinatura: getTipoAssinatura()
       };
     }
 
@@ -1671,7 +2068,7 @@
       const qualificacaoFuncional = valorOuCampo(dados.qualificacaoFuncional, 'QUALIFICAÇÃO FUNCIONAL');
       const tabelionato = valorOuCampo(dados.tabelionato, 'TABELIONATO');
 
-      return [
+      const blocos = [
         { tipo: 'line', texto: 'Ofício nº ' + numeroAno },
         { tipo: 'line', texto: 'Protocolo interno: ' + protocoloComSufixo },
         { tipo: 'line', texto: tabelionato },
@@ -1697,10 +2094,21 @@
         { tipo: 'space' },
         { tipo: 'space' },
         { tipo: 'space' },
-        { tipo: 'space' },
-        { tipo: 'signature', texto: quemAssina },
-        { tipo: 'centerLine', texto: qualificacaoFuncional }
+        { tipo: 'space' }
       ];
+
+      if (dados.tipoAssinatura === 'fisica') {
+        blocos.push({ tipo: 'signatureLine' });
+      }
+
+      blocos.push({ tipo: 'signature', texto: quemAssina });
+
+      if (dados.tipoAssinatura === 'digital') {
+        blocos.push({ tipo: 'digitalNote', texto: '(assinado digitalmente)' });
+      }
+
+      blocos.push({ tipo: 'centerLine', texto: qualificacaoFuncional });
+      return blocos;
     }
 
     function montarTextoOficio(dados) {
@@ -1740,7 +2148,9 @@
         if (bloco.tipo === 'paragraph' || bloco.tipo === 'paragraphRich') return '<p class="oficio-paragraph">' + texto + '</p>';
         if (bloco.tipo === 'listItem' || bloco.tipo === 'listItemRich') return '<p class="oficio-list-item">' + texto + '</p>';
         if (bloco.tipo === 'assunto') return '<p class="oficio-assunto">' + texto + '</p>';
+        if (bloco.tipo === 'signatureLine') return '<div class="oficio-signature-line"></div>';
         if (bloco.tipo === 'signature') return '<p class="oficio-signature">' + texto + '</p>';
+        if (bloco.tipo === 'digitalNote') return '<p class="oficio-digital-note">' + texto + '</p>';
         if (bloco.tipo === 'centerLine') return '<p class="oficio-signature" style="font-weight:400;">' + texto + '</p>';
         if (bloco.tipo === 'validation') return '<p class="oficio-validation">' + texto + '</p>';
         if (bloco.tipo === 'lineBold') return '<p class="oficio-line"><strong>' + texto + '</strong></p>';
@@ -1797,6 +2207,11 @@
           return;
         }
 
+        if (elemento.classList.contains('oficio-signature-line')) {
+          blocos.push({ tipo: 'signatureLine' });
+          return;
+        }
+
         const partes = extrairPartesHtmlEditado(elemento);
         const texto = partesParaTexto(partes).trim();
         if (!texto) return;
@@ -1813,6 +2228,11 @@
 
         if (elemento.classList.contains('oficio-list-item')) {
           blocos.push({ tipo: 'listItemRich', partes: partes });
+          return;
+        }
+
+        if (elemento.classList.contains('oficio-digital-note')) {
+          blocos.push({ tipo: 'digitalNote', partes: partes });
           return;
         }
 
@@ -1905,6 +2325,14 @@
         return false;
       }
 
+      if (!getTipoAssinatura()) {
+        alert('Selecione o tipo da assinatura do ofício.');
+        setStatus('Selecione o tipo da assinatura do ofício antes de gerar ou imprimir.');
+        const primeiroTipo = document.getElementById('tipoAssinaturaDigital');
+        if (primeiroTipo) primeiroTipo.focus();
+        return false;
+      }
+
       if (!ids.certidaoPdf.files[0]) {
         alert('Selecione a certidão de óbito em PDF antes de gerar o PDF final.');
         ids.certidaoPdf.focus();
@@ -1919,6 +2347,13 @@
 
     function imprimirOficio() {
       if (!ids.previewOficio) return;
+      if (!getTipoAssinatura()) {
+        alert('Selecione o tipo da assinatura do ofício.');
+        setStatus('Selecione o tipo da assinatura do ofício antes de imprimir.');
+        const primeiroTipo = document.getElementById('tipoAssinaturaDigital');
+        if (primeiroTipo) primeiroTipo.focus();
+        return;
+      }
       if (!edicaoManualOficio && !edicaoOficioAtiva) {
         atualizarPrevia(true);
       }
@@ -1945,6 +2380,8 @@
         '.oficio-paragraph{margin:0 0 6pt;text-align:justify;line-height:1.15;}' +
         '.oficio-list-item{margin:0 0 4pt 18pt;text-align:justify;line-height:1.15;}' +
         '.oficio-signature{margin:0 0 3pt;font-weight:700;text-transform:uppercase;text-align:center;}' +
+        '.oficio-signature-line{width:8cm;border-top:1px solid #000;margin:0 auto 12pt;height:0;}' +
+        '.oficio-digital-note{margin:0 0 6pt;text-align:center;font-size:11pt;line-height:1.15;}' +
         '.oficio-bold{font-weight:700;}' +
         '</style></head><body>' + ids.previewOficio.innerHTML + '</body></html>');
       doc.close();
@@ -2085,11 +2522,25 @@
           return;
         }
 
+        if (bloco.tipo === 'signatureLine') {
+          novaPaginaSeNecessario(24);
+          const larguraLinhaAssinatura = 226.77;
+          const xInicio = margemLateral + (larguraTexto - larguraLinhaAssinatura) / 2;
+          page.drawLine({
+            start: { x: xInicio, y: y - 8 },
+            end: { x: xInicio + larguraLinhaAssinatura, y: y - 8 },
+            thickness: 1,
+            color: rgb(0, 0, 0)
+          });
+          y -= 24;
+          return;
+        }
+
         const fonteBloco = bloco.tipo === 'lineBold' || bloco.tipo === 'signature' || bloco.tipo === 'assunto' || bloco.tipo === 'heading' ? fonteNegrito : fonteNormal;
         const isParagraph = bloco.tipo === 'paragraph' || bloco.tipo === 'paragraphRich';
         const isListItem = bloco.tipo === 'listItem' || bloco.tipo === 'listItemRich';
         const justify = isParagraph || isListItem;
-        const center = bloco.tipo === 'signature' || bloco.tipo === 'centerLine' || bloco.tipo === 'validation';
+        const center = bloco.tipo === 'signature' || bloco.tipo === 'centerLine' || bloco.tipo === 'validation' || bloco.tipo === 'digitalNote';
         const right = bloco.tipo === 'rightLine';
         const indent = isListItem ? 18 : 0;
         const larguraDisponivel = larguraTexto - indent;
