@@ -26,6 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: #f5f5f4;
@@ -503,6 +504,440 @@
 }
 </style>
 
+
+<style>
+/* Layout ajustado para o padrão visual do Aplicador de Emolumentos. */
+:root{
+  --bg:#f5f7fb;
+  --panel:#ffffff;
+  --text:#172033;
+  --muted:#64748b;
+  --line:#d8dee9;
+  --brand:#0076ff;
+  --brand-dark:#005bd1;
+  --soft:#eef5ff;
+  --warn:#fff7ed;
+  --warn-border:#fed7aa;
+  --ok:#ecfdf5;
+  --bad:#fff1f2;
+  --shadow:0 18px 55px rgba(15,23,42,.09);
+  --radius:22px;
+  --primary:#0076ff;
+  --primary-dark:#005bd1;
+  --line-soft:#dbe3ef;
+  --surface:#ffffff;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(0,118,255,.12), transparent 32rem),
+    linear-gradient(180deg,#f8fbff 0%,var(--bg) 55%,#eef2f7 100%);
+  color:var(--text);
+  line-height:1.48;
+}
+body::before{display:none}
+a{color:inherit;text-decoration:none}
+a:hover{text-decoration:none}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+.wrap{
+  width:min(1220px,calc(100% - 32px));
+  max-width:none;
+  margin:0 auto;
+  padding:0;
+}
+main.wrap.page{padding:34px 0 54px}
+header{padding:0 0 18px}
+
+.hero{
+  margin:0 0 22px;
+  padding:0;
+  display:block;
+}
+.hero-card,
+.hero{
+  background:rgba(255,255,255,.86);
+  border:1px solid rgba(216,222,233,.8);
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  padding:32px 28px 30px;
+  backdrop-filter:blur(12px);
+  position:relative;
+  overflow:hidden;
+  min-height:0;
+}
+.hero-card::after,
+.hero::after{
+  content:"";
+  position:absolute;
+  width:250px;
+  height:250px;
+  right:-90px;
+  top:-110px;
+  border-radius:50%;
+  background:rgba(0,118,255,.12);
+  pointer-events:none;
+}
+.eyebrow{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  width:max-content;
+  max-width:100%;
+  background:var(--soft);
+  color:var(--brand-dark);
+  border:1px solid #cfe2ff;
+  border-radius:999px;
+  padding:6px 12px;
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.02em;
+  margin:0 0 14px;
+  text-transform:none;
+  position:relative;
+  z-index:1;
+}
+.eyebrow::before{display:none}
+h1,
+.hero-card h2{
+  margin:0;
+  max-width:none;
+  width:100%;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:clamp(30px,4vw,52px);
+  line-height:1.02;
+  font-weight:850;
+  letter-spacing:-.045em;
+  color:#0f172a;
+  position:relative;
+  z-index:1;
+}
+.hero-card h2 em{font-style:normal;font-weight:850}
+.lead,
+.hero-card p{
+  margin:20px 0 0;
+  max-width:none;
+  width:100%;
+  color:#334155;
+  font-size:18px;
+  line-height:1.7;
+  position:relative;
+  z-index:1;
+}
+.scope{
+  margin:18px 0 0;
+  max-width:none;
+  width:100%;
+  color:#475569;
+  font-size:14px;
+  line-height:1.65;
+  background:#f8fafc;
+  border:1px solid #e2e8f0;
+  border-radius:14px;
+  padding:14px 16px;
+  position:relative;
+  z-index:1;
+}
+.hero-actions,
+.pn-hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+  position:relative;
+  z-index:1;
+}
+.hero-link,
+.button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:42px;
+  padding:10px 14px;
+  border-radius:14px;
+  font-size:14px;
+  font-weight:850;
+  text-decoration:none;
+  border:1px solid transparent;
+  background:#fff;
+  color:#0f172a;
+  box-shadow:none;
+  white-space:nowrap;
+}
+.hero-link:hover,
+.button:hover{transform:translateY(-1px);text-decoration:none;filter:brightness(.98)}
+.hero-link.primary-link,
+.button.primary,
+.button.primary:visited{
+  background:var(--brand);
+  color:#fff;
+  border-color:var(--brand);
+  box-shadow:0 12px 28px rgba(0,118,255,.22);
+}
+.hero-link.secondary-link,
+.button:not(.primary){background:#fff;border-color:#cbd5e1;color:#0f172a}
+.hero-link.primary-link:hover,
+.button.primary:hover{background:var(--brand-dark);border-color:var(--brand-dark)}
+
+.adsense-section,
+.bloco-como-utilizar,
+.pn-editorial{
+  margin:22px auto 0;
+  background:rgba(255,255,255,.88);
+  border:1px solid rgba(216,222,233,.84);
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  padding:30px 28px;
+  scroll-margin-top:26px;
+  color:var(--text);
+}
+.section-kicker{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  background:var(--soft);
+  color:var(--brand-dark);
+  border-radius:999px;
+  padding:6px 12px;
+  font-size:12px;
+  font-weight:850;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  margin:0 0 14px;
+}
+.adsense-section h2,
+.bloco-como-utilizar h2,
+.pn-editorial h2{
+  margin:0 0 12px;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  font-size:clamp(28px,3vw,42px);
+  line-height:1.08;
+  font-weight:850;
+  letter-spacing:-.035em;
+  color:#0f172a;
+}
+.adsense-section p,
+.bloco-como-utilizar .intro,
+.pn-editorial p{
+  color:#334155;
+  margin:0;
+  font-size:16px;
+  line-height:1.7;
+}
+.bloco-como-utilizar .intro + .intro,
+.pn-editorial p + p{margin-top:10px}
+.info-grid,
+.pn-info-grid,
+.bloco-como-utilizar .cards{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  margin-top:22px;
+}
+.info-card,
+.pn-info-card,
+.bloco-como-utilizar .card{
+  background:#fff;
+  border:1px solid #dbe3ef;
+  border-radius:18px;
+  padding:18px;
+  min-height:118px;
+}
+.info-card h3,
+.pn-info-card h3,
+.bloco-como-utilizar .card h3{
+  margin:0 0 9px;
+  font-size:16px;
+  line-height:1.25;
+  color:#0f172a;
+  font-weight:850;
+  letter-spacing:-.01em;
+}
+.info-card p,
+.pn-info-card p,
+.bloco-como-utilizar .card p{
+  margin:0;
+  font-size:14px;
+  color:#475569;
+  line-height:1.65;
+}
+.pn-note,
+.bloco-como-utilizar .alerta{
+  margin-top:20px;
+  background:#f8fafc;
+  border-left:4px solid var(--brand);
+  border-radius:0 14px 14px 0;
+  padding:16px 18px;
+  color:#334155;
+  font-size:14px;
+  line-height:1.7;
+}
+.pn-meta,
+.bloco-como-utilizar .atualizacao{margin-top:16px;font-size:14px;color:#64748b;display:block;line-height:1.5}
+.pn-steps{
+  margin:20px 0 0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:12px;
+}
+.pn-steps li{
+  display:grid;
+  grid-template-columns:34px 1fr;
+  gap:12px;
+  align-items:start;
+  background:#fff;
+  border:1px solid #dbe3ef;
+  border-radius:16px;
+  padding:14px;
+  color:#475569;
+  font-size:14px;
+  line-height:1.6;
+}
+.pn-steps strong{
+  width:34px;
+  height:34px;
+  display:grid;
+  place-items:center;
+  border-radius:12px;
+  background:var(--soft);
+  color:var(--brand-dark);
+  font-weight:900;
+  font-size:13px;
+}
+.source-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+  margin-top:20px;
+}
+.source-box{
+  background:#fff;
+  border:1px solid #dbe3ef;
+  border-radius:18px;
+  padding:18px;
+}
+.source-box h3{margin:0 0 9px;font-size:16px;color:#0f172a}
+.source-box ul{margin:0;padding-left:18px;color:#475569;font-size:14px;line-height:1.65}
+.faq-list,
+.pn-faq{display:grid;gap:10px;margin-top:20px}
+.faq-list details,
+.pn-faq details{margin:0;border:1px solid #dbe3ef;border-radius:16px;background:#fff;overflow:hidden;padding:0}
+.faq-list summary,
+.pn-faq summary{padding:14px 16px;background:#f8fafc;color:#0f172a;font-weight:850;cursor:pointer;font-size:14px}
+.faq-list .faq-body,
+.pn-faq p{padding:14px 16px;color:#475569;font-size:14px;line-height:1.65;margin:0}
+
+#consulta-normas{
+  margin-top:22px;
+  scroll-margin-top:22px;
+  display:grid;
+  grid-template-columns:285px minmax(0,1fr) 310px;
+  gap:18px;
+  align-items:start;
+  padding-bottom:0;
+}
+.sticky{position:sticky;top:18px;max-height:calc(100vh - 36px);overflow:auto}
+.panel,
+.search-box,
+.stat,
+.result-card,
+.empty{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:0 12px 36px rgba(15,23,42,.06);
+}
+.panel{overflow:hidden}
+.panel-head{padding:18px 18px 12px;border-bottom:1px solid var(--line)}
+.panel-head h3{margin:0;font-size:20px;letter-spacing:-.02em;color:#0f172a;font-weight:850}
+.panel-head p{margin:7px 0 0;color:var(--muted);font-size:14px;line-height:1.55}
+.panel-body{padding:18px;overflow:hidden}
+.field{display:block;margin-bottom:14px}
+.field span,.field-label,label{display:block;font-size:13px;font-weight:750;color:#273244;margin:0 0 7px}
+input[type="search"],select,textarea{
+  width:100%;
+  border:1px solid #cbd5e1;
+  background:#fff;
+  color:var(--text);
+  border-radius:14px;
+  padding:12px 12px;
+  outline:none;
+  transition:border-color .15s,box-shadow .15s;
+  min-height:48px;
+}
+input[type="search"]:focus,select:focus,textarea:focus{border-color:var(--brand);box-shadow:0 0 0 4px rgba(0,118,255,.12)}
+.search-box{padding:16px;margin-bottom:14px}
+.search-input-wrap{display:flex;align-items:center;gap:10px;border:1px solid #cbd5e1;background:#fff;padding:0 12px;border-radius:14px}
+.search-input-wrap input{border:0;box-shadow:none;padding:15px 0;font-size:16px;min-height:48px}
+.search-input-wrap input:focus{box-shadow:none}
+.index-list a,.fav-list a,.alteracoes-list a,.alteracoes-list .alteracao-item{font-size:13px;padding:9px 0;border-bottom:1px solid #eef2f7;color:#334155}
+.result-list{display:grid;gap:14px}
+.result-card{padding:18px;scroll-margin-top:24px}
+.result-card.marked{border-color:var(--brand);box-shadow:0 0 0 4px rgba(0,118,255,.12)}
+.result-title{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:22px;font-weight:850;letter-spacing:-.02em;color:#0f172a}
+.tag{border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800}
+.tag.teal{background:var(--soft);color:var(--brand-dark)}
+.full-text{font-size:14px;line-height:1.62;color:#1e293b}
+.hierarchy-block{border-bottom:1px solid #e5eaf2;color:#0f172a}
+.empty{min-height:200px;display:grid;place-items:center;text-align:center;padding:34px;color:var(--muted)}
+.meta-grid,.chips,.stats{display:none!important}
+
+footer{color:#64748b;font-size:13px;padding:22px 0 44px}
+.src{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:15px;
+  box-shadow:0 12px 36px rgba(15,23,42,.04);
+}
+.src p{margin:0 0 8px;line-height:1.6}
+.src p:last-child{margin-bottom:0}
+.src a{color:var(--brand);font-weight:800}
+.institutional-nav{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 16px;
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid #e2e8f0;
+}
+.institutional-nav a{font-weight:800;color:#0f172a}
+.toast{z-index:90}
+
+@media (max-width:1180px){
+  #consulta-normas{grid-template-columns:260px minmax(0,1fr)}
+  .right-col{display:none}
+}
+@media (max-width:980px){
+  .wrap{width:min(100% - 22px,1220px)}
+  main.wrap.page{padding-top:22px}
+  .hero,.hero-card,.adsense-section,.bloco-como-utilizar,.pn-editorial{padding:22px 18px;border-radius:22px}
+  #consulta-normas,.info-grid,.pn-info-grid,.bloco-como-utilizar .cards,.source-grid{grid-template-columns:1fr}
+  .sticky{position:static;max-height:none}
+  .left-col{order:2}.main-col{order:1}
+}
+@media (max-width:620px){
+  .hero-link,.button{width:100%;padding:14px 18px}
+  .panel-head,.panel-body{padding:16px}
+}
+@media print{
+  body{background:#fff}
+  header,.left-col,.right-col,.search-box,footer,.adsense-section,.bloco-como-utilizar{display:none!important}
+  .wrap{width:100%;padding:0}
+  #consulta-normas{display:block}
+  .panel,.result-card{box-shadow:none;border:0}
+  details{display:block}
+  details summary{display:none}
+}
+</style>
+
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTD149ZWLC"></script>
   <script>
@@ -514,92 +949,66 @@
 
 </head>
 <body>
-  <main class="wrap">
-    <section class="hero">
-      <div class="hero-card">
-        <div class="eyebrow">Consulta normativa</div>
-        <h2>Consulta prática ao <em>Código Nacional de Normas</em> do Foro Extrajudicial</h2>
-        <p>Ferramenta para localização rápida de dispositivos do Código Nacional de Normas da Corregedoria Nacional de Justiça, com busca por artigo, expressão, tema e especialidade.</p>
-        <div class="pn-hero-actions">
-          <a class="button primary" href="#consulta-normas">Ir para a ferramenta</a>
-          <a class="button" href="https://portalnotarial.com.br/">Voltar à home</a>
+  <main class="wrap page">
+    <header>
+      <section class="hero" aria-labelledby="titulo">
+        <div>
+          <div class="eyebrow">Consulta normativa</div>
+          <h1 id="titulo">Código Nacional de Normas do Foro Extrajudicial</h1>
+          <p class="lead">Ferramenta para localização rápida de dispositivos do Código Nacional de Normas da Corregedoria Nacional de Justiça, com busca por artigo, expressão, tema e especialidade.</p>
+          <p class="scope">A consulta organiza a base normativa em formato pesquisável. O resultado serve como apoio de triagem, estudo e conferência inicial, sem substituir a leitura da redação oficial vigente.</p>
+          <div class="hero-actions" aria-label="Atalhos da página">
+            <a class="hero-link primary-link" href="#consulta-normas">Ir para a ferramenta</a>
+            <a class="hero-link secondary-link" href="#criterios-fontes">Ver critérios e fontes</a>
+            <a class="hero-link secondary-link" href="https://portalnotarial.com.br/">Voltar à home</a>
+          </div>
         </div>
-        <div class="meta-grid">
-          <div class="meta-chip"><strong>CNJ</strong><span>fonte oficial primária</span></div>
-          <div class="meta-chip"><strong>Alterado</strong><span>situação informada no portal</span></div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </header>
 
-    <section class="pn-editorial" aria-labelledby="sobre-ferramenta">
-      <h2 id="sobre-ferramenta">O que a ferramenta faz</h2>
-      <p>Esta página organiza dispositivos do Código Nacional de Normas da Corregedoria Nacional de Justiça para consulta por artigo, expressão, tema e especialidade. A ferramenta serve como apoio de pesquisa para localizar rapidamente regras do foro extrajudicial, sem substituir a leitura da redação oficial vigente.</p>
-      <div class="pn-info-grid">
-        <div class="pn-info-card">
+    <section class="adsense-section" id="informacoes-ferramenta" aria-labelledby="infoTitulo">
+      <div class="section-kicker">Informações</div>
+      <h2 id="infoTitulo">O que a ferramenta faz</h2>
+      <p>Esta página organiza dispositivos do Código Nacional de Normas da Corregedoria Nacional de Justiça para consulta por artigo, expressão, tema e especialidade. A ferramenta facilita a localização de regras do foro extrajudicial e mantém a conferência concentrada no texto normativo indexado.</p>
+
+      <div class="info-grid">
+        <article class="info-card">
           <h3>Quando usar</h3>
           <p>Use a consulta para localizar artigos sobre atos notariais, registros públicos, e-Notariado, apostilamento, tecnologia, centrais eletrônicas, fiscalização e demais temas do foro extrajudicial.</p>
-        </div>
-        <div class="pn-info-card">
-          <h3>Como usar</h3>
-          <p>Digite uma palavra, expressão ou número de artigo no campo de busca. Use filtros por especialidade, tipo, ordem, expressão exata ou termos semelhantes quando a pesquisa retornar muitos resultados.</p>
-        </div>
-        <div class="pn-info-card">
+        </article>
+        <article class="info-card">
           <h3>Como interpretar o resultado</h3>
-          <p>Os resultados exibem dispositivos indexados da base carregada. A ordem pode variar conforme a busca e os filtros. O texto encontrado deve ser conferido com a fonte oficial antes de uso formal.</p>
-        </div>
-        <div class="pn-info-card">
-          <h3>Critérios e fontes</h3>
-          <p>A base da página corresponde ao arquivo dados/normas-nacional.json, derivado do Código Nacional de Normas do Foro Extrajudicial, instituído pelo Provimento CNJ nº 149/2023 e alterações indicadas na ferramenta.</p>
-        </div>
-        <div class="pn-info-card">
-          <h3>Limites da ferramenta</h3>
-          <p>A consulta não resolve conflito interpretativo, não verifica revogação superveniente fora da base publicada e não substitui qualificação notarial, registral ou análise jurídica do caso concreto.</p>
-        </div>
-        <div class="pn-info-card">
-          <h3>Uso responsável</h3>
-          <p>A ferramenta é indicada para triagem, estudo e conferência inicial. Em procedimento formal, confirme a norma vigente, a especialidade aplicável e eventuais decisões, comunicados ou provimentos posteriores.</p>
-        </div>
+          <p>Os resultados exibem dispositivos indexados da base carregada. A ordem pode variar conforme termo pesquisado, filtro selecionado, expressão exata, termos semelhantes e relevância da busca.</p>
+        </article>
+        <article class="info-card">
+          <h3>Limite operacional</h3>
+          <p>A ferramenta não resolve conflito interpretativo, não verifica alterações externas à base publicada e não substitui qualificação notarial, registral ou análise jurídica do caso concreto.</p>
+        </article>
       </div>
-      <div class="pn-note">Para uso jurídico formal, confira a redação vigente no portal oficial de atos normativos do Conselho Nacional de Justiça. A indexação facilita a pesquisa, mas não altera o conteúdo normativo nem produz interpretação vinculante.</div>
-      <span class="pn-meta">Base atualizada automaticamente.</span>
     </section>
 
-    <section class="pn-editorial" aria-labelledby="como-usar-ferramenta">
-      <h2 id="como-usar-ferramenta">Como usar a consulta</h2>
-      <p>O fluxo foi pensado para pesquisa rápida em rotina de balcão, estudo, conferência interna ou preparação de ato extrajudicial.</p>
-      <ol class="pn-steps">
-        <li><strong>1</strong><span>Pesquise por artigo, expressão ou tema. Exemplos: art. 302, e-Notariado, ata notarial, escritura eletrônica, competência, apostilamento ou indisponibilidade.</span></li>
-        <li><strong>2</strong><span>Use os filtros de especialidade e tipo quando a pesquisa retornar muitos resultados.</span></li>
-        <li><strong>3</strong><span>Marque expressão exata quando quiser localizar uma sequência literal de palavras.</span></li>
-        <li><strong>4</strong><span>Use termos semelhantes para ampliar a busca quando houver variação entre singular, plural ou termos próximos.</span></li>
-        <li><strong>5</strong><span>Antes de aplicar o resultado, confira a redação oficial vigente e a existência de alterações posteriores.</span></li>
-      </ol>
-    </section>
+    <section class="bloco-como-utilizar" id="como-usar">
+      <h2>Como usar a consulta</h2>
+      <p class="intro">O fluxo foi pensado para pesquisa rápida em rotina de balcão, estudo, conferência interna ou preparação de ato extrajudicial.</p>
+      <p class="intro">Digite o termo, escolha filtros quando necessário e confira o dispositivo encontrado antes de aplicar o resultado em procedimento formal.</p>
 
-    <section class="pn-editorial" aria-labelledby="faq-ferramenta">
-      <h2 id="faq-ferramenta">Perguntas frequentes</h2>
-      <div class="pn-faq">
-        <details>
-          <summary>A página substitui a consulta ao texto oficial do CNJ?</summary>
-          <p>Não. A página é uma ferramenta de busca e organização. Para uso formal, consulte a redação oficial vigente no portal de atos normativos do Conselho Nacional de Justiça.</p>
-        </details>
-        <details>
-          <summary>A base é atualizada automaticamente?</summary>
-          <p>A página informa a data da base carregada quando o arquivo dados/normas-nacional.json é publicado corretamente. A atualização depende da manutenção desse arquivo no repositório.</p>
-        </details>
-        <details>
-          <summary>Por que a busca pode trazer muitos resultados?</summary>
-          <p>Termos amplos, como escritura, registro, procuração ou certidão, aparecem em vários livros e capítulos. Use expressão exata, filtros por especialidade ou termos combinados para reduzir o resultado.</p>
-        </details>
-        <details>
-          <summary>O resultado tem caráter oficial?</summary>
-          <p>Não. O conteúdo exibido é informativo e serve para localização. A aplicação da norma depende de conferência da redação oficial e análise do caso concreto.</p>
-        </details>
-        <details>
-          <summary>Posso usar a ferramenta em atendimento ao público?</summary>
-          <p>Sim, como apoio de pesquisa e triagem. O resultado deve ser revisado pelo responsável técnico antes de orientar conclusivamente o usuário ou praticar ato formal.</p>
-        </details>
+      <div class="cards">
+        <div class="card">
+          <h3>1. Pesquise o termo</h3>
+          <p>Informe artigo, expressão ou tema. Exemplos: art. 302, e-Notariado, ata notarial, escritura eletrônica, competência, apostilamento ou indisponibilidade.</p>
+        </div>
+        <div class="card">
+          <h3>2. Aplique filtros</h3>
+          <p>Use especialidade, tipo, ordem, expressão exata ou termos semelhantes para reduzir resultados amplos e localizar o trecho normativo adequado.</p>
+        </div>
+        <div class="card">
+          <h3>3. Confira a fonte</h3>
+          <p>Leia o texto completo exibido, verifique a hierarquia normativa e confirme a redação oficial vigente antes de usar o resultado em ato formal.</p>
+        </div>
       </div>
+
+      <div class="alerta">Para uso jurídico formal, confira a redação vigente no portal oficial de atos normativos do Conselho Nacional de Justiça. A indexação facilita a pesquisa, mas não altera o conteúdo normativo nem produz interpretação vinculante.</div>
+      <div class="atualizacao pn-meta">Base atualizada automaticamente.</div>
     </section>
 
     <section class="layout" id="consulta-normas">
@@ -686,22 +1095,79 @@
         </section>
       </aside>
     </section>
+
   </main>
 
-  <footer class="footer">
-    <div class="wrap footer-row">
-      <span>Base atualizada automaticamente.</span>
-      <span class="footer-support">
-        Projeto apoiado por <a href="https://escriturapublica.substack.com/" target="_blank" rel="noopener noreferrer">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener noreferrer">Atesta</a>
-      </span>
-      <nav class="footer-links" aria-label="Links institucionais">
-        <a href="https://portalnotarial.com.br/">Home</a>
-        <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
-        <a href="https://portalnotarial.com.br/contato.html">Contato</a>
-        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
-        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
-        <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
-      </nav>
+  <section class="wrap adsense-section" id="criterios-fontes" aria-labelledby="criteriosTitulo">
+    <div class="section-kicker">Critérios e fontes</div>
+    <h2 id="criteriosTitulo">Critérios utilizados na consulta</h2>
+    <p>A consulta usa a base publicada no arquivo dados/normas-nacional.json, vinculada ao Código Nacional de Normas da Corregedoria Nacional de Justiça, instituído pelo Provimento CNJ nº 149/2023 e alterações indicadas na própria página.</p>
+
+    <div class="source-grid">
+      <article class="source-box">
+        <h3>Fontes indicadas</h3>
+        <ul>
+          <li>Código Nacional de Normas da Corregedoria Nacional de Justiça.</li>
+          <li>Provimento CNJ nº 149/2023.</li>
+          <li>Arquivo dados/normas-nacional.json publicado junto à página.</li>
+          <li>Lista de provimentos alteradores indicada na ferramenta.</li>
+        </ul>
+      </article>
+      <article class="source-box">
+        <h3>Limites da ferramenta</h3>
+        <ul>
+          <li>Não substitui a consulta ao portal oficial do CNJ.</li>
+          <li>Não decide divergência interpretativa.</li>
+          <li>Não dispensa qualificação notarial ou registral.</li>
+          <li>Não confirma atualização normativa posterior à base carregada.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap adsense-section" id="faq" aria-labelledby="faqTitulo">
+    <div class="section-kicker">FAQ</div>
+    <h2 id="faqTitulo">Perguntas frequentes</h2>
+
+    <div class="faq-list">
+      <details>
+        <summary>A página substitui a consulta ao texto oficial do CNJ?</summary>
+        <div class="faq-body">Não. A página é uma ferramenta de busca e organização. Para uso formal, consulte a redação oficial vigente no portal de atos normativos do Conselho Nacional de Justiça.</div>
+      </details>
+      <details>
+        <summary>A base é atualizada automaticamente?</summary>
+        <div class="faq-body">A página informa a data da base carregada quando o arquivo dados/normas-nacional.json é publicado corretamente. A atualização depende da manutenção desse arquivo no repositório.</div>
+      </details>
+      <details>
+        <summary>Por que a busca pode trazer muitos resultados?</summary>
+        <div class="faq-body">Termos amplos, como escritura, registro, procuração ou certidão, aparecem em vários livros e capítulos. Use expressão exata, filtros por especialidade ou termos combinados para reduzir a lista.</div>
+      </details>
+      <details>
+        <summary>O resultado tem caráter oficial?</summary>
+        <div class="faq-body">Não. O conteúdo exibido é informativo e serve para localização. A aplicação da norma depende de conferência da redação oficial e análise do caso concreto.</div>
+      </details>
+      <details>
+        <summary>Posso usar a ferramenta em atendimento ao público?</summary>
+        <div class="faq-body">Sim, como apoio de pesquisa e triagem. O resultado deve ser revisado pelo responsável técnico antes de orientar conclusivamente o usuário ou praticar ato formal.</div>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="src">
+        <p>Base informativa. Código Nacional de Normas da Corregedoria Nacional de Justiça, Foro Extrajudicial, instituído pelo Provimento CNJ nº 149/2023 e alterações indicadas na ferramenta.</p>
+        <p>Uso recomendado. Triagem, estudo e conferência interna. O resultado não substitui a consulta à redação oficial vigente nem a análise do caso concreto.</p>
+        <p>Projeto apoiado por <a href="https://escriturapublica.substack.com/" target="_blank" rel="noopener noreferrer">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener noreferrer">Atesta</a></p>
+        <nav class="institutional-nav" aria-label="Links institucionais">
+          <a href="https://portalnotarial.com.br/">Início</a>
+          <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
+          <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+          <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
+          <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
+          <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
+        </nav>
+      </div>
     </div>
   </footer>
 
