@@ -935,7 +935,7 @@
     <div class="info-grid">
       <article class="info-card">
         <h3>Quando usar</h3>
-        <p>Use antes de preparar orçamento, conferir composição de ato ou comparar hipóteses como compra e venda, doação, inventário, procuração, ata notarial, garantia, testamento, separação ou escritura sem valor declarado.</p>
+        <p>Use antes de preparar orçamento, conferir composição de ato ou comparar hipóteses como compra e venda, doação, inventário, procuração, ata notarial, garantia, testamento, divórcio ou extinção de união estável ou escritura sem valor declarado.</p>
       </article>
       <article class="info-card">
         <h3>Como interpretar o resultado</h3>
@@ -1322,20 +1322,19 @@
       {id:"hipoteca", nome:"Hipoteca ou penhor", grupo:"Garantias", inputs:["tipoHipoteca","divida","imoveisGarantia","valorImovel1","valorImovel2","valorImovel3"], resumo:"Base no débito confessado. Modalidade com ou sem valor individualizado por imóvel.", tags:["hipoteca","penhor","garantia"]},
       {id:"servidao", nome:"Instituição de servidão", grupo:"Direitos reais", inputs:["negocio","venal","itbi"], resumo:"Base de cálculo correspondente a 20% do valor do imóvel serviente.", tags:["servidão","20% base"]},
       {id:"locacao", nome:"Locação", grupo:"Contratos", inputs:["aluguel","mesesLocacao"], resumo:"Base pela soma dos aluguéis. Se por prazo indeterminado, usar 12 meses.", tags:["locação","aluguel"]},
-      {id:"direitos_possessorios", nome:"Constituição, transferência, modificação ou renúncia de direitos possessórios", grupo:"Posse", inputs:["negocio","venal","itbi"], resumo:"Aplica desconto de 40%, por admitir forma particular.", tags:["posse","possessórios","60%"]},
+      {id:"direitos_possessorios", nome:"Cessão ou renúncia de direitos possessórios", grupo:"Posse", inputs:["negocio","venal","itbi"], resumo:"Aplica desconto de 40%, por admitir forma particular.", tags:["posse","possessórios","60%"]},
       {id:"inventario_partilha", nome:"Inventário e partilha sem excesso", grupo:"Inventário", inputs:["partilha"], resumo:"Um ato pela partilha. Informe a base partilhável correta.", tags:["inventário","partilha"]},
       {id:"inventario_excesso", nome:"Inventário com excesso de quinhão ou meação", grupo:"Inventário", inputs:["partilha","excesso"], resumo:"Um ato pela partilha e um ato autônomo pela cessão decorrente do excesso.", tags:["inventário","excesso","cessão"]},
       {id:"renuncia_hereditaria", nome:"Renúncia pura e simples de direitos hereditários", grupo:"Inventário", inputs:["qtd"], resumo:"Um ato sem valor declarado por renúncia formalizada.", tags:["renúncia","herança"]},
-      {id:"renuncia_translativa", nome:"Renúncia translativa ou in favorem", grupo:"Inventário", inputs:["partilha","excesso"], resumo:"Cessão autônoma sobre o valor do quinhão transferido, somada à cobrança da partilha.", tags:["renúncia","translativa","in favorem"]},
-      {id:"divorcio_sem_bens", nome:"Divórcio ou separação sem bens", grupo:"Família", inputs:[], resumo:"Demais escrituras sem valor declarado, item 6.2.", tags:["divórcio","separação"]},
-      {id:"divorcio_partilha", nome:"Divórcio ou separação com partilha", grupo:"Família", inputs:["partilha"], resumo:"Um ato com valor declarado pela partilha informada.", tags:["divórcio","partilha"]},
-      {id:"divorcio_pensao", nome:"Divórcio ou separação com pensão alimentícia", grupo:"Família", inputs:["partilha","pensao","mesesPensao"], resumo:"Soma dos bens e das prestações da pensão. Se indeterminada, usar 12 prestações.", tags:["divórcio","pensão","alimentos"]},
-      {id:"separacao_fato", nome:"Escritura de declaração de separação de fato", grupo:"Família", inputs:[], resumo:"Ato protocolar sem valor declarado, item 6.2, podendo ser unilateral ou bilateral.", tags:["separação de fato"]},
+      {id:"renuncia_translativa", nome:"Cessão de direitos hereditários", grupo:"Inventário", inputs:["partilha","excesso"], resumo:"Cessão autônoma sobre o valor do quinhão transferido, somada à cobrança da partilha.", tags:["cessão","direitos hereditários"]},
+      {id:"divorcio_sem_bens", nome:"Divórcio ou extinção de união estável sem bens", grupo:"Família", inputs:[], resumo:"Demais escrituras sem valor declarado, item 6.2.", tags:["divórcio","extinção de união estável"]},
+      {id:"divorcio_partilha", nome:"Divórcio ou extinção de união estável com partilha", grupo:"Família", inputs:["partilha"], resumo:"Um ato com valor declarado pela partilha informada.", tags:["divórcio","extinção de união estável","partilha"]},
+      {id:"divorcio_pensao", nome:"Divórcio ou extinção de união estável com pensão alimentícia", grupo:"Família", inputs:["partilha","pensao","mesesPensao"], resumo:"Soma dos bens e das prestações da pensão. Se indeterminada, usar 12 prestações.", tags:["divórcio","extinção de união estável","pensão","alimentos"]},
+      {id:"separacao_fato", nome:"Escritura de declaração de separação de corpos", grupo:"Família", inputs:[], resumo:"Ato protocolar sem valor declarado, item 6.2, podendo ser unilateral ou bilateral.", tags:["separação de corpos"]},
       {id:"pacto_antenupcial_simples", nome:"Pacto antenupcial ou união estável sem avenças patrimoniais", grupo:"Família", inputs:[], resumo:"Demais escrituras sem valor declarado, item 6.2.", tags:["pacto antenupcial","união estável"]},
       {id:"pacto_antenupcial_patrimonial", nome:"Pacto antenupcial ou união estável com avenças patrimoniais", grupo:"Família", inputs:["valorPactuacao"], resumo:"Cobrança pela tabela de escritura com valor declarado, conforme o valor total das avenças.", tags:["pacto antenupcial","Enunciado 66"]},
       {id:"ata_sem_reflexo", nome:"Ata notarial sem reflexo econômico", grupo:"Atas notariais", inputs:["folhas"], resumo:"Primeira folha pelo item 9.1 e páginas adicionais pelo item 9.2.", tags:["ata","sem reflexo"]},
       {id:"ata_usucapiao_adjudicacao", nome:"Ata notarial de usucapião ou adjudicação compulsória", grupo:"Atas notariais", inputs:["negocio","venal","itbi"], resumo:"Ata com conteúdo econômico, aplicada pela Tabela 1 sobre o maior valor cabível.", tags:["usucapião","adjudicação","ata"]},
-      {id:"ata_incompleta", nome:"Ata notarial iniciada e não concluída por desistência", grupo:"Atas notariais", inputs:["negocio","venal","itbi"], resumo:"1/3 dos emolumentos estimados para o ato solicitado.", tags:["ata","desistência","1/3"]},
       {id:"proc_previdenciaria", nome:"Procuração para fins previdenciários", grupo:"Procurações", inputs:[], resumo:"Isenta de pagamento de quaisquer despesas, na hipótese estrita do item 2.1.", tags:["procuração","previdenciária"]},
       {id:"proc_foro", nome:"Procuração para foro em geral", grupo:"Procurações", inputs:["outorgantes","analfabetos"], resumo:"Até quatro outorgantes pelo item 2.2.1. Acima de quatro, acrescenta por outorgante adicional.", tags:["procuração","foro"]},
       {id:"proc_sem_valor", nome:"Outras procurações sem valor econômico", grupo:"Procurações", inputs:["outorgantes"], resumo:"Até quatro outorgantes pelo item 2.3.1. Acima de quatro, acréscimo por outorgante adicional.", tags:["procuração","sem valor"]},
@@ -1431,7 +1430,7 @@
       hipoteca:"Modalidade sem valor unitário aplica o Enunciado nº 16, §1º, repartindo o débito pelo número de bens. Modalidade com valor unitário aplica o Enunciado nº 16, §2º, com base no valor garantido por imóvel.",
       venda_bipartida_usufruto:"Na consolidação simultânea da propriedade plena em nome do mesmo adquirente, cobra-se um único ato sobre o valor total do imóvel, conforme Enunciado nº 29, §2º.",
       inventario_excesso:"Em caso de pluralidade de cedentes e cessionários, cada relação individualmente discriminável constitui fato gerador autônomo, conforme Enunciado nº 9, §1º. Lance as cessões adicionais separadamente.",
-      renuncia_translativa:"A renúncia translativa ou in favorem é tratada como cessão. A cobrança da transferência se faz sobre o valor do quinhão, sem prejuízo da cobrança pela escritura de inventário, conforme Enunciado nº 8 in fine combinado com o Enunciado nº 9.",
+      renuncia_translativa:"A cessão de direitos hereditários é tratada como cessão. A cobrança da transferência se faz sobre o valor do quinhão, sem prejuízo da cobrança pela escritura de inventário, conforme Enunciado nº 8 in fine combinado com o Enunciado nº 9.",
       renuncia_mandato:"O Enunciado nº 12 manda aplicar a Tabela 2. O motor usa o item 2.3 como padrão para a renúncia, mas a hipótese concreta pode reclamar enquadramento em 2.2 ou 2.4, conforme a natureza do mandato original.",
       ata_usucapiao_adjudicacao:"A indicação do valor venal não afasta o confronto com o valor atribuído pelos possuidores ou adjudicantes, conforme Enunciado nº 2. Prevalece o maior valor entre os parâmetros aplicáveis.",
       ata_retificativa:"A ata retificativa só cabe quando lavrada por tabelião diverso do que praticou o ato original. Se a retificação for por erro imputável ao próprio tabelião, use a hipótese específica de retificação por erro, que afasta a cobrança.",
@@ -1749,7 +1748,7 @@
           break;
 
         case "direitos_possessorios":
-          partes.push(valorDeclarado("Direitos possessórios", b, 60));
+          partes.push(valorDeclarado("Cessão ou renúncia de direitos possessórios", b, 60));
           break;
 
         case "inventario_partilha":
@@ -1767,7 +1766,7 @@
 
         case "renuncia_translativa":
           partes.push(valorDeclarado("Inventário e partilha", v.partilha, 100));
-          partes.push(valorDeclarado("Cessão por renúncia translativa ou in favorem", v.excesso, 100));
+          partes.push(valorDeclarado("Cessão de direitos hereditários", v.excesso, 100));
           break;
 
         case "divorcio_sem_bens":
@@ -1775,17 +1774,17 @@
           break;
 
         case "divorcio_partilha":
-          partes.push(valorDeclarado("Divórcio ou separação com partilha", v.partilha, 100));
+          partes.push(valorDeclarado("Divórcio ou extinção de união estável com partilha", v.partilha, 100));
           break;
 
         case "divorcio_pensao": {
           const basePensao = (v.pensao || 0) * (v.mesesPensao || 12);
-          partes.push(valorDeclarado("Divórcio ou separação, bens e pensão", (v.partilha || 0) + basePensao, 100));
+          partes.push(valorDeclarado("Divórcio ou extinção de união estável, bens e pensão", (v.partilha || 0) + basePensao, 100));
           break;
         }
 
         case "separacao_fato":
-          partes.push(fixo("escrituraSemValor", 1, 100, "Declaração de separação de fato, ato protocolar"));
+          partes.push(fixo("escrituraSemValor", 1, 100, "Declaração de separação de corpos, ato protocolar"));
           break;
 
         case "pacto_antenupcial_simples":
