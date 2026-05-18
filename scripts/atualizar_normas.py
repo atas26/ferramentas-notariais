@@ -183,14 +183,14 @@ def formatar_paragrafos(linhas):
 
 
 CAPITULOS_SP = {
-    "XIII": "Capítulo XIII\nDisposições gerais\nFunção correcional\nLivros\nClassificadores\nEmolumentos",
-    "XIV": "Capítulo XIV\nPessoal dos serviços extrajudiciais",
-    "XV": "Capítulo XV\nTabelionato de Protesto",
-    "XVI": "Capítulo XVI\nTabelionato de Notas",
-    "XVII": "Capítulo XVII\nRegistro Civil das Pessoas Naturais",
-    "XVIII": "Capítulo XVIII\nRegistro Civil das Pessoas Jurídicas",
-    "XIX": "Capítulo XIX\nRegistro de Títulos e Documentos",
-    "XX": "Capítulo XX\nRegistro de Imóveis",
+    "XIII": "CAPÍTULO XIII\nDA FUNÇÃO CORRECIONAL; DAS DISPOSIÇÕES GERAIS; DOS LIVROS E CLASSIFICADORES OBRIGATÓRIOS E DOS EMOLUMENTOS, CUSTAS E DESPESAS DAS UNIDADES DOS SERVIÇOS NOTARIAIS E DE REGISTRO",
+    "XIV": "CAPÍTULO XIV\nDO PESSOAL DOS SERVIÇOS EXTRAJUDICIAIS",
+    "XV": "CAPÍTULO XV\nDO TABELIONATO DE PROTESTOS",
+    "XVI": "CAPÍTULO XVI\nDO TABELIONATO DE NOTAS",
+    "XVII": "CAPÍTULO XVII\nDO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+    "XVIII": "CAPÍTULO XVIII\nDO REGISTRO CIVIL DAS PESSOAS JURÍDICAS",
+    "XIX": "CAPÍTULO XIX\nDO REGISTRO DE TÍTULOS E DOCUMENTOS",
+    "XX": "CAPÍTULO XX\nDO REGISTRO DE IMÓVEIS",
 }
 
 AREAS_SP = {
@@ -214,6 +214,43 @@ ORDEM_SP = {
     "XIX": 700000,
     "XX": 800000,
 }
+
+
+def limpar_titulo_hierarquia_sp(valor):
+    valor = limpar_linha(str(valor or ""))
+    valor = re.sub(r"\(\s+", "(", valor)
+    valor = re.sub(r"\s+\)", ")", valor)
+    valor = re.sub(r"\s+", " ", valor).strip()
+    return valor.upper()
+
+
+def normalizar_secao_sp(linha):
+    texto = limpar_linha(str(linha or ""))
+    m = re.match(r"^(SEÇÃO|SECÃO|SECAO|SUBSEÇÃO|SUBSECÃO|SUBSECAO|SUB\s+SUBSEÇÃO|SUB\s+SUBSECAO)\s+([IVXLCDM]+)\b\s*(.*)$", texto, re.I)
+    if not m:
+        return limpar_titulo_hierarquia_sp(texto)
+
+    tipo_bruto = m.group(1).upper()
+    tipo = "SUBSEÇÃO" if "SUB" in tipo_bruto else "SEÇÃO"
+    romano = m.group(2).upper()
+    resto = (m.group(3) or "").strip()
+    resto = re.sub(r"^\d{1,4}\b\s*", "", resto).strip()
+
+    if resto:
+        return f"{tipo} {romano}\n{limpar_titulo_hierarquia_sp(resto)}"
+
+    return f"{tipo} {romano}"
+
+
+def completar_secao_sp(secao, titulo):
+    secao = normalizar_secao_sp(secao)
+    titulo = limpar_titulo_hierarquia_sp(titulo)
+    if not titulo:
+        return secao
+    if "\n" in secao:
+        return secao
+    return f"{secao}\n{titulo}"
+
 
 
 def numero_item(linha):
@@ -263,7 +300,7 @@ def parse_sp(texto):
             continue
 
         if re.match(r"^SEÇÃO\s+[IVXLCDM]+", linha, re.I) or re.match(r"^Subseção\s+[IVXLCDM]+", linha, re.I):
-            secao_atual = linha.title()
+            secao_atual = normalizar_secao_sp(linha)
             continue
 
         if not capitulo_atual:
@@ -750,7 +787,7 @@ def parse_sp_pdf(pdf_bytes):
 
             if is_section_line_sp_coord(linha):
                 fechar_item()
-                pending_sec = linha.title()
+                pending_sec = normalizar_secao_sp(linha)
                 secao_atual = pending_sec
                 continue
 
@@ -758,7 +795,7 @@ def parse_sp_pdf(pdf_bytes):
 
             if pending_sec and not numero:
                 if len(linha) < 120:
-                    secao_atual = pending_sec + "\n" + linha.title()
+                    secao_atual = completar_secao_sp(pending_sec, linha)
                     pending_sec = None
                     continue
 
@@ -941,7 +978,7 @@ def main():
         "dados/normas-sp.json",
         pdf_sp,
         artigos_sp,
-        parser_version="sp-pymupdf-footnotes-v3-hierarchy-lines",
+        parser_version="sp-pymupdf-footnotes-v4-uppercase-hierarchy",
     )
 
     cnj_pdf_url = descobrir_pdf_compilado_cnj()
