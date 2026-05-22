@@ -1,8 +1,8 @@
 {
-  "source": "https://atos.cnj.jus.br/files/compilado114013202605156a07061dc2f12.pdf",
-  "updatedAt": "2026-05-21T08:01:34.063496+00:00",
-  "sha256": "3a1e1002920412e634c3c76941c52ff3abb5eed562e7977ffc91aae9df579dd1",
-  "totalItems": 835,
+  "source": "https://atos.cnj.jus.br/files/compilado125557202605216a0f00dd960d8.pdf",
+  "updatedAt": "2026-05-22T08:00:58.327061+00:00",
+  "sha256": "77d3e8fbdea47fff98a1688013456ac21493bf7084779bd294a154fec808eb56",
+  "totalItems": 844,
   "parserVersion": "cnj-hierarchy-v5",
   "articles": [
     {
@@ -9694,63 +9694,7 @@
           "type": "section-title"
         }
       ],
-      "texto": "Art. 125. As certidões dos imóveis que já forem objeto de matrícula eletrônica, após a “primeira qualificação eletrônica”, serão expedidas, independentemente de indicação de finalidade, em formato nato-digital estruturado, contendo a situação jurídica atual do imóvel, ou seja, a sua descrição, a titularidade e os ônus reais não cancelados.\n\nParágrafo único. A expedição de certidão de atos anteriores da cadeia filiatória do imóvel depende de identificação segura do requerente e de indicação da finalidade."
-    },
-    {
-      "id": "cnj-art-126",
-      "numero": "Art. 126",
-      "ordem": 126,
-      "tipo": "artigo",
-      "capitulo": "Código Nacional de Normas",
-      "secao": "Seção XIV",
-      "areas": [
-        "Registro de Imóveis",
-        "Tecnologia e proteção de dados"
-      ],
-      "temas": [],
-      "norma": true,
-      "notas": [],
-      "parte": "PARTE GERAL",
-      "livro": "LIVRO I",
-      "livroTitulo": "DO REGIME JURÍDICO ADMINISTRATIVO",
-      "titulo": "TÍTULO II",
-      "tituloTitulo": "DO LIVRO III DA PARTE GERAL DESTE CÓDIGO DE NORMAS, DA CORREGEDORIA NACIONAL",
-      "capituloNumero": "",
-      "capituloTitulo": "",
-      "secaoTitulo": "Do Registro de Imóveis e a Proteção de Dados",
-      "subsecao": "",
-      "subsecaoTitulo": "",
-      "estrutura": [
-        {
-          "text": "PARTE GERAL",
-          "type": "upper"
-        },
-        {
-          "text": "LIVRO I",
-          "type": "upper"
-        },
-        {
-          "text": "DO REGIME JURÍDICO ADMINISTRATIVO",
-          "type": "title"
-        },
-        {
-          "text": "TÍTULO II",
-          "type": "upper"
-        },
-        {
-          "text": "DO LIVRO III DA PARTE GERAL DESTE CÓDIGO DE NORMAS, DA CORREGEDORIA NACIONAL",
-          "type": "title"
-        },
-        {
-          "text": "Seção XIV",
-          "type": "section"
-        },
-        {
-          "text": "Do Registro de Imóveis e a Proteção de Dados",
-          "type": "section-title"
-        }
-      ],
-      "texto": "Art. 126. O atendimento a requisições de buscas fundadas exclusivamente no indicador pessoal ou real pressupõe a identificação segura do solicitante, bem como a indicação da finalidade, de tudo mantendo-se o registro em meio físico ou virtual."
+      "texto": "Art. 125. As certidões dos imóveis que já forem objeto de matrícula eletrônica, após a “primeira qualificação eletrônica”, serão expedidas, independentemente de indicação de finalidade, em formato nato-digital estruturado, contendo a situação jurídica atual do imóvel, ou seja, a sua descrição, a titularidade e os ônus reais não cancelados.\n\nParágrafo único. A expedição de certidão de atos anteriores da cadeia filiatória do imóvel depende de identificação segura do requerente e de indicação da finalidade. Art. 126. O atendimento a requisições de buscas fundadas exclusivamente no indicador pessoal ou real pressupõe a identificação segura do solicitante, bem como a indicação da finalidade, de tudo mantendo-se o registro em meio físico ou virtual."
     },
     {
       "id": "cnj-art-127",
@@ -20366,14 +20310,15 @@
       "texto": "Art. 236-A. Os mandados judiciais a serem cumpridos pelos oficiais de registro civil das pessoas naturais serão enviados eletronicamente pelos respectivos juízos de origem, por meio de módulo disponibilizado pelo ON-RCPN, devendo a parte interessada efetuar o pagamento dos emolumentos, caso não seja beneficiária da justiça gratuita. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 1º. O registrador poderá rejeitar o recebimento de mandados judiciais enviados por via diversa da prevista no caputdeste artigo. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 2º. O mandado judicial advindo de juízo de comarca diversa do oficial de registro civil destinatário da ordem é dispensado do recebimento do “Cumpra-se” do juízo local, desde que seja possível a verificação de sua autenticidade. (incluído pelo Provimento n. 180, de 16.8.2024)"
     },
     {
-      "id": "cnj-art-237",
-      "numero": "Art. 237",
-      "ordem": 237,
+      "id": "cnj-art-263-a",
+      "numero": "Art. 263-A",
+      "ordem": 263.01,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção I",
+      "secao": "Seção II",
       "areas": [
-        "Registro Civil das Pessoas Naturais"
+        "Registro Civil das Pessoas Naturais",
+        "Tabelionato de Protesto"
       ],
       "temas": [],
       "norma": true,
@@ -20385,7 +20330,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -20418,11 +20363,649 @@
           "type": "title"
         },
         {
-          "text": "Seção I",
+          "text": "Seção II",
           "type": "section"
         },
         {
-          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-A. Fica instituída a obrigatoriedade de comunicação contínua, estruturada e padronizada de dados relativos ao cumprimento de decisões judiciais que determinem a suspensão, o cancelamento provisório ou definitivo, ou qualquer forma de supressão da publicidade de protestos de títulos e outros documentos de dívida, bem como de informações correlatas necessárias à análise dos efeitos dessas decisões sobre o acervo de protestos e sobre o ambiente de crédito. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nParágrafo único. A obrigação de comunicação de que trata o caput será cumprida, em nível operacional, pelos Tabeliães de Protesto, mediante alimentação contínua da base de dados da Central Nacional de Serviços Eletrônicos Compartilhados dos Tabeliães de Protesto (CENPROT), incumbindo a esta a consolidação, o tratamento e a disponibilização analítica das informações em âmbito nacional. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-b",
+      "numero": "Art. 263-B",
+      "ordem": 263.02,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secao": "Seção II",
+      "areas": [
+        "Registro Civil das Pessoas Naturais",
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO III",
+      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO III",
+          "type": "upper"
+        },
+        {
+          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-B. Para os fins desta Seção, considera-se: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – litigância abusiva: o exercício do direito de ação ou de defesa com desvio de finalidade, excesso manifesto ou utilização do processo como instrumento de obtenção de vantagem indevida, em desconformidade com os deveres de boa-fé objetiva, cooperação e lealdade processual; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – litigância predatória: a prática reiterada, sistemática ou massificada de atos processuais, individuais ou coletivos, com potencial de gerar efeitos artificiais ou desproporcionais sobre a publicidade dos protestos, o ambiente de crédito ou a atividade extrajudicial, independentemente da análise do mérito das decisões judiciais proferidas; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIII – abuso de direito por credores: o exercício de prerrogativas legais ou contratuais relacionadas ao protesto de títulos e documentos de dívida em desconformidade com a função econômica e social do crédito, caracterizado, dentre outras hipóteses, pela utilização reiterada de expedientes formais com finalidade de constrangimento indevido, distorção informacional ou indução a erro quanto à existência, exigibilidade ou extensão da obrigação. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-c",
+      "numero": "Art. 263-C",
+      "ordem": 263.03,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secao": "Seção II",
+      "areas": [
+        "Registro Civil das Pessoas Naturais",
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO III",
+      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO III",
+          "type": "upper"
+        },
+        {
+          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-C. A Central Nacional de Serviços Eletrônicos Compartilhados dos Tabeliães de Protesto (CENPROT) deverá disponibilizar, à Corregedoria Nacional de Justiça e às Corregedorias dos Tribunais de Justiça dos Estados e do Distrito Federal, relatório analítico e estruturado contendo os dados das ordens judiciais de que trata o art. 263-A, organizados de modo a permitir a identificação de padrões relacionados à litigância abusiva, à litigância predatória e ao abuso de direito por credores. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§ 1º A obrigatoriedade recai especialmente sobre determinações oriundas de: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – ações coletivas; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – ações individuais que, segundo parâmetros objetivos de análise de dados, revelem padrões relevantes de repetição, distribuição ou concentração, aptos a produzir efeitos sistêmicos sobre a publicidade dos registros de protesto; e (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIII – práticas que, amparadas ou não por decisões judiciais, consideradas isoladamente ou em conjunto, revelem, a partir da análise agregada dos dados, padrões relevantes de atuação de credores, indicativos de exercício abusivo de prerrogativas relacionadas ao protesto. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§2º O exercício regular do direito de cobrança de obrigações inadimplidas, ainda que realizado de forma massificada, desde que observados os requisitos da Lei n. 9.492/1997, não caracteriza exercício abusivo. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º Os tabeliães de protesto deverão alimentar a base de dados da CENPROT em tempo real ou na periodicidade estipulada pela Central, garantindo a completude, atualidade e a fidedignidade das informações. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º O sistema de inteligência da CENPROT deverá consolidar as informações em âmbito nacional, com vistas à identificação de padrões relevantes de concentração, dispersão territorial e recorrência de demandas, permitindo a análise integrada de impactos sobre a publicidade dos protestos e sobre o ambiente de crédito. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§5º A identificação de padrões relevantes deverá observar critérios objetivos de recorrência, concentração, dispersão territorial, impacto quantitativo, variação temporal e correlação estatística, vedada a atribuição automatizada de ilicitude, abuso ou irregularidade sem validação analítica humana. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-d",
+      "numero": "Art. 263-D",
+      "ordem": 263.04,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secao": "Seção II",
+      "areas": [
+        "Registro Civil das Pessoas Naturais",
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO III",
+      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO III",
+          "type": "upper"
+        },
+        {
+          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-D. O Instituto de Estudos de Protesto de Títulos do Brasil (IEPTB), na qualidade de gestor da CENPROT, poderá, diante de indícios consistentes de descumprimento dos deveres previstos nesta Seção, requerer à Corregedoria Nacional de Justiça a adoção de medidas de bloqueio provisório ou permanente: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – de credores específicos, para fins de suspensão de acesso ou de remessa de novos títulos à CENPROT; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – de títulos determinados, quando houver indícios de irregularidade material ou informacional. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§1º O requerimento deverá indicar, de forma fundamentada, os elementos objetivos que evidenciem potencial risco à regularidade do ambiente de crédito, à integridade da publicidade dos protestos ou à confiabilidade das informações constantes da CENPROT. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§2º O bloqueio provisório terá natureza cautelar e poderá ser determinado inaudita altera parte, pelo prazo necessário à apuração dos fatos. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º O bloqueio permanente dependerá de decisão fundamentada da Corregedoria Nacional de Justiça, assegurados o contraditório e a ampla defesa. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º As medidas previstas neste artigo não afastam a responsabilidade do credor nem impedem a adoção de outras providências administrativas, civis ou penais cabíveis (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-e",
+      "numero": "Art. 263-E",
+      "ordem": 263.05,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secao": "Seção II",
+      "areas": [
+        "Registro Civil das Pessoas Naturais",
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO III",
+      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO III",
+          "type": "upper"
+        },
+        {
+          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-E. As informações de que trata esta Seção terão caráter exclusivamente correcional, destinando-se à identificação de padrões e ao monitoramento de efeitos sistêmicos sobre a publicidade dos protestos, à formulação e ao aperfeiçoamento de políticas públicas e ao aprimoramento da atividade correcional, sendo em regra vedado o uso para outros fins, inclusive antecipação de juízo quanto à legitimidade, à validade, o conteúdo ou o alcance de decisões judiciais. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nParágrafo único. A utilização dos dados deverá observar critérios de proporcionalidade, prudência, economicidade e eficiência, sendo vedada a adoção de medidas automatizadas sem validação analítica prévia. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-f",
+      "numero": "Art. 263-F",
+      "ordem": 263.06,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secao": "Seção II",
+      "areas": [
+        "Registro Civil das Pessoas Naturais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO III",
+      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO III",
+          "type": "upper"
+        },
+        {
+          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-F. A transmissão, o armazenamento e o tratamento dos dados observarão as diretrizes da Lei n. 13.709/2018, devendo a CENPROT e as Corregedorias adotar medidas técnicas e administrativas aptas a assegurar a segurança da informação, a prevenção de acessos não autorizados, a rastreabilidade das operações e, quando cabível para fins estatísticos, a anonimização ou pseudonimização dos dados. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-g",
+      "numero": "Art. 263-G",
+      "ordem": 263.07,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secao": "Seção II",
+      "areas": [
+        "Registro Civil das Pessoas Naturais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO III",
+      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO III",
+          "type": "upper"
+        },
+        {
+          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-G. O tratamento, o cruzamento, a consolidação e a análise dos dados previstos nesta Seção observarão os princípios da finalidade correcional, da transparência metodológica, da rastreabilidade, da auditabilidade, da verificabilidade técnica, da supervisão humana, da proporcionalidade e da mitigação de distorções analíticas indevidas. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nParágrafo único. Os modelos analíticos, mecanismos automatizados e ferramentas computacionais utilizados deverão permitir verificação posterior dos critérios de processamento, agregação, classificação, correlação e tratamento dos dados empregados na geração dos resultados analíticos. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-h",
+      "numero": "Art. 263-H",
+      "ordem": 263.08,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secao": "Seção II",
+      "areas": [
+        "Registro Civil das Pessoas Naturais",
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO III",
+      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO III",
+          "type": "upper"
+        },
+        {
+          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-H. O formato, a estrutura de dados e os metadados obrigatórios das remessas eletrônicas e dos relatórios padronizados constam do Anexo VIII deste Código, devendo sua implementação observar integração sistêmica por Interface de Programação de Aplicações (API). (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§1º Os relatórios destinados às Corregedorias dos Tribunais de Justiça dos Estados e do Distrito Federal serão encaminhados bimestralmente, sempre que identificadas ocorrências, inconsistências, padrões ou variações com potencial relevância correicional, estatística, regulatória ou sistêmica no respectivo período de referência, em formato estruturado e padronizado, devendo conter, no mínimo: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – consolidação territorial das decisões judiciais comunicadas no período; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – quantitativos de protestos afetados; (incluído pelo Provimento CN n. 225, de 20.5.2026) III – valores globais impactados sobre a publicidade dos protestos; (incluído pelo Provimento CN n. 225, de 20.5.2026) IV – indicadores de recorrência, concentração e dispersão territorial; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nV – identificação de variações relevantes observadas no período; e (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVI – registros de inconsistências informacionais, falhas de alimentação ou padrões anômalos identificados; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVII – indicação das situações que, em razão de relevância quantitativa, territorial ou estatística, possam demandar atuação correicional. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§2º Os relatórios destinados à Corregedoria Nacional de Justiça serão encaminhados quadrimestralmente, sempre que identificados padrões, tendências, impactos sistêmicos ou outras informações de relevância nacional, em formato estruturado e padronizado, devendo conter, no mínimo: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – consolidação nacional dos dados; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – séries históricas comparativas; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIII – indicadores agregados de impacto sistêmico sobre a publicidade dos protestos e sobre o ambiente de crédito; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIV – análise comparativa entre unidades da federação; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nV – identificação de padrões nacionais relevantes de recorrência, concentração ou dispersão territorial; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVI – indicadores estatísticos relativos à litigância abusiva, à litigância predatória e ao exercício abusivo de prerrogativas relacionadas ao protesto; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVII – avaliação consolidada de riscos, tendências e distorções estruturais identificadas no período; e (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVIII – registros de situações relevantes comunicadas às Corregedorias dos Tribunais de Justiça e das providências adotadas ou conhecidas. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º Independentemente da periodicidade ordinária prevista nos §§1º e 2º, deverão ser encaminhadas comunicações extraordinárias sempre que identificados padrões, ocorrências ou situações com potencial impacto sistêmico, risco relevante ao ambiente de crédito ou necessidade de atuação correicional imediata. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º Verificada ausência de adoção, em tempo razoável, de providências potencialmente cabíveis pelas Corregedorias dos Tribunais de Justiça, a CENPROT poderá cientificar a Corregedoria Nacional de Justiça mediante encaminhamento de relatório circunstanciado. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§5º A consolidação nacional e as consolidações territoriais deverão observar critérios uniformes de agregação, consistência, comparabilidade e rastreabilidade dos dados, de modo a permitir análise integrada e distribuída no tempo dos efeitos sistêmicos das decisões judiciais sobre a publicidade dos protestos e sobre o ambiente de crédito. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§6º Os relatórios e comunicações previstos neste artigo terão caráter exclusivamente informacional, estatístico e correcional, vedada sua utilização para antecipação de juízo quanto à legitimidade, à validade, ao conteúdo ou ao alcance de decisões judiciais. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-i",
+      "numero": "Art. 263-I",
+      "ordem": 263.09,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secao": "Seção II",
+      "areas": [
+        "Registro Civil das Pessoas Naturais",
+        "Tabelionato de Protesto",
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO III",
+      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO III",
+          "type": "upper"
+        },
+        {
+          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-I. A publicidade das informações coletadas e tratadas nos termos desta Seção observará, cumulativamente, as disposições das Leis n. 12.527/2011 e 13.709/2018, restringindo-se à divulgação de dados agregados e anonimizados, vedada, em qualquer hipótese, a exposição de dados pessoais ou de elementos que permitam identificação direta ou indireta de pessoas naturais. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§ 1º A disponibilização pública das informações limitar-se-á a indicadores estatísticos, séries históricas, distribuições territoriais e demais dados agregados que expressem efeitos sistêmicos sobre a publicidade dos protestos, vedada a individualização de processos, partes ou representantes processuais. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§ 2º Os dados relativos à identificação de partes, representantes processuais ou quaisquer outros elementos individualizantes permanecerão restritos às camadas internas de tratamento, exclusivamente para fins correcionais, de inteligência institucional e de formulação de políticas públicas. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º A anonimização dos dados deverá observar técnicas aptas a impedir a reidentificação, considerada a utilização de meios técnicos razoáveis e disponíveis à época de seu tratamento, nos termos da legislação vigente. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º A Corregedoria Nacional de Justiça poderá estabelecer critérios complementares de anonimização, agregação e divulgação, com vistas a assegurar o equilíbrio entre transparência pública e proteção de dados pessoais. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-j",
+      "numero": "Art. 263-J",
+      "ordem": 263.1,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secao": "Seção II",
+      "areas": [
+        "Registro Civil das Pessoas Naturais",
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO III",
+      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO III",
+          "type": "upper"
+        },
+        {
+          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-J. O descumprimento das disposições desta Seção, a omissão ou o envio de informações inverídicas sujeitará os Tabeliães de Protesto e, no que couber, os responsáveis pela gestão da CENPROT, às sanções disciplinares previstas no art. 31 da Lei n. 8.935/1994, sem prejuízo de outras penalidades legais. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-237",
+      "numero": "Art. 237",
+      "ordem": 237,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secao": "Seção II",
+      "areas": [
+        "Registro Civil das Pessoas Naturais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO III",
+      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO III",
+          "type": "upper"
+        },
+        {
+          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
           "type": "section-title"
         }
       ],
@@ -20434,7 +21017,7 @@
       "ordem": 238,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção I",
+      "secao": "Seção II",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -20448,7 +21031,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -20481,11 +21064,11 @@
           "type": "title"
         },
         {
-          "text": "Seção I",
+          "text": "Seção II",
           "type": "section"
         },
         {
-          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
           "type": "section-title"
         }
       ],
@@ -20497,7 +21080,7 @@
       "ordem": 239,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção I",
+      "secao": "Seção II",
       "areas": [
         "Registro Civil das Pessoas Naturais",
         "Tecnologia e proteção de dados"
@@ -20512,7 +21095,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -20545,11 +21128,11 @@
           "type": "title"
         },
         {
-          "text": "Seção I",
+          "text": "Seção II",
           "type": "section"
         },
         {
-          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
           "type": "section-title"
         }
       ],
@@ -20561,7 +21144,7 @@
       "ordem": 240,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção I",
+      "secao": "Seção II",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -20575,7 +21158,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -20608,11 +21191,11 @@
           "type": "title"
         },
         {
-          "text": "Seção I",
+          "text": "Seção II",
           "type": "section"
         },
         {
-          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
           "type": "section-title"
         }
       ],
@@ -20624,7 +21207,7 @@
       "ordem": 241,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção I",
+      "secao": "Seção II",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -20638,7 +21221,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -20671,11 +21254,11 @@
           "type": "title"
         },
         {
-          "text": "Seção I",
+          "text": "Seção II",
           "type": "section"
         },
         {
-          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
           "type": "section-title"
         }
       ],
@@ -20687,7 +21270,7 @@
       "ordem": 242,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção I",
+      "secao": "Seção II",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -20701,7 +21284,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -20734,11 +21317,11 @@
           "type": "title"
         },
         {
-          "text": "Seção I",
+          "text": "Seção II",
           "type": "section"
         },
         {
-          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
           "type": "section-title"
         }
       ],
@@ -20750,7 +21333,7 @@
       "ordem": 243,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção I",
+      "secao": "Seção II",
       "areas": [
         "Registro Civil das Pessoas Naturais",
         "Tecnologia e proteção de dados"
@@ -20765,7 +21348,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -20798,11 +21381,11 @@
           "type": "title"
         },
         {
-          "text": "Seção I",
+          "text": "Seção II",
           "type": "section"
         },
         {
-          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
           "type": "section-title"
         }
       ],
@@ -20814,7 +21397,7 @@
       "ordem": 244,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção I",
+      "secao": "Seção II",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -20828,7 +21411,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -20861,11 +21444,11 @@
           "type": "title"
         },
         {
-          "text": "Seção I",
+          "text": "Seção II",
           "type": "section"
         },
         {
-          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
           "type": "section-title"
         }
       ],
@@ -20877,7 +21460,7 @@
       "ordem": 245,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção I",
+      "secao": "Seção II",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -20891,7 +21474,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -20924,11 +21507,11 @@
           "type": "title"
         },
         {
-          "text": "Seção I",
+          "text": "Seção II",
           "type": "section"
         },
         {
-          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
           "type": "section-title"
         }
       ],
@@ -52882,7 +53465,9 @@
       "secao": "Seção I",
       "areas": [
         "Registro Civil das Pessoas Naturais",
-        "Tabelionato de Notas"
+        "Tabelionato de Notas",
+        "Tabelionato de Protesto",
+        "Tecnologia e proteção de dados"
       ],
       "temas": [],
       "norma": true,
@@ -52935,7 +53520,7 @@
           "type": "section-title"
         }
       ],
-      "texto": "Art. 556. Revogam-se as seguintes normas:\n\nI — Provimento n. 13, de 3 de setembro de 2010;\n\nII — art. 1.º ao art. 9.º do Provimento n. 16, de 17 de fevereiro de 2012, preservado o seu Anexo;\n\nIII — Provimento n. 18, de 28 de agosto de 2012;\n\nIV — Provimento n. 19, de 29 de agosto de 2012;\n\nV — Provimento n. 23, de 24 de outubro de 2012;\n\nVI — o art. 2.º e art. 3.º do Provimento n. 27, de 12 de dezembro de 2012;\n\nVII — Provimento n. 28, de 5 de fevereiro de 2013;\n\nVIII — Provimento n. 30, de 16 de abril de 2013;\n\nIX — Provimento n. 33, de 3 de julho de 2013; IX-A – Provimento n. 37, de 7 de julho de 2014; (incluído pelo Provimento n. 150, de 11.9.2023)\n\nX — Provimento n. 43, de 17 de abril de 2015;\n\nXI — art. 1.º ao art. 7.º, art. 9.º ao art. 11 e art. 13 ao art. 14 do Provimento n. 45, de 13 de maio de 2015;\n\nXII — Provimento n. 46, de 16 de junho de 2015;\n\nXIII — Provimento n. 51, de 22 de setembro de 2015;\n\nXIV — Provimento n. 48, de 16 de março de 2016;\n\nXV — Provimento n. 53, de 16 de maio de 2016; XVI — Provimento n. 60, de 10 de agosto de 2017; XVII — art. 2.º ao art. 6.º; art. 7.º, caput e § 1.º e § 2.º; e art. 8.º ao art. 17 do Provimento n. 62, de 14 de novembro de 2017; XVIII — art. 2.º ao art. 8.º e art. 10 ao art. 19 do Provimento n. 63, de 14 de novembro de 2017; XIX — Provimento n. 65, de 14 de dezembro de 2017; XX — Provimento n. 67, de 26 de março de 2018; XXI — Provimento n. 69, de 12 de junho de 2018; XXII — Provimento n. 70, de 12 de junho de 2018; XXIII — Provimento n. 72, de 27 de junho de 2018; XXIV — art. 2.º ao art. 9.º do Provimento n. 73, de 28 de junho de 2018; XXV — art. 2.º ao art. 7.º do Provimento n. 77, de 7 de novembro de 2018; XXVI — Provimento n. 78, de 7 de novembro de 2018; XXVII — Provimento n. 86, de 29 de agosto de 2019; XXVIII — Provimento n. 87, de 11 de setembro de 2019; XXIX — Provimento n. 88, de 1.º de outubro de 2019; XXX — Provimento n. 93, de 26 de março de 2020; XXXI — Provimento n. 94, de 28 de março de 2020; XXXII — Provimento n. 95, de 1.º de abril de 2020; XXXIII — Provimento n. 97, de 27 de abril de 2020; XXXIV — Provimento n. 100, de 26 de maio de 2020; XXXV — Provimento n. 104, de 9 de junho de 2020; XXXVI — art. 2.º ao art. 8.º do Provimento n. 122, de 13 de agosto de 2021 XXXVII — art. 1.º ao art. 4.º do Provimento n. 133, de 15 de agosto de 2022 XXXVIII — art. 1.º e art. 2.º bem como art. 4.º ao art. 57 do Provimento n. 134, de 24 de agosto de 2022; XXXIX — Provimento n. 137, de 6 de dezembro de 2022; XL — Provimento n. 139, de 1.º de fevereiro de 2023; e XLI — art. 1.º ao art. 12 e art. 19 do Provimento n. 143, de 25 de abril de 2023.\n\nParágrafo único. Remissões aos atos normativos acima referidos, por outras normas, deverão ser consideradas como endereçadas aos dispositivos correlatos deste Código Nacional de Normas, se houver. ANEXO I (renumerado pelo Provimento n. 164, de 27.3.2024) REQUERIMENTO DE ALTERAÇÃO DE PRENOME (incluído pelo Provimento n. 153, de 26.9.2023) OFICIAL DE REGISTRO CIVIL DAS PESSOAS NATURAIS DO MUNICÍPIO DE ...\n\nI - REQUERENTE: Nome civil completo, nacionalidade, naturalidade, data e local do nascimento, estado civil, profissão, RG, CPF, endereço completo, telefone, endereço eletrônico.\n\nII - REQUERIMENTO: O(a) REQUERENTE acima indicado(a), registrado(a) nesta serventia, no Livro A- ___, fls.___, termo n.º ___, vem, respeitosamente, requerer, a V.Sa., a INSTAURAÇÃO DE PROCEDIMENTO PARA ALTERAÇÃO DE PRENOME, de modo que seu prenome passe a ser __________, passando a ser identificado(a) pelo nome completo de __________.\n\nIII - DECLARAÇÕES SOB AS PENAS DA LEI: O(A) REQUERENTE DECLARA que:\n\na) a alteração ora requerida está de acordo com seu nome atual e que responde civil e criminalmente pela veracidade desta afirmação. Declara, ainda, que não é parte em ação judicial em trâmite sobre alteração de prenome ou, em caso de ação judicial com o referido escopo, que a mesma já foi devidamente arquivada, conforme certidão anexa (se for o caso);\n\nb) possui cédula de identidade RG n.º __________(órgão expedidor), inscrição perante o CPF sob o n. __________, passaporte de n. __________ e título de eleitor n. __________;\n\nc) não possui cédula de identidade RG emitida em outra unidade da federação (se for o caso);\n\nd) está ciente de que não será admitida outra alteração de prenome por este procedimento diretamente perante Oficial de Registro Civil das Pessoas Naturais, resguardada a via judicial;\n\ne) está ciente que deverá promover a alteração nos demais registros que lhe digam respeito, direta ou indiretamente, e em respectivos documentos de identificação.\n\nIV - FUNDAMENTO JURÍDICO: O presente requerimento está fundamentado no artigo 56 da Lei n. 6.015/1973. Por ser verdade, firmo o presente termo. Local e data. Assinatura do(a) requerente CERTIFICO E DOU FÉ que a assinatura supra foi lançada em minha presença. Carimbo e assinatura do Oficial/Preposto autorizado ANEXO II (incluído pelo Provimento n. 164, de 27.3.2024) DECLARAÇÃO DE DOAÇÃO DE ÓRGÃOS, TECIDOS E PARTES DO CORPO HUMANO PARA DEPOIS DA MORTE Eu, ___________________________________________ (nome preenchido automaticamente pelo e-Notariado), CPF n. ______________-_____ (número preenchido automaticamente pelo e-Notariado), DECLARO que sou DOADOR de órgãos, tecidos e partes do corpo humano para fins de transplante ou finalidade terapêutica post mortem, ou seja, depois de minha morte. AUTORIZO a retirada de __________________(órgãos, tecidos e partes do corpo humano) para transplantes ou outra finalidade terapêutica. Esta é a minha vontade e solicito que seja cumprida. Autorizo a consulta da presente declaração pelos órgãos e profissionais que atuem na área médica ou estejam autorizados por previsão legal ou normativa. (redação dada em razão de republicação do Provimento n. 164, de 27.3.2024) ___/___/___ (data preenchida automaticamente) ____________(local preenchido automaticamente) Assinatura Eletrônica e-Notariado ANEXO III (incluído pelo Provimento n. 164, de 27.3.2024) REVOGAÇÃO DE DECLARAÇÃO DE DOAÇÃO DE ÓRGÃOS, TECIDOS E PARTES DO CORPO HUMANO PARA DEPOIS DA MORTE Eu, ___________________________________________ (nome preenchido automaticamente pelo e-Notariado), CPF n. ______________-_____ (número preenchido automaticamente pelo e-Notariado), REVOGO a anterior DECLARAÇÃO DE DOAÇÃO DE ÓRGÃOS, TECIDOS E PARTES DO CORPO HUMANO PARA DEPOIS DA MORTE assinada em ___/___/___ (data preenchida automaticamente). ___/___/___ (data preenchida automaticamente) ____________ (local preenchido automaticamente) Assinatura Eletrônica e-Notariado ANEXOS IV, V, VI E VII (Incluído pelo Provimento n. 182, de 17.9.2024)"
+      "texto": "Art. 556. Revogam-se as seguintes normas:\n\nI — Provimento n. 13, de 3 de setembro de 2010;\n\nII — art. 1.º ao art. 9.º do Provimento n. 16, de 17 de fevereiro de 2012, preservado o seu Anexo;\n\nIII — Provimento n. 18, de 28 de agosto de 2012;\n\nIV — Provimento n. 19, de 29 de agosto de 2012;\n\nV — Provimento n. 23, de 24 de outubro de 2012;\n\nVI — o art. 2.º e art. 3.º do Provimento n. 27, de 12 de dezembro de 2012;\n\nVII — Provimento n. 28, de 5 de fevereiro de 2013;\n\nVIII — Provimento n. 30, de 16 de abril de 2013;\n\nIX — Provimento n. 33, de 3 de julho de 2013; IX-A – Provimento n. 37, de 7 de julho de 2014; (incluído pelo Provimento n. 150, de 11.9.2023)\n\nX — Provimento n. 43, de 17 de abril de 2015;\n\nXI — art. 1.º ao art. 7.º, art. 9.º ao art. 11 e art. 13 ao art. 14 do Provimento n. 45, de 13 de maio de 2015;\n\nXII — Provimento n. 46, de 16 de junho de 2015;\n\nXIII — Provimento n. 51, de 22 de setembro de 2015;\n\nXIV — Provimento n. 48, de 16 de março de 2016;\n\nXV — Provimento n. 53, de 16 de maio de 2016; XVI — Provimento n. 60, de 10 de agosto de 2017; XVII — art. 2.º ao art. 6.º; art. 7.º, caput e § 1.º e § 2.º; e art. 8.º ao art. 17 do Provimento n. 62, de 14 de novembro de 2017; XVIII — art. 2.º ao art. 8.º e art. 10 ao art. 19 do Provimento n. 63, de 14 de novembro de 2017; XIX — Provimento n. 65, de 14 de dezembro de 2017; XX — Provimento n. 67, de 26 de março de 2018; XXI — Provimento n. 69, de 12 de junho de 2018; XXII — Provimento n. 70, de 12 de junho de 2018; XXIII — Provimento n. 72, de 27 de junho de 2018; XXIV — art. 2.º ao art. 9.º do Provimento n. 73, de 28 de junho de 2018; XXV — art. 2.º ao art. 7.º do Provimento n. 77, de 7 de novembro de 2018; XXVI — Provimento n. 78, de 7 de novembro de 2018; XXVII — Provimento n. 86, de 29 de agosto de 2019; XXVIII — Provimento n. 87, de 11 de setembro de 2019; XXIX — Provimento n. 88, de 1.º de outubro de 2019; XXX — Provimento n. 93, de 26 de março de 2020; XXXI — Provimento n. 94, de 28 de março de 2020; XXXII — Provimento n. 95, de 1.º de abril de 2020; XXXIII — Provimento n. 97, de 27 de abril de 2020; XXXIV — Provimento n. 100, de 26 de maio de 2020; XXXV — Provimento n. 104, de 9 de junho de 2020; XXXVI — art. 2.º ao art. 8.º do Provimento n. 122, de 13 de agosto de 2021 XXXVII — art. 1.º ao art. 4.º do Provimento n. 133, de 15 de agosto de 2022 XXXVIII — art. 1.º e art. 2.º bem como art. 4.º ao art. 57 do Provimento n. 134, de 24 de agosto de 2022; XXXIX — Provimento n. 137, de 6 de dezembro de 2022; XL — Provimento n. 139, de 1.º de fevereiro de 2023; e XLI — art. 1.º ao art. 12 e art. 19 do Provimento n. 143, de 25 de abril de 2023.\n\nParágrafo único. Remissões aos atos normativos acima referidos, por outras normas, deverão ser consideradas como endereçadas aos dispositivos correlatos deste Código Nacional de Normas, se houver. ANEXO I REQUERIMENTO DE ALTERAÇÃO DE PRENOME (renumerado pelo Provimento n. 164, de 27.3.2024) (incluído pelo Provimento n. 153, de 26.9.2023) OFICIAL DE REGISTRO CIVIL DAS PESSOAS NATURAIS DO MUNICÍPIO DE ...\n\nI - REQUERENTE: Nome civil completo, nacionalidade, naturalidade, data e local do nascimento, estado civil, profissão, RG, CPF, endereço completo, telefone, endereço eletrônico.\n\nII - REQUERIMENTO: O(a) REQUERENTE acima indicado(a), registrado(a) nesta serventia, no Livro A- ___, fls.___, termo n.º ___, vem, respeitosamente, requerer, a V.Sa., a INSTAURAÇÃO DE PROCEDIMENTO PARA ALTERAÇÃO DE PRENOME, de modo que seu prenome passe a ser __________, passando a ser identificado(a) pelo nome completo de __________.\n\nIII - DECLARAÇÕES SOB AS PENAS DA LEI: O(A) REQUERENTE DECLARA que:\n\na) a alteração ora requerida está de acordo com seu nome atual e que responde civil e criminalmente pela veracidade desta afirmação. Declara, ainda, que não é parte em ação judicial em trâmite sobre alteração de prenome ou, em caso de ação judicial com o referido escopo, que a mesma já foi devidamente arquivada, conforme certidão anexa (se for o caso);\n\nb) possui cédula de identidade RG n.º __________(órgão expedidor), inscrição perante o CPF sob o n. __________, passaporte de n. __________ e título de eleitor n. __________;\n\nc) não possui cédula de identidade RG emitida em outra unidade da federação (se for o caso);\n\nd) está ciente de que não será admitida outra alteração de prenome por este procedimento diretamente perante Oficial de Registro Civil das Pessoas Naturais, resguardada a via judicial;\n\ne) está ciente que deverá promover a alteração nos demais registros que lhe digam respeito, direta ou indiretamente, e em respectivos documentos de identificação.\n\nIV - FUNDAMENTO JURÍDICO: O presente requerimento está fundamentado no artigo 56 da Lei n. 6.015/1973. Por ser verdade, firmo o presente termo. Local e data. Assinatura do(a) requerente CERTIFICO E DOU FÉ que a assinatura supra foi lançada em minha presença. Carimbo e assinatura do Oficial/Preposto autorizado ANEXO II DECLARAÇÃO DE DOAÇÃO DE ÓRGÃOS, TECIDOS E PARTES DO CORPO HUMANO PARA DEPOIS DA MORTE (incluído pelo Provimento n. 164, de 27.3.2024) Eu, ___________________________________________ (nome preenchido automaticamente pelo e-Notariado), CPF n. ______________-_____ (número preenchido automaticamente pelo e-Notariado), DECLARO que sou DOADOR de órgãos, tecidos e partes do corpo humano para fins de transplante ou finalidade terapêutica post mortem, ou seja, depois de minha morte. AUTORIZO a retirada de __________________(órgãos, tecidos e partes do corpo humano) para transplantes ou outra finalidade terapêutica. Esta é a minha vontade e solicito que seja cumprida. Autorizo a consulta da presente declaração pelos órgãos e profissionais que atuem na área médica ou estejam autorizados por previsão legal ou normativa. (redação dada em razão de republicação do Provimento n. 164, de 27.3.2024) ___/___/___ (data preenchida automaticamente) ____________(local preenchido automaticamente) Assinatura Eletrônica e-Notariado ANEXO III REVOGAÇÃO DE DECLARAÇÃO DE DOAÇÃO DE ÓRGÃOS, TECIDOS E PARTES DO CORPO HUMANO PARA DEPOIS DA MORTE (incluído pelo Provimento n. 164, de 27.3.2024) Eu, ___________________________________________ (nome preenchido automaticamente pelo e-Notariado), CPF n. ______________-_____ (número preenchido automaticamente pelo e-Notariado), REVOGO a anterior DECLARAÇÃO DE DOAÇÃO DE ÓRGÃOS, TECIDOS E PARTES DO CORPO HUMANO PARA DEPOIS DA MORTE assinada em ___/___/___ (data preenchida automaticamente). ___/___/___ (data preenchida automaticamente) ____________ (local preenchido automaticamente) Assinatura Eletrônica e-Notariado ANEXOS IV, V, VI E VII (Incluídos pelo Provimento n. 182, de 17.9.2024) ANEXO VIII ESPECIFICAÇÕES TÉCNICAS PARA MONITORAMENTO NACIONAL (incluído pelo Provimento n. 225, de 20.5.2026) 1.1. Arquitetura, integração e governança do ciclo de dados I) Para a implementação do monitoramento de que trata este Provimento, o envio de dados deverá ser realizado, preferencialmente, de forma automatizada, mediante integração sistêmica por Interface de Programação de Aplicações (API) padronizada e homologada. As remessas periódicas em lote deverão observar formato estruturado, em padrão JSON, admitido XML em caráter subsidiário, com codificação UTF-8, datas no padrão ISO 8601 (YYYY-MM-DD) e valores monetários expressos em reais (R$), com precisão de duas casas decimais. II) Os dados deverão ser organizados em camadas de tratamento distintas, compreendendo: (i) camada transacional, contendo dados completos e identificáveis, de acesso restrito às Corregedorias; (ii) camada analítica, com dados pseudonimizados para fins de inteligência institucional; e (iii) camada pública, composta exclusivamente por dados agregados e anonimizados, destinados à transparência estatística. A transmissão, o armazenamento e o tratamento das informações deverão observar as diretrizes da Lei nº 13.709/2018, assegurada a rastreabilidade, a integridade e a auditabilidade dos registros. 1.1.1. As interfaces de programação de aplicações (APIs) utilizadas para integração sistêmica deverão observar, no mínimo:\n\nI – autenticação forte e controle de credenciais de acesso;\n\nII – versionamento controlado das interfaces e dos schemas de dados;\n\nIII – rastreabilidade integral das operações realizadas;\n\nIV – mecanismos de validação estrutural e lógica das remessas;\n\nV – prevenção de duplicidade de registros mediante controle de idempotência;\n\nVI – registro de falhas de transmissão, inconsistências e tentativas de acesso não autorizado;\n\nVII – sincronização incremental de dados e controle de atualização de versões dos registros;\n\nVIII – manutenção de trilhas de auditoria aptas à verificação posterior da integridade e da autoria das operações 1.2. Finalidade: o modelo de dados foi concebido para permitir o cruzamento de informações em âmbito nacional, com vistas à identificação de padrões relevantes de repetição, concentração e dispersão territorial de decisões judiciais e de comportamentos associados a litigância abusiva, litigância predatória e eventual abuso de direito por credores, que produzam efeitos sobre a publicidade dos protestos, sem interferência na atividade jurisdicional. 1.3. Diretrizes gerais de publicidade e proteção de dados I) A camada pública de dados será composta exclusivamente por informações agregadas e anonimizadas, estruturadas de modo a impedir a identificação direta ou indireta de pessoas naturais, ainda que mediante cruzamento com bases externas. II) A divulgação observará critérios mínimos de agregação territorial, temporal e quantitativa, de modo a evitar a exposição de eventos individualizados ou de baixa recorrência que possam ensejar reidentificação. III) Não integrarão a camada pública, em nenhuma hipótese:\n\na) números de inscrição no CPF ou no CNPJ vinculados a pessoas naturais;\n\nb) identificação de partes, representantes processuais ou credores individualizados;\n\nc) números de processos judiciais ou quaisquer identificadores que permitam rastreamento direto de demandas específicas;\n\nd) dados cuja combinação possa resultar em identificação indireta de pessoa natural. IV) Poderão ser divulgados, desde que agregados:\n\na) quantitativos de decisões judiciais por período;\n\nb) valores totais impactados sobre a publicidade dos protestos;\n\nc) distribuições territoriais por unidade da federação ou região;\n\nd) séries históricas e indicadores de variação temporal;\n\ne) dados setoriais agregados relativos aos credores, vedada a individualização. V) A anonimização deverá ser submetida a avaliação periódica de risco de reidentificação, devendo ser revista sempre que houver alteração relevante no estado da técnica ou na disponibilidade de bases de dados externas. VI) Os dados constantes das camadas transacional e analítica permanecerão sob regime de acesso restrito, sendo seu tratamento limitado às finalidades previstas neste Provimento. 1.4. Dicionário de dados 1.4.1. Bloco de identificação da ordem judicial I) id_ordem_judicial: identificador unívoco da ocorrência registrada no sistema, vinculado ao número único do processo judicial correspondente; II) numero_processo_judicial: número único do processo no padrão do Conselho Nacional de Justiça, destinado à vinculação processual da ordem judicial; III) juizo_prolator: identificação completa do órgão jurisdicional prolator da decisão, com indicação de vara, comarca, tribunal e unidade da federação; IV) natureza_acao: classificação da ação como coletiva ou individual; V) tipo_decisao: classificação do provimento judicial, tais como tutela provisória, decisão interlocutória, sentença ou acórdão; VI) data_decisao: data de prolação da decisão judicial; VII) data_cumprimento: data de efetivo cumprimento da ordem no âmbito do tabelionato; VIII) uf_juizo: unidade da federação do órgão jurisdicional prolator; IX) uf_domicilio_autor: unidade da federação correspondente ao domicílio informado da parte autora, quando disponível. 1.4.2. Bloco de identificação das partes e de representantes (acesso restrito) I) cpf_patrono: número de inscrição no Cadastro de Pessoas Físicas do advogado ou procurador responsável, constituindo identificador nacional unívoco; II) oab_patrono: número de inscrição profissional na Ordem dos Advogados do Brasil; III) uf_oab: unidade da federação da inscrição principal ou suplementar; IV) documento_polo_ativo: número de inscrição no Cadastro de Pessoas Físicas ou no Cadastro Nacional da Pessoa Jurídica da parte autora, preservado integralmente na camada restrita e submetido à anonimização nas demais camadas. 1.4.3. Bloco de impacto no acervo I) quantidade_protestos_afetados: número total de protestos cuja publicidade foi suspensa, cancelada ou suprimida por força da decisão; II) valor_total_afetado: valor global, em reais, correspondente às obrigações cuja publicidade foi impactada; III) cnpj_credor_afetado: número de inscrição no Cadastro Nacional da Pessoa Jurídica do credor originário do título ou documento de dívida. 1.4.4. Bloco de metadados da atividade extrajudicial I) cns_cartorio: Código Nacional da Serventia responsável pelo cumprimento da ordem; II) status_publicidade: situação atual do registro de protesto, com classificação padronizada, tais como suspenso por decisão judicial, cancelado judicialmente ou restabelecido; III) timestamp_registro: data e hora do envio do registro à base nacional; IV) hash_registro: identificador criptográfico destinado à verificação de integridade dos dados; V) versao_registro: identificador de versionamento do registro, para fins de controle de alterações; VI) log_atualizacao: histórico de modificações relevantes do registro, com indicação de data, natureza da alteração e responsável.\" 1.4.5. Diretrizes de interoperabilidade e consistência I) Os campos identificadores deverão observar validação estrutural e consistência lógica, especialmente quanto aos números de CPF, CNPJ e ao Número Único de Processo. A alimentação da base de dados deverá ocorrer preferencialmente em tempo real ou na periodicidade operacional definida pela CENPROT, sem prejuízo da elaboração dos relatórios e comunicações previstos no art. 263-H. II) A estrutura de dados deverá permitir cruzamentos automatizados, inclusive para identificação de padrões de recorrência, concentração por representantes processuais, dispersão territorial de demandas e impacto setorial sobre credores, sempre em perspectiva agregada e sem atribuição de qualificação jurídica às condutas processuais."
     }
   ]
 }
