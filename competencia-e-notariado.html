@@ -553,7 +553,7 @@ footer.no-print .space-y-3 p{font-size:14px!important;color:#334155!important;li
       <p style="margin:0 0 .85rem;">O resultado indica o critério de competência aplicável, a base normativa e eventual observação interpretativa. Ele não substitui a conferência do caso concreto.</p>
       <h2 style="margin:1rem 0 .35rem;font-size:1rem;color:#0f172a;">Critérios, fontes e limites</h2>
       <p style="margin:0 0 .85rem;">A lógica considera o Código Nacional de Normas da Corregedoria Nacional de Justiça e a Lei nº 8.935/1994, nos pontos indicados na própria página. A competência deve ser confirmada pelo tabelião responsável e pela norma vigente.</p>
-      <p style="margin:1rem 0 0;color:#64748b;font-size:.9rem;">Última atualização da ferramenta: 04/05/2026.</p>
+      <p style="margin:1rem 0 0;color:#64748b;font-size:.9rem;">Última atualização da ferramenta: 18/05/2026.</p>
     </section>
   </div>
 </div>
@@ -564,7 +564,7 @@ footer.no-print .space-y-3 p{font-size:14px!important;color:#334155!important;li
     <p>A ferramenta é informativa e considera critérios do Código Nacional de Normas da Corregedoria Nacional de Justiça e da Lei nº 8.935/1994. O resultado não substitui a conferência da norma vigente, dos documentos apresentados e da análise do caso concreto pelo tabelião responsável.</p>
   </div>
 </noscript>
-<!-- Versão revisada: fluxo de escritura pública com pergunta sobre ato híbrido com imóvel, regra da mesma UF com adquirente/credor, tópico próprio de domiciliados no exterior, nota sobre comprovação de domicílio, dependências fixadas, fallback de carregamento. -->
+<!-- Versão revisada: testamento com base no art. 303, parágrafo único, do CNN aplicado por analogia, aviso técnico sobre divergência doutrinária; fluxo de escritura pública com pergunta sobre ato híbrido com imóvel; regra da mesma UF com adquirente/credor; tópico próprio de domiciliados no exterior; nota sobre comprovação de domicílio; res_pessoal_remoto com distinção entre atos com e sem aquisição patrimonial; remoção de resultados órfãos; correção da contradição em res_um_imovel_uf_diferente; opção Testamento usando resultado direto; lista de atos pessoais inclui inventário. -->
 
 <script>
 const { useState, useEffect } = React;
@@ -657,8 +657,8 @@ const FLUXO = {
             { rotulo: 'Domiciliados no exterior', desc: 'Estrangeiro ou brasileiro com domicílio fora do Brasil, com ou sem imóvel.', icone: Globe, proximo: 'exterior_imovel' },
             { rotulo: 'Ata notarial', desc: 'Constatação de fato.', icone: ScrollText, proximo: 'ata_local' },
             { rotulo: 'Procuração pública', desc: 'Outorga de poderes, com ou sem substabelecimento.', icone: BookOpen, proximo: 'proc_imovel' },
-            { rotulo: 'Testamento', desc: 'Disposição de última vontade.', icone: ShieldCheck, proximo: 'testamento_final' },
-            { rotulo: 'Reconhecimento de firma', desc: 'Assinatura eletrônica, em documento físico ou DUT-e/ATPV-e.', icone: Stamp, proximo: 'rec_tipo' },
+            { rotulo: 'Testamento', desc: 'Disposição de última vontade.', icone: ShieldCheck, resultado: 'res_testamento' },
+            { rotulo: 'Reconhecimento de firma', desc: 'Assinatura eletrônica, em documento físico ou ATPV-e.', icone: Stamp, proximo: 'rec_tipo' },
             { rotulo: 'Autenticação ou apostila', desc: 'Desmaterialização, e-Not Provas, certificado digital notarizado, apostilamento.', icone: Layers, proximo: 'aut_tipo' }
         ]
     },
@@ -667,7 +667,7 @@ const FLUXO = {
         pergunta: 'O ato envolve bem imóvel?',
         opcoes: [
             { rotulo: 'Sim, com imóvel', icone: Building2, proximo: 'esc_hibrido_imovel' },
-            { rotulo: 'Não, apenas atos pessoais', desc: 'Divórcio, união estável, emancipação, pacto antenupcial, DAV, dependência econômica, declarações, etc. Lista exemplificativa.', icone: FileText, proximo: 'esc_hibrido' }
+            { rotulo: 'Não, apenas atos pessoais', desc: 'Divórcio, união estável, inventário, emancipação, pacto antenupcial, DAV, dependência econômica, declarações, etc. Lista exemplificativa.', icone: FileText, proximo: 'esc_hibrido' }
         ]
     },
     esc_hibrido_imovel: {
@@ -740,7 +740,7 @@ const FLUXO = {
         opcoes: [
             { rotulo: 'Assinatura eletrônica via e-Not Assina', desc: 'Documento digital firmado com certificado digital notarizado.', icone: Stamp, resultado: 'res_rec_enot' },
             { rotulo: 'Assinatura em documento físico', desc: 'Ratificação por videoconferência.', icone: Camera, resultado: 'res_rec_fisico' },
-            { rotulo: 'DUT-e ou ATPV-e (veículo automotor)', icone: Car, resultado: 'res_rec_veiculo' }
+            { rotulo: 'ATPV-e (veículo automotor)', icone: Car, resultado: 'res_rec_veiculo' }
         ]
     },
     aut_tipo: {
@@ -755,22 +755,10 @@ const FLUXO = {
     }
 };
 const RESULTADOS = {
-    res_imovel_simples: {
-        competencia: 'Local do imóvel ou domicílio do(s) adquirente(s) ou credor(es).',
-        base: 'CNN, art. 302, caput.',
-        detalhe: 'A competência é definida pelo local do imóvel ou pelo domicílio do adquirente ou credor. Para os fins do art. 302, §3º, adquirente compreende o comprador, a parte que adquire direito real ou a parte em relação à qual é reconhecido crédito. O domicílio deve ser comprovado na forma do art. 304 do CNN.',
-        aviso: null
-    },
-    res_imovel_credor: {
-        competencia: 'Local do imóvel, domicílio do(s) adquirente(s) ou domicílio do(s) credor(es).',
-        base: 'CNN, art. 302, caput e § 3º.',
-        detalhe: 'Nas escrituras com financiamento, alienação fiduciária, hipoteca ou reconhecimento de crédito, o domicílio do credor também pode fixar a competência.',
-        aviso: null
-    },
     res_um_imovel_uf_diferente: {
         competencia: 'Local do imóvel ou domicílio do(s) adquirente(s) ou credor(es).',
         base: 'CNN, art. 302, caput e § 3º.',
-        detalhe: 'Para escritura eletrônica com imóvel em Estado diverso do domicílio do adquirente ou credor, a competência permanece vinculada ao local do imóvel ou ao domicílio do adquirente ou credor. Quando houver coincidência entre o imóvel e o domicílio do adquirente ou credor no mesmo Estado, qualquer tabelião de notas desse Estado é competente. Havendo mais de um imóvel no mesmo ato, o tabelião competente por qualquer dos critérios acima também será competente para os demais imóveis constantes do ato.',
+        detalhe: 'Para escritura eletrônica com imóvel em Estado diverso do domicílio do adquirente ou credor, a competência permanece vinculada ao local do imóvel ou ao domicílio do adquirente ou credor. Não há, nessa hipótese, a faculdade de escolha de qualquer tabelião do mesmo Estado, prevista no § 2º do art. 302 do CNN para a coincidência de UF.',
         aviso: null
     },
     res_mesma_uf: {
@@ -798,22 +786,22 @@ const RESULTADOS = {
         aviso: null
     },
     res_pessoal_remoto: {
-        competencia: 'Qualquer tabelião de notas do domicílio de qualquer das partes.',
-        base: 'CNN, art. 289 e arts. 302 a 306.',
-        detalhe: 'Aplica-se a divórcio, união estável, emancipação, pacto antenupcial, DAV, dependência econômica, declarações, etc. Lista exemplificativa. A parte pode ter mais de um domicílio. Qualquer domicílio comprovado de qualquer das partes pode ser utilizado como vínculo territorial para fixar a competência.',
-        aviso: 'Não há disciplina expressa nos arts. 302 a 306 do CNN para todos os atos pessoais sem imóvel. A ferramenta utiliza o domicílio comprovado de qualquer das partes como critério operacional, em atenção à competência territorial prevista no art. 289 do CNN.'
+        competencia: 'Domicílio comprovado de qualquer das partes. Quando houver aquisição patrimonial, também o domicílio do adquirente na forma do art. 302, § 3º, do CNN.',
+        base: 'CNN, art. 302, caput e § 3º, e art. 289.',
+        detalhe: 'Aplica-se a divórcio, união estável, inventário, emancipação, pacto antenupcial, DAV, dependência econômica, declarações, etc. Lista exemplificativa. Para os atos com aquisição patrimonial, como divórcio com partilha, dissolução de união estável com partilha e inventário, a competência fixa-se pelo domicílio do adquirente, na leitura técnica do § 3º do art. 302 do CNN, que alcança herdeiros, meeiros, ex-cônjuges e ex-companheiros como partes em relação às quais é reconhecido direito real ou crédito. Para os atos sem aquisição patrimonial, como emancipação, pacto antenupcial puro, DAV e declarações, a competência fixa-se pelo domicílio comprovado de qualquer das partes, como critério operacional. A parte pode ter mais de um domicílio. Qualquer domicílio comprovado de qualquer das partes pode ser utilizado como vínculo territorial.',
+        aviso: 'Os arts. 302 a 306 do CNN não trazem regra expressa para a totalidade dos atos pessoais sem imóvel. Para os atos com aquisição patrimonial, a subsunção ao § 3º do art. 302 decorre de leitura técnica do conceito de adquirente. Para os atos sem aquisição patrimonial, a ferramenta utiliza o domicílio comprovado das partes como critério operacional, em atenção à competência territorial absoluta prevista no art. 289 do CNN.'
     },
     res_hibrido: {
         competencia: 'Tabelião que recebe a rogação presencial ou o tabelião que detém competência para o ato eletrônico.',
         base: 'CNN, art. 313; Lei 8.935/1994, art. 8º.',
         detalhe: 'No ato híbrido, autorizado pelo art. 313 do Código Nacional de Normas, admite-se a competência do tabelião que recebe a rogação presencial, com apoio no art. 8º da Lei 8.935/1994, sem afastar a competência do tabelião definido pelas regras próprias do ato eletrônico, quando aplicáveis.',
-        aviso: 'Não desconhecemos a zona de tensão interpretativa sobre a aplicação do art. 313 do CNN. A linha adotada considera a rogação presencial, com menção ao art. 8º da Lei 8.935/1994, sem afastar o tabelião que detém competência própria para o ato eletrônico.'
+        aviso: null
     },
     res_hibrido_imovel: {
         competencia: 'Tabelião que recebe a rogação presencial ou o tabelião que detém competência para o ato eletrônico com imóvel.',
         base: 'CNN, arts. 302 e 313; Lei 8.935/1994, art. 8º.',
         detalhe: 'No ato híbrido com imóvel, autorizado pelo art. 313 do Código Nacional de Normas, admite-se a competência do tabelião que recebe a rogação presencial, com apoio no art. 8º da Lei 8.935/1994, sem afastar a competência do tabelião definido pelas regras do art. 302 do CNN, quando aplicáveis.',
-        aviso: 'Não desconhecemos a zona de tensão interpretativa sobre a aplicação do art. 313 do CNN. A linha adotada considera a rogação presencial, sem afastar a competência própria do tabelião definida pelo art. 302 do CNN.'
+        aviso: null
     },
     res_ata_fato: {
         competencia: 'Local do fato constatado. Subsidiariamente, domicílio do requerente.',
@@ -841,9 +829,9 @@ const RESULTADOS = {
     },
     res_testamento: {
         competencia: 'Domicílio do testador.',
-        base: 'CNN, art. 289 e arts. 302 a 306.',
-        detalhe: 'Não há regra específica para testamento eletrônico nos arts. 302 a 306 do CNN. A ferramenta utiliza o domicílio do testador como vínculo territorial para fixar a competência, por analogia ao regime da procuração pública eletrônica.',
-        aviso: 'A indicação de competência não afasta as solenidades próprias do testamento previstas na legislação civil. Diante da ausência de disciplina específica nos arts. 302 a 306 do CNN, recomenda-se cautela na prática eletrônica e avaliação da conveniência da via presencial.'
+        base: 'CNN, art. 303, parágrafo único, aplicado por analogia.',
+        detalhe: 'O Provimento nº 149/2023 não disciplina expressamente o testamento entre os atos do e-Notariado. A indicação de competência adotada decorre de aplicação analógica do art. 303, parágrafo único, do CNN, que fixa a competência da procuração pública eletrônica pelo domicílio do outorgante. Procuração e testamento têm em comum a natureza de ato unilateral com declarante principal, o que sustenta a analogia. O domicílio do testador deve ser comprovado na forma do art. 304 do CNN.',
+        aviso: 'A prática do testamento público eletrônico depende de assunção da linha permissiva da doutrina notarial, que admite a videoconferência notarial como forma compatível com o art. 1.864 do Código Civil. A linha restritiva sustenta que a presença simultânea de testador e duas testemunhas instrumentárias prevista no art. 1.864 não foi expressamente regulada para o ambiente eletrônico no Código Nacional de Normas. O cumprimento das solenidades do art. 1.864, em especial quanto à identificação e à presença das testemunhas instrumentárias na videoconferência, exige cuidado redobrado.'
     },
     res_rec_enot: {
         competencia: 'Tabelião que emitiu o certificado digital notarizado usado na assinatura.',
@@ -889,10 +877,6 @@ const RESULTADOS = {
     }
 };
 const TEXTOS_ARTIGOS = {
-    'CNN, art. 302, caput.': {
-        titulo: `Código Nacional de Normas, art. 302, caput`,
-        texto: `Art. 302. Ao tabelião de notas da circunscrição do imóvel ou do domicílio do adquirente compete, de forma remota e com exclusividade, lavrar as escrituras eletronicamente, por meio do e-Notariado, com a realização de videoconferência e assinaturas digitais das partes.`
-    },
     'CNN, art. 302, caput e § 3º.': {
         titulo: `Código Nacional de Normas, art. 302, caput e § 3º`,
         texto: `Art. 302. Ao tabelião de notas da circunscrição do imóvel ou do domicílio do adquirente compete, de forma remota e com exclusividade, lavrar as escrituras eletronicamente, por meio do e-Notariado, com a realização de videoconferência e assinaturas digitais das partes. § 3.º Para os fins desta Seção, entende-se por adquirente, nesta ordem, o comprador, a parte que está adquirindo direito real ou a parte em relação à qual é reconhecido crédito.`
@@ -913,10 +897,6 @@ const TEXTOS_ARTIGOS = {
         titulo: `Código Nacional de Normas, art. 289 e arts. 302 a 306`,
         texto: `Art. 289. A competência para a prática dos atos regulados nesta Seção é absoluta e observará a circunscrição territorial em que o tabelião recebeu sua delegação, nos termos do art. 9.º da Lei n. 8.935/1994. Art. 302. Ao tabelião de notas da circunscrição do imóvel ou do domicílio do adquirente compete, de forma remota e com exclusividade, lavrar as escrituras eletronicamente, por meio do e-Notariado, com a realização de videoconferência e assinaturas digitais das partes. § 1.º Quando houver um ou mais imóveis de diferentes circunscrições no mesmo ato notarial, será competente para a prática de atos remotos o tabelião de quaisquer delas. § 2.º Estando o imóvel localizado no mesmo estado da federação do domicílio do adquirente, este poderá escolher qualquer tabelionato de notas da unidade federativa para a lavratura do ato. § 3.º Para os fins desta Seção, entende-se por adquirente, nesta ordem, o comprador, a parte que está adquirindo direito real ou a parte em relação à qual é reconhecido crédito. Art. 303. Ao tabelião de notas da circunscrição do fato constatado ou, quando inaplicável este critério, ao tabelião do domicílio do requerente compete lavrar as atas notariais eletrônicas, de forma remota e com exclusividade por meio do e-Notariado, com a realização de videoconferência e assinaturas digitais das partes. Parágrafo único. A lavratura de procuração pública eletrônica caberá ao tabelião do domicílio do outorgante ou do local do imóvel, se for o caso. Art. 304. A comprovação do domicílio, em qualquer das hipóteses desta Seção do Código Nacional de Normas, será realizada: I — em se tratando de pessoa jurídica ou ente equiparado: pela verificação da sede da matriz, ou da filial em relação a negócios praticados no local desta, conforme registrado nos órgãos de registro competentes; e II — em se tratando de pessoa física: pela verificação do título de eleitor, ou outro domicílio comprovado. Parágrafo único. Na falta de comprovação do domicílio da pessoa física, será observado apenas o local do imóvel, podendo ser estabelecidos convênios com órgãos fiscais para que os notários identifiquem, de forma mais célere e segura, o domicílio das partes. Art. 305. A desmaterialização será realizada por meio da CENAD nos seguintes documentos: I — na cópia de um documento físico digitalizado, mediante a conferência com o documento original ou eletrônico; e II - em documento híbrido. § 1.º Após a conferência do documento físico, o notário poderá expedir cópias autenticadas em papel ou em meio digital. § 2.º As cópias eletrônicas oriundas da digitalização de documentos físicos serão conferidas na CENAD. § 3.º A autenticação notarial gerará um registro na CENAD, que conterá os dados do notário ou preposto que o tenha assinado, a data e hora da assinatura e um código de verificação (hash), que será arquivado. § 4.º O interessado poderá conferir o documento eletrônico autenticado pelo envio desse mesmo documento à CENAD, que confirmará a autenticidade por até cinco anos. § 5º A desmaterialização de que trata este artigo tem a mesma força jurídica de uma autenticação de cópia. Art. 306. Compete, exclusivamente, ao tabelião de notas: I — a materialização, a desmaterialização, a autenticação e a verificação da autoria de documento eletrônico; II — autenticar a cópia em papel de documento original digitalizado e autenticado eletronicamente perante outro notário; III - reconhecer as assinaturas eletrônicas apostas em documentos digitais, ato que terá a mesma força jurídica de um reconhecimento de firma; e IV — realizar o reconhecimento da firma como autêntica no documento físico, devendo ser confirmadas, por videoconferência, a identidade, a capacidade daquele que assinou e a autoria da assinatura a ser reconhecida. § 1.º Tratando-se de documento atinente a veículo automotor, será competente para o reconhecimento de firma, de forma remota, o tabelião de notas do município de emplacamento do veículo ou de domicílio do adquirente indicados no Certificado de Registro de Veículo (CRV) ou na Autorização para Transferência de Propriedade de Veículo (ATPV). § 2.º O tabelião arquivará o trecho da videoconferência em que constar a ratificação da assinatura pelo signatário com expressa menção ao documento assinado, observados os requisitos previstos para o conteúdo da gravação da videoconferência notarial na forma desta Seção do Código Nacional de Normas. § 3.º A identidade das partes será atestada remotamente nos termos desta Seção do Código de Normas.`
     },
-    'CNN, arts. 302 a 306.': {
-        titulo: `Código Nacional de Normas, arts. 302 a 306`,
-        texto: `Art. 302. Ao tabelião de notas da circunscrição do imóvel ou do domicílio do adquirente compete, de forma remota e com exclusividade, lavrar as escrituras eletronicamente, por meio do e-Notariado, com a realização de videoconferência e assinaturas digitais das partes. § 1.º Quando houver um ou mais imóveis de diferentes circunscrições no mesmo ato notarial, será competente para a prática de atos remotos o tabelião de quaisquer delas. § 2.º Estando o imóvel localizado no mesmo estado da federação do domicílio do adquirente, este poderá escolher qualquer tabelionato de notas da unidade federativa para a lavratura do ato. § 3.º Para os fins desta Seção, entende-se por adquirente, nesta ordem, o comprador, a parte que está adquirindo direito real ou a parte em relação à qual é reconhecido crédito. Art. 303. Ao tabelião de notas da circunscrição do fato constatado ou, quando inaplicável este critério, ao tabelião do domicílio do requerente compete lavrar as atas notariais eletrônicas, de forma remota e com exclusividade por meio do e-Notariado, com a realização de videoconferência e assinaturas digitais das partes. Parágrafo único. A lavratura de procuração pública eletrônica caberá ao tabelião do domicílio do outorgante ou do local do imóvel, se for o caso. Art. 304. A comprovação do domicílio, em qualquer das hipóteses desta Seção do Código Nacional de Normas, será realizada: I — em se tratando de pessoa jurídica ou ente equiparado: pela verificação da sede da matriz, ou da filial em relação a negócios praticados no local desta, conforme registrado nos órgãos de registro competentes; e II — em se tratando de pessoa física: pela verificação do título de eleitor, ou outro domicílio comprovado. Parágrafo único. Na falta de comprovação do domicílio da pessoa física, será observado apenas o local do imóvel, podendo ser estabelecidos convênios com órgãos fiscais para que os notários identifiquem, de forma mais célere e segura, o domicílio das partes. Art. 305. A desmaterialização será realizada por meio da CENAD nos seguintes documentos: I — na cópia de um documento físico digitalizado, mediante a conferência com o documento original ou eletrônico; e II - em documento híbrido. § 1.º Após a conferência do documento físico, o notário poderá expedir cópias autenticadas em papel ou em meio digital. § 2.º As cópias eletrônicas oriundas da digitalização de documentos físicos serão conferidas na CENAD. § 3.º A autenticação notarial gerará um registro na CENAD, que conterá os dados do notário ou preposto que o tenha assinado, a data e hora da assinatura e um código de verificação (hash), que será arquivado. § 4.º O interessado poderá conferir o documento eletrônico autenticado pelo envio desse mesmo documento à CENAD, que confirmará a autenticidade por até cinco anos. § 5º A desmaterialização de que trata este artigo tem a mesma força jurídica de uma autenticação de cópia. Art. 306. Compete, exclusivamente, ao tabelião de notas: I — a materialização, a desmaterialização, a autenticação e a verificação da autoria de documento eletrônico; II — autenticar a cópia em papel de documento original digitalizado e autenticado eletronicamente perante outro notário; III - reconhecer as assinaturas eletrônicas apostas em documentos digitais, ato que terá a mesma força jurídica de um reconhecimento de firma; e IV — realizar o reconhecimento da firma como autêntica no documento físico, devendo ser confirmadas, por videoconferência, a identidade, a capacidade daquele que assinou e a autoria da assinatura a ser reconhecida. § 1.º Tratando-se de documento atinente a veículo automotor, será competente para o reconhecimento de firma, de forma remota, o tabelião de notas do município de emplacamento do veículo ou de domicílio do adquirente indicados no Certificado de Registro de Veículo (CRV) ou na Autorização para Transferência de Propriedade de Veículo (ATPV). § 2.º O tabelião arquivará o trecho da videoconferência em que constar a ratificação da assinatura pelo signatário com expressa menção ao documento assinado, observados os requisitos previstos para o conteúdo da gravação da videoconferência notarial na forma desta Seção do Código Nacional de Normas. § 3.º A identidade das partes será atestada remotamente nos termos desta Seção do Código de Normas.`
-    },
     'CNN, art. 313; Lei 8.935/1994, art. 8º.': {
         titulo: `Código Nacional de Normas, art. 313, e Lei 8.935/1994, art. 8º`,
         texto: `Art. 313. Fica autorizada a realização de ato notarial híbrido, com uma das partes assinando fisicamente o ato notarial e a outra, a distância, nos termos deste Código de Normas. Art. 8º É livre a escolha do tabelião de notas, qualquer que seja o domicílio das partes ou o lugar de situação dos bens objeto do ato ou negócio.`
@@ -936,6 +916,14 @@ const TEXTOS_ARTIGOS = {
     'CNN, art. 303, parágrafo único.': {
         titulo: `Código Nacional de Normas, art. 303, parágrafo único`,
         texto: `Parágrafo único. A lavratura de procuração pública eletrônica caberá ao tabelião do domicílio do outorgante ou do local do imóvel, se for o caso.`
+    },
+    'CNN, art. 303, parágrafo único, aplicado por analogia.': {
+        titulo: `Código Nacional de Normas, art. 303, parágrafo único (aplicado por analogia)`,
+        texto: `Parágrafo único. A lavratura de procuração pública eletrônica caberá ao tabelião do domicílio do outorgante ou do local do imóvel, se for o caso.`
+    },
+    'CNN, art. 302, caput e § 3º, e art. 289.': {
+        titulo: `Código Nacional de Normas, art. 302, caput e § 3º, e art. 289`,
+        texto: `Art. 289. A competência para a prática dos atos regulados nesta Seção é absoluta e observará a circunscrição territorial em que o tabelião recebeu sua delegação, nos termos do art. 9.º da Lei n. 8.935/1994. Art. 302. Ao tabelião de notas da circunscrição do imóvel ou do domicílio do adquirente compete, de forma remota e com exclusividade, lavrar as escrituras eletronicamente, por meio do e-Notariado, com a realização de videoconferência e assinaturas digitais das partes. § 3.º Para os fins desta Seção, entende-se por adquirente, nesta ordem, o comprador, a parte que está adquirindo direito real ou a parte em relação à qual é reconhecido crédito.`
     },
     'CNN, art. 306, III; art. 293, XIII.': {
         titulo: `Código Nacional de Normas, art. 306, III, e art. 293, XIII`,
@@ -1081,11 +1069,6 @@ function CompetenciaENotariado() {
             escolha: opcao.rotulo
         };
         setRespostas([...respostas, novoRegistro]);
-        if (opcao.proximo === 'testamento_final') {
-            setResultadoId('res_testamento');
-            scrollParaConsulta();
-            return;
-        }
         if (opcao.resultado) {
             setResultadoId(opcao.resultado);
             scrollParaConsulta();
@@ -1228,7 +1211,7 @@ function CompetenciaENotariado() {
                         "Presentante de pessoa jur\u00EDdica, procurador e assistente jur\u00EDdico n\u00E3o s\u00E3o partes para fins de fixa\u00E7\u00E3o da compet\u00EAncia. A regra observa as partes em sentido material."),
                     React.createElement("p", null,
                         React.createElement("span", { className: "font-mono text-slate-400 mr-2" }, "v."),
-                        "Adquirente, conforme art. 302, \u00A73\u00BA, abrange comprador(es), credor(es), herdeiro(s), divorciando(s), usufrutu\u00E1rio(s), donat\u00E1rios e demais partes em rela\u00E7\u00E3o \u00E0s quais \u00E9 reconhecido cr\u00E9dito ou direito real, ou pessoa jur\u00EDdica, matriz ou filial."),
+                        "Adquirente, na leitura t\u00E9cnica do art. 302, \u00A73\u00BA, alcan\u00E7a comprador(es), credor(es), herdeiro(s), meeiro(s), ex-c\u00F4njuge(s), ex-companheiro(s), usufrutu\u00E1rio(s), donat\u00E1rios e demais partes em rela\u00E7\u00E3o \u00E0s quais \u00E9 reconhecido cr\u00E9dito ou direito real, ou pessoa jur\u00EDdica, matriz ou filial. A enumera\u00E7\u00E3o decorre de interpreta\u00E7\u00E3o do conceito de parte que adquire direito real, n\u00E3o de literalidade do dispositivo."),
                     React.createElement("p", null,
                         React.createElement("span", { className: "font-mono text-slate-400 mr-2" }, "vi."),
                         "Im\u00F3vel situado no mesmo Estado do domic\u00EDlio do adquirente ou credor permite a escolha de qualquer tabelionato de notas dessa unidade federativa, conforme o art. 302, \u00A7\u00A72\u00BA e 3\u00BA."),
@@ -1237,13 +1220,13 @@ function CompetenciaENotariado() {
                         "Domiciliados no exterior foram tratados em t\u00F3pico pr\u00F3prio. Quando houver parte domiciliada no exterior em ata, procura\u00E7\u00E3o, testamento ou escritura sem im\u00F3vel, recomenda-se iniciar a consulta por esse t\u00F3pico. Sem im\u00F3vel, a ferramenta indica qualquer tabeli\u00E3o de notas do territ\u00F3rio nacional; com im\u00F3vel, a compet\u00EAncia fica vinculada \u00E0s regras da escritura com im\u00F3vel."),
                     React.createElement("p", null,
                         React.createElement("span", { className: "font-mono text-slate-400 mr-2" }, "viii."),
-                        "Escritura sem im\u00F3vel n\u00E3o tem disciplina expressa nos arts. 302 a 306 do CNN para todas as suas modalidades; a ferramenta utiliza o domic\u00EDlio de qualquer das partes como crit\u00E9rio operacional."),
+                        "Escritura sem im\u00F3vel. Para os atos com aquisi\u00E7\u00E3o patrimonial, como div\u00F3rcio com partilha, dissolu\u00E7\u00E3o de uni\u00E3o est\u00E1vel com partilha e invent\u00E1rio, a compet\u00EAncia fixa-se pelo domic\u00EDlio do adquirente, na leitura t\u00E9cnica do \u00A7 3\u00BA do art. 302 do CNN. Para os atos sem aquisi\u00E7\u00E3o patrimonial, como emancipa\u00E7\u00E3o, pacto antenupcial puro, DAV e declara\u00E7\u00F5es, a ferramenta utiliza o domic\u00EDlio comprovado de qualquer das partes como crit\u00E9rio operacional."),
                     React.createElement("p", null,
                         React.createElement("span", { className: "font-mono text-slate-400 mr-2" }, "ix."),
-                        "Ato h\u00EDbrido. N\u00E3o desconhecemos a zona de tens\u00E3o interpretativa sobre a aplica\u00E7\u00E3o do art. 313 do CNN e do art. 8\u00BA da Lei 8.935/1994. Admite-se o tabeli\u00E3o que recebe a roga\u00E7\u00E3o presencial ou o tabeli\u00E3o que det\u00E9m compet\u00EAncia para o ato eletr\u00F4nico."),
+                        "Ato h\u00EDbrido. No regime do art. 313 do CNN, conjugado com o art. 8\u00BA da Lei 8.935/1994, admite-se a compet\u00EAncia do tabeli\u00E3o que recebe a roga\u00E7\u00E3o presencial, sem afastar a compet\u00EAncia do tabeli\u00E3o definido pelas regras pr\u00F3prias do ato eletr\u00F4nico, quando aplic\u00E1veis."),
                     React.createElement("p", null,
                         React.createElement("span", { className: "font-mono text-slate-400 mr-2" }, "x."),
-                        "Testamento eletr\u00F4nico n\u00E3o tem disciplina expressa nos arts. 302 a 306 do CNN; a ferramenta utiliza o domic\u00EDlio do testador como crit\u00E9rio operacional.")),
+                        "Testamento eletr\u00F4nico n\u00E3o tem disciplina expressa nos arts. 302 a 306 do CNN. A ferramenta indica o domic\u00EDlio do testador como crit\u00E9rio de compet\u00EAncia, em aplica\u00E7\u00E3o anal\u00F3gica do art. 303, par\u00E1grafo \u00FAnico, do CNN. A pr\u00E1tica do ato exige observ\u00E2ncia das solenidades do art. 1.864 do C\u00F3digo Civil, em especial quanto \u00E0 presen\u00E7a e \u00E0 identifica\u00E7\u00E3o das testemunhas instrument\u00E1rias na videoconfer\u00EAncia notarial.")),
                 React.createElement("div", { className: "mt-8 pt-6 border-t border-stone-300 flex flex-col md:flex-row md:items-start md:justify-between gap-2 text-xs text-slate-500 pn-footer-final" },
                     React.createElement("div", { className: "pn-footer-links" },
                         React.createElement("a", { href: "https://portalnotarial.com.br/", className: "text-orange-700 hover:text-orange-900 transition" }, "Home"),
