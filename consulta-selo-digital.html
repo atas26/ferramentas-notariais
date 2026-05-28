@@ -145,7 +145,7 @@
   }
   .confronto.visivel { display: block; }
   .confronto h2 { font-size: .97rem; margin: 0 0 6px; color: var(--texto); }
-  .confronto p { margin: 0; }
+  .confronto p { margin: 0; white-space: pre-line; }
   .confronto.neutro { background: #f4f7fc; color: var(--suave); border: 1px solid var(--linha); }
   .confronto.compativel { background: var(--ok-fundo); color: var(--ok); border: 1px solid #cdebd8; }
   .confronto.alerta { background: var(--aviso-fundo); color: var(--aviso); border: 1px solid var(--aviso-linha); }
@@ -374,7 +374,7 @@
         <option value="traslado">Traslado de ato notarial</option>
         <option value="outro">Outro documento com Selo Digital</option>
       </select>
-      <p>O confronto auxiliar de iniciais e CPF/CNPJ somente é tentado para traslado, quando os dados puderem ser extraídos com segurança.</p>
+      <p>A conferência auxiliar de CPF/CNPJ e iniciais somente é tentado para traslado, quando a pessoa correspondente puder ser localizada com segurança.</p>
     </div>
 
     <label class="drop" id="drop" for="arquivo">
@@ -392,8 +392,8 @@
     </div>
     <div class="mensagem" id="mensagem" role="alert" aria-live="polite"></div>
 
-    <section class="confronto neutro" id="confronto" aria-label="Confronto auxiliar dos dados">
-      <h2>Confronto auxiliar</h2>
+    <section class="confronto neutro" id="confronto" aria-label="Conferência auxiliar dos dados">
+      <h2>Conferência auxiliar</h2>
       <p id="confrontoTexto"></p>
     </section>
 
@@ -421,7 +421,7 @@
 
     <div class="informacoes">
       <p>A consulta utiliza exclusivamente a URL oficial contida no QR Code do documento. A ferramenta não preenche nem contorna CAPTCHA.</p>
-      <p>Nos traslados, a conferência de iniciais e CPF/CNPJ é auxiliar e somente será exibida quando houver extração segura dos dados. Em certidões, esse confronto não é aplicado, pois os dados do selo podem corresponder ao solicitante da emissão.</p>
+      <p>Nos traslados, a conferência de iniciais e CPF/CNPJ é auxiliar e somente será exibida quando houver extração segura dos dados. Em certidões, essa conferência não é aplicada, pois os dados do selo podem corresponder ao solicitante da emissão.</p>
       <p>Quando o portal do TJSP exigir CAPTCHA, a ferramenta apresenta o selo identificado e abre a consulta oficial para conclusão manual pelo usuário.</p>
       <p>O arquivo é processado para esta conferência e não é mantido em armazenamento permanente pela aplicação. O resultado deve ser conferido no contexto do ato apresentado.</p>
     </div>
