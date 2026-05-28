@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conferência do Selo Digital TJSP</title>
+<meta name="description" content="Ferramenta para conferência do Selo Digital TJSP a partir do QR Code de certidão em PDF ou imagem, com acesso à consulta oficial do Tribunal de Justiça de São Paulo.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://portalnotarial.com.br/consulta-selo-digital.html">
+<meta name="google-adsense-account" content="ca-pub-1578115877344777">
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777"
+     crossorigin="anonymous"></script>
+
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TTD149ZWLC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TTD149ZWLC');
+</script>
+
+<style>
+  :root {
+    --azul: #0b5fff;
+    --azul-escuro: #0748c9;
+    --texto: #17202c;
+    --suave: #5d6978;
+    --linha: #dce3ed;
+    --fundo: #f5f7fb;
+    --painel: #ffffff;
+    --erro: #a52d36;
+    --erro-fundo: #fff3f4;
+    --ok: #146c43;
+    --ok-fundo: #f1fbf5;
+    --aviso: #774b00;
+    --aviso-fundo: #fff9eb;
+    --aviso-linha: #f0d493;
+    --raio: 14px;
+    --sombra: 0 2px 4px rgba(15, 23, 42, .04), 0 12px 30px rgba(15, 23, 42, .06);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--texto);
+    background: var(--fundo);
+    line-height: 1.5;
+  }
+  .pagina { max-width: 920px; margin: 0 auto; padding: 38px 20px 58px; }
+  .cabecalho h1 { font-size: 1.65rem; line-height: 1.2; margin: 0 0 9px; letter-spacing: -.02em; }
+  .cabecalho p { margin: 0; max-width: 720px; color: var(--suave); }
+  .painel {
+    background: var(--painel);
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    padding: 24px;
+    margin-top: 24px;
+  }
+  .drop {
+    border: 2px dashed #bfd0ec;
+    background: #fbfcff;
+    border-radius: 12px;
+    min-height: 172px;
+    padding: 34px 22px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .drop:hover, .drop.ativo { background: #f1f6ff; border-color: var(--azul); }
+  .drop strong { display: block; color: var(--azul); font-size: 1.02rem; margin-bottom: 5px; }
+  .drop span { display: block; color: var(--suave); font-size: .9rem; }
+  .drop small { display: block; color: var(--suave); margin-top: 13px; font-size: .8rem; }
+  input[type="file"] { display: none; }
+  .campo-tipo { margin-bottom: 18px; }
+  .campo-tipo label {
+    display: block; margin-bottom: 7px; color: var(--texto);
+    font-size: .9rem; font-weight: 600;
+  }
+  .campo-tipo select {
+    width: 100%; max-width: 400px; border: 1px solid var(--linha);
+    border-radius: 9px; background: #fff; color: var(--texto);
+    padding: 10px 12px; font: inherit; font-size: .92rem;
+  }
+  .campo-tipo p {
+    margin: 7px 0 0; color: var(--suave); font-size: .82rem;
+  }
+  .status, .mensagem {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 16px;
+    font-size: .92rem;
+  }
+  .status { background: #f4f7fc; color: var(--suave); }
+  .status.visivel { display: flex; }
+  .mensagem.erro { display: block; color: var(--erro); background: var(--erro-fundo); border: 1px solid #f0cbd0; }
+  .mensagem.ok { display: block; color: var(--ok); background: var(--ok-fundo); border: 1px solid #cdebd8; }
+  .mensagem.aviso { display: block; color: var(--aviso); background: var(--aviso-fundo); border: 1px solid var(--aviso-linha); }
+  .spinner {
+    width: 16px; height: 16px; border: 2px solid #d1dbe9;
+    border-top-color: var(--azul); border-radius: 50%;
+    animation: giro .75s linear infinite; flex-shrink: 0;
+  }
+  @keyframes giro { to { transform: rotate(360deg); } }
+  .acoes { display: none; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  .acoes.visivel { display: flex; }
+  .botao {
+    font: inherit; font-size: .92rem; font-weight: 600;
+    border: 1px solid var(--azul); border-radius: 9px;
+    padding: 10px 17px; text-decoration: none; cursor: pointer;
+    background: var(--azul); color: #fff;
+  }
+  .botao:hover { background: var(--azul-escuro); border-color: var(--azul-escuro); }
+  .botao.secundario { background: #fff; color: var(--azul); }
+  .botao.secundario:hover { background: #f2f6ff; color: var(--azul-escuro); }
+  .consulta-manual {
+    display: none;
+    background: #fff;
+    border: 1px solid var(--aviso-linha);
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 14px;
+  }
+  .consulta-manual.visivel { display: block; }
+  .consulta-manual h2 { font-size: 1rem; line-height: 1.35; margin: 0 0 8px; }
+  .consulta-manual p { font-size: .9rem; color: var(--suave); margin: 0 0 12px; }
+  .consulta-manual .selo {
+    display: inline-flex; align-items: center; gap: 9px; color: var(--texto);
+    background: #f5f7fb; border: 1px solid var(--linha); border-radius: 8px;
+    padding: 8px 11px; margin: 0;
+  }
+  .consulta-manual code { font-size: .9rem; font-weight: 600; }
+  .feedback { min-height: 20px; color: var(--ok); font-size: .82rem; margin: 10px 0 0; }
+  .confronto {
+    display: none; border-radius: 10px; padding: 14px 15px; margin-top: 16px;
+    font-size: .9rem; line-height: 1.58;
+  }
+  .confronto.visivel { display: block; }
+  .confronto h2 { font-size: .97rem; margin: 0 0 6px; color: var(--texto); }
+  .confronto p { margin: 0; }
+  .confronto.neutro { background: #f4f7fc; color: var(--suave); border: 1px solid var(--linha); }
+  .confronto.compativel { background: var(--ok-fundo); color: var(--ok); border: 1px solid #cdebd8; }
+  .confronto.alerta { background: var(--aviso-fundo); color: var(--aviso); border: 1px solid var(--aviso-linha); }
+  iframe {
+    display: none; width: 100%; height: 620px; margin-top: 18px;
+    border: 1px solid var(--linha); border-radius: 10px; background: #fff;
+  }
+  iframe.visivel { display: block; }
+  .informacoes {
+    margin-top: 18px; padding-top: 17px; border-top: 1px solid var(--linha);
+    font-size: .84rem; color: var(--suave);
+  }
+  .informacoes p { margin: 0 0 8px; }
+  .informacoes p:last-child { margin-bottom: 0; }
+
+  .conteudo {
+    margin-top: 22px;
+    display: grid;
+    gap: 18px;
+  }
+  .bloco-conteudo {
+    background: var(--painel);
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    padding: 24px;
+  }
+  .selo-secao {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #cfe0ff;
+    border-radius: 999px;
+    background: #f2f6ff;
+    color: var(--azul-escuro);
+    padding: 5px 11px;
+    font-size: .73rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .bloco-conteudo h2 {
+    margin: 0 0 10px;
+    color: var(--texto);
+    font-size: 1.34rem;
+    line-height: 1.25;
+    letter-spacing: -.02em;
+  }
+  .bloco-conteudo > p {
+    margin: 0;
+    color: var(--suave);
+    font-size: .95rem;
+    line-height: 1.65;
+  }
+  .grade-conteudo {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 19px;
+  }
+  .cartao-conteudo {
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: #fbfcff;
+    padding: 16px;
+  }
+  .cartao-conteudo h3,
+  .fonte h3 {
+    margin: 0 0 7px;
+    color: var(--texto);
+    font-size: .94rem;
+    line-height: 1.38;
+  }
+  .cartao-conteudo p,
+  .fonte p {
+    margin: 0;
+    color: var(--suave);
+    font-size: .86rem;
+    line-height: 1.58;
+  }
+  .passos {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: passo;
+  }
+  .passos li {
+    counter-increment: passo;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+    align-items: start;
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: #fbfcff;
+    padding: 13px 14px;
+    color: var(--suave);
+    font-size: .88rem;
+    line-height: 1.55;
+  }
+  .passos li::before {
+    content: counter(passo);
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: #eef5ff;
+    color: var(--azul-escuro);
+    font-size: .85rem;
+    font-weight: 700;
+  }
+  .passos strong {
+    display: block;
+    color: var(--texto);
+    font-size: .92rem;
+    margin-bottom: 3px;
+  }
+  .fontes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .fonte {
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: #fbfcff;
+    padding: 16px;
+  }
+  .fonte a {
+    color: var(--azul);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .fonte a:hover { text-decoration: underline; }
+  .alerta-conteudo {
+    margin-top: 16px;
+    padding: 13px 14px;
+    border-left: 3px solid var(--azul);
+    border-radius: 0 10px 10px 0;
+    background: #f4f8ff;
+    color: var(--suave);
+    font-size: .87rem;
+    line-height: 1.6;
+  }
+  .faq {
+    display: grid;
+    gap: 9px;
+    margin-top: 17px;
+  }
+  .faq details {
+    border: 1px solid var(--linha);
+    border-radius: 11px;
+    background: #fbfcff;
+    overflow: hidden;
+  }
+  .faq summary {
+    cursor: pointer;
+    padding: 13px 14px;
+    color: var(--texto);
+    font-size: .9rem;
+    font-weight: 600;
+  }
+  .faq details p {
+    margin: 0;
+    padding: 0 14px 14px;
+    color: var(--suave);
+    font-size: .86rem;
+    line-height: 1.6;
+  }
+  .rodape {
+    border-top: 1px solid var(--linha);
+    background: var(--painel);
+    margin-top: 30px;
+    padding: 20px;
+    color: var(--suave);
+    font-size: .83rem;
+  }
+  .rodape-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+  }
+  .links-institucionais {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px 15px;
+  }
+  .links-institucionais a {
+    color: var(--suave);
+    text-decoration: none;
+  }
+  .links-institucionais a:hover { color: var(--azul); }
+
+  @media (max-width: 640px) {
+    .pagina { padding-top: 26px; }
+    .painel { padding: 16px; }
+    iframe { height: 480px; }
+    .botao { width: 100%; text-align: center; }
+    .bloco-conteudo { padding: 17px; }
+    .grade-conteudo, .fontes { grid-template-columns: 1fr; }
+    .rodape-inner { align-items: flex-start; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<main class="pagina">
+  <header class="cabecalho">
+    <h1>Conferência do Selo Digital TJSP</h1>
+    <p>Envie uma certidão em PDF ou imagem. A ferramenta lê o QR Code do documento e obtém o resultado da página oficial de consulta do Tribunal de Justiça de São Paulo.</p>
+  </header>
+
+  <section class="painel" aria-label="Envio da certidão">
+    <div class="campo-tipo">
+      <label for="tipoDocumento">Tipo de documento enviado</label>
+      <select id="tipoDocumento" name="tipo_documento">
+        <option value="certidao" selected>Certidão</option>
+        <option value="traslado">Traslado de ato notarial</option>
+        <option value="outro">Outro documento com Selo Digital</option>
+      </select>
+      <p>O confronto auxiliar de iniciais e CPF/CNPJ somente é tentado para traslado, quando os dados puderem ser extraídos com segurança.</p>
+    </div>
+
+    <label class="drop" id="drop" for="arquivo">
+      <span>
+        <strong>Selecionar certidão</strong>
+        Arraste o arquivo ou clique para enviar
+        <small>Formatos aceitos: PDF, PNG e JPG. Limite: 15 MB.</small>
+      </span>
+    </label>
+    <input id="arquivo" type="file" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg">
+
+    <div class="status" id="status" role="status" aria-live="polite">
+      <span class="spinner"></span>
+      <span id="statusTexto">Processando a certidão</span>
+    </div>
+    <div class="mensagem" id="mensagem" role="alert" aria-live="polite"></div>
+
+    <section class="confronto neutro" id="confronto" aria-label="Confronto auxiliar dos dados">
+      <h2>Confronto auxiliar</h2>
+      <p id="confrontoTexto"></p>
+    </section>
+
+    <section class="consulta-manual" id="consultaManual" aria-label="Consulta manual necessária">
+      <h2>Continuidade manual no portal oficial</h2>
+      <p id="orientacaoManual"></p>
+      <p class="selo">Selo identificado <code id="seloManual"></code></p>
+      <div class="acoes visivel">
+        <a class="botao" id="abrirConsultaOficial" target="_blank" rel="noopener noreferrer">Abrir consulta oficial com o selo preenchido</a>
+        <button class="botao secundario" id="copiarSelo" type="button">Copiar número do selo</button>
+      </div>
+      <p class="feedback" id="feedbackCopia" aria-live="polite"></p>
+    </section>
+
+    <div class="acoes" id="acoesPdf">
+      <a class="botao" id="baixar" download>Baixar PDF da consulta</a>
+      <a class="botao secundario" id="abrir" target="_blank" rel="noopener">Abrir PDF</a>
+    </div>
+
+    <div class="acoes" id="acoesNovaConsulta">
+      <button class="botao secundario" id="novaConsulta" type="button">Nova consulta</button>
+    </div>
+
+    <iframe id="visor" title="PDF da consulta oficial do Selo Digital TJSP"></iframe>
+
+    <div class="informacoes">
+      <p>A consulta utiliza exclusivamente a URL oficial contida no QR Code do documento. A ferramenta não preenche nem contorna CAPTCHA.</p>
+      <p>Nos traslados, a conferência de iniciais e CPF/CNPJ é auxiliar e somente será exibida quando houver extração segura dos dados. Em certidões, esse confronto não é aplicado, pois os dados do selo podem corresponder ao solicitante da emissão.</p>
+      <p>Quando o portal do TJSP exigir CAPTCHA, a ferramenta apresenta o selo identificado e abre a consulta oficial para conclusão manual pelo usuário.</p>
+      <p>O arquivo é processado para esta conferência e não é mantido em armazenamento permanente pela aplicação. O resultado deve ser conferido no contexto do ato apresentado.</p>
+    </div>
+  </section>
+
+  <section class="conteudo" aria-label="Informações da ferramenta">
+    <section class="bloco-conteudo" id="sobre-ferramenta" aria-labelledby="titulo-sobre-ferramenta">
+      <span class="selo-secao">Informações</span>
+      <h2 id="titulo-sobre-ferramenta">O que a ferramenta faz</h2>
+      <p>A ferramenta recebe uma certidão em PDF ou imagem, localiza o QR Code e direciona a conferência para a página oficial indicada no próprio código. Quando a consulta oficial puder ser concluída automaticamente, o resultado é apresentado em PDF. Quando houver CAPTCHA, a continuidade ocorre manualmente no portal oficial.</p>
+
+      <div class="grade-conteudo">
+        <article class="cartao-conteudo">
+          <h3>Quando usar</h3>
+          <p>Use para conferir certidões ou documentos notariais que contenham Selo Digital do Tribunal de Justiça de São Paulo com QR Code legível.</p>
+        </article>
+        <article class="cartao-conteudo">
+          <h3>Como interpretar o resultado</h3>
+          <p>O PDF gerado ou a consulta aberta no portal oficial registra o resultado localizado para o selo informado. Confira a correspondência com o documento enviado.</p>
+        </article>
+        <article class="cartao-conteudo">
+          <h3>Limites da ferramenta</h3>
+          <p>A ferramenta não valida o conteúdo jurídico do ato, não substitui a conferência humana e não resolve nem contorna CAPTCHA.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="bloco-conteudo" id="como-usar" aria-labelledby="titulo-como-usar">
+      <span class="selo-secao">Como usar</span>
+      <h2 id="titulo-como-usar">Etapas da conferência</h2>
+      <ol class="passos">
+        <li><div><strong>Selecione a certidão</strong>Envie o arquivo em PDF, PNG ou JPG, observado o limite indicado na área de envio.</div></li>
+        <li><div><strong>Aguarde a leitura do QR Code</strong>A aplicação identifica o selo e acessa somente a URL oficial contida no QR Code.</div></li>
+        <li><div><strong>Conclua a consulta</strong>Baixe o PDF do resultado quando disponível. Havendo CAPTCHA, abra a consulta oficial e faça a validação manual.</div></li>
+        <li><div><strong>Confira o documento</strong>Compare o selo, os dados apresentados na página oficial e a certidão utilizada na conferência.</div></li>
+      </ol>
+    </section>
+
+    <section class="bloco-conteudo" id="criterios-fontes" aria-labelledby="titulo-criterios-fontes">
+      <span class="selo-secao">Critérios e fontes</span>
+      <h2 id="titulo-criterios-fontes">Origem da consulta e cautelas</h2>
+      <p>A conferência utiliza como referência a página oficial correspondente ao endereço incorporado no QR Code do documento. A ferramenta não substitui a consulta ao órgão responsável nem atribui autenticidade a documento sem resultado compatível na fonte oficial.</p>
+      <div class="fontes">
+        <article class="fonte">
+          <h3>Fonte institucional</h3>
+          <p>Tribunal de Justiça do Estado de São Paulo, responsável pelo serviço de consulta do Selo Digital utilizado na conferência.</p>
+          <p><a href="https://www.tjsp.jus.br/" target="_blank" rel="noopener noreferrer">Acessar o TJSP</a></p>
+        </article>
+        <article class="fonte">
+          <h3>Tratamento do arquivo</h3>
+          <p>O arquivo enviado é processado para leitura do QR Code e para obtenção do resultado. A página informa que não há armazenamento permanente pela aplicação.</p>
+        </article>
+      </div>
+      <div class="alerta-conteudo">Em caso de divergência, ausência de resultado ou exigência de CAPTCHA, prevalece a conferência realizada diretamente no ambiente oficial do TJSP.</div>
+    </section>
+
+    <section class="bloco-conteudo" id="faq" aria-labelledby="titulo-faq">
+      <span class="selo-secao">FAQ</span>
+      <h2 id="titulo-faq">Perguntas frequentes</h2>
+      <div class="faq">
+        <details>
+          <summary>A ferramenta substitui a consulta no site oficial?</summary>
+          <p>Não. A ferramenta utiliza o endereço oficial contido no QR Code e facilita o acesso ao resultado. A fonte de conferência continua sendo a página oficial do TJSP.</p>
+        </details>
+        <details>
+          <summary>O que acontece quando o portal exigir CAPTCHA?</summary>
+          <p>O selo identificado é exibido e a página oficial é aberta para que o usuário conclua a verificação manualmente. Não há solução automática de CAPTCHA.</p>
+        </details>
+        <details>
+          <summary>O arquivo enviado permanece armazenado?</summary>
+          <p>A própria ferramenta informa que o arquivo é processado para a conferência e não é mantido em armazenamento permanente pela aplicação.</p>
+        </details>
+        <details>
+          <summary>O resultado confirma que o conteúdo jurídico do ato está correto?</summary>
+          <p>Não. A consulta auxilia na verificação do selo digital. A análise do conteúdo, da validade do ato e do documento apresentado depende de conferência própria.</p>
+        </details>
+      </div>
+    </section>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="rodape-inner">
+    <div>Portal Notarial | Ferramenta de conferência auxiliar</div>
+    <nav class="links-institucionais" aria-label="Links institucionais">
+      <a href="https://portalnotarial.com.br/">Início</a>
+      <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
+      <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+      <a href="https://portalnotarial.com.br/fontes-normativas.html">Fontes</a>
+      <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
+      <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
+      <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+const API_BASE = "https://consulta-selo-digital-tjsp.onrender.com";
+const LIMITE_BYTES = 15 * 1024 * 1024;
+const TIPOS = ["application/pdf", "image/png", "image/jpeg"];
+
+const arquivo = document.getElementById("arquivo");
+const tipoDocumento = document.getElementById("tipoDocumento");
+const drop = document.getElementById("drop");
+const statusBox = document.getElementById("status");
+const statusTexto = document.getElementById("statusTexto");
+const mensagem = document.getElementById("mensagem");
+const confronto = document.getElementById("confronto");
+const confrontoTexto = document.getElementById("confrontoTexto");
+const consultaManual = document.getElementById("consultaManual");
+const orientacaoManual = document.getElementById("orientacaoManual");
+const seloManual = document.getElementById("seloManual");
+const abrirConsultaOficial = document.getElementById("abrirConsultaOficial");
+const copiarSelo = document.getElementById("copiarSelo");
+const feedbackCopia = document.getElementById("feedbackCopia");
+const acoesPdf = document.getElementById("acoesPdf");
+const visor = document.getElementById("visor");
+const baixar = document.getElementById("baixar");
+const abrir = document.getElementById("abrir");
+const acoesNovaConsulta = document.getElementById("acoesNovaConsulta");
+const novaConsulta = document.getElementById("novaConsulta");
+let urlAnterior = null;
+
+function limparResultado() {
+  mensagem.className = "mensagem";
+  mensagem.textContent = "";
+  confronto.className = "confronto neutro";
+  confronto.classList.remove("visivel");
+  confrontoTexto.textContent = "";
+  consultaManual.classList.remove("visivel");
+  orientacaoManual.textContent = "";
+  seloManual.textContent = "";
+  abrirConsultaOficial.removeAttribute("href");
+  feedbackCopia.textContent = "";
+  acoesPdf.classList.remove("visivel");
+  acoesNovaConsulta.classList.remove("visivel");
+  visor.classList.remove("visivel");
+  visor.removeAttribute("src");
+  if (urlAnterior) {
+    URL.revokeObjectURL(urlAnterior);
+    urlAnterior = null;
+  }
+}
+
+function mostrarNovaConsulta() {
+  acoesNovaConsulta.classList.add("visivel");
+}
+
+function mostrarConfronto(dados) {
+  if (!dados || !dados.mensagem) return;
+  confrontoTexto.textContent = dados.mensagem;
+  const status = dados.status || "";
+  if (status.startsWith("compativel")) {
+    confronto.className = "confronto compativel visivel";
+  } else if (status.includes("divergencia") || status.includes("inconclusivo") || status.includes("indisponivel")) {
+    confronto.className = "confronto alerta visivel";
+  } else {
+    confronto.className = "confronto neutro visivel";
+  }
+}
+
+function confrontoDosCabecalhos(resposta) {
+  const status = resposta.headers.get("X-Confronto-Status");
+  const mensagemCodificada = resposta.headers.get("X-Confronto-Mensagem");
+  if (!status || !mensagemCodificada) return null;
+  let texto = mensagemCodificada;
+  try { texto = decodeURIComponent(mensagemCodificada); } catch (erro) { texto = mensagemCodificada; }
+  return { status: status, mensagem: texto };
+}
+
+function mostrarStatus(texto) {
+  statusTexto.textContent = texto;
+  statusBox.classList.add("visivel");
+}
+
+function ocultarStatus() {
+  statusBox.classList.remove("visivel");
+}
+
+function mostrarMensagem(texto, tipo) {
+  mensagem.textContent = texto;
+  mensagem.className = "mensagem " + tipo;
+}
+
+function validarArquivo(file) {
+  if (!file) return "Selecione um arquivo.";
+  if (file.size > LIMITE_BYTES) return "O arquivo excede o limite de 15 MB.";
+  const extensaoAceita = /\.(pdf|png|jpe?g)$/i.test(file.name);
+  if (!TIPOS.includes(file.type) && !extensaoAceita) {
+    return "Envie um arquivo PDF, PNG ou JPG.";
+  }
+  return "";
+}
+
+function mostrarConsultaManual(dados) {
+  mostrarMensagem(dados.mensagem, "aviso");
+  orientacaoManual.textContent = dados.orientacao;
+  seloManual.textContent = dados.selo || "Não identificado";
+  abrirConsultaOficial.href = dados.url_consulta_oficial;
+  consultaManual.classList.add("visivel");
+  if (dados.confronto) mostrarConfronto(dados.confronto);
+  mostrarNovaConsulta();
+}
+
+async function enviar(file) {
+  limparResultado();
+  const erroValidacao = validarArquivo(file);
+  if (erroValidacao) {
+    mostrarMensagem(erroValidacao, "erro");
+    mostrarNovaConsulta();
+    return;
+  }
+
+  mostrarStatus("Lendo o QR Code e abrindo a consulta oficial do TJSP.");
+  const dados = new FormData();
+  dados.append("arquivo", file);
+  dados.append("tipo_documento", tipoDocumento.value);
+
+  try {
+    const resposta = await fetch(API_BASE + "/api/consultar", {
+      method: "POST",
+      body: dados
+    });
+    const contentType = resposta.headers.get("Content-Type") || "";
+
+    if (contentType.includes("application/json")) {
+      const corpo = await resposta.json().catch(() => ({}));
+      ocultarStatus();
+      if (resposta.ok && corpo.status === "consulta_manual_necessaria") {
+        mostrarConsultaManual(corpo);
+        return;
+      }
+      mostrarMensagem(corpo.detail || "Não foi possível concluir a consulta.", "erro");
+      mostrarNovaConsulta();
+      return;
+    }
+
+    if (!resposta.ok) {
+      ocultarStatus();
+      mostrarMensagem("Não foi possível concluir a consulta.", "erro");
+      mostrarNovaConsulta();
+      return;
+    }
+
+    const blob = await resposta.blob();
+    urlAnterior = URL.createObjectURL(blob);
+    const disposicao = resposta.headers.get("Content-Disposition") || "";
+    const correspondencia = disposicao.match(/filename="([^"]+)"/i);
+    const nome = correspondencia ? correspondencia[1] : "consulta-selo-tjsp.pdf";
+
+    baixar.href = urlAnterior;
+    baixar.download = nome;
+    abrir.href = urlAnterior;
+    visor.src = urlAnterior;
+    mostrarConfronto(confrontoDosCabecalhos(resposta));
+
+    ocultarStatus();
+    mostrarMensagem("Consulta concluída. Confira o PDF gerado pela página oficial do TJSP.", "ok");
+    acoesPdf.classList.add("visivel");
+    acoesNovaConsulta.classList.add("visivel");
+    visor.classList.add("visivel");
+  } catch (erro) {
+    ocultarStatus();
+    mostrarMensagem("Não foi possível conectar ao servidor da ferramenta.", "erro");
+    mostrarNovaConsulta();
+  }
+}
+
+copiarSelo.addEventListener("click", async function () {
+  const selo = seloManual.textContent.trim();
+  if (!selo || selo === "Não identificado") return;
+  try {
+    await navigator.clipboard.writeText(selo);
+    feedbackCopia.textContent = "Número do selo copiado.";
+  } catch (erro) {
+    feedbackCopia.textContent = "Não foi possível copiar automaticamente. Selecione e copie o número exibido.";
+  }
+});
+
+novaConsulta.addEventListener("click", function () {
+  ocultarStatus();
+  limparResultado();
+  arquivo.value = "";
+  tipoDocumento.value = "certidao";
+  drop.scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
+arquivo.addEventListener("change", function () {
+  if (arquivo.files && arquivo.files[0]) enviar(arquivo.files[0]);
+});
+["dragenter", "dragover"].forEach(function (evento) {
+  drop.addEventListener(evento, function (e) {
+    e.preventDefault();
+    drop.classList.add("ativo");
+  });
+});
+["dragleave", "drop"].forEach(function (evento) {
+  drop.addEventListener(evento, function (e) {
+    e.preventDefault();
+    drop.classList.remove("ativo");
+  });
+});
+drop.addEventListener("drop", function (e) {
+  if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+    enviar(e.dataTransfer.files[0]);
+  }
+});
+</script>
+</body>
+</html>
