@@ -429,7 +429,7 @@
       <div class="confirmacao-ocr" id="confirmacaoOcr">
         <label for="seloOcrEditavel">Número do selo digital para conferência manual</label>
         <input id="seloOcrEditavel" type="text" maxlength="25" autocomplete="off" spellcheck="false" aria-describedby="ajudaSeloOcr">
-        <p class="ajuda-ocr" id="ajudaSeloOcr">Confira o código com o selo impresso no documento antes de prosseguir. O código atual deve conter exatamente 25 caracteres alfanuméricos.</p>
+        <p class="ajuda-ocr" id="ajudaSeloOcr">Confira o código com o selo impresso no documento antes de prosseguir. O Selo Digital deve conter 25 posições, natureza compatível e dígito verificador válido.</p>
         <label class="checagem-ocr"><input id="confirmarSeloOcr" type="checkbox"> Conferi o código com o selo impresso no documento.</label>
         <p class="feedback" id="feedbackConfirmacaoOcr" aria-live="polite"></p>
       </div>
@@ -884,9 +884,61 @@ async function pesquisarPagina(pagina, numero, escalas, robusto) {
   }
   return null;
 }
-function seloOcrValido(codigo) {
+const ALFABETO_LUHN_MOD_N = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const NATUREZAS_CERTIDAO = new Set(["1", "2", "3"]);
+function digitoVerificadorLuhnModN(corpo) {
+  let soma = 0;
+  let fator = 2;
+  const base = ALFABETO_LUHN_MOD_N.length;
+  const normalizado = String(corpo || "").toUpperCase();
+  for (let i = normalizado.length - 1; i >= 0; i -= 1) {
+    const codigo = ALFABETO_LUHN_MOD_N.indexOf(normalizado[i]);
+    if (codigo < 0) return null;
+    const produto = fator * codigo;
+    soma += Math.floor(produto / base) + (produto % base);
+    fator = fator === 2 ? 1 : 2;
+  }
+  return ALFABETO_LUHN_MOD_N[(base - (soma % base)) % base];
+}
+function validarEstruturaSeloDigital(codigo, tipoSelecionado = "") {
   const limpo = String(codigo || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
-  return /^[A-Z0-9]{25}$/.test(limpo) ? limpo : null;
+  if (!/^[A-Z0-9]{25}$/.test(limpo)) {
+    return { valido: false, codigo: null, mensagem: "Informe um código com exatamente 25 posições alfanuméricas." };
+  }
+  const natureza = limpo[6];
+  if (!/^[1-5]$/.test(natureza)) {
+    return { valido: false, codigo: null, mensagem: "O código informado não contém natureza de serventia válida na 7ª posição." };
+  }
+  if (!/^\d{2}$/.test(limpo.slice(22, 24))) {
+    return { valido: false, codigo: null, mensagem: "O código informado não contém ano válido nas posições 23 e 24." };
+  }
+  if (tipoSelecionado === "traslado" && natureza !== "1") {
+    return { valido: false, codigo: null, mensagem: "Para traslado de ato notarial, o selo deve indicar natureza de Tabelionato de Notas." };
+  }
+  if (tipoSelecionado === "certidao" && !NATUREZAS_CERTIDAO.has(natureza)) {
+    return { valido: false, codigo: null, mensagem: "Para a certidão selecionada, o selo deve indicar natureza notarial, civil ou imobiliária." };
+  }
+  const digitoEsperado = digitoVerificadorLuhnModN(limpo.slice(0, 24));
+  if (!digitoEsperado || digitoEsperado !== limpo[24]) {
+    return { valido: false, codigo: null, mensagem: "O dígito verificador do código informado não é válido." };
+  }
+  return {
+    valido: true,
+    codigo: limpo,
+    campos: {
+      cns: limpo.slice(0, 6),
+      natureza,
+      ato: limpo.slice(7, 9),
+      informacoesAto: limpo.slice(9, 22),
+      ano: limpo.slice(22, 24),
+      digitoVerificador: limpo[24]
+    },
+    mensagem: ""
+  };
+}
+function seloOcrValido(codigo, tipoSelecionado = (typeof tipoDocumento !== "undefined" ? tipoDocumento.value : "")) {
+  const resultado = validarEstruturaSeloDigital(codigo, tipoSelecionado);
+  return resultado.valido ? resultado.codigo : null;
 }
 function extrairSeloImpressoOcr(texto) {
   const normalizado = semAcentos(String(texto || "")).toUpperCase();
@@ -895,12 +947,13 @@ function extrairSeloImpressoOcr(texto) {
     if (!/SELO\s*DIGITAL/.test(linhas[i])) continue;
     const janela = linhas.slice(i, i + 2).join(" ");
     const aposRotulo = janela.replace(/^.*?SELO\s*DIGITAL\s*(?:(?:N|NO|NUMERO)\s*[º°O.]?\s*)?[:.\-]?\s*/i, "");
-    const candidatosContiguos = aposRotulo.match(/(?:^|[^A-Z0-9])([A-Z0-9]{25})(?![A-Z0-9])/g) || [];
+    const faixaProximaAoRotulo = aposRotulo.slice(0, 100);
+    const candidatosContiguos = faixaProximaAoRotulo.match(/(?:^|[^A-Z0-9])([A-Z0-9]{25})(?![A-Z0-9])/g) || [];
     for (const trecho of candidatosContiguos) {
       const candidato = seloOcrValido(trecho);
       if (candidato) return candidato;
     }
-    const codigoEspacado = aposRotulo.match(/(?:[A-Z0-9][ ._-]*){25}/);
+    const codigoEspacado = faixaProximaAoRotulo.match(/(?:[A-Z0-9][ ._-]*){25}/);
     if (codigoEspacado) {
       const candidato = seloOcrValido(codigoEspacado[0]);
       if (candidato) return candidato;
@@ -1069,9 +1122,10 @@ function normalizarSeloOcrDigitado(valor) {
   return String(valor || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 25);
 }
 function atualizarConfirmacaoSeloOcr() {
-  const candidato = seloOcrValido(seloOcrEditavel.value);
+  const validacao = validarEstruturaSeloDigital(seloOcrEditavel.value, tipoDocumento.value);
+  const candidato = validacao.valido ? validacao.codigo : null;
   const confirmado = Boolean(candidato) && confirmarSeloOcr.checked;
-  feedbackConfirmacaoOcr.textContent = candidato ? "" : "Informe e confira um código com exatamente 25 caracteres alfanuméricos.";
+  feedbackConfirmacaoOcr.textContent = candidato ? "" : validacao.mensagem;
   abrirConsultaOficial.classList.toggle("desabilitado", !confirmado);
   abrirConsultaOficial.setAttribute("aria-disabled", confirmado ? "false" : "true");
   if (confirmado) abrirConsultaOficial.href = CONSULTA_MANUAL_URL;
@@ -1084,7 +1138,7 @@ function mostrarSeloIdentificadoPorOcr(selo) {
   mostrarMensagem("Não foi possível decodificar automaticamente o QR Code desta digitalização.", "aviso");
   orientacaoManual.textContent = candidato
     ? "Foi localizado um possível número de selo por leitura da imagem. Confira o código com o selo impresso no documento antes de prosseguir para a consulta manual no portal oficial do TJSP."
-    : "O número do selo não foi localizado com segurança pela leitura automática. Digite o código de 25 caracteres impresso no documento e confira antes de prosseguir para a consulta manual no portal oficial do TJSP.";
+    : "Não foi possível localizar automaticamente um número de Selo Digital válido na imagem. Digite o código de 25 posições impresso ao lado do QR Code e confira-o no documento antes de prosseguir para a consulta manual no portal oficial do TJSP.";
   seloResumoManual.style.display = "none";
   confirmacaoOcr.classList.add("visivel");
   seloOcrEditavel.value = candidato || "";
