@@ -683,12 +683,21 @@ function nomesPossiveisAssociados(texto, posicaoDocumento) {
   }
   return encontrados;
 }
-function confrontarLocalmente(texto, iniciaisConsulta, cpfCnpjConsulta) {
+function valorDadoOficial(valor) {
+  return String(valor || "").trim() || "Não informado na consulta oficial.";
+}
+function informacoesAtoOficial(dadosAto) {
+  return `Confira manualmente os dados do selo em relação ao ato consultado.\n\nCartório: ${valorDadoOficial(dadosAto.cartorio)}\nTipo de ato: ${valorDadoOficial(dadosAto.tipoAto)}\nData: ${valorDadoOficial(dadosAto.dataAto)}`;
+}
+function formatarIniciaisResultado(iniciais) {
+  return String(iniciais || "").replace(/\.\s*/g, ". ").trim();
+}
+function confrontarLocalmente(texto, iniciaisConsulta, cpfCnpjConsulta, dadosAto = {}) {
   if (tipoDocumento.value !== "traslado") return null;
   const iniciaisOficiais = normalizarIniciais(iniciaisConsulta);
   const fragmento = fragmentoOficial(cpfCnpjConsulta);
   if (!texto || texto.trim().length < 10) return { status: "alerta", mensagem: "Conferência auxiliar\n\nNão foi possível confrontar automaticamente CPF/CNPJ e iniciais porque o traslado não contém texto pesquisável suficiente. Confira manualmente." };
-  if (!iniciaisOficiais || fragmento.length < 5) return { status: "alerta", mensagem: "Conferência auxiliar\n\nA consulta oficial não apresentou dados suficientes para o confronto automático de CPF/CNPJ e iniciais. Confira manualmente." };
+  if (!iniciaisOficiais || fragmento.length < 5) return { status: "alerta", mensagem: `Conferência auxiliar\n\nA consulta oficial não apresentou dados suficientes para o confronto automático do CPF/CNPJ com as iniciais do nome, provavelmente porque o cartório não comunicou estes dados.\n\n${informacoesAtoOficial(dadosAto)}` };
   const candidatos = documentosNoTexto(texto).filter((item) => item.digitos.includes(fragmento));
   if (candidatos.length === 0) return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: não compatível na conferência automática. O fragmento exibido na consulta oficial (${fragmento}) não foi localizado em CPF/CNPJ constante do traslado. Confira manualmente.` };
   if (candidatos.length > 1) return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: confronto inconclusivo. O fragmento exibido na consulta oficial (${fragmento}) corresponde a mais de um CPF/CNPJ localizado no traslado. Confira manualmente.` };
@@ -696,8 +705,8 @@ function confrontarLocalmente(texto, iniciaisConsulta, cpfCnpjConsulta) {
   const nomesComIniciais = nomes.filter((nome) => normalizarIniciais(calcularIniciais(nome)) === iniciaisOficiais);
   if (nomesComIniciais.length === 1) {
     const nome = nomesComIniciais[0];
-    const iniciaisCalculadas = calcularIniciais(nome);
-    return { status: "compativel", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: compatível. Fragmento conferido: ${fragmento}.\n\nNome e iniciais: compatíveis. ${nome} = ${iniciaisCalculadas}.\n\nEsta conferência é auxiliar e não substitui a conferência do traslado e do resultado oficial do TJSP.` };
+    const iniciaisCalculadas = formatarIniciaisResultado(calcularIniciais(nome));
+    return { status: "compativel", mensagem: `Conferência auxiliar\n\nCPF/CNPJ compatível. Fragmento conferido: ${fragmento}.\n\nNome compatível com as iniciais apresentadas: ${nome} = ${iniciaisCalculadas}\n\n${informacoesAtoOficial(dadosAto)}` };
   }
   if (nomes.length === 1) {
     const nome = nomes[0];
@@ -906,7 +915,16 @@ async function consultarResultadoOficial(url, textoTraslado) {
   const correspondencia = disposicao.match(/filename="([^"]+)"/i);
   baixar.href = urlAnterior; baixar.download = correspondencia ? correspondencia[1] : "consulta-selo-tjsp.pdf";
   abrir.href = urlAnterior; visor.src = urlAnterior;
-  const confrontoLocal = confrontarLocalmente(textoTraslado, lerCabecalho(resposta, "X-Consulta-Iniciais"), lerCabecalho(resposta, "X-Consulta-CPF-CNPJ"));
+  const confrontoLocal = confrontarLocalmente(
+    textoTraslado,
+    lerCabecalho(resposta, "X-Consulta-Iniciais"),
+    lerCabecalho(resposta, "X-Consulta-CPF-CNPJ"),
+    {
+      cartorio: lerCabecalho(resposta, "X-Consulta-Cartorio"),
+      tipoAto: lerCabecalho(resposta, "X-Consulta-Tipo-Ato"),
+      dataAto: lerCabecalho(resposta, "X-Consulta-Data-Ato")
+    }
+  );
   if (confrontoLocal) mostrarConfronto(confrontoLocal);
   ocultarStatus();
   mostrarMensagem("Consulta concluída. Confira o PDF gerado pela página oficial do TJSP.", "ok");
