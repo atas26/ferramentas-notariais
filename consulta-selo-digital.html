@@ -434,7 +434,7 @@
     <iframe id="visor" title="PDF da consulta oficial do Selo Digital TJSP"></iframe>
 
     <div class="informacoes">
-      <p>O documento é analisado localmente no navegador para localizar o QR Code. O servidor da ferramenta recebe somente a URL oficial extraída do código quando a geração do PDF da consulta for solicitada.</p>
+      <p>O documento é analisado localmente no navegador para localizar o QR Code. Se o código não puder ser decodificado, a ferramenta pode procurar localmente o número impresso do selo para orientar a consulta manual. O servidor da ferramenta recebe somente a URL oficial extraída do código quando a geração do PDF da consulta for solicitada.</p>
       <p>A ferramenta não preenche nem contorna CAPTCHA. Quando o portal do TJSP exigir CAPTCHA, a consulta oficial é aberta para conclusão manual pelo usuário.</p>
       <p>Nos traslados pesquisáveis, a conferência de CPF/CNPJ e iniciais também ocorre localmente. Em certidões do registro civil, imobiliárias ou notariais, essa conferência não é aplicada.</p>
     </div>
@@ -542,7 +542,10 @@ const TIPOS = ["application/pdf", "image/png", "image/jpeg"];
 const MAX_CANVAS_PIXELS = 35_000_000;
 const ESCALAS_RAPIDAS = [2, 3, 4];
 const ESCALAS_ROBUSTAS = [5, 6, 8];
-const MAX_PAGINAS_ROBUSTAS = 3;
+const MAX_PAGINAS_EXTREMIDADES = 3;
+const MAX_PAGINAS_OCR = 6;
+const CONSULTA_MANUAL_URL = "https://selodigital.tjsp.jus.br/consulta";
+const TESSERACT_CDN = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
 const ROTULOS_CONTEXTO = /^(?:(?:o|a|os|as)\s+)?(?:(?:comparece(?:m)?(?:\s+(?:neste|no)\s+ato)?(?:\s+(?:na\s+qualidade\s+de|como))?\s+)?(?:outorgante|outorgado|mandante|mandat[aá]ri[oa]|comprador|compradora|vendedor|vendedora|transmitente|adquirente|interveniente|credor|devedor|representante|parte|s[oó]ci[oa])s?)(?:\s*[:\-–—]\s*|\s+)+/i;
 const PALAVRAS_NAO_NOME = new Set(["BRASILEIRO", "BRASILEIRA", "CASADO", "CASADA", "SOLTEIRO", "SOLTEIRA", "DIVORCIADO", "DIVORCIADA", "VIUVO", "VIUVA", "EMPRESARIO", "EMPRESARIA", "ADVOGADO", "ADVOGADA", "PORTADOR", "PORTADORA", "RESIDENTE", "DOMICILIADO", "DOMICILIADA", "NASCIDO", "NASCIDA", "INSCRITO", "INSCRITA", "CPF", "CNPJ", "RG", "CEDULA", "IDENTIDADE", "PROFISSAO", "ESTADO", "CIVIL", "COMPARECE", "COMPARECEM", "COMO", "QUALIDADE", "MANDANTE", "OUTORGANTE", "OUTORGADO", "PARTE", "REPRESENTANTE"]);
 
@@ -569,6 +572,7 @@ const acoesNovaConsulta = document.getElementById("acoesNovaConsulta");
 const novaConsulta = document.getElementById("novaConsulta");
 let urlAnterior = null;
 let barcodeDetector = null;
+let carregamentoTesseract = null;
 
 function atualizarTipoDocumento() {
   const tipo = tipoDocumento.value;
@@ -597,6 +601,7 @@ function limparResultado() {
   orientacaoManual.textContent = "";
   seloManual.textContent = "";
   abrirConsultaOficial.removeAttribute("href");
+  abrirConsultaOficial.textContent = "Abrir consulta oficial com o selo preenchido";
   feedbackCopia.textContent = "";
   acoesPdf.classList.remove("visivel");
   acoesNovaConsulta.classList.remove("visivel");
@@ -811,6 +816,21 @@ async function renderizarTiles(pagina, escala) {
   }
   return tiles;
 }
+
+function ordemPaginasPrioritarias(total) {
+  const limite = Math.min(MAX_PAGINAS_EXTREMIDADES, total);
+  const primeiras = Array.from({ length: limite }, (_, i) => i + 1);
+  const ultimas = Array.from({ length: limite }, (_, i) => total - i);
+  const ordem = tipoDocumento.value === "certidao" ? [...primeiras, ...ultimas] : [...ultimas, ...primeiras];
+  return Array.from(new Set(ordem.filter((numero) => numero >= 1 && numero <= total)));
+}
+function ordemPaginasDemais(total, prioritarias) {
+  const usadas = new Set(prioritarias);
+  const todas = tipoDocumento.value === "certidao"
+    ? Array.from({ length: total }, (_, i) => i + 1)
+    : Array.from({ length: total }, (_, i) => total - i);
+  return todas.filter((numero) => !usadas.has(numero));
+}
 async function pesquisarPagina(pagina, numero, escalas, robusto) {
   for (const escala of escalas) {
     mostrarStatus(`Lendo o QR Code localmente. Página ${numero}, ampliação ${escala}x.`);
@@ -831,12 +851,116 @@ async function pesquisarPagina(pagina, numero, escalas, robusto) {
   }
   return null;
 }
+function seloOcrValido(codigo) {
+  const limpo = String(codigo || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  return /^[A-Z0-9]{25}$/.test(limpo) || /^[A-Z0-9]{13}$/.test(limpo) ? limpo : null;
+}
+function extrairSeloImpressoOcr(texto) {
+  const normalizado = semAcentos(String(texto || "")).toUpperCase();
+  const linhas = normalizado.split(/\r?\n/).map((linha) => linha.replace(/\s+/g, " ").trim()).filter(Boolean);
+  for (let i = 0; i < linhas.length; i += 1) {
+    if (!/SELO\s*DIGITAL/.test(linhas[i])) continue;
+    const janela = linhas.slice(i, i + 3).join(" ");
+    const aposRotulo = janela.replace(/^.*?SELO\s*DIGITAL\s*(?:(?:N|NO|NUMERO)\s*[º°O.]?\s*)?[:.\-]?\s*/i, "");
+    const compacto = aposRotulo.replace(/[^A-Z0-9]/g, "");
+    for (const tamanho of [25, 13]) {
+      const candidato = seloOcrValido(compacto.slice(0, tamanho));
+      if (candidato) return candidato;
+    }
+  }
+  return null;
+}
+function carregarTesseract() {
+  if (window.Tesseract) return Promise.resolve(window.Tesseract);
+  if (carregamentoTesseract) return carregamentoTesseract;
+  carregamentoTesseract = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = TESSERACT_CDN;
+    script.crossOrigin = "anonymous";
+    script.onload = () => window.Tesseract ? resolve(window.Tesseract) : reject(new Error("OCR indisponível."));
+    script.onerror = () => reject(new Error("Não foi possível carregar o OCR local."));
+    document.head.appendChild(script);
+  });
+  return carregamentoTesseract;
+}
+async function criarWorkerOcr() {
+  const tesseract = await carregarTesseract();
+  return tesseract.createWorker("por");
+}
+function recortarCanvasOcr(origem, yInicial, proporcaoAltura) {
+  const canvas = document.createElement("canvas");
+  const y = Math.max(0, Math.floor(origem.height * yInicial));
+  const altura = Math.min(origem.height - y, Math.ceil(origem.height * proporcaoAltura));
+  canvas.width = origem.width;
+  canvas.height = altura;
+  canvas.getContext("2d", { willReadFrequently: true }).drawImage(origem, 0, y, origem.width, altura, 0, 0, origem.width, altura);
+  return canvas;
+}
+function regioesOcr(origem) {
+  return [
+    recortarCanvasOcr(origem, 0, 0.38),
+    recortarCanvasOcr(origem, 0.58, 0.42),
+    origem
+  ];
+}
+async function pesquisarSeloPorOcrCanvas(canvas, worker) {
+  const regioes = regioesOcr(canvas);
+  for (const regiao of regioes) {
+    const resultado = await worker.recognize(regiao);
+    const selo = extrairSeloImpressoOcr(resultado && resultado.data && resultado.data.text);
+    if (regiao !== canvas) liberarCanvas(regiao);
+    if (selo) return selo;
+    await pausarInterface();
+  }
+  return null;
+}
+async function localizarSeloPorOcrPdf(pdf, paginas) {
+  let worker = null;
+  try {
+    mostrarStatus("QR Code não decodificado. Preparando leitura local do número impresso do selo.");
+    worker = await criarWorkerOcr();
+    for (const numero of paginas.slice(0, MAX_PAGINAS_OCR)) {
+      mostrarStatus(`QR Code não decodificado. Procurando número impresso do selo localmente. Página ${numero}.`);
+      const canvas = await renderizarPagina(await pdf.getPage(numero), 3);
+      if (!canvas) continue;
+      const selo = await pesquisarSeloPorOcrCanvas(canvas, worker);
+      liberarCanvas(canvas);
+      if (selo) return selo;
+    }
+  } catch (erro) {
+    console.warn("OCR local de contingência indisponível.", erro);
+  } finally {
+    if (worker) await worker.terminate();
+  }
+  return null;
+}
+async function localizarSeloPorOcrImagem(bitmap) {
+  let worker = null;
+  try {
+    mostrarStatus("QR Code não decodificado. Procurando número impresso do selo localmente.");
+    worker = await criarWorkerOcr();
+    const escala = Math.min(3, Math.max(1, 2200 / Math.max(bitmap.width, 1)));
+    const largura = Math.ceil(bitmap.width * escala);
+    const altura = Math.ceil(bitmap.height * escala);
+    if (largura * altura > MAX_CANVAS_PIXELS) return null;
+    const canvas = document.createElement("canvas");
+    canvas.width = largura; canvas.height = altura;
+    canvas.getContext("2d", { willReadFrequently: true }).drawImage(bitmap, 0, 0, largura, altura);
+    const selo = await pesquisarSeloPorOcrCanvas(canvas, worker);
+    liberarCanvas(canvas);
+    return selo;
+  } catch (erro) {
+    console.warn("OCR local de contingência indisponível.", erro);
+    return null;
+  } finally {
+    if (worker) await worker.terminate();
+  }
+}
 async function lerPdfLocalmente(file) {
   const bytes = new Uint8Array(await file.arrayBuffer());
   const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
-  const paginas = Array.from({ length: pdf.numPages }, (_, i) => pdf.numPages - i);
-  const prioritarias = paginas.slice(0, Math.min(MAX_PAGINAS_ROBUSTAS, paginas.length));
-  const demais = paginas.slice(prioritarias.length);
+  const prioritarias = ordemPaginasPrioritarias(pdf.numPages);
+  const demais = ordemPaginasDemais(pdf.numPages, prioritarias);
   let textoTraslado = "";
   if (tipoDocumento.value === "traslado") {
     mostrarStatus("Extraindo localmente o texto pesquisável do traslado.");
@@ -848,17 +972,18 @@ async function lerPdfLocalmente(file) {
   }
   for (const numero of prioritarias) {
     const url = await pesquisarPagina(await pdf.getPage(numero), numero, ESCALAS_RAPIDAS, false);
-    if (url) return { url, textoTraslado };
+    if (url) return { url, textoTraslado, seloOcr: null };
   }
   for (const numero of demais) {
     const url = await pesquisarPagina(await pdf.getPage(numero), numero, [2, 3], false);
-    if (url) return { url, textoTraslado };
+    if (url) return { url, textoTraslado, seloOcr: null };
   }
   for (const numero of prioritarias) {
     const url = await pesquisarPagina(await pdf.getPage(numero), numero, ESCALAS_ROBUSTAS, true);
-    if (url) return { url, textoTraslado };
+    if (url) return { url, textoTraslado, seloOcr: null };
   }
-  return { url: null, textoTraslado };
+  const seloOcr = await localizarSeloPorOcrPdf(pdf, prioritarias);
+  return { url: null, textoTraslado, seloOcr };
 }
 async function lerImagemLocalmente(file) {
   const bitmap = await createImageBitmap(file);
@@ -871,11 +996,12 @@ async function lerImagemLocalmente(file) {
     canvas.getContext("2d", { willReadFrequently: true }).drawImage(bitmap, 0, 0, largura, altura);
     const url = await lerQrCanvas(canvas, escala >= 2);
     liberarCanvas(canvas);
-    if (url) { bitmap.close(); return { url, textoTraslado: "" }; }
+    if (url) { bitmap.close(); return { url, textoTraslado: "", seloOcr: null }; }
     await pausarInterface();
   }
+  const seloOcr = await localizarSeloPorOcrImagem(bitmap);
   bitmap.close();
-  return { url: null, textoTraslado: "" };
+  return { url: null, textoTraslado: "", seloOcr };
 }
 async function localizarQrLocalmente(file) {
   const ehPdf = file.type === "application/pdf" || /\.pdf$/i.test(file.name);
@@ -890,9 +1016,20 @@ function mostrarConsultaManual(dados) {
   orientacaoManual.textContent = dados.orientacao;
   seloManual.textContent = dados.selo || "Não identificado";
   abrirConsultaOficial.href = dados.url_consulta_oficial;
+  abrirConsultaOficial.textContent = dados.rotulo_botao || "Abrir consulta oficial com o selo preenchido";
   consultaManual.classList.add("visivel");
-  if (tipoDocumento.value === "traslado") mostrarConfronto({ status: "alerta", mensagem: "Conferência auxiliar\n\nA conferência de CPF/CNPJ e iniciais não foi realizada porque o TJSP exigiu consulta manual com CAPTCHA." });
+  if (!dados.ocr_contingencia && tipoDocumento.value === "traslado") mostrarConfronto({ status: "alerta", mensagem: "Conferência auxiliar\n\nA conferência de CPF/CNPJ e iniciais não foi realizada porque o TJSP exigiu consulta manual com CAPTCHA." });
   mostrarNovaConsulta();
+}
+function mostrarSeloIdentificadoPorOcr(selo) {
+  mostrarConsultaManual({
+    mensagem: "Não foi possível decodificar automaticamente o QR Code desta digitalização.",
+    orientacao: "Foi localizado um possível número de selo impresso no documento. Confira o número exibido e prossiga para a consulta manual no portal oficial do TJSP, informando o selo e o CAPTCHA apresentado.",
+    selo,
+    url_consulta_oficial: CONSULTA_MANUAL_URL,
+    rotulo_botao: "Abrir consulta oficial do TJSP",
+    ocr_contingencia: true
+  });
 }
 async function consultarResultadoOficial(url, textoTraslado) {
   mostrarStatus("QR Code localizado. Obtendo a consulta oficial do TJSP.");
@@ -938,7 +1075,9 @@ async function enviar(file) {
     mostrarStatus("Lendo localmente o QR Code. O arquivo não será enviado ao servidor da ferramenta.");
     const leitura = await localizarQrLocalmente(file);
     if (!leitura.url) {
-      ocultarStatus(); mostrarMensagem("Não foi possível ler o QR Code de forma automática. O documento pode estar com baixa qualidade de imagem, QR Code danificado ou sem código compatível. Confira manualmente no portal oficial do TJSP.", "erro"); mostrarNovaConsulta(); return;
+      ocultarStatus();
+      if (leitura.seloOcr) { mostrarSeloIdentificadoPorOcr(leitura.seloOcr); return; }
+      mostrarMensagem("Não foi possível ler o QR Code nem localizar automaticamente o número impresso do selo. O documento pode estar com baixa qualidade de imagem, QR Code danificado ou sem código compatível. Confira manualmente no portal oficial do TJSP.", "erro"); mostrarNovaConsulta(); return;
     }
     await consultarResultadoOficial(leitura.url, leitura.textoTraslado);
   } catch (erro) {
