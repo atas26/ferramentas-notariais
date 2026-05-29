@@ -1213,15 +1213,15 @@ function mostrarSeloIdentificadoPorOcr(leituraOcr) {
   orientacaoManual.textContent = candidato
     ? (analise.digitoVerificadorCorrigido
         ? "Foi localizado um possível número de selo por leitura focalizada da imagem. O último caractere foi ajustado pelo dígito verificador previsto na especificação do TJSP. Confira integralmente o código com o selo impresso no documento antes de prosseguir."
-        : "Foi localizado um possível número de selo por leitura focalizada da imagem. Confira integralmente o código com o selo impresso no documento antes de prosseguir para a consulta manual no portal oficial do TJSP.")
-    : "Não foi possível localizar automaticamente um número de Selo Digital válido na imagem. Digite o código de 25 posições impresso ao lado do QR Code e confira-o no documento antes de prosseguir para a consulta manual no portal oficial do TJSP.";
+        : "Foi localizado um possível número de selo por leitura focalizada da imagem. Confira integralmente o código com o selo impresso no documento antes de prosseguir. Ao clicar no botão de consulta, o selo será copiado para que você o cole no campo Selo da página oficial do TJSP e preencha o CAPTCHA.")
+    : "Não foi possível localizar automaticamente um número de Selo Digital válido na imagem. Digite o código de 25 posições impresso ao lado do QR Code e confira-o no documento antes de prosseguir. Ao clicar no botão de consulta, o selo será copiado para que você o cole no campo Selo da página oficial do TJSP e preencha o CAPTCHA.";
   seloResumoManual.style.display = "none";
   confirmacaoOcr.classList.add("visivel");
   seloOcrEditavel.value = candidato || "";
   confirmarSeloOcr.checked = false;
   feedbackCopia.textContent = "";
   consultaManual.classList.add("visivel");
-  abrirConsultaOficial.textContent = "Abrir consulta oficial do TJSP";
+  abrirConsultaOficial.textContent = "Copiar selo e abrir consulta oficial do TJSP";
   atualizarConfirmacaoSeloOcr();
   mostrarNovaConsulta();
 }
@@ -1285,14 +1285,30 @@ seloOcrEditavel.addEventListener("input", function () {
   atualizarConfirmacaoSeloOcr();
 });
 confirmarSeloOcr.addEventListener("change", atualizarConfirmacaoSeloOcr);
-abrirConsultaOficial.addEventListener("click", function (evento) {
-  if (fluxoOcrPendente && (!confirmarSeloOcr.checked || !seloOcrValido(seloOcrEditavel.value))) evento.preventDefault();
-});
-copiarSelo.addEventListener("click", async function () {
-  const selo = fluxoOcrPendente ? seloOcrValido(seloOcrEditavel.value) : seloManual.textContent.trim();
+function copiarSeloParaConsultaManual(selo) {
   if (!selo || selo === "Não identificado") return;
-  try { await navigator.clipboard.writeText(selo); feedbackCopia.textContent = "Número do selo copiado."; }
-  catch (erro) { feedbackCopia.textContent = "Não foi possível copiar automaticamente. Selecione e copie o número exibido."; }
+  if (!navigator.clipboard || !window.isSecureContext) {
+    feedbackCopia.textContent = "Não foi possível copiar automaticamente. Copie o número exibido e cole-o no campo Selo da página oficial do TJSP.";
+    return;
+  }
+  navigator.clipboard.writeText(selo).then(function () {
+    feedbackCopia.textContent = "Número do selo copiado. Na página oficial do TJSP, cole-o no campo Selo e preencha o CAPTCHA.";
+  }).catch(function () {
+    feedbackCopia.textContent = "Não foi possível copiar automaticamente. Copie o número exibido e cole-o no campo Selo da página oficial do TJSP.";
+  });
+}
+abrirConsultaOficial.addEventListener("click", function (evento) {
+  if (!fluxoOcrPendente) return;
+  const selo = seloOcrValido(seloOcrEditavel.value);
+  if (!confirmarSeloOcr.checked || !selo) {
+    evento.preventDefault();
+    return;
+  }
+  copiarSeloParaConsultaManual(selo);
+});
+copiarSelo.addEventListener("click", function () {
+  const selo = fluxoOcrPendente ? seloOcrValido(seloOcrEditavel.value) : seloManual.textContent.trim();
+  copiarSeloParaConsultaManual(selo);
 });
 novaConsulta.addEventListener("click", function () {
   ocultarStatus(); limparResultado(); arquivo.value = ""; tipoDocumento.value = ""; atualizarTipoDocumento(); tipoDocumento.scrollIntoView({ behavior: "smooth", block: "center" });
