@@ -905,6 +905,9 @@ function validarEstruturaSeloDigital(codigo, tipoSelecionado = "") {
   if (!/^[A-Z0-9]{25}$/.test(limpo)) {
     return { valido: false, codigo: null, mensagem: "Informe um código com exatamente 25 posições alfanuméricas." };
   }
+  if (!/^\d{6}$/.test(limpo.slice(0, 6))) {
+    return { valido: false, codigo: null, mensagem: "O código informado não contém CNS numérico válido nas seis primeiras posições." };
+  }
   const natureza = limpo[6];
   if (!/^[1-5]$/.test(natureza)) {
     return { valido: false, codigo: null, mensagem: "O código informado não contém natureza de serventia válida na 7ª posição." };
@@ -936,30 +939,65 @@ function validarEstruturaSeloDigital(codigo, tipoSelecionado = "") {
     mensagem: ""
   };
 }
+function estruturaBasicaSeloOcrValida(codigo, tipoSelecionado = "") {
+  const limpo = String(codigo || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  if (!/^[A-Z0-9]{25}$/.test(limpo)) return false;
+  if (!/^\d{6}$/.test(limpo.slice(0, 6))) return false;
+  const natureza = limpo[6];
+  if (!/^[1-5]$/.test(natureza)) return false;
+  if (!/^\d{2}$/.test(limpo.slice(22, 24))) return false;
+  if (tipoSelecionado === "traslado" && natureza !== "1") return false;
+  if (tipoSelecionado === "certidao" && !NATUREZAS_CERTIDAO.has(natureza)) return false;
+  return true;
+}
+function analisarCandidatoSeloOcr(codigo, tipoSelecionado = (typeof tipoDocumento !== "undefined" ? tipoDocumento.value : "")) {
+  const limpo = String(codigo || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  const validacaoExata = validarEstruturaSeloDigital(limpo, tipoSelecionado);
+  if (validacaoExata.valido) {
+    return { codigo: validacaoExata.codigo, codigoLido: validacaoExata.codigo, digitoVerificadorCorrigido: false };
+  }
+  if (!estruturaBasicaSeloOcrValida(limpo, tipoSelecionado)) return null;
+  const digitoEsperado = digitoVerificadorLuhnModN(limpo.slice(0, 24));
+  if (!digitoEsperado) return null;
+  const corrigido = limpo.slice(0, 24) + digitoEsperado;
+  const validacaoCorrigida = validarEstruturaSeloDigital(corrigido, tipoSelecionado);
+  if (!validacaoCorrigida.valido) return null;
+  return { codigo: corrigido, codigoLido: limpo, digitoVerificadorCorrigido: corrigido !== limpo };
+}
 function seloOcrValido(codigo, tipoSelecionado = (typeof tipoDocumento !== "undefined" ? tipoDocumento.value : "")) {
   const resultado = validarEstruturaSeloDigital(codigo, tipoSelecionado);
   return resultado.valido ? resultado.codigo : null;
 }
-function extrairSeloImpressoOcr(texto) {
+function encontrarCandidatoSeloEmTrecho(texto, permitirSemRotulo = false) {
   const normalizado = semAcentos(String(texto || "")).toUpperCase();
+  const fontes = [];
   const linhas = normalizado.split(/\r?\n/).map((linha) => linha.replace(/\s+/g, " ").trim()).filter(Boolean);
   for (let i = 0; i < linhas.length; i += 1) {
     if (!/SELO\s*DIGITAL/.test(linhas[i])) continue;
     const janela = linhas.slice(i, i + 2).join(" ");
-    const aposRotulo = janela.replace(/^.*?SELO\s*DIGITAL\s*(?:(?:N|NO|NUMERO)\s*[º°O.]?\s*)?[:.\-]?\s*/i, "");
-    const faixaProximaAoRotulo = aposRotulo.slice(0, 100);
-    const candidatosContiguos = faixaProximaAoRotulo.match(/(?:^|[^A-Z0-9])([A-Z0-9]{25})(?![A-Z0-9])/g) || [];
-    for (const trecho of candidatosContiguos) {
-      const candidato = seloOcrValido(trecho);
-      if (candidato) return candidato;
-    }
-    const codigoEspacado = faixaProximaAoRotulo.match(/(?:[A-Z0-9][ ._-]*){25}/);
-    if (codigoEspacado) {
-      const candidato = seloOcrValido(codigoEspacado[0]);
-      if (candidato) return candidato;
+    fontes.push(janela.replace(/^.*?SELO\s*DIGITAL\s*(?:(?:N|NO|NUMERO)\s*[º°O.]?\s*)?[:.\-]?\s*/i, "").slice(0, 120));
+  }
+  if (permitirSemRotulo) fontes.push(normalizado.slice(0, 220));
+  for (const fonte of fontes) {
+    const tokens = fonte.match(/[A-Z0-9]+/g) || [];
+    for (let inicio = 0; inicio < tokens.length; inicio += 1) {
+      let candidato = "";
+      for (let fim = inicio; fim < tokens.length && candidato.length <= 25; fim += 1) {
+        candidato += tokens[fim];
+        if (candidato.length === 25) {
+          const analisado = analisarCandidatoSeloOcr(candidato);
+          if (analisado) return analisado;
+        }
+      }
     }
   }
   return null;
+}
+function extrairSeloImpressoOcr(texto) {
+  return encontrarCandidatoSeloEmTrecho(texto, false);
+}
+function extrairSeloEmRegiaoFocalizadaOcr(texto) {
+  return encontrarCandidatoSeloEmTrecho(texto, true);
 }
 function carregarTesseract() {
   if (window.Tesseract) return Promise.resolve(window.Tesseract);
@@ -976,7 +1014,11 @@ function carregarTesseract() {
 }
 async function criarWorkerOcr() {
   const tesseract = await carregarTesseract();
-  return tesseract.createWorker("por");
+  const worker = await tesseract.createWorker("por");
+  if (worker.setParameters) {
+    await worker.setParameters({ preserve_interword_spaces: "1", tessedit_pageseg_mode: "6" });
+  }
+  return worker;
 }
 function recortarCanvasOcr(origem, yInicial, proporcaoAltura) {
   const canvas = document.createElement("canvas");
@@ -987,7 +1029,30 @@ function recortarCanvasOcr(origem, yInicial, proporcaoAltura) {
   canvas.getContext("2d", { willReadFrequently: true }).drawImage(origem, 0, y, origem.width, altura, 0, 0, origem.width, altura);
   return canvas;
 }
-function regioesOcr(origem) {
+function recortarCanvasOcrRetangular(origem, xInicial, yInicial, proporcaoLargura, proporcaoAltura, ampliacao = 1) {
+  const x = Math.max(0, Math.floor(origem.width * xInicial));
+  const y = Math.max(0, Math.floor(origem.height * yInicial));
+  const largura = Math.min(origem.width - x, Math.ceil(origem.width * proporcaoLargura));
+  const altura = Math.min(origem.height - y, Math.ceil(origem.height * proporcaoAltura));
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.max(1, Math.ceil(largura * ampliacao));
+  canvas.height = Math.max(1, Math.ceil(altura * ampliacao));
+  canvas.getContext("2d", { willReadFrequently: true }).drawImage(origem, x, y, largura, altura, 0, 0, canvas.width, canvas.height);
+  return canvas;
+}
+function regioesOcrFocalizadas(origem) {
+  if (tipoDocumento.value === "certidao") {
+    return [
+      recortarCanvasOcrRetangular(origem, 0.01, 0.015, 0.83, 0.13, 1.7),
+      recortarCanvasOcrRetangular(origem, 0, 0, 1, 0.20, 1.25)
+    ];
+  }
+  return [
+    recortarCanvasOcrRetangular(origem, 0, 0, 1, 0.22, 1.25),
+    recortarCanvasOcrRetangular(origem, 0, 0.72, 1, 0.28, 1.25)
+  ];
+}
+function regioesOcrGenericas(origem) {
   return [
     recortarCanvasOcr(origem, 0, 0.38),
     recortarCanvasOcr(origem, 0.58, 0.42),
@@ -995,7 +1060,15 @@ function regioesOcr(origem) {
   ];
 }
 async function pesquisarSeloPorOcrCanvas(canvas, worker) {
-  const regioes = regioesOcr(canvas);
+  const focadas = regioesOcrFocalizadas(canvas);
+  for (const regiao of focadas) {
+    const resultado = await worker.recognize(regiao);
+    const selo = extrairSeloEmRegiaoFocalizadaOcr(resultado && resultado.data && resultado.data.text);
+    liberarCanvas(regiao);
+    if (selo) return selo;
+    await pausarInterface();
+  }
+  const regioes = regioesOcrGenericas(canvas);
   for (const regiao of regioes) {
     const resultado = await worker.recognize(regiao);
     const selo = extrairSeloImpressoOcr(resultado && resultado.data && resultado.data.text);
@@ -1008,11 +1081,11 @@ async function pesquisarSeloPorOcrCanvas(canvas, worker) {
 async function localizarSeloPorOcrPdf(pdf, paginas) {
   let worker = null;
   try {
-    mostrarStatus("QR Code não decodificado. Preparando leitura local do número impresso do selo.");
+    mostrarStatus("QR Code não decodificado. Fazendo leitura focalizada do número impresso do selo no próprio documento.");
     worker = await criarWorkerOcr();
     for (const numero of paginas.slice(0, MAX_PAGINAS_OCR)) {
-      mostrarStatus(`QR Code não decodificado. Procurando número impresso do selo localmente. Página ${numero}.`);
-      const canvas = await renderizarPagina(await pdf.getPage(numero), 3);
+      mostrarStatus(`QR Code não decodificado. Lendo localmente o campo impresso do selo. Página ${numero}.`);
+      const canvas = await renderizarPagina(await pdf.getPage(numero), 4);
       if (!canvas) continue;
       const selo = await pesquisarSeloPorOcrCanvas(canvas, worker);
       liberarCanvas(canvas);
@@ -1028,9 +1101,9 @@ async function localizarSeloPorOcrPdf(pdf, paginas) {
 async function localizarSeloPorOcrImagem(bitmap) {
   let worker = null;
   try {
-    mostrarStatus("QR Code não decodificado. Procurando número impresso do selo localmente.");
+    mostrarStatus("QR Code não decodificado. Fazendo leitura focalizada do número impresso do selo no próprio documento.");
     worker = await criarWorkerOcr();
-    const escala = Math.min(3, Math.max(1, 2200 / Math.max(bitmap.width, 1)));
+    const escala = Math.min(4, Math.max(1, 3000 / Math.max(bitmap.width, 1)));
     const largura = Math.ceil(bitmap.width * escala);
     const altura = Math.ceil(bitmap.height * escala);
     if (largura * altura > MAX_CANVAS_PIXELS) return null;
@@ -1132,12 +1205,15 @@ function atualizarConfirmacaoSeloOcr() {
   else abrirConsultaOficial.removeAttribute("href");
   copiarSelo.disabled = !confirmado;
 }
-function mostrarSeloIdentificadoPorOcr(selo) {
-  const candidato = seloOcrValido(selo);
+function mostrarSeloIdentificadoPorOcr(leituraOcr) {
+  const analise = leituraOcr && typeof leituraOcr === "object" ? leituraOcr : analisarCandidatoSeloOcr(leituraOcr || "");
+  const candidato = analise ? analise.codigo : null;
   fluxoOcrPendente = true;
-  mostrarMensagem("Não foi possível decodificar automaticamente o QR Code desta digitalização.", "aviso");
+  mostrarMensagem("A consulta oficial ainda não foi realizada porque o QR Code desta digitalização não pôde ser lido automaticamente.", "aviso");
   orientacaoManual.textContent = candidato
-    ? "Foi localizado um possível número de selo por leitura da imagem. Confira o código com o selo impresso no documento antes de prosseguir para a consulta manual no portal oficial do TJSP."
+    ? (analise.digitoVerificadorCorrigido
+        ? "Foi localizado um possível número de selo por leitura focalizada da imagem. O último caractere foi ajustado pelo dígito verificador previsto na especificação do TJSP. Confira integralmente o código com o selo impresso no documento antes de prosseguir."
+        : "Foi localizado um possível número de selo por leitura focalizada da imagem. Confira integralmente o código com o selo impresso no documento antes de prosseguir para a consulta manual no portal oficial do TJSP.")
     : "Não foi possível localizar automaticamente um número de Selo Digital válido na imagem. Digite o código de 25 posições impresso ao lado do QR Code e confira-o no documento antes de prosseguir para a consulta manual no portal oficial do TJSP.";
   seloResumoManual.style.display = "none";
   confirmacaoOcr.classList.add("visivel");
@@ -1194,7 +1270,7 @@ async function enviar(file) {
     const leitura = await localizarQrLocalmente(file);
     if (!leitura.url) {
       ocultarStatus();
-      mostrarSeloIdentificadoPorOcr(leitura.seloOcr || ""); return;
+      mostrarSeloIdentificadoPorOcr(leitura.seloOcr); return;
     }
     await consultarResultadoOficial(leitura.url, leitura.textoTraslado);
   } catch (erro) {
