@@ -147,6 +147,17 @@
     padding: 8px 11px; margin: 0;
   }
   .consulta-manual code { font-size: .9rem; font-weight: 600; }
+  .confirmacao-ocr { display: none; margin-top: 13px; }
+  .confirmacao-ocr.visivel { display: block; }
+  .confirmacao-ocr > label:first-child { display: block; color: var(--texto); font-size: .88rem; font-weight: 600; margin-bottom: 7px; }
+  .confirmacao-ocr input[type="text"] {
+    width: 100%; max-width: 360px; border: 1px solid var(--linha); border-radius: 8px;
+    padding: 9px 11px; font: inherit; font-size: .92rem; text-transform: uppercase;
+  }
+  .confirmacao-ocr .ajuda-ocr { margin: 8px 0 11px; color: var(--suave); font-size: .84rem; }
+  .checagem-ocr { display: flex; align-items: flex-start; gap: 8px; color: var(--texto); font-size: .87rem; }
+  .checagem-ocr input { margin-top: 3px; }
+  .botao.desabilitado, .botao:disabled { opacity: .52; cursor: not-allowed; pointer-events: none; }
   .feedback { min-height: 20px; color: var(--ok); font-size: .82rem; margin: 10px 0 0; }
   .confronto {
     display: none; border-radius: 10px; padding: 14px 15px; margin-top: 16px;
@@ -414,7 +425,14 @@
     <section class="consulta-manual" id="consultaManual" aria-label="Consulta manual necessária">
       <h2>Continuidade manual no portal oficial</h2>
       <p id="orientacaoManual"></p>
-      <p class="selo">Selo identificado <code id="seloManual"></code></p>
+      <p class="selo" id="seloResumoManual">Selo identificado pelo QR Code <code id="seloManual"></code></p>
+      <div class="confirmacao-ocr" id="confirmacaoOcr">
+        <label for="seloOcrEditavel">Número do selo digital para conferência manual</label>
+        <input id="seloOcrEditavel" type="text" maxlength="25" autocomplete="off" spellcheck="false" aria-describedby="ajudaSeloOcr">
+        <p class="ajuda-ocr" id="ajudaSeloOcr">Confira o código com o selo impresso no documento antes de prosseguir. O código atual deve conter exatamente 25 caracteres alfanuméricos.</p>
+        <label class="checagem-ocr"><input id="confirmarSeloOcr" type="checkbox"> Conferi o código com o selo impresso no documento.</label>
+        <p class="feedback" id="feedbackConfirmacaoOcr" aria-live="polite"></p>
+      </div>
       <div class="acoes visivel">
         <a class="botao" id="abrirConsultaOficial" target="_blank" rel="noopener noreferrer">Abrir consulta oficial com o selo preenchido</a>
         <button class="botao secundario" id="copiarSelo" type="button">Copiar número do selo</button>
@@ -560,7 +578,12 @@ const confronto = document.getElementById("confronto");
 const confrontoTexto = document.getElementById("confrontoTexto");
 const consultaManual = document.getElementById("consultaManual");
 const orientacaoManual = document.getElementById("orientacaoManual");
+const seloResumoManual = document.getElementById("seloResumoManual");
 const seloManual = document.getElementById("seloManual");
+const confirmacaoOcr = document.getElementById("confirmacaoOcr");
+const seloOcrEditavel = document.getElementById("seloOcrEditavel");
+const confirmarSeloOcr = document.getElementById("confirmarSeloOcr");
+const feedbackConfirmacaoOcr = document.getElementById("feedbackConfirmacaoOcr");
 const abrirConsultaOficial = document.getElementById("abrirConsultaOficial");
 const copiarSelo = document.getElementById("copiarSelo");
 const feedbackCopia = document.getElementById("feedbackCopia");
@@ -573,6 +596,7 @@ const novaConsulta = document.getElementById("novaConsulta");
 let urlAnterior = null;
 let barcodeDetector = null;
 let carregamentoTesseract = null;
+let fluxoOcrPendente = false;
 
 function atualizarTipoDocumento() {
   const tipo = tipoDocumento.value;
@@ -599,9 +623,18 @@ function limparResultado() {
   confrontoTexto.textContent = "";
   consultaManual.classList.remove("visivel");
   orientacaoManual.textContent = "";
+  seloResumoManual.style.display = "inline-flex";
   seloManual.textContent = "";
+  confirmacaoOcr.classList.remove("visivel");
+  seloOcrEditavel.value = "";
+  confirmarSeloOcr.checked = false;
+  feedbackConfirmacaoOcr.textContent = "";
+  fluxoOcrPendente = false;
   abrirConsultaOficial.removeAttribute("href");
+  abrirConsultaOficial.classList.remove("desabilitado");
+  abrirConsultaOficial.removeAttribute("aria-disabled");
   abrirConsultaOficial.textContent = "Abrir consulta oficial com o selo preenchido";
+  copiarSelo.disabled = false;
   feedbackCopia.textContent = "";
   acoesPdf.classList.remove("visivel");
   acoesNovaConsulta.classList.remove("visivel");
@@ -853,18 +886,23 @@ async function pesquisarPagina(pagina, numero, escalas, robusto) {
 }
 function seloOcrValido(codigo) {
   const limpo = String(codigo || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
-  return /^[A-Z0-9]{25}$/.test(limpo) || /^[A-Z0-9]{13}$/.test(limpo) ? limpo : null;
+  return /^[A-Z0-9]{25}$/.test(limpo) ? limpo : null;
 }
 function extrairSeloImpressoOcr(texto) {
   const normalizado = semAcentos(String(texto || "")).toUpperCase();
   const linhas = normalizado.split(/\r?\n/).map((linha) => linha.replace(/\s+/g, " ").trim()).filter(Boolean);
   for (let i = 0; i < linhas.length; i += 1) {
     if (!/SELO\s*DIGITAL/.test(linhas[i])) continue;
-    const janela = linhas.slice(i, i + 3).join(" ");
+    const janela = linhas.slice(i, i + 2).join(" ");
     const aposRotulo = janela.replace(/^.*?SELO\s*DIGITAL\s*(?:(?:N|NO|NUMERO)\s*[º°O.]?\s*)?[:.\-]?\s*/i, "");
-    const compacto = aposRotulo.replace(/[^A-Z0-9]/g, "");
-    for (const tamanho of [25, 13]) {
-      const candidato = seloOcrValido(compacto.slice(0, tamanho));
+    const candidatosContiguos = aposRotulo.match(/(?:^|[^A-Z0-9])([A-Z0-9]{25})(?![A-Z0-9])/g) || [];
+    for (const trecho of candidatosContiguos) {
+      const candidato = seloOcrValido(trecho);
+      if (candidato) return candidato;
+    }
+    const codigoEspacado = aposRotulo.match(/(?:[A-Z0-9][ ._-]*){25}/);
+    if (codigoEspacado) {
+      const candidato = seloOcrValido(codigoEspacado[0]);
       if (candidato) return candidato;
     }
   }
@@ -1012,24 +1050,50 @@ function lerCabecalho(resposta, nome) {
   try { return decodeURIComponent(valor); } catch (erro) { return valor; }
 }
 function mostrarConsultaManual(dados) {
+  fluxoOcrPendente = false;
   mostrarMensagem(dados.mensagem, "aviso");
   orientacaoManual.textContent = dados.orientacao;
+  seloResumoManual.style.display = "inline-flex";
+  confirmacaoOcr.classList.remove("visivel");
   seloManual.textContent = dados.selo || "Não identificado";
   abrirConsultaOficial.href = dados.url_consulta_oficial;
+  abrirConsultaOficial.classList.remove("desabilitado");
+  abrirConsultaOficial.removeAttribute("aria-disabled");
   abrirConsultaOficial.textContent = dados.rotulo_botao || "Abrir consulta oficial com o selo preenchido";
+  copiarSelo.disabled = false;
   consultaManual.classList.add("visivel");
-  if (!dados.ocr_contingencia && tipoDocumento.value === "traslado") mostrarConfronto({ status: "alerta", mensagem: "Conferência auxiliar\n\nA conferência de CPF/CNPJ e iniciais não foi realizada porque o TJSP exigiu consulta manual com CAPTCHA." });
+  if (tipoDocumento.value === "traslado") mostrarConfronto({ status: "alerta", mensagem: "Conferência auxiliar\n\nA conferência de CPF/CNPJ e iniciais não foi realizada porque o TJSP exigiu consulta manual com CAPTCHA." });
   mostrarNovaConsulta();
 }
+function normalizarSeloOcrDigitado(valor) {
+  return String(valor || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 25);
+}
+function atualizarConfirmacaoSeloOcr() {
+  const candidato = seloOcrValido(seloOcrEditavel.value);
+  const confirmado = Boolean(candidato) && confirmarSeloOcr.checked;
+  feedbackConfirmacaoOcr.textContent = candidato ? "" : "Informe e confira um código com exatamente 25 caracteres alfanuméricos.";
+  abrirConsultaOficial.classList.toggle("desabilitado", !confirmado);
+  abrirConsultaOficial.setAttribute("aria-disabled", confirmado ? "false" : "true");
+  if (confirmado) abrirConsultaOficial.href = CONSULTA_MANUAL_URL;
+  else abrirConsultaOficial.removeAttribute("href");
+  copiarSelo.disabled = !confirmado;
+}
 function mostrarSeloIdentificadoPorOcr(selo) {
-  mostrarConsultaManual({
-    mensagem: "Não foi possível decodificar automaticamente o QR Code desta digitalização.",
-    orientacao: "Foi localizado um possível número de selo impresso no documento. Confira o número exibido e prossiga para a consulta manual no portal oficial do TJSP, informando o selo e o CAPTCHA apresentado.",
-    selo,
-    url_consulta_oficial: CONSULTA_MANUAL_URL,
-    rotulo_botao: "Abrir consulta oficial do TJSP",
-    ocr_contingencia: true
-  });
+  const candidato = seloOcrValido(selo);
+  fluxoOcrPendente = true;
+  mostrarMensagem("Não foi possível decodificar automaticamente o QR Code desta digitalização.", "aviso");
+  orientacaoManual.textContent = candidato
+    ? "Foi localizado um possível número de selo por leitura da imagem. Confira o código com o selo impresso no documento antes de prosseguir para a consulta manual no portal oficial do TJSP."
+    : "O número do selo não foi localizado com segurança pela leitura automática. Digite o código de 25 caracteres impresso no documento e confira antes de prosseguir para a consulta manual no portal oficial do TJSP.";
+  seloResumoManual.style.display = "none";
+  confirmacaoOcr.classList.add("visivel");
+  seloOcrEditavel.value = candidato || "";
+  confirmarSeloOcr.checked = false;
+  feedbackCopia.textContent = "";
+  consultaManual.classList.add("visivel");
+  abrirConsultaOficial.textContent = "Abrir consulta oficial do TJSP";
+  atualizarConfirmacaoSeloOcr();
+  mostrarNovaConsulta();
 }
 async function consultarResultadoOficial(url, textoTraslado) {
   mostrarStatus("QR Code localizado. Obtendo a consulta oficial do TJSP.");
@@ -1076,8 +1140,7 @@ async function enviar(file) {
     const leitura = await localizarQrLocalmente(file);
     if (!leitura.url) {
       ocultarStatus();
-      if (leitura.seloOcr) { mostrarSeloIdentificadoPorOcr(leitura.seloOcr); return; }
-      mostrarMensagem("Não foi possível ler o QR Code nem localizar automaticamente o número impresso do selo. O documento pode estar com baixa qualidade de imagem, QR Code danificado ou sem código compatível. Confira manualmente no portal oficial do TJSP.", "erro"); mostrarNovaConsulta(); return;
+      mostrarSeloIdentificadoPorOcr(leitura.seloOcr || ""); return;
     }
     await consultarResultadoOficial(leitura.url, leitura.textoTraslado);
   } catch (erro) {
@@ -1086,8 +1149,18 @@ async function enviar(file) {
   }
 }
 
+seloOcrEditavel.addEventListener("input", function () {
+  seloOcrEditavel.value = normalizarSeloOcrDigitado(seloOcrEditavel.value);
+  confirmarSeloOcr.checked = false;
+  atualizarConfirmacaoSeloOcr();
+});
+confirmarSeloOcr.addEventListener("change", atualizarConfirmacaoSeloOcr);
+abrirConsultaOficial.addEventListener("click", function (evento) {
+  if (fluxoOcrPendente && (!confirmarSeloOcr.checked || !seloOcrValido(seloOcrEditavel.value))) evento.preventDefault();
+});
 copiarSelo.addEventListener("click", async function () {
-  const selo = seloManual.textContent.trim(); if (!selo || selo === "Não identificado") return;
+  const selo = fluxoOcrPendente ? seloOcrValido(seloOcrEditavel.value) : seloManual.textContent.trim();
+  if (!selo || selo === "Não identificado") return;
   try { await navigator.clipboard.writeText(selo); feedbackCopia.textContent = "Número do selo copiado."; }
   catch (erro) { feedbackCopia.textContent = "Não foi possível copiar automaticamente. Selecione e copie o número exibido."; }
 });
