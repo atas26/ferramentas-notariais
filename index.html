@@ -1314,6 +1314,139 @@
       background: #f4f6fa;
     }
 
+
+    /* Apoio recorrente: bloco institucional entre as ferramentas e as informações */
+    .support-callout {
+      position: relative;
+      z-index: 3;
+      max-width: 1440px;
+      margin: 54px auto 72px;
+      padding: 0 22px;
+    }
+
+    .support-callout-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(296px, 382px);
+      align-items: stretch;
+      gap: 24px;
+      padding: 28px;
+      border: 1px solid rgba(11,23,39,0.10);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 86% 10%, rgba(11, 95, 255, 0.09), transparent 34%),
+        radial-gradient(circle at 8% 100%, rgba(0, 144, 157, 0.06), transparent 32%),
+        linear-gradient(145deg, #ffffff, #f7f9fc);
+      box-shadow: 0 16px 40px rgba(11,23,39,0.06);
+      overflow: hidden;
+    }
+
+    .support-callout-copy {
+      padding: 8px 6px 8px 8px;
+    }
+
+    .support-callout-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 13px;
+      color: var(--texto-fraco);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .support-callout-eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--verde);
+    }
+
+    .support-callout-copy h2 {
+      margin: 0;
+      max-width: 720px;
+      color: var(--texto);
+      font-size: clamp(26px, 3vw, 40px);
+      line-height: 1.04;
+      letter-spacing: -0.05em;
+    }
+
+    .support-callout-copy p {
+      max-width: 760px;
+      margin: 15px 0 0;
+      color: var(--texto-suave);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .support-monthly {
+      padding: 22px;
+      border: 1px solid rgba(11, 95, 255, 0.14);
+      border-radius: 22px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 8px 20px rgba(11,23,39,0.035);
+    }
+
+    .support-monthly-label {
+      display: block;
+      color: var(--texto-fraco);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .support-monthly-price {
+      margin: 7px 0 0;
+      color: var(--texto);
+      font-size: 38px;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      font-weight: 800;
+    }
+
+    .support-monthly-price small {
+      color: var(--texto-suave);
+      font-size: 14px;
+      letter-spacing: 0;
+      font-weight: 700;
+    }
+
+    .support-monthly-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 13px 16px;
+      border-radius: 14px;
+      background: var(--azul);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 800;
+      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .support-monthly-button:hover {
+      background: rgb(0, 81, 225);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(11, 95, 255, 0.18);
+    }
+
+    .support-monthly-note {
+      margin: 0;
+      color: var(--texto-fraco);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
     @media (max-width: 1380px) {
       .cards {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1459,6 +1592,22 @@
       .content-section {
         padding: 0 16px 52px;
       }
+
+      .support-callout {
+        padding: 0 16px;
+        margin: 34px auto 52px;
+      }
+
+      .support-callout-panel {
+        grid-template-columns: 1fr;
+        padding: 22px;
+        border-radius: 24px;
+      }
+
+      .support-callout-copy {
+        padding: 0;
+      }
+
 
       .section-panel {
         border-radius: 24px;
@@ -2471,6 +2620,33 @@
         </div>
       </section>
 
+      <section class="support-callout" aria-labelledby="titulo-apoio-recorrente">
+        <div class="support-callout-panel">
+          <div class="support-callout-copy">
+            <span class="support-callout-eyebrow">Apoie o projeto</span>
+            <h2 id="titulo-apoio-recorrente">Ajude a manter as ferramentas gratuitas</h2>
+            <p>
+              O apoio recorrente contribui para manutenção, atualização normativa e desenvolvimento de novas ferramentas do Portal Notarial. O acesso às ferramentas permanece gratuito.
+            </p>
+          </div>
+
+          <aside class="support-monthly" aria-label="Apoio recorrente mensal">
+            <div>
+              <span class="support-monthly-label">Apoio voluntário mensal</span>
+              <div class="support-monthly-price">R$ 4,99 <small>/ mês</small></div>
+            </div>
+
+            <a class="support-monthly-button" href="apoie.html" aria-label="Conhecer o apoio recorrente ao Portal Notarial">
+              Conheça o apoio recorrente <span aria-hidden="true">→</span>
+            </a>
+
+            <p class="support-monthly-note">
+              Cobrança recorrente, com cancelamento disponível ao apoiador.
+            </p>
+          </aside>
+        </div>
+      </section>
+
 
       <section class="content-section" id="informacoes" aria-labelledby="titulo-informacoes">
         <div class="section-panel">
@@ -2674,6 +2850,7 @@
           <a href="politica-de-privacidade.html">Privacidade</a>
           <a href="termos-de-uso.html">Termos</a>
           <a href="aviso-legal.html">Aviso legal</a>
+          <a href="apoie.html">Apoie o projeto</a>
         </div>
       </div>
     </footer>
