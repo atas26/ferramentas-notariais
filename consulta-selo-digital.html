@@ -149,6 +149,10 @@
   .consulta-manual code { font-size: .9rem; font-weight: 600; }
   .confirmacao-ocr { display: none; margin-top: 13px; }
   .confirmacao-ocr.visivel { display: block; }
+  .resgate-leitura { display: none; margin-top: 12px; padding-top: 2px; }
+  .resgate-leitura.visivel { display: block; }
+  .resgate-leitura strong { display: block; margin-bottom: 6px; color: var(--texto); font-size: .9rem; }
+  .resgate-leitura p { margin-bottom: 10px; }
   .confirmacao-ocr > label:first-child { display: block; color: var(--texto); font-size: .88rem; font-weight: 600; margin-bottom: 7px; }
   .confirmacao-ocr input[type="text"] {
     width: 100%; max-width: 360px; border: 1px solid var(--linha); border-radius: 8px;
@@ -433,9 +437,18 @@
         <label class="checagem-ocr"><input id="confirmarSeloOcr" type="checkbox"> Conferi o código com o selo impresso no documento.</label>
         <p class="feedback" id="feedbackConfirmacaoOcr" aria-live="polite"></p>
       </div>
-      <div class="acoes visivel">
+      <div class="acoes visivel" id="acoesConsultaManual">
         <a class="botao" id="abrirConsultaOficial" target="_blank" rel="noopener noreferrer">Abrir consulta oficial com o selo preenchido</a>
         <button class="botao secundario" id="copiarSelo" type="button">Copiar número do selo</button>
+      </div>
+      <div class="resgate-leitura" id="resgateLeitura">
+        <strong>Tentar nova leitura com imagem mais nítida</strong>
+        <p>Envie uma foto ou recorte aproximado da área que contém o QR Code e o número do selo. A imagem também será analisada somente no seu navegador.</p>
+        <div class="acoes visivel">
+          <button class="botao" id="tentarImagemAproximada" type="button">Selecionar imagem aproximada</button>
+          <a class="botao secundario" id="abrirPortalSemSelo" href="https://selodigital.tjsp.jus.br/consulta" target="_blank" rel="noopener noreferrer">Abrir portal oficial para consulta manual</a>
+        </div>
+        <input id="arquivoAproximado" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg">
       </div>
       <p class="feedback" id="feedbackCopia" aria-live="polite"></p>
     </section>
@@ -452,7 +465,7 @@
     <iframe id="visor" title="PDF da consulta oficial do Selo Digital TJSP"></iframe>
 
     <div class="informacoes">
-      <p>O documento é analisado localmente no navegador para localizar o QR Code. Se o código não puder ser decodificado, a ferramenta pode procurar localmente o número impresso do selo para orientar a consulta manual. O servidor da ferramenta recebe somente a URL oficial extraída do código quando a geração do PDF da consulta for solicitada.</p>
+      <p>O documento é analisado localmente no navegador para localizar o QR Code. Se a leitura falhar, a ferramenta tenta localizar localmente o número impresso do selo. Se nenhum número válido for obtido, poderá ser enviada uma imagem aproximada da área do QR Code e do selo, sem envio do documento ao servidor. O servidor da ferramenta recebe somente a URL oficial extraída do código quando a geração do PDF da consulta for solicitada.</p>
       <p>A ferramenta não preenche nem contorna CAPTCHA. Quando o portal do TJSP exigir CAPTCHA, a consulta oficial é aberta para conclusão manual pelo usuário.</p>
       <p>Nos traslados pesquisáveis, a conferência de CPF/CNPJ e iniciais também ocorre localmente. Em certidões do registro civil, imobiliárias ou notariais, essa conferência não é aplicada.</p>
     </div>
@@ -587,6 +600,10 @@ const feedbackConfirmacaoOcr = document.getElementById("feedbackConfirmacaoOcr")
 const abrirConsultaOficial = document.getElementById("abrirConsultaOficial");
 const copiarSelo = document.getElementById("copiarSelo");
 const feedbackCopia = document.getElementById("feedbackCopia");
+const acoesConsultaManual = document.getElementById("acoesConsultaManual");
+const resgateLeitura = document.getElementById("resgateLeitura");
+const tentarImagemAproximada = document.getElementById("tentarImagemAproximada");
+const arquivoAproximado = document.getElementById("arquivoAproximado");
 const acoesPdf = document.getElementById("acoesPdf");
 const visor = document.getElementById("visor");
 const baixar = document.getElementById("baixar");
@@ -597,6 +614,7 @@ let urlAnterior = null;
 let barcodeDetector = null;
 let carregamentoTesseract = null;
 let fluxoOcrPendente = false;
+let textoTrasladoPendente = "";
 
 function atualizarTipoDocumento() {
   const tipo = tipoDocumento.value;
@@ -626,10 +644,14 @@ function limparResultado() {
   seloResumoManual.style.display = "inline-flex";
   seloManual.textContent = "";
   confirmacaoOcr.classList.remove("visivel");
+  resgateLeitura.classList.remove("visivel");
+  acoesConsultaManual.classList.add("visivel");
+  arquivoAproximado.value = "";
   seloOcrEditavel.value = "";
   confirmarSeloOcr.checked = false;
   feedbackConfirmacaoOcr.textContent = "";
   fluxoOcrPendente = false;
+  textoTrasladoPendente = "";
   abrirConsultaOficial.removeAttribute("href");
   abrirConsultaOficial.classList.remove("desabilitado");
   abrirConsultaOficial.removeAttribute("aria-disabled");
@@ -1043,6 +1065,8 @@ function recortarCanvasOcrRetangular(origem, xInicial, yInicial, proporcaoLargur
 function regioesOcrFocalizadas(origem) {
   if (tipoDocumento.value === "certidao") {
     return [
+      recortarCanvasOcrRetangular(origem, 0.03, 0.018, 0.58, 0.070, 3.0),
+      recortarCanvasOcrRetangular(origem, 0.01, 0.010, 0.72, 0.105, 2.2),
       recortarCanvasOcrRetangular(origem, 0.01, 0.015, 0.83, 0.13, 1.7),
       recortarCanvasOcrRetangular(origem, 0, 0, 1, 0.20, 1.25)
     ];
@@ -1061,6 +1085,7 @@ function regioesOcrGenericas(origem) {
 }
 async function pesquisarSeloPorOcrCanvas(canvas, worker) {
   const focadas = regioesOcrFocalizadas(canvas);
+  if (worker.setParameters) await worker.setParameters({ preserve_interword_spaces: "1", tessedit_pageseg_mode: "7" });
   for (const regiao of focadas) {
     const resultado = await worker.recognize(regiao);
     const selo = extrairSeloEmRegiaoFocalizadaOcr(resultado && resultado.data && resultado.data.text);
@@ -1069,6 +1094,7 @@ async function pesquisarSeloPorOcrCanvas(canvas, worker) {
     await pausarInterface();
   }
   const regioes = regioesOcrGenericas(canvas);
+  if (worker.setParameters) await worker.setParameters({ preserve_interword_spaces: "1", tessedit_pageseg_mode: "6" });
   for (const regiao of regioes) {
     const resultado = await worker.recognize(regiao);
     const selo = extrairSeloImpressoOcr(resultado && resultado.data && resultado.data.text);
@@ -1181,6 +1207,8 @@ function mostrarConsultaManual(dados) {
   orientacaoManual.textContent = dados.orientacao;
   seloResumoManual.style.display = "inline-flex";
   confirmacaoOcr.classList.remove("visivel");
+  resgateLeitura.classList.remove("visivel");
+  acoesConsultaManual.classList.add("visivel");
   seloManual.textContent = dados.selo || "Não identificado";
   abrirConsultaOficial.href = dados.url_consulta_oficial;
   abrirConsultaOficial.classList.remove("desabilitado");
@@ -1208,19 +1236,29 @@ function atualizarConfirmacaoSeloOcr() {
 function mostrarSeloIdentificadoPorOcr(leituraOcr) {
   const analise = leituraOcr && typeof leituraOcr === "object" ? leituraOcr : analisarCandidatoSeloOcr(leituraOcr || "");
   const candidato = analise ? analise.codigo : null;
+  consultaManual.classList.add("visivel");
+  seloResumoManual.style.display = "none";
+  feedbackCopia.textContent = "";
+  if (!candidato) {
+    fluxoOcrPendente = false;
+    mostrarMensagem("Não foi possível ler automaticamente o QR Code nem identificar com segurança o número do Selo Digital nesta imagem.", "aviso");
+    orientacaoManual.textContent = "A ferramenta não solicitará a redigitação do selo. Tente novamente com uma foto ou recorte mais nítido da área que contém o QR Code e o número do selo. Caso não disponha de nova imagem, faça a consulta manual diretamente no portal oficial do TJSP.";
+    confirmacaoOcr.classList.remove("visivel");
+    resgateLeitura.classList.add("visivel");
+    acoesConsultaManual.classList.remove("visivel");
+    mostrarNovaConsulta();
+    return;
+  }
   fluxoOcrPendente = true;
   mostrarMensagem("A consulta oficial ainda não foi realizada porque o QR Code desta digitalização não pôde ser lido automaticamente.", "aviso");
-  orientacaoManual.textContent = candidato
-    ? (analise.digitoVerificadorCorrigido
-        ? "Foi localizado um possível número de selo por leitura focalizada da imagem. O último caractere foi ajustado pelo dígito verificador previsto na especificação do TJSP. Confira integralmente o código com o selo impresso no documento antes de prosseguir."
-        : "Foi localizado um possível número de selo por leitura focalizada da imagem. Confira integralmente o código com o selo impresso no documento antes de prosseguir. Ao clicar no botão de consulta, o selo será copiado para que você o cole no campo Selo da página oficial do TJSP e preencha o CAPTCHA.")
-    : "Não foi possível localizar automaticamente um número de Selo Digital válido na imagem. Digite o código de 25 posições impresso ao lado do QR Code e confira-o no documento antes de prosseguir. Ao clicar no botão de consulta, o selo será copiado para que você o cole no campo Selo da página oficial do TJSP e preencha o CAPTCHA.";
-  seloResumoManual.style.display = "none";
+  orientacaoManual.textContent = analise.digitoVerificadorCorrigido
+    ? "Foi localizado um possível número de selo por leitura focalizada da imagem. O último caractere foi ajustado pelo dígito verificador previsto na especificação do TJSP. Confira integralmente o código com o selo impresso no documento antes de prosseguir."
+    : "Foi localizado um possível número de selo por leitura focalizada da imagem. Confira integralmente o código com o selo impresso no documento antes de prosseguir. Ao clicar no botão de consulta, o selo será copiado para que você o cole no campo Selo da página oficial do TJSP e preencha o CAPTCHA.";
+  resgateLeitura.classList.remove("visivel");
+  acoesConsultaManual.classList.add("visivel");
   confirmacaoOcr.classList.add("visivel");
-  seloOcrEditavel.value = candidato || "";
+  seloOcrEditavel.value = candidato;
   confirmarSeloOcr.checked = false;
-  feedbackCopia.textContent = "";
-  consultaManual.classList.add("visivel");
   abrirConsultaOficial.textContent = "Copiar selo e abrir consulta oficial do TJSP";
   atualizarConfirmacaoSeloOcr();
   mostrarNovaConsulta();
@@ -1268,16 +1306,49 @@ async function enviar(file) {
   try {
     mostrarStatus("Lendo localmente o QR Code. O arquivo não será enviado ao servidor da ferramenta.");
     const leitura = await localizarQrLocalmente(file);
+    textoTrasladoPendente = leitura.textoTraslado || "";
     if (!leitura.url) {
       ocultarStatus();
       mostrarSeloIdentificadoPorOcr(leitura.seloOcr); return;
     }
-    await consultarResultadoOficial(leitura.url, leitura.textoTraslado);
+    await consultarResultadoOficial(leitura.url, textoTrasladoPendente);
   } catch (erro) {
     console.error(erro);
     ocultarStatus(); mostrarMensagem("Não foi possível concluir a leitura local ou acessar o servidor da ferramenta.", "erro"); mostrarNovaConsulta();
   }
 }
+
+async function enviarImagemAproximada(file) {
+  if (!file) return;
+  if (!/^image\/(png|jpeg)$/i.test(file.type) && !/\.(png|jpe?g)$/i.test(file.name)) {
+    mostrarMensagem("Selecione uma imagem PNG ou JPG aproximada da área do QR Code e do número do selo.", "erro");
+    return;
+  }
+  if (file.size > 15 * 1024 * 1024) {
+    mostrarMensagem("A imagem aproximada excede o limite de 15 MB.", "erro");
+    return;
+  }
+  try {
+    consultaManual.classList.remove("visivel");
+    mostrarStatus("Lendo localmente a imagem aproximada do QR Code e do selo.");
+    const leitura = await lerImagemLocalmente(file);
+    if (leitura.url) {
+      await consultarResultadoOficial(leitura.url, textoTrasladoPendente);
+      return;
+    }
+    ocultarStatus();
+    mostrarSeloIdentificadoPorOcr(leitura.seloOcr);
+  } catch (erro) {
+    console.error(erro);
+    ocultarStatus();
+    mostrarMensagem("Não foi possível concluir a leitura da imagem aproximada.", "erro");
+    mostrarNovaConsulta();
+  }
+}
+tentarImagemAproximada.addEventListener("click", function () { arquivoAproximado.click(); });
+arquivoAproximado.addEventListener("change", function () {
+  if (arquivoAproximado.files && arquivoAproximado.files[0]) enviarImagemAproximada(arquivoAproximado.files[0]);
+});
 
 seloOcrEditavel.addEventListener("input", function () {
   seloOcrEditavel.value = normalizarSeloOcrDigitado(seloOcrEditavel.value);
