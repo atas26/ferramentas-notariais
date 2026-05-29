@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Conferência do Selo Digital TJSP</title>
-<meta name="description" content="Ferramenta para conferência do Selo Digital TJSP a partir do QR Code de certidão em PDF ou imagem, com acesso à consulta oficial do Tribunal de Justiça de São Paulo.">
+<meta name="description" content="Ferramenta para conferência do Selo Digital TJSP a partir do QR Code de certidão ou traslado em PDF ou imagem, com leitura local e acesso à consulta oficial do Tribunal de Justiça de São Paulo.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://portalnotarial.com.br/consulta-selo-digital.html">
 <meta name="google-adsense-account" content="ca-pub-1578115877344777">
@@ -77,6 +77,15 @@
   .drop span { display: block; color: var(--suave); font-size: .9rem; }
   .drop small { display: block; color: var(--suave); margin-top: 13px; font-size: .8rem; }
   input[type="file"] { display: none; }
+
+  .drop.bloqueada { opacity: .58; cursor: not-allowed; background: #f7f8fb; border-color: var(--linha); }
+  .drop.bloqueada:hover { background: #f7f8fb; border-color: var(--linha); }
+  .processamento-local {
+    margin: 0 0 18px; padding: 12px 14px; border: 1px solid #cfe0ff;
+    border-radius: 10px; background: #f4f8ff; color: var(--suave); font-size: .86rem;
+  }
+  .processamento-local strong { display: block; color: var(--texto); margin-bottom: 4px; font-size: .9rem; }
+  .processamento-local p { margin: 0; line-height: 1.55; }
   .campo-tipo { margin-bottom: 18px; }
   .campo-tipo label {
     display: block; margin-bottom: 7px; color: var(--texto);
@@ -363,23 +372,28 @@
 <main class="pagina">
   <header class="cabecalho">
     <h1>Conferência do Selo Digital TJSP</h1>
-    <p>Envie uma certidão em PDF ou imagem. A ferramenta lê o QR Code do documento e obtém o resultado da página oficial de consulta do Tribunal de Justiça de São Paulo.</p>
+    <p>Selecione o tipo de documento e envie o arquivo. O QR Code é lido localmente no seu navegador e somente a URL oficial encontrada é utilizada para obter o resultado no Tribunal de Justiça de São Paulo.</p>
   </header>
 
   <section class="painel" aria-label="Envio da certidão">
     <div class="campo-tipo">
       <label for="tipoDocumento">Tipo de documento enviado</label>
-      <select id="tipoDocumento" name="tipo_documento">
-        <option value="certidao" selected>Certidão</option>
+      <select id="tipoDocumento" name="tipo_documento" required>
+        <option value="" selected>Selecione o tipo de documento</option>
+        <option value="certidao">Certidão do registro civil, imobiliária ou notarial</option>
         <option value="traslado">Traslado de ato notarial</option>
-        <option value="outro">Outro documento com Selo Digital</option>
       </select>
-      <p>A conferência auxiliar de CPF/CNPJ e iniciais somente é tentado para traslado, quando a pessoa correspondente puder ser localizada com segurança.</p>
+      <p id="orientacaoTipo">Selecione o tipo de documento para iniciar a conferência.</p>
     </div>
 
-    <label class="drop" id="drop" for="arquivo">
+    <div class="processamento-local">
+      <strong>Processamento local do documento</strong>
+      <p>O PDF ou a imagem permanece no seu navegador durante a leitura do QR Code e, em traslados pesquisáveis, durante a conferência auxiliar. O arquivo não é enviado ao servidor da ferramenta.</p>
+    </div>
+
+    <label class="drop bloqueada" id="drop" for="arquivo" aria-disabled="true">
       <span>
-        <strong>Selecionar certidão</strong>
+        <strong>Selecionar documento</strong>
         Arraste o arquivo ou clique para enviar
         <small>Formatos aceitos: PDF, PNG e JPG. Limite: 15 MB.</small>
       </span>
@@ -420,10 +434,9 @@
     <iframe id="visor" title="PDF da consulta oficial do Selo Digital TJSP"></iframe>
 
     <div class="informacoes">
-      <p>A consulta utiliza exclusivamente a URL oficial contida no QR Code do documento. A ferramenta não preenche nem contorna CAPTCHA.</p>
-      <p>Nos traslados, a conferência de iniciais e CPF/CNPJ é auxiliar e somente será exibida quando houver extração segura dos dados. Em certidões, essa conferência não é aplicada, pois os dados do selo podem corresponder ao solicitante da emissão.</p>
-      <p>Quando o portal do TJSP exigir CAPTCHA, a ferramenta apresenta o selo identificado e abre a consulta oficial para conclusão manual pelo usuário.</p>
-      <p>O arquivo é processado para esta conferência e não é mantido em armazenamento permanente pela aplicação. O resultado deve ser conferido no contexto do ato apresentado.</p>
+      <p>O documento é analisado localmente no navegador para localizar o QR Code. O servidor da ferramenta recebe somente a URL oficial extraída do código quando a geração do PDF da consulta for solicitada.</p>
+      <p>A ferramenta não preenche nem contorna CAPTCHA. Quando o portal do TJSP exigir CAPTCHA, a consulta oficial é aberta para conclusão manual pelo usuário.</p>
+      <p>Nos traslados pesquisáveis, a conferência de CPF/CNPJ e iniciais também ocorre localmente. Em certidões do registro civil, imobiliárias ou notariais, essa conferência não é aplicada.</p>
     </div>
   </section>
 
@@ -431,12 +444,12 @@
     <section class="bloco-conteudo" id="sobre-ferramenta" aria-labelledby="titulo-sobre-ferramenta">
       <span class="selo-secao">Informações</span>
       <h2 id="titulo-sobre-ferramenta">O que a ferramenta faz</h2>
-      <p>A ferramenta recebe uma certidão em PDF ou imagem, localiza o QR Code e direciona a conferência para a página oficial indicada no próprio código. Quando a consulta oficial puder ser concluída automaticamente, o resultado é apresentado em PDF. Quando houver CAPTCHA, a continuidade ocorre manualmente no portal oficial.</p>
+      <p>A ferramenta analisa localmente o documento em PDF ou imagem, localiza o QR Code e direciona a conferência para a página oficial indicada no próprio código. Quando a consulta oficial puder ser concluída automaticamente, o resultado é apresentado em PDF. Quando houver CAPTCHA, a continuidade ocorre manualmente no portal oficial.</p>
 
       <div class="grade-conteudo">
         <article class="cartao-conteudo">
           <h3>Quando usar</h3>
-          <p>Use para conferir certidões ou documentos notariais que contenham Selo Digital do Tribunal de Justiça de São Paulo com QR Code legível.</p>
+          <p>Use para conferir certidões do registro civil, imobiliárias ou notariais e traslados de atos notariais que contenham Selo Digital do Tribunal de Justiça de São Paulo com QR Code legível.</p>
         </article>
         <article class="cartao-conteudo">
           <h3>Como interpretar o resultado</h3>
@@ -453,8 +466,8 @@
       <span class="selo-secao">Como usar</span>
       <h2 id="titulo-como-usar">Etapas da conferência</h2>
       <ol class="passos">
-        <li><div><strong>Selecione a certidão</strong>Envie o arquivo em PDF, PNG ou JPG, observado o limite indicado na área de envio.</div></li>
-        <li><div><strong>Aguarde a leitura do QR Code</strong>A aplicação identifica o selo e acessa somente a URL oficial contida no QR Code.</div></li>
+        <li><div><strong>Selecione o tipo e o documento</strong>Escolha entre certidão e traslado e envie o arquivo em PDF, PNG ou JPG, observado o limite indicado.</div></li>
+        <li><div><strong>Aguarde a leitura do QR Code</strong>A aplicação identifica localmente o QR Code e encaminha somente a URL oficial extraída para geração do resultado.</div></li>
         <li><div><strong>Conclua a consulta</strong>Baixe o PDF do resultado quando disponível. Havendo CAPTCHA, abra a consulta oficial e faça a validação manual.</div></li>
         <li><div><strong>Confira o documento</strong>Compare o selo, os dados apresentados na página oficial e a certidão utilizada na conferência.</div></li>
       </ol>
@@ -472,7 +485,7 @@
         </article>
         <article class="fonte">
           <h3>Tratamento do arquivo</h3>
-          <p>O arquivo enviado é processado para leitura do QR Code e para obtenção do resultado. A página informa que não há armazenamento permanente pela aplicação.</p>
+          <p>O arquivo é processado localmente pelo navegador para leitura do QR Code. O backend não recebe o documento e processa apenas a URL oficial necessária à obtenção do resultado.</p>
         </article>
       </div>
       <div class="alerta-conteudo">Em caso de divergência, ausência de resultado ou exigência de CAPTCHA, prevalece a conferência realizada diretamente no ambiente oficial do TJSP.</div>
@@ -492,7 +505,7 @@
         </details>
         <details>
           <summary>O arquivo enviado permanece armazenado?</summary>
-          <p>A própria ferramenta informa que o arquivo é processado para a conferência e não é mantido em armazenamento permanente pela aplicação.</p>
+          <p>O documento é analisado localmente no navegador. O servidor da ferramenta não recebe o PDF ou a imagem enviada pelo usuário.</p>
         </details>
         <details>
           <summary>O resultado confirma que o conteúdo jurídico do ato está correto?</summary>
@@ -518,13 +531,24 @@
   </div>
 </footer>
 
-<script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js" crossorigin="anonymous"></script>
+<script type="module">
+import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
+
 const API_BASE = "https://consulta-selo-digital-tjsp.onrender.com";
 const LIMITE_BYTES = 15 * 1024 * 1024;
 const TIPOS = ["application/pdf", "image/png", "image/jpeg"];
+const MAX_CANVAS_PIXELS = 35_000_000;
+const ESCALAS_RAPIDAS = [2, 3, 4];
+const ESCALAS_ROBUSTAS = [5, 6, 8];
+const MAX_PAGINAS_ROBUSTAS = 3;
+const ROTULOS_CONTEXTO = /^(?:(?:o|a|os|as)\s+)?(?:(?:comparece(?:m)?(?:\s+(?:neste|no)\s+ato)?(?:\s+(?:na\s+qualidade\s+de|como))?\s+)?(?:outorgante|outorgado|mandante|mandat[aá]ri[oa]|comprador|compradora|vendedor|vendedora|transmitente|adquirente|interveniente|credor|devedor|representante|parte|s[oó]ci[oa])s?)(?:\s*[:\-–—]\s*|\s+)+/i;
+const PALAVRAS_NAO_NOME = new Set(["BRASILEIRO", "BRASILEIRA", "CASADO", "CASADA", "SOLTEIRO", "SOLTEIRA", "DIVORCIADO", "DIVORCIADA", "VIUVO", "VIUVA", "EMPRESARIO", "EMPRESARIA", "ADVOGADO", "ADVOGADA", "PORTADOR", "PORTADORA", "RESIDENTE", "DOMICILIADO", "DOMICILIADA", "NASCIDO", "NASCIDA", "INSCRITO", "INSCRITA", "CPF", "CNPJ", "RG", "CEDULA", "IDENTIDADE", "PROFISSAO", "ESTADO", "CIVIL", "COMPARECE", "COMPARECEM", "COMO", "QUALIDADE", "MANDANTE", "OUTORGANTE", "OUTORGADO", "PARTE", "REPRESENTANTE"]);
 
 const arquivo = document.getElementById("arquivo");
 const tipoDocumento = document.getElementById("tipoDocumento");
+const orientacaoTipo = document.getElementById("orientacaoTipo");
 const drop = document.getElementById("drop");
 const statusBox = document.getElementById("status");
 const statusTexto = document.getElementById("statusTexto");
@@ -544,6 +568,24 @@ const abrir = document.getElementById("abrir");
 const acoesNovaConsulta = document.getElementById("acoesNovaConsulta");
 const novaConsulta = document.getElementById("novaConsulta");
 let urlAnterior = null;
+let barcodeDetector = null;
+
+function atualizarTipoDocumento() {
+  const tipo = tipoDocumento.value;
+  const habilitado = tipo === "certidao" || tipo === "traslado";
+  arquivo.disabled = !habilitado;
+  drop.classList.toggle("bloqueada", !habilitado);
+  drop.setAttribute("aria-disabled", habilitado ? "false" : "true");
+  if (!habilitado) {
+    orientacaoTipo.textContent = "Selecione o tipo de documento para iniciar a conferência.";
+    return;
+  }
+  if (tipo === "certidao") {
+    orientacaoTipo.textContent = "A ferramenta consultará o selo digital pelo QR Code. Não será realizado confronto automático de CPF/CNPJ ou iniciais com pessoas mencionadas no teor da certidão.";
+    return;
+  }
+  orientacaoTipo.textContent = "A ferramenta consultará o selo digital pelo QR Code e, quando o resultado oficial estiver disponível automaticamente, realizará conferência auxiliar dos dígitos visíveis do CPF/CNPJ e das iniciais com a pessoa localizada no traslado.";
+}
 
 function limparResultado() {
   mensagem.className = "mensagem";
@@ -566,169 +608,342 @@ function limparResultado() {
   }
 }
 
-function mostrarNovaConsulta() {
-  acoesNovaConsulta.classList.add("visivel");
+function mostrarNovaConsulta() { acoesNovaConsulta.classList.add("visivel"); }
+function mostrarStatus(texto) { statusTexto.textContent = texto; statusBox.classList.add("visivel"); }
+function ocultarStatus() { statusBox.classList.remove("visivel"); }
+function mostrarMensagem(texto, tipo) { mensagem.textContent = texto; mensagem.className = "mensagem " + tipo; }
+function pausarInterface() { return new Promise((resolve) => window.requestAnimationFrame(() => resolve())); }
+
+function validarArquivo(file) {
+  if (!tipoDocumento.value) return "Selecione o tipo de documento antes de enviar o arquivo.";
+  if (!file) return "Selecione um arquivo.";
+  if (file.size > LIMITE_BYTES) return "O arquivo excede o limite de 15 MB.";
+  const extensaoAceita = /\.(pdf|png|jpe?g)$/i.test(file.name);
+  if (!TIPOS.includes(file.type) && !extensaoAceita) return "Envie um arquivo PDF, PNG ou JPG.";
+  return "";
 }
 
 function mostrarConfronto(dados) {
   if (!dados || !dados.mensagem) return;
   confrontoTexto.textContent = dados.mensagem;
-  const status = dados.status || "";
-  if (status.startsWith("compativel")) {
-    confronto.className = "confronto compativel visivel";
-  } else if (status.includes("divergencia") || status.includes("inconclusivo") || status.includes("indisponivel")) {
-    confronto.className = "confronto alerta visivel";
-  } else {
-    confronto.className = "confronto neutro visivel";
+  if (dados.status === "compativel") confronto.className = "confronto compativel visivel";
+  else confronto.className = "confronto alerta visivel";
+}
+
+function somenteDigitos(texto) { return String(texto || "").replace(/\D/g, ""); }
+function semAcentos(texto) { return String(texto || "").normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+function normalizarIniciais(texto) { return semAcentos(texto).toUpperCase().replace(/[^A-Z0-9]/g, ""); }
+function fragmentoOficial(texto) { return somenteDigitos(texto); }
+function limparNome(texto) {
+  let nome = String(texto || "").replace(/\s+/g, " ").trim().replace(/^[\s.,:;\-–—]+|[\s.,:;\-–—]+$/g, "");
+  if (nome.includes(":")) nome = nome.split(":").pop().trim();
+  nome = nome.replace(/^\s*\d+\s*[).:\-]\s*/, "");
+  let anterior = "";
+  while (nome && nome !== anterior) {
+    anterior = nome;
+    nome = nome.replace(ROTULOS_CONTEXTO, "").trim().replace(/^[\s.,:;\-–—]+|[\s.,:;\-–—]+$/g, "");
+    nome = nome.replace(/^\s*\d+\s*[).:\-]\s*/, "");
   }
+  return nome;
 }
-
-function confrontoDosCabecalhos(resposta) {
-  const status = resposta.headers.get("X-Confronto-Status");
-  const mensagemCodificada = resposta.headers.get("X-Confronto-Mensagem");
-  if (!status || !mensagemCodificada) return null;
-  let texto = mensagemCodificada;
-  try { texto = decodeURIComponent(mensagemCodificada); } catch (erro) { texto = mensagemCodificada; }
-  return { status: status, mensagem: texto };
+function calcularIniciais(nome) {
+  const palavras = semAcentos(limparNome(nome)).toUpperCase().match(/[A-Z0-9]+/g) || [];
+  if (palavras.length < 2) return null;
+  return palavras.map((palavra) => palavra.charAt(0)).join(".") + ".";
 }
-
-function mostrarStatus(texto) {
-  statusTexto.textContent = texto;
-  statusBox.classList.add("visivel");
+function nomeValido(segmento) {
+  const nome = limparNome(segmento);
+  const normalizado = semAcentos(nome).toUpperCase();
+  if (/^(FILHO|FILHA|PORTADOR|PORTADORA|NASCIDO|NASCIDA|RESIDENTE|DOMICILIADO|DOMICILIADA)\b/.test(normalizado)) return null;
+  const palavras = normalizado.match(/[A-Z0-9]+/g) || [];
+  if (palavras.length < 2 || palavras.length > 12) return null;
+  if (palavras.some((palavra) => PALAVRAS_NAO_NOME.has(palavra))) return null;
+  return calcularIniciais(nome) ? nome.toUpperCase() : null;
 }
-
-function ocultarStatus() {
-  statusBox.classList.remove("visivel");
+function documentosNoTexto(texto) {
+  const encontrados = [];
+  const expressoes = [/(?<!\d)(\d{3}[.\s]?\d{3}[.\s]?\d{3}[-\s]?\d{2})(?!\d)/g, /(?<!\d)(\d{2}[.\s]?\d{3}[.\s]?\d{3}[\/\s]?\d{4}[-\s]?\d{2})(?!\d)/g];
+  expressoes.forEach((expressao) => {
+    let match;
+    while ((match = expressao.exec(texto)) !== null) {
+      const digitos = somenteDigitos(match[1]);
+      if (!encontrados.some((item) => item.digitos === digitos)) encontrados.push({ digitos, posicao: match.index });
+    }
+  });
+  return encontrados;
 }
-
-function mostrarMensagem(texto, tipo) {
-  mensagem.textContent = texto;
-  mensagem.className = "mensagem " + tipo;
-}
-
-function validarArquivo(file) {
-  if (!file) return "Selecione um arquivo.";
-  if (file.size > LIMITE_BYTES) return "O arquivo excede o limite de 15 MB.";
-  const extensaoAceita = /\.(pdf|png|jpe?g)$/i.test(file.name);
-  if (!TIPOS.includes(file.type) && !extensaoAceita) {
-    return "Envie um arquivo PDF, PNG ou JPG.";
+function nomesPossiveisAssociados(texto, posicaoDocumento) {
+  let trecho = texto.slice(Math.max(0, posicaoDocumento - 700), posicaoDocumento).replace(/\s+/g, " ").trim();
+  trecho = trecho.replace(/(?:inscrit[oa]\s+(?:no|na)\s+)?(?:CPF|CNPJ)(?:\s*(?:\/\s*MF|MF))?(?:\s*(?:sob|n[º°o.]*)\s*)?$/i, "").trim();
+  const encontrados = [];
+  const segmentos = trecho.split(/[,;\n]/).reverse();
+  for (const segmento of segmentos) {
+    const nome = nomeValido(segmento);
+    if (nome && !encontrados.includes(nome)) encontrados.push(nome);
   }
-  return "";
+  return encontrados;
+}
+function confrontarLocalmente(texto, iniciaisConsulta, cpfCnpjConsulta) {
+  if (tipoDocumento.value !== "traslado") return null;
+  const iniciaisOficiais = normalizarIniciais(iniciaisConsulta);
+  const fragmento = fragmentoOficial(cpfCnpjConsulta);
+  if (!texto || texto.trim().length < 10) return { status: "alerta", mensagem: "Conferência auxiliar\n\nNão foi possível confrontar automaticamente CPF/CNPJ e iniciais porque o traslado não contém texto pesquisável suficiente. Confira manualmente." };
+  if (!iniciaisOficiais || fragmento.length < 5) return { status: "alerta", mensagem: "Conferência auxiliar\n\nA consulta oficial não apresentou dados suficientes para o confronto automático de CPF/CNPJ e iniciais. Confira manualmente." };
+  const candidatos = documentosNoTexto(texto).filter((item) => item.digitos.includes(fragmento));
+  if (candidatos.length === 0) return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: não compatível na conferência automática. O fragmento exibido na consulta oficial (${fragmento}) não foi localizado em CPF/CNPJ constante do traslado. Confira manualmente.` };
+  if (candidatos.length > 1) return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: confronto inconclusivo. O fragmento exibido na consulta oficial (${fragmento}) corresponde a mais de um CPF/CNPJ localizado no traslado. Confira manualmente.` };
+  const nomes = nomesPossiveisAssociados(texto, candidatos[0].posicao);
+  const nomesComIniciais = nomes.filter((nome) => normalizarIniciais(calcularIniciais(nome)) === iniciaisOficiais);
+  if (nomesComIniciais.length === 1) {
+    const nome = nomesComIniciais[0];
+    const iniciaisCalculadas = calcularIniciais(nome);
+    return { status: "compativel", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: compatível. Fragmento conferido: ${fragmento}.\n\nNome e iniciais: compatíveis. ${nome} = ${iniciaisCalculadas}.\n\nEsta conferência é auxiliar e não substitui a conferência do traslado e do resultado oficial do TJSP.` };
+  }
+  if (nomes.length === 1) {
+    const nome = nomes[0];
+    const iniciaisCalculadas = calcularIniciais(nome);
+    return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: compatível. Fragmento conferido: ${fragmento}.\n\nNome e iniciais: divergentes. O nome associado ao CPF/CNPJ localizado no traslado é ${nome} = ${iniciaisCalculadas}, enquanto a consulta oficial apresenta ${iniciaisConsulta}. Confira manualmente.` };
+  }
+  return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: compatível. Fragmento conferido: ${fragmento}.\n\nAs iniciais não puderam ser confrontadas com segurança de forma automática. Confira manualmente.` };
 }
 
+function validarUrlOficial(texto) {
+  try {
+    const url = new URL(String(texto || "").trim());
+    if (url.protocol !== "https:" || url.hostname.toLowerCase() !== "selodigital.tjsp.jus.br") return null;
+    const caminho = url.pathname.toLowerCase();
+    if (caminho !== "/" && caminho !== "/consulta") return null;
+    if (!url.searchParams.get("r")) return null;
+    return url.toString();
+  } catch (erro) { return null; }
+}
+function extrairSeloDaUrl(urlTexto) {
+  try {
+    const valor = new URL(urlTexto).searchParams.get("r") || "";
+    const codigo = valor.split("|")[0].replace(/[^A-Za-z0-9]/g, "");
+    return codigo || null;
+  } catch (erro) { return null; }
+}
+
+async function obterDetectorNativo() {
+  if (!("BarcodeDetector" in window)) return null;
+  if (barcodeDetector) return barcodeDetector;
+  try {
+    const formatos = await window.BarcodeDetector.getSupportedFormats();
+    if (!formatos.includes("qr_code")) return null;
+    barcodeDetector = new window.BarcodeDetector({ formats: ["qr_code"] });
+    return barcodeDetector;
+  } catch (erro) { return null; }
+}
+async function lerQrCanvasNativo(canvas) {
+  const detector = await obterDetectorNativo();
+  if (!detector) return null;
+  try {
+    const resultados = await detector.detect(canvas);
+    for (const resultado of resultados) {
+      const url = validarUrlOficial(resultado.rawValue);
+      if (url) return url;
+    }
+  } catch (erro) { return null; }
+  return null;
+}
+function transformarImagem(imageData, modo) {
+  const entrada = imageData.data;
+  const saida = new Uint8ClampedArray(entrada.length);
+  for (let i = 0; i < entrada.length; i += 4) {
+    const cinza = Math.round(0.299 * entrada[i] + 0.587 * entrada[i + 1] + 0.114 * entrada[i + 2]);
+    let valor = cinza;
+    if (modo === "contraste") valor = Math.max(0, Math.min(255, (cinza - 128) * 1.8 + 128));
+    if (modo === "limiar") valor = cinza > 155 ? 255 : 0;
+    if (modo === "invertido") valor = cinza > 155 ? 0 : 255;
+    saida[i] = valor; saida[i + 1] = valor; saida[i + 2] = valor; saida[i + 3] = 255;
+  }
+  return new ImageData(saida, imageData.width, imageData.height);
+}
+async function lerQrCanvas(canvas, robusto) {
+  const nativo = await lerQrCanvasNativo(canvas);
+  if (nativo) return nativo;
+  const contexto = canvas.getContext("2d", { willReadFrequently: true });
+  const original = contexto.getImageData(0, 0, canvas.width, canvas.height);
+  const variantes = robusto ? [original, transformarImagem(original, "contraste"), transformarImagem(original, "limiar"), transformarImagem(original, "invertido")] : [original];
+  for (const dados of variantes) {
+    const resultado = window.jsQR(dados.data, dados.width, dados.height, { inversionAttempts: "attemptBoth" });
+    const url = resultado && validarUrlOficial(resultado.data);
+    if (url) return url;
+  }
+  return null;
+}
+function liberarCanvas(canvas) { if (canvas) { canvas.width = 1; canvas.height = 1; } }
+async function renderizarPagina(pagina, escala) {
+  const viewport = pagina.getViewport({ scale: escala });
+  if (viewport.width * viewport.height > MAX_CANVAS_PIXELS) return null;
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.ceil(viewport.width); canvas.height = Math.ceil(viewport.height);
+  await pagina.render({ canvasContext: canvas.getContext("2d", { willReadFrequently: true }), viewport }).promise;
+  return canvas;
+}
+async function renderizarTiles(pagina, escala) {
+  const viewport = pagina.getViewport({ scale: escala });
+  const tiles = [];
+  const largura = viewport.width / 2; const altura = viewport.height / 2;
+  const margemX = viewport.width * 0.12; const margemY = viewport.height * 0.12;
+  for (let linha = 0; linha < 2; linha += 1) {
+    for (let coluna = 0; coluna < 2; coluna += 1) {
+      const x = Math.max(0, coluna * largura - margemX);
+      const y = Math.max(0, linha * altura - margemY);
+      const w = Math.min(viewport.width - x, largura + 2 * margemX);
+      const h = Math.min(viewport.height - y, altura + 2 * margemY);
+      if (w * h > MAX_CANVAS_PIXELS) continue;
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.ceil(w); canvas.height = Math.ceil(h);
+      await pagina.render({ canvasContext: canvas.getContext("2d", { willReadFrequently: true }), viewport, transform: [1, 0, 0, 1, -x, -y] }).promise;
+      tiles.push(canvas);
+    }
+  }
+  return tiles;
+}
+async function pesquisarPagina(pagina, numero, escalas, robusto) {
+  for (const escala of escalas) {
+    mostrarStatus(`Lendo o QR Code localmente. Página ${numero}, ampliação ${escala}x.`);
+    let canvas = await renderizarPagina(pagina, escala);
+    if (canvas) {
+      const url = await lerQrCanvas(canvas, robusto);
+      liberarCanvas(canvas);
+      if (url) return url;
+    } else if (escala >= 6) {
+      const tiles = await renderizarTiles(pagina, escala);
+      for (const tile of tiles) {
+        const url = await lerQrCanvas(tile, robusto);
+        liberarCanvas(tile);
+        if (url) return url;
+      }
+    }
+    await pausarInterface();
+  }
+  return null;
+}
+async function lerPdfLocalmente(file) {
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+  const paginas = Array.from({ length: pdf.numPages }, (_, i) => pdf.numPages - i);
+  const prioritarias = paginas.slice(0, Math.min(MAX_PAGINAS_ROBUSTAS, paginas.length));
+  const demais = paginas.slice(prioritarias.length);
+  let textoTraslado = "";
+  if (tipoDocumento.value === "traslado") {
+    mostrarStatus("Extraindo localmente o texto pesquisável do traslado.");
+    for (let i = 1; i <= pdf.numPages; i += 1) {
+      const pagina = await pdf.getPage(i);
+      const conteudo = await pagina.getTextContent();
+      textoTraslado += conteudo.items.map((item) => item.str || "").join(" ") + "\n";
+    }
+  }
+  for (const numero of prioritarias) {
+    const url = await pesquisarPagina(await pdf.getPage(numero), numero, ESCALAS_RAPIDAS, false);
+    if (url) return { url, textoTraslado };
+  }
+  for (const numero of demais) {
+    const url = await pesquisarPagina(await pdf.getPage(numero), numero, [2, 3], false);
+    if (url) return { url, textoTraslado };
+  }
+  for (const numero of prioritarias) {
+    const url = await pesquisarPagina(await pdf.getPage(numero), numero, ESCALAS_ROBUSTAS, true);
+    if (url) return { url, textoTraslado };
+  }
+  return { url: null, textoTraslado };
+}
+async function lerImagemLocalmente(file) {
+  const bitmap = await createImageBitmap(file);
+  const escalas = [1, 2, 3, 4];
+  for (const escala of escalas) {
+    const largura = Math.ceil(bitmap.width * escala); const altura = Math.ceil(bitmap.height * escala);
+    if (largura * altura > MAX_CANVAS_PIXELS) continue;
+    mostrarStatus(`Lendo o QR Code localmente. Ampliação ${escala}x.`);
+    const canvas = document.createElement("canvas"); canvas.width = largura; canvas.height = altura;
+    canvas.getContext("2d", { willReadFrequently: true }).drawImage(bitmap, 0, 0, largura, altura);
+    const url = await lerQrCanvas(canvas, escala >= 2);
+    liberarCanvas(canvas);
+    if (url) { bitmap.close(); return { url, textoTraslado: "" }; }
+    await pausarInterface();
+  }
+  bitmap.close();
+  return { url: null, textoTraslado: "" };
+}
+async function localizarQrLocalmente(file) {
+  const ehPdf = file.type === "application/pdf" || /\.pdf$/i.test(file.name);
+  return ehPdf ? lerPdfLocalmente(file) : lerImagemLocalmente(file);
+}
+function lerCabecalho(resposta, nome) {
+  const valor = resposta.headers.get(nome) || "";
+  try { return decodeURIComponent(valor); } catch (erro) { return valor; }
+}
 function mostrarConsultaManual(dados) {
   mostrarMensagem(dados.mensagem, "aviso");
   orientacaoManual.textContent = dados.orientacao;
   seloManual.textContent = dados.selo || "Não identificado";
   abrirConsultaOficial.href = dados.url_consulta_oficial;
   consultaManual.classList.add("visivel");
-  if (dados.confronto) mostrarConfronto(dados.confronto);
+  if (tipoDocumento.value === "traslado") mostrarConfronto({ status: "alerta", mensagem: "Conferência auxiliar\n\nA conferência de CPF/CNPJ e iniciais não foi realizada porque o TJSP exigiu consulta manual com CAPTCHA." });
   mostrarNovaConsulta();
 }
-
+async function consultarResultadoOficial(url, textoTraslado) {
+  mostrarStatus("QR Code localizado. Obtendo a consulta oficial do TJSP.");
+  const resposta = await fetch(API_BASE + "/api/consultar-url", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url_consulta_oficial: url, tipo_documento: tipoDocumento.value })
+  });
+  const contentType = resposta.headers.get("Content-Type") || "";
+  if (contentType.includes("application/json")) {
+    const corpo = await resposta.json().catch(() => ({}));
+    ocultarStatus();
+    if (resposta.ok && corpo.status === "consulta_manual_necessaria") { mostrarConsultaManual(corpo); return; }
+    mostrarMensagem(corpo.detail || "Não foi possível concluir a consulta.", "erro"); mostrarNovaConsulta(); return;
+  }
+  if (!resposta.ok) { ocultarStatus(); mostrarMensagem("Não foi possível concluir a consulta.", "erro"); mostrarNovaConsulta(); return; }
+  const blob = await resposta.blob();
+  urlAnterior = URL.createObjectURL(blob);
+  const disposicao = resposta.headers.get("Content-Disposition") || "";
+  const correspondencia = disposicao.match(/filename="([^"]+)"/i);
+  baixar.href = urlAnterior; baixar.download = correspondencia ? correspondencia[1] : "consulta-selo-tjsp.pdf";
+  abrir.href = urlAnterior; visor.src = urlAnterior;
+  const confrontoLocal = confrontarLocalmente(textoTraslado, lerCabecalho(resposta, "X-Consulta-Iniciais"), lerCabecalho(resposta, "X-Consulta-CPF-CNPJ"));
+  if (confrontoLocal) mostrarConfronto(confrontoLocal);
+  ocultarStatus();
+  mostrarMensagem("Consulta concluída. Confira o PDF gerado pela página oficial do TJSP.", "ok");
+  acoesPdf.classList.add("visivel"); visor.classList.add("visivel"); mostrarNovaConsulta();
+}
 async function enviar(file) {
   limparResultado();
   const erroValidacao = validarArquivo(file);
-  if (erroValidacao) {
-    mostrarMensagem(erroValidacao, "erro");
-    mostrarNovaConsulta();
-    return;
-  }
-
-  mostrarStatus("Lendo o QR Code e abrindo a consulta oficial do TJSP.");
-  const dados = new FormData();
-  dados.append("arquivo", file);
-  dados.append("tipo_documento", tipoDocumento.value);
-
+  if (erroValidacao) { mostrarMensagem(erroValidacao, "erro"); mostrarNovaConsulta(); return; }
   try {
-    const resposta = await fetch(API_BASE + "/api/consultar", {
-      method: "POST",
-      body: dados
-    });
-    const contentType = resposta.headers.get("Content-Type") || "";
-
-    if (contentType.includes("application/json")) {
-      const corpo = await resposta.json().catch(() => ({}));
-      ocultarStatus();
-      if (resposta.ok && corpo.status === "consulta_manual_necessaria") {
-        mostrarConsultaManual(corpo);
-        return;
-      }
-      mostrarMensagem(corpo.detail || "Não foi possível concluir a consulta.", "erro");
-      mostrarNovaConsulta();
-      return;
+    mostrarStatus("Lendo localmente o QR Code. O arquivo não será enviado ao servidor da ferramenta.");
+    const leitura = await localizarQrLocalmente(file);
+    if (!leitura.url) {
+      ocultarStatus(); mostrarMensagem("Não foi possível ler o QR Code de forma automática. O documento pode estar com baixa qualidade de imagem, QR Code danificado ou sem código compatível. Confira manualmente no portal oficial do TJSP.", "erro"); mostrarNovaConsulta(); return;
     }
-
-    if (!resposta.ok) {
-      ocultarStatus();
-      mostrarMensagem("Não foi possível concluir a consulta.", "erro");
-      mostrarNovaConsulta();
-      return;
-    }
-
-    const blob = await resposta.blob();
-    urlAnterior = URL.createObjectURL(blob);
-    const disposicao = resposta.headers.get("Content-Disposition") || "";
-    const correspondencia = disposicao.match(/filename="([^"]+)"/i);
-    const nome = correspondencia ? correspondencia[1] : "consulta-selo-tjsp.pdf";
-
-    baixar.href = urlAnterior;
-    baixar.download = nome;
-    abrir.href = urlAnterior;
-    visor.src = urlAnterior;
-    mostrarConfronto(confrontoDosCabecalhos(resposta));
-
-    ocultarStatus();
-    mostrarMensagem("Consulta concluída. Confira o PDF gerado pela página oficial do TJSP.", "ok");
-    acoesPdf.classList.add("visivel");
-    acoesNovaConsulta.classList.add("visivel");
-    visor.classList.add("visivel");
+    await consultarResultadoOficial(leitura.url, leitura.textoTraslado);
   } catch (erro) {
-    ocultarStatus();
-    mostrarMensagem("Não foi possível conectar ao servidor da ferramenta.", "erro");
-    mostrarNovaConsulta();
+    console.error(erro);
+    ocultarStatus(); mostrarMensagem("Não foi possível concluir a leitura local ou acessar o servidor da ferramenta.", "erro"); mostrarNovaConsulta();
   }
 }
 
 copiarSelo.addEventListener("click", async function () {
-  const selo = seloManual.textContent.trim();
-  if (!selo || selo === "Não identificado") return;
-  try {
-    await navigator.clipboard.writeText(selo);
-    feedbackCopia.textContent = "Número do selo copiado.";
-  } catch (erro) {
-    feedbackCopia.textContent = "Não foi possível copiar automaticamente. Selecione e copie o número exibido.";
-  }
+  const selo = seloManual.textContent.trim(); if (!selo || selo === "Não identificado") return;
+  try { await navigator.clipboard.writeText(selo); feedbackCopia.textContent = "Número do selo copiado."; }
+  catch (erro) { feedbackCopia.textContent = "Não foi possível copiar automaticamente. Selecione e copie o número exibido."; }
 });
-
 novaConsulta.addEventListener("click", function () {
-  ocultarStatus();
-  limparResultado();
-  arquivo.value = "";
-  tipoDocumento.value = "certidao";
-  drop.scrollIntoView({ behavior: "smooth", block: "center" });
+  ocultarStatus(); limparResultado(); arquivo.value = ""; tipoDocumento.value = ""; atualizarTipoDocumento(); tipoDocumento.scrollIntoView({ behavior: "smooth", block: "center" });
 });
+tipoDocumento.addEventListener("change", function () { arquivo.value = ""; limparResultado(); atualizarTipoDocumento(); });
+arquivo.addEventListener("change", function () { if (arquivo.files && arquivo.files[0]) enviar(arquivo.files[0]); });
+["dragenter", "dragover"].forEach(function (evento) { drop.addEventListener(evento, function (e) { e.preventDefault(); if (!arquivo.disabled) drop.classList.add("ativo"); }); });
+["dragleave", "drop"].forEach(function (evento) { drop.addEventListener(evento, function (e) { e.preventDefault(); drop.classList.remove("ativo"); }); });
+drop.addEventListener("drop", function (e) { if (!arquivo.disabled && e.dataTransfer.files && e.dataTransfer.files[0]) enviar(e.dataTransfer.files[0]); });
+atualizarTipoDocumento();
 
-arquivo.addEventListener("change", function () {
-  if (arquivo.files && arquivo.files[0]) enviar(arquivo.files[0]);
-});
-["dragenter", "dragover"].forEach(function (evento) {
-  drop.addEventListener(evento, function (e) {
-    e.preventDefault();
-    drop.classList.add("ativo");
-  });
-});
-["dragleave", "drop"].forEach(function (evento) {
-  drop.addEventListener(evento, function (e) {
-    e.preventDefault();
-    drop.classList.remove("ativo");
-  });
-});
-drop.addEventListener("drop", function (e) {
-  if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-    enviar(e.dataTransfer.files[0]);
-  }
-});
 </script>
 </body>
 </html>
