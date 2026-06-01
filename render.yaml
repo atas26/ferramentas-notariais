@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: ferramentas-notariais
+    env: node
+    plan: free
+    autoDeploy: true
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"
+      - key: PORTAL_AUTH_REQUIRED
+        value: "True"
+      - key: PORTAL_APP_URL
+        value: "https://app.portalnotarial.com.br"
+      - key: PORTAL_ACCESS_COOKIE_MAX_AGE
+        value: "7200"
+      - key: PORTAL_TOOL_ACCESS_SECRET
+        sync: false
