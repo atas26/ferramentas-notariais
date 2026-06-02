@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Portal Notarial | Ferramentas notariais públicas e Portal Notarial Pro</title>
-  <meta name="description" content="Ferramentas públicas para a rotina notarial e Portal Notarial Pro, área de assinantes com Calculadora Avançada, ITCMD e Ganho de Capital." />
+  <title>Portal Notarial | Ferramentas públicas e Portal Notarial Pro</title>
+  <meta name="description" content="Páginas públicas para consulta normativa e Portal Notarial Pro, área de assinantes com ferramentas protegidas para apoio operacional." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://portalnotarial.com.br/" />
   <meta property="og:locale" content="pt_BR" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Portal Notarial" />
   <meta property="og:title" content="Portal Notarial | Ferramentas públicas e Portal Notarial Pro" />
-  <meta property="og:description" content="Ferramentas públicas para a rotina notarial e área Pro com ferramentas protegidas por assinatura mensal." />
+  <meta property="og:description" content="Páginas públicas para consulta normativa e área Pro com ferramentas protegidas por assinatura mensal." />
   <meta property="og:url" content="https://portalnotarial.com.br/" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Portal Notarial | Ferramentas públicas e Portal Notarial Pro" />
-  <meta name="twitter:description" content="Ferramentas públicas para a rotina notarial e área Pro com ferramentas protegidas por assinatura mensal." />
+  <meta name="twitter:description" content="Páginas públicas para consulta normativa e área Pro com ferramentas protegidas por assinatura mensal." />
 
 <style>
     :root {
@@ -1965,7 +1965,33 @@
       }
     }
 
-  </style>
+  
+    /* Ajustes de produção v3 - Home pública e Pro */
+    .pro-tools.pro-tools-expanded {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .pro-tools.pro-tools-expanded .pro-tool {
+      min-height: 168px;
+    }
+
+    .tools-heading {
+      align-items: flex-start;
+    }
+
+    @media (max-width: 1280px) {
+      .pro-tools.pro-tools-expanded {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .pro-tools.pro-tools-expanded {
+        grid-template-columns: 1fr;
+      }
+    }
+
+</style>
 
   <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
 
@@ -2035,7 +2061,7 @@
             </h1>
 
             <p class="lead">
-              Ferramentas públicas para a rotina notarial e área Pro com ferramentas protegidas por assinatura mensal.
+              Páginas públicas para consulta normativa e área Pro com ferramentas protegidas por assinatura mensal.
             </p>
 
             <div class="hero-actions" aria-label="Ações principais">
@@ -2626,7 +2652,7 @@
 
             <div class="pn-main-card">
               <p class="pn-card-title">
-                Ferramentas públicas e área Pro para uso profissional.
+                Consulta pública e área Pro para uso profissional.
               </p>
 
               <div class="pn-tool-row">
@@ -2684,26 +2710,98 @@
           <span class="pro-eyebrow">Portal Notarial Pro</span>
           <h2 id="titulo-portal-pro">Ferramentas protegidas para uso profissional.</h2>
           <p>
-            O Portal Notarial Pro reúne ferramentas de apoio operacional em área logada, com acesso vinculado à assinatura ativa. O painel atual inclui Calculadora Avançada, ITCMD e Ganho de Capital.
+            O Portal Notarial Pro reúne ferramentas de apoio operacional em área logada, com acesso vinculado à assinatura ativa. O painel atual inclui 15 ferramentas protegidas para rotinas de cálculo, triagem, validação, emolumentos, ofícios e apoio cadastral.
           </p>
 
-          <div class="pro-tools" aria-label="Ferramentas protegidas do Portal Notarial Pro">
+          <div class="pro-tools pro-tools-expanded" aria-label="Ferramentas protegidas do Portal Notarial Pro">
             <article class="pro-tool">
               <span>01</span>
               <h3>Calculadora Avançada</h3>
-              <p>Rotinas profissionais de cálculo em ambiente protegido para assinantes.</p>
+              <p>Calculadora principal do Portal Notarial para rotinas profissionais de cálculo.</p>
             </article>
 
             <article class="pro-tool">
               <span>02</span>
               <h3>ITCMD</h3>
-              <p>Apoio para cálculo, conferência e organização operacional de ITCMD.</p>
+              <p>Apoio para cálculo, conferência e organização operacional em ITCMD.</p>
             </article>
 
             <article class="pro-tool">
               <span>03</span>
               <h3>Ganho de Capital</h3>
               <p>Apoio para estimativa e análise preliminar de ganho de capital.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>04</span>
+              <h3>Triagem Notarial</h3>
+              <p>Organização de informações e documentos antes da solicitação do ato notarial.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>05</span>
+              <h3>Verificador técnico</h3>
+              <p>Validação técnica de documentos eletrônicos, PDF/A, hash e assinatura digital.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>06</span>
+              <h3>Aplicador de Emolumentos</h3>
+              <p>Enquadramento estimado de atos conforme dados informados pelo usuário.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>07</span>
+              <h3>Validação Selo Digital TJSP</h3>
+              <p>Consulta auxiliar do selo digital e conferência dos dados oficiais exibidos.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>08</span>
+              <h3>Gerador de orçamento</h3>
+              <p>Apoio à geração de orçamento estimativo para atos notariais.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>09</span>
+              <h3>Consulta PEP por CPF</h3>
+              <p>Pesquisa auxiliar de pessoa exposta politicamente para triagem cadastral.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>10</span>
+              <h3>Competência e-Notariado</h3>
+              <p>Identificação do tabelião competente para ato eletrônico ou híbrido.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>11</span>
+              <h3>Tarifas da Conta Notarial</h3>
+              <p>Cálculo auxiliar de tarifas da conta notarial conforme dados informados.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>12</span>
+              <h3>Certidão reprográfica</h3>
+              <p>Apoio à montagem de certidão reprográfica e arquivo final.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>13</span>
+              <h3>Ofício de comparecimento</h3>
+              <p>Geração de declaração de comparecimento em padrão operacional.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>14</span>
+              <h3>Ofício para cartórios</h3>
+              <p>Geração de ofícios para comunicação a outros cartórios.</p>
+            </article>
+
+            <article class="pro-tool">
+              <span>15</span>
+              <h3>Ofício para bancos em inventário</h3>
+              <p>Geração de ofícios para informações bancárias em inventário.</p>
             </article>
           </div>
         </div>
@@ -2719,178 +2817,26 @@
 
           <div class="pro-actions">
             <a class="pro-button primary" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
-            <a class="pro-button" href="#ferramentas">Ver ferramentas públicas</a>
+            <a class="pro-button" href="#ferramentas">Ver páginas públicas</a>
           </div>
         </aside>
       </div>
     </section>
 
     <main class="tools" id="ferramentas">
-      <div class="public-tools-label">Ferramentas públicas e ferramentas Pro</div>
-      <section class="tools-group" aria-label="Ferramentas públicas e ferramentas Pro">
-        <div class="cards" aria-label="Todas as ferramentas">
-          <a class="card card--atendimento" href="https://triagem.portalnotarial.com.br" aria-label="Abrir Triagem Notarial">
+      <div class="public-tools-label">Páginas públicas</div>
+      <section class="tools-group" aria-label="Páginas públicas do Portal Notarial">
+        <div class="tools-heading">
+          <h2>Consulta pública e conteúdo institucional</h2>
+          <p>As ferramentas Pro exigem login e assinatura ativa. As páginas abaixo permanecem abertas para consulta, informação e navegação.</p>
+        </div>
+        <div class="cards" aria-label="Páginas públicas">
+          <a class="card card--normas" href="codigo-de-normas-nacional.html" aria-label="Abrir Código Nacional de Normas">
             <div>
-              <span class="card-kicker">Atendimento</span>
-              <h3>Triagem Notarial</h3>
-              <p>
-                Organize as informações e os documentos antes de solicitar o ato notarial.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--emolumentos" href="https://portalnotarial.com.br/aplicador-de-emolumentos.html" aria-label="Abrir aplicador inteligente da tabela de emolumentos">
-            <div>
-              <span class="card-kicker">Emolumentos</span>
-              <h3>Aplicador inteligente da tabela de emolumentos</h3>
-              <p>
-                Selecione o ato, informe os valores necessários e obtenha o enquadramento emolumentar estimado.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--validacao" href="https://verificador.portalnotarial.com.br" aria-label="Abrir verificador técnico de documentos eletrônicos">
-            <div>
-              <span class="card-kicker">Validação</span>
-              <h3>Verificador técnico de documentos eletrônicos</h3>
-              <p>
-                Triagem e validação de documentos eletrônicos, com verificação de formato, hash, PDF/A e assinatura digital.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--validacao" href="https://portalnotarial.com.br/consulta-selo-digital.html" aria-label="Abrir validação Selo digital TJSP">
-            <div>
-              <span class="card-kicker">Validação</span>
-              <h3>Validação Selo digital TJSP</h3>
-              <p>
-                Consulte o selo digital e confira os dados apresentados na consulta oficial do TJSP.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--calculo" href="calculadora-escritura-tributo-registro-sp.html" aria-label="Abrir calculadora de escritura, tributo e registro">
-            <div>
-              <span class="card-kicker">Cálculo</span>
-              <h3>Calculadora de escritura, tributo e registro</h3>
-              <p>
-                Calcule com rapidez e facilidade o valor da escritura, tributo e registro imobiliário.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--certidao" href="gerador-certidao-reprografica.html" aria-label="Abrir gerador de certidão reprográfica">
-            <div>
-              <span class="card-kicker">Certidão</span>
-              <h3>Gerador de certidão reprográfica</h3>
-              <p>
-                Monte a certidão, anexe o PDF do ato digitalizado e gere o arquivo final com numeração automática das páginas.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--oficio-comparecimento" href="oficios-comparecimento.html" aria-label="Abrir gerador de ofício de declaração de comparecimento">
-            <div>
-              <span class="card-kicker">Ofícios</span>
-              <h3>Ofício de declaração de comparecimento</h3>
-              <p>
-                Gere a declaração de comparecimento com dados do atendido, prévia editável e PDF no padrão do ofício.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--oficio-cartorios" href="oficios-outros-cartorios.html" aria-label="Abrir gerador de ofício para outros cartórios">
-            <div>
-              <span class="card-kicker">Ofícios</span>
-              <h3>Ofício para outros cartórios</h3>
-              <p>
-                Comunique retificação, dissolução, revogação ou substabelecimento, com o traslado lavrado anexado ao PDF final.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--oficio-bancos" href="oficios-bancos/" aria-label="Abrir gerador de ofício para bancos em inventário">
-            <div>
-              <span class="card-kicker">Ofícios</span>
-              <h3>Ofício para bancos em inventário</h3>
-              <p>
-                Solicite informações bancárias em inventário, com leitura auxiliar da certidão de óbito e anexação do comunicado da Febraban.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--orcamento" href="gerador-de-orcamentos-notariais.html" aria-label="Abrir gerador de orçamento de atos notariais">
-            <div>
-              <span class="card-kicker">Orçamento</span>
-              <h3>Gerador de orçamento de atos notariais</h3>
-              <p>
-                Gere orçamento estimativo com escritura, tributo, registro imobiliário e valores adicionais informados.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--tarifa" href="calculadora-tarifas-conta-notarial.html" aria-label="Abrir calculadora de tarifas da conta notarial">
-            <div>
-              <span class="card-kicker">Tarifas</span>
-              <h3>Calculadora de tarifas conta notarial</h3>
-              <p>
-                Calcule de forma simples e rápida o valor da tarifa.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--apoio" href="competencia-e-notariado.html" aria-label="Abrir ferramenta de competência em ato notarial eletrônico">
-            <div>
-              <span class="card-kicker">Competência</span>
-              <h3>Competência em ato notarial eletrônico</h3>
-              <p>
-                Identificação do tabelião de notas competente para a prática de ato notarial eletrônico ou híbrido.
-              </p>
-            </div>
-            <div class="card-bottom" aria-hidden="true">
-              <div class="arrow">→</div>
-            </div>
-          </a>
-
-          <a class="card card--consulta" href="codigo-de-normas-nacional.html" aria-label="Abrir consulta ao Código Nacional de Normas">
-            <div>
-              <span class="card-kicker">Normas nacionais</span>
+              <span class="card-kicker">Normas</span>
               <h3>Código Nacional de Normas</h3>
               <p>
-                Consulta estruturada ao Código Nacional de Normas da Corregedoria Nacional de Justiça, com busca por dispositivo, tema e especialidade.
+                Consulte a versão organizada do Código Nacional de Normas para apoio à pesquisa normativa.
               </p>
             </div>
             <div class="card-bottom" aria-hidden="true">
@@ -2898,12 +2844,12 @@
             </div>
           </a>
 
-          <a class="card card--normas" href="codigo-de-normas-de-sao-paulo.html" aria-label="Abrir consulta às Normas da Corregedoria de São Paulo">
+          <a class="card card--normas-sp" href="codigo-de-normas-de-sao-paulo.html" aria-label="Abrir Normas da Corregedoria de São Paulo">
             <div>
-              <span class="card-kicker">Normas SP</span>
+              <span class="card-kicker">Normas</span>
               <h3>Normas da Corregedoria de São Paulo</h3>
               <p>
-                Consulta às Normas de Serviço da Corregedoria Geral da Justiça de São Paulo, organizada para localização rápida de capítulos.
+                Acesse a página de apoio para consulta das normas da Corregedoria de São Paulo.
               </p>
             </div>
             <div class="card-bottom" aria-hidden="true">
@@ -2911,12 +2857,12 @@
             </div>
           </a>
 
-          <a class="card card--pep" href="consulta-pep.html" aria-label="Abrir consulta PEP por CPF">
+          <a class="card card--links" href="links-uteis.html" aria-label="Abrir Links úteis">
             <div>
-              <span class="card-kicker">Triagem</span>
-              <h3>Consulta PEP por CPF</h3>
+              <span class="card-kicker">Links</span>
+              <h3>Links úteis</h3>
               <p>
-                Pesquisa auxiliar de Pessoas Expostas Politicamente a partir do CPF, com base no Siscoaf, para apoio à triagem cadastral.
+                Acesse serviços, sistemas e páginas institucionais úteis à rotina extrajudicial.
               </p>
             </div>
             <div class="card-bottom" aria-hidden="true">
@@ -2924,12 +2870,38 @@
             </div>
           </a>
 
-          <a class="card card--servicos" href="https://portalnotarial.com.br/links-uteis.html" aria-label="Abrir páginas de serviços e links úteis">
+          <a class="card card--fontes" href="fontes-normativas.html" aria-label="Abrir Fontes normativas">
             <div>
-              <span class="card-kicker">Links úteis</span>
-              <h3>Páginas de serviços e links úteis</h3>
+              <span class="card-kicker">Fontes</span>
+              <h3>Fontes normativas</h3>
               <p>
-                Acesso rápido a páginas, serviços, órgãos e temas de uso frequente na rotina notarial.
+                Veja as fontes usadas como referência para páginas informativas e normativas do portal.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
+
+          <a class="card card--atualizacoes" href="atualizacoes.html" aria-label="Abrir Atualizações">
+            <div>
+              <span class="card-kicker">Atualizações</span>
+              <h3>Atualizações</h3>
+              <p>
+                Acompanhe alterações relevantes, novas páginas e ajustes publicados no Portal Notarial.
+              </p>
+            </div>
+            <div class="card-bottom" aria-hidden="true">
+              <div class="arrow">→</div>
+            </div>
+          </a>
+
+          <a class="card card--sobre" href="sobre.html" aria-label="Abrir Sobre o Portal Notarial">
+            <div>
+              <span class="card-kicker">Institucional</span>
+              <h3>Sobre o Portal Notarial</h3>
+              <p>
+                Entenda a finalidade do portal, seus limites e a organização das páginas públicas e Pro.
               </p>
             </div>
             <div class="card-bottom" aria-hidden="true">
@@ -2944,7 +2916,7 @@
             <span class="support-callout-eyebrow">Área de assinantes</span>
             <h2 id="titulo-assinatura-pro">Acesse o Portal Notarial Pro</h2>
             <p>
-              O plano mensal libera ferramentas protegidas para rotinas de cálculo e conferência. As ferramentas públicas permanecem disponíveis na página inicial.
+              O plano mensal libera as ferramentas protegidas do Portal Notarial Pro. As páginas públicas permanecem disponíveis para consulta normativa, informações institucionais e navegação.
             </p>
           </div>
 
@@ -2972,14 +2944,14 @@
             <span class="section-eyebrow">Informação</span>
             <h2 class="section-title" id="titulo-informacoes">Informações sobre as ferramentas</h2>
             <p class="section-lead">
-              O Portal Notarial reúne ferramentas públicas e uma área Pro para assinantes. As páginas foram pensadas para uso direto no navegador, com linguagem objetiva e indicação dos limites de cada resultado.
+              O Portal Notarial reúne páginas públicas de consulta e uma área Pro para assinantes. As páginas foram pensadas para uso direto no navegador, com linguagem objetiva e indicação dos limites de cada resultado.
             </p>
 
             <div class="info-grid" aria-label="Características das ferramentas">
               <article class="info-card">
                 <div class="info-icon">01</div>
-                <h3>Ferramentas públicas e Pro</h3>
-                <p>Parte das ferramentas pode ser acessada sem cadastro. As ferramentas Pro exigem login e assinatura ativa no Portal Notarial Pro.</p>
+                <h3>Páginas públicas e ferramentas Pro</h3>
+                <p>As páginas públicas permanecem abertas para consulta e informação. As ferramentas Pro exigem login e assinatura ativa no Portal Notarial Pro.</p>
               </article>
 
               <article class="info-card">
@@ -3135,8 +3107,8 @@
               </article>
 
               <article class="faq-item">
-                <h3>As ferramentas são gratuitas?</h3>
-                <p>Parte das ferramentas é pública. O Portal Notarial Pro reúne ferramentas protegidas por assinatura mensal.</p>
+                <h3>O que permanece público?</h3>
+                <p>As páginas normativas, institucionais e informativas permanecem públicas. As ferramentas Pro exigem assinatura mensal ativa.</p>
               </article>
 
               <article class="faq-item">

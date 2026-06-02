@@ -1,8 +1,8 @@
 {
   "name": "ferramentas-notariais-protegido",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "private": true,
-  "description": "Site público do Portal Notarial com proteção por assinatura em páginas Pro e auxiliares.",
+  "description": "Site público do Portal Notarial com Home separando páginas públicas e Portal Notarial Pro.",
   "type": "module",
   "main": "server.js",
   "scripts": {

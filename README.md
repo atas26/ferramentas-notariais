@@ -44,3 +44,15 @@ PORTAL_APP_URL=https://app.portalnotarial.com.br
 PORTAL_TOOL_ACCESS_SECRET=mesmo_valor_do_portal_notarial_app
 PORTAL_ACCESS_COOKIE_MAX_AGE=7200
 ```
+
+
+## Proteção Portal Notarial Pro v3
+
+Esta versão mantém as rotas protegidas da v2 e ajusta a Home pública para produção:
+
+- separa páginas públicas e Portal Notarial Pro;
+- move as 15 ferramentas protegidas para o bloco Pro;
+- deixa a Home com foco em assinatura e consulta normativa pública;
+- atualiza `mapa-do-site.html`;
+- atualiza `sitemap.xml` para listar apenas páginas públicas;
+- preserva o backend Node/Express e as rotas protegidas já validadas.
