@@ -1,30 +1,949 @@
 <!doctype html>
 <html lang="pt-BR">
-<head> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1"> <title>Calculadora de tarifas da conta notarial | Portal Notarial</title> <meta name="description" content="Calculadora estimativa de tarifa da conta notarial por faixa de movimentação, a partir do valor base da operação informado pelo usuário."> <meta name="robots" content="index,follow"> <meta name="google-adsense-account" content="ca-pub-1578115877344777"> <link rel="canonical" href="https://portalnotarial.com.br/calculadora-tarifas-conta-notarial.html"> <meta property="og:locale" content="pt_BR"> <meta property="og:type" content="website"> <meta property="og:site_name" content="Portal Notarial"> <meta property="og:title" content="Calculadora de tarifas da conta notarial | Portal Notarial"> <meta property="og:description" content="Calculadora estimativa de tarifa da conta notarial por faixa de movimentação, a partir do valor base da operação informado pelo usuário."> <meta property="og:url" content="https://portalnotarial.com.br/calculadora-tarifas-conta-notarial.html"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="Calculadora de tarifas da conta notarial | Portal Notarial"> <meta name="twitter:description" content="Calculadora estimativa de tarifa da conta notarial por faixa de movimentação, a partir do valor base da operação informado pelo usuário."> <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777" crossorigin="anonymous"></script> <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTD149ZWLC"></script> <script> window.dataLayer = window.dataLayer | []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-TTD149ZWLC'); </script> <style> :root{ --bg:#f5f7fb; --panel:#ffffff; --text:#172033; --muted:#64748b; --line:#d8dee9; --brand:#0076ff; --brand-dark:#005bd1; --soft:#eef5ff; --warn:#fff7ed; --warn-border:#fed7aa; --ok:#ecfdf5; --shadow:0 18px 55px rgba(15,23,42,.09); --radius:22px; } *{box-sizing:border-box} html{scroll-behavior:smooth;scroll-padding-top:22px} body{ margin:0; font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif; background: radial-gradient(circle at top left, rgba(0,118,255,.12), transparent 32rem), linear-gradient(180deg,#f8fbff 0%,var(--bg) 55%,#eef2f7 100%); color:var(--text); line-height:1.48; } a{color:inherit;text-decoration:none} .wrap{ width:min(1220px,calc(100% - 32px)); margin:0 auto; } header{ padding:34px 0 18px; } .hero{ background:rgba(255,255,255,.86); border:1px solid rgba(216,222,233,.8); border-radius:28px; box-shadow:var(--shadow); padding:32px 28px 30px; display:grid; grid-template-columns:1fr; gap:22px; align-items:stretch; backdrop-filter:blur(12px); } .eyebrow{ display:inline-flex; gap:8px; align-items:center; background:var(--soft); color:var(--brand-dark); border:1px solid #cfe2ff; border-radius:999px; padding:6px 12px; font-size:13px; font-weight:700; letter-spacing:.02em; margin-bottom:14px; } h1{ margin:0; font-size:clamp(30px,4vw,52px); line-height:1.02; letter-spacing:-.045em; } .lead{ margin:20px 0 0; max-width:none; width:100%; color:#334155; font-size:18px; line-height:1.7; } .scope{ margin:18px 0 0; max-width:none; width:100%; color:#475569; font-size:14px; line-height:1.65; background:#f8fafc; border:1px solid #e2e8f0; border-radius:14px; padding:14px 16px; } .hero-actions{ display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; } .hero-link{ display:inline-flex; align-items:center; justify-content:center; min-height:42px; padding:10px 14px; border-radius:14px; font-size:14px; font-weight:850; text-decoration:none; border:1px solid transparent; } .hero-link.primary-link{ background:var(--brand); color:#fff; box-shadow:0 12px 28px rgba(0,118,255,.22); } .hero-link.secondary-link{ background:#fff; border-color:#cbd5e1; color:#0f172a; } .adsense-section, .tool-shell{ margin-top:22px; background:rgba(255,255,255,.88); border:1px solid rgba(216,222,233,.84); border-radius:28px; box-shadow:var(--shadow); padding:30px 28px; scroll-margin-top:26px; } .section-kicker{ display:inline-flex; gap:8px; align-items:center; background:var(--soft); color:var(--brand-dark); border-radius:999px; padding:6px 12px; font-size:12px; font-weight:850; letter-spacing:.16em; text-transform:uppercase; margin-bottom:14px; } .adsense-section h2, .tool-title{ margin:0 0 12px; font-size:clamp(28px,3vw,42px); line-height:1.08; letter-spacing:-.035em; color:#0f172a; } .adsense-section p{ color:#334155; margin:0; font-size:16px; line-height:1.7; } .info-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-top:22px; } .info-card{ background:#fff; border:1px solid #dbe3ef; border-radius:18px; padding:18px; } .info-card h3{ margin:0 0 9px; font-size:16px; line-height:1.25; color:#0f172a; letter-spacing:-.01em; } .info-card p{ font-size:14px; color:#475569; line-height:1.65; } .bloco-como-utilizar{ margin-top:22px; background:rgba(255,255,255,.86); border:1px solid rgba(216,222,233,.8); border-radius:28px; padding:32px 28px 30px; box-shadow:var(--shadow); } .bloco-como-utilizar h2{ margin:0 0 14px; font-size:30px; line-height:1.15; color:#0f172a; font-weight:600; letter-spacing:-.02em; } .bloco-como-utilizar .intro{ margin:0 0 12px; font-size:16px; line-height:1.7; color:#334155; } .bloco-como-utilizar .cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:22px; } .bloco-como-utilizar .card{ border:1px solid #d9dde3; border-radius:18px; padding:22px 22px 20px; background:#fff; } .bloco-como-utilizar .card h3{ margin:0 0 12px; font-size:16px; font-weight:700; color:#0f172a; } .bloco-como-utilizar .card p{ margin:0; font-size:16px; line-height:1.7; color:#475569; } .bloco-como-utilizar .alerta{ margin-top:20px; background:#f8fafc; border-left:4px solid #2563eb; padding:16px 18px; color:#334155; font-size:16px; line-height:1.7; } .bloco-como-utilizar .atualizacao{ margin-top:16px; font-size:14px; color:#64748b; } main{ padding:18px 0 54px; } #consulta-ferramenta, #dados-calculo{ scroll-margin-top:22px; } #faq{ margin-bottom:30px; } .grid{ display:grid; grid-template-columns:430px 1fr; gap:18px; align-items:start; } .panel{ background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); box-shadow:0 12px 36px rgba(15,23,42,.06); } .panel-head{ padding:18px 18px 12px; border-bottom:1px solid var(--line); } .panel-head h2{ margin:0; font-size:20px; letter-spacing:-.02em; } .panel-head p{ margin:7px 0 0; color:var(--muted); font-size:14px; } .panel-body{ padding:18px; } label{ display:block; font-size:13px; font-weight:750; color:#273244; margin:0 0 7px; } input,button{ font:inherit; } input{ width:100%; border:1px solid #cbd5e1; background:#fff; color:var(--text); border-radius:14px; padding:12px; outline:none; transition:border-color .15s, box-shadow .15s; } input:focus{ border-color:var(--brand); box-shadow:0 0 0 4px rgba(0,118,255,.12); } .field{ margin-bottom:14px; } .hint{ font-size:12px; color:var(--muted); margin-top:6px; } .actions{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:18px; } button{ border:0; border-radius:15px; padding:12px 14px; cursor:pointer; font-weight:800; transition:transform .08s, filter .15s, background .15s; } button:active{transform:translateY(1px)} .primary{background:var(--brand);color:#fff} .primary:hover{background:var(--brand-dark)} .secondary{background:#e2e8f0;color:#0f172a} .ghost{background:#fff;border:1px solid #cbd5e1;color:#0f172a} .result-top{ display:grid; grid-template-columns:1fr auto; gap:16px; align-items:center; } .total-box{ background:linear-gradient(180deg,var(--brand),var(--brand-dark)); color:white; border-radius:20px; padding:18px; min-width:230px; text-align:right; } .total-box .label{ color:#dbeafe; font-size:13px; margin:0 0 4px; } .total-box .money{ font-size:30px; font-weight:900; letter-spacing:-.035em; } .breakdown{ display:grid; gap:0; margin-top:6px; } .row-item{ display:grid; grid-template-columns:minmax(130px,1fr) minmax(160px,auto); gap:12px; align-items:start; border-bottom:1px solid #e5eaf2; padding:12px 0; color:#334155; font-size:14px; } .row-item:last-child{border-bottom:0} .row-item span:last-child{font-weight:850;color:#0f172a;text-align:right} .row-item.faixa-row span:last-child{white-space:normal;max-width:360px;line-height:1.35} .tarifa-vigencia, .note{ border:1px solid #dbeafe; background:#f8fbff; border-radius:17px; padding:13px 14px; color:#334155; margin-top:14px; font-size:14px; line-height:1.6; } .status{ margin-top:12px; padding:12px 14px; font-size:13px; line-height:1.5; background:var(--warn); border:1px solid var(--warn-border); color:#7c2d12; border-radius:14px; display:none; } .status.show{display:block} .faq-list{ display:grid; gap:10px; margin-top:20px; } .faq-list details{ margin:0; border:1px solid #dbe3ef; border-radius:16px; background:#fff; overflow:hidden; } .faq-list summary{ padding:14px 16px; background:#f8fafc; color:#0f172a; font-weight:850; cursor:pointer; } .faq-list .faq-body{ padding:14px 16px; color:#475569; font-size:14px; line-height:1.65; } .source-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-top:20px; } .source-box{ background:#fff; border:1px solid #dbe3ef; border-radius:18px; padding:18px; } .source-box h3{ margin:0 0 9px; font-size:16px; color:#0f172a; } .source-box ul{ margin:0; padding-left:18px; color:#475569; font-size:14px; line-height:1.65; } footer{ color:#64748b; font-size:13px; padding:0 0 44px; } .src{ background:#fff; border:1px solid var(--line); border-radius:18px; padding:15px; } .src p{ margin:0 0 8px; line-height:1.6; } .src p:last-child{margin-bottom:0} .institutional-nav{ display:flex; flex-wrap:wrap; gap:10px 16px; margin-top:12px; padding-top:12px; border-top:1px solid #e2e8f0; } .institutional-nav a{ font-weight:800; color:#0f172a; } @media (max-width:980px){ .grid,.result-top{grid-template-columns:1fr} .total-box{text-align:left} .info-grid,.source-grid{grid-template-columns:1fr} .bloco-como-utilizar .cards{grid-template-columns:1fr} } @media (max-width:620px){ .wrap{width:min(100% - 22px,1220px)} .hero,.panel-body,.panel-head,.adsense-section,.bloco-como-utilizar{padding:16px} .actions{grid-template-columns:1fr} .row-item{grid-template-columns:1fr} .row-item span:last-child{text-align:left} } @media print{ body{background:#fff} header,.left-panel,footer,.adsense-section,.bloco-como-utilizar{display:none} .wrap{width:100%} .grid{display:block} .panel{box-shadow:none;border:0} .actions{display:none!important} } </style>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculadora de tarifas da conta notarial | Portal Notarial</title>
+  <meta name="description" content="Calculadora estimativa de tarifa da conta notarial por faixa de movimentação, a partir do valor base da operação informado pelo usuário.">
+  <meta name="robots" content="index,follow">
+  <meta name="google-adsense-account" content="ca-pub-1578115877344777">
+  <link rel="canonical" href="https://portalnotarial.com.br/calculadora-tarifas-conta-notarial.html">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Portal Notarial">
+  <meta property="og:title" content="Calculadora de tarifas da conta notarial | Portal Notarial">
+  <meta property="og:description" content="Calculadora estimativa de tarifa da conta notarial por faixa de movimentação, a partir do valor base da operação informado pelo usuário.">
+  <meta property="og:url" content="https://portalnotarial.com.br/calculadora-tarifas-conta-notarial.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Calculadora de tarifas da conta notarial | Portal Notarial">
+  <meta name="twitter:description" content="Calculadora estimativa de tarifa da conta notarial por faixa de movimentação, a partir do valor base da operação informado pelo usuário.">
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777" crossorigin="anonymous"></script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTD149ZWLC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TTD149ZWLC');
+  </script>
+
+  <style>
+    :root{
+      --bg:#f5f7fb;
+      --panel:#ffffff;
+      --text:#172033;
+      --muted:#64748b;
+      --line:#d8dee9;
+      --brand:#0076ff;
+      --brand-dark:#005bd1;
+      --soft:#eef5ff;
+      --warn:#fff7ed;
+      --warn-border:#fed7aa;
+      --ok:#ecfdf5;
+      --shadow:0 18px 55px rgba(15,23,42,.09);
+      --radius:22px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:22px}
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(0,118,255,.12), transparent 32rem),
+        linear-gradient(180deg,#f8fbff 0%,var(--bg) 55%,#eef2f7 100%);
+      color:var(--text);
+      line-height:1.48;
+    }
+
+    a{color:inherit;text-decoration:none}
+
+    .wrap{
+      width:min(1220px,calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    header{
+      padding:34px 0 18px;
+    }
+
+    .hero{
+      background:rgba(255,255,255,.86);
+      border:1px solid rgba(216,222,233,.8);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:32px 28px 30px;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:22px;
+      align-items:stretch;
+      backdrop-filter:blur(12px);
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      background:var(--soft);
+      color:var(--brand-dark);
+      border:1px solid #cfe2ff;
+      border-radius:999px;
+      padding:6px 12px;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.02em;
+      margin-bottom:14px;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(30px,4vw,52px);
+      line-height:1.02;
+      letter-spacing:-.045em;
+    }
+
+    .lead{
+      margin:20px 0 0;
+      max-width:none;
+      width:100%;
+      color:#334155;
+      font-size:18px;
+      line-height:1.7;
+    }
+
+    .scope{
+      margin:18px 0 0;
+      max-width:none;
+      width:100%;
+      color:#475569;
+      font-size:14px;
+      line-height:1.65;
+      background:#f8fafc;
+      border:1px solid #e2e8f0;
+      border-radius:14px;
+      padding:14px 16px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:20px;
+    }
+
+    .hero-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:42px;
+      padding:10px 14px;
+      border-radius:14px;
+      font-size:14px;
+      font-weight:850;
+      text-decoration:none;
+      border:1px solid transparent;
+    }
+
+    .hero-link.primary-link{
+      background:var(--brand);
+      color:#fff;
+      box-shadow:0 12px 28px rgba(0,118,255,.22);
+    }
+
+    .hero-link.secondary-link{
+      background:#fff;
+      border-color:#cbd5e1;
+      color:#0f172a;
+    }
+
+    .adsense-section,
+    .tool-shell{
+      margin-top:22px;
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(216,222,233,.84);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:30px 28px;
+      scroll-margin-top:26px;
+    }
+
+    .section-kicker{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      background:var(--soft);
+      color:var(--brand-dark);
+      border-radius:999px;
+      padding:6px 12px;
+      font-size:12px;
+      font-weight:850;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      margin-bottom:14px;
+    }
+
+    .adsense-section h2,
+    .tool-title{
+      margin:0 0 12px;
+      font-size:clamp(28px,3vw,42px);
+      line-height:1.08;
+      letter-spacing:-.035em;
+      color:#0f172a;
+    }
+
+    .adsense-section p{
+      color:#334155;
+      margin:0;
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:22px;
+    }
+
+    .info-card{
+      background:#fff;
+      border:1px solid #dbe3ef;
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .info-card h3{
+      margin:0 0 9px;
+      font-size:16px;
+      line-height:1.25;
+      color:#0f172a;
+      letter-spacing:-.01em;
+    }
+
+    .info-card p{
+      font-size:14px;
+      color:#475569;
+      line-height:1.65;
+    }
+
+    .bloco-como-utilizar{
+      margin-top:22px;
+      background:rgba(255,255,255,.86);
+      border:1px solid rgba(216,222,233,.8);
+      border-radius:28px;
+      padding:32px 28px 30px;
+      box-shadow:var(--shadow);
+    }
+
+    .bloco-como-utilizar h2{
+      margin:0 0 14px;
+      font-size:30px;
+      line-height:1.15;
+      color:#0f172a;
+      font-weight:600;
+      letter-spacing:-.02em;
+    }
+
+    .bloco-como-utilizar .intro{
+      margin:0 0 12px;
+      font-size:16px;
+      line-height:1.7;
+      color:#334155;
+    }
+
+    .bloco-como-utilizar .cards{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:22px;
+    }
+
+    .bloco-como-utilizar .card{
+      border:1px solid #d9dde3;
+      border-radius:18px;
+      padding:22px 22px 20px;
+      background:#fff;
+    }
+
+    .bloco-como-utilizar .card h3{
+      margin:0 0 12px;
+      font-size:16px;
+      font-weight:700;
+      color:#0f172a;
+    }
+
+    .bloco-como-utilizar .card p{
+      margin:0;
+      font-size:16px;
+      line-height:1.7;
+      color:#475569;
+    }
+
+    .bloco-como-utilizar .alerta{
+      margin-top:20px;
+      background:#f8fafc;
+      border-left:4px solid #2563eb;
+      padding:16px 18px;
+      color:#334155;
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    .bloco-como-utilizar .atualizacao{
+      margin-top:16px;
+      font-size:14px;
+      color:#64748b;
+    }
+
+    main{
+      padding:18px 0 54px;
+    }
+
+    #consulta-ferramenta,
+    #dados-calculo{
+      scroll-margin-top:22px;
+    }
+
+    #faq{
+      margin-bottom:30px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:430px 1fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:0 12px 36px rgba(15,23,42,.06);
+    }
+
+    .panel-head{
+      padding:18px 18px 12px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .panel-head h2{
+      margin:0;
+      font-size:20px;
+      letter-spacing:-.02em;
+    }
+
+    .panel-head p{
+      margin:7px 0 0;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .panel-body{
+      padding:18px;
+    }
+
+    label{
+      display:block;
+      font-size:13px;
+      font-weight:750;
+      color:#273244;
+      margin:0 0 7px;
+    }
+
+    input,button{
+      font:inherit;
+    }
+
+    input{
+      width:100%;
+      border:1px solid #cbd5e1;
+      background:#fff;
+      color:var(--text);
+      border-radius:14px;
+      padding:12px;
+      outline:none;
+      transition:border-color .15s, box-shadow .15s;
+    }
+
+    input:focus{
+      border-color:var(--brand);
+      box-shadow:0 0 0 4px rgba(0,118,255,.12);
+    }
+
+    .field{
+      margin-bottom:14px;
+    }
+
+    .hint{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:6px;
+    }
+
+    .actions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:18px;
+    }
+
+    button{
+      border:0;
+      border-radius:15px;
+      padding:12px 14px;
+      cursor:pointer;
+      font-weight:800;
+      transition:transform .08s, filter .15s, background .15s;
+    }
+
+    button:active{transform:translateY(1px)}
+
+    .primary{background:var(--brand);color:#fff}
+    .primary:hover{background:var(--brand-dark)}
+    .secondary{background:#e2e8f0;color:#0f172a}
+    .ghost{background:#fff;border:1px solid #cbd5e1;color:#0f172a}
+
+    .result-top{
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:16px;
+      align-items:center;
+    }
+
+    .total-box{
+      background:linear-gradient(180deg,var(--brand),var(--brand-dark));
+      color:white;
+      border-radius:20px;
+      padding:18px;
+      min-width:230px;
+      text-align:right;
+    }
+
+    .total-box .label{
+      color:#dbeafe;
+      font-size:13px;
+      margin:0 0 4px;
+    }
+
+    .total-box .money{
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:-.035em;
+    }
+
+    .breakdown{
+      display:grid;
+      gap:0;
+      margin-top:6px;
+    }
+
+    .row-item{
+      display:grid;
+      grid-template-columns:minmax(130px,1fr) minmax(160px,auto);
+      gap:12px;
+      align-items:start;
+      border-bottom:1px solid #e5eaf2;
+      padding:12px 0;
+      color:#334155;
+      font-size:14px;
+    }
+
+    .row-item:last-child{border-bottom:0}
+    .row-item span:last-child{font-weight:850;color:#0f172a;text-align:right}
+    .row-item.faixa-row span:last-child{white-space:normal;max-width:360px;line-height:1.35}
+
+    .tarifa-vigencia,
+    .note{
+      border:1px solid #dbeafe;
+      background:#f8fbff;
+      border-radius:17px;
+      padding:13px 14px;
+      color:#334155;
+      margin-top:14px;
+      font-size:14px;
+      line-height:1.6;
+    }
+
+    .status{
+      margin-top:12px;
+      padding:12px 14px;
+      font-size:13px;
+      line-height:1.5;
+      background:var(--warn);
+      border:1px solid var(--warn-border);
+      color:#7c2d12;
+      border-radius:14px;
+      display:none;
+    }
+
+    .status.show{display:block}
+
+    .faq-list{
+      display:grid;
+      gap:10px;
+      margin-top:20px;
+    }
+
+    .faq-list details{
+      margin:0;
+      border:1px solid #dbe3ef;
+      border-radius:16px;
+      background:#fff;
+      overflow:hidden;
+    }
+
+    .faq-list summary{
+      padding:14px 16px;
+      background:#f8fafc;
+      color:#0f172a;
+      font-weight:850;
+      cursor:pointer;
+    }
+
+    .faq-list .faq-body{
+      padding:14px 16px;
+      color:#475569;
+      font-size:14px;
+      line-height:1.65;
+    }
+
+    .source-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:20px;
+    }
+
+    .source-box{
+      background:#fff;
+      border:1px solid #dbe3ef;
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .source-box h3{
+      margin:0 0 9px;
+      font-size:16px;
+      color:#0f172a;
+    }
+
+    .source-box ul{
+      margin:0;
+      padding-left:18px;
+      color:#475569;
+      font-size:14px;
+      line-height:1.65;
+    }
+
+    footer{
+      color:#64748b;
+      font-size:13px;
+      padding:0 0 44px;
+    }
+
+    .src{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:15px;
+    }
+
+    .src p{
+      margin:0 0 8px;
+      line-height:1.6;
+    }
+
+    .src p:last-child{margin-bottom:0}
+
+    .institutional-nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 16px;
+      margin-top:12px;
+      padding-top:12px;
+      border-top:1px solid #e2e8f0;
+    }
+
+    .institutional-nav a{
+      font-weight:800;
+      color:#0f172a;
+    }
+
+    @media (max-width:980px){
+      .grid,.result-top{grid-template-columns:1fr}
+      .total-box{text-align:left}
+      .info-grid,.source-grid{grid-template-columns:1fr}
+      .bloco-como-utilizar .cards{grid-template-columns:1fr}
+    }
+
+    @media (max-width:620px){
+      .wrap{width:min(100% - 22px,1220px)}
+      .hero,.panel-body,.panel-head,.adsense-section,.bloco-como-utilizar{padding:16px}
+      .actions{grid-template-columns:1fr}
+      .row-item{grid-template-columns:1fr}
+      .row-item span:last-child{text-align:left}
+    }
+
+    @media print{
+      body{background:#fff}
+      header,.left-panel,footer,.adsense-section,.bloco-como-utilizar{display:none}
+      .wrap{width:100%}
+      .grid{display:block}
+      .panel{box-shadow:none;border:0}
+      .actions{display:none!important}
+    }
+  </style>
 </head>
-<body> <header> <div class="wrap"> <section class="hero" aria-labelledby="titulo"> <div> <div class="eyebrow">Conta notarial</div> <h1 id="titulo">Calculadora de tarifas da conta notarial</h1> <p class="lead">Informe o valor base da operação e obtenha a tarifa estimada da conta notarial, com indicação da faixa aplicada, do percentual e do valor mínimo considerado.</p> <p class="scope">A página tem finalidade informativa e serve para triagem inicial. O resultado não substitui conferência operacional, orçamento oficial, validação bancária ou análise do caso concreto.</p> <div class="hero-actions" aria-label="Atalhos da página"> <a class="hero-link primary-link" href="#consulta-ferramenta">Ir para a ferramenta</a> <a class="hero-link secondary-link" href="#criterios-fontes">Ver critérios e fontes</a> </div> </div> </section> </div> </header> <section class="wrap adsense-section" id="informacoes-ferramenta" aria-labelledby="infoTitulo"> <div class="section-kicker">Informações</div> <h2 id="infoTitulo">O que a ferramenta faz</h2> <p>A calculadora estima a tarifa da conta notarial a partir do valor base informado pelo usuário. O cálculo localiza a faixa de movimentação cadastrada na página, aplica o percentual previsto quando houver e compara o resultado com o valor mínimo da faixa.</p> <div class="info-grid"> <article class="info-card"> <h3>Quando usar</h3> <p>Use para simulação preliminar em operações que envolvam conta notarial, antes da conferência final do atendimento e da validação das regras operacionais aplicáveis.</p> </article> <article class="info-card"> <h3>Como interpretar o resultado</h3> <p>O valor indicado corresponde à tarifa estimada. Confira a faixa aplicada, o percentual, o valor mínimo e a vigência informada antes de usar o resultado em atendimento.</p> </article> <article class="info-card"> <h3>Limite operacional</h3> <p>A ferramenta não calcula escritura, tributo, registro imobiliário, certidões, averbações, diligências, despesas externas ou custos de instituições financeiras.</p> </article> </div> </section> <section class="wrap bloco-como-utilizar" id="como-usar"> <h2>Como utilizar a ferramenta</h2> <p class="intro">A página foi desenvolvida para consulta rápida da tarifa estimada da conta notarial. O usuário informa o valor base da operação e a ferramenta retorna a faixa correspondente.</p> <p class="intro">O cálculo é feito no próprio navegador, com base na tabela configurada no código da página.</p> <div class="cards"> <div class="card"> <h3>1. Informe o valor base</h3> <p>Digite o valor da operação que servirá de referência para a conta notarial.</p> </div> <div class="card"> <h3>2. Calcule a tarifa</h3> <p>Clique em calcular para localizar a faixa correspondente e obter a tarifa estimada.</p> </div> <div class="card"> <h3>3. Confira o resultado</h3> <p>Verifique valor base, tarifa em reais, faixa, percentual e total antes de usar a simulação.</p> </div> </div> <div class="alerta">Antes de utilizar o resultado em atendimento, orçamento ou ato formal, confirme a regra vigente e as particularidades da operação.</div> <div class="atualizacao">Última atualização da ferramenta: 04/05/2026.</div> </section> <main id="consulta-ferramenta"> <div class="wrap grid"> <section class="panel left-panel" aria-labelledby="dados-calculo"> <div class="panel-head"> <h2 id="dados-calculo">Dados do cálculo</h2> <p>Informe o valor base da operação para calcular a tarifa estimada da conta notarial.</p> </div> <div class="panel-body"> <div class="field"> <label for="valorBase">Valor base da operação</label> <input id="valorBase" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00"> <div class="hint">Informe o valor em reais.</div> </div> <div class="note">Este valor não contempla escritura, tributo, registro imobiliário, certidões, averbações, diligências ou outras despesas necessárias à lavratura e à segurança do ato.</div> <div class="actions"> <button type="button" class="primary" id="btnCalcular">Calcular</button> <button type="button" class="secondary" id="btnCopiar">Copiar resultado</button> <button type="button" class="ghost" id="btnImprimir">Imprimir</button> <button type="button" class="ghost" id="btnLimpar">Limpar</button> </div> </div> </section> <section class="panel" id="resultado" aria-labelledby="resultado-titulo"> <div class="panel-head result-top"> <div> <div class="section-kicker">Resultado</div> <h2 id="resultado-titulo">Resultado do cálculo</h2> <p>A composição abaixo será atualizada conforme o valor informado.</p> </div> <div class="total-box"> <div class="label">Valor estimado</div> <div class="money" id="totalResultado">R$ 0,00</div> </div> </div> <div class="panel-body"> <div class="breakdown"> <div class="row-item"><span>Valor base</span><span id="valorResultado">R$ 0,00</span></div> <div class="row-item"><span>Tarifa R$</span><span id="tarifaResultado">R$ 0,00</span></div> <div class="row-item faixa-row"><span>Faixa correspondente</span><span id="faixaResultado">-</span></div> <div class="row-item"><span>Tarifa %</span><span id="percentualResultado">-</span></div> <div class="row-item"><span>Total</span><span id="totalLinhaResultado">R$ 0,00</span></div> </div> <div class="tarifa-vigencia">Tarifa aplicada a partir de 01/04/2026.</div> <div class="status" id="statusCalculo"></div> </div> </section> </div> </main> <section class="wrap adsense-section" id="interpretar-resultado" aria-labelledby="interpretarTitulo"> <div class="section-kicker">Resultado</div> <h2 id="interpretarTitulo">Como interpretar o resultado</h2> <p>O campo “Tarifa R$” mostra o valor estimado da tarifa. O campo “Faixa correspondente” indica o intervalo usado para enquadrar o valor base. O campo “Tarifa %” mostra o percentual previsto para a faixa, quando houver percentual aplicável.</p> </section> <section class="wrap adsense-section" id="criterios-fontes" aria-labelledby="criteriosTitulo"> <div class="section-kicker">Critérios e fontes</div> <h2 id="criteriosTitulo">Critérios utilizados no cálculo</h2> <p>A estimativa considera o valor informado pelo usuário e a tabela de tarifas cadastrada no código da ferramenta. A tarifa corresponde ao maior valor entre o percentual calculado sobre o valor base e o valor mínimo previsto para a faixa. Na primeira faixa, sem percentual aplicável, a ferramenta usa o valor mínimo da tarifa.</p> <div class="source-grid"> <article class="source-box"> <h3>Fontes indicadas na ferramenta</h3> <ul> <li>Tabela de tarifas por faixa de movimentação cadastrada no código da página.</li> <li>Vigência informada na própria ferramenta a partir de 01/04/2026.</li> <li>Valor base informado pelo usuário no momento da simulação.</li> </ul> </article> <article class="source-box"> <h3>Limites da ferramenta</h3> <ul> <li>Não valida automaticamente regras bancárias, operacionais ou contratuais.</li> <li>Não substitui orçamento oficial ou conferência do caso concreto.</li> <li>Não calcula tributos, emolumentos, registro imobiliário ou despesas externas.</li> <li>Não verifica atualização posterior à tabela cadastrada no arquivo.</li> </ul> </article> </div> </section> <section class="wrap adsense-section" id="faq" aria-labelledby="faqTitulo"> <div class="section-kicker">FAQ</div> <h2 id="faqTitulo">Perguntas frequentes</h2> <div class="faq-list"> <details> <summary>A calculadora substitui orçamento oficial?</summary> <div class="faq-body">Não. A calculadora fornece estimativa para triagem. O orçamento oficial depende da conferência do caso concreto e das regras vigentes.</div> </details> <details> <summary>Qual valor deve ser informado?</summary> <div class="faq-body">Informe o valor base da operação que será usado como referência para a tarifa da conta notarial.</div> </details> <details> <summary>Por que aparece tarifa mínima?</summary> <div class="faq-body">Porque a regra configurada considera, em cada faixa, o maior valor entre o percentual calculado e o valor mínimo da tarifa.</div> </details> <details> <summary>A tarifa inclui escritura, tributo e registro?</summary> <div class="faq-body">Não. A página calcula apenas a tarifa estimada da conta notarial. Escritura, tributo, registro, certidões e diligências são itens distintos.</div> </details> <details> <summary>O resultado é definitivo?</summary> <div class="faq-body">Não. O resultado é estimativo e deve ser conferido antes de uso em atendimento, orçamento ou ato formal.</div> </details> <details> <summary>Como informar erro ou divergência?</summary> <div class="faq-body">Use a página de contato do Portal Notarial para comunicar erro, divergência de valor ou necessidade de atualização.</div> </details> </div> </section> <footer> <div class="wrap"> <div class="src"> <p>Base informativa. A página apresenta estimativa de tarifa da conta notarial com base no valor informado pelo usuário e na tabela cadastrada na ferramenta.</p> <p>Uso recomendado. Simulação preliminar e conferência operacional. O resultado não substitui orçamento oficial, conferência bancária ou análise caso a caso.</p> <p>Projeto apoiado por <a href="https://escriturapublica.substack.com" target="_blank" rel="noopener">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener">Atesta</a></p> <nav class="institutional-nav" aria-label="Links institucionais"> <a href="https://portalnotarial.com.br/">Início</a> <a href="https://portalnotarial.com.br/sobre.html">Sobre</a> <a href="https://portalnotarial.com.br/contato.html">Contato</a> <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a> <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a> <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a> </nav> </div> </div> </footer> <script>
+<body>
+  <header>
+    <div class="wrap">
+      <section class="hero" aria-labelledby="titulo">
+        <div>
+          <div class="eyebrow">Conta notarial</div>
+          <h1 id="titulo">Calculadora de tarifas da conta notarial</h1>
+          <p class="lead">Informe o valor base da operação e obtenha a tarifa estimada da conta notarial, com indicação da faixa aplicada, do percentual e do valor mínimo considerado.</p>
+          <p class="scope">A página tem finalidade informativa e serve para triagem inicial. O resultado não substitui conferência operacional, orçamento oficial, validação bancária ou análise do caso concreto.</p>
+          <div class="hero-actions" aria-label="Atalhos da página">
+            <a class="hero-link primary-link" href="#consulta-ferramenta">Ir para a ferramenta</a>
+            <a class="hero-link secondary-link" href="#criterios-fontes">Ver critérios e fontes</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </header>
+
+  <section class="wrap adsense-section" id="informacoes-ferramenta" aria-labelledby="infoTitulo">
+    <div class="section-kicker">Informações</div>
+    <h2 id="infoTitulo">O que a ferramenta faz</h2>
+    <p>A calculadora estima a tarifa da conta notarial a partir do valor base informado pelo usuário. O cálculo localiza a faixa de movimentação cadastrada na página, aplica o percentual previsto quando houver e compara o resultado com o valor mínimo da faixa.</p>
+
+    <div class="info-grid">
+      <article class="info-card">
+        <h3>Quando usar</h3>
+        <p>Use para simulação preliminar em operações que envolvam conta notarial, antes da conferência final do atendimento e da validação das regras operacionais aplicáveis.</p>
+      </article>
+      <article class="info-card">
+        <h3>Como interpretar o resultado</h3>
+        <p>O valor indicado corresponde à tarifa estimada. Confira a faixa aplicada, o percentual, o valor mínimo e a vigência informada antes de usar o resultado em atendimento.</p>
+      </article>
+      <article class="info-card">
+        <h3>Limite operacional</h3>
+        <p>A ferramenta não calcula escritura, tributo, registro imobiliário, certidões, averbações, diligências, despesas externas ou custos de instituições financeiras.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap bloco-como-utilizar" id="como-usar">
+    <h2>Como utilizar a ferramenta</h2>
+    <p class="intro">A página foi desenvolvida para consulta rápida da tarifa estimada da conta notarial. O usuário informa o valor base da operação e a ferramenta retorna a faixa correspondente.</p>
+    <p class="intro">O cálculo é feito no próprio navegador, com base na tabela configurada no código da página.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>1. Informe o valor base</h3>
+        <p>Digite o valor da operação que servirá de referência para a conta notarial.</p>
+      </div>
+      <div class="card">
+        <h3>2. Calcule a tarifa</h3>
+        <p>Clique em calcular para localizar a faixa correspondente e obter a tarifa estimada.</p>
+      </div>
+      <div class="card">
+        <h3>3. Confira o resultado</h3>
+        <p>Verifique valor base, tarifa em reais, faixa, percentual e total antes de usar a simulação.</p>
+      </div>
+    </div>
+
+    <div class="alerta">Antes de utilizar o resultado em atendimento, orçamento ou ato formal, confirme a regra vigente e as particularidades da operação.</div>
+    <div class="atualizacao">Última atualização da ferramenta: 04/05/2026.</div>
+  </section>
+
+  <main id="consulta-ferramenta">
+    <div class="wrap grid">
+      <section class="panel left-panel" aria-labelledby="dados-calculo">
+        <div class="panel-head">
+          <h2 id="dados-calculo">Dados do cálculo</h2>
+          <p>Informe o valor base da operação para calcular a tarifa estimada da conta notarial.</p>
+        </div>
+        <div class="panel-body">
+          <div class="field">
+            <label for="valorBase">Valor base da operação</label>
+            <input id="valorBase" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00">
+            <div class="hint">Informe o valor em reais.</div>
+          </div>
+
+          <div class="note">Este valor não contempla escritura, tributo, registro imobiliário, certidões, averbações, diligências ou outras despesas necessárias à lavratura e à segurança do ato.</div>
+
+          <div class="actions">
+            <button type="button" class="primary" id="btnCalcular">Calcular</button>
+            <button type="button" class="secondary" id="btnCopiar">Copiar resultado</button>
+            <button type="button" class="ghost" id="btnImprimir">Imprimir</button>
+            <button type="button" class="ghost" id="btnLimpar">Limpar</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" id="resultado" aria-labelledby="resultado-titulo">
+        <div class="panel-head result-top">
+          <div>
+            <div class="section-kicker">Resultado</div>
+            <h2 id="resultado-titulo">Resultado do cálculo</h2>
+            <p>A composição abaixo será atualizada conforme o valor informado.</p>
+          </div>
+          <div class="total-box">
+            <div class="label">Valor estimado</div>
+            <div class="money" id="totalResultado">R$ 0,00</div>
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="breakdown">
+            <div class="row-item"><span>Valor base</span><span id="valorResultado">R$ 0,00</span></div>
+            <div class="row-item"><span>Tarifa R$</span><span id="tarifaResultado">R$ 0,00</span></div>
+            <div class="row-item faixa-row"><span>Faixa correspondente</span><span id="faixaResultado">-</span></div>
+            <div class="row-item"><span>Tarifa %</span><span id="percentualResultado">-</span></div>
+            <div class="row-item"><span>Total</span><span id="totalLinhaResultado">R$ 0,00</span></div>
+          </div>
+          <div class="tarifa-vigencia">Tarifa aplicada a partir de 01/04/2026.</div>
+          <div class="status" id="statusCalculo"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <section class="wrap adsense-section" id="interpretar-resultado" aria-labelledby="interpretarTitulo">
+    <div class="section-kicker">Resultado</div>
+    <h2 id="interpretarTitulo">Como interpretar o resultado</h2>
+    <p>O campo “Tarifa R$” mostra o valor estimado da tarifa. O campo “Faixa correspondente” indica o intervalo usado para enquadrar o valor base. O campo “Tarifa %” mostra o percentual previsto para a faixa, quando houver percentual aplicável.</p>
+  </section>
+
+  <section class="wrap adsense-section" id="criterios-fontes" aria-labelledby="criteriosTitulo">
+    <div class="section-kicker">Critérios e fontes</div>
+    <h2 id="criteriosTitulo">Critérios utilizados no cálculo</h2>
+    <p>A estimativa considera o valor informado pelo usuário e a tabela de tarifas cadastrada no código da ferramenta. A tarifa corresponde ao maior valor entre o percentual calculado sobre o valor base e o valor mínimo previsto para a faixa. Na primeira faixa, sem percentual aplicável, a ferramenta usa o valor mínimo da tarifa.</p>
+
+    <div class="source-grid">
+      <article class="source-box">
+        <h3>Fontes indicadas na ferramenta</h3>
+        <ul>
+          <li>Tabela de tarifas por faixa de movimentação cadastrada no código da página.</li>
+          <li>Vigência informada na própria ferramenta a partir de 01/04/2026.</li>
+          <li>Valor base informado pelo usuário no momento da simulação.</li>
+        </ul>
+      </article>
+      <article class="source-box">
+        <h3>Limites da ferramenta</h3>
+        <ul>
+          <li>Não valida automaticamente regras bancárias, operacionais ou contratuais.</li>
+          <li>Não substitui orçamento oficial ou conferência do caso concreto.</li>
+          <li>Não calcula tributos, emolumentos, registro imobiliário ou despesas externas.</li>
+          <li>Não verifica atualização posterior à tabela cadastrada no arquivo.</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap adsense-section" id="faq" aria-labelledby="faqTitulo">
+    <div class="section-kicker">FAQ</div>
+    <h2 id="faqTitulo">Perguntas frequentes</h2>
+    <div class="faq-list">
+      <details>
+        <summary>A calculadora substitui orçamento oficial?</summary>
+        <div class="faq-body">Não. A calculadora fornece estimativa para triagem. O orçamento oficial depende da conferência do caso concreto e das regras vigentes.</div>
+      </details>
+      <details>
+        <summary>Qual valor deve ser informado?</summary>
+        <div class="faq-body">Informe o valor base da operação que será usado como referência para a tarifa da conta notarial.</div>
+      </details>
+      <details>
+        <summary>Por que aparece tarifa mínima?</summary>
+        <div class="faq-body">Porque a regra configurada considera, em cada faixa, o maior valor entre o percentual calculado e o valor mínimo da tarifa.</div>
+      </details>
+      <details>
+        <summary>A tarifa inclui escritura, tributo e registro?</summary>
+        <div class="faq-body">Não. A página calcula apenas a tarifa estimada da conta notarial. Escritura, tributo, registro, certidões e diligências são itens distintos.</div>
+      </details>
+      <details>
+        <summary>O resultado é definitivo?</summary>
+        <div class="faq-body">Não. O resultado é estimativo e deve ser conferido antes de uso em atendimento, orçamento ou ato formal.</div>
+      </details>
+      <details>
+        <summary>Como informar erro ou divergência?</summary>
+        <div class="faq-body">Use a página de contato do Portal Notarial para comunicar erro, divergência de valor ou necessidade de atualização.</div>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="src">
+        <p>Base informativa. A página apresenta estimativa de tarifa da conta notarial com base no valor informado pelo usuário e na tabela cadastrada na ferramenta.</p>
+        <p>Uso recomendado. Simulação preliminar e conferência operacional. O resultado não substitui orçamento oficial, conferência bancária ou análise caso a caso.</p>
+        <p>Projeto apoiado por <a href="https://escriturapublica.substack.com" target="_blank" rel="noopener">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener">Atesta</a></p>
+        <nav class="institutional-nav" aria-label="Links institucionais">
+          <a href="https://portalnotarial.com.br/">Início</a>
+          <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
+          <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+          <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
+          <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
+          <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
 // =====================================================================
 // Tarifas por faixa de movimentação
 // Vigência informada na tabela-base: a partir de 01/04/2026.
 // Regra aplicada: tarifa = maior valor entre o percentual da faixa e o valor mínimo da tarifa.
 // Na faixa 1, sem percentual aplicável, adota-se o valor mínimo da tarifa.
 // =====================================================================
-const TABELA_TARIFAS = [ { faixa: '1', de: 0.00, ate: 99999.99, percentual: null, valorMinimo: 500.00, rotulo: 'Faixa 1 — até R$ 99.999,99' }, { faixa: '2', de: 100000.00, ate: 299999.99, percentual: 0.0045, valorMinimo: 500.00, rotulo: 'Faixa 2 — de R$ 100.000,00 até R$ 299.999,99' }, { faixa: '3', de: 300000.00, ate: 499999.99, percentual: 0.0035, valorMinimo: 1350.00, rotulo: 'Faixa 3 — de R$ 300.000,00 até R$ 499.999,99' }, { faixa: '4', de: 500000.00, ate: 699999.99, percentual: 0.0032, valorMinimo: 1750.00, rotulo: 'Faixa 4 — de R$ 500.000,00 até R$ 699.999,99' }, { faixa: '5', de: 700000.00, ate: 999999.99, percentual: 0.0031, valorMinimo: 2240.00, rotulo: 'Faixa 5 — de R$ 700.000,00 até R$ 999.999,99' }, { faixa: '6', de: 1000000.00, ate: 1999999.99, percentual: 0.0023, valorMinimo: 3100.00, rotulo: 'Faixa 6 — de R$ 1.000.000,00 até R$ 1.999.999,99' }, { faixa: '7', de: 2000000.00, ate: 2999999.99, percentual: 0.0017, valorMinimo: 4600.00, rotulo: 'Faixa 7 — de R$ 2.000.000,00 até R$ 2.999.999,99' }, { faixa: '8', de: 3000000.00, ate: 3999999.99, percentual: 0.0016, valorMinimo: 5100.00, rotulo: 'Faixa 8 — de R$ 3.000.000,00 até R$ 3.999.999,99' }, { faixa: '9', de: 4000000.00, ate: 4999999.99, percentual: 0.0015, valorMinimo: 6400.00, rotulo: 'Faixa 9 — de R$ 4.000.000,00 até R$ 4.999.999,99' }, { faixa: '10', de: 5000000.00, ate: 5999999.99, percentual: 0.0014, valorMinimo: 7500.00, rotulo: 'Faixa 10 — de R$ 5.000.000,00 até R$ 5.999.999,99' }, { faixa: '11', de: 6000000.00, ate: Infinity, percentual: 0.0013, valorMinimo: 8400.00, rotulo: 'Faixa 11 — a partir de R$ 6.000.000,00' },
-]; let ultimoResultado = null; const el = (id) => document.getElementById(id); const campoValorBase = el('valorBase');
-if (campoValorBase) { campoValorBase.addEventListener('input', () => mascaraMoeda(campoValorBase)); campoValorBase.addEventListener('blur', () => { const valor = parseMoeda(campoValorBase.value); campoValorBase.value = valor ? formatMoeda(valor) : ''; });
-} el('btnCalcular').addEventListener('click', calcular);
+const TABELA_TARIFAS = [
+  { faixa: '1', de: 0.00, ate: 99999.99, percentual: null, valorMinimo: 500.00, rotulo: 'Faixa 1 — até R$ 99.999,99' },
+  { faixa: '2', de: 100000.00, ate: 299999.99, percentual: 0.0045, valorMinimo: 500.00, rotulo: 'Faixa 2 — de R$ 100.000,00 até R$ 299.999,99' },
+  { faixa: '3', de: 300000.00, ate: 499999.99, percentual: 0.0035, valorMinimo: 1350.00, rotulo: 'Faixa 3 — de R$ 300.000,00 até R$ 499.999,99' },
+  { faixa: '4', de: 500000.00, ate: 699999.99, percentual: 0.0032, valorMinimo: 1750.00, rotulo: 'Faixa 4 — de R$ 500.000,00 até R$ 699.999,99' },
+  { faixa: '5', de: 700000.00, ate: 999999.99, percentual: 0.0031, valorMinimo: 2240.00, rotulo: 'Faixa 5 — de R$ 700.000,00 até R$ 999.999,99' },
+  { faixa: '6', de: 1000000.00, ate: 1999999.99, percentual: 0.0023, valorMinimo: 3100.00, rotulo: 'Faixa 6 — de R$ 1.000.000,00 até R$ 1.999.999,99' },
+  { faixa: '7', de: 2000000.00, ate: 2999999.99, percentual: 0.0017, valorMinimo: 4600.00, rotulo: 'Faixa 7 — de R$ 2.000.000,00 até R$ 2.999.999,99' },
+  { faixa: '8', de: 3000000.00, ate: 3999999.99, percentual: 0.0016, valorMinimo: 5100.00, rotulo: 'Faixa 8 — de R$ 3.000.000,00 até R$ 3.999.999,99' },
+  { faixa: '9', de: 4000000.00, ate: 4999999.99, percentual: 0.0015, valorMinimo: 6400.00, rotulo: 'Faixa 9 — de R$ 4.000.000,00 até R$ 4.999.999,99' },
+  { faixa: '10', de: 5000000.00, ate: 5999999.99, percentual: 0.0014, valorMinimo: 7500.00, rotulo: 'Faixa 10 — de R$ 5.000.000,00 até R$ 5.999.999,99' },
+  { faixa: '11', de: 6000000.00, ate: Infinity, percentual: 0.0013, valorMinimo: 8400.00, rotulo: 'Faixa 11 — a partir de R$ 6.000.000,00' },
+];
+
+let ultimoResultado = null;
+
+const el = (id) => document.getElementById(id);
+
+const campoValorBase = el('valorBase');
+if (campoValorBase) {
+  campoValorBase.addEventListener('input', () => mascaraMoeda(campoValorBase));
+  campoValorBase.addEventListener('blur', () => {
+    const valor = parseMoeda(campoValorBase.value);
+    campoValorBase.value = valor ? formatMoeda(valor) : '';
+  });
+}
+
+el('btnCalcular').addEventListener('click', calcular);
 el('btnLimpar').addEventListener('click', limpar);
 el('btnImprimir').addEventListener('click', () => window.print());
-el('btnCopiar').addEventListener('click', copiarResultado); calcular(false); function mascaraMoeda(campo){ const somenteNumeros = campo.value.replace(/\D/g, ''); if (!somenteNumeros) { campo.value = ''; return; } const valor = Number(somenteNumeros) / 100; campo.value = formatMoeda(valor);
-} function parseMoeda(valor){ if (typeof valor === 'number') return Number.isFinite(valor) ? valor : 0; if (!valor) return 0; const limpo = String(valor).replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.'); const numero = Number(limpo); return Number.isFinite(numero) ? numero : 0;
-} function formatMoeda(valor){ return valor.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
-} function formatPercentual(valorDecimal){ const numero = Number(valorDecimal); if (!Number.isFinite(numero) | numero <= 0) return '0%'; return (numero * 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
-} function buscaFaixa(valorBase, tabela){ if (!valorBase | valorBase <= 0) return { valor:0, rotulo:'aguardando valor base' }; const faixa = tabela.find((item) => valorBase >= item.de && valorBase <= item.ate) | tabela[tabela.length - 1]; return faixa | { valor:0, rotulo:'sem faixa configurada' };
-} function calcular(rolar = true){ const valorBase = parseMoeda(el('valorBase').value); const faixaTarifa = buscaFaixa(valorBase, TABELA_TARIFAS); const tarifaPercentual = faixaTarifa.percentual === null ? 0 : valorBase * Number(faixaTarifa.percentual | 0); const tarifaMinima = Number(faixaTarifa.valorMinimo | 0); const tarifa = valorBase > 0 ? Math.max(tarifaPercentual, tarifaMinima) : 0; const total = tarifa; const criterioPercentual = formatPercentual(faixaTarifa.percentual); ultimoResultado = { valorBase, tarifa, total, faixa: faixaTarifa.faixa | '-', faixaRotulo: faixaTarifa.rotulo | '-', percentual: criterioPercentual, tarifaMinima, criterioTarifa: `${faixaTarifa.rotulo}; percentual: ${criterioPercentual}; valor mínimo da tarifa: ${formatMoeda(tarifaMinima)}` }; renderResultado(ultimoResultado); if (rolar && window.innerWidth < 900) el('resultado').scrollIntoView({ behavior:'smooth', block:'start' });
-} function renderResultado(r){ el('valorResultado').textContent = formatMoeda(r.valorBase); el('tarifaResultado').textContent = formatMoeda(r.tarifa); el('faixaResultado').textContent = r.faixaRotulo | r.faixa | '-'; el('percentualResultado').textContent = r.percentual | '-'; el('totalResultado').textContent = formatMoeda(r.total); el('totalLinhaResultado').textContent = formatMoeda(r.total); const status = el('statusCalculo'); status.textContent = ''; status.classList.remove('show');
-} function limpar(){ el('valorBase').value = ''; calcular(false); const alvo = el('dados-calculo'); if (alvo) { alvo.scrollIntoView({ behavior:'smooth', block:'start' }); }
-} async function copiarResultado(){ if (!ultimoResultado) calcular(false); const r = ultimoResultado; const texto = [ 'Calculadora de tarifas conta notarial', `Valor base da operação: ${formatMoeda(r.valorBase)}`, `Tarifa R$: ${formatMoeda(r.tarifa)} (${r.criterioTarifa})`, `Faixa correspondente: ${r.faixaRotulo | r.faixa | '-'}`, `Tarifa %: ${r.percentual | '-'}`, `Valor estimado: ${formatMoeda(r.total)}`, 'Observação: valores meramente estimativos.' ].join('\n'); try { await navigator.clipboard.writeText(texto); mostrarAvisoTemporario('Resultado copiado.'); } catch (error) { mostrarAvisoTemporario('Não foi possível copiar automaticamente.'); }
-} function mostrarAvisoTemporario(texto){ const status = el('statusCalculo'); const original = status.textContent; const estavaVisivel = status.classList.contains('show'); status.textContent = texto; status.classList.add('show'); setTimeout(() => { status.textContent = original; status.classList.toggle('show', estavaVisivel); }, 1800);
-} </script>
+el('btnCopiar').addEventListener('click', copiarResultado);
+
+calcular(false);
+
+
+function mascaraMoeda(campo){
+  const somenteNumeros = campo.value.replace(/\D/g, '');
+  if (!somenteNumeros) { campo.value = ''; return; }
+  const valor = Number(somenteNumeros) / 100;
+  campo.value = formatMoeda(valor);
+}
+
+function parseMoeda(valor){
+  if (typeof valor === 'number') return Number.isFinite(valor) ? valor : 0;
+  if (!valor) return 0;
+  const limpo = String(valor).replace(/[^\d,.-]/g, '').replace(/\./g, '').replace(',', '.');
+  const numero = Number(limpo);
+  return Number.isFinite(numero) ? numero : 0;
+}
+
+function formatMoeda(valor){
+  return valor.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
+}
+
+function formatPercentual(valorDecimal){
+  const numero = Number(valorDecimal);
+  if (!Number.isFinite(numero) || numero <= 0) return '0%';
+  return (numero * 100).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '%';
+}
+
+function buscaFaixa(valorBase, tabela){
+  if (!valorBase || valorBase <= 0) return { valor:0, rotulo:'aguardando valor base' };
+  const faixa = tabela.find((item) => valorBase >= item.de && valorBase <= item.ate) || tabela[tabela.length - 1];
+  return faixa || { valor:0, rotulo:'sem faixa configurada' };
+}
+
+function calcular(rolar = true){
+  const valorBase = parseMoeda(el('valorBase').value);
+  const faixaTarifa = buscaFaixa(valorBase, TABELA_TARIFAS);
+  const tarifaPercentual = faixaTarifa.percentual === null ? 0 : valorBase * Number(faixaTarifa.percentual || 0);
+  const tarifaMinima = Number(faixaTarifa.valorMinimo || 0);
+  const tarifa = valorBase > 0 ? Math.max(tarifaPercentual, tarifaMinima) : 0;
+  const total = tarifa;
+  const criterioPercentual = formatPercentual(faixaTarifa.percentual);
+
+  ultimoResultado = {
+    valorBase,
+    tarifa,
+    total,
+    faixa: faixaTarifa.faixa || '-',
+    faixaRotulo: faixaTarifa.rotulo || '-',
+    percentual: criterioPercentual,
+    tarifaMinima,
+    criterioTarifa: `${faixaTarifa.rotulo}; percentual: ${criterioPercentual}; valor mínimo da tarifa: ${formatMoeda(tarifaMinima)}`
+  };
+
+  renderResultado(ultimoResultado);
+  if (rolar && window.innerWidth < 900) el('resultado').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function renderResultado(r){
+  el('valorResultado').textContent = formatMoeda(r.valorBase);
+  el('tarifaResultado').textContent = formatMoeda(r.tarifa);
+  el('faixaResultado').textContent = r.faixaRotulo || r.faixa || '-';
+  el('percentualResultado').textContent = r.percentual || '-';
+  el('totalResultado').textContent = formatMoeda(r.total);
+  el('totalLinhaResultado').textContent = formatMoeda(r.total);
+
+  const status = el('statusCalculo');
+  status.textContent = '';
+  status.classList.remove('show');
+}
+
+function limpar(){
+  el('valorBase').value = '';
+  calcular(false);
+  const alvo = el('dados-calculo');
+  if (alvo) {
+    alvo.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+}
+
+async function copiarResultado(){
+  if (!ultimoResultado) calcular(false);
+  const r = ultimoResultado;
+  const texto = [
+    'Calculadora de tarifas conta notarial',
+    `Valor base da operação: ${formatMoeda(r.valorBase)}`,
+    `Tarifa R$: ${formatMoeda(r.tarifa)} (${r.criterioTarifa})`,
+    `Faixa correspondente: ${r.faixaRotulo || r.faixa || '-'}`,
+    `Tarifa %: ${r.percentual || '-'}`,
+    `Valor estimado: ${formatMoeda(r.total)}`,
+    'Observação: valores meramente estimativos.'
+  ].join('\n');
+
+  try {
+    await navigator.clipboard.writeText(texto);
+    mostrarAvisoTemporario('Resultado copiado.');
+  } catch (error) {
+    mostrarAvisoTemporario('Não foi possível copiar automaticamente.');
+  }
+}
+
+function mostrarAvisoTemporario(texto){
+  const status = el('statusCalculo');
+  const original = status.textContent;
+  const estavaVisivel = status.classList.contains('show');
+  status.textContent = texto;
+  status.classList.add('show');
+  setTimeout(() => {
+    status.textContent = original;
+    status.classList.toggle('show', estavaVisivel);
+  }, 1800);
+}
+  </script>
 </body>
 </html>

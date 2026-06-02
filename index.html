@@ -3,67 +3,73 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Portal Notarial | Ferramentas notariais em área logada</title>
-  <meta name="description" content="Portal Notarial Pro, área logada com ferramentas notariais protegidas por assinatura mensal. Páginas normativas públicas permanecem abertas para consulta." />
+  <title>Portal Notarial | Ferramentas notariais para rotinas extrajudiciais</title>
+  <meta name="description" content="Portal Notarial Pro reúne ferramentas notariais em área logada para apoiar cálculos, triagem, validação, emolumentos, ofícios e rotinas extrajudiciais." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://portalnotarial.com.br/" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Portal Notarial | Ferramentas notariais em área logada" />
+  <meta property="og:title" content="Portal Notarial | Ferramentas notariais para rotinas extrajudiciais" />
   <meta property="og:description" content="Área Pro com ferramentas notariais protegidas por assinatura mensal e páginas normativas públicas para consulta." />
   <meta property="og:url" content="https://portalnotarial.com.br/" />
   <meta property="og:site_name" content="Portal Notarial" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Portal Notarial | Ferramentas notariais em área logada" />
+  <meta name="twitter:title" content="Portal Notarial | Ferramentas notariais para rotinas extrajudiciais" />
   <meta name="twitter:description" content="Área Pro com ferramentas notariais protegidas por assinatura mensal e páginas normativas públicas para consulta." />
 
   <style>
     :root {
-      --bg: #f6f8fb;
-      --panel: rgba(255,255,255,.88);
-      --panel-solid: #ffffff;
-      --text: #071326;
-      --muted: #5d6878;
-      --line: rgba(7, 19, 38, .10);
-      --blue: #0b5cff;
-      --blue-dark: #0646c7;
-      --soft-blue: #eaf1ff;
-      --shadow: 0 24px 80px rgba(7, 19, 38, .10);
-      --radius-lg: 34px;
-      --radius-md: 22px;
+      --bg: #f7f9fc;
+      --white: #ffffff;
+      --text: #0b1727;
+      --muted: #5f6b7a;
+      --soft: #eef4ff;
+      --blue: #0057ff;
+      --blue-2: #003fb8;
+      --green: #0f766e;
+      --line: rgba(11, 23, 39, .10);
+      --shadow: 0 24px 70px rgba(11, 23, 39, .10);
+      --radius-xl: 36px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       margin: 0;
-      background:
-        radial-gradient(circle at 9% 8%, rgba(11, 92, 255, .10), transparent 28%),
-        radial-gradient(circle at 87% 18%, rgba(15, 118, 110, .11), transparent 30%),
-        linear-gradient(180deg, #f8fbff 0%, var(--bg) 100%);
       color: var(--text);
+      background:
+        radial-gradient(circle at 15% 4%, rgba(0, 87, 255, .12), transparent 30%),
+        radial-gradient(circle at 88% 0%, rgba(15, 118, 110, .10), transparent 28%),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 48%, #ffffff 100%);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
 
-    a { color: inherit; }
+    a {
+      color: inherit;
+    }
 
     .page {
-      width: min(1180px, calc(100% - 36px));
+      width: min(1200px, calc(100% - 36px));
       margin: 0 auto;
-      padding: 32px 0 44px;
     }
 
     .topbar {
+      min-height: 84px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 24px;
-      margin-bottom: 48px;
     }
 
     .brand {
@@ -74,31 +80,34 @@
     }
 
     .brand-mark {
-      width: 44px;
-      height: 44px;
+      width: 43px;
+      height: 43px;
       border-radius: 16px;
       display: grid;
       place-items: center;
-      background: #071326;
+      background: var(--text);
       color: #fff;
       font-weight: 900;
       letter-spacing: -.04em;
     }
 
-    .brand-text { display: grid; line-height: 1; }
+    .brand-text {
+      display: grid;
+      line-height: 1;
+    }
 
     .brand-text span {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .32em;
-      text-transform: uppercase;
       color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .28em;
+      text-transform: uppercase;
     }
 
     .brand-text strong {
+      color: var(--text);
       font-size: 27px;
       letter-spacing: -.06em;
-      color: var(--text);
     }
 
     .nav {
@@ -108,7 +117,7 @@
       gap: 10px;
       flex-wrap: wrap;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .nav a {
@@ -121,72 +130,71 @@
     .nav a:hover,
     .nav a:focus-visible {
       color: var(--text);
-      background: rgba(7, 19, 38, .05);
+      background: rgba(11, 23, 39, .05);
       outline: none;
     }
 
     .nav .nav-cta {
       color: #fff;
       background: var(--blue);
-      box-shadow: 0 12px 28px rgba(11, 92, 255, .22);
+      box-shadow: 0 14px 30px rgba(0, 87, 255, .22);
     }
 
     .nav .nav-cta:hover,
     .nav .nav-cta:focus-visible {
       color: #fff;
-      background: var(--blue-dark);
+      background: var(--blue-2);
     }
 
     .hero {
+      position: relative;
+      padding: 74px 0 34px;
       display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 24px;
-      align-items: stretch;
-      margin-bottom: 22px;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 34px;
+      align-items: center;
+      overflow: hidden;
     }
 
-    .hero-main,
-    .price-card,
-    .normas,
-    .legal-note {
-      background: var(--panel);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-    }
-
-    .hero-main {
-      padding: clamp(30px, 5vw, 62px);
-      min-height: 520px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    .hero-copy {
+      position: relative;
+      z-index: 2;
     }
 
     .eyebrow {
-      margin: 0 0 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 20px;
       color: var(--blue);
       font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .22em;
+      font-weight: 950;
+      letter-spacing: .18em;
       text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 2px;
+      border-radius: 99px;
+      background: currentColor;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(44px, 6.6vw, 82px);
+      max-width: 760px;
+      font-size: clamp(46px, 7vw, 86px);
       line-height: .94;
-      letter-spacing: -.075em;
-      max-width: 850px;
+      letter-spacing: -.08em;
     }
 
     .lead {
+      max-width: 690px;
       margin: 26px 0 0;
       color: var(--muted);
-      font-size: clamp(18px, 2.2vw, 22px);
+      font-size: clamp(18px, 2.1vw, 22px);
       line-height: 1.55;
-      max-width: 760px;
     }
 
     .hero-actions {
@@ -197,228 +205,461 @@
     }
 
     .button {
+      min-height: 54px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 52px;
+      gap: 8px;
       padding: 0 20px;
       border-radius: 16px;
-      text-decoration: none;
-      font-weight: 900;
-      font-size: 15px;
       border: 1px solid var(--line);
       background: #fff;
       color: var(--text);
-      transition: transform .18s ease, background .18s ease;
-    }
-
-    .button.primary {
-      background: var(--blue);
-      border-color: var(--blue);
-      color: #fff;
-      box-shadow: 0 18px 34px rgba(11, 92, 255, .24);
-    }
-
-    .button.primary:hover,
-    .button.primary:focus-visible {
-      background: var(--blue-dark);
-      border-color: var(--blue-dark);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 950;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
     }
 
     .button:hover,
     .button:focus-visible {
-      outline: none;
       transform: translateY(-1px);
+      outline: none;
+      box-shadow: 0 18px 38px rgba(11, 23, 39, .10);
     }
 
-    .price-card {
-      padding: 34px;
+    .button.primary {
+      color: #fff;
+      background: var(--blue);
+      border-color: var(--blue);
+      box-shadow: 0 18px 38px rgba(0, 87, 255, .24);
+    }
+
+    .button.primary:hover,
+    .button.primary:focus-visible {
+      background: var(--blue-2);
+      border-color: var(--blue-2);
+    }
+
+    .hero-proof {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      gap: 30px;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
     }
 
-    .price-label {
-      margin: 0 0 12px;
+    .hero-proof span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      place-items: center;
+    }
+
+    .orbit {
+      position: absolute;
+      inset: 42px 34px;
+      border-radius: 44px;
+      background:
+        linear-gradient(135deg, rgba(0, 87, 255, .10), transparent 34%),
+        linear-gradient(315deg, rgba(15, 118, 110, .08), transparent 40%),
+        rgba(255,255,255,.70);
+      border: 1px solid rgba(11, 23, 39, .08);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(.2px);
+      opacity: .85;
+      animation: float 8s ease-in-out infinite;
+    }
+
+    .orbit::before {
+      width: 240px;
+      height: 240px;
+      background: rgba(0, 87, 255, .16);
+      top: -80px;
+      right: -40px;
+    }
+
+    .orbit::after {
+      width: 180px;
+      height: 180px;
+      background: rgba(15, 118, 110, .16);
+      left: -56px;
+      bottom: -42px;
+      animation-delay: -2.4s;
+    }
+
+    .dashboard {
+      position: relative;
+      z-index: 2;
+      width: min(440px, 92%);
+      border-radius: 30px;
+      border: 1px solid rgba(11, 23, 39, .10);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 34px 90px rgba(11, 23, 39, .18);
+      overflow: hidden;
+      transform: translateY(0);
+      animation: panelFloat 7s ease-in-out infinite;
+    }
+
+    .dash-top {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .dash-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .dash-dots i {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(11,23,39,.20);
+    }
+
+    .dash-label {
       color: var(--muted);
       font-size: 12px;
       font-weight: 900;
-      letter-spacing: .22em;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
 
-    .price {
-      margin: 0;
-      font-size: clamp(42px, 5vw, 64px);
-      font-weight: 950;
+    .dash-body {
+      padding: 22px;
+    }
+
+    .dash-price {
+      display: grid;
+      gap: 7px;
+      padding: 20px;
+      border-radius: 22px;
+      background: var(--text);
+      color: #fff;
+    }
+
+    .dash-price small {
+      color: rgba(255,255,255,.66);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .dash-price strong {
+      font-size: 42px;
       line-height: 1;
       letter-spacing: -.06em;
     }
 
-    .price small {
-      font-size: 18px;
-      color: var(--muted);
-      letter-spacing: 0;
-      font-weight: 800;
+    .dash-price span {
+      color: rgba(255,255,255,.72);
+      font-size: 14px;
+      line-height: 1.4;
     }
 
-    .price-card p {
-      margin: 18px 0 0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.6;
+    .ticker {
+      position: relative;
+      margin-top: 16px;
+      height: 132px;
+      overflow: hidden;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff, #f8fbff);
     }
 
-    .included {
+    .ticker-track {
       display: grid;
-      gap: 12px;
-    }
-
-    .included h2 {
-      margin: 0;
-      font-size: 24px;
-      letter-spacing: -.04em;
-    }
-
-    .included ul {
-      list-style: none;
-      padding: 0;
-      margin: 8px 0 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
       gap: 8px;
+      padding: 12px;
+      animation: ticker 18s linear infinite;
     }
 
-    .included li {
-      min-height: 38px;
+    .mini-card {
+      min-height: 40px;
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 12px;
       border: 1px solid var(--line);
-      border-radius: 13px;
-      padding: 8px 10px;
-      background: rgba(255,255,255,.62);
+      border-radius: 14px;
+      padding: 0 12px;
+      background: #fff;
       color: #334155;
       font-size: 13px;
-      font-weight: 800;
-      line-height: 1.25;
+      font-weight: 850;
     }
 
-    .normas {
-      margin-top: 24px;
-      padding: clamp(24px, 4vw, 40px);
+    .mini-card i {
+      width: 9px;
+      height: 9px;
+      border-radius: 99px;
+      background: var(--blue);
+      flex: 0 0 auto;
+    }
+
+    .floating-message {
+      position: absolute;
+      z-index: 3;
+      display: grid;
+      gap: 5px;
+      min-width: 220px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.94);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 44px rgba(11, 23, 39, .12);
+      animation: bubble 7s ease-in-out infinite;
+    }
+
+    .floating-message strong {
+      font-size: 14px;
+    }
+
+    .floating-message span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .floating-message.one {
+      top: 78px;
+      left: 0;
+    }
+
+    .floating-message.two {
+      right: 0;
+      bottom: 98px;
+      animation-delay: -2s;
+    }
+
+    .section {
+      padding: 58px 0;
     }
 
     .section-head {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-      gap: 18px;
-      margin-bottom: 18px;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .section-head div {
+      max-width: 760px;
     }
 
     .section-head h2 {
       margin: 0;
-      font-size: clamp(28px, 3.4vw, 44px);
-      line-height: 1;
-      letter-spacing: -.055em;
+      font-size: clamp(34px, 4.2vw, 58px);
+      line-height: .98;
+      letter-spacing: -.07em;
     }
 
     .section-head p {
-      margin: 12px 0 0;
+      margin: 14px 0 0;
       color: var(--muted);
+      font-size: 17px;
       line-height: 1.6;
-      font-size: 16px;
-      max-width: 760px;
     }
 
-    .cards {
+    .tools-panel {
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.84);
+      box-shadow: var(--shadow);
+      padding: clamp(22px, 3vw, 34px);
+    }
+
+    .tool-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .tool-list li {
+      min-height: 76px;
+      display: grid;
+      gap: 4px;
+      align-content: center;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .tool-list span {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .tool-list small {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .commercial-strip {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px;
+      border-radius: 22px;
+      background: var(--text);
+      color: #fff;
+    }
+
+    .commercial-strip p {
+      margin: 0;
+      color: rgba(255,255,255,.72);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .commercial-strip strong {
+      display: block;
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .commercial-strip .button {
+      border-color: rgba(255,255,255,.18);
+      box-shadow: none;
+      white-space: nowrap;
+    }
+
+    .normas-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
-      margin-top: 24px;
     }
 
-    .card {
-      min-height: 210px;
-      padding: 24px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--line);
-      background: var(--panel-solid);
-      text-decoration: none;
+    .norma-card {
+      min-height: 236px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      padding: 26px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: #fff;
+      text-decoration: none;
+      box-shadow: 0 16px 44px rgba(11, 23, 39, .06);
       transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
 
-    .card:hover,
-    .card:focus-visible {
+    .norma-card:hover,
+    .norma-card:focus-visible {
       transform: translateY(-2px);
-      border-color: rgba(11, 92, 255, .35);
-      box-shadow: 0 18px 40px rgba(7, 19, 38, .10);
+      box-shadow: 0 24px 54px rgba(11, 23, 39, .11);
+      border-color: rgba(0,87,255,.30);
       outline: none;
     }
 
-    .card span {
-      display: inline-block;
+    .norma-card span {
+      display: inline-flex;
+      width: fit-content;
+      min-height: 30px;
+      align-items: center;
+      padding: 0 10px;
+      border-radius: 999px;
       color: var(--blue);
-      font-weight: 900;
+      background: var(--soft);
       font-size: 12px;
-      letter-spacing: .18em;
+      font-weight: 950;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      margin-bottom: 14px;
     }
 
-    .card h3 {
-      margin: 0;
-      font-size: 23px;
-      letter-spacing: -.04em;
+    .norma-card h3 {
+      margin: 24px 0 0;
+      font-size: 25px;
+      line-height: 1.1;
+      letter-spacing: -.045em;
     }
 
-    .card p {
+    .norma-card p {
       margin: 14px 0 0;
       color: var(--muted);
       line-height: 1.55;
       font-size: 15px;
     }
 
-    .arrow {
-      margin-top: 22px;
-      width: 38px;
-      height: 38px;
-      border-radius: 13px;
+    .norma-card .arrow {
+      margin-top: 26px;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
       display: grid;
       place-items: center;
-      background: var(--soft-blue);
+      background: var(--soft);
       color: var(--blue);
-      font-weight: 900;
+      font-weight: 950;
     }
 
-    .legal-note {
-      margin-top: 24px;
-      padding: 24px 28px;
+    .legal {
+      margin: 12px 0 58px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 22px 24px;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
-      gap: 20px;
-      box-shadow: none;
-      border-radius: var(--radius-md);
+      gap: 18px;
     }
 
-    .legal-note p {
+    .legal p {
       margin: 0;
       color: var(--muted);
-      line-height: 1.6;
-      font-size: 15px;
+      font-size: 14px;
+      line-height: 1.55;
     }
 
-    .legal-note strong { color: var(--text); }
+    .legal strong {
+      color: var(--text);
+    }
 
     .footer {
-      margin-top: 34px;
-      padding-top: 24px;
       border-top: 1px solid var(--line);
+      padding: 28px 0 44px;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
@@ -428,13 +669,15 @@
       line-height: 1.6;
     }
 
-    .footer strong { color: var(--text); }
+    .footer strong {
+      color: var(--text);
+    }
 
     .footer-links {
       display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
       justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 12px;
       font-weight: 800;
     }
 
@@ -451,164 +694,307 @@
       outline: none;
     }
 
-    @media (max-width: 980px) {
-      .hero { grid-template-columns: 1fr; }
-      .hero-main { min-height: auto; }
-      .cards { grid-template-columns: 1fr; }
-      .section-head,
-      .footer,
-      .legal-note { flex-direction: column; }
-      .footer-links { justify-content: flex-start; }
+    @keyframes panelFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
     }
 
-    @media (max-width: 680px) {
+    @keyframes bubble {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0); }
+      50% { transform: translate(16px, 20px); }
+    }
+
+    @keyframes ticker {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+      }
+    }
+
+    @media (max-width: 1060px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 48px;
+      }
+
+      .hero-visual {
+        min-height: 470px;
+      }
+
+      .tool-list,
+      .normas-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
       .page {
-        width: min(100% - 24px, 1180px);
-        padding-top: 22px;
+        width: min(100% - 24px, 1200px);
+      }
+
+      .topbar,
+      .section-head,
+      .commercial-strip,
+      .legal,
+      .footer {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
       .topbar {
-        align-items: flex-start;
-        flex-direction: column;
-        margin-bottom: 30px;
+        padding-top: 20px;
       }
 
-      .nav { justify-content: flex-start; }
-      .included ul { grid-template-columns: 1fr; }
-      .hero-actions { flex-direction: column; }
-      .button { width: 100%; }
+      .nav {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        padding-top: 34px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 520px;
+      }
+
+      .floating-message {
+        position: relative;
+        top: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        margin: 10px 0;
+      }
+
+      .orbit {
+        inset: 34px 0;
+      }
+
+      .tool-list,
+      .normas-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-links {
+        justify-content: flex-start;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <header class="topbar">
-      <a class="brand" href="/" aria-label="Portal Notarial">
-        <span class="brand-mark">P</span>
-        <span class="brand-text">
-          <span>Portal</span>
-          <strong>notarial</strong>
-        </span>
-      </a>
+  <header class="page topbar">
+    <a class="brand" href="/" aria-label="Portal Notarial">
+      <span class="brand-mark">P</span>
+      <span class="brand-text">
+        <span>Portal</span>
+        <strong>notarial</strong>
+      </span>
+    </a>
 
-      <nav class="nav" aria-label="Navegação principal">
-        <a href="#portal-pro">Portal Pro</a>
-        <a href="#normas">Normas</a>
-        <a href="https://app.portalnotarial.com.br" class="nav-cta">Entrar ou assinar</a>
-      </nav>
-    </header>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#portal-pro">Portal Pro</a>
+      <a href="#normas">Normas</a>
+      <a href="https://app.portalnotarial.com.br" class="nav-cta">Entrar ou assinar</a>
+    </nav>
+  </header>
 
-    <main>
-      <section class="hero" id="portal-pro">
-        <div class="hero-main">
-          <p class="eyebrow">Área de assinantes</p>
-          <h1>Ferramentas notariais em uma área logada.</h1>
-          <p class="lead">
-            Acesso mensal às principais ferramentas operacionais do Portal Notarial Pro. O painel reúne recursos para cálculo, triagem, validação, emolumentos, ofícios e apoio cadastral.
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
-            <a class="button" href="#normas">Ver normas públicas</a>
-          </div>
-        </div>
-
-        <aside class="price-card" aria-label="Plano mensal do Portal Notarial Pro">
-          <div>
-            <p class="price-label">Plano mensal</p>
-            <p class="price">R$ 49,40 <small>/ mês</small></p>
-            <p>
-              A assinatura libera o painel protegido. Não inclui consultoria individual, análise de caso concreto ou atendimento personalizado.
-            </p>
-          </div>
-
-          <div class="included">
-            <h2>Inclui 15 ferramentas</h2>
-            <ul>
-              <li>Calculadora Avançada</li>
-              <li>ITCMD</li>
-              <li>Ganho de Capital</li>
-              <li>Triagem Notarial</li>
-              <li>Verificador técnico</li>
-              <li>Aplicador de Emolumentos</li>
-              <li>Validação Selo Digital TJSP</li>
-              <li>Gerador de orçamento</li>
-              <li>Consulta PEP por CPF</li>
-              <li>Competência e-Notariado</li>
-              <li>Tarifas da Conta Notarial</li>
-              <li>Certidão reprográfica</li>
-              <li>Ofício de comparecimento</li>
-              <li>Ofício para cartórios</li>
-              <li>Ofício para bancos em inventário</li>
-            </ul>
-          </div>
-        </aside>
-      </section>
-
-      <section class="normas" id="normas" aria-labelledby="titulo-normas">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow">Consulta pública</p>
-            <h2 id="titulo-normas">Normas e fontes abertas.</h2>
-            <p>
-              As páginas abaixo permanecem públicas para consulta normativa e conferência das fontes utilizadas no portal.
-            </p>
-          </div>
-        </div>
-
-        <div class="cards">
-          <a class="card" href="codigo-de-normas-nacional.html">
-            <div>
-              <span>Normas</span>
-              <h3>Código Nacional de Normas</h3>
-              <p>Consulta organizada para apoio à pesquisa normativa extrajudicial.</p>
-            </div>
-            <div class="arrow" aria-hidden="true">→</div>
-          </a>
-
-          <a class="card" href="codigo-de-normas-de-sao-paulo.html">
-            <div>
-              <span>Normas</span>
-              <h3>Normas da Corregedoria de São Paulo</h3>
-              <p>Página de apoio para consulta das normas aplicáveis em São Paulo.</p>
-            </div>
-            <div class="arrow" aria-hidden="true">→</div>
-          </a>
-
-          <a class="card" href="fontes-normativas.html">
-            <div>
-              <span>Fontes</span>
-              <h3>Fontes normativas</h3>
-              <p>Referências institucionais utilizadas nas páginas informativas do portal.</p>
-            </div>
-            <div class="arrow" aria-hidden="true">→</div>
-          </a>
-        </div>
-      </section>
-
-      <section class="legal-note" aria-label="Limites das ferramentas">
-        <p>
-          <strong>Limite de uso.</strong> As ferramentas são recursos de apoio operacional. Os resultados dependem dos dados informados e não substituem análise do caso concreto, conferência normativa, orientação profissional individualizada ou manifestação oficial.
+  <main>
+    <section class="page hero" id="portal-pro">
+      <div class="hero-copy">
+        <p class="eyebrow">Portal Notarial Pro</p>
+        <h1>Ferramentas notariais para ganhar tempo na rotina extrajudicial.</h1>
+        <p class="lead">
+          Uma área logada com recursos para cálculo, conferência, triagem, validação, emolumentos e ofícios. Acesse as ferramentas em um painel único, com assinatura mensal.
         </p>
-        <a class="button" href="aviso-legal.html">Ler aviso legal</a>
-      </section>
-    </main>
 
-    <footer class="footer">
-      <div>
-        <strong>Portal Notarial Pro</strong><br />
-        Ferramentas de apoio operacional em área logada.
+        <div class="hero-actions">
+          <a class="button primary" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
+          <a class="button" href="#ferramentas">Conhecer ferramentas</a>
+        </div>
+
+        <div class="hero-proof" aria-label="Resumo do plano">
+          <span>15 ferramentas incluídas</span>
+          <span>R$ 49,40 por mês</span>
+          <span>Área protegida por login</span>
+        </div>
       </div>
 
-      <nav class="footer-links" aria-label="Links jurídicos e institucionais">
-        <a href="sobre.html">Sobre</a>
-        <a href="contato.html">Contato</a>
-        <a href="mapa-do-site.html">Mapa do site</a>
-        <a href="termos-de-uso.html">Termos</a>
-        <a href="politica-de-privacidade.html">Privacidade</a>
-        <a href="aviso-legal.html">Aviso legal</a>
-        <a href="politica-de-cancelamento.html">Cancelamento</a>
-      </nav>
-    </footer>
-  </div>
+      <div class="hero-visual" aria-label="Prévia visual do Portal Notarial Pro">
+        <div class="orbit" aria-hidden="true"></div>
+
+        <div class="floating-message one">
+          <strong>Rotina mais organizada</strong>
+          <span>Triagem, cálculo e documentos em um painel de acesso.</span>
+        </div>
+
+        <div class="floating-message two">
+          <strong>Assinatura ativa</strong>
+          <span>As ferramentas protegidas são abertas pelo app do assinante.</span>
+        </div>
+
+        <div class="dashboard">
+          <div class="dash-top">
+            <div class="dash-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+            <div class="dash-label">Painel Pro</div>
+          </div>
+          <div class="dash-body">
+            <div class="dash-price">
+              <small>Plano mensal</small>
+              <strong>R$ 49,40</strong>
+              <span>Ferramentas protegidas para apoio operacional.</span>
+            </div>
+
+            <div class="ticker" aria-hidden="true">
+              <div class="ticker-track">
+                <div class="mini-card"><span>Calculadora Avançada</span><i></i></div>
+                <div class="mini-card"><span>ITCMD</span><i></i></div>
+                <div class="mini-card"><span>Triagem Notarial</span><i></i></div>
+                <div class="mini-card"><span>Verificador técnico</span><i></i></div>
+                <div class="mini-card"><span>Consulta PEP</span><i></i></div>
+                <div class="mini-card"><span>Ofícios e certidões</span><i></i></div>
+                <div class="mini-card"><span>Aplicador de Emolumentos</span><i></i></div>
+                <div class="mini-card"><span>Ganho de Capital</span><i></i></div>
+                <div class="mini-card"><span>Calculadora Avançada</span><i></i></div>
+                <div class="mini-card"><span>ITCMD</span><i></i></div>
+                <div class="mini-card"><span>Triagem Notarial</span><i></i></div>
+                <div class="mini-card"><span>Verificador técnico</span><i></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page section" id="ferramentas">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Ferramentas incluídas</p>
+          <h2>O essencial para apoiar atos, cálculos e conferências.</h2>
+          <p>
+            O Portal Notarial Pro concentra ferramentas usadas em etapas recorrentes da rotina extrajudicial, com acesso pelo painel do assinante.
+          </p>
+        </div>
+        <a class="button" href="https://app.portalnotarial.com.br">Acessar painel</a>
+      </div>
+
+      <div class="tools-panel">
+        <ul class="tool-list">
+              <li><span>Calculadora Avançada</span><small>Cálculos notariais em ambiente protegido</small></li>
+              <li><span>ITCMD</span><small>Apoio para conferência do imposto</small></li>
+              <li><span>Ganho de Capital</span><small>Estimativa para análise preliminar</small></li>
+              <li><span>Triagem Notarial</span><small>Organização prévia de dados e documentos</small></li>
+              <li><span>Verificador técnico</span><small>PDF/A, hash e assinatura digital</small></li>
+              <li><span>Aplicador de Emolumentos</span><small>Enquadramento estimado por ato</small></li>
+              <li><span>Validação Selo Digital TJSP</span><small>Consulta auxiliar de selo</small></li>
+              <li><span>Gerador de orçamento</span><small>Orçamentos estimativos</small></li>
+              <li><span>Consulta PEP por CPF</span><small>Apoio à triagem cadastral</small></li>
+              <li><span>Competência e-Notariado</span><small>Atos eletrônicos e híbridos</small></li>
+              <li><span>Tarifas da Conta Notarial</span><small>Tarifas conforme dados informados</small></li>
+              <li><span>Certidão reprográfica</span><small>Apoio à montagem do documento</small></li>
+              <li><span>Ofício de comparecimento</span><small>Declarações editáveis</small></li>
+              <li><span>Ofício para cartórios</span><small>Comunicações padronizadas</small></li>
+              <li><span>Ofício para bancos em inventário</span><small>Solicitações bancárias</small></li>
+        </ul>
+
+        <div class="commercial-strip">
+          <div>
+            <strong>Assinatura simples, acesso direto.</strong>
+            <p>Entre com seu e-mail, mantenha a assinatura ativa e acesse as ferramentas protegidas pelo painel.</p>
+          </div>
+          <a class="button primary" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="page section" id="normas">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Consulta aberta</p>
+          <h2>Normas públicas para consulta rápida.</h2>
+          <p>
+            As páginas normativas permanecem abertas para pesquisa e conferência das fontes usadas no portal.
+          </p>
+        </div>
+      </div>
+
+      <div class="normas-grid">
+        <a class="norma-card" href="codigo-de-normas-nacional.html">
+          <div>
+            <span>Normas</span>
+            <h3>Código Nacional de Normas</h3>
+            <p>Consulta organizada para apoio à pesquisa normativa extrajudicial.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="norma-card" href="codigo-de-normas-de-sao-paulo.html">
+          <div>
+            <span>Normas</span>
+            <h3>Normas da Corregedoria de São Paulo</h3>
+            <p>Página de apoio para consulta das normas aplicáveis em São Paulo.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+
+        <a class="norma-card" href="fontes-normativas.html">
+          <div>
+            <span>Fontes</span>
+            <h3>Fontes normativas</h3>
+            <p>Referências institucionais utilizadas nas páginas informativas do portal.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">→</div>
+        </a>
+      </div>
+    </section>
+
+    <section class="page legal">
+      <p>
+        <strong>Aviso.</strong> As ferramentas são recursos de apoio operacional. Os resultados dependem dos dados informados e não substituem análise do caso concreto, conferência normativa, orientação profissional individualizada ou manifestação oficial.
+      </p>
+      <a class="button" href="aviso-legal.html">Ler aviso legal</a>
+    </section>
+  </main>
+
+  <footer class="page footer">
+    <div>
+      <strong>Portal Notarial Pro</strong><br />
+      Ferramentas notariais em área logada para apoio operacional.
+    </div>
+
+    <nav class="footer-links" aria-label="Links jurídicos e institucionais">
+      <a href="sobre.html">Sobre</a>
+      <a href="contato.html">Contato</a>
+      <a href="mapa-do-site.html">Mapa do site</a>
+      <a href="termos-de-uso.html">Termos</a>
+      <a href="politica-de-privacidade.html">Privacidade</a>
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="politica-de-cancelamento.html">Cancelamento</a>
+    </nav>
+  </footer>
 </body>
 </html>

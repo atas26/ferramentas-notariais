@@ -7,20 +7,567 @@
 <meta name="description" content="Ferramenta para conferência do Selo Digital TJSP a partir do QR Code de certidão ou traslado em PDF ou imagem, com leitura local e acesso à consulta oficial do Tribunal de Justiça de São Paulo.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://portalnotarial.com.br/consulta-selo-digital.html">
-<meta name="google-adsense-account" content="ca-pub-1578115877344777"> <!-- Google AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777" crossorigin="anonymous"></script> <!-- Google Analytics 4 -->
+<meta name="google-adsense-account" content="ca-pub-1578115877344777">
+
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777"
+     crossorigin="anonymous"></script>
+
+<!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TTD149ZWLC"></script>
-<script> window.dataLayer = window.dataLayer | []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-TTD149ZWLC');
-</script> <style> :root { --azul: #0b5fff; --azul-escuro: #0748c9; --texto: #17202c; --suave: #5d6978; --linha: #dce3ed; --fundo: #f5f7fb; --painel: #ffffff; --erro: #a52d36; --erro-fundo: #fff3f4; --ok: #146c43; --ok-fundo: #f1fbf5; --aviso: #774b00; --aviso-fundo: #fff9eb; --aviso-linha: #f0d493; --raio: 14px; --sombra: 0 2px 4px rgba(15, 23, 42, .04), 0 12px 30px rgba(15, 23, 42, .06); } * { box-sizing: border-box; } body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; color: var(--texto); background: var(--fundo); line-height: 1.5; } .pagina { max-width: 920px; margin: 0 auto; padding: 38px 20px 58px; } .cabecalho h1 { font-size: 1.65rem; line-height: 1.2; margin: 0 0 9px; letter-spacing: -.02em; } .cabecalho p { margin: 0; max-width: 720px; color: var(--suave); } .painel { background: var(--painel); border: 1px solid var(--linha); border-radius: var(--raio); box-shadow: var(--sombra); padding: 24px; margin-top: 24px; } .drop { border: 2px dashed #bfd0ec; background: #fbfcff; border-radius: 12px; min-height: 172px; padding: 34px 22px; display: grid; place-items: center; text-align: center; cursor: pointer; transition: background .15s, border-color .15s; } .drop:hover, .drop.ativo { background: #f1f6ff; border-color: var(--azul); } .drop strong { display: block; color: var(--azul); font-size: 1.02rem; margin-bottom: 5px; } .drop span { display: block; color: var(--suave); font-size: .9rem; } .drop small { display: block; color: var(--suave); margin-top: 13px; font-size: .8rem; } input[type="file"] { display: none; } .drop.bloqueada { opacity: .58; cursor: not-allowed; background: #f7f8fb; border-color: var(--linha); } .drop.bloqueada:hover { background: #f7f8fb; border-color: var(--linha); } .processamento-local { margin: 0 0 18px; padding: 12px 14px; border: 1px solid #cfe0ff; border-radius: 10px; background: #f4f8ff; color: var(--suave); font-size: .86rem; } .processamento-local strong { display: block; color: var(--texto); margin-bottom: 4px; font-size: .9rem; } .processamento-local p { margin: 0; line-height: 1.55; } .campo-tipo { margin-bottom: 18px; } .campo-tipo label { display: block; margin-bottom: 7px; color: var(--texto); font-size: .9rem; font-weight: 600; } .campo-tipo select { width: 100%; max-width: 400px; border: 1px solid var(--linha); border-radius: 9px; background: #fff; color: var(--texto); padding: 10px 12px; font: inherit; font-size: .92rem; } .campo-tipo p { margin: 7px 0 0; color: var(--suave); font-size: .82rem; } .status, .mensagem { display: none; align-items: center; gap: 10px; border-radius: 10px; padding: 12px 14px; margin-top: 16px; font-size: .92rem; } .status { background: #f4f7fc; color: var(--suave); } .status.visivel { display: flex; } .mensagem.erro { display: block; color: var(--erro); background: var(--erro-fundo); border: 1px solid #f0cbd0; } .mensagem.ok { display: block; color: var(--ok); background: var(--ok-fundo); border: 1px solid #cdebd8; } .mensagem.aviso { display: block; color: var(--aviso); background: var(--aviso-fundo); border: 1px solid var(--aviso-linha); } .spinner { width: 16px; height: 16px; border: 2px solid #d1dbe9; border-top-color: var(--azul); border-radius: 50%; animation: giro .75s linear infinite; flex-shrink: 0; } @keyframes giro { to { transform: rotate(360deg); } } .acoes { display: none; gap: 10px; flex-wrap: wrap; margin-top: 16px; } .acoes.visivel { display: flex; } .botao { font: inherit; font-size: .92rem; font-weight: 600; border: 1px solid var(--azul); border-radius: 9px; padding: 10px 17px; text-decoration: none; cursor: pointer; background: var(--azul); color: #fff; } .botao:hover { background: var(--azul-escuro); border-color: var(--azul-escuro); } .botao.secundario { background: #fff; color: var(--azul); } .botao.secundario:hover { background: #f2f6ff; color: var(--azul-escuro); } .consulta-manual { display: none; background: #fff; border: 1px solid var(--aviso-linha); border-radius: 10px; padding: 16px; margin-top: 14px; } .consulta-manual.visivel { display: block; } .consulta-manual h2 { font-size: 1rem; line-height: 1.35; margin: 0 0 8px; } .consulta-manual p { font-size: .9rem; color: var(--suave); margin: 0 0 12px; } .consulta-manual .selo { display: inline-flex; align-items: center; gap: 9px; color: var(--texto); background: #f5f7fb; border: 1px solid var(--linha); border-radius: 8px; padding: 8px 11px; margin: 0; } .consulta-manual code { font-size: .9rem; font-weight: 600; } .confirmacao-ocr { display: none; margin-top: 13px; } .confirmacao-ocr.visivel { display: block; } .resgate-leitura { display: none; margin-top: 12px; padding-top: 2px; } .resgate-leitura.visivel { display: block; } .resgate-leitura strong { display: block; margin-bottom: 6px; color: var(--texto); font-size: .9rem; } .resgate-leitura p { margin-bottom: 10px; } .confirmacao-ocr > label:first-child { display: block; color: var(--texto); font-size: .88rem; font-weight: 600; margin-bottom: 7px; } .confirmacao-ocr input[type="text"] { width: 100%; max-width: 360px; border: 1px solid var(--linha); border-radius: 8px; padding: 9px 11px; font: inherit; font-size: .92rem; text-transform: uppercase; } .confirmacao-ocr .ajuda-ocr { margin: 8px 0 11px; color: var(--suave); font-size: .84rem; } .checagem-ocr { display: flex; align-items: flex-start; gap: 8px; color: var(--texto); font-size: .87rem; } .checagem-ocr input { margin-top: 3px; } .botao.desabilitado, .botao:disabled { opacity: .52; cursor: not-allowed; pointer-events: none; } .feedback { min-height: 20px; color: var(--ok); font-size: .82rem; margin: 10px 0 0; } .confronto { display: none; border-radius: 10px; padding: 14px 15px; margin-top: 16px; font-size: .9rem; line-height: 1.58; } .confronto.visivel { display: block; } .confronto h2 { font-size: .97rem; margin: 0 0 6px; color: var(--texto); } .confronto p { margin: 0; white-space: pre-line; } .confronto.neutro { background: #f4f7fc; color: var(--suave); border: 1px solid var(--linha); } .confronto.compativel { background: var(--ok-fundo); color: var(--ok); border: 1px solid #cdebd8; } .confronto.alerta { background: var(--aviso-fundo); color: var(--aviso); border: 1px solid var(--aviso-linha); } iframe { display: none; width: 100%; height: 620px; margin-top: 18px; border: 1px solid var(--linha); border-radius: 10px; background: #fff; } iframe.visivel { display: block; } .informacoes { margin-top: 18px; padding-top: 17px; border-top: 1px solid var(--linha); font-size: .84rem; color: var(--suave); } .informacoes p { margin: 0 0 8px; } .informacoes p:last-child { margin-bottom: 0; } .conteudo { margin-top: 22px; display: grid; gap: 18px; } .bloco-conteudo { background: var(--painel); border: 1px solid var(--linha); border-radius: var(--raio); box-shadow: var(--sombra); padding: 24px; } .selo-secao { display: inline-flex; align-items: center; margin-bottom: 10px; border: 1px solid #cfe0ff; border-radius: 999px; background: #f2f6ff; color: var(--azul-escuro); padding: 5px 11px; font-size: .73rem; line-height: 1; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; } .bloco-conteudo h2 { margin: 0 0 10px; color: var(--texto); font-size: 1.34rem; line-height: 1.25; letter-spacing: -.02em; } .bloco-conteudo > p { margin: 0; color: var(--suave); font-size: .95rem; line-height: 1.65; } .grade-conteudo { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 19px; } .cartao-conteudo { border: 1px solid var(--linha); border-radius: 12px; background: #fbfcff; padding: 16px; } .cartao-conteudo h3, .fonte h3 { margin: 0 0 7px; color: var(--texto); font-size: .94rem; line-height: 1.38; } .cartao-conteudo p, .fonte p { margin: 0; color: var(--suave); font-size: .86rem; line-height: 1.58; } .passos { display: grid; gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; counter-reset: passo; } .passos li { counter-increment: passo; display: grid; grid-template-columns: 36px 1fr; gap: 12px; align-items: start; border: 1px solid var(--linha); border-radius: 12px; background: #fbfcff; padding: 13px 14px; color: var(--suave); font-size: .88rem; line-height: 1.55; } .passos li::before { content: counter(passo); width: 34px; height: 34px; display: grid; place-items: center; border-radius: 10px; background: #eef5ff; color: var(--azul-escuro); font-size: .85rem; font-weight: 700; } .passos strong { display: block; color: var(--texto); font-size: .92rem; margin-bottom: 3px; } .fontes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; } .fonte { border: 1px solid var(--linha); border-radius: 12px; background: #fbfcff; padding: 16px; } .fonte a { color: var(--azul); text-decoration: none; font-weight: 600; } .fonte a:hover { text-decoration: underline; } .alerta-conteudo { margin-top: 16px; padding: 13px 14px; border-left: 3px solid var(--azul); border-radius: 0 10px 10px 0; background: #f4f8ff; color: var(--suave); font-size: .87rem; line-height: 1.6; } .faq { display: grid; gap: 9px; margin-top: 17px; } .faq details { border: 1px solid var(--linha); border-radius: 11px; background: #fbfcff; overflow: hidden; } .faq summary { cursor: pointer; padding: 13px 14px; color: var(--texto); font-size: .9rem; font-weight: 600; } .faq details p { margin: 0; padding: 0 14px 14px; color: var(--suave); font-size: .86rem; line-height: 1.6; } .rodape { border-top: 1px solid var(--linha); background: var(--painel); margin-top: 30px; padding: 20px; color: var(--suave); font-size: .83rem; } .rodape-inner { max-width: 920px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; } .links-institucionais { display: flex; flex-wrap: wrap; gap: 9px 15px; } .links-institucionais a { color: var(--suave); text-decoration: none; } .links-institucionais a:hover { color: var(--azul); } @media (max-width: 640px) { .pagina { padding-top: 26px; } .painel { padding: 16px; } iframe { height: 480px; } .botao { width: 100%; text-align: center; } .bloco-conteudo { padding: 17px; } .grade-conteudo, .fontes { grid-template-columns: 1fr; } .rodape-inner { align-items: flex-start; flex-direction: column; } }
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TTD149ZWLC');
+</script>
+
+<style>
+  :root {
+    --azul: #0b5fff;
+    --azul-escuro: #0748c9;
+    --texto: #17202c;
+    --suave: #5d6978;
+    --linha: #dce3ed;
+    --fundo: #f5f7fb;
+    --painel: #ffffff;
+    --erro: #a52d36;
+    --erro-fundo: #fff3f4;
+    --ok: #146c43;
+    --ok-fundo: #f1fbf5;
+    --aviso: #774b00;
+    --aviso-fundo: #fff9eb;
+    --aviso-linha: #f0d493;
+    --raio: 14px;
+    --sombra: 0 2px 4px rgba(15, 23, 42, .04), 0 12px 30px rgba(15, 23, 42, .06);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: var(--texto);
+    background: var(--fundo);
+    line-height: 1.5;
+  }
+  .pagina { max-width: 920px; margin: 0 auto; padding: 38px 20px 58px; }
+  .cabecalho h1 { font-size: 1.65rem; line-height: 1.2; margin: 0 0 9px; letter-spacing: -.02em; }
+  .cabecalho p { margin: 0; max-width: 720px; color: var(--suave); }
+  .painel {
+    background: var(--painel);
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    padding: 24px;
+    margin-top: 24px;
+  }
+  .drop {
+    border: 2px dashed #bfd0ec;
+    background: #fbfcff;
+    border-radius: 12px;
+    min-height: 172px;
+    padding: 34px 22px;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+  }
+  .drop:hover, .drop.ativo { background: #f1f6ff; border-color: var(--azul); }
+  .drop strong { display: block; color: var(--azul); font-size: 1.02rem; margin-bottom: 5px; }
+  .drop span { display: block; color: var(--suave); font-size: .9rem; }
+  .drop small { display: block; color: var(--suave); margin-top: 13px; font-size: .8rem; }
+  input[type="file"] { display: none; }
+
+  .drop.bloqueada { opacity: .58; cursor: not-allowed; background: #f7f8fb; border-color: var(--linha); }
+  .drop.bloqueada:hover { background: #f7f8fb; border-color: var(--linha); }
+  .processamento-local {
+    margin: 0 0 18px; padding: 12px 14px; border: 1px solid #cfe0ff;
+    border-radius: 10px; background: #f4f8ff; color: var(--suave); font-size: .86rem;
+  }
+  .processamento-local strong { display: block; color: var(--texto); margin-bottom: 4px; font-size: .9rem; }
+  .processamento-local p { margin: 0; line-height: 1.55; }
+  .campo-tipo { margin-bottom: 18px; }
+  .campo-tipo label {
+    display: block; margin-bottom: 7px; color: var(--texto);
+    font-size: .9rem; font-weight: 600;
+  }
+  .campo-tipo select {
+    width: 100%; max-width: 400px; border: 1px solid var(--linha);
+    border-radius: 9px; background: #fff; color: var(--texto);
+    padding: 10px 12px; font: inherit; font-size: .92rem;
+  }
+  .campo-tipo p {
+    margin: 7px 0 0; color: var(--suave); font-size: .82rem;
+  }
+  .status, .mensagem {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 16px;
+    font-size: .92rem;
+  }
+  .status { background: #f4f7fc; color: var(--suave); }
+  .status.visivel { display: flex; }
+  .mensagem.erro { display: block; color: var(--erro); background: var(--erro-fundo); border: 1px solid #f0cbd0; }
+  .mensagem.ok { display: block; color: var(--ok); background: var(--ok-fundo); border: 1px solid #cdebd8; }
+  .mensagem.aviso { display: block; color: var(--aviso); background: var(--aviso-fundo); border: 1px solid var(--aviso-linha); }
+  .spinner {
+    width: 16px; height: 16px; border: 2px solid #d1dbe9;
+    border-top-color: var(--azul); border-radius: 50%;
+    animation: giro .75s linear infinite; flex-shrink: 0;
+  }
+  @keyframes giro { to { transform: rotate(360deg); } }
+  .acoes { display: none; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+  .acoes.visivel { display: flex; }
+  .botao {
+    font: inherit; font-size: .92rem; font-weight: 600;
+    border: 1px solid var(--azul); border-radius: 9px;
+    padding: 10px 17px; text-decoration: none; cursor: pointer;
+    background: var(--azul); color: #fff;
+  }
+  .botao:hover { background: var(--azul-escuro); border-color: var(--azul-escuro); }
+  .botao.secundario { background: #fff; color: var(--azul); }
+  .botao.secundario:hover { background: #f2f6ff; color: var(--azul-escuro); }
+  .consulta-manual {
+    display: none;
+    background: #fff;
+    border: 1px solid var(--aviso-linha);
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 14px;
+  }
+  .consulta-manual.visivel { display: block; }
+  .consulta-manual h2 { font-size: 1rem; line-height: 1.35; margin: 0 0 8px; }
+  .consulta-manual p { font-size: .9rem; color: var(--suave); margin: 0 0 12px; }
+  .consulta-manual .selo {
+    display: inline-flex; align-items: center; gap: 9px; color: var(--texto);
+    background: #f5f7fb; border: 1px solid var(--linha); border-radius: 8px;
+    padding: 8px 11px; margin: 0;
+  }
+  .consulta-manual code { font-size: .9rem; font-weight: 600; }
+  .confirmacao-ocr { display: none; margin-top: 13px; }
+  .confirmacao-ocr.visivel { display: block; }
+  .resgate-leitura { display: none; margin-top: 12px; padding-top: 2px; }
+  .resgate-leitura.visivel { display: block; }
+  .resgate-leitura strong { display: block; margin-bottom: 6px; color: var(--texto); font-size: .9rem; }
+  .resgate-leitura p { margin-bottom: 10px; }
+  .confirmacao-ocr > label:first-child { display: block; color: var(--texto); font-size: .88rem; font-weight: 600; margin-bottom: 7px; }
+  .confirmacao-ocr input[type="text"] {
+    width: 100%; max-width: 360px; border: 1px solid var(--linha); border-radius: 8px;
+    padding: 9px 11px; font: inherit; font-size: .92rem; text-transform: uppercase;
+  }
+  .confirmacao-ocr .ajuda-ocr { margin: 8px 0 11px; color: var(--suave); font-size: .84rem; }
+  .checagem-ocr { display: flex; align-items: flex-start; gap: 8px; color: var(--texto); font-size: .87rem; }
+  .checagem-ocr input { margin-top: 3px; }
+  .botao.desabilitado, .botao:disabled { opacity: .52; cursor: not-allowed; pointer-events: none; }
+  .feedback { min-height: 20px; color: var(--ok); font-size: .82rem; margin: 10px 0 0; }
+  .confronto {
+    display: none; border-radius: 10px; padding: 14px 15px; margin-top: 16px;
+    font-size: .9rem; line-height: 1.58;
+  }
+  .confronto.visivel { display: block; }
+  .confronto h2 { font-size: .97rem; margin: 0 0 6px; color: var(--texto); }
+  .confronto p { margin: 0; white-space: pre-line; }
+  .confronto.neutro { background: #f4f7fc; color: var(--suave); border: 1px solid var(--linha); }
+  .confronto.compativel { background: var(--ok-fundo); color: var(--ok); border: 1px solid #cdebd8; }
+  .confronto.alerta { background: var(--aviso-fundo); color: var(--aviso); border: 1px solid var(--aviso-linha); }
+  iframe {
+    display: none; width: 100%; height: 620px; margin-top: 18px;
+    border: 1px solid var(--linha); border-radius: 10px; background: #fff;
+  }
+  iframe.visivel { display: block; }
+  .informacoes {
+    margin-top: 18px; padding-top: 17px; border-top: 1px solid var(--linha);
+    font-size: .84rem; color: var(--suave);
+  }
+  .informacoes p { margin: 0 0 8px; }
+  .informacoes p:last-child { margin-bottom: 0; }
+
+  .conteudo {
+    margin-top: 22px;
+    display: grid;
+    gap: 18px;
+  }
+  .bloco-conteudo {
+    background: var(--painel);
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    box-shadow: var(--sombra);
+    padding: 24px;
+  }
+  .selo-secao {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #cfe0ff;
+    border-radius: 999px;
+    background: #f2f6ff;
+    color: var(--azul-escuro);
+    padding: 5px 11px;
+    font-size: .73rem;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .bloco-conteudo h2 {
+    margin: 0 0 10px;
+    color: var(--texto);
+    font-size: 1.34rem;
+    line-height: 1.25;
+    letter-spacing: -.02em;
+  }
+  .bloco-conteudo > p {
+    margin: 0;
+    color: var(--suave);
+    font-size: .95rem;
+    line-height: 1.65;
+  }
+  .grade-conteudo {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 19px;
+  }
+  .cartao-conteudo {
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: #fbfcff;
+    padding: 16px;
+  }
+  .cartao-conteudo h3,
+  .fonte h3 {
+    margin: 0 0 7px;
+    color: var(--texto);
+    font-size: .94rem;
+    line-height: 1.38;
+  }
+  .cartao-conteudo p,
+  .fonte p {
+    margin: 0;
+    color: var(--suave);
+    font-size: .86rem;
+    line-height: 1.58;
+  }
+  .passos {
+    display: grid;
+    gap: 10px;
+    margin: 18px 0 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: passo;
+  }
+  .passos li {
+    counter-increment: passo;
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+    align-items: start;
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: #fbfcff;
+    padding: 13px 14px;
+    color: var(--suave);
+    font-size: .88rem;
+    line-height: 1.55;
+  }
+  .passos li::before {
+    content: counter(passo);
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: #eef5ff;
+    color: var(--azul-escuro);
+    font-size: .85rem;
+    font-weight: 700;
+  }
+  .passos strong {
+    display: block;
+    color: var(--texto);
+    font-size: .92rem;
+    margin-bottom: 3px;
+  }
+  .fontes {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+  }
+  .fonte {
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: #fbfcff;
+    padding: 16px;
+  }
+  .fonte a {
+    color: var(--azul);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .fonte a:hover { text-decoration: underline; }
+  .alerta-conteudo {
+    margin-top: 16px;
+    padding: 13px 14px;
+    border-left: 3px solid var(--azul);
+    border-radius: 0 10px 10px 0;
+    background: #f4f8ff;
+    color: var(--suave);
+    font-size: .87rem;
+    line-height: 1.6;
+  }
+  .faq {
+    display: grid;
+    gap: 9px;
+    margin-top: 17px;
+  }
+  .faq details {
+    border: 1px solid var(--linha);
+    border-radius: 11px;
+    background: #fbfcff;
+    overflow: hidden;
+  }
+  .faq summary {
+    cursor: pointer;
+    padding: 13px 14px;
+    color: var(--texto);
+    font-size: .9rem;
+    font-weight: 600;
+  }
+  .faq details p {
+    margin: 0;
+    padding: 0 14px 14px;
+    color: var(--suave);
+    font-size: .86rem;
+    line-height: 1.6;
+  }
+  .rodape {
+    border-top: 1px solid var(--linha);
+    background: var(--painel);
+    margin-top: 30px;
+    padding: 20px;
+    color: var(--suave);
+    font-size: .83rem;
+  }
+  .rodape-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 20px;
+  }
+  .links-institucionais {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px 15px;
+  }
+  .links-institucionais a {
+    color: var(--suave);
+    text-decoration: none;
+  }
+  .links-institucionais a:hover { color: var(--azul); }
+
+  @media (max-width: 640px) {
+    .pagina { padding-top: 26px; }
+    .painel { padding: 16px; }
+    iframe { height: 480px; }
+    .botao { width: 100%; text-align: center; }
+    .bloco-conteudo { padding: 17px; }
+    .grade-conteudo, .fontes { grid-template-columns: 1fr; }
+    .rodape-inner { align-items: flex-start; flex-direction: column; }
+  }
 </style>
 </head>
 <body>
-<main class="pagina"> <header class="cabecalho"> <h1>Conferência do Selo Digital TJSP</h1> <p>Selecione o tipo de documento e envie o arquivo. O QR Code é lido localmente no seu navegador e somente a URL oficial encontrada é utilizada para obter o resultado no Tribunal de Justiça de São Paulo.</p> </header> <section class="painel" aria-label="Envio da certidão"> <div class="campo-tipo"> <label for="tipoDocumento">Tipo de documento enviado</label> <select id="tipoDocumento" name="tipo_documento" required> <option value="" selected>Selecione o tipo de documento</option> <option value="certidao">Certidão do registro civil, imobiliária ou notarial</option> <option value="traslado">Traslado de ato notarial</option> </select> <p id="orientacaoTipo">Selecione o tipo de documento para iniciar a conferência.</p> </div> <div class="processamento-local"> <strong>Processamento local do documento</strong> <p>O PDF ou a imagem permanece no seu navegador durante a leitura do QR Code e, em traslados pesquisáveis, durante a conferência auxiliar. O arquivo não é enviado ao servidor da ferramenta.</p> </div> <label class="drop bloqueada" id="drop" for="arquivo" aria-disabled="true"> <span> <strong>Selecionar documento</strong> Arraste o arquivo ou clique para enviar <small>Formatos aceitos: PDF, PNG e JPG. Limite: 15 MB.</small> </span> </label> <input id="arquivo" type="file" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg"> <div class="status" id="status" role="status" aria-live="polite"> <span class="spinner"></span> <span id="statusTexto">Processando a certidão</span> </div> <div class="mensagem" id="mensagem" role="alert" aria-live="polite"></div> <section class="confronto neutro" id="confronto" aria-label="Conferência auxiliar dos dados"> <h2>Conferência auxiliar</h2> <p id="confrontoTexto"></p> </section> <section class="consulta-manual" id="consultaManual" aria-label="Consulta manual necessária"> <h2>Continuidade manual no portal oficial</h2> <p id="orientacaoManual"></p> <p class="selo" id="seloResumoManual">Selo identificado pelo QR Code <code id="seloManual"></code></p> <div class="confirmacao-ocr" id="confirmacaoOcr"> <label for="seloOcrEditavel">Número do selo digital para conferência manual</label> <input id="seloOcrEditavel" type="text" maxlength="25" autocomplete="off" spellcheck="false" aria-describedby="ajudaSeloOcr"> <p class="ajuda-ocr" id="ajudaSeloOcr">Confira o código com o selo impresso no documento antes de prosseguir. O Selo Digital deve conter 25 posições, natureza compatível e dígito verificador válido.</p> <label class="checagem-ocr"><input id="confirmarSeloOcr" type="checkbox"> Conferi o código com o selo impresso no documento.</label> <p class="feedback" id="feedbackConfirmacaoOcr" aria-live="polite"></p> </div> <div class="acoes visivel" id="acoesConsultaManual"> <a class="botao" id="abrirConsultaOficial" target="_blank" rel="noopener noreferrer">Abrir consulta oficial com o selo preenchido</a> <button class="botao secundario" id="copiarSelo" type="button">Copiar número do selo</button> </div> <div class="resgate-leitura" id="resgateLeitura"> <strong>Tentar nova leitura com imagem mais nítida</strong> <p>Envie uma foto ou recorte aproximado da área que contém o QR Code e o número do selo. A imagem também será analisada somente no seu navegador.</p> <div class="acoes visivel"> <button class="botao" id="tentarImagemAproximada" type="button">Selecionar imagem aproximada</button> <a class="botao secundario" id="abrirPortalSemSelo" href="https://selodigital.tjsp.jus.br/consulta" target="_blank" rel="noopener noreferrer">Abrir portal oficial para consulta manual</a> </div> <input id="arquivoAproximado" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg"> </div> <p class="feedback" id="feedbackCopia" aria-live="polite"></p> </section> <div class="acoes" id="acoesPdf"> <a class="botao" id="baixar" download>Baixar PDF da consulta</a> <a class="botao secundario" id="abrir" target="_blank" rel="noopener">Abrir PDF</a> </div> <div class="acoes" id="acoesNovaConsulta"> <button class="botao secundario" id="novaConsulta" type="button">Nova consulta</button> </div> <iframe id="visor" title="PDF da consulta oficial do Selo Digital TJSP"></iframe> <div class="informacoes"> <p>O documento é analisado localmente no navegador para localizar o QR Code. Se a leitura falhar, a ferramenta tenta localizar localmente o número impresso do selo. Se nenhum número válido for obtido, poderá ser enviada uma imagem aproximada da área do QR Code e do selo, sem envio do documento ao servidor. O servidor da ferramenta recebe somente a URL oficial extraída do código quando a geração do PDF da consulta for solicitada.</p> <p>A ferramenta não preenche nem contorna CAPTCHA. Quando o portal do TJSP exigir CAPTCHA, a consulta oficial é aberta para conclusão manual pelo usuário.</p> <p>Nos traslados pesquisáveis, a conferência de CPF/CNPJ e iniciais também ocorre localmente. Em certidões do registro civil, imobiliárias ou notariais, essa conferência não é aplicada.</p> </div> </section> <section class="conteudo" aria-label="Informações da ferramenta"> <section class="bloco-conteudo" id="sobre-ferramenta" aria-labelledby="titulo-sobre-ferramenta"> <span class="selo-secao">Informações</span> <h2 id="titulo-sobre-ferramenta">O que a ferramenta faz</h2> <p>A ferramenta analisa localmente o documento em PDF ou imagem, localiza o QR Code e direciona a conferência para a página oficial indicada no próprio código. Quando a consulta oficial puder ser concluída automaticamente, o resultado é apresentado em PDF. Quando houver CAPTCHA, a continuidade ocorre manualmente no portal oficial.</p> <div class="grade-conteudo"> <article class="cartao-conteudo"> <h3>Quando usar</h3> <p>Use para conferir certidões do registro civil, imobiliárias ou notariais e traslados de atos notariais que contenham Selo Digital do Tribunal de Justiça de São Paulo com QR Code legível.</p> </article> <article class="cartao-conteudo"> <h3>Como interpretar o resultado</h3> <p>O PDF gerado ou a consulta aberta no portal oficial registra o resultado localizado para o selo informado. Confira a correspondência com o documento enviado.</p> </article> <article class="cartao-conteudo"> <h3>Limites da ferramenta</h3> <p>A ferramenta não valida o conteúdo jurídico do ato, não substitui a conferência humana e não resolve nem contorna CAPTCHA.</p> </article> </div> </section> <section class="bloco-conteudo" id="como-usar" aria-labelledby="titulo-como-usar"> <span class="selo-secao">Como usar</span> <h2 id="titulo-como-usar">Etapas da conferência</h2> <ol class="passos"> <li><div><strong>Selecione o tipo e o documento</strong>Escolha entre certidão e traslado e envie o arquivo em PDF, PNG ou JPG, observado o limite indicado.</div></li> <li><div><strong>Aguarde a leitura do QR Code</strong>A aplicação identifica localmente o QR Code e encaminha somente a URL oficial extraída para geração do resultado.</div></li> <li><div><strong>Conclua a consulta</strong>Baixe o PDF do resultado quando disponível. Havendo CAPTCHA, abra a consulta oficial e faça a validação manual.</div></li> <li><div><strong>Confira o documento</strong>Compare o selo, os dados apresentados na página oficial e a certidão utilizada na conferência.</div></li> </ol> </section> <section class="bloco-conteudo" id="criterios-fontes" aria-labelledby="titulo-criterios-fontes"> <span class="selo-secao">Critérios e fontes</span> <h2 id="titulo-criterios-fontes">Origem da consulta e cautelas</h2> <p>A conferência utiliza como referência a página oficial correspondente ao endereço incorporado no QR Code do documento. A ferramenta não substitui a consulta ao órgão responsável nem atribui autenticidade a documento sem resultado compatível na fonte oficial.</p> <div class="fontes"> <article class="fonte"> <h3>Fonte institucional</h3> <p>Tribunal de Justiça do Estado de São Paulo, responsável pelo serviço de consulta do Selo Digital utilizado na conferência.</p> <p><a href="https://www.tjsp.jus.br/" target="_blank" rel="noopener noreferrer">Acessar o TJSP</a></p> </article> <article class="fonte"> <h3>Tratamento do arquivo</h3> <p>O arquivo é processado localmente pelo navegador para leitura do QR Code. O backend não recebe o documento e processa apenas a URL oficial necessária à obtenção do resultado.</p> </article> </div> <div class="alerta-conteudo">Em caso de divergência, ausência de resultado ou exigência de CAPTCHA, prevalece a conferência realizada diretamente no ambiente oficial do TJSP.</div> </section> <section class="bloco-conteudo" id="faq" aria-labelledby="titulo-faq"> <span class="selo-secao">FAQ</span> <h2 id="titulo-faq">Perguntas frequentes</h2> <div class="faq"> <details> <summary>A ferramenta substitui a consulta no site oficial?</summary> <p>Não. A ferramenta utiliza o endereço oficial contido no QR Code e facilita o acesso ao resultado. A fonte de conferência continua sendo a página oficial do TJSP.</p> </details> <details> <summary>O que acontece quando o portal exigir CAPTCHA?</summary> <p>O selo identificado é exibido e a página oficial é aberta para que o usuário conclua a verificação manualmente. Não há solução automática de CAPTCHA.</p> </details> <details> <summary>O arquivo enviado permanece armazenado?</summary> <p>O documento é analisado localmente no navegador. O servidor da ferramenta não recebe o PDF ou a imagem enviada pelo usuário.</p> </details> <details> <summary>O resultado confirma que o conteúdo jurídico do ato está correto?</summary> <p>Não. A consulta auxilia na verificação do selo digital. A análise do conteúdo, da validade do ato e do documento apresentado depende de conferência própria.</p> </details> </div> </section> </section>
-</main> <footer class="rodape"> <div class="rodape-inner"> <div>Portal Notarial | Ferramenta de conferência auxiliar</div> <nav class="links-institucionais" aria-label="Links institucionais"> <a href="https://portalnotarial.com.br/">Início</a> <a href="https://portalnotarial.com.br/sobre.html">Sobre</a> <a href="https://portalnotarial.com.br/contato.html">Contato</a> <a href="https://portalnotarial.com.br/fontes-normativas.html">Fontes</a> <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a> <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a> <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a> </nav> </div>
-</footer> <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js" crossorigin="anonymous"></script>
+<main class="pagina">
+  <header class="cabecalho">
+    <h1>Conferência do Selo Digital TJSP</h1>
+    <p>Selecione o tipo de documento e envie o arquivo. O QR Code é lido localmente no seu navegador e somente a URL oficial encontrada é utilizada para obter o resultado no Tribunal de Justiça de São Paulo.</p>
+  </header>
+
+  <section class="painel" aria-label="Envio da certidão">
+    <div class="campo-tipo">
+      <label for="tipoDocumento">Tipo de documento enviado</label>
+      <select id="tipoDocumento" name="tipo_documento" required>
+        <option value="" selected>Selecione o tipo de documento</option>
+        <option value="certidao">Certidão do registro civil, imobiliária ou notarial</option>
+        <option value="traslado">Traslado de ato notarial</option>
+      </select>
+      <p id="orientacaoTipo">Selecione o tipo de documento para iniciar a conferência.</p>
+    </div>
+
+    <div class="processamento-local">
+      <strong>Processamento local do documento</strong>
+      <p>O PDF ou a imagem permanece no seu navegador durante a leitura do QR Code e, em traslados pesquisáveis, durante a conferência auxiliar. O arquivo não é enviado ao servidor da ferramenta.</p>
+    </div>
+
+    <label class="drop bloqueada" id="drop" for="arquivo" aria-disabled="true">
+      <span>
+        <strong>Selecionar documento</strong>
+        Arraste o arquivo ou clique para enviar
+        <small>Formatos aceitos: PDF, PNG e JPG. Limite: 15 MB.</small>
+      </span>
+    </label>
+    <input id="arquivo" type="file" accept=".pdf,.png,.jpg,.jpeg,application/pdf,image/png,image/jpeg">
+
+    <div class="status" id="status" role="status" aria-live="polite">
+      <span class="spinner"></span>
+      <span id="statusTexto">Processando a certidão</span>
+    </div>
+    <div class="mensagem" id="mensagem" role="alert" aria-live="polite"></div>
+
+    <section class="confronto neutro" id="confronto" aria-label="Conferência auxiliar dos dados">
+      <h2>Conferência auxiliar</h2>
+      <p id="confrontoTexto"></p>
+    </section>
+
+    <section class="consulta-manual" id="consultaManual" aria-label="Consulta manual necessária">
+      <h2>Continuidade manual no portal oficial</h2>
+      <p id="orientacaoManual"></p>
+      <p class="selo" id="seloResumoManual">Selo identificado pelo QR Code <code id="seloManual"></code></p>
+      <div class="confirmacao-ocr" id="confirmacaoOcr">
+        <label for="seloOcrEditavel">Número do selo digital para conferência manual</label>
+        <input id="seloOcrEditavel" type="text" maxlength="25" autocomplete="off" spellcheck="false" aria-describedby="ajudaSeloOcr">
+        <p class="ajuda-ocr" id="ajudaSeloOcr">Confira o código com o selo impresso no documento antes de prosseguir. O Selo Digital deve conter 25 posições, natureza compatível e dígito verificador válido.</p>
+        <label class="checagem-ocr"><input id="confirmarSeloOcr" type="checkbox"> Conferi o código com o selo impresso no documento.</label>
+        <p class="feedback" id="feedbackConfirmacaoOcr" aria-live="polite"></p>
+      </div>
+      <div class="acoes visivel" id="acoesConsultaManual">
+        <a class="botao" id="abrirConsultaOficial" target="_blank" rel="noopener noreferrer">Abrir consulta oficial com o selo preenchido</a>
+        <button class="botao secundario" id="copiarSelo" type="button">Copiar número do selo</button>
+      </div>
+      <div class="resgate-leitura" id="resgateLeitura">
+        <strong>Tentar nova leitura com imagem mais nítida</strong>
+        <p>Envie uma foto ou recorte aproximado da área que contém o QR Code e o número do selo. A imagem também será analisada somente no seu navegador.</p>
+        <div class="acoes visivel">
+          <button class="botao" id="tentarImagemAproximada" type="button">Selecionar imagem aproximada</button>
+          <a class="botao secundario" id="abrirPortalSemSelo" href="https://selodigital.tjsp.jus.br/consulta" target="_blank" rel="noopener noreferrer">Abrir portal oficial para consulta manual</a>
+        </div>
+        <input id="arquivoAproximado" type="file" accept=".png,.jpg,.jpeg,image/png,image/jpeg">
+      </div>
+      <p class="feedback" id="feedbackCopia" aria-live="polite"></p>
+    </section>
+
+    <div class="acoes" id="acoesPdf">
+      <a class="botao" id="baixar" download>Baixar PDF da consulta</a>
+      <a class="botao secundario" id="abrir" target="_blank" rel="noopener">Abrir PDF</a>
+    </div>
+
+    <div class="acoes" id="acoesNovaConsulta">
+      <button class="botao secundario" id="novaConsulta" type="button">Nova consulta</button>
+    </div>
+
+    <iframe id="visor" title="PDF da consulta oficial do Selo Digital TJSP"></iframe>
+
+    <div class="informacoes">
+      <p>O documento é analisado localmente no navegador para localizar o QR Code. Se a leitura falhar, a ferramenta tenta localizar localmente o número impresso do selo. Se nenhum número válido for obtido, poderá ser enviada uma imagem aproximada da área do QR Code e do selo, sem envio do documento ao servidor. O servidor da ferramenta recebe somente a URL oficial extraída do código quando a geração do PDF da consulta for solicitada.</p>
+      <p>A ferramenta não preenche nem contorna CAPTCHA. Quando o portal do TJSP exigir CAPTCHA, a consulta oficial é aberta para conclusão manual pelo usuário.</p>
+      <p>Nos traslados pesquisáveis, a conferência de CPF/CNPJ e iniciais também ocorre localmente. Em certidões do registro civil, imobiliárias ou notariais, essa conferência não é aplicada.</p>
+    </div>
+  </section>
+
+  <section class="conteudo" aria-label="Informações da ferramenta">
+    <section class="bloco-conteudo" id="sobre-ferramenta" aria-labelledby="titulo-sobre-ferramenta">
+      <span class="selo-secao">Informações</span>
+      <h2 id="titulo-sobre-ferramenta">O que a ferramenta faz</h2>
+      <p>A ferramenta analisa localmente o documento em PDF ou imagem, localiza o QR Code e direciona a conferência para a página oficial indicada no próprio código. Quando a consulta oficial puder ser concluída automaticamente, o resultado é apresentado em PDF. Quando houver CAPTCHA, a continuidade ocorre manualmente no portal oficial.</p>
+
+      <div class="grade-conteudo">
+        <article class="cartao-conteudo">
+          <h3>Quando usar</h3>
+          <p>Use para conferir certidões do registro civil, imobiliárias ou notariais e traslados de atos notariais que contenham Selo Digital do Tribunal de Justiça de São Paulo com QR Code legível.</p>
+        </article>
+        <article class="cartao-conteudo">
+          <h3>Como interpretar o resultado</h3>
+          <p>O PDF gerado ou a consulta aberta no portal oficial registra o resultado localizado para o selo informado. Confira a correspondência com o documento enviado.</p>
+        </article>
+        <article class="cartao-conteudo">
+          <h3>Limites da ferramenta</h3>
+          <p>A ferramenta não valida o conteúdo jurídico do ato, não substitui a conferência humana e não resolve nem contorna CAPTCHA.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="bloco-conteudo" id="como-usar" aria-labelledby="titulo-como-usar">
+      <span class="selo-secao">Como usar</span>
+      <h2 id="titulo-como-usar">Etapas da conferência</h2>
+      <ol class="passos">
+        <li><div><strong>Selecione o tipo e o documento</strong>Escolha entre certidão e traslado e envie o arquivo em PDF, PNG ou JPG, observado o limite indicado.</div></li>
+        <li><div><strong>Aguarde a leitura do QR Code</strong>A aplicação identifica localmente o QR Code e encaminha somente a URL oficial extraída para geração do resultado.</div></li>
+        <li><div><strong>Conclua a consulta</strong>Baixe o PDF do resultado quando disponível. Havendo CAPTCHA, abra a consulta oficial e faça a validação manual.</div></li>
+        <li><div><strong>Confira o documento</strong>Compare o selo, os dados apresentados na página oficial e a certidão utilizada na conferência.</div></li>
+      </ol>
+    </section>
+
+    <section class="bloco-conteudo" id="criterios-fontes" aria-labelledby="titulo-criterios-fontes">
+      <span class="selo-secao">Critérios e fontes</span>
+      <h2 id="titulo-criterios-fontes">Origem da consulta e cautelas</h2>
+      <p>A conferência utiliza como referência a página oficial correspondente ao endereço incorporado no QR Code do documento. A ferramenta não substitui a consulta ao órgão responsável nem atribui autenticidade a documento sem resultado compatível na fonte oficial.</p>
+      <div class="fontes">
+        <article class="fonte">
+          <h3>Fonte institucional</h3>
+          <p>Tribunal de Justiça do Estado de São Paulo, responsável pelo serviço de consulta do Selo Digital utilizado na conferência.</p>
+          <p><a href="https://www.tjsp.jus.br/" target="_blank" rel="noopener noreferrer">Acessar o TJSP</a></p>
+        </article>
+        <article class="fonte">
+          <h3>Tratamento do arquivo</h3>
+          <p>O arquivo é processado localmente pelo navegador para leitura do QR Code. O backend não recebe o documento e processa apenas a URL oficial necessária à obtenção do resultado.</p>
+        </article>
+      </div>
+      <div class="alerta-conteudo">Em caso de divergência, ausência de resultado ou exigência de CAPTCHA, prevalece a conferência realizada diretamente no ambiente oficial do TJSP.</div>
+    </section>
+
+    <section class="bloco-conteudo" id="faq" aria-labelledby="titulo-faq">
+      <span class="selo-secao">FAQ</span>
+      <h2 id="titulo-faq">Perguntas frequentes</h2>
+      <div class="faq">
+        <details>
+          <summary>A ferramenta substitui a consulta no site oficial?</summary>
+          <p>Não. A ferramenta utiliza o endereço oficial contido no QR Code e facilita o acesso ao resultado. A fonte de conferência continua sendo a página oficial do TJSP.</p>
+        </details>
+        <details>
+          <summary>O que acontece quando o portal exigir CAPTCHA?</summary>
+          <p>O selo identificado é exibido e a página oficial é aberta para que o usuário conclua a verificação manualmente. Não há solução automática de CAPTCHA.</p>
+        </details>
+        <details>
+          <summary>O arquivo enviado permanece armazenado?</summary>
+          <p>O documento é analisado localmente no navegador. O servidor da ferramenta não recebe o PDF ou a imagem enviada pelo usuário.</p>
+        </details>
+        <details>
+          <summary>O resultado confirma que o conteúdo jurídico do ato está correto?</summary>
+          <p>Não. A consulta auxilia na verificação do selo digital. A análise do conteúdo, da validade do ato e do documento apresentado depende de conferência própria.</p>
+        </details>
+      </div>
+    </section>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="rodape-inner">
+    <div>Portal Notarial | Ferramenta de conferência auxiliar</div>
+    <nav class="links-institucionais" aria-label="Links institucionais">
+      <a href="https://portalnotarial.com.br/">Início</a>
+      <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
+      <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+      <a href="https://portalnotarial.com.br/fontes-normativas.html">Fontes</a>
+      <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
+      <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
+      <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js" crossorigin="anonymous"></script>
 <script type="module">
 import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
-pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs"; const API_BASE = "https://consulta-selo-digital-tjsp.onrender.com";
+pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
+
+const API_BASE = "https://consulta-selo-digital-tjsp.onrender.com";
 const LIMITE_BYTES = 15 * 1024 * 1024;
 const TIPOS = ["application/pdf", "image/png", "image/jpeg"];
 const MAX_CANVAS_PIXELS = 35_000_000;
@@ -31,7 +578,9 @@ const MAX_PAGINAS_OCR = 6;
 const CONSULTA_MANUAL_URL = "https://selodigital.tjsp.jus.br/consulta";
 const TESSERACT_CDN = "https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js";
 const ROTULOS_CONTEXTO = /^(?:(?:o|a|os|as)\s+)?(?:(?:comparece(?:m)?(?:\s+(?:neste|no)\s+ato)?(?:\s+(?:na\s+qualidade\s+de|como))?\s+)?(?:outorgante|outorgado|mandante|mandat[aá]ri[oa]|comprador|compradora|vendedor|vendedora|transmitente|adquirente|interveniente|credor|devedor|representante|parte|s[oó]ci[oa])s?)(?:\s*[:\-–—]\s*|\s+)+/i;
-const PALAVRAS_NAO_NOME = new Set(["BRASILEIRO", "BRASILEIRA", "CASADO", "CASADA", "SOLTEIRO", "SOLTEIRA", "DIVORCIADO", "DIVORCIADA", "VIUVO", "VIUVA", "EMPRESARIO", "EMPRESARIA", "ADVOGADO", "ADVOGADA", "PORTADOR", "PORTADORA", "RESIDENTE", "DOMICILIADO", "DOMICILIADA", "NASCIDO", "NASCIDA", "INSCRITO", "INSCRITA", "CPF", "CNPJ", "RG", "CEDULA", "IDENTIDADE", "PROFISSAO", "ESTADO", "CIVIL", "COMPARECE", "COMPARECEM", "COMO", "QUALIDADE", "MANDANTE", "OUTORGANTE", "OUTORGADO", "PARTE", "REPRESENTANTE"]); const arquivo = document.getElementById("arquivo");
+const PALAVRAS_NAO_NOME = new Set(["BRASILEIRO", "BRASILEIRA", "CASADO", "CASADA", "SOLTEIRO", "SOLTEIRA", "DIVORCIADO", "DIVORCIADA", "VIUVO", "VIUVA", "EMPRESARIO", "EMPRESARIA", "ADVOGADO", "ADVOGADA", "PORTADOR", "PORTADORA", "RESIDENTE", "DOMICILIADO", "DOMICILIADA", "NASCIDO", "NASCIDA", "INSCRITO", "INSCRITA", "CPF", "CNPJ", "RG", "CEDULA", "IDENTIDADE", "PROFISSAO", "ESTADO", "CIVIL", "COMPARECE", "COMPARECEM", "COMO", "QUALIDADE", "MANDANTE", "OUTORGANTE", "OUTORGADO", "PARTE", "REPRESENTANTE"]);
+
+const arquivo = document.getElementById("arquivo");
 const tipoDocumento = document.getElementById("tipoDocumento");
 const orientacaoTipo = document.getElementById("orientacaoTipo");
 const drop = document.getElementById("drop");
@@ -65,131 +614,783 @@ let urlAnterior = null;
 let barcodeDetector = null;
 let carregamentoTesseract = null;
 let fluxoOcrPendente = false;
-let textoTrasladoPendente = ""; function atualizarTipoDocumento() { const tipo = tipoDocumento.value; const habilitado = tipo === "certidao" | tipo === "traslado"; arquivo.disabled = !habilitado; drop.classList.toggle("bloqueada", !habilitado); drop.setAttribute("aria-disabled", habilitado ? "false" : "true"); if (!habilitado) { orientacaoTipo.textContent = "Selecione o tipo de documento para iniciar a conferência."; return; } if (tipo === "certidao") { orientacaoTipo.textContent = "A ferramenta consultará o selo digital pelo QR Code. Não será realizado confronto automático de CPF/CNPJ ou iniciais com pessoas mencionadas no teor da certidão."; return; } orientacaoTipo.textContent = "A ferramenta consultará o selo digital pelo QR Code e, quando o resultado oficial estiver disponível automaticamente, realizará conferência auxiliar dos dígitos visíveis do CPF/CNPJ e das iniciais com a pessoa localizada no traslado.";
-} function limparResultado() { mensagem.className = "mensagem"; mensagem.textContent = ""; confronto.className = "confronto neutro"; confronto.classList.remove("visivel"); confrontoTexto.textContent = ""; consultaManual.classList.remove("visivel"); orientacaoManual.textContent = ""; seloResumoManual.style.display = "inline-flex"; seloManual.textContent = ""; confirmacaoOcr.classList.remove("visivel"); resgateLeitura.classList.remove("visivel"); acoesConsultaManual.classList.add("visivel"); arquivoAproximado.value = ""; seloOcrEditavel.value = ""; confirmarSeloOcr.checked = false; feedbackConfirmacaoOcr.textContent = ""; fluxoOcrPendente = false; textoTrasladoPendente = ""; abrirConsultaOficial.removeAttribute("href"); abrirConsultaOficial.classList.remove("desabilitado"); abrirConsultaOficial.removeAttribute("aria-disabled"); abrirConsultaOficial.textContent = "Abrir consulta oficial com o selo preenchido"; copiarSelo.disabled = false; feedbackCopia.textContent = ""; acoesPdf.classList.remove("visivel"); acoesNovaConsulta.classList.remove("visivel"); visor.classList.remove("visivel"); visor.removeAttribute("src"); if (urlAnterior) { URL.revokeObjectURL(urlAnterior); urlAnterior = null; }
-} function mostrarNovaConsulta() { acoesNovaConsulta.classList.add("visivel"); }
+let textoTrasladoPendente = "";
+
+function atualizarTipoDocumento() {
+  const tipo = tipoDocumento.value;
+  const habilitado = tipo === "certidao" || tipo === "traslado";
+  arquivo.disabled = !habilitado;
+  drop.classList.toggle("bloqueada", !habilitado);
+  drop.setAttribute("aria-disabled", habilitado ? "false" : "true");
+  if (!habilitado) {
+    orientacaoTipo.textContent = "Selecione o tipo de documento para iniciar a conferência.";
+    return;
+  }
+  if (tipo === "certidao") {
+    orientacaoTipo.textContent = "A ferramenta consultará o selo digital pelo QR Code. Não será realizado confronto automático de CPF/CNPJ ou iniciais com pessoas mencionadas no teor da certidão.";
+    return;
+  }
+  orientacaoTipo.textContent = "A ferramenta consultará o selo digital pelo QR Code e, quando o resultado oficial estiver disponível automaticamente, realizará conferência auxiliar dos dígitos visíveis do CPF/CNPJ e das iniciais com a pessoa localizada no traslado.";
+}
+
+function limparResultado() {
+  mensagem.className = "mensagem";
+  mensagem.textContent = "";
+  confronto.className = "confronto neutro";
+  confronto.classList.remove("visivel");
+  confrontoTexto.textContent = "";
+  consultaManual.classList.remove("visivel");
+  orientacaoManual.textContent = "";
+  seloResumoManual.style.display = "inline-flex";
+  seloManual.textContent = "";
+  confirmacaoOcr.classList.remove("visivel");
+  resgateLeitura.classList.remove("visivel");
+  acoesConsultaManual.classList.add("visivel");
+  arquivoAproximado.value = "";
+  seloOcrEditavel.value = "";
+  confirmarSeloOcr.checked = false;
+  feedbackConfirmacaoOcr.textContent = "";
+  fluxoOcrPendente = false;
+  textoTrasladoPendente = "";
+  abrirConsultaOficial.removeAttribute("href");
+  abrirConsultaOficial.classList.remove("desabilitado");
+  abrirConsultaOficial.removeAttribute("aria-disabled");
+  abrirConsultaOficial.textContent = "Abrir consulta oficial com o selo preenchido";
+  copiarSelo.disabled = false;
+  feedbackCopia.textContent = "";
+  acoesPdf.classList.remove("visivel");
+  acoesNovaConsulta.classList.remove("visivel");
+  visor.classList.remove("visivel");
+  visor.removeAttribute("src");
+  if (urlAnterior) {
+    URL.revokeObjectURL(urlAnterior);
+    urlAnterior = null;
+  }
+}
+
+function mostrarNovaConsulta() { acoesNovaConsulta.classList.add("visivel"); }
 function mostrarStatus(texto) { statusTexto.textContent = texto; statusBox.classList.add("visivel"); }
 function ocultarStatus() { statusBox.classList.remove("visivel"); }
 function mostrarMensagem(texto, tipo) { mensagem.textContent = texto; mensagem.className = "mensagem " + tipo; }
-function pausarInterface() { return new Promise((resolve) => window.requestAnimationFrame(() => resolve())); } function validarArquivo(file) { if (!tipoDocumento.value) return "Selecione o tipo de documento antes de enviar o arquivo."; if (!file) return "Selecione um arquivo."; if (file.size > LIMITE_BYTES) return "O arquivo excede o limite de 15 MB."; const extensaoAceita = /\.(pdf|png|jpe?g)$/i.test(file.name); if (!TIPOS.includes(file.type) && !extensaoAceita) return "Envie um arquivo PDF, PNG ou JPG."; return "";
-} function mostrarConfronto(dados) { if (!dados | !dados.mensagem) return; confrontoTexto.textContent = dados.mensagem; if (dados.status === "compativel") confronto.className = "confronto compativel visivel"; else confronto.className = "confronto alerta visivel";
-} function somenteDigitos(texto) { return String(texto | "").replace(/\D/g, ""); }
-function semAcentos(texto) { return String(texto | "").normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
+function pausarInterface() { return new Promise((resolve) => window.requestAnimationFrame(() => resolve())); }
+
+function validarArquivo(file) {
+  if (!tipoDocumento.value) return "Selecione o tipo de documento antes de enviar o arquivo.";
+  if (!file) return "Selecione um arquivo.";
+  if (file.size > LIMITE_BYTES) return "O arquivo excede o limite de 15 MB.";
+  const extensaoAceita = /\.(pdf|png|jpe?g)$/i.test(file.name);
+  if (!TIPOS.includes(file.type) && !extensaoAceita) return "Envie um arquivo PDF, PNG ou JPG.";
+  return "";
+}
+
+function mostrarConfronto(dados) {
+  if (!dados || !dados.mensagem) return;
+  confrontoTexto.textContent = dados.mensagem;
+  if (dados.status === "compativel") confronto.className = "confronto compativel visivel";
+  else confronto.className = "confronto alerta visivel";
+}
+
+function somenteDigitos(texto) { return String(texto || "").replace(/\D/g, ""); }
+function semAcentos(texto) { return String(texto || "").normalize("NFD").replace(/[\u0300-\u036f]/g, ""); }
 function normalizarIniciais(texto) { return semAcentos(texto).toUpperCase().replace(/[^A-Z0-9]/g, ""); }
 function fragmentoOficial(texto) { return somenteDigitos(texto); }
-function limparNome(texto) { let nome = String(texto | "").replace(/\s+/g, " ").trim().replace(/^[\s.,:;\-–—]+|[\s.,:;\-–—]+$/g, ""); if (nome.includes(":")) nome = nome.split(":").pop().trim(); nome = nome.replace(/^\s*\d+\s*[).:\-]\s*/, ""); let anterior = ""; while (nome && nome !== anterior) { anterior = nome; nome = nome.replace(ROTULOS_CONTEXTO, "").trim().replace(/^[\s.,:;\-–—]+|[\s.,:;\-–—]+$/g, ""); nome = nome.replace(/^\s*\d+\s*[).:\-]\s*/, ""); } return nome;
+function limparNome(texto) {
+  let nome = String(texto || "").replace(/\s+/g, " ").trim().replace(/^[\s.,:;\-–—]+|[\s.,:;\-–—]+$/g, "");
+  if (nome.includes(":")) nome = nome.split(":").pop().trim();
+  nome = nome.replace(/^\s*\d+\s*[).:\-]\s*/, "");
+  let anterior = "";
+  while (nome && nome !== anterior) {
+    anterior = nome;
+    nome = nome.replace(ROTULOS_CONTEXTO, "").trim().replace(/^[\s.,:;\-–—]+|[\s.,:;\-–—]+$/g, "");
+    nome = nome.replace(/^\s*\d+\s*[).:\-]\s*/, "");
+  }
+  return nome;
 }
-function calcularIniciais(nome) { const palavras = semAcentos(limparNome(nome)).toUpperCase().match(/[A-Z0-9]+/g) | []; if (palavras.length < 2) return null; return palavras.map((palavra) => palavra.charAt(0)).join(".") + ".";
+function calcularIniciais(nome) {
+  const palavras = semAcentos(limparNome(nome)).toUpperCase().match(/[A-Z0-9]+/g) || [];
+  if (palavras.length < 2) return null;
+  return palavras.map((palavra) => palavra.charAt(0)).join(".") + ".";
 }
-function nomeValido(segmento) { const nome = limparNome(segmento); const normalizado = semAcentos(nome).toUpperCase(); if (/^(FILHO|FILHA|PORTADOR|PORTADORA|NASCIDO|NASCIDA|RESIDENTE|DOMICILIADO|DOMICILIADA)\b/.test(normalizado)) return null; const palavras = normalizado.match(/[A-Z0-9]+/g) | []; if (palavras.length < 2 | palavras.length > 12) return null; if (palavras.some((palavra) => PALAVRAS_NAO_NOME.has(palavra))) return null; return calcularIniciais(nome) ? nome.toUpperCase() : null;
+function nomeValido(segmento) {
+  const nome = limparNome(segmento);
+  const normalizado = semAcentos(nome).toUpperCase();
+  if (/^(FILHO|FILHA|PORTADOR|PORTADORA|NASCIDO|NASCIDA|RESIDENTE|DOMICILIADO|DOMICILIADA)\b/.test(normalizado)) return null;
+  const palavras = normalizado.match(/[A-Z0-9]+/g) || [];
+  if (palavras.length < 2 || palavras.length > 12) return null;
+  if (palavras.some((palavra) => PALAVRAS_NAO_NOME.has(palavra))) return null;
+  return calcularIniciais(nome) ? nome.toUpperCase() : null;
 }
-function documentosNoTexto(texto) { const encontrados = []; const expressoes = [/(?<!\d)(\d{3}[.\s]?\d{3}[.\s]?\d{3}[-\s]?\d{2})(?!\d)/g, /(?<!\d)(\d{2}[.\s]?\d{3}[.\s]?\d{3}[\/\s]?\d{4}[-\s]?\d{2})(?!\d)/g]; expressoes.forEach((expressao) => { let match; while ((match = expressao.exec(texto)) !== null) { const digitos = somenteDigitos(match[1]); if (!encontrados.some((item) => item.digitos === digitos)) encontrados.push({ digitos, posicao: match.index }); } }); return encontrados;
+function documentosNoTexto(texto) {
+  const encontrados = [];
+  const expressoes = [/(?<!\d)(\d{3}[.\s]?\d{3}[.\s]?\d{3}[-\s]?\d{2})(?!\d)/g, /(?<!\d)(\d{2}[.\s]?\d{3}[.\s]?\d{3}[\/\s]?\d{4}[-\s]?\d{2})(?!\d)/g];
+  expressoes.forEach((expressao) => {
+    let match;
+    while ((match = expressao.exec(texto)) !== null) {
+      const digitos = somenteDigitos(match[1]);
+      if (!encontrados.some((item) => item.digitos === digitos)) encontrados.push({ digitos, posicao: match.index });
+    }
+  });
+  return encontrados;
 }
-function nomesPossiveisAssociados(texto, posicaoDocumento) { let trecho = texto.slice(Math.max(0, posicaoDocumento - 700), posicaoDocumento).replace(/\s+/g, " ").trim(); trecho = trecho.replace(/(?:inscrit[oa]\s+(?:no|na)\s+)?(?:CPF|CNPJ)(?:\s*(?:\/\s*MF|MF))?(?:\s*(?:sob|n[º°o.]*)\s*)?$/i, "").trim(); const encontrados = []; const segmentos = trecho.split(/[,;\n]/).reverse(); for (const segmento of segmentos) { const nome = nomeValido(segmento); if (nome && !encontrados.includes(nome)) encontrados.push(nome); } return encontrados;
+function nomesPossiveisAssociados(texto, posicaoDocumento) {
+  let trecho = texto.slice(Math.max(0, posicaoDocumento - 700), posicaoDocumento).replace(/\s+/g, " ").trim();
+  trecho = trecho.replace(/(?:inscrit[oa]\s+(?:no|na)\s+)?(?:CPF|CNPJ)(?:\s*(?:\/\s*MF|MF))?(?:\s*(?:sob|n[º°o.]*)\s*)?$/i, "").trim();
+  const encontrados = [];
+  const segmentos = trecho.split(/[,;\n]/).reverse();
+  for (const segmento of segmentos) {
+    const nome = nomeValido(segmento);
+    if (nome && !encontrados.includes(nome)) encontrados.push(nome);
+  }
+  return encontrados;
 }
-function valorDadoOficial(valor) { return String(valor | "").trim() | "Não informado na consulta oficial.";
+function valorDadoOficial(valor) {
+  return String(valor || "").trim() || "Não informado na consulta oficial.";
 }
-function informacoesAtoOficial(dadosAto) { return `Confira manualmente os dados do selo em relação ao ato consultado.\n\nCartório: ${valorDadoOficial(dadosAto.cartorio)}\nTipo de ato: ${valorDadoOficial(dadosAto.tipoAto)}\nData: ${valorDadoOficial(dadosAto.dataAto)}`;
+function informacoesAtoOficial(dadosAto) {
+  return `Confira manualmente os dados do selo em relação ao ato consultado.\n\nCartório: ${valorDadoOficial(dadosAto.cartorio)}\nTipo de ato: ${valorDadoOficial(dadosAto.tipoAto)}\nData: ${valorDadoOficial(dadosAto.dataAto)}`;
 }
-function formatarIniciaisResultado(iniciais) { return String(iniciais | "").replace(/\.\s*/g, ". ").trim();
+function formatarIniciaisResultado(iniciais) {
+  return String(iniciais || "").replace(/\.\s*/g, ". ").trim();
 }
-function confrontarLocalmente(texto, iniciaisConsulta, cpfCnpjConsulta, dadosAto = {}) { if (tipoDocumento.value !== "traslado") return null; const iniciaisOficiais = normalizarIniciais(iniciaisConsulta); const fragmento = fragmentoOficial(cpfCnpjConsulta); if (!texto | texto.trim().length < 10) return { status: "alerta", mensagem: "Conferência auxiliar\n\nNão foi possível confrontar automaticamente CPF/CNPJ e iniciais porque o traslado não contém texto pesquisável suficiente. Confira manualmente." }; if (!iniciaisOficiais | fragmento.length < 5) return { status: "alerta", mensagem: `Conferência auxiliar\n\nA consulta oficial não apresentou dados suficientes para o confronto automático do CPF/CNPJ com as iniciais do nome, provavelmente porque o cartório não comunicou estes dados.\n\n${informacoesAtoOficial(dadosAto)}` }; const candidatos = documentosNoTexto(texto).filter((item) => item.digitos.includes(fragmento)); if (candidatos.length === 0) return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: não compatível na conferência automática. O fragmento exibido na consulta oficial (${fragmento}) não foi localizado em CPF/CNPJ constante do traslado. Confira manualmente.` }; if (candidatos.length > 1) return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: confronto inconclusivo. O fragmento exibido na consulta oficial (${fragmento}) corresponde a mais de um CPF/CNPJ localizado no traslado. Confira manualmente.` }; const nomes = nomesPossiveisAssociados(texto, candidatos[0].posicao); const nomesComIniciais = nomes.filter((nome) => normalizarIniciais(calcularIniciais(nome)) === iniciaisOficiais); if (nomesComIniciais.length === 1) { const nome = nomesComIniciais[0]; const iniciaisCalculadas = formatarIniciaisResultado(calcularIniciais(nome)); return { status: "compativel", mensagem: `Conferência auxiliar\n\nCPF/CNPJ compatível. Fragmento conferido: ${fragmento}.\n\nNome compatível com as iniciais apresentadas: ${nome} = ${iniciaisCalculadas}\n\n${informacoesAtoOficial(dadosAto)}` }; } if (nomes.length === 1) { const nome = nomes[0]; const iniciaisCalculadas = calcularIniciais(nome); return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: compatível. Fragmento conferido: ${fragmento}.\n\nNome e iniciais: divergentes. O nome associado ao CPF/CNPJ localizado no traslado é ${nome} = ${iniciaisCalculadas}, enquanto a consulta oficial apresenta ${iniciaisConsulta}. Confira manualmente.` }; } return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: compatível. Fragmento conferido: ${fragmento}.\n\nAs iniciais não puderam ser confrontadas com segurança de forma automática. Confira manualmente.` };
-} function validarUrlOficial(texto) { try { const url = new URL(String(texto | "").trim()); if (url.protocol !== "https:" | url.hostname.toLowerCase() !== "selodigital.tjsp.jus.br") return null; const caminho = url.pathname.toLowerCase(); if (caminho !== "/" && caminho !== "/consulta") return null; if (!url.searchParams.get("r")) return null; return url.toString(); } catch (erro) { return null; }
+function confrontarLocalmente(texto, iniciaisConsulta, cpfCnpjConsulta, dadosAto = {}) {
+  if (tipoDocumento.value !== "traslado") return null;
+  const iniciaisOficiais = normalizarIniciais(iniciaisConsulta);
+  const fragmento = fragmentoOficial(cpfCnpjConsulta);
+  if (!texto || texto.trim().length < 10) return { status: "alerta", mensagem: "Conferência auxiliar\n\nNão foi possível confrontar automaticamente CPF/CNPJ e iniciais porque o traslado não contém texto pesquisável suficiente. Confira manualmente." };
+  if (!iniciaisOficiais || fragmento.length < 5) return { status: "alerta", mensagem: `Conferência auxiliar\n\nA consulta oficial não apresentou dados suficientes para o confronto automático do CPF/CNPJ com as iniciais do nome, provavelmente porque o cartório não comunicou estes dados.\n\n${informacoesAtoOficial(dadosAto)}` };
+  const candidatos = documentosNoTexto(texto).filter((item) => item.digitos.includes(fragmento));
+  if (candidatos.length === 0) return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: não compatível na conferência automática. O fragmento exibido na consulta oficial (${fragmento}) não foi localizado em CPF/CNPJ constante do traslado. Confira manualmente.` };
+  if (candidatos.length > 1) return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: confronto inconclusivo. O fragmento exibido na consulta oficial (${fragmento}) corresponde a mais de um CPF/CNPJ localizado no traslado. Confira manualmente.` };
+  const nomes = nomesPossiveisAssociados(texto, candidatos[0].posicao);
+  const nomesComIniciais = nomes.filter((nome) => normalizarIniciais(calcularIniciais(nome)) === iniciaisOficiais);
+  if (nomesComIniciais.length === 1) {
+    const nome = nomesComIniciais[0];
+    const iniciaisCalculadas = formatarIniciaisResultado(calcularIniciais(nome));
+    return { status: "compativel", mensagem: `Conferência auxiliar\n\nCPF/CNPJ compatível. Fragmento conferido: ${fragmento}.\n\nNome compatível com as iniciais apresentadas: ${nome} = ${iniciaisCalculadas}\n\n${informacoesAtoOficial(dadosAto)}` };
+  }
+  if (nomes.length === 1) {
+    const nome = nomes[0];
+    const iniciaisCalculadas = calcularIniciais(nome);
+    return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: compatível. Fragmento conferido: ${fragmento}.\n\nNome e iniciais: divergentes. O nome associado ao CPF/CNPJ localizado no traslado é ${nome} = ${iniciaisCalculadas}, enquanto a consulta oficial apresenta ${iniciaisConsulta}. Confira manualmente.` };
+  }
+  return { status: "alerta", mensagem: `Conferência auxiliar\n\nCPF/CNPJ: compatível. Fragmento conferido: ${fragmento}.\n\nAs iniciais não puderam ser confrontadas com segurança de forma automática. Confira manualmente.` };
 }
-function extrairSeloDaUrl(urlTexto) { try { const valor = new URL(urlTexto).searchParams.get("r") | ""; const codigo = valor.split("|")[0].replace(/[^A-Za-z0-9]/g, ""); return codigo | null; } catch (erro) { return null; }
-} async function obterDetectorNativo() { if (!("BarcodeDetector" in window)) return null; if (barcodeDetector) return barcodeDetector; try { const formatos = await window.BarcodeDetector.getSupportedFormats(); if (!formatos.includes("qr_code")) return null; barcodeDetector = new window.BarcodeDetector({ formats: ["qr_code"] }); return barcodeDetector; } catch (erro) { return null; }
+
+function validarUrlOficial(texto) {
+  try {
+    const url = new URL(String(texto || "").trim());
+    if (url.protocol !== "https:" || url.hostname.toLowerCase() !== "selodigital.tjsp.jus.br") return null;
+    const caminho = url.pathname.toLowerCase();
+    if (caminho !== "/" && caminho !== "/consulta") return null;
+    if (!url.searchParams.get("r")) return null;
+    return url.toString();
+  } catch (erro) { return null; }
 }
-async function lerQrCanvasNativo(canvas) { const detector = await obterDetectorNativo(); if (!detector) return null; try { const resultados = await detector.detect(canvas); for (const resultado of resultados) { const url = validarUrlOficial(resultado.rawValue); if (url) return url; } } catch (erro) { return null; } return null;
+function extrairSeloDaUrl(urlTexto) {
+  try {
+    const valor = new URL(urlTexto).searchParams.get("r") || "";
+    const codigo = valor.split("|")[0].replace(/[^A-Za-z0-9]/g, "");
+    return codigo || null;
+  } catch (erro) { return null; }
 }
-function transformarImagem(imageData, modo) { const entrada = imageData.data; const saida = new Uint8ClampedArray(entrada.length); for (let i = 0; i < entrada.length; i += 4) { const cinza = Math.round(0.299 * entrada[i] + 0.587 * entrada[i + 1] + 0.114 * entrada[i + 2]); let valor = cinza; if (modo === "contraste") valor = Math.max(0, Math.min(255, (cinza - 128) * 1.8 + 128)); if (modo === "limiar") valor = cinza > 155 ? 255 : 0; if (modo === "invertido") valor = cinza > 155 ? 0 : 255; saida[i] = valor; saida[i + 1] = valor; saida[i + 2] = valor; saida[i + 3] = 255; } return new ImageData(saida, imageData.width, imageData.height);
+
+async function obterDetectorNativo() {
+  if (!("BarcodeDetector" in window)) return null;
+  if (barcodeDetector) return barcodeDetector;
+  try {
+    const formatos = await window.BarcodeDetector.getSupportedFormats();
+    if (!formatos.includes("qr_code")) return null;
+    barcodeDetector = new window.BarcodeDetector({ formats: ["qr_code"] });
+    return barcodeDetector;
+  } catch (erro) { return null; }
 }
-async function lerQrCanvas(canvas, robusto) { const nativo = await lerQrCanvasNativo(canvas); if (nativo) return nativo; const contexto = canvas.getContext("2d", { willReadFrequently: true }); const original = contexto.getImageData(0, 0, canvas.width, canvas.height); const variantes = robusto ? [original, transformarImagem(original, "contraste"), transformarImagem(original, "limiar"), transformarImagem(original, "invertido")] : [original]; for (const dados of variantes) { const resultado = window.jsQR(dados.data, dados.width, dados.height, { inversionAttempts: "attemptBoth" }); const url = resultado && validarUrlOficial(resultado.data); if (url) return url; } return null;
+async function lerQrCanvasNativo(canvas) {
+  const detector = await obterDetectorNativo();
+  if (!detector) return null;
+  try {
+    const resultados = await detector.detect(canvas);
+    for (const resultado of resultados) {
+      const url = validarUrlOficial(resultado.rawValue);
+      if (url) return url;
+    }
+  } catch (erro) { return null; }
+  return null;
+}
+function transformarImagem(imageData, modo) {
+  const entrada = imageData.data;
+  const saida = new Uint8ClampedArray(entrada.length);
+  for (let i = 0; i < entrada.length; i += 4) {
+    const cinza = Math.round(0.299 * entrada[i] + 0.587 * entrada[i + 1] + 0.114 * entrada[i + 2]);
+    let valor = cinza;
+    if (modo === "contraste") valor = Math.max(0, Math.min(255, (cinza - 128) * 1.8 + 128));
+    if (modo === "limiar") valor = cinza > 155 ? 255 : 0;
+    if (modo === "invertido") valor = cinza > 155 ? 0 : 255;
+    saida[i] = valor; saida[i + 1] = valor; saida[i + 2] = valor; saida[i + 3] = 255;
+  }
+  return new ImageData(saida, imageData.width, imageData.height);
+}
+async function lerQrCanvas(canvas, robusto) {
+  const nativo = await lerQrCanvasNativo(canvas);
+  if (nativo) return nativo;
+  const contexto = canvas.getContext("2d", { willReadFrequently: true });
+  const original = contexto.getImageData(0, 0, canvas.width, canvas.height);
+  const variantes = robusto ? [original, transformarImagem(original, "contraste"), transformarImagem(original, "limiar"), transformarImagem(original, "invertido")] : [original];
+  for (const dados of variantes) {
+    const resultado = window.jsQR(dados.data, dados.width, dados.height, { inversionAttempts: "attemptBoth" });
+    const url = resultado && validarUrlOficial(resultado.data);
+    if (url) return url;
+  }
+  return null;
 }
 function liberarCanvas(canvas) { if (canvas) { canvas.width = 1; canvas.height = 1; } }
-async function renderizarPagina(pagina, escala) { const viewport = pagina.getViewport({ scale: escala }); if (viewport.width * viewport.height > MAX_CANVAS_PIXELS) return null; const canvas = document.createElement("canvas"); canvas.width = Math.ceil(viewport.width); canvas.height = Math.ceil(viewport.height); await pagina.render({ canvasContext: canvas.getContext("2d", { willReadFrequently: true }), viewport }).promise; return canvas;
+async function renderizarPagina(pagina, escala) {
+  const viewport = pagina.getViewport({ scale: escala });
+  if (viewport.width * viewport.height > MAX_CANVAS_PIXELS) return null;
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.ceil(viewport.width); canvas.height = Math.ceil(viewport.height);
+  await pagina.render({ canvasContext: canvas.getContext("2d", { willReadFrequently: true }), viewport }).promise;
+  return canvas;
 }
-async function renderizarTiles(pagina, escala) { const viewport = pagina.getViewport({ scale: escala }); const tiles = []; const largura = viewport.width / 2; const altura = viewport.height / 2; const margemX = viewport.width * 0.12; const margemY = viewport.height * 0.12; for (let linha = 0; linha < 2; linha += 1) { for (let coluna = 0; coluna < 2; coluna += 1) { const x = Math.max(0, coluna * largura - margemX); const y = Math.max(0, linha * altura - margemY); const w = Math.min(viewport.width - x, largura + 2 * margemX); const h = Math.min(viewport.height - y, altura + 2 * margemY); if (w * h > MAX_CANVAS_PIXELS) continue; const canvas = document.createElement("canvas"); canvas.width = Math.ceil(w); canvas.height = Math.ceil(h); await pagina.render({ canvasContext: canvas.getContext("2d", { willReadFrequently: true }), viewport, transform: [1, 0, 0, 1, -x, -y] }).promise; tiles.push(canvas); } } return tiles;
-} function ordemPaginasPrioritarias(total) { const limite = Math.min(MAX_PAGINAS_EXTREMIDADES, total); const primeiras = Array.from({ length: limite }, (_, i) => i + 1); const ultimas = Array.from({ length: limite }, (_, i) => total - i); const ordem = tipoDocumento.value === "certidao" ? [...primeiras, ...ultimas] : [...ultimas, ...primeiras]; return Array.from(new Set(ordem.filter((numero) => numero >= 1 && numero <= total)));
+async function renderizarTiles(pagina, escala) {
+  const viewport = pagina.getViewport({ scale: escala });
+  const tiles = [];
+  const largura = viewport.width / 2; const altura = viewport.height / 2;
+  const margemX = viewport.width * 0.12; const margemY = viewport.height * 0.12;
+  for (let linha = 0; linha < 2; linha += 1) {
+    for (let coluna = 0; coluna < 2; coluna += 1) {
+      const x = Math.max(0, coluna * largura - margemX);
+      const y = Math.max(0, linha * altura - margemY);
+      const w = Math.min(viewport.width - x, largura + 2 * margemX);
+      const h = Math.min(viewport.height - y, altura + 2 * margemY);
+      if (w * h > MAX_CANVAS_PIXELS) continue;
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.ceil(w); canvas.height = Math.ceil(h);
+      await pagina.render({ canvasContext: canvas.getContext("2d", { willReadFrequently: true }), viewport, transform: [1, 0, 0, 1, -x, -y] }).promise;
+      tiles.push(canvas);
+    }
+  }
+  return tiles;
 }
-function ordemPaginasDemais(total, prioritarias) { const usadas = new Set(prioritarias); const todas = tipoDocumento.value === "certidao" ? Array.from({ length: total }, (_, i) => i + 1) : Array.from({ length: total }, (_, i) => total - i); return todas.filter((numero) => !usadas.has(numero));
+
+function ordemPaginasPrioritarias(total) {
+  const limite = Math.min(MAX_PAGINAS_EXTREMIDADES, total);
+  const primeiras = Array.from({ length: limite }, (_, i) => i + 1);
+  const ultimas = Array.from({ length: limite }, (_, i) => total - i);
+  const ordem = tipoDocumento.value === "certidao" ? [...primeiras, ...ultimas] : [...ultimas, ...primeiras];
+  return Array.from(new Set(ordem.filter((numero) => numero >= 1 && numero <= total)));
 }
-async function pesquisarPagina(pagina, numero, escalas, robusto) { for (const escala of escalas) { mostrarStatus(`Lendo o QR Code localmente. Página ${numero}, ampliação ${escala}x.`); let canvas = await renderizarPagina(pagina, escala); if (canvas) { const url = await lerQrCanvas(canvas, robusto); liberarCanvas(canvas); if (url) return url; } else if (escala >= 6) { const tiles = await renderizarTiles(pagina, escala); for (const tile of tiles) { const url = await lerQrCanvas(tile, robusto); liberarCanvas(tile); if (url) return url; } } await pausarInterface(); } return null;
+function ordemPaginasDemais(total, prioritarias) {
+  const usadas = new Set(prioritarias);
+  const todas = tipoDocumento.value === "certidao"
+    ? Array.from({ length: total }, (_, i) => i + 1)
+    : Array.from({ length: total }, (_, i) => total - i);
+  return todas.filter((numero) => !usadas.has(numero));
+}
+async function pesquisarPagina(pagina, numero, escalas, robusto) {
+  for (const escala of escalas) {
+    mostrarStatus(`Lendo o QR Code localmente. Página ${numero}, ampliação ${escala}x.`);
+    let canvas = await renderizarPagina(pagina, escala);
+    if (canvas) {
+      const url = await lerQrCanvas(canvas, robusto);
+      liberarCanvas(canvas);
+      if (url) return url;
+    } else if (escala >= 6) {
+      const tiles = await renderizarTiles(pagina, escala);
+      for (const tile of tiles) {
+        const url = await lerQrCanvas(tile, robusto);
+        liberarCanvas(tile);
+        if (url) return url;
+      }
+    }
+    await pausarInterface();
+  }
+  return null;
 }
 const ALFABETO_LUHN_MOD_N = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const NATUREZAS_CERTIDAO = new Set(["1", "2", "3"]);
-function digitoVerificadorLuhnModN(corpo) { let soma = 0; let fator = 2; const base = ALFABETO_LUHN_MOD_N.length; const normalizado = String(corpo | "").toUpperCase(); for (let i = normalizado.length - 1; i >= 0; i -= 1) { const codigo = ALFABETO_LUHN_MOD_N.indexOf(normalizado[i]); if (codigo < 0) return null; const produto = fator * codigo; soma += Math.floor(produto / base) + (produto % base); fator = fator === 2 ? 1 : 2; } return ALFABETO_LUHN_MOD_N[(base - (soma % base)) % base];
+function digitoVerificadorLuhnModN(corpo) {
+  let soma = 0;
+  let fator = 2;
+  const base = ALFABETO_LUHN_MOD_N.length;
+  const normalizado = String(corpo || "").toUpperCase();
+  for (let i = normalizado.length - 1; i >= 0; i -= 1) {
+    const codigo = ALFABETO_LUHN_MOD_N.indexOf(normalizado[i]);
+    if (codigo < 0) return null;
+    const produto = fator * codigo;
+    soma += Math.floor(produto / base) + (produto % base);
+    fator = fator === 2 ? 1 : 2;
+  }
+  return ALFABETO_LUHN_MOD_N[(base - (soma % base)) % base];
 }
-function validarEstruturaSeloDigital(codigo, tipoSelecionado = "") { const limpo = String(codigo | "").toUpperCase().replace(/[^A-Z0-9]/g, ""); if (!/^[A-Z0-9]{25}$/.test(limpo)) { return { valido: false, codigo: null, mensagem: "Informe um código com exatamente 25 posições alfanuméricas." }; } if (!/^\d{6}$/.test(limpo.slice(0, 6))) { return { valido: false, codigo: null, mensagem: "O código informado não contém CNS numérico válido nas seis primeiras posições." }; } const natureza = limpo[6]; if (!/^[1-5]$/.test(natureza)) { return { valido: false, codigo: null, mensagem: "O código informado não contém natureza de serventia válida na 7ª posição." }; } if (!/^\d{2}$/.test(limpo.slice(22, 24))) { return { valido: false, codigo: null, mensagem: "O código informado não contém ano válido nas posições 23 e 24." }; } if (tipoSelecionado === "traslado" && natureza !== "1") { return { valido: false, codigo: null, mensagem: "Para traslado de ato notarial, o selo deve indicar natureza de Tabelionato de Notas." }; } if (tipoSelecionado === "certidao" && !NATUREZAS_CERTIDAO.has(natureza)) { return { valido: false, codigo: null, mensagem: "Para a certidão selecionada, o selo deve indicar natureza notarial, civil ou imobiliária." }; } const digitoEsperado = digitoVerificadorLuhnModN(limpo.slice(0, 24)); if (!digitoEsperado | digitoEsperado !== limpo[24]) { return { valido: false, codigo: null, mensagem: "O dígito verificador do código informado não é válido." }; } return { valido: true, codigo: limpo, campos: { cns: limpo.slice(0, 6), natureza, ato: limpo.slice(7, 9), informacoesAto: limpo.slice(9, 22), ano: limpo.slice(22, 24), digitoVerificador: limpo[24] }, mensagem: "" };
+function validarEstruturaSeloDigital(codigo, tipoSelecionado = "") {
+  const limpo = String(codigo || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  if (!/^[A-Z0-9]{25}$/.test(limpo)) {
+    return { valido: false, codigo: null, mensagem: "Informe um código com exatamente 25 posições alfanuméricas." };
+  }
+  if (!/^\d{6}$/.test(limpo.slice(0, 6))) {
+    return { valido: false, codigo: null, mensagem: "O código informado não contém CNS numérico válido nas seis primeiras posições." };
+  }
+  const natureza = limpo[6];
+  if (!/^[1-5]$/.test(natureza)) {
+    return { valido: false, codigo: null, mensagem: "O código informado não contém natureza de serventia válida na 7ª posição." };
+  }
+  if (!/^\d{2}$/.test(limpo.slice(22, 24))) {
+    return { valido: false, codigo: null, mensagem: "O código informado não contém ano válido nas posições 23 e 24." };
+  }
+  if (tipoSelecionado === "traslado" && natureza !== "1") {
+    return { valido: false, codigo: null, mensagem: "Para traslado de ato notarial, o selo deve indicar natureza de Tabelionato de Notas." };
+  }
+  if (tipoSelecionado === "certidao" && !NATUREZAS_CERTIDAO.has(natureza)) {
+    return { valido: false, codigo: null, mensagem: "Para a certidão selecionada, o selo deve indicar natureza notarial, civil ou imobiliária." };
+  }
+  const digitoEsperado = digitoVerificadorLuhnModN(limpo.slice(0, 24));
+  if (!digitoEsperado || digitoEsperado !== limpo[24]) {
+    return { valido: false, codigo: null, mensagem: "O dígito verificador do código informado não é válido." };
+  }
+  return {
+    valido: true,
+    codigo: limpo,
+    campos: {
+      cns: limpo.slice(0, 6),
+      natureza,
+      ato: limpo.slice(7, 9),
+      informacoesAto: limpo.slice(9, 22),
+      ano: limpo.slice(22, 24),
+      digitoVerificador: limpo[24]
+    },
+    mensagem: ""
+  };
 }
-function estruturaBasicaSeloOcrValida(codigo, tipoSelecionado = "") { const limpo = String(codigo | "").toUpperCase().replace(/[^A-Z0-9]/g, ""); if (!/^[A-Z0-9]{25}$/.test(limpo)) return false; if (!/^\d{6}$/.test(limpo.slice(0, 6))) return false; const natureza = limpo[6]; if (!/^[1-5]$/.test(natureza)) return false; if (!/^\d{2}$/.test(limpo.slice(22, 24))) return false; if (tipoSelecionado === "traslado" && natureza !== "1") return false; if (tipoSelecionado === "certidao" && !NATUREZAS_CERTIDAO.has(natureza)) return false; return true;
+function estruturaBasicaSeloOcrValida(codigo, tipoSelecionado = "") {
+  const limpo = String(codigo || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  if (!/^[A-Z0-9]{25}$/.test(limpo)) return false;
+  if (!/^\d{6}$/.test(limpo.slice(0, 6))) return false;
+  const natureza = limpo[6];
+  if (!/^[1-5]$/.test(natureza)) return false;
+  if (!/^\d{2}$/.test(limpo.slice(22, 24))) return false;
+  if (tipoSelecionado === "traslado" && natureza !== "1") return false;
+  if (tipoSelecionado === "certidao" && !NATUREZAS_CERTIDAO.has(natureza)) return false;
+  return true;
 }
-function analisarCandidatoSeloOcr(codigo, tipoSelecionado = (typeof tipoDocumento !== "undefined" ? tipoDocumento.value : "")) { const limpo = String(codigo | "").toUpperCase().replace(/[^A-Z0-9]/g, ""); const validacaoExata = validarEstruturaSeloDigital(limpo, tipoSelecionado); if (validacaoExata.valido) { return { codigo: validacaoExata.codigo, codigoLido: validacaoExata.codigo, digitoVerificadorCorrigido: false }; } if (!estruturaBasicaSeloOcrValida(limpo, tipoSelecionado)) return null; const digitoEsperado = digitoVerificadorLuhnModN(limpo.slice(0, 24)); if (!digitoEsperado) return null; const corrigido = limpo.slice(0, 24) + digitoEsperado; const validacaoCorrigida = validarEstruturaSeloDigital(corrigido, tipoSelecionado); if (!validacaoCorrigida.valido) return null; return { codigo: corrigido, codigoLido: limpo, digitoVerificadorCorrigido: corrigido !== limpo };
+function analisarCandidatoSeloOcr(codigo, tipoSelecionado = (typeof tipoDocumento !== "undefined" ? tipoDocumento.value : "")) {
+  const limpo = String(codigo || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  const validacaoExata = validarEstruturaSeloDigital(limpo, tipoSelecionado);
+  if (validacaoExata.valido) {
+    return { codigo: validacaoExata.codigo, codigoLido: validacaoExata.codigo, digitoVerificadorCorrigido: false };
+  }
+  if (!estruturaBasicaSeloOcrValida(limpo, tipoSelecionado)) return null;
+  const digitoEsperado = digitoVerificadorLuhnModN(limpo.slice(0, 24));
+  if (!digitoEsperado) return null;
+  const corrigido = limpo.slice(0, 24) + digitoEsperado;
+  const validacaoCorrigida = validarEstruturaSeloDigital(corrigido, tipoSelecionado);
+  if (!validacaoCorrigida.valido) return null;
+  return { codigo: corrigido, codigoLido: limpo, digitoVerificadorCorrigido: corrigido !== limpo };
 }
-function seloOcrValido(codigo, tipoSelecionado = (typeof tipoDocumento !== "undefined" ? tipoDocumento.value : "")) { const resultado = validarEstruturaSeloDigital(codigo, tipoSelecionado); return resultado.valido ? resultado.codigo : null;
+function seloOcrValido(codigo, tipoSelecionado = (typeof tipoDocumento !== "undefined" ? tipoDocumento.value : "")) {
+  const resultado = validarEstruturaSeloDigital(codigo, tipoSelecionado);
+  return resultado.valido ? resultado.codigo : null;
 }
-function encontrarCandidatoSeloEmTrecho(texto, permitirSemRotulo = false) { const normalizado = semAcentos(String(texto | "")).toUpperCase(); const fontes = []; const linhas = normalizado.split(/\r?\n/).map((linha) => linha.replace(/\s+/g, " ").trim()).filter(Boolean); for (let i = 0; i < linhas.length; i += 1) { if (!/SELO\s*DIGITAL/.test(linhas[i])) continue; const janela = linhas.slice(i, i + 2).join(" "); fontes.push(janela.replace(/^.*?SELO\s*DIGITAL\s*(?:(?:N|NO|NUMERO)\s*[º°O.]?\s*)?[:.\-]?\s*/i, "").slice(0, 120)); } if (permitirSemRotulo) fontes.push(normalizado.slice(0, 220)); for (const fonte of fontes) { const tokens = fonte.match(/[A-Z0-9]+/g) | []; for (let inicio = 0; inicio < tokens.length; inicio += 1) { let candidato = ""; for (let fim = inicio; fim < tokens.length && candidato.length <= 25; fim += 1) { candidato += tokens[fim]; if (candidato.length === 25) { const analisado = analisarCandidatoSeloOcr(candidato); if (analisado) return analisado; } } } } return null;
+function encontrarCandidatoSeloEmTrecho(texto, permitirSemRotulo = false) {
+  const normalizado = semAcentos(String(texto || "")).toUpperCase();
+  const fontes = [];
+  const linhas = normalizado.split(/\r?\n/).map((linha) => linha.replace(/\s+/g, " ").trim()).filter(Boolean);
+  for (let i = 0; i < linhas.length; i += 1) {
+    if (!/SELO\s*DIGITAL/.test(linhas[i])) continue;
+    const janela = linhas.slice(i, i + 2).join(" ");
+    fontes.push(janela.replace(/^.*?SELO\s*DIGITAL\s*(?:(?:N|NO|NUMERO)\s*[º°O.]?\s*)?[:.\-]?\s*/i, "").slice(0, 120));
+  }
+  if (permitirSemRotulo) fontes.push(normalizado.slice(0, 220));
+  for (const fonte of fontes) {
+    const tokens = fonte.match(/[A-Z0-9]+/g) || [];
+    for (let inicio = 0; inicio < tokens.length; inicio += 1) {
+      let candidato = "";
+      for (let fim = inicio; fim < tokens.length && candidato.length <= 25; fim += 1) {
+        candidato += tokens[fim];
+        if (candidato.length === 25) {
+          const analisado = analisarCandidatoSeloOcr(candidato);
+          if (analisado) return analisado;
+        }
+      }
+    }
+  }
+  return null;
 }
-function extrairSeloImpressoOcr(texto) { return encontrarCandidatoSeloEmTrecho(texto, false);
+function extrairSeloImpressoOcr(texto) {
+  return encontrarCandidatoSeloEmTrecho(texto, false);
 }
-function extrairSeloEmRegiaoFocalizadaOcr(texto) { return encontrarCandidatoSeloEmTrecho(texto, true);
+function extrairSeloEmRegiaoFocalizadaOcr(texto) {
+  return encontrarCandidatoSeloEmTrecho(texto, true);
 }
-function carregarTesseract() { if (window.Tesseract) return Promise.resolve(window.Tesseract); if (carregamentoTesseract) return carregamentoTesseract; carregamentoTesseract = new Promise((resolve, reject) => { const script = document.createElement("script"); script.src = TESSERACT_CDN; script.crossOrigin = "anonymous"; script.onload = () => window.Tesseract ? resolve(window.Tesseract) : reject(new Error("OCR indisponível.")); script.onerror = () => reject(new Error("Não foi possível carregar o OCR local.")); document.head.appendChild(script); }); return carregamentoTesseract;
+function carregarTesseract() {
+  if (window.Tesseract) return Promise.resolve(window.Tesseract);
+  if (carregamentoTesseract) return carregamentoTesseract;
+  carregamentoTesseract = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = TESSERACT_CDN;
+    script.crossOrigin = "anonymous";
+    script.onload = () => window.Tesseract ? resolve(window.Tesseract) : reject(new Error("OCR indisponível."));
+    script.onerror = () => reject(new Error("Não foi possível carregar o OCR local."));
+    document.head.appendChild(script);
+  });
+  return carregamentoTesseract;
 }
-async function criarWorkerOcr() { const tesseract = await carregarTesseract(); const worker = await tesseract.createWorker("por"); if (worker.setParameters) { await worker.setParameters({ preserve_interword_spaces: "1", tessedit_pageseg_mode: "6" }); } return worker;
+async function criarWorkerOcr() {
+  const tesseract = await carregarTesseract();
+  const worker = await tesseract.createWorker("por");
+  if (worker.setParameters) {
+    await worker.setParameters({ preserve_interword_spaces: "1", tessedit_pageseg_mode: "6" });
+  }
+  return worker;
 }
-function recortarCanvasOcr(origem, yInicial, proporcaoAltura) { const canvas = document.createElement("canvas"); const y = Math.max(0, Math.floor(origem.height * yInicial)); const altura = Math.min(origem.height - y, Math.ceil(origem.height * proporcaoAltura)); canvas.width = origem.width; canvas.height = altura; canvas.getContext("2d", { willReadFrequently: true }).drawImage(origem, 0, y, origem.width, altura, 0, 0, origem.width, altura); return canvas;
+function recortarCanvasOcr(origem, yInicial, proporcaoAltura) {
+  const canvas = document.createElement("canvas");
+  const y = Math.max(0, Math.floor(origem.height * yInicial));
+  const altura = Math.min(origem.height - y, Math.ceil(origem.height * proporcaoAltura));
+  canvas.width = origem.width;
+  canvas.height = altura;
+  canvas.getContext("2d", { willReadFrequently: true }).drawImage(origem, 0, y, origem.width, altura, 0, 0, origem.width, altura);
+  return canvas;
 }
-function recortarCanvasOcrRetangular(origem, xInicial, yInicial, proporcaoLargura, proporcaoAltura, ampliacao = 1) { const x = Math.max(0, Math.floor(origem.width * xInicial)); const y = Math.max(0, Math.floor(origem.height * yInicial)); const largura = Math.min(origem.width - x, Math.ceil(origem.width * proporcaoLargura)); const altura = Math.min(origem.height - y, Math.ceil(origem.height * proporcaoAltura)); const canvas = document.createElement("canvas"); canvas.width = Math.max(1, Math.ceil(largura * ampliacao)); canvas.height = Math.max(1, Math.ceil(altura * ampliacao)); canvas.getContext("2d", { willReadFrequently: true }).drawImage(origem, x, y, largura, altura, 0, 0, canvas.width, canvas.height); return canvas;
+function recortarCanvasOcrRetangular(origem, xInicial, yInicial, proporcaoLargura, proporcaoAltura, ampliacao = 1) {
+  const x = Math.max(0, Math.floor(origem.width * xInicial));
+  const y = Math.max(0, Math.floor(origem.height * yInicial));
+  const largura = Math.min(origem.width - x, Math.ceil(origem.width * proporcaoLargura));
+  const altura = Math.min(origem.height - y, Math.ceil(origem.height * proporcaoAltura));
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.max(1, Math.ceil(largura * ampliacao));
+  canvas.height = Math.max(1, Math.ceil(altura * ampliacao));
+  canvas.getContext("2d", { willReadFrequently: true }).drawImage(origem, x, y, largura, altura, 0, 0, canvas.width, canvas.height);
+  return canvas;
 }
-function regioesOcrFocalizadas(origem) { if (tipoDocumento.value === "certidao") { return [ recortarCanvasOcrRetangular(origem, 0.03, 0.018, 0.58, 0.070, 3.0), recortarCanvasOcrRetangular(origem, 0.01, 0.010, 0.72, 0.105, 2.2), recortarCanvasOcrRetangular(origem, 0.01, 0.015, 0.83, 0.13, 1.7), recortarCanvasOcrRetangular(origem, 0, 0, 1, 0.20, 1.25) ]; } return [ recortarCanvasOcrRetangular(origem, 0, 0, 1, 0.22, 1.25), recortarCanvasOcrRetangular(origem, 0, 0.72, 1, 0.28, 1.25) ];
+function regioesOcrFocalizadas(origem) {
+  if (tipoDocumento.value === "certidao") {
+    return [
+      recortarCanvasOcrRetangular(origem, 0.03, 0.018, 0.58, 0.070, 3.0),
+      recortarCanvasOcrRetangular(origem, 0.01, 0.010, 0.72, 0.105, 2.2),
+      recortarCanvasOcrRetangular(origem, 0.01, 0.015, 0.83, 0.13, 1.7),
+      recortarCanvasOcrRetangular(origem, 0, 0, 1, 0.20, 1.25)
+    ];
+  }
+  return [
+    recortarCanvasOcrRetangular(origem, 0, 0, 1, 0.22, 1.25),
+    recortarCanvasOcrRetangular(origem, 0, 0.72, 1, 0.28, 1.25)
+  ];
 }
-function regioesOcrGenericas(origem) { return [ recortarCanvasOcr(origem, 0, 0.38), recortarCanvasOcr(origem, 0.58, 0.42), origem ];
+function regioesOcrGenericas(origem) {
+  return [
+    recortarCanvasOcr(origem, 0, 0.38),
+    recortarCanvasOcr(origem, 0.58, 0.42),
+    origem
+  ];
 }
-async function pesquisarSeloPorOcrCanvas(canvas, worker) { const focadas = regioesOcrFocalizadas(canvas); if (worker.setParameters) await worker.setParameters({ preserve_interword_spaces: "1", tessedit_pageseg_mode: "7" }); for (const regiao of focadas) { const resultado = await worker.recognize(regiao); const selo = extrairSeloEmRegiaoFocalizadaOcr(resultado && resultado.data && resultado.data.text); liberarCanvas(regiao); if (selo) return selo; await pausarInterface(); } const regioes = regioesOcrGenericas(canvas); if (worker.setParameters) await worker.setParameters({ preserve_interword_spaces: "1", tessedit_pageseg_mode: "6" }); for (const regiao of regioes) { const resultado = await worker.recognize(regiao); const selo = extrairSeloImpressoOcr(resultado && resultado.data && resultado.data.text); if (regiao !== canvas) liberarCanvas(regiao); if (selo) return selo; await pausarInterface(); } return null;
+async function pesquisarSeloPorOcrCanvas(canvas, worker) {
+  const focadas = regioesOcrFocalizadas(canvas);
+  if (worker.setParameters) await worker.setParameters({ preserve_interword_spaces: "1", tessedit_pageseg_mode: "7" });
+  for (const regiao of focadas) {
+    const resultado = await worker.recognize(regiao);
+    const selo = extrairSeloEmRegiaoFocalizadaOcr(resultado && resultado.data && resultado.data.text);
+    liberarCanvas(regiao);
+    if (selo) return selo;
+    await pausarInterface();
+  }
+  const regioes = regioesOcrGenericas(canvas);
+  if (worker.setParameters) await worker.setParameters({ preserve_interword_spaces: "1", tessedit_pageseg_mode: "6" });
+  for (const regiao of regioes) {
+    const resultado = await worker.recognize(regiao);
+    const selo = extrairSeloImpressoOcr(resultado && resultado.data && resultado.data.text);
+    if (regiao !== canvas) liberarCanvas(regiao);
+    if (selo) return selo;
+    await pausarInterface();
+  }
+  return null;
 }
-async function localizarSeloPorOcrPdf(pdf, paginas) { let worker = null; try { mostrarStatus("QR Code não decodificado. Fazendo leitura focalizada do número impresso do selo no próprio documento."); worker = await criarWorkerOcr(); for (const numero of paginas.slice(0, MAX_PAGINAS_OCR)) { mostrarStatus(`QR Code não decodificado. Lendo localmente o campo impresso do selo. Página ${numero}.`); const canvas = await renderizarPagina(await pdf.getPage(numero), 4); if (!canvas) continue; const selo = await pesquisarSeloPorOcrCanvas(canvas, worker); liberarCanvas(canvas); if (selo) return selo; } } catch (erro) { console.warn("OCR local de contingência indisponível.", erro); } finally { if (worker) await worker.terminate(); } return null;
+async function localizarSeloPorOcrPdf(pdf, paginas) {
+  let worker = null;
+  try {
+    mostrarStatus("QR Code não decodificado. Fazendo leitura focalizada do número impresso do selo no próprio documento.");
+    worker = await criarWorkerOcr();
+    for (const numero of paginas.slice(0, MAX_PAGINAS_OCR)) {
+      mostrarStatus(`QR Code não decodificado. Lendo localmente o campo impresso do selo. Página ${numero}.`);
+      const canvas = await renderizarPagina(await pdf.getPage(numero), 4);
+      if (!canvas) continue;
+      const selo = await pesquisarSeloPorOcrCanvas(canvas, worker);
+      liberarCanvas(canvas);
+      if (selo) return selo;
+    }
+  } catch (erro) {
+    console.warn("OCR local de contingência indisponível.", erro);
+  } finally {
+    if (worker) await worker.terminate();
+  }
+  return null;
 }
-async function localizarSeloPorOcrImagem(bitmap) { let worker = null; try { mostrarStatus("QR Code não decodificado. Fazendo leitura focalizada do número impresso do selo no próprio documento."); worker = await criarWorkerOcr(); const escala = Math.min(4, Math.max(1, 3000 / Math.max(bitmap.width, 1))); const largura = Math.ceil(bitmap.width * escala); const altura = Math.ceil(bitmap.height * escala); if (largura * altura > MAX_CANVAS_PIXELS) return null; const canvas = document.createElement("canvas"); canvas.width = largura; canvas.height = altura; canvas.getContext("2d", { willReadFrequently: true }).drawImage(bitmap, 0, 0, largura, altura); const selo = await pesquisarSeloPorOcrCanvas(canvas, worker); liberarCanvas(canvas); return selo; } catch (erro) { console.warn("OCR local de contingência indisponível.", erro); return null; } finally { if (worker) await worker.terminate(); }
+async function localizarSeloPorOcrImagem(bitmap) {
+  let worker = null;
+  try {
+    mostrarStatus("QR Code não decodificado. Fazendo leitura focalizada do número impresso do selo no próprio documento.");
+    worker = await criarWorkerOcr();
+    const escala = Math.min(4, Math.max(1, 3000 / Math.max(bitmap.width, 1)));
+    const largura = Math.ceil(bitmap.width * escala);
+    const altura = Math.ceil(bitmap.height * escala);
+    if (largura * altura > MAX_CANVAS_PIXELS) return null;
+    const canvas = document.createElement("canvas");
+    canvas.width = largura; canvas.height = altura;
+    canvas.getContext("2d", { willReadFrequently: true }).drawImage(bitmap, 0, 0, largura, altura);
+    const selo = await pesquisarSeloPorOcrCanvas(canvas, worker);
+    liberarCanvas(canvas);
+    return selo;
+  } catch (erro) {
+    console.warn("OCR local de contingência indisponível.", erro);
+    return null;
+  } finally {
+    if (worker) await worker.terminate();
+  }
 }
-async function lerPdfLocalmente(file) { const bytes = new Uint8Array(await file.arrayBuffer()); const pdf = await pdfjsLib.getDocument({ data: bytes }).promise; const prioritarias = ordemPaginasPrioritarias(pdf.numPages); const demais = ordemPaginasDemais(pdf.numPages, prioritarias); let textoTraslado = ""; if (tipoDocumento.value === "traslado") { mostrarStatus("Extraindo localmente o texto pesquisável do traslado."); for (let i = 1; i <= pdf.numPages; i += 1) { const pagina = await pdf.getPage(i); const conteudo = await pagina.getTextContent(); textoTraslado += conteudo.items.map((item) => item.str | "").join(" ") + "\n"; } } for (const numero of prioritarias) { const url = await pesquisarPagina(await pdf.getPage(numero), numero, ESCALAS_RAPIDAS, false); if (url) return { url, textoTraslado, seloOcr: null }; } for (const numero of demais) { const url = await pesquisarPagina(await pdf.getPage(numero), numero, [2, 3], false); if (url) return { url, textoTraslado, seloOcr: null }; } for (const numero of prioritarias) { const url = await pesquisarPagina(await pdf.getPage(numero), numero, ESCALAS_ROBUSTAS, true); if (url) return { url, textoTraslado, seloOcr: null }; } const seloOcr = await localizarSeloPorOcrPdf(pdf, prioritarias); return { url: null, textoTraslado, seloOcr };
+async function lerPdfLocalmente(file) {
+  const bytes = new Uint8Array(await file.arrayBuffer());
+  const pdf = await pdfjsLib.getDocument({ data: bytes }).promise;
+  const prioritarias = ordemPaginasPrioritarias(pdf.numPages);
+  const demais = ordemPaginasDemais(pdf.numPages, prioritarias);
+  let textoTraslado = "";
+  if (tipoDocumento.value === "traslado") {
+    mostrarStatus("Extraindo localmente o texto pesquisável do traslado.");
+    for (let i = 1; i <= pdf.numPages; i += 1) {
+      const pagina = await pdf.getPage(i);
+      const conteudo = await pagina.getTextContent();
+      textoTraslado += conteudo.items.map((item) => item.str || "").join(" ") + "\n";
+    }
+  }
+  for (const numero of prioritarias) {
+    const url = await pesquisarPagina(await pdf.getPage(numero), numero, ESCALAS_RAPIDAS, false);
+    if (url) return { url, textoTraslado, seloOcr: null };
+  }
+  for (const numero of demais) {
+    const url = await pesquisarPagina(await pdf.getPage(numero), numero, [2, 3], false);
+    if (url) return { url, textoTraslado, seloOcr: null };
+  }
+  for (const numero of prioritarias) {
+    const url = await pesquisarPagina(await pdf.getPage(numero), numero, ESCALAS_ROBUSTAS, true);
+    if (url) return { url, textoTraslado, seloOcr: null };
+  }
+  const seloOcr = await localizarSeloPorOcrPdf(pdf, prioritarias);
+  return { url: null, textoTraslado, seloOcr };
 }
-async function lerImagemLocalmente(file) { const bitmap = await createImageBitmap(file); const escalas = [1, 2, 3, 4]; for (const escala of escalas) { const largura = Math.ceil(bitmap.width * escala); const altura = Math.ceil(bitmap.height * escala); if (largura * altura > MAX_CANVAS_PIXELS) continue; mostrarStatus(`Lendo o QR Code localmente. Ampliação ${escala}x.`); const canvas = document.createElement("canvas"); canvas.width = largura; canvas.height = altura; canvas.getContext("2d", { willReadFrequently: true }).drawImage(bitmap, 0, 0, largura, altura); const url = await lerQrCanvas(canvas, escala >= 2); liberarCanvas(canvas); if (url) { bitmap.close(); return { url, textoTraslado: "", seloOcr: null }; } await pausarInterface(); } const seloOcr = await localizarSeloPorOcrImagem(bitmap); bitmap.close(); return { url: null, textoTraslado: "", seloOcr };
+async function lerImagemLocalmente(file) {
+  const bitmap = await createImageBitmap(file);
+  const escalas = [1, 2, 3, 4];
+  for (const escala of escalas) {
+    const largura = Math.ceil(bitmap.width * escala); const altura = Math.ceil(bitmap.height * escala);
+    if (largura * altura > MAX_CANVAS_PIXELS) continue;
+    mostrarStatus(`Lendo o QR Code localmente. Ampliação ${escala}x.`);
+    const canvas = document.createElement("canvas"); canvas.width = largura; canvas.height = altura;
+    canvas.getContext("2d", { willReadFrequently: true }).drawImage(bitmap, 0, 0, largura, altura);
+    const url = await lerQrCanvas(canvas, escala >= 2);
+    liberarCanvas(canvas);
+    if (url) { bitmap.close(); return { url, textoTraslado: "", seloOcr: null }; }
+    await pausarInterface();
+  }
+  const seloOcr = await localizarSeloPorOcrImagem(bitmap);
+  bitmap.close();
+  return { url: null, textoTraslado: "", seloOcr };
 }
-async function localizarQrLocalmente(file) { const ehPdf = file.type === "application/pdf" | /\.pdf$/i.test(file.name); return ehPdf ? lerPdfLocalmente(file) : lerImagemLocalmente(file);
+async function localizarQrLocalmente(file) {
+  const ehPdf = file.type === "application/pdf" || /\.pdf$/i.test(file.name);
+  return ehPdf ? lerPdfLocalmente(file) : lerImagemLocalmente(file);
 }
-function lerCabecalho(resposta, nome) { const valor = resposta.headers.get(nome) | ""; try { return decodeURIComponent(valor); } catch (erro) { return valor; }
+function lerCabecalho(resposta, nome) {
+  const valor = resposta.headers.get(nome) || "";
+  try { return decodeURIComponent(valor); } catch (erro) { return valor; }
 }
-function mostrarConsultaManual(dados) { fluxoOcrPendente = false; mostrarMensagem(dados.mensagem, "aviso"); orientacaoManual.textContent = dados.orientacao; seloResumoManual.style.display = "inline-flex"; confirmacaoOcr.classList.remove("visivel"); resgateLeitura.classList.remove("visivel"); acoesConsultaManual.classList.add("visivel"); seloManual.textContent = dados.selo | "Não identificado"; abrirConsultaOficial.href = dados.url_consulta_oficial; abrirConsultaOficial.classList.remove("desabilitado"); abrirConsultaOficial.removeAttribute("aria-disabled"); abrirConsultaOficial.textContent = dados.rotulo_botao | "Abrir consulta oficial com o selo preenchido"; copiarSelo.disabled = false; consultaManual.classList.add("visivel"); if (tipoDocumento.value === "traslado") mostrarConfronto({ status: "alerta", mensagem: "Conferência auxiliar\n\nA conferência de CPF/CNPJ e iniciais não foi realizada porque o TJSP exigiu consulta manual com CAPTCHA." }); mostrarNovaConsulta();
+function mostrarConsultaManual(dados) {
+  fluxoOcrPendente = false;
+  mostrarMensagem(dados.mensagem, "aviso");
+  orientacaoManual.textContent = dados.orientacao;
+  seloResumoManual.style.display = "inline-flex";
+  confirmacaoOcr.classList.remove("visivel");
+  resgateLeitura.classList.remove("visivel");
+  acoesConsultaManual.classList.add("visivel");
+  seloManual.textContent = dados.selo || "Não identificado";
+  abrirConsultaOficial.href = dados.url_consulta_oficial;
+  abrirConsultaOficial.classList.remove("desabilitado");
+  abrirConsultaOficial.removeAttribute("aria-disabled");
+  abrirConsultaOficial.textContent = dados.rotulo_botao || "Abrir consulta oficial com o selo preenchido";
+  copiarSelo.disabled = false;
+  consultaManual.classList.add("visivel");
+  if (tipoDocumento.value === "traslado") mostrarConfronto({ status: "alerta", mensagem: "Conferência auxiliar\n\nA conferência de CPF/CNPJ e iniciais não foi realizada porque o TJSP exigiu consulta manual com CAPTCHA." });
+  mostrarNovaConsulta();
 }
-function normalizarSeloOcrDigitado(valor) { return String(valor | "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 25);
+function normalizarSeloOcrDigitado(valor) {
+  return String(valor || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 25);
 }
-function atualizarConfirmacaoSeloOcr() { const validacao = validarEstruturaSeloDigital(seloOcrEditavel.value, tipoDocumento.value); const candidato = validacao.valido ? validacao.codigo : null; const confirmado = Boolean(candidato) && confirmarSeloOcr.checked; feedbackConfirmacaoOcr.textContent = candidato ? "" : validacao.mensagem; abrirConsultaOficial.classList.toggle("desabilitado", !confirmado); abrirConsultaOficial.setAttribute("aria-disabled", confirmado ? "false" : "true"); if (confirmado) abrirConsultaOficial.href = CONSULTA_MANUAL_URL; else abrirConsultaOficial.removeAttribute("href"); copiarSelo.disabled = !confirmado;
+function atualizarConfirmacaoSeloOcr() {
+  const validacao = validarEstruturaSeloDigital(seloOcrEditavel.value, tipoDocumento.value);
+  const candidato = validacao.valido ? validacao.codigo : null;
+  const confirmado = Boolean(candidato) && confirmarSeloOcr.checked;
+  feedbackConfirmacaoOcr.textContent = candidato ? "" : validacao.mensagem;
+  abrirConsultaOficial.classList.toggle("desabilitado", !confirmado);
+  abrirConsultaOficial.setAttribute("aria-disabled", confirmado ? "false" : "true");
+  if (confirmado) abrirConsultaOficial.href = CONSULTA_MANUAL_URL;
+  else abrirConsultaOficial.removeAttribute("href");
+  copiarSelo.disabled = !confirmado;
 }
-function mostrarSeloIdentificadoPorOcr(leituraOcr) { const analise = leituraOcr && typeof leituraOcr === "object" ? leituraOcr : analisarCandidatoSeloOcr(leituraOcr | ""); const candidato = analise ? analise.codigo : null; consultaManual.classList.add("visivel"); seloResumoManual.style.display = "none"; feedbackCopia.textContent = ""; if (!candidato) { fluxoOcrPendente = false; mostrarMensagem("Não foi possível ler automaticamente o QR Code nem identificar com segurança o número do Selo Digital nesta imagem.", "aviso"); orientacaoManual.textContent = "A ferramenta não solicitará a redigitação do selo. Tente novamente com uma foto ou recorte mais nítido da área que contém o QR Code e o número do selo. Caso não disponha de nova imagem, faça a consulta manual diretamente no portal oficial do TJSP."; confirmacaoOcr.classList.remove("visivel"); resgateLeitura.classList.add("visivel"); acoesConsultaManual.classList.remove("visivel"); mostrarNovaConsulta(); return; } fluxoOcrPendente = true; mostrarMensagem("A consulta oficial ainda não foi realizada porque o QR Code desta digitalização não pôde ser lido automaticamente.", "aviso"); orientacaoManual.textContent = analise.digitoVerificadorCorrigido ? "Foi localizado um possível número de selo por leitura focalizada da imagem. O último caractere foi ajustado pelo dígito verificador previsto na especificação do TJSP. Confira integralmente o código com o selo impresso no documento antes de prosseguir." : "Foi localizado um possível número de selo por leitura focalizada da imagem. Confira integralmente o código com o selo impresso no documento antes de prosseguir. Ao clicar no botão de consulta, o selo será copiado para que você o cole no campo Selo da página oficial do TJSP e preencha o CAPTCHA."; resgateLeitura.classList.remove("visivel"); acoesConsultaManual.classList.add("visivel"); confirmacaoOcr.classList.add("visivel"); seloOcrEditavel.value = candidato; confirmarSeloOcr.checked = false; abrirConsultaOficial.textContent = "Copiar selo e abrir consulta oficial do TJSP"; atualizarConfirmacaoSeloOcr(); mostrarNovaConsulta();
+function mostrarSeloIdentificadoPorOcr(leituraOcr) {
+  const analise = leituraOcr && typeof leituraOcr === "object" ? leituraOcr : analisarCandidatoSeloOcr(leituraOcr || "");
+  const candidato = analise ? analise.codigo : null;
+  consultaManual.classList.add("visivel");
+  seloResumoManual.style.display = "none";
+  feedbackCopia.textContent = "";
+  if (!candidato) {
+    fluxoOcrPendente = false;
+    mostrarMensagem("Não foi possível ler automaticamente o QR Code nem identificar com segurança o número do Selo Digital nesta imagem.", "aviso");
+    orientacaoManual.textContent = "A ferramenta não solicitará a redigitação do selo. Tente novamente com uma foto ou recorte mais nítido da área que contém o QR Code e o número do selo. Caso não disponha de nova imagem, faça a consulta manual diretamente no portal oficial do TJSP.";
+    confirmacaoOcr.classList.remove("visivel");
+    resgateLeitura.classList.add("visivel");
+    acoesConsultaManual.classList.remove("visivel");
+    mostrarNovaConsulta();
+    return;
+  }
+  fluxoOcrPendente = true;
+  mostrarMensagem("A consulta oficial ainda não foi realizada porque o QR Code desta digitalização não pôde ser lido automaticamente.", "aviso");
+  orientacaoManual.textContent = analise.digitoVerificadorCorrigido
+    ? "Foi localizado um possível número de selo por leitura focalizada da imagem. O último caractere foi ajustado pelo dígito verificador previsto na especificação do TJSP. Confira integralmente o código com o selo impresso no documento antes de prosseguir."
+    : "Foi localizado um possível número de selo por leitura focalizada da imagem. Confira integralmente o código com o selo impresso no documento antes de prosseguir. Ao clicar no botão de consulta, o selo será copiado para que você o cole no campo Selo da página oficial do TJSP e preencha o CAPTCHA.";
+  resgateLeitura.classList.remove("visivel");
+  acoesConsultaManual.classList.add("visivel");
+  confirmacaoOcr.classList.add("visivel");
+  seloOcrEditavel.value = candidato;
+  confirmarSeloOcr.checked = false;
+  abrirConsultaOficial.textContent = "Copiar selo e abrir consulta oficial do TJSP";
+  atualizarConfirmacaoSeloOcr();
+  mostrarNovaConsulta();
 }
-async function consultarResultadoOficial(url, textoTraslado) { mostrarStatus("QR Code localizado. Obtendo a consulta oficial do TJSP."); const resposta = await fetch(API_BASE + "/api/consultar-url", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ url_consulta_oficial: url, tipo_documento: tipoDocumento.value }) }); const contentType = resposta.headers.get("Content-Type") | ""; if (contentType.includes("application/json")) { const corpo = await resposta.json().catch(() => ({})); ocultarStatus(); if (resposta.ok && corpo.status === "consulta_manual_necessaria") { mostrarConsultaManual(corpo); return; } mostrarMensagem(corpo.detail | "Não foi possível concluir a consulta.", "erro"); mostrarNovaConsulta(); return; } if (!resposta.ok) { ocultarStatus(); mostrarMensagem("Não foi possível concluir a consulta.", "erro"); mostrarNovaConsulta(); return; } const blob = await resposta.blob(); urlAnterior = URL.createObjectURL(blob); const disposicao = resposta.headers.get("Content-Disposition") | ""; const correspondencia = disposicao.match(/filename="([^"]+)"/i); baixar.href = urlAnterior; baixar.download = correspondencia ? correspondencia[1] : "consulta-selo-tjsp.pdf"; abrir.href = urlAnterior; visor.src = urlAnterior; const confrontoLocal = confrontarLocalmente( textoTraslado, lerCabecalho(resposta, "X-Consulta-Iniciais"), lerCabecalho(resposta, "X-Consulta-CPF-CNPJ"), { cartorio: lerCabecalho(resposta, "X-Consulta-Cartorio"), tipoAto: lerCabecalho(resposta, "X-Consulta-Tipo-Ato"), dataAto: lerCabecalho(resposta, "X-Consulta-Data-Ato") } ); if (confrontoLocal) mostrarConfronto(confrontoLocal); ocultarStatus(); mostrarMensagem("Consulta concluída. Confira o PDF gerado pela página oficial do TJSP.", "ok"); acoesPdf.classList.add("visivel"); visor.classList.add("visivel"); mostrarNovaConsulta();
+async function consultarResultadoOficial(url, textoTraslado) {
+  mostrarStatus("QR Code localizado. Obtendo a consulta oficial do TJSP.");
+  const resposta = await fetch(API_BASE + "/api/consultar-url", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ url_consulta_oficial: url, tipo_documento: tipoDocumento.value })
+  });
+  const contentType = resposta.headers.get("Content-Type") || "";
+  if (contentType.includes("application/json")) {
+    const corpo = await resposta.json().catch(() => ({}));
+    ocultarStatus();
+    if (resposta.ok && corpo.status === "consulta_manual_necessaria") { mostrarConsultaManual(corpo); return; }
+    mostrarMensagem(corpo.detail || "Não foi possível concluir a consulta.", "erro"); mostrarNovaConsulta(); return;
+  }
+  if (!resposta.ok) { ocultarStatus(); mostrarMensagem("Não foi possível concluir a consulta.", "erro"); mostrarNovaConsulta(); return; }
+  const blob = await resposta.blob();
+  urlAnterior = URL.createObjectURL(blob);
+  const disposicao = resposta.headers.get("Content-Disposition") || "";
+  const correspondencia = disposicao.match(/filename="([^"]+)"/i);
+  baixar.href = urlAnterior; baixar.download = correspondencia ? correspondencia[1] : "consulta-selo-tjsp.pdf";
+  abrir.href = urlAnterior; visor.src = urlAnterior;
+  const confrontoLocal = confrontarLocalmente(
+    textoTraslado,
+    lerCabecalho(resposta, "X-Consulta-Iniciais"),
+    lerCabecalho(resposta, "X-Consulta-CPF-CNPJ"),
+    {
+      cartorio: lerCabecalho(resposta, "X-Consulta-Cartorio"),
+      tipoAto: lerCabecalho(resposta, "X-Consulta-Tipo-Ato"),
+      dataAto: lerCabecalho(resposta, "X-Consulta-Data-Ato")
+    }
+  );
+  if (confrontoLocal) mostrarConfronto(confrontoLocal);
+  ocultarStatus();
+  mostrarMensagem("Consulta concluída. Confira o PDF gerado pela página oficial do TJSP.", "ok");
+  acoesPdf.classList.add("visivel"); visor.classList.add("visivel"); mostrarNovaConsulta();
 }
-async function enviar(file) { limparResultado(); const erroValidacao = validarArquivo(file); if (erroValidacao) { mostrarMensagem(erroValidacao, "erro"); mostrarNovaConsulta(); return; } try { mostrarStatus("Lendo localmente o QR Code. O arquivo não será enviado ao servidor da ferramenta."); const leitura = await localizarQrLocalmente(file); textoTrasladoPendente = leitura.textoTraslado | ""; if (!leitura.url) { ocultarStatus(); mostrarSeloIdentificadoPorOcr(leitura.seloOcr); return; } await consultarResultadoOficial(leitura.url, textoTrasladoPendente); } catch (erro) { console.error(erro); ocultarStatus(); mostrarMensagem("Não foi possível concluir a leitura local ou acessar o servidor da ferramenta.", "erro"); mostrarNovaConsulta(); }
-} async function enviarImagemAproximada(file) { if (!file) return; if (!/^image\/(png|jpeg)$/i.test(file.type) && !/\.(png|jpe?g)$/i.test(file.name)) { mostrarMensagem("Selecione uma imagem PNG ou JPG aproximada da área do QR Code e do número do selo.", "erro"); return; } if (file.size > 15 * 1024 * 1024) { mostrarMensagem("A imagem aproximada excede o limite de 15 MB.", "erro"); return; } try { consultaManual.classList.remove("visivel"); mostrarStatus("Lendo localmente a imagem aproximada do QR Code e do selo."); const leitura = await lerImagemLocalmente(file); if (leitura.url) { await consultarResultadoOficial(leitura.url, textoTrasladoPendente); return; } ocultarStatus(); mostrarSeloIdentificadoPorOcr(leitura.seloOcr); } catch (erro) { console.error(erro); ocultarStatus(); mostrarMensagem("Não foi possível concluir a leitura da imagem aproximada.", "erro"); mostrarNovaConsulta(); }
+async function enviar(file) {
+  limparResultado();
+  const erroValidacao = validarArquivo(file);
+  if (erroValidacao) { mostrarMensagem(erroValidacao, "erro"); mostrarNovaConsulta(); return; }
+  try {
+    mostrarStatus("Lendo localmente o QR Code. O arquivo não será enviado ao servidor da ferramenta.");
+    const leitura = await localizarQrLocalmente(file);
+    textoTrasladoPendente = leitura.textoTraslado || "";
+    if (!leitura.url) {
+      ocultarStatus();
+      mostrarSeloIdentificadoPorOcr(leitura.seloOcr); return;
+    }
+    await consultarResultadoOficial(leitura.url, textoTrasladoPendente);
+  } catch (erro) {
+    console.error(erro);
+    ocultarStatus(); mostrarMensagem("Não foi possível concluir a leitura local ou acessar o servidor da ferramenta.", "erro"); mostrarNovaConsulta();
+  }
+}
+
+async function enviarImagemAproximada(file) {
+  if (!file) return;
+  if (!/^image\/(png|jpeg)$/i.test(file.type) && !/\.(png|jpe?g)$/i.test(file.name)) {
+    mostrarMensagem("Selecione uma imagem PNG ou JPG aproximada da área do QR Code e do número do selo.", "erro");
+    return;
+  }
+  if (file.size > 15 * 1024 * 1024) {
+    mostrarMensagem("A imagem aproximada excede o limite de 15 MB.", "erro");
+    return;
+  }
+  try {
+    consultaManual.classList.remove("visivel");
+    mostrarStatus("Lendo localmente a imagem aproximada do QR Code e do selo.");
+    const leitura = await lerImagemLocalmente(file);
+    if (leitura.url) {
+      await consultarResultadoOficial(leitura.url, textoTrasladoPendente);
+      return;
+    }
+    ocultarStatus();
+    mostrarSeloIdentificadoPorOcr(leitura.seloOcr);
+  } catch (erro) {
+    console.error(erro);
+    ocultarStatus();
+    mostrarMensagem("Não foi possível concluir a leitura da imagem aproximada.", "erro");
+    mostrarNovaConsulta();
+  }
 }
 tentarImagemAproximada.addEventListener("click", function () { arquivoAproximado.click(); });
-arquivoAproximado.addEventListener("change", function () { if (arquivoAproximado.files && arquivoAproximado.files[0]) enviarImagemAproximada(arquivoAproximado.files[0]);
-}); seloOcrEditavel.addEventListener("input", function () { seloOcrEditavel.value = normalizarSeloOcrDigitado(seloOcrEditavel.value); confirmarSeloOcr.checked = false; atualizarConfirmacaoSeloOcr();
+arquivoAproximado.addEventListener("change", function () {
+  if (arquivoAproximado.files && arquivoAproximado.files[0]) enviarImagemAproximada(arquivoAproximado.files[0]);
+});
+
+seloOcrEditavel.addEventListener("input", function () {
+  seloOcrEditavel.value = normalizarSeloOcrDigitado(seloOcrEditavel.value);
+  confirmarSeloOcr.checked = false;
+  atualizarConfirmacaoSeloOcr();
 });
 confirmarSeloOcr.addEventListener("change", atualizarConfirmacaoSeloOcr);
-function copiarSeloParaConsultaManual(selo) { if (!selo | selo === "Não identificado") return; if (!navigator.clipboard | !window.isSecureContext) { feedbackCopia.textContent = "Não foi possível copiar automaticamente. Copie o número exibido e cole-o no campo Selo da página oficial do TJSP."; return; } navigator.clipboard.writeText(selo).then(function () { feedbackCopia.textContent = "Número do selo copiado. Na página oficial do TJSP, cole-o no campo Selo e preencha o CAPTCHA."; }).catch(function () { feedbackCopia.textContent = "Não foi possível copiar automaticamente. Copie o número exibido e cole-o no campo Selo da página oficial do TJSP."; });
+function copiarSeloParaConsultaManual(selo) {
+  if (!selo || selo === "Não identificado") return;
+  if (!navigator.clipboard || !window.isSecureContext) {
+    feedbackCopia.textContent = "Não foi possível copiar automaticamente. Copie o número exibido e cole-o no campo Selo da página oficial do TJSP.";
+    return;
+  }
+  navigator.clipboard.writeText(selo).then(function () {
+    feedbackCopia.textContent = "Número do selo copiado. Na página oficial do TJSP, cole-o no campo Selo e preencha o CAPTCHA.";
+  }).catch(function () {
+    feedbackCopia.textContent = "Não foi possível copiar automaticamente. Copie o número exibido e cole-o no campo Selo da página oficial do TJSP.";
+  });
 }
-abrirConsultaOficial.addEventListener("click", function (evento) { if (!fluxoOcrPendente) return; const selo = seloOcrValido(seloOcrEditavel.value); if (!confirmarSeloOcr.checked | !selo) { evento.preventDefault(); return; } copiarSeloParaConsultaManual(selo);
+abrirConsultaOficial.addEventListener("click", function (evento) {
+  if (!fluxoOcrPendente) return;
+  const selo = seloOcrValido(seloOcrEditavel.value);
+  if (!confirmarSeloOcr.checked || !selo) {
+    evento.preventDefault();
+    return;
+  }
+  copiarSeloParaConsultaManual(selo);
 });
-copiarSelo.addEventListener("click", function () { const selo = fluxoOcrPendente ? seloOcrValido(seloOcrEditavel.value) : seloManual.textContent.trim(); copiarSeloParaConsultaManual(selo);
+copiarSelo.addEventListener("click", function () {
+  const selo = fluxoOcrPendente ? seloOcrValido(seloOcrEditavel.value) : seloManual.textContent.trim();
+  copiarSeloParaConsultaManual(selo);
 });
-novaConsulta.addEventListener("click", function () { ocultarStatus(); limparResultado(); arquivo.value = ""; tipoDocumento.value = ""; atualizarTipoDocumento(); tipoDocumento.scrollIntoView({ behavior: "smooth", block: "center" });
+novaConsulta.addEventListener("click", function () {
+  ocultarStatus(); limparResultado(); arquivo.value = ""; tipoDocumento.value = ""; atualizarTipoDocumento(); tipoDocumento.scrollIntoView({ behavior: "smooth", block: "center" });
 });
 tipoDocumento.addEventListener("change", function () { arquivo.value = ""; limparResultado(); atualizarTipoDocumento(); });
 arquivo.addEventListener("change", function () { if (arquivo.files && arquivo.files[0]) enviar(arquivo.files[0]); });
 ["dragenter", "dragover"].forEach(function (evento) { drop.addEventListener(evento, function (e) { e.preventDefault(); if (!arquivo.disabled) drop.classList.add("ativo"); }); });
 ["dragleave", "drop"].forEach(function (evento) { drop.addEventListener(evento, function (e) { e.preventDefault(); drop.classList.remove("ativo"); }); });
 drop.addEventListener("drop", function (e) { if (!arquivo.disabled && e.dataTransfer.files && e.dataTransfer.files[0]) enviar(e.dataTransfer.files[0]); });
-atualizarTipoDocumento(); </script>
+atualizarTipoDocumento();
+
+</script>
 </body>
 </html>

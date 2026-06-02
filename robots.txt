@@ -1,2 +1,4 @@
 User-agent: *
-Allow: / Sitemap: https://portalnotarial.com.br/sitemap.xml
+Allow: /
+
+Sitemap: https://portalnotarial.com.br/sitemap.xml

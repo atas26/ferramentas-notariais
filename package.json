@@ -1,8 +1,8 @@
 {
   "name": "ferramentas-notariais-protegido",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "private": true,
-  "description": "Home pública limpa do Portal Notarial Pro, com foco comercial e cards normativos.",
+  "description": "Home pública moderna do Portal Notarial Pro com mensagens e animação preservadas.",
   "type": "module",
   "main": "server.js",
   "scripts": {
