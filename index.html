@@ -379,9 +379,11 @@
       max-width: 1440px;
       margin: 0 auto;
       padding: 0 22px 72px;
+      clear: both;
     }
 
     .section-panel {
+      width: 100%;
       border: 1px solid rgba(10,37,64,0.10);
       border-radius: 32px;
       background:
@@ -449,7 +451,7 @@
 
     .tools-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(5, minmax(170px, 1fr));
       gap: 12px;
       margin-top: 28px;
     }
@@ -469,6 +471,7 @@
       font-size: 17px;
       line-height: 1.22;
       letter-spacing: -0.025em;
+      overflow-wrap: anywhere;
     }
 
     .tool-card p {
@@ -476,6 +479,7 @@
       color: var(--texto-suave);
       font-size: 13.5px;
       line-height: 1.42;
+      overflow-wrap: anywhere;
     }
 
     .pro-strip {
@@ -505,7 +509,7 @@
 
     .normas-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(260px, 1fr));
       gap: 16px;
       margin-top: 28px;
     }
@@ -579,6 +583,7 @@
       max-width: 1440px;
       margin: 0 auto 72px;
       padding: 0 22px;
+      clear: both;
     }
 
     .notice-inner {
@@ -586,6 +591,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 18px;
+      width: 100%;
       border: 1px solid rgba(10,37,64,0.10);
       border-radius: 24px;
       background: rgba(255,255,255,0.86);
@@ -611,6 +617,7 @@
       color: var(--texto-suave);
       padding: 22px;
       font-size: 13px;
+      clear: both;
     }
 
     .footer-inner {
@@ -713,8 +720,6 @@
 
         <div class="nav-right">
           <div class="primary-links" aria-label="Links principais">
-            <a href="#ferramentas">Ferramentas</a>
-            <a href="#normas">Normas</a>
             <a href="sobre.html">Sobre</a>
             <a href="contato.html">Contato</a>
             <a class="login-link" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
@@ -1383,6 +1388,9 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </header>
 
     <main>
       <section class="section" id="ferramentas" aria-labelledby="titulo-ferramentas">
@@ -1472,7 +1480,7 @@
         <div class="section-panel">
           <div class="section-content">
             <span class="section-eyebrow">Consulta aberta</span>
-            <h2 class="section-title" id="titulo-normas">Normas públicas para consulta rápida.</h2>
+            <h2 class="section-title" id="titulo-normas">Normas para consulta rápida.</h2>
             <p class="section-lead">
               As páginas normativas permanecem abertas para pesquisa e conferência das fontes usadas no portal.
             </p>
@@ -1492,15 +1500,6 @@
                   <span>Normas</span>
                   <h3>Normas da Corregedoria de São Paulo</h3>
                   <p>Página de apoio para consulta das normas aplicáveis em São Paulo.</p>
-                </div>
-                <div class="arrow" aria-hidden="true">→</div>
-              </a>
-
-              <a class="norma-card" href="fontes-normativas.html">
-                <div>
-                  <span>Fontes</span>
-                  <h3>Fontes normativas</h3>
-                  <p>Referências institucionais utilizadas nas páginas informativas do portal.</p>
                 </div>
                 <div class="arrow" aria-hidden="true">→</div>
               </a>

@@ -85,3 +85,16 @@ Esta versão preserva as rotas protegidas e ajusta a Home pública:
 - corrige e alinha o aviso;
 - mantém apenas os três cards normativos públicos;
 - preserva `server.js`, `sitemap.xml`, `mapa-do-site.html` e as rotas protegidas.
+
+
+## Proteção Portal Notarial Pro v7
+
+Esta versão preserva as rotas protegidas e ajusta apenas a Home pública:
+
+- corrige o fechamento estrutural do bloco hero, evitando deslocamento dos blocos inferiores;
+- ajusta os blocos “Ferramentas incluídas”, “Consulta aberta” e “Aviso”;
+- altera o título para “Normas para consulta rápida.”;
+- remove o card “Fontes normativas” da Home;
+- remove os links “Ferramentas” e “Normas” da barra superior;
+- preserva logotipo, frases superiores e animação original;
+- preserva `server.js` e as rotas protegidas.

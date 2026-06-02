@@ -1,8 +1,8 @@
 {
   "name": "ferramentas-notariais-protegido",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "private": true,
-  "description": "Home comercial do Portal Notarial Pro com logotipo, frases e animação restaurados.",
+  "description": "Ajuste fino dos blocos da Home comercial do Portal Notarial Pro.",
   "type": "module",
   "main": "server.js",
   "scripts": {
