@@ -7,28 +7,28 @@
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://portalnotarial.com.br/links-uteis.html</loc>
+    <loc>https://portalnotarial.com.br/codigo-de-normas-nacional.html</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://portalnotarial.com.br/codigo-de-normas-nacional.html</loc>
-    <lastmod>2026-06-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
     <loc>https://portalnotarial.com.br/codigo-de-normas-de-sao-paulo.html</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
+    <priority>0.95</priority>
   </url>
   <url>
     <loc>https://portalnotarial.com.br/fontes-normativas.html</loc>
     <lastmod>2026-06-02</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://portalnotarial.com.br/links-uteis.html</loc>
+    <lastmod>2026-06-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.65</priority>
   </url>
   <url>
     <loc>https://portalnotarial.com.br/atualizacoes.html</loc>
