@@ -133,7 +133,22 @@ const PROTECTED_ROUTES = new Map([
   ['/consulta-selo-digital.html', 'selo-digital-tjsp'],
   ['/consulta-selo-digital', 'selo-digital-tjsp'],
   ['/gerador-de-orcamentos-notariais.html', 'gerador-orcamento'],
-  ['/gerador-de-orcamentos-notariais', 'gerador-orcamento']
+  ['/gerador-de-orcamentos-notariais', 'gerador-orcamento'],
+  ['/consulta-pep.html', 'consulta-pep'],
+  ['/consulta-pep', 'consulta-pep'],
+  ['/competencia-e-notariado.html', 'competencia-e-notariado'],
+  ['/competencia-e-notariado', 'competencia-e-notariado'],
+  ['/calculadora-tarifas-conta-notarial.html', 'tarifas-conta-notarial'],
+  ['/calculadora-tarifas-conta-notarial', 'tarifas-conta-notarial'],
+  ['/gerador-certidao-reprografica.html', 'certidao-reprografica'],
+  ['/gerador-certidao-reprografica', 'certidao-reprografica'],
+  ['/oficios-comparecimento.html', 'oficio-comparecimento'],
+  ['/oficios-comparecimento', 'oficio-comparecimento'],
+  ['/oficios-outros-cartorios.html', 'oficio-cartorios'],
+  ['/oficios-outros-cartorios', 'oficio-cartorios'],
+  ['/oficios-bancos', 'oficio-bancos-inventario'],
+  ['/oficios-bancos/', 'oficio-bancos-inventario'],
+  ['/oficios-bancos/index.html', 'oficio-bancos-inventario']
 ]);
 
 function portalProtectedStaticMiddleware(req, res, next) {
