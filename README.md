@@ -69,3 +69,19 @@ Esta versão preserva as rotas protegidas e revisa a Home pública para venda:
 - remove a expressão de apoio anterior;
 - preserva `server.js` e as rotas protegidas já validadas;
 - atualiza `sitemap.xml` e `mapa-do-site.html`.
+
+
+## Proteção Portal Notarial Pro v6
+
+Esta versão preserva as rotas protegidas e ajusta a Home pública:
+
+- restaura o logotipo em SVG embutido;
+- restaura o rotador de frases no topo;
+- restaura a animação original `pn-portal-motion`;
+- reduz o tamanho do título principal;
+- substitui preto puro por paleta azul-marinho;
+- corrige o texto principal de venda;
+- corrige a lista das 15 ferramentas;
+- corrige e alinha o aviso;
+- mantém apenas os três cards normativos públicos;
+- preserva `server.js`, `sitemap.xml`, `mapa-do-site.html` e as rotas protegidas.

@@ -3,37 +3,42 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <title>Portal Notarial | Ferramentas notariais para rotinas extrajudiciais</title>
-  <meta name="description" content="Portal Notarial Pro reúne ferramentas notariais em área logada para apoiar cálculos, triagem, validação, emolumentos, ofícios e rotinas extrajudiciais." />
+  <meta name="description" content="Portal Notarial Pro reúne ferramentas notariais em área logada para cálculos de emolumentos, ITCMD, conta notarial, triagem de documentos, validação de documentos eletrônicos, ofícios e outras rotinas extrajudiciais." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://portalnotarial.com.br/" />
-
+  <meta property="og:locale" content="pt_BR" />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Portal Notarial" />
   <meta property="og:title" content="Portal Notarial | Ferramentas notariais para rotinas extrajudiciais" />
   <meta property="og:description" content="Área Pro com ferramentas notariais protegidas por assinatura mensal e páginas normativas públicas para consulta." />
   <meta property="og:url" content="https://portalnotarial.com.br/" />
-  <meta property="og:site_name" content="Portal Notarial" />
-
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Portal Notarial | Ferramentas notariais para rotinas extrajudiciais" />
   <meta name="twitter:description" content="Área Pro com ferramentas notariais protegidas por assinatura mensal e páginas normativas públicas para consulta." />
 
   <style>
     :root {
-      --bg: #f7f9fc;
-      --white: #ffffff;
-      --text: #0b1727;
-      --muted: #5f6b7a;
-      --soft: #eef4ff;
-      --blue: #0057ff;
-      --blue-2: #003fb8;
-      --green: #0f766e;
-      --line: rgba(11, 23, 39, .10);
-      --shadow: 0 24px 70px rgba(11, 23, 39, .10);
-      --radius-xl: 36px;
-      --radius-lg: 26px;
-      --radius-md: 18px;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --azul: rgb(11, 95, 255);
+      --azul-escuro: rgb(15, 57, 142);
+      --vermelho: rgb(232, 57, 70);
+      --verde: rgb(0, 144, 157);
+      --amarelo: rgb(217, 165, 30);
+      --roxo: rgb(147, 51, 234);
+      --ciano: rgb(8, 145, 178);
+      --fundo: #ffffff;
+      --fundo-2: #f4f7fb;
+      --texto: #0a2540;
+      --texto-2: #183657;
+      --texto-suave: rgba(10, 37, 64, 0.74);
+      --texto-fraco: rgba(10, 37, 64, 0.54);
+      --linha: rgba(10, 37, 64, 0.12);
+      --branco: #ffffff;
+      --sombra: 0 24px 80px rgba(10, 37, 64, 0.10);
+      --radius-lg: 32px;
+      --radius-md: 24px;
+      font-family: Arial, Helvetica, sans-serif;
     }
 
     * {
@@ -46,11 +51,8 @@
 
     body {
       margin: 0;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 15% 4%, rgba(0, 87, 255, .12), transparent 30%),
-        radial-gradient(circle at 88% 0%, rgba(15, 118, 110, .10), transparent 28%),
-        linear-gradient(180deg, #ffffff 0%, var(--bg) 48%, #ffffff 100%);
+      background: var(--fundo);
+      color: var(--texto);
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
     }
@@ -60,12 +62,74 @@
     }
 
     .page {
-      width: min(1200px, calc(100% - 36px));
-      margin: 0 auto;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      padding-top: 76px;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(11, 95, 255, 0.08), transparent 32%),
+        radial-gradient(circle at 88% 28%, rgba(0, 144, 157, 0.07), transparent 34%),
+        radial-gradient(circle at 72% 82%, rgba(232, 57, 70, 0.04), transparent 32%),
+        linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
     }
 
-    .topbar {
-      min-height: 84px;
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(10,37,64,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(10,37,64,0.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.42), transparent 88%);
+    }
+
+    .orb {
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.08;
+      pointer-events: none;
+      animation: float 12s ease-in-out infinite alternate;
+    }
+
+    .orb.one {
+      top: 80px;
+      right: -140px;
+      background: var(--azul);
+    }
+
+    .orb.two {
+      bottom: -180px;
+      left: -120px;
+      background: var(--verde);
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(-42px, 28px, 0) scale(1.08); }
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      width: 100%;
+      border-bottom: 1px solid var(--linha);
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 14px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -73,928 +137,1802 @@
     }
 
     .brand {
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      font-size: 18px;
+      color: var(--texto);
+      white-space: nowrap;
+    }
+
+    .site-logo {
       display: inline-flex;
       align-items: center;
-      gap: 13px;
-      text-decoration: none;
-    }
-
-    .brand-mark {
-      width: 43px;
-      height: 43px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      background: var(--text);
-      color: #fff;
-      font-weight: 900;
-      letter-spacing: -.04em;
-    }
-
-    .brand-text {
-      display: grid;
+      flex: 0 0 auto;
       line-height: 1;
     }
 
-    .brand-text span {
-      color: var(--muted);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .28em;
-      text-transform: uppercase;
+    .site-logo img {
+      width: 250px;
+      height: auto;
+      display: block;
     }
 
-    .brand-text strong {
-      color: var(--text);
-      font-size: 27px;
-      letter-spacing: -.06em;
-    }
-
-    .nav {
+    .nav-right {
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      gap: 10px;
+      gap: 24px;
       flex-wrap: wrap;
-      font-size: 14px;
-      font-weight: 800;
+      min-width: 0;
     }
 
-    .nav a {
+    .primary-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+      color: var(--texto-suave);
+      font-size: 13px;
+      line-height: 1.4;
+      white-space: nowrap;
+    }
+
+    .primary-links a {
       text-decoration: none;
-      color: var(--muted);
-      padding: 11px 13px;
+      color: var(--texto-suave);
+      font-weight: 700;
+      padding: 8px 0;
+    }
+
+    .primary-links a:hover {
+      color: var(--texto);
+    }
+
+    .primary-links .login-link {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      padding: 0 14px;
       border-radius: 999px;
-    }
-
-    .nav a:hover,
-    .nav a:focus-visible {
-      color: var(--text);
-      background: rgba(11, 23, 39, .05);
-      outline: none;
-    }
-
-    .nav .nav-cta {
       color: #fff;
-      background: var(--blue);
-      box-shadow: 0 14px 30px rgba(0, 87, 255, .22);
+      background: var(--azul);
+      box-shadow: 0 14px 34px rgba(11, 95, 255, 0.22);
     }
 
-    .nav .nav-cta:hover,
-    .nav .nav-cta:focus-visible {
+    .primary-links .login-link:hover {
       color: #fff;
-      background: var(--blue-2);
+      background: var(--azul-escuro);
     }
 
     .hero {
       position: relative;
-      padding: 74px 0 34px;
-      display: grid;
-      grid-template-columns: 1.02fr .98fr;
-      gap: 34px;
-      align-items: center;
-      overflow: hidden;
-    }
-
-    .hero-copy {
-      position: relative;
       z-index: 2;
+      display: flex;
+      align-items: center;
+      padding: 62px 22px 54px;
     }
 
-    .eyebrow {
+    .hero-inner {
+      max-width: 1440px;
+      width: 100%;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .quote-rotator {
+      width: min(100%, 1040px);
+      min-height: 86px;
+      margin: 0 0 32px;
+      padding: 0;
+      position: relative;
+    }
+
+    .quote-text {
+      min-height: 0;
+      color: var(--texto-suave);
+      font-size: clamp(16px, 1.7vw, 23px);
+      line-height: 1.45;
+      letter-spacing: -0.015em;
+    }
+
+    .quote-author {
+      min-height: 18px;
+      margin-top: 2px;
+      color: var(--texto-fraco);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      margin-left: 4px;
+      vertical-align: -0.12em;
+      background: var(--verde);
+      animation: blink 0.9s steps(2, start) infinite;
+    }
+
+    @keyframes blink {
+      0%, 45% { opacity: 1; }
+      46%, 100% { opacity: 0; }
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 610px) minmax(360px, 1fr);
+      align-items: center;
+      gap: 56px;
+    }
+
+    .hero-content {
+      max-width: 610px;
+    }
+
+    .hero-kicker {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      margin: 0 0 20px;
-      color: var(--blue);
+      margin: 0 0 18px;
+      color: var(--azul);
       font-size: 12px;
-      font-weight: 950;
-      letter-spacing: .18em;
+      font-weight: 800;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
     }
 
-    .eyebrow::before {
+    .hero-kicker::before {
       content: "";
-      width: 36px;
+      width: 38px;
       height: 2px;
-      border-radius: 99px;
-      background: currentColor;
+      border-radius: 999px;
+      background: var(--azul);
     }
 
     h1 {
       margin: 0;
-      max-width: 760px;
-      font-size: clamp(46px, 7vw, 86px);
-      line-height: .94;
-      letter-spacing: -.08em;
+      max-width: 610px;
+      font-size: clamp(34px, 4.35vw, 62px);
+      line-height: 1.02;
+      letter-spacing: -0.058em;
+      font-weight: 850;
+      color: var(--texto);
+    }
+
+    h1 .accent {
+      color: var(--azul);
     }
 
     .lead {
-      max-width: 690px;
-      margin: 26px 0 0;
-      color: var(--muted);
-      font-size: clamp(18px, 2.1vw, 22px);
-      line-height: 1.55;
+      max-width: 700px;
+      margin: 24px 0 0;
+      color: var(--texto-suave);
+      font-size: 18px;
+      line-height: 1.68;
     }
 
     .hero-actions {
       display: flex;
-      gap: 12px;
+      align-items: center;
       flex-wrap: wrap;
-      margin-top: 34px;
+      gap: 12px;
+      margin-top: 30px;
     }
 
     .button {
-      min-height: 54px;
+      min-height: 50px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 0 20px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
+      padding: 0 18px;
+      border-radius: 15px;
+      border: 1px solid var(--linha);
       background: #fff;
-      color: var(--text);
+      color: var(--texto);
       text-decoration: none;
-      font-size: 15px;
-      font-weight: 950;
-      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      font-size: 14px;
+      font-weight: 800;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
     }
 
-    .button:hover,
-    .button:focus-visible {
+    .button:hover {
       transform: translateY(-1px);
-      outline: none;
-      box-shadow: 0 18px 38px rgba(11, 23, 39, .10);
+      box-shadow: 0 18px 40px rgba(10, 37, 64, 0.10);
     }
 
     .button.primary {
       color: #fff;
-      background: var(--blue);
-      border-color: var(--blue);
-      box-shadow: 0 18px 38px rgba(0, 87, 255, .24);
+      border-color: var(--azul);
+      background: var(--azul);
+      box-shadow: 0 18px 38px rgba(11, 95, 255, 0.24);
     }
 
-    .button.primary:hover,
-    .button.primary:focus-visible {
-      background: var(--blue-2);
-      border-color: var(--blue-2);
+    .button.primary:hover {
+      background: var(--azul-escuro);
     }
 
-    .hero-proof {
+    .hero-badges {
       display: flex;
-      align-items: center;
-      gap: 12px;
       flex-wrap: wrap;
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
+      align-items: center;
+      gap: 10px;
+      margin-top: 24px;
     }
 
-    .hero-proof span {
+    .hero-badges span {
       display: inline-flex;
       align-items: center;
       min-height: 32px;
       padding: 0 12px;
-      border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(255,255,255,.72);
-    }
-
-    .hero-visual {
-      position: relative;
-      min-height: 560px;
-      display: grid;
-      place-items: center;
-    }
-
-    .orbit {
-      position: absolute;
-      inset: 42px 34px;
-      border-radius: 44px;
-      background:
-        linear-gradient(135deg, rgba(0, 87, 255, .10), transparent 34%),
-        linear-gradient(315deg, rgba(15, 118, 110, .08), transparent 40%),
-        rgba(255,255,255,.70);
-      border: 1px solid rgba(11, 23, 39, .08);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .orbit::before,
-    .orbit::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      filter: blur(.2px);
-      opacity: .85;
-      animation: float 8s ease-in-out infinite;
-    }
-
-    .orbit::before {
-      width: 240px;
-      height: 240px;
-      background: rgba(0, 87, 255, .16);
-      top: -80px;
-      right: -40px;
-    }
-
-    .orbit::after {
-      width: 180px;
-      height: 180px;
-      background: rgba(15, 118, 110, .16);
-      left: -56px;
-      bottom: -42px;
-      animation-delay: -2.4s;
-    }
-
-    .dashboard {
-      position: relative;
-      z-index: 2;
-      width: min(440px, 92%);
-      border-radius: 30px;
-      border: 1px solid rgba(11, 23, 39, .10);
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 34px 90px rgba(11, 23, 39, .18);
-      overflow: hidden;
-      transform: translateY(0);
-      animation: panelFloat 7s ease-in-out infinite;
-    }
-
-    .dash-top {
-      min-height: 66px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    .dash-dots {
-      display: flex;
-      gap: 7px;
-    }
-
-    .dash-dots i {
-      width: 10px;
-      height: 10px;
-      border-radius: 999px;
-      background: rgba(11,23,39,.20);
-    }
-
-    .dash-label {
-      color: var(--muted);
+      border: 1px solid var(--linha);
+      background: rgba(255,255,255,0.70);
+      color: var(--texto-suave);
       font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    .dash-body {
-      padding: 22px;
-    }
-
-    .dash-price {
-      display: grid;
-      gap: 7px;
-      padding: 20px;
-      border-radius: 22px;
-      background: var(--text);
-      color: #fff;
-    }
-
-    .dash-price small {
-      color: rgba(255,255,255,.66);
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    .dash-price strong {
-      font-size: 42px;
-      line-height: 1;
-      letter-spacing: -.06em;
-    }
-
-    .dash-price span {
-      color: rgba(255,255,255,.72);
-      font-size: 14px;
-      line-height: 1.4;
-    }
-
-    .ticker {
-      position: relative;
-      margin-top: 16px;
-      height: 132px;
-      overflow: hidden;
-      border-radius: 22px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, #ffffff, #f8fbff);
-    }
-
-    .ticker-track {
-      display: grid;
-      gap: 8px;
-      padding: 12px;
-      animation: ticker 18s linear infinite;
-    }
-
-    .mini-card {
-      min-height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      padding: 0 12px;
-      background: #fff;
-      color: #334155;
-      font-size: 13px;
-      font-weight: 850;
-    }
-
-    .mini-card i {
-      width: 9px;
-      height: 9px;
-      border-radius: 99px;
-      background: var(--blue);
-      flex: 0 0 auto;
-    }
-
-    .floating-message {
-      position: absolute;
-      z-index: 3;
-      display: grid;
-      gap: 5px;
-      min-width: 220px;
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.94);
-      border: 1px solid var(--line);
-      box-shadow: 0 18px 44px rgba(11, 23, 39, .12);
-      animation: bubble 7s ease-in-out infinite;
-    }
-
-    .floating-message strong {
-      font-size: 14px;
-    }
-
-    .floating-message span {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.35;
-      font-weight: 700;
-    }
-
-    .floating-message.one {
-      top: 78px;
-      left: 0;
-    }
-
-    .floating-message.two {
-      right: 0;
-      bottom: 98px;
-      animation-delay: -2s;
+      font-weight: 800;
     }
 
     .section {
-      padding: 58px 0;
+      position: relative;
+      z-index: 3;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 22px 72px;
     }
 
-    .section-head {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 24px;
-      margin-bottom: 22px;
+    .section-panel {
+      border: 1px solid rgba(10,37,64,0.10);
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 82% 0%, rgba(11, 95, 255, 0.07), transparent 42%),
+        linear-gradient(145deg, #ffffff, #f7f9fc);
+      box-shadow: 0 16px 40px rgba(10,37,64,0.06);
+      padding: 34px;
+      overflow: hidden;
+      position: relative;
     }
 
-    .section-head div {
-      max-width: 760px;
+    .section-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(10,37,64,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(10,37,64,0.025) 1px, transparent 1px);
+      background-size: 42px 42px;
+      opacity: 0.45;
     }
 
-    .section-head h2 {
-      margin: 0;
-      font-size: clamp(34px, 4.2vw, 58px);
-      line-height: .98;
-      letter-spacing: -.07em;
+    .section-content {
+      position: relative;
+      z-index: 1;
     }
 
-    .section-head p {
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: 17px;
-      line-height: 1.6;
-    }
-
-    .tools-panel {
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.84);
-      box-shadow: var(--shadow);
-      padding: clamp(22px, 3vw, 34px);
-    }
-
-    .tool-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
       gap: 10px;
-    }
-
-    .tool-list li {
-      min-height: 76px;
-      display: grid;
-      gap: 4px;
-      align-content: center;
-      padding: 14px 16px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: #fff;
-    }
-
-    .tool-list span {
-      color: var(--text);
-      font-size: 15px;
-      font-weight: 900;
-      line-height: 1.2;
-    }
-
-    .tool-list small {
-      color: var(--muted);
+      margin-bottom: 14px;
+      color: var(--texto-fraco);
       font-size: 12px;
-      line-height: 1.35;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
     }
 
-    .commercial-strip {
-      margin-top: 18px;
+    .section-eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--azul);
+    }
+
+    .section-title {
+      margin: 0;
+      max-width: 860px;
+      color: var(--texto);
+      font-size: clamp(30px, 3.6vw, 48px);
+      line-height: 1.04;
+      letter-spacing: -0.055em;
+    }
+
+    .section-lead {
+      max-width: 920px;
+      margin: 18px 0 0;
+      color: var(--texto-suave);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .tool-card {
+      min-height: 132px;
+      border: 1px solid rgba(10,37,64,0.10);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.86);
+      padding: 18px;
+      box-shadow: 0 8px 20px rgba(10,37,64,0.045);
+    }
+
+    .tool-card h3 {
+      margin: 0;
+      color: var(--texto);
+      font-size: 17px;
+      line-height: 1.22;
+      letter-spacing: -0.025em;
+    }
+
+    .tool-card p {
+      margin: 10px 0 0;
+      color: var(--texto-suave);
+      font-size: 13.5px;
+      line-height: 1.42;
+    }
+
+    .pro-strip {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      padding: 18px;
+      margin-top: 18px;
       border-radius: 22px;
-      background: var(--text);
+      background: linear-gradient(135deg, var(--texto) 0%, #15395f 100%);
       color: #fff;
+      padding: 20px 22px;
     }
 
-    .commercial-strip p {
-      margin: 0;
-      color: rgba(255,255,255,.72);
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .commercial-strip strong {
+    .pro-strip strong {
       display: block;
-      color: #fff;
       font-size: 18px;
-      margin-bottom: 4px;
+      letter-spacing: -0.025em;
     }
 
-    .commercial-strip .button {
-      border-color: rgba(255,255,255,.18);
-      box-shadow: none;
-      white-space: nowrap;
+    .pro-strip p {
+      margin: 5px 0 0;
+      color: rgba(255,255,255,0.74);
+      line-height: 1.5;
+      font-size: 14px;
     }
 
     .normas-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
+      margin-top: 28px;
     }
 
     .norma-card {
-      min-height: 236px;
+      min-height: 222px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding: 26px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--line);
+      border-radius: 28px;
+      border: 1px solid rgba(10,37,64,0.10);
       background: #fff;
       text-decoration: none;
-      box-shadow: 0 16px 44px rgba(11, 23, 39, .06);
-      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      box-shadow: 0 14px 36px rgba(10,37,64,0.06);
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
     }
 
-    .norma-card:hover,
-    .norma-card:focus-visible {
+    .norma-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 24px 54px rgba(11, 23, 39, .11);
-      border-color: rgba(0,87,255,.30);
-      outline: none;
+      box-shadow: 0 22px 52px rgba(10,37,64,0.10);
+      border-color: rgba(11,95,255,0.26);
     }
 
     .norma-card span {
-      display: inline-flex;
       width: fit-content;
       min-height: 30px;
+      display: inline-flex;
       align-items: center;
       padding: 0 10px;
       border-radius: 999px;
-      color: var(--blue);
-      background: var(--soft);
+      color: var(--azul);
+      background: rgba(11,95,255,0.09);
       font-size: 12px;
-      font-weight: 950;
-      letter-spacing: .12em;
+      font-weight: 850;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
     .norma-card h3 {
       margin: 24px 0 0;
-      font-size: 25px;
-      line-height: 1.1;
-      letter-spacing: -.045em;
+      color: var(--texto);
+      font-size: 24px;
+      line-height: 1.12;
+      letter-spacing: -0.045em;
     }
 
     .norma-card p {
       margin: 14px 0 0;
-      color: var(--muted);
+      color: var(--texto-suave);
       line-height: 1.55;
       font-size: 15px;
     }
 
-    .norma-card .arrow {
-      margin-top: 26px;
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
+    .arrow {
+      margin-top: 22px;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(11,95,255,0.18);
+      border-radius: 13px;
       display: grid;
       place-items: center;
-      background: var(--soft);
-      color: var(--blue);
-      font-weight: 950;
+      color: var(--azul);
+      background: rgba(11,95,255,0.08);
+      font-weight: 900;
     }
 
-    .legal {
-      margin: 12px 0 58px;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--line);
-      background: #fff;
-      padding: 22px 24px;
+    .notice-panel {
+      position: relative;
+      z-index: 3;
+      max-width: 1440px;
+      margin: 0 auto 72px;
+      padding: 0 22px;
+    }
+
+    .notice-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 18px;
+      border: 1px solid rgba(10,37,64,0.10);
+      border-radius: 24px;
+      background: rgba(255,255,255,0.86);
+      padding: 22px 24px;
+      box-shadow: 0 10px 28px rgba(10,37,64,0.045);
     }
 
-    .legal p {
+    .notice-inner p {
       margin: 0;
-      color: var(--muted);
-      font-size: 14px;
+      color: var(--texto-suave);
       line-height: 1.55;
+      font-size: 15px;
     }
 
-    .legal strong {
-      color: var(--text);
+    .notice-inner strong {
+      color: var(--texto);
     }
 
-    .footer {
-      border-top: 1px solid var(--line);
-      padding: 28px 0 44px;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 20px;
-      color: var(--muted);
+    footer {
+      position: relative;
+      z-index: 3;
+      border-top: 1px solid var(--linha);
+      color: var(--texto-suave);
+      padding: 22px;
       font-size: 13px;
-      line-height: 1.6;
     }
 
-    .footer strong {
-      color: var(--text);
+    .footer-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
     }
 
     .footer-links {
       display: flex;
+      align-items: center;
       justify-content: flex-end;
+      gap: 14px;
       flex-wrap: wrap;
-      gap: 12px;
-      font-weight: 800;
+      color: var(--texto-suave);
     }
 
     .footer-links a {
-      color: var(--muted);
+      color: var(--texto-suave);
       text-decoration: none;
+      font-weight: 700;
     }
 
-    .footer-links a:hover,
-    .footer-links a:focus-visible {
-      color: var(--text);
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      outline: none;
+    .footer-links a:hover {
+      color: var(--texto);
     }
 
-    @keyframes panelFloat {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
-    }
-
-    @keyframes bubble {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(16px, 20px); }
-    }
-
-    @keyframes ticker {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-50%); }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: .001ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .001ms !important;
+    @media (max-width: 1180px) {
+      .tools-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 1060px) {
-      .hero {
+    @media (max-width: 980px) {
+      .hero-grid {
         grid-template-columns: 1fr;
-        padding-top: 48px;
       }
 
-      .hero-visual {
-        min-height: 470px;
-      }
-
-      .tool-list,
+      .tools-grid,
       .normas-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
+      }
+
+      .pro-strip,
+      .notice-inner {
+        align-items: flex-start;
+        flex-direction: column;
       }
     }
 
-    @media (max-width: 760px) {
-      .page {
-        width: min(100% - 24px, 1200px);
+    @media (max-width: 720px) {
+      .site-logo img {
+        width: 210px;
       }
 
-      .topbar,
-      .section-head,
-      .commercial-strip,
-      .legal,
-      .footer {
+      .nav-inner {
         align-items: flex-start;
         flex-direction: column;
       }
 
-      .topbar {
-        padding-top: 20px;
-      }
-
-      .nav {
+      .primary-links {
         justify-content: flex-start;
+        flex-wrap: wrap;
+        white-space: normal;
       }
 
       .hero {
-        padding-top: 34px;
+        padding-top: 44px;
       }
 
-      .hero-actions {
-        flex-direction: column;
+      h1 {
+        font-size: clamp(32px, 11vw, 48px);
       }
 
       .button {
         width: 100%;
       }
 
-      .hero-visual {
-        min-height: 520px;
-      }
-
-      .floating-message {
-        position: relative;
-        top: auto !important;
-        right: auto !important;
-        bottom: auto !important;
-        left: auto !important;
-        margin: 10px 0;
-      }
-
-      .orbit {
-        inset: 34px 0;
-      }
-
-      .tool-list,
-      .normas-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-links {
-        justify-content: flex-start;
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
-  <header class="page topbar">
-    <a class="brand" href="/" aria-label="Portal Notarial">
-      <span class="brand-mark">P</span>
-      <span class="brand-text">
-        <span>Portal</span>
-        <strong>notarial</strong>
-      </span>
-    </a>
+  <div class="page">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
 
-    <nav class="nav" aria-label="Navegação principal">
-      <a href="#portal-pro">Portal Pro</a>
-      <a href="#normas">Normas</a>
-      <a href="https://app.portalnotarial.com.br" class="nav-cta">Entrar ou assinar</a>
-    </nav>
-  </header>
+    <nav class="navbar" aria-label="Navegação principal">
+      <div class="nav-inner">
+        <a class="brand site-logo" href="/" aria-label="Portal Notarial — Início">
+          <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgICAgdmlld0JveD0iLTQwIC0xODAgOTAwIDIyMCIKICAgICB3aWR0aD0iOTAwIiBoZWlnaHQ9IjIyMCIKICAgICByb2xlPSJpbWciCiAgICAgYXJpYS1sYWJlbD0iUG9ydGFsIE5vdGFyaWFsIj4KICA8dGl0bGU+UG9ydGFsIE5vdGFyaWFsPC90aXRsZT4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Imlua0JsZWVkIiB4PSItNTAlIiB5PSItNTAlIiB3aWR0aD0iMjAwJSIgaGVpZ2h0PSIyMDAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMS41Ii8+CiAgICA8L2ZpbHRlcj4KICAgIDxmaWx0ZXIgaWQ9ImhhbG9TcHJlYWQiIHg9Ii01MCUiIHk9Ii01MCUiIHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiPgogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSI0Ii8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHRleHQgeD0iMCIgeT0iLTEzMCIKICAgICAgICBmb250LWZhbWlseT0iTWFucm9wZSwgJ0hlbHZldGljYSBOZXVlJywgQXJpYWwsIHNhbnMtc2VyaWYiCiAgICAgICAgZm9udC13ZWlnaHQ9IjUwMCIgZm9udC1zaXplPSIyNiIgbGV0dGVyLXNwYWNpbmc9IjE0IgogICAgICAgIGZpbGw9IiM2QjdBOEYiPlBPUlRBTDwvdGV4dD4KICA8dGV4dCB4PSIwIiB5PSIwIgogICAgICAgIGZvbnQtZmFtaWx5PSJNYW5yb3BlLCAnSGVsdmV0aWNhIE5ldWUnLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgICAgICBmb250LXdlaWdodD0iOTAwIiBmb250LXNpemU9IjE2OCIgbGV0dGVyLXNwYWNpbmc9Ii04IgogICAgICAgIGZpbGw9IiMwQTI1NDAiPm5vdGFyaWFsPC90ZXh0PgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDgwMCwgMCkiPgogICAgPGVsbGlwc2UgY3g9IjAiIGN5PSIwIiByeD0iMzIiIHJ5PSIyOCIgZmlsbD0iIzNBNUREMCIgb3BhY2l0eT0iMC4zMCIgZmlsdGVyPSJ1cmwoI2hhbG9TcHJlYWQpIi8+CiAgICA8cGF0aCBkPSJNIC0yMiwtMiBRIC0yNSwtMjAgLTcsLTI1IFEgMTIsLTI3IDI1LC0xNSBRIDMyLDIgMjUsMTcgUSAxMiwyNyAtNSwyNSBRIC0yMiwyMCAtMjIsLTIgWiIKICAgICAgICAgIGZpbGw9IiMzQTVERDAiIGZpbHRlcj0idXJsKCNpbmtCbGVlZCkiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="Portal Notarial" width="300" height="73" loading="eager" decoding="async">
+        </a>
 
-  <main>
-    <section class="page hero" id="portal-pro">
-      <div class="hero-copy">
-        <p class="eyebrow">Portal Notarial Pro</p>
-        <h1>Ferramentas notariais para ganhar tempo na rotina extrajudicial.</h1>
-        <p class="lead">
-          Uma área logada com recursos para cálculo, conferência, triagem, validação, emolumentos e ofícios. Acesse as ferramentas em um painel único, com assinatura mensal.
-        </p>
-
-        <div class="hero-actions">
-          <a class="button primary" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
-          <a class="button" href="#ferramentas">Conhecer ferramentas</a>
-        </div>
-
-        <div class="hero-proof" aria-label="Resumo do plano">
-          <span>15 ferramentas incluídas</span>
-          <span>R$ 49,40 por mês</span>
-          <span>Área protegida por login</span>
+        <div class="nav-right">
+          <div class="primary-links" aria-label="Links principais">
+            <a href="#ferramentas">Ferramentas</a>
+            <a href="#normas">Normas</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="contato.html">Contato</a>
+            <a class="login-link" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
+          </div>
         </div>
       </div>
+    </nav>
 
-      <div class="hero-visual" aria-label="Prévia visual do Portal Notarial Pro">
-        <div class="orbit" aria-hidden="true"></div>
-
-        <div class="floating-message one">
-          <strong>Rotina mais organizada</strong>
-          <span>Triagem, cálculo e documentos em um painel de acesso.</span>
-        </div>
-
-        <div class="floating-message two">
-          <strong>Assinatura ativa</strong>
-          <span>As ferramentas protegidas são abertas pelo app do assinante.</span>
-        </div>
-
-        <div class="dashboard">
-          <div class="dash-top">
-            <div class="dash-dots" aria-hidden="true"><i></i><i></i><i></i></div>
-            <div class="dash-label">Painel Pro</div>
+    <header class="hero">
+      <div class="hero-inner">
+        <div class="quote-rotator" aria-live="polite">
+          <div class="quote-text">
+            <span id="quoteText"></span><span class="typing-cursor" aria-hidden="true"></span>
           </div>
-          <div class="dash-body">
-            <div class="dash-price">
-              <small>Plano mensal</small>
-              <strong>R$ 49,40</strong>
-              <span>Ferramentas protegidas para apoio operacional.</span>
+          <div class="quote-author" id="quoteAuthor"></div>
+        </div>
+
+        <div class="hero-grid">
+          <section class="hero-content">
+            <p class="hero-kicker">Portal Notarial Pro</p>
+            <h1>
+              Ferramentas notariais para ganhar tempo na <span class="accent">rotina extrajudicial.</span>
+            </h1>
+
+            <p class="lead">
+              Uma área logada com recursos para cálculos de emolumentos, ITCMD, conta notarial, triagem de documentos, validação de documentos eletrônicos, aplicador inteligente de emolumentos, gerador de ofícios, dentre outros. Acesse as ferramentas em um painel único, com assinatura mensal.
+            </p>
+
+            <div class="hero-actions">
+              <a class="button primary" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
+              <a class="button" href="#ferramentas">Ver ferramentas incluídas</a>
             </div>
 
-            <div class="ticker" aria-hidden="true">
-              <div class="ticker-track">
-                <div class="mini-card"><span>Calculadora Avançada</span><i></i></div>
-                <div class="mini-card"><span>ITCMD</span><i></i></div>
-                <div class="mini-card"><span>Triagem Notarial</span><i></i></div>
-                <div class="mini-card"><span>Verificador técnico</span><i></i></div>
-                <div class="mini-card"><span>Consulta PEP</span><i></i></div>
-                <div class="mini-card"><span>Ofícios e certidões</span><i></i></div>
-                <div class="mini-card"><span>Aplicador de Emolumentos</span><i></i></div>
-                <div class="mini-card"><span>Ganho de Capital</span><i></i></div>
-                <div class="mini-card"><span>Calculadora Avançada</span><i></i></div>
-                <div class="mini-card"><span>ITCMD</span><i></i></div>
-                <div class="mini-card"><span>Triagem Notarial</span><i></i></div>
-                <div class="mini-card"><span>Verificador técnico</span><i></i></div>
+            <div class="hero-badges" aria-label="Resumo do plano">
+              <span>15 ferramentas incluídas</span>
+              <span>R$ 49,40 por mês</span>
+              <span>Acesso por área logada</span>
+            </div>
+          </section>
+
+          <!-- ANIMAÇÃO PORTAL NOTARIAL — VERSÃO DARK -->
+          <style>
+            .pn-portal-motion {
+              --pn-blue: rgb(11, 95, 255);
+              --pn-blue-soft: rgb(58, 93, 208);
+              --pn-surface: rgba(11, 23, 39, 0.03);
+              --pn-surface-strong: rgba(11, 23, 39, 0.06);
+              --pn-text: #0b1727;
+              --pn-muted: rgba(11, 23, 39, 0.6);
+              --pn-line: rgba(11, 23, 39, 0.10);
+              --pn-line-soft: rgba(11, 23, 39, 0.05);
+
+              position: relative;
+              width: min(100%, 720px);
+              height: 440px;
+              margin: 0 auto;
+              overflow: hidden;
+              border-radius: 30px;
+              background:
+                radial-gradient(circle at 50% 8%, rgba(11, 95, 255, 0.10), transparent 36%),
+                radial-gradient(circle at 85% 80%, rgba(11, 95, 255, 0.06), transparent 42%),
+                linear-gradient(180deg, #ffffff 0%, #f4f6fa 100%);
+              font-family: Arial, Helvetica, sans-serif;
+              isolation: isolate;
+              border: 1px solid rgba(11, 23, 39, 0.08);
+              perspective: 1200px;
+              transform: translateZ(0);
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+              text-rendering: optimizeLegibility;
+            }
+
+            .pn-portal-motion::before {
+              content: "";
+              position: absolute;
+              inset: 0;
+              z-index: 0;
+              background-image:
+                linear-gradient(rgba(11, 23, 39, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(11, 23, 39, 0.04) 1px, transparent 1px);
+              background-size: 42px 42px;
+              pointer-events: none;
+              mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 80%);
+            }
+
+            .pn-portal-motion * {
+              box-sizing: border-box;
+            }
+
+            .pn-portal-star,
+            .pn-orbit,
+            .pn-main-card,
+            .pn-tool-row,
+            .pn-side-badge,
+            .pn-avatar,
+            .pn-tool-cloud,
+            .pn-cloud-pill,
+            .pn-flow-dot,
+            .pn-line-node {
+              will-change: transform, opacity;
+              backface-visibility: hidden;
+              -webkit-backface-visibility: hidden;
+              transform-style: preserve-3d;
+            }
+
+            .pn-connection-lines {
+              position: absolute;
+              inset: 0;
+              z-index: 2;
+              width: 100%;
+              height: 100%;
+              pointer-events: none;
+              overflow: visible;
+            }
+
+            .pn-line-path {
+              fill: none;
+              stroke: var(--pn-blue);
+              stroke-width: 1.5;
+              stroke-linecap: round;
+              stroke-dasharray: 5 8;
+              opacity: 0.35;
+              animation: pnLineFlow 4.8s linear infinite;
+            }
+
+            .pn-line-path-soft {
+              opacity: 0.22;
+              stroke-width: 1.2;
+            }
+
+            .pn-line-node {
+              fill: #ffffff;
+              stroke: var(--pn-blue);
+              stroke-width: 1.5;
+              opacity: 0.9;
+              transform-box: fill-box;
+              transform-origin: center;
+              animation: pnNodePulse 3.6s ease-in-out infinite;
+            }
+
+            .pn-flow-dot {
+              fill: var(--pn-blue);
+              opacity: 1;
+            }
+
+            .pn-portal-star {
+              position: absolute;
+              top: 26px;
+              left: 50%;
+              z-index: 8;
+              width: 38px;
+              height: 38px;
+              transform: translate3d(-50%, 0, 0);
+              border-radius: 50%;
+              background: var(--pn-blue);
+              display: grid;
+              place-items: center;
+              box-shadow:
+                0 0 0 6px rgba(11, 95, 255, 0.10),
+                0 0 28px rgba(11, 95, 255, 0.28),
+                0 12px 28px rgba(11, 95, 255, 0.20);
+              animation: pnStarPulseActive 2.8s ease-in-out infinite;
+            }
+
+            .pn-portal-star svg {
+              width: 20px;
+              height: 20px;
+              fill: #ffffff;
+            }
+
+            .pn-orbit {
+              position: absolute;
+              top: 70px;
+              left: 112px;
+              z-index: 1;
+              width: 410px;
+              height: 410px;
+              border: 1px solid rgba(11, 95, 255, 0.18);
+              border-radius: 999px;
+              animation: pnOrbitActive 5.5s ease-in-out infinite;
+            }
+
+            .pn-orbit-small {
+              top: 128px;
+              left: 172px;
+              width: 285px;
+              height: 285px;
+              border-color: rgba(11, 95, 255, 0.12);
+              opacity: 0.7;
+              animation: pnOrbitActive 4.6s ease-in-out infinite reverse;
+            }
+
+            .pn-main-card {
+              position: absolute;
+              top: 98px;
+              left: 112px;
+              z-index: 5;
+              width: 305px;
+              height: 320px;
+              padding: 22px 16px 16px;
+              border: 1px solid var(--pn-line);
+              border-radius: 18px;
+              background: linear-gradient(180deg, #ffffff, #f7f9fc);
+              box-shadow:
+                0 18px 40px rgba(11, 23, 39, 0.10),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+              overflow: hidden;
+              contain: layout paint style;
+            }
+
+            .pn-card-title {
+              margin: 0 0 18px 0;
+              padding-left: 0;
+              max-width: 265px;
+              font-size: 18px;
+              line-height: 1.26;
+              font-weight: 700;
+              letter-spacing: -0.02em;
+              color: var(--pn-blue);
+            }
+
+            .pn-tool-row {
+              position: relative;
+              height: 52px;
+              margin-top: 10px;
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 0 14px;
+              border-radius: 14px;
+              background: rgba(11, 95, 255, 0.08);
+              border: 1px solid rgba(11, 95, 255, 0.18);
+              overflow: hidden;
+            }
+
+            .pn-tool-row:nth-of-type(2) {
+              opacity: 0.62;
+              width: 226px;
+              animation-delay: 0.45s;
+            }
+
+            .pn-tool-row:nth-of-type(3) {
+              opacity: 0.38;
+              width: 176px;
+              animation-delay: 0.9s;
+            }
+
+            .pn-tool-icon {
+              flex: 0 0 30px;
+              width: 30px;
+              height: 30px;
+              border-radius: 10px;
+              background: var(--pn-blue);
+              display: grid;
+              place-items: center;
+              color: #ffffff;
+              font-size: 14px;
+              font-weight: 700;
+              box-shadow: 0 4px 12px rgba(11, 95, 255, 0.25);
+            }
+
+            .pn-tool-copy strong {
+              display: block;
+              font-size: 12.5px;
+              line-height: 1.15;
+              color: var(--pn-text);
+            }
+
+            .pn-tool-copy small {
+              display: block;
+              margin-top: 3px;
+              font-size: 11px;
+              line-height: 1.15;
+              color: var(--pn-muted);
+            }
+
+            .pn-side-badge {
+              position: absolute;
+              z-index: 7;
+              width: 48px;
+              height: 48px;
+              border-radius: 50%;
+              background: #ffffff;
+              display: grid;
+              place-items: center;
+              border: 1px solid rgba(11, 95, 255, 0.22);
+              box-shadow:
+                0 12px 28px rgba(11, 23, 39, 0.10),
+                0 0 18px rgba(11, 95, 255, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+              color: var(--pn-blue);
+              font-size: 22px;
+              font-weight: 700;
+              contain: layout paint style;
+              animation: pnBadgeFloatActive 4.2s ease-in-out infinite;
+            }
+
+            .pn-badge-left {
+              top: 108px;
+              left: 62px;
+            }
+
+            .pn-badge-doc {
+              top: 252px;
+              left: 96px;
+              width: 36px;
+              height: 36px;
+              font-size: 18px;
+              animation-delay: 0.4s;
+            }
+
+            .pn-badge-bottom {
+              top: 384px;
+              left: 260px;
+              width: 34px;
+              height: 34px;
+              font-size: 14px;
+              animation-delay: 0.8s;
+            }
+
+            .pn-avatar {
+              position: absolute;
+              top: 160px;
+              left: 455px;
+              z-index: 7;
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              background:
+                radial-gradient(circle at 50% 35%, #c98d67 0 10%, transparent 11%),
+                radial-gradient(circle at 50% 68%, var(--pn-blue) 0 25%, transparent 26%),
+                linear-gradient(180deg, #e6ecf4, #d6deea);
+              border: 1px solid rgba(11, 95, 255, 0.18);
+              box-shadow:
+                0 14px 34px rgba(11, 23, 39, 0.10),
+                0 0 18px rgba(11, 95, 255, 0.10);
+              contain: layout paint style;
+              animation: pnAvatarFloatActive 4.6s ease-in-out infinite;
+            }
+
+            .pn-avatar::before {
+              content: "";
+              position: absolute;
+              top: 12px;
+              left: 15px;
+              width: 20px;
+              height: 14px;
+              border-radius: 50% 50% 42% 42%;
+              background: #7d4836;
+            }
+
+            .pn-avatar::after {
+              content: "";
+              position: absolute;
+              left: 13px;
+              bottom: 7px;
+              width: 24px;
+              height: 18px;
+              border-radius: 14px 14px 7px 7px;
+              background: var(--pn-blue);
+            }
+
+            .pn-tool-cloud {
+              position: absolute;
+              top: 114px;
+              right: 42px;
+              z-index: 3;
+              width: 180px;
+              display: grid;
+              gap: 10px;
+            }
+
+            .pn-cloud-pill {
+              height: 38px;
+              display: flex;
+              align-items: center;
+              gap: 9px;
+              padding: 0 12px;
+              border: 1px solid rgba(11, 95, 255, 0.18);
+              border-radius: 999px;
+              background: #ffffff;
+              box-shadow:
+                0 10px 24px rgba(11, 23, 39, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+              font-size: 12px;
+              color: var(--pn-text);
+              opacity: 0.96;
+              contain: layout paint style;
+            }
+
+            .pn-cloud-pill:nth-child(2) {
+              margin-left: 22px;
+              animation-delay: 0.6s;
+            }
+
+            .pn-cloud-pill:nth-child(3) {
+              margin-left: 6px;
+              animation-delay: 1.2s;
+            }
+
+            .pn-cloud-dot {
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background: var(--pn-blue);
+              box-shadow: 0 0 8px rgba(11, 95, 255, 0.5);
+            }
+
+            .pn-pause {
+              position: absolute;
+              right: 24px;
+              bottom: 16px;
+              z-index: 12;
+              width: 48px;
+              height: 48px;
+              border: 0;
+              border-radius: 50%;
+              background: #ffffff;
+              cursor: pointer;
+              box-shadow:
+                0 10px 26px rgba(11, 23, 39, 0.12),
+                0 0 22px rgba(11, 95, 255, 0.15);
+            }
+
+            .pn-pause::before {
+              content: "";
+              position: absolute;
+              inset: 0;
+              border-radius: 50%;
+              background: conic-gradient(var(--pn-blue) 0deg 100deg, rgba(11, 95, 255, 0.18) 100deg 360deg);
+              animation: pnRingActive 3.8s linear infinite;
+            }
+
+            .pn-pause::after {
+              content: "";
+              position: absolute;
+              inset: 4px;
+              border-radius: 50%;
+              background: #ffffff;
+            }
+
+            .pn-pause-icon {
+              position: relative;
+              z-index: 2;
+              width: 14px;
+              height: 16px;
+              margin: 16px auto 0;
+              display: flex;
+              justify-content: center;
+              gap: 4px;
+            }
+
+            .pn-pause-icon span {
+              display: block;
+              width: 4px;
+              height: 16px;
+              border-radius: 2px;
+              background: var(--pn-blue);
+            }
+
+            .pn-portal-motion.is-paused *,
+            .pn-portal-motion.is-paused .pn-orbit,
+            .pn-portal-motion.is-paused .pn-pause::before {
+              animation-play-state: paused !important;
+            }
+
+            .pn-portal-motion.is-paused .pn-pause-icon {
+              width: 0;
+              height: 0;
+              margin-top: 14px;
+              border-left: 14px solid var(--pn-blue);
+              border-top: 9px solid transparent;
+              border-bottom: 9px solid transparent;
+            }
+
+            .pn-portal-motion.is-paused .pn-pause-icon span {
+              display: none;
+            }
+
+            @keyframes pnLineFlow {
+              to { stroke-dashoffset: -26; }
+            }
+
+            @keyframes pnNodePulse {
+              0%, 100% { transform: scale(0.75); opacity: 0.65; }
+              50% { transform: scale(1.1); opacity: 1; }
+            }
+
+            @keyframes pnStarPulseActive {
+              0%, 100% { transform: translate3d(-50%, 0, 0) scale(1); }
+              50% { transform: translate3d(-50%, 0, 0) scale(1.16); }
+            }
+
+            @keyframes pnOrbitActive {
+              0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.78; }
+              50% { transform: translate3d(0, 0, 0) scale(1.08); opacity: 0.28; }
+            }
+
+            @keyframes pnCardFloatActive {
+              0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+              50% { transform: translate3d(0, -18px, 0) rotate(-0.6deg); }
+            }
+
+            @keyframes pnRowMoveActive {
+              0%, 100% { transform: translate3d(0, 0, 0); }
+              50% { transform: translate3d(18px, -4px, 0); }
+            }
+
+            @keyframes pnBadgeFloatActive {
+              0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+              50% { transform: translate3d(8px, -18px, 0) scale(1.05); }
+            }
+
+            @keyframes pnAvatarFloatActive {
+              0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+              50% { transform: translate3d(-14px, -18px, 0) scale(1.04); }
+            }
+
+            @keyframes pnCloudFloatActive {
+              0%, 100% { transform: translate3d(0, 0, 0); }
+              50% { transform: translate3d(-18px, -14px, 0); }
+            }
+
+            @keyframes pnPillPulseActive {
+              0%, 100% { opacity: 0.85; transform: translate3d(0, 0, 0); }
+              50% { opacity: 1; transform: translate3d(-14px, 0, 0); }
+            }
+
+            @keyframes pnRingActive {
+              to { transform: translate3d(0, 0, 0) rotate(360deg); }
+            }
+
+            @media (max-width: 720px) {
+              .pn-portal-motion { height: 410px; border-radius: 24px; }
+              .pn-connection-lines { opacity: 0.72; }
+              .pn-line-cloud, .pn-node-cloud, .pn-dot-cloud { display: none; }
+              .pn-orbit { left: 50%; top: 70px; width: 340px; height: 340px; margin-left: -170px; }
+              .pn-orbit-small { left: 50%; top: 126px; width: 240px; height: 240px; margin-left: -120px; }
+              .pn-main-card { left: 50%; top: 96px; width: 290px; margin-left: -145px; }
+              .pn-badge-left { left: calc(50% - 188px); }
+              .pn-badge-doc { left: calc(50% - 146px); }
+              .pn-badge-bottom { left: calc(50% + 10px); top: 384px; }
+              .pn-avatar { left: calc(50% + 142px); width: 44px; height: 44px; }
+              .pn-tool-cloud { display: none; }
+              .pn-pause { right: 16px; bottom: 12px; }
+            }
+
+            @media (max-width: 430px) {
+              .pn-portal-motion { height: 395px; }
+              .pn-main-card { width: 272px; height: 318px; margin-left: -136px; }
+              .pn-card-title { font-size: 17px; }
+              .pn-badge-left { left: calc(50% - 158px); }
+              .pn-badge-doc { left: calc(50% - 124px); }
+              .pn-avatar { left: calc(50% + 116px); }
+            }
+          </style>
+
+          <div class="pn-portal-motion" aria-label="Animação visual do Portal Notarial">
+            <div class="pn-orbit"></div>
+            <div class="pn-orbit pn-orbit-small"></div>
+
+            <svg class="pn-connection-lines" viewBox="0 0 720 440" aria-hidden="true">
+              <path id="pnPathPen" class="pn-line-path" d="M110 132 C132 124, 146 118, 166 118"></path>
+              <path id="pnPathAt" class="pn-line-path" d="M118 270 C144 256, 164 247, 190 246"></path>
+              <path id="pnPathCheck" class="pn-line-path pn-line-path-soft" d="M276 402 C298 390, 312 371, 326 346"></path>
+              <path id="pnPathAvatar" class="pn-line-path" d="M397 180 C420 176, 439 174, 458 178"></path>
+              <path id="pnPathCloud" class="pn-line-path pn-line-path-soft pn-line-cloud" d="M396 136 C452 104, 520 108, 584 136"></path>
+              <path id="pnPathCloudTwo" class="pn-line-path pn-line-path-soft pn-line-cloud" d="M398 244 C460 232, 510 232, 582 248"></path>
+
+              <circle class="pn-line-node" cx="110" cy="132" r="4"></circle>
+              <circle class="pn-line-node" cx="166" cy="118" r="4"></circle>
+              <circle class="pn-line-node" cx="118" cy="270" r="4"></circle>
+              <circle class="pn-line-node" cx="190" cy="246" r="4"></circle>
+              <circle class="pn-line-node" cx="326" cy="346" r="4"></circle>
+              <circle class="pn-line-node" cx="458" cy="178" r="4"></circle>
+              <circle class="pn-line-node pn-node-cloud" cx="584" cy="136" r="4"></circle>
+              <circle class="pn-line-node pn-node-cloud" cx="582" cy="248" r="4"></circle>
+
+              <circle class="pn-flow-dot" r="3">
+                <animateMotion dur="3.2s" repeatCount="indefinite">
+                  <mpath href="#pnPathPen"></mpath>
+                </animateMotion>
+              </circle>
+
+              <circle class="pn-flow-dot" r="3">
+                <animateMotion dur="3.6s" begin="0.4s" repeatCount="indefinite">
+                  <mpath href="#pnPathAt"></mpath>
+                </animateMotion>
+              </circle>
+
+              <circle class="pn-flow-dot" r="3">
+                <animateMotion dur="4s" begin="0.8s" repeatCount="indefinite">
+                  <mpath href="#pnPathAvatar"></mpath>
+                </animateMotion>
+              </circle>
+
+              <circle class="pn-flow-dot pn-dot-cloud" r="3">
+                <animateMotion dur="4.2s" begin="1s" repeatCount="indefinite">
+                  <mpath href="#pnPathCloud"></mpath>
+                </animateMotion>
+              </circle>
+
+              <circle class="pn-flow-dot pn-dot-cloud" r="3">
+                <animateMotion dur="4.4s" begin="1.3s" repeatCount="indefinite">
+                  <mpath href="#pnPathCloudTwo"></mpath>
+                </animateMotion>
+              </circle>
+            </svg>
+
+            <div class="pn-portal-star" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2.5c.8 4.8 3.7 7.7 8.5 8.5-4.8.8-7.7 3.7-8.5 8.5-.8-4.8-3.7-7.7-8.5-8.5 4.8-.8 7.7-3.7 8.5-8.5Z"></path>
+              </svg>
+            </div>
+
+            <div class="pn-side-badge pn-badge-left" aria-hidden="true">✒</div>
+            <div class="pn-side-badge pn-badge-doc" aria-hidden="true">@</div>
+            <div class="pn-side-badge pn-badge-bottom" aria-hidden="true">✓</div>
+
+            <div class="pn-main-card">
+              <p class="pn-card-title">
+                Ferramentas notariais em área logada para apoio à rotina extrajudicial.
+              </p>
+
+              <div class="pn-tool-row">
+                <div class="pn-tool-icon">1</div>
+                <div class="pn-tool-copy">
+                  <strong>Competência e-Notariado</strong>
+                  <small>Atos eletrônicos e híbridos</small>
+                </div>
+              </div>
+
+              <div class="pn-tool-row">
+                <div class="pn-tool-icon">2</div>
+                <div class="pn-tool-copy">
+                  <strong>Aplicador de Emolumentos</strong>
+                  <small>Enquadramento estimado por ato</small>
+                </div>
+              </div>
+
+              <div class="pn-tool-row">
+                <div class="pn-tool-icon">3</div>
+                <div class="pn-tool-copy">
+                  <strong>Triagem Notarial</strong>
+                  <small>Organize dados e documentos</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="pn-avatar" aria-hidden="true"></div>
+
+            <div class="pn-tool-cloud" aria-hidden="true">
+              <div class="pn-cloud-pill">
+                <span class="pn-cloud-dot"></span>
+                PDF/A, ICP-Brasil e e-Gov
+              </div>
+
+              <div class="pn-cloud-pill">
+                <span class="pn-cloud-dot"></span>
+                Escritura, tributo e registro
+              </div>
+
+              <div class="pn-cloud-pill">
+                <span class="pn-cloud-dot"></span>
+                Gerador de ofícios
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section class="page section" id="ferramentas">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Ferramentas incluídas</p>
-          <h2>O essencial para apoiar atos, cálculos e conferências.</h2>
+    <main>
+      <section class="section" id="ferramentas" aria-labelledby="titulo-ferramentas">
+        <div class="section-panel">
+          <div class="section-content">
+            <span class="section-eyebrow">Ferramentas incluídas</span>
+            <h2 class="section-title" id="titulo-ferramentas">Um painel único para rotinas recorrentes.</h2>
+            <p class="section-lead">
+              O Portal Notarial Pro reúne ferramentas de apoio operacional para cálculo, triagem, conferência técnica, emolumentos, ofícios e consultas auxiliares.
+            </p>
+
+            <div class="tools-grid" aria-label="Ferramentas do Portal Notarial Pro">
+          <article class="tool-card">
+            <h3>Calculadora Avançada</h3>
+            <p>Escritura, tributo e registro</p>
+          </article>
+          <article class="tool-card">
+            <h3>ITCMD</h3>
+            <p>Assistente de cálculo do imposto</p>
+          </article>
+          <article class="tool-card">
+            <h3>Ganho de Capital</h3>
+            <p>Assistente de cálculo do imposto</p>
+          </article>
+          <article class="tool-card">
+            <h3>Triagem Notarial</h3>
+            <p>Organização prévia de dados e documentos</p>
+          </article>
+          <article class="tool-card">
+            <h3>Verificador técnico</h3>
+            <p>PDF/A e assinatura digital ICP-Brasil e e-Gov</p>
+          </article>
+          <article class="tool-card">
+            <h3>Aplicador de Emolumentos</h3>
+            <p>Enquadramento estimado por ato</p>
+          </article>
+          <article class="tool-card">
+            <h3>Validação Selo Digital TJSP</h3>
+            <p>Consulta automatizada de selo</p>
+          </article>
+          <article class="tool-card">
+            <h3>Gerador de orçamento</h3>
+            <p>Orçamentos estimativos</p>
+          </article>
+          <article class="tool-card">
+            <h3>Consulta PEP por CPF</h3>
+            <p>Apoio à triagem cadastral</p>
+          </article>
+          <article class="tool-card">
+            <h3>Competência e-Notariado</h3>
+            <p>Atos eletrônicos e híbridos</p>
+          </article>
+          <article class="tool-card">
+            <h3>Tarifas da Conta Notarial</h3>
+            <p>Assistente de cálculo da tarifa</p>
+          </article>
+          <article class="tool-card">
+            <h3>Certidão reprográfica</h3>
+            <p>Apoio à montagem da certidão</p>
+          </article>
+          <article class="tool-card">
+            <h3>Ofício de comparecimento</h3>
+            <p>Geração automatizada</p>
+          </article>
+          <article class="tool-card">
+            <h3>Ofício para cartórios</h3>
+            <p>Geração automatizada</p>
+          </article>
+          <article class="tool-card">
+            <h3>Ofício para bancos em inventário</h3>
+            <p>Geração automatizada</p>
+          </article>
+            </div>
+
+            <div class="pro-strip">
+              <div>
+                <strong>Assinatura mensal do Portal Notarial Pro.</strong>
+                <p>O acesso às ferramentas protegidas é feito pelo painel do assinante.</p>
+              </div>
+              <a class="button primary" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="normas" aria-labelledby="titulo-normas">
+        <div class="section-panel">
+          <div class="section-content">
+            <span class="section-eyebrow">Consulta aberta</span>
+            <h2 class="section-title" id="titulo-normas">Normas públicas para consulta rápida.</h2>
+            <p class="section-lead">
+              As páginas normativas permanecem abertas para pesquisa e conferência das fontes usadas no portal.
+            </p>
+
+            <div class="normas-grid">
+              <a class="norma-card" href="codigo-de-normas-nacional.html">
+                <div>
+                  <span>Normas</span>
+                  <h3>Código Nacional de Normas</h3>
+                  <p>Consulta organizada para apoio à pesquisa normativa extrajudicial.</p>
+                </div>
+                <div class="arrow" aria-hidden="true">→</div>
+              </a>
+
+              <a class="norma-card" href="codigo-de-normas-de-sao-paulo.html">
+                <div>
+                  <span>Normas</span>
+                  <h3>Normas da Corregedoria de São Paulo</h3>
+                  <p>Página de apoio para consulta das normas aplicáveis em São Paulo.</p>
+                </div>
+                <div class="arrow" aria-hidden="true">→</div>
+              </a>
+
+              <a class="norma-card" href="fontes-normativas.html">
+                <div>
+                  <span>Fontes</span>
+                  <h3>Fontes normativas</h3>
+                  <p>Referências institucionais utilizadas nas páginas informativas do portal.</p>
+                </div>
+                <div class="arrow" aria-hidden="true">→</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="notice-panel" aria-label="Aviso sobre limites das ferramentas">
+        <div class="notice-inner">
           <p>
-            O Portal Notarial Pro concentra ferramentas usadas em etapas recorrentes da rotina extrajudicial, com acesso pelo painel do assinante.
+            <strong>Aviso.</strong> As ferramentas são recursos de apoio operacional. Os resultados dependem dos dados informados e não substituem a análise do caso concreto.
           </p>
+          <a class="button" href="aviso-legal.html">Ler aviso legal</a>
         </div>
-        <a class="button" href="https://app.portalnotarial.com.br">Acessar painel</a>
-      </div>
+      </section>
+    </main>
 
-      <div class="tools-panel">
-        <ul class="tool-list">
-              <li><span>Calculadora Avançada</span><small>Cálculos notariais em ambiente protegido</small></li>
-              <li><span>ITCMD</span><small>Apoio para conferência do imposto</small></li>
-              <li><span>Ganho de Capital</span><small>Estimativa para análise preliminar</small></li>
-              <li><span>Triagem Notarial</span><small>Organização prévia de dados e documentos</small></li>
-              <li><span>Verificador técnico</span><small>PDF/A, hash e assinatura digital</small></li>
-              <li><span>Aplicador de Emolumentos</span><small>Enquadramento estimado por ato</small></li>
-              <li><span>Validação Selo Digital TJSP</span><small>Consulta auxiliar de selo</small></li>
-              <li><span>Gerador de orçamento</span><small>Orçamentos estimativos</small></li>
-              <li><span>Consulta PEP por CPF</span><small>Apoio à triagem cadastral</small></li>
-              <li><span>Competência e-Notariado</span><small>Atos eletrônicos e híbridos</small></li>
-              <li><span>Tarifas da Conta Notarial</span><small>Tarifas conforme dados informados</small></li>
-              <li><span>Certidão reprográfica</span><small>Apoio à montagem do documento</small></li>
-              <li><span>Ofício de comparecimento</span><small>Declarações editáveis</small></li>
-              <li><span>Ofício para cartórios</span><small>Comunicações padronizadas</small></li>
-              <li><span>Ofício para bancos em inventário</span><small>Solicitações bancárias</small></li>
-        </ul>
-
-        <div class="commercial-strip">
-          <div>
-            <strong>Assinatura simples, acesso direto.</strong>
-            <p>Entre com seu e-mail, mantenha a assinatura ativa e acesse as ferramentas protegidas pelo painel.</p>
-          </div>
-          <a class="button primary" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
+    <footer>
+      <div class="footer-inner">
+        <div>Portal Notarial Pro | Ferramentas notariais em área logada.</div>
+        <div class="footer-links" aria-label="Links institucionais">
+          <a href="sobre.html">Sobre</a>
+          <a href="contato.html">Contato</a>
+          <a href="mapa-do-site.html">Mapa do site</a>
+          <a href="termos-de-uso.html">Termos</a>
+          <a href="politica-de-privacidade.html">Privacidade</a>
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="politica-de-cancelamento.html">Cancelamento</a>
         </div>
       </div>
-    </section>
+    </footer>
+  </div>
 
-    <section class="page section" id="normas">
-      <div class="section-head">
-        <div>
-          <p class="eyebrow">Consulta aberta</p>
-          <h2>Normas públicas para consulta rápida.</h2>
-          <p>
-            As páginas normativas permanecem abertas para pesquisa e conferência das fontes usadas no portal.
-          </p>
-        </div>
-      </div>
+<script>
+    const frasesNotariais = [
+      {
+        texto: "Quanto mais notário, menos juiz.",
+        autor: "Francesco Carnelutti"
+      },
+      {
+        texto: "Sou o notário que por causa do notariado me tornei jurista.",
+        autor: "Zeno Veloso"
+      },
+      {
+        texto: "O tabellio romano revela a raiz documental do notariado latino.",
+        autor: "Tradição justinianeia"
+      },
+      {
+        texto: "Se o tabelião não salvar o seu notariado, ninguém mais o fará.",
+        autor: "Carlos Luiz Poisl"
+      },
+      {
+        texto: "A pública forma é documento público elaborado por tabelião, sob responsabilidade de sua fé pública.",
+        autor: "Antônio Albergaria Pereira"
+      },
+      {
+        texto: "O notário é jurista profissional e agente público.",
+        autor: "União Internacional do Notariado"
+      },
+      {
+        texto: "Notaria aberta, juizado fechado.",
+        autor: "Joaquín Costa"
+      },
+      {
+        texto: "O notário não pratica ato do processo judicial. Sua função é preventiva e extrajudicial.",
+        autor: "Antônio Augusto Firmo da Silva"
+      },
+      {
+        texto: "A imparcialidade notarial não é passiva. É uma imparcialidade ativa.",
+        autor: "Vallet de Goytisolo"
+      },
+      {
+        texto: "A única vinculação essencial do notariado com o Estado não esgota a natureza da função.",
+        autor: "Francisco Martínez Segovia"
+      },
+      {
+        texto: "O tabelião é profissional do direito, dotado de fé pública.",
+        autor: "Lei nº 8.935/1994, art. 3º"
+      },
+      {
+        texto: "O certificado notarial trata de fatos já ocorridos, verificados por documentos ou outras fontes.",
+        autor: "Julia Siri García"
+      },
+      {
+        texto: "A fé pública é a essência da função notarial.",
+        autor: "Carlos Luiz Poisl"
+      },
+      {
+        texto: "O tabelião é guardião moral, legal e prático da vontade das partes.",
+        autor: "Zeno Veloso"
+      },
+      {
+        texto: "A função notarial opera na vida jurídica normal, antes da controvérsia.",
+        autor: "José Castán Tobeñas"
+      },
+      {
+        texto: "O notário atua com imparcialidade e independência.",
+        autor: "União Internacional do Notariado"
+      },
+      {
+        texto: "A ação funcional do notário tem etapa profissional e etapa documental.",
+        autor: "Francisco Martínez Segovia"
+      },
+      {
+        texto: "Fé é confiança na autoridade de quem afirma.",
+        autor: "Rufino Larraud"
+      },
+      {
+        texto: "A escritura pública é ato notarial por excelência.",
+        autor: "Carlos Luiz Poisl"
+      },
+      {
+        texto: "O tabelião também é um conselheiro, uma espécie de magistrado.",
+        autor: "Zeno Veloso"
+      },
+      {
+        texto: "A função notarial não se limita à documentação ou à autenticação.",
+        autor: "José Castán Tobeñas"
+      },
+      {
+        texto: "O notário interpreta a vontade das partes e verifica sua conformidade com a lei.",
+        autor: "União Internacional do Notariado"
+      },
+      {
+        texto: "O notário recebe a vontade, assessora as partes e interpreta seu sentido jurídico.",
+        autor: "Francisco Martínez Segovia"
+      },
+      {
+        texto: "Sem fé notarial, o notário não teria razão de ser.",
+        autor: "Carlos Nicolás Gattari"
+      },
+      {
+        texto: "Conselheiro e assessor jurídico imparcial, receptor e intérprete da vontade das partes.",
+        autor: "Carlos Luiz Poisl"
+      },
+      {
+        texto: "A atividade cartorial deu base intelectual e científica à atividade doutrinária.",
+        autor: "Zeno Veloso"
+      },
+      {
+        texto: "O notariado assume tarefas legitimadoras e constitutivas dos atos jurídicos.",
+        autor: "José Castán Tobeñas"
+      },
+      {
+        texto: "O notário é responsável pela redação do ato que autoriza.",
+        autor: "União Internacional do Notariado"
+      },
+      {
+        texto: "A fé pública notarial é grau de eficácia atribuído pela lei a certos documentos.",
+        autor: "Rufino Larraud"
+      },
+      {
+        texto: "A mediação notarial favorece a comunicação das partes e a harmonização de seus interesses.",
+        autor: "Julia Siri García"
+      },
+      {
+        texto: "O que caracteriza o ato notarial é a fé pública nele impressa.",
+        autor: "Carlos Luiz Poisl"
+      },
+      {
+        texto: "Ser tabelião de notas exige responsabilidade, conhecimento e prudência.",
+        autor: "Zeno Veloso"
+      },
+      {
+        texto: "A função notarial se desdobra em faculdades diretiva, moldeadora e constatadora.",
+        autor: "José Castán Tobeñas"
+      },
+      {
+        texto: "O formulismo sem reflexão conduz a textos incongruentes, disparatados e extemporâneos.",
+        autor: "Francisco Martínez Segovia"
+      },
+      {
+        texto: "A função notarial é uma função antiprocessual.",
+        autor: "Francesco Carnelutti"
+      },
+      {
+        texto: "A fé pública confere sentido à função e à instituição notarial.",
+        autor: "Carlos Nicolás Gattari"
+      },
+      {
+        texto: "O tabelião imprime fé pública nas declarações de vontade e nos fatos juridicamente relevantes.",
+        autor: "Carlos Luiz Poisl"
+      },
+      {
+        texto: "O notário exerce função pública por delegação estatal da fé pública.",
+        autor: "Antônio Augusto Firmo da Silva"
+      },
+      {
+        texto: "A ata notarial testemunha fatos presenciados pelo notário e lhes dá forma documental.",
+        autor: "Antônio Albergaria Pereira"
+      },
+      {
+        texto: "Para o notário devem vir os atos consensuais.",
+        autor: "Zeno Veloso"
+      },
+      {
+        texto: "O notariado auxilia a administração da justiça ao prevenir litígios.",
+        autor: "União Internacional do Notariado"
+      },
+      {
+        texto: "A fé pública reúne confiança, poder e qualidade.",
+        autor: "Rufino Larraud"
+      },
+      {
+        texto: "A técnica notarial deve adequar-se aos fins que serve na vida jurídica contemporânea.",
+        autor: "Julia Siri García"
+      },
+      {
+        texto: "Ciência, consciência e experiência sustentam a função notarial.",
+        autor: "José González Palomino"
+      },
+      {
+        texto: "O notário é conselheiro, assessor jurídico e avenidor das partes.",
+        autor: "José Castán Tobeñas"
+      },
+      {
+        texto: "A fórmula deve ser escolhida como norma de experiência, não repetida por inércia.",
+        autor: "Francisco Martínez Segovia"
+      },
+      {
+        texto: "O notário atua antes do conflito. O juiz atua depois dele.",
+        autor: "Francesco Carnelutti"
+      },
+      {
+        texto: "O ato notarial depende da fé pública para dar forma autêntica à vontade.",
+        autor: "Carlos Nicolás Gattari"
+      },
+      {
+        texto: "Ser tabelião exige conhecimento do universo da ciência do direito.",
+        autor: "Carlos Luiz Poisl"
+      },
+      {
+        texto: "Fé pública é garantia estatal de certeza e verdade sobre fatos, situações e interesses.",
+        autor: "Antônio Augusto Firmo da Silva"
+      },
+      {
+        texto: "A escritura pública formaliza declarações de vontade. A ata notarial documenta fatos.",
+        autor: "Antônio Albergaria Pereira"
+      },
+      {
+        texto: "O notário deve estudar cada caso como caso único.",
+        autor: "Zeno Veloso"
+      },
+      {
+        texto: "O notário confere autenticidade aos documentos que prepara.",
+        autor: "União Internacional do Notariado"
+      },
+      {
+        texto: "O notário impõe qualidade fehaciente ao instrumento do qual é autor.",
+        autor: "Rufino Larraud"
+      },
+      {
+        texto: "A ars notariae transformou a prática documental em técnica jurídica.",
+        autor: "Rolandino de’ Passaggeri"
+      },
+      {
+        texto: "O documento fez o notário. Hoje, o notário faz o documento.",
+        autor: "Rafael Núñez Lagos"
+      },
+      {
+        texto: "O documento eletrônico não elimina os princípios da função notarial.",
+        autor: "Julia Siri García"
+      },
+      {
+        texto: "O notariado é uma criação social, antes de ser criação das normas.",
+        autor: "José González Palomino"
+      },
+      {
+        texto: "O notário instrui os interessados sobre possibilidades legais, requisitos e consequências.",
+        autor: "José Castán Tobeñas"
+      },
+      {
+        texto: "A autenticação é elemento próprio e distintivo da função notarial.",
+        autor: "Francisco Martínez Segovia"
+      },
+      {
+        texto: "A intervenção notarial reduz a necessidade de intervenção judicial.",
+        autor: "Francesco Carnelutti"
+      },
+      {
+        texto: "O instrumento público é o lugar geométrico da função notarial.",
+        autor: "Enrique Giménez-Arnau"
+      },
+      {
+        texto: "O ato notarial recebe a vontade, qualifica o negócio e lhe dá forma jurídica.",
+        autor: "Doutrina notarial latina"
+      },
+      {
+        texto: "A fé pública proporciona certeza e segurança ao documento notarial.",
+        autor: "Carlos Nicolás Gattari"
+      },
+      {
+        texto: "O notariado brasileiro precisa ser instituição aparelhada para o exercício de sua função.",
+        autor: "Carlos Luiz Poisl"
+      },
+      {
+        texto: "O notariado de tipo latino combina função pública e exercício profissional.",
+        autor: "Antônio Augusto Firmo da Silva"
+      },
+      {
+        texto: "A fé pública notarial exige cuidado técnico no poder de certificar.",
+        autor: "Antônio Albergaria Pereira"
+      },
+      {
+        texto: "O tabelião deve ajudar a transformar dissenso inicial em consenso jurídico.",
+        autor: "Zeno Veloso"
+      },
+      {
+        texto: "O conselho notarial reconduz os fatos a fórmulas legais e justas.",
+        autor: "Vallet de Goytisolo"
+      },
+      {
+        texto: "A autenticidade do ato notarial se apoia na assinatura, na data e no conteúdo do documento.",
+        autor: "União Internacional do Notariado"
+      },
+      {
+        texto: "Na vida do notário, há poesia e verdade.",
+        autor: "Salvatore Satta"
+      },
+      {
+        texto: "A função notarial começa pela compreensão do propósito econômico ou moral dos interessados.",
+        autor: "Rufino Larraud"
+      },
+      {
+        texto: "A arte notarial exige forma, ordem e prudência documental.",
+        autor: "Rolandino de’ Passaggeri"
+      },
+      {
+        texto: "O notário não está super partes. Está extra partes.",
+        autor: "Renato Giacobbe, difundido por Vallet de Goytisolo"
+      },
+      {
+        texto: "A escritura pública transforma a vontade em forma jurídica documentada.",
+        autor: "Rafael Núñez Lagos"
+      },
+      {
+        texto: "A ata notarial exige técnica própria de constatação, narrativa e documentação.",
+        autor: "Julia Siri García"
+      },
+      {
+        texto: "O direito não tolera a carência de formas.",
+        autor: "José González Palomino"
+      },
+      {
+        texto: "O notário qualifica a natureza e a legalidade do ato pretendido.",
+        autor: "José Castán Tobeñas"
+      },
+      {
+        texto: "O documento notarial é prova antilitigiosa por excelência.",
+        autor: "Joaquín Costa"
+      },
+      {
+        texto: "A fé pública dá valor jurídico ao documento e ao seu conteúdo.",
+        autor: "Francisco Martínez Segovia"
+      },
+      {
+        texto: "O notário documenta a normalidade jurídica. O juiz decide a patologia jurídica.",
+        autor: "Francesco Carnelutti"
+      },
+      {
+        texto: "O instrumento público prova fatos, dá forma a atos e assegura efeitos jurídicos.",
+        autor: "Enrique Giménez-Arnau"
+      },
+      {
+        texto: "A função notarial é técnica, pública e preventiva.",
+        autor: "Doutrina notarial latina"
+      },
+      {
+        texto: "A fé pública qualifica o documento, mas não dispensa o juízo jurídico do tabelião.",
+        autor: "Doutrina notarial brasileira"
+      },
+      {
+        texto: "O notário é o agente próprio para dar fé pública a determinados instrumentos.",
+        autor: "Carlos Nicolás Gattari"
+      },
+      {
+        texto: "A escritura pública dá certeza, tranquilidade e segurança às negociações imobiliárias.",
+        autor: "Carlos Luiz Poisl"
+      },
+      {
+        texto: "O bom desempenho notarial recomenda sólida formação jurídica.",
+        autor: "Antônio Augusto Firmo da Silva"
+      },
+      {
+        texto: "O notariado brasileiro exige consciência institucional para preservar sua função.",
+        autor: "Antônio Albergaria Pereira"
+      }
+    ];
 
-      <div class="normas-grid">
-        <a class="norma-card" href="codigo-de-normas-nacional.html">
-          <div>
-            <span>Normas</span>
-            <h3>Código Nacional de Normas</h3>
-            <p>Consulta organizada para apoio à pesquisa normativa extrajudicial.</p>
-          </div>
-          <div class="arrow" aria-hidden="true">→</div>
-        </a>
+    const quoteTextElement = document.getElementById("quoteText");
+    const quoteAuthorElement = document.getElementById("quoteAuthor");
+    let quoteIndex = 0;
+    let letterIndex = 0;
+    let deleting = false;
 
-        <a class="norma-card" href="codigo-de-normas-de-sao-paulo.html">
-          <div>
-            <span>Normas</span>
-            <h3>Normas da Corregedoria de São Paulo</h3>
-            <p>Página de apoio para consulta das normas aplicáveis em São Paulo.</p>
-          </div>
-          <div class="arrow" aria-hidden="true">→</div>
-        </a>
+    function typeQuote() {
+      if (!quoteTextElement || !quoteAuthorElement) return;
 
-        <a class="norma-card" href="fontes-normativas.html">
-          <div>
-            <span>Fontes</span>
-            <h3>Fontes normativas</h3>
-            <p>Referências institucionais utilizadas nas páginas informativas do portal.</p>
-          </div>
-          <div class="arrow" aria-hidden="true">→</div>
-        </a>
-      </div>
-    </section>
+      const item = frasesNotariais[quoteIndex];
+      const fullText = item.texto;
 
-    <section class="page legal">
-      <p>
-        <strong>Aviso.</strong> As ferramentas são recursos de apoio operacional. Os resultados dependem dos dados informados e não substituem análise do caso concreto, conferência normativa, orientação profissional individualizada ou manifestação oficial.
-      </p>
-      <a class="button" href="aviso-legal.html">Ler aviso legal</a>
-    </section>
-  </main>
+      if (!deleting) {
+        letterIndex += 1;
+        quoteTextElement.textContent = fullText.slice(0, letterIndex);
+        quoteAuthorElement.textContent = letterIndex === fullText.length ? item.autor : "";
 
-  <footer class="page footer">
-    <div>
-      <strong>Portal Notarial Pro</strong><br />
-      Ferramentas notariais em área logada para apoio operacional.
-    </div>
+        if (letterIndex === fullText.length) {
+          deleting = true;
+          window.setTimeout(typeQuote, 2600);
+          return;
+        }
 
-    <nav class="footer-links" aria-label="Links jurídicos e institucionais">
-      <a href="sobre.html">Sobre</a>
-      <a href="contato.html">Contato</a>
-      <a href="mapa-do-site.html">Mapa do site</a>
-      <a href="termos-de-uso.html">Termos</a>
-      <a href="politica-de-privacidade.html">Privacidade</a>
-      <a href="aviso-legal.html">Aviso legal</a>
-      <a href="politica-de-cancelamento.html">Cancelamento</a>
-    </nav>
-  </footer>
+        window.setTimeout(typeQuote, 34);
+        return;
+      }
+
+      letterIndex -= 1;
+      quoteTextElement.textContent = fullText.slice(0, letterIndex);
+      quoteAuthorElement.textContent = "";
+
+      if (letterIndex === 0) {
+        deleting = false;
+        quoteIndex = (quoteIndex + 1) % frasesNotariais.length;
+        window.setTimeout(typeQuote, 360);
+        return;
+      }
+
+      window.setTimeout(typeQuote, 12);
+    }
+
+    typeQuote();
+  </script>
 </body>
 </html>
