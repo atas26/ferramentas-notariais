@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-BR" class="pn-tool-guard-pending" data-portal-tool-slug="aplicador-emolumentos">
 <head>
-  <!-- Portal Notarial Pro: validação de acesso da ferramenta -->
+  <!-- Portal Notarial Pro: validação inline de acesso da ferramenta -->
   <style>
     html.pn-tool-guard-pending body {
       min-height: 100vh;
@@ -36,15 +36,89 @@
       visibility: visible;
     }
   </style>
-  <script defer src="https://app.portalnotarial.com.br/tool-guard.js" data-tool-slug="aplicador-emolumentos"></script>
-  <!-- Portal Notarial Pro: fallback de redirecionamento -->
   <script>
-    window.setTimeout(function () {
-      var html = document.documentElement;
-      if (html && html.classList && html.classList.contains("pn-tool-guard-pending")) {
-        window.location.href = "https://app.portalnotarial.com.br?origem=" + encodeURIComponent(window.location.href);
+    (function () {
+      var APP_ORIGIN = "https://app.portalnotarial.com.br";
+      var VERIFY_URL = APP_ORIGIN + "/api/tool-ticket/verify";
+      var TOOL_SLUG = "aplicador-emolumentos";
+      var REDIRECT_DELAY = 900;
+      var FALLBACK_DELAY = 6000;
+
+      function goToApp() {
+        window.location.href = APP_ORIGIN + "?origem=" + encodeURIComponent(window.location.href);
       }
-    }, 6000);
+
+      function getToken() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          var token = params.get("pn_token") || "";
+          var storageKey = "pn_tool_token_" + TOOL_SLUG;
+
+          if (token) {
+            sessionStorage.setItem(storageKey, token);
+            return token;
+          }
+
+          return sessionStorage.getItem(storageKey) || "";
+        } catch (error) {
+          return "";
+        }
+      }
+
+      function clearTokenFromUrl() {
+        try {
+          var url = new URL(window.location.href);
+          if (!url.searchParams.has("pn_token")) return;
+          url.searchParams.delete("pn_token");
+          window.history.replaceState({}, document.title, url.toString());
+        } catch (error) {}
+      }
+
+      function authorize() {
+        clearTokenFromUrl();
+        document.documentElement.classList.remove("pn-tool-guard-pending");
+        document.documentElement.classList.add("pn-tool-guard-authorized");
+      }
+
+      async function verify() {
+        var token = getToken();
+
+        if (!token) {
+          window.setTimeout(goToApp, REDIRECT_DELAY);
+          return;
+        }
+
+        var fallback = window.setTimeout(function () {
+          if (document.documentElement.classList.contains("pn-tool-guard-pending")) {
+            goToApp();
+          }
+        }, FALLBACK_DELAY);
+
+        try {
+          var response = await fetch(VERIFY_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ token: token, slug: TOOL_SLUG })
+          });
+
+          var data = await response.json().catch(function () { return {}; });
+
+          window.clearTimeout(fallback);
+
+          if (!response.ok || !data.ok) {
+            goToApp();
+            return;
+          }
+
+          authorize();
+        } catch (error) {
+          window.clearTimeout(fallback);
+          goToApp();
+        }
+      }
+
+      verify();
+    })();
   </script>
 
   <meta charset="utf-8">
