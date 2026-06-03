@@ -2470,188 +2470,71 @@
 
 
     function imprimirOficio() {
-      if (!ids.previewOficio) return;
-      if (!getTipoAssinatura()) {
-        alert('Selecione o tipo da assinatura do ofício.');
-        setStatus('Selecione o tipo da assinatura do ofício antes de imprimir.');
-        const primeiroTipo = document.getElementById('tipoAssinaturaDigital');
-        if (primeiroTipo) primeiroTipo.focus();
-        return;
-      }
-      if (!edicaoManualOficio && !edicaoOficioAtiva) {
-        atualizarPrevia(true);
-      }
+  if (!ids.previewOficio) return;
 
-      const iframe = document.createElement('iframe');
-      iframe.style.position = 'fixed';
-      iframe.style.right = '0';
-      iframe.style.bottom = '0';
-      iframe.style.width = '0';
-      iframe.style.height = '0';
-      iframe.style.border = '0';
-      document.body.appendChild(iframe);
+  const iframe = document.createElement('iframe');
+  iframe.setAttribute('aria-hidden', 'true');
+  iframe.style.position = 'fixed';
+  iframe.style.right = '0';
+  iframe.style.bottom = '0';
+  iframe.style.width = '0';
+  iframe.style.height = '0';
+  iframe.style.border = '0';
+  iframe.style.opacity = '0';
 
-      const doc = iframe.contentDocument || iframe.contentWindow.document;
-      doc.open();
-      doc.write('<!doctype html><html class="pn-tool-guard-pending" data-portal-tool-slug="oficio-bancos-inventario"><head>
-  <!-- Portal Notarial Pro: validação inline de acesso da ferramenta -->
-  <style>
-    html.pn-tool-guard-pending body {
-      min-height: 100vh;
-      background: #f4f7fb;
-    }
+  document.body.appendChild(iframe);
 
-    html.pn-tool-guard-pending body > * {
-      visibility: hidden;
-    }
+  const doc = iframe.contentDocument || iframe.contentWindow.document;
+  const estilos = Array.from(document.querySelectorAll('style, link[rel="stylesheet"]'))
+    .map(function (node) {
+      return node.outerHTML;
+    })
+    .join('\n');
 
-    html.pn-tool-guard-pending body::before {
-      content: "Validando acesso pelo Portal Notarial Pro...";
-      visibility: visible;
-      position: fixed;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      color: #0a2540;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 18px;
-      font-weight: 700;
-      text-align: center;
-      background:
-        radial-gradient(circle at 15% 18%, rgba(11, 95, 255, 0.08), transparent 32%),
-        linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
-      z-index: 2147483647;
-    }
+  const conteudo = ids.previewOficio.cloneNode(true);
+  conteudo.removeAttribute('contenteditable');
+  conteudo.classList.remove('is-editing');
 
-    html.pn-tool-guard-authorized body > *,
-    html.pn-tool-guard-blocked body > * {
-      visibility: visible;
-    }
-  </style>
-  <script>
-    (function () {
-      var APP_ORIGIN = "https://app.portalnotarial.com.br";
-      var VERIFY_URL = APP_ORIGIN + "/api/tool-ticket/verify-get";
-      var TOOL_SLUG = "oficio-bancos-inventario";
-      var REDIRECT_DELAY = 900;
-      var FALLBACK_DELAY = 8000;
+  doc.open();
+  doc.write(
+    '<!doctype html>' +
+    '<html lang="pt-BR">' +
+    '<head>' +
+    '<meta charset="UTF-8">' +
+    '<title>Ofício para bancos</title>' +
+    estilos +
+    '<style>' +
+    '@page { size: A4; margin: 12mm; }' +
+    'html, body { background: #ffffff; }' +
+    'body { margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; color: #111827; }' +
+    '.print-wrap { max-width: 780px; margin: 0 auto; }' +
+    '</style>' +
+    '</head>' +
+    '<body><main class="print-wrap"></main></body>' +
+    '</html>'
+  );
+  doc.close();
 
-      function goToApp() {
-        window.location.href = APP_ORIGIN + "?origem=" + encodeURIComponent(window.location.href);
-      }
+  const destino = doc.querySelector('.print-wrap') || doc.body;
+  destino.appendChild(doc.importNode(conteudo, true));
 
-      function getToken() {
-        try {
-          var params = new URLSearchParams(window.location.search || "");
-          var token = params.get("pn_token") || "";
-          var storageKey = "pn_tool_token_" + TOOL_SLUG;
+  const executarImpressao = function () {
+    iframe.contentWindow.focus();
+    iframe.contentWindow.print();
 
-          if (token) {
-            sessionStorage.setItem(storageKey, token);
-            return token;
-          }
+    window.setTimeout(function () {
+      iframe.remove();
+    }, 800);
+  };
 
-          return sessionStorage.getItem(storageKey) || "";
-        } catch (error) {
-          return "";
-        }
-      }
+  if (doc.fonts && doc.fonts.ready) {
+    doc.fonts.ready.then(executarImpressao).catch(executarImpressao);
+  } else {
+    window.setTimeout(executarImpressao, 300);
+  }
+}
 
-      function clearTokenFromUrl() {
-        try {
-          var url = new URL(window.location.href);
-          if (!url.searchParams.has("pn_token")) return;
-          url.searchParams.delete("pn_token");
-          window.history.replaceState({}, document.title, url.toString());
-        } catch (error) {}
-      }
-
-      function authorize() {
-        clearTokenFromUrl();
-        document.documentElement.classList.remove("pn-tool-guard-pending");
-        document.documentElement.classList.add("pn-tool-guard-authorized");
-      }
-
-      async function verify() {
-        var token = getToken();
-
-        if (!token) {
-          window.setTimeout(goToApp, REDIRECT_DELAY);
-          return;
-        }
-
-        var fallback = window.setTimeout(function () {
-          if (document.documentElement.classList.contains("pn-tool-guard-pending")) {
-            goToApp();
-          }
-        }, FALLBACK_DELAY);
-
-        try {
-          var url = VERIFY_URL +
-            "?slug=" + encodeURIComponent(TOOL_SLUG) +
-            "&token=" + encodeURIComponent(token);
-
-          var response = await fetch(url, {
-            method: "GET",
-            mode: "cors",
-            cache: "no-store"
-          });
-
-          var data = await response.json().catch(function () { return {}; });
-
-          window.clearTimeout(fallback);
-
-          if (!response.ok || !data.ok) {
-            goToApp();
-            return;
-          }
-
-          authorize();
-        } catch (error) {
-          window.clearTimeout(fallback);
-          goToApp();
-        }
-      }
-
-      verify();
-    })();
-  </script>
-  <meta charset="utf-8"><title>Imprimir ofício</title><style>' +
-        '@font-face{font-family:Carlito;src:url("https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/carlito/Carlito-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}' +
-        '@font-face{font-family:Carlito;src:url("https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/carlito/Carlito-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap;}' +
-        '@page{size:A4;margin:4.5cm 2cm 2.5cm 2cm;}' +
-        'body{margin:0;font-family:Carlito,Calibri,Arial,sans-serif;font-size:12pt;line-height:1.15;color:#000;}' +
-        '.oficio-line{margin:0 0 3pt;}' +
-        '.oficio-right{margin:0 0 5pt;text-align:right;}' +
-        '.oficio-space{height:6pt;}' +
-        '.oficio-paragraph{margin:0 0 6pt;text-align:justify;line-height:1.15;}' +
-        '.oficio-list-item{margin:0 0 4pt 18pt;text-align:justify;line-height:1.15;}' +
-        '.oficio-signature{margin:0 0 3pt;font-weight:700;text-transform:uppercase;text-align:center;}' +
-        '.oficio-signature-line{width:8cm;border-top:1px solid #000;margin:0 auto 12pt;height:0;}' +
-        '.oficio-digital-note{margin:0 0 6pt;text-align:center;font-size:11pt;line-height:1.15;}' +
-        '.oficio-bold{font-weight:700;}' +
-        '</style></head><body>' + ids.previewOficio.innerHTML + '</body></html>');
-      doc.close();
-
-      iframe.onload = function () {
-        const executarImpressao = function () {
-          iframe.contentWindow.focus();
-          iframe.contentWindow.print();
-          window.setTimeout(function () {
-            iframe.remove();
-          }, 800);
-        };
-
-        if (iframe.contentDocument && iframe.contentDocument.fonts && iframe.contentDocument.fonts.ready) {
-          iframe.contentDocument.fonts.ready.then(executarImpressao).catch(executarImpressao);
-        } else {
-          window.setTimeout(executarImpressao, 300);
-        }
-      };
-    }
-
-    async function gerarPdfFinal() {
+async function gerarPdfFinal() {
       if (!validarCamposAntesDeGerar()) return;
 
       const certidao = ids.certidaoPdf.files[0];
