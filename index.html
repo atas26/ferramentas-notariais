@@ -127,9 +127,9 @@
     }
 
     .nav-inner {
-      max-width: 1440px;
+      max-width: 1320px;
       margin: 0 auto;
-      padding: 14px 22px;
+      padding: 14px 48px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -210,11 +210,11 @@
       z-index: 2;
       display: flex;
       align-items: center;
-      padding: 62px 22px 54px;
+      padding: 62px 48px 54px;
     }
 
     .hero-inner {
-      max-width: 1440px;
+      max-width: 1320px;
       width: 100%;
       margin: 0 auto;
       display: block;
@@ -273,7 +273,7 @@
     .hero-kicker {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 0;
       margin: 0 0 18px;
       color: var(--azul);
       font-size: 12px;
@@ -283,11 +283,7 @@
     }
 
     .hero-kicker::before {
-      content: "";
-      width: 38px;
-      height: 2px;
-      border-radius: 999px;
-      background: var(--azul);
+      display: none;
     }
 
     h1 {
@@ -352,6 +348,64 @@
       background: var(--azul-escuro);
     }
 
+    .button.publish-style {
+      min-height: 56px;
+      gap: 10px;
+      padding: 0 24px 0 18px;
+      border: 0;
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--azul), #6d5dfc);
+      box-shadow:
+        0 18px 42px rgba(11, 95, 255, 0.28),
+        inset 0 1px 0 rgba(255,255,255,0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button.publish-style::before {
+      content: "+";
+      width: 28px;
+      height: 28px;
+      display: inline-grid;
+      place-items: center;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.20);
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+      font-weight: 850;
+    }
+
+    .button.publish-style::after {
+      content: "";
+      position: absolute;
+      top: -80%;
+      left: -30%;
+      width: 42%;
+      height: 220%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.26), transparent);
+      transform: rotate(18deg) translateX(-140%);
+      transition: transform 0.52s ease;
+      pointer-events: none;
+    }
+
+    .button.publish-style:hover {
+      transform: translateY(-2px) scale(1.015);
+      box-shadow:
+        0 24px 54px rgba(11, 95, 255, 0.34),
+        inset 0 1px 0 rgba(255,255,255,0.32);
+      background: linear-gradient(135deg, #1c6bff, #745cff);
+    }
+
+    .button.publish-style:hover::after {
+      transform: rotate(18deg) translateX(420%);
+    }
+
+    .button.publish-style:active {
+      transform: translateY(0) scale(0.985);
+    }
+
     .hero-badges {
       display: flex;
       flex-wrap: wrap;
@@ -376,9 +430,9 @@
     .section {
       position: relative;
       z-index: 3;
-      max-width: 1440px;
+      max-width: 1320px;
       margin: 0 auto;
-      padding: 0 22px 72px;
+      padding: 0 48px 72px;
       clear: both;
     }
 
@@ -451,8 +505,8 @@
 
     .tools-grid {
       display: grid;
-      grid-template-columns: repeat(5, minmax(170px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
       margin-top: 28px;
     }
 
@@ -580,9 +634,9 @@
     .notice-panel {
       position: relative;
       z-index: 3;
-      max-width: 1440px;
+      max-width: 1320px;
       margin: 0 auto 72px;
-      padding: 0 22px;
+      padding: 0 48px;
       clear: both;
     }
 
@@ -615,13 +669,13 @@
       z-index: 3;
       border-top: 1px solid var(--linha);
       color: var(--texto-suave);
-      padding: 22px;
+      padding: 22px 48px;
       font-size: 13px;
       clear: both;
     }
 
     .footer-inner {
-      max-width: 1440px;
+      max-width: 1320px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -651,7 +705,7 @@
 
     @media (max-width: 1180px) {
       .tools-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -680,6 +734,23 @@
       .nav-inner {
         align-items: flex-start;
         flex-direction: column;
+        padding: 14px 22px;
+      }
+
+      .hero {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      .section,
+      .notice-panel {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      footer {
+        padding-left: 22px;
+        padding-right: 22px;
       }
 
       .primary-links {
@@ -722,7 +793,6 @@
           <div class="primary-links" aria-label="Links principais">
             <a href="sobre.html">Sobre</a>
             <a href="contato.html">Contato</a>
-            <a class="login-link" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
           </div>
         </div>
       </div>
@@ -749,14 +819,7 @@
             </p>
 
             <div class="hero-actions">
-              <a class="button primary" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
               <a class="button" href="#ferramentas">Ver ferramentas incluídas</a>
-            </div>
-
-            <div class="hero-badges" aria-label="Resumo do plano">
-              <span>15 ferramentas incluídas</span>
-              <span>R$ 49,40 por mês</span>
-              <span>Acesso por área logada</span>
             </div>
           </section>
 
@@ -1467,10 +1530,9 @@
 
             <div class="pro-strip">
               <div>
-                <strong>Assinatura mensal do Portal Notarial Pro.</strong>
+                <strong>Assinar</strong>
                 <p>O acesso às ferramentas protegidas é feito pelo painel do assinante.</p>
               </div>
-              <a class="button primary" href="https://app.portalnotarial.com.br">Entrar ou assinar</a>
             </div>
           </div>
         </div>
@@ -1481,10 +1543,6 @@
           <div class="section-content">
             <span class="section-eyebrow">Consulta aberta</span>
             <h2 class="section-title" id="titulo-normas">Normas para consulta rápida.</h2>
-            <p class="section-lead">
-              As páginas normativas permanecem abertas para pesquisa e conferência das fontes usadas no portal.
-            </p>
-
             <div class="normas-grid">
               <a class="norma-card" href="codigo-de-normas-nacional.html">
                 <div>
