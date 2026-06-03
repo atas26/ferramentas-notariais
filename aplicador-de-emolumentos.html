@@ -39,10 +39,10 @@
   <script>
     (function () {
       var APP_ORIGIN = "https://app.portalnotarial.com.br";
-      var VERIFY_URL = APP_ORIGIN + "/api/tool-ticket/verify";
+      var VERIFY_URL = APP_ORIGIN + "/api/tool-ticket/verify-get";
       var TOOL_SLUG = "aplicador-emolumentos";
       var REDIRECT_DELAY = 900;
-      var FALLBACK_DELAY = 6000;
+      var FALLBACK_DELAY = 8000;
 
       function goToApp() {
         window.location.href = APP_ORIGIN + "?origem=" + encodeURIComponent(window.location.href);
@@ -95,10 +95,14 @@
         }, FALLBACK_DELAY);
 
         try {
-          var response = await fetch(VERIFY_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ token: token, slug: TOOL_SLUG })
+          var url = VERIFY_URL +
+            "?slug=" + encodeURIComponent(TOOL_SLUG) +
+            "&token=" + encodeURIComponent(token);
+
+          var response = await fetch(url, {
+            method: "GET",
+            mode: "cors",
+            cache: "no-store"
           });
 
           var data = await response.json().catch(function () { return {}; });
