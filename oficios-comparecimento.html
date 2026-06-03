@@ -1,7 +1,131 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="pn-tool-guard-pending" data-portal-tool-slug="oficio-comparecimento">
 <head>
-  <meta charset="UTF-8" />
+  <!-- Portal Notarial Pro: validação inline de acesso da ferramenta -->
+  <style>
+    html.pn-tool-guard-pending body {
+      min-height: 100vh;
+      background: #f4f7fb;
+    }
+
+    html.pn-tool-guard-pending body > * {
+      visibility: hidden;
+    }
+
+    html.pn-tool-guard-pending body::before {
+      content: "Validando acesso pelo Portal Notarial Pro...";
+      visibility: visible;
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: #0a2540;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(11, 95, 255, 0.08), transparent 32%),
+        linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+      z-index: 2147483647;
+    }
+
+    html.pn-tool-guard-authorized body > *,
+    html.pn-tool-guard-blocked body > * {
+      visibility: visible;
+    }
+  </style>
+  <script>
+    (function () {
+      var APP_ORIGIN = "https://app.portalnotarial.com.br";
+      var VERIFY_URL = APP_ORIGIN + "/api/tool-ticket/verify-get";
+      var TOOL_SLUG = "oficio-comparecimento";
+      var REDIRECT_DELAY = 900;
+      var FALLBACK_DELAY = 8000;
+
+      function goToApp() {
+        window.location.href = APP_ORIGIN + "?origem=" + encodeURIComponent(window.location.href);
+      }
+
+      function getToken() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          var token = params.get("pn_token") || "";
+          var storageKey = "pn_tool_token_" + TOOL_SLUG;
+
+          if (token) {
+            sessionStorage.setItem(storageKey, token);
+            return token;
+          }
+
+          return sessionStorage.getItem(storageKey) || "";
+        } catch (error) {
+          return "";
+        }
+      }
+
+      function clearTokenFromUrl() {
+        try {
+          var url = new URL(window.location.href);
+          if (!url.searchParams.has("pn_token")) return;
+          url.searchParams.delete("pn_token");
+          window.history.replaceState({}, document.title, url.toString());
+        } catch (error) {}
+      }
+
+      function authorize() {
+        clearTokenFromUrl();
+        document.documentElement.classList.remove("pn-tool-guard-pending");
+        document.documentElement.classList.add("pn-tool-guard-authorized");
+      }
+
+      async function verify() {
+        var token = getToken();
+
+        if (!token) {
+          window.setTimeout(goToApp, REDIRECT_DELAY);
+          return;
+        }
+
+        var fallback = window.setTimeout(function () {
+          if (document.documentElement.classList.contains("pn-tool-guard-pending")) {
+            goToApp();
+          }
+        }, FALLBACK_DELAY);
+
+        try {
+          var url = VERIFY_URL +
+            "?slug=" + encodeURIComponent(TOOL_SLUG) +
+            "&token=" + encodeURIComponent(token);
+
+          var response = await fetch(url, {
+            method: "GET",
+            mode: "cors",
+            cache: "no-store"
+          });
+
+          var data = await response.json().catch(function () { return {}; });
+
+          window.clearTimeout(fallback);
+
+          if (!response.ok || !data.ok) {
+            goToApp();
+            return;
+          }
+
+          authorize();
+        } catch (error) {
+          window.clearTimeout(fallback);
+          goToApp();
+        }
+      }
+
+      verify();
+    })();
+  </script>
+
+    <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gerador de ofício para declaração de comparecimento</title>
   <meta name="description" content="Ferramenta para gerar ofício de declaração de comparecimento, com preenchimento dos dados, prévia editável, template em PDF e emissão do arquivo final para conferência do usuário." />
@@ -1348,7 +1472,131 @@
 
       const doc = iframe.contentDocument || iframe.contentWindow.document;
       doc.open();
-      doc.write('<!doctype html><html><head><meta charset="utf-8"><title>Imprimir declaração</title><style>' +
+      doc.write('<!doctype html><html class="pn-tool-guard-pending" data-portal-tool-slug="oficio-comparecimento"><head>
+  <!-- Portal Notarial Pro: validação inline de acesso da ferramenta -->
+  <style>
+    html.pn-tool-guard-pending body {
+      min-height: 100vh;
+      background: #f4f7fb;
+    }
+
+    html.pn-tool-guard-pending body > * {
+      visibility: hidden;
+    }
+
+    html.pn-tool-guard-pending body::before {
+      content: "Validando acesso pelo Portal Notarial Pro...";
+      visibility: visible;
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: #0a2540;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      background:
+        radial-gradient(circle at 15% 18%, rgba(11, 95, 255, 0.08), transparent 32%),
+        linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+      z-index: 2147483647;
+    }
+
+    html.pn-tool-guard-authorized body > *,
+    html.pn-tool-guard-blocked body > * {
+      visibility: visible;
+    }
+  </style>
+  <script>
+    (function () {
+      var APP_ORIGIN = "https://app.portalnotarial.com.br";
+      var VERIFY_URL = APP_ORIGIN + "/api/tool-ticket/verify-get";
+      var TOOL_SLUG = "oficio-comparecimento";
+      var REDIRECT_DELAY = 900;
+      var FALLBACK_DELAY = 8000;
+
+      function goToApp() {
+        window.location.href = APP_ORIGIN + "?origem=" + encodeURIComponent(window.location.href);
+      }
+
+      function getToken() {
+        try {
+          var params = new URLSearchParams(window.location.search || "");
+          var token = params.get("pn_token") || "";
+          var storageKey = "pn_tool_token_" + TOOL_SLUG;
+
+          if (token) {
+            sessionStorage.setItem(storageKey, token);
+            return token;
+          }
+
+          return sessionStorage.getItem(storageKey) || "";
+        } catch (error) {
+          return "";
+        }
+      }
+
+      function clearTokenFromUrl() {
+        try {
+          var url = new URL(window.location.href);
+          if (!url.searchParams.has("pn_token")) return;
+          url.searchParams.delete("pn_token");
+          window.history.replaceState({}, document.title, url.toString());
+        } catch (error) {}
+      }
+
+      function authorize() {
+        clearTokenFromUrl();
+        document.documentElement.classList.remove("pn-tool-guard-pending");
+        document.documentElement.classList.add("pn-tool-guard-authorized");
+      }
+
+      async function verify() {
+        var token = getToken();
+
+        if (!token) {
+          window.setTimeout(goToApp, REDIRECT_DELAY);
+          return;
+        }
+
+        var fallback = window.setTimeout(function () {
+          if (document.documentElement.classList.contains("pn-tool-guard-pending")) {
+            goToApp();
+          }
+        }, FALLBACK_DELAY);
+
+        try {
+          var url = VERIFY_URL +
+            "?slug=" + encodeURIComponent(TOOL_SLUG) +
+            "&token=" + encodeURIComponent(token);
+
+          var response = await fetch(url, {
+            method: "GET",
+            mode: "cors",
+            cache: "no-store"
+          });
+
+          var data = await response.json().catch(function () { return {}; });
+
+          window.clearTimeout(fallback);
+
+          if (!response.ok || !data.ok) {
+            goToApp();
+            return;
+          }
+
+          authorize();
+        } catch (error) {
+          window.clearTimeout(fallback);
+          goToApp();
+        }
+      }
+
+      verify();
+    })();
+  </script>
+  <meta charset="utf-8"><title>Imprimir declaração</title><style>' +
         '@font-face{font-family:Carlito;src:url("https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/carlito/Carlito-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}' +
         '@font-face{font-family:Carlito;src:url("https://cdn.jsdelivr.net/gh/google/fonts@main/ofl/carlito/Carlito-Bold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap;}' +
         '@page{size:A4;margin:6cm 2cm 2.5cm 2cm;}' +
