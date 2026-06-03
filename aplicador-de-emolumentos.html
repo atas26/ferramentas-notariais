@@ -1,6 +1,21 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="pn-tool-guard-pending" data-portal-tool-slug="aplicador-emolumentos">
 <head>
+  <!-- Portal Notarial Pro: validação de acesso da ferramenta -->
+  <style>
+    html.pn-tool-guard-pending body {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    html.pn-tool-guard-authorized body,
+    html.pn-tool-guard-blocked body {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+  <script defer src="https://app.portalnotarial.com.br/tool-guard.js" data-tool-slug="aplicador-emolumentos"></script>
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Aplicador inteligente da tabela de emolumentos - São Paulo</title>
