@@ -36,67 +36,176 @@
       visibility: visible;
     }
   
-/* oficios-comparecimento-itcmd-r3: ajuste fino pelo padrao ITCMD */
-.nav,
-.shell {
-    width: min(1080px, calc(100% - 32px)) !important;
+/* oficios-comparecimento-itcmd-r4: ajuste restrito ao que foi solicitado */
+body{
+  background:#f3f6fb!important;
 }
 
-.nav {
-    min-height: 92px !important;
+.topbar{
+  width:100%!important;
+  background:#ffffff!important;
+  border-bottom:1px solid #e5eaf2!important;
 }
 
-.brand img {
-    height: 40px !important;
-    max-height: 40px !important;
-    width: auto !important;
-    max-width: min(100%, 420px) !important;
-    object-fit: contain !important;
+.nav{
+  width:min(1220px,calc(100% - 32px))!important;
+  min-height:104px!important;
+  margin:0 auto!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:28px!important;
 }
 
-.shell {
-    padding-top: 34px !important;
+.brand{
+  display:inline-flex!important;
+  align-items:center!important;
+  text-decoration:none!important;
+  min-width:0!important;
 }
 
-.title-card {
-    margin-top: 0 !important;
-    margin-bottom: 14px !important;
-    padding: 24px 20px !important;
+.brand img{
+  display:block!important;
+  height:40px!important;
+  max-height:40px!important;
+  width:auto!important;
+  max-width:min(100%,420px)!important;
+  object-fit:contain!important;
 }
 
-.grid {
-    margin-top: 14px !important;
+.menu{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:26px!important;
+  flex-wrap:wrap!important;
+  font-weight:800!important;
 }
 
-.card,
-.adsense-section,
-.title-card {
-    max-width: 1080px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+.menu a{
+  color:#111827!important;
+  text-decoration:none!important;
+  white-space:nowrap!important;
+}
+
+main.shell{
+  width:min(1080px,calc(100% - 32px))!important;
+  padding:34px 0 50px!important;
+  margin:0 auto!important;
+}
+
+.title-card{
+  width:100%!important;
+  max-width:none!important;
+  margin:0 0 14px!important;
+  padding:24px 20px!important;
+  background:#ffffff!important;
+  border:1px solid #d8dee9!important;
+  border-radius:18px!important;
+  box-shadow:0 14px 38px rgba(15,23,42,.05)!important;
+  text-align:center!important;
+}
+
+.title-card h1{
+  margin:0!important;
+  color:#1263f1!important;
+  font-size:clamp(30px,3vw,40px)!important;
+  line-height:1.15!important;
+  letter-spacing:.01em!important;
+  font-weight:900!important;
+  text-transform:uppercase!important;
+}
+
+.grid{
+  width:100%!important;
+  max-width:none!important;
+  margin:14px 0 0!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:18px!important;
+  justify-items:stretch!important;
+  align-items:start!important;
+}
+
+.grid > .card,
+.grid > .card.full{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  justify-self:stretch!important;
+  grid-column:auto!important;
+}
+
+.card{
+  background:#ffffff!important;
+  border:1px solid #d8dee9!important;
+  border-radius:18px!important;
+  box-shadow:0 14px 38px rgba(15,23,42,.05)!important;
 }
 
 footer,
-footer.footer {
-    background: #f3f6fb !important;
-    color: #64748b !important;
-    font-size: 13px !important;
-    line-height: 1.55 !important;
-    text-align: center !important;
-    padding: 8px 16px 40px !important;
+footer.footer{
+  background:#f3f6fb!important;
+  color:#64748b!important;
+  font-size:13px!important;
+  line-height:1.55!important;
+  text-align:center!important;
+  padding:8px 16px 40px!important;
 }
 
-footer .shell {
-    padding: 0 !important;
+footer .shell,
+footer .footer-shell{
+  width:min(1220px,calc(100% - 32px))!important;
+  margin:0 auto!important;
+  padding:0!important;
 }
 
-footer .src,
-footer nav,
-.institutional-nav {
-    display: none !important;
+footer a{
+  color:#0f172a!important;
+  font-weight:700!important;
+  text-decoration:none!important;
 }
 
-</style>
+footer a:hover{
+  text-decoration:underline!important;
+}
+
+@media (max-width:900px){
+  .nav{
+    min-height:auto!important;
+    padding:22px 0!important;
+    align-items:flex-start!important;
+    flex-direction:column!important;
+    gap:16px!important;
+  }
+
+  .menu{
+    justify-content:flex-start!important;
+    gap:14px 20px!important;
+  }
+
+  .brand img{
+    height:34px!important;
+    max-height:34px!important;
+  }
+}
+
+@media (max-width:620px){
+  main.shell{
+    width:min(100% - 22px,1080px)!important;
+    padding-top:24px!important;
+  }
+
+  .title-card{
+    padding:22px 16px!important;
+  }
+
+  .title-card h1{
+    font-size:28px!important;
+  }
+}
+
+  </style>
   <script>
     (function () {
       var APP_ORIGIN = "https://app.portalnotarial.com.br";
@@ -193,7 +302,7 @@ footer nav,
   <meta name="robots" content="index,follow" />
   <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
   <link rel="canonical" href="https://portalnotarial.com.br/oficios-comparecimento.html" />
-  <meta name="portal-layout-version" content="oficios-comparecimento-itcmd-r2" />
+  <meta name="portal-layout-version" content="oficios-comparecimento-itcmd-r4" />
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777"
      crossorigin="anonymous"></script>
@@ -1011,68 +1120,7 @@ footer nav,
       }
     }
 
-  
-/* oficios-comparecimento-itcmd-r3: ajuste fino pelo padrao ITCMD */
-.nav,
-.shell {
-    width: min(1080px, calc(100% - 32px)) !important;
-}
-
-.nav {
-    min-height: 92px !important;
-}
-
-.brand img {
-    height: 40px !important;
-    max-height: 40px !important;
-    width: auto !important;
-    max-width: min(100%, 420px) !important;
-    object-fit: contain !important;
-}
-
-.shell {
-    padding-top: 34px !important;
-}
-
-.title-card {
-    margin-top: 0 !important;
-    margin-bottom: 14px !important;
-    padding: 24px 20px !important;
-}
-
-.grid {
-    margin-top: 14px !important;
-}
-
-.card,
-.adsense-section,
-.title-card {
-    max-width: 1080px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-footer,
-footer.footer {
-    background: #f3f6fb !important;
-    color: #64748b !important;
-    font-size: 13px !important;
-    line-height: 1.55 !important;
-    text-align: center !important;
-    padding: 8px 16px 40px !important;
-}
-
-footer .shell {
-    padding: 0 !important;
-}
-
-footer .src,
-footer nav,
-.institutional-nav {
-    display: none !important;
-}
-
-</style>
+  </style>
 </head>
 <body>
   <div class="topbar" role="navigation" aria-label="Menu principal">
@@ -1246,8 +1294,8 @@ footer nav,
     </section>
   </main>
 
-      <footer>
-    <div class="shell">
+  <footer>
+    <div class="shell footer-shell">
       © 2024 – Todos os direitos reservados. Registrado no INPI.<br>
       Ofício de Comparecimento – Atesta Processamento e Automação de Dados Ltda.<br>
       CNPJ: 31.527.748/0001-70 • São Paulo/SP<br>
@@ -1663,7 +1711,7 @@ footer nav,
       const doc = iframe.contentDocument || iframe.contentWindow.document;
 
       doc.open();
-      doc.write('<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Ofício de Comparecimento</title></head><body><main class="print-wrap"></main></body></html>');
+      doc.write('<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Imprimir declaração</title></head><body><main class="print-wrap"></main></body></html>');
       doc.close();
 
       Array.from(document.querySelectorAll('style, link[rel="stylesheet"]')).forEach(function (node) {
@@ -2160,4 +2208,3 @@ footer nav,
   </script>
 </body>
 </html>
-
