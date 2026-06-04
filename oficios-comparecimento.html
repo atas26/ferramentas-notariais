@@ -35,7 +35,68 @@
     html.pn-tool-guard-blocked body > * {
       visibility: visible;
     }
-  </style>
+  
+/* oficios-comparecimento-itcmd-r3: ajuste fino pelo padrao ITCMD */
+.nav,
+.shell {
+    width: min(1080px, calc(100% - 32px)) !important;
+}
+
+.nav {
+    min-height: 92px !important;
+}
+
+.brand img {
+    height: 40px !important;
+    max-height: 40px !important;
+    width: auto !important;
+    max-width: min(100%, 420px) !important;
+    object-fit: contain !important;
+}
+
+.shell {
+    padding-top: 34px !important;
+}
+
+.title-card {
+    margin-top: 0 !important;
+    margin-bottom: 14px !important;
+    padding: 24px 20px !important;
+}
+
+.grid {
+    margin-top: 14px !important;
+}
+
+.card,
+.adsense-section,
+.title-card {
+    max-width: 1080px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+footer,
+footer.footer {
+    background: #f3f6fb !important;
+    color: #64748b !important;
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    text-align: center !important;
+    padding: 8px 16px 40px !important;
+}
+
+footer .shell {
+    padding: 0 !important;
+}
+
+footer .src,
+footer nav,
+.institutional-nav {
+    display: none !important;
+}
+
+</style>
   <script>
     (function () {
       var APP_ORIGIN = "https://app.portalnotarial.com.br";
@@ -950,7 +1011,68 @@
       }
     }
 
-  </style>
+  
+/* oficios-comparecimento-itcmd-r3: ajuste fino pelo padrao ITCMD */
+.nav,
+.shell {
+    width: min(1080px, calc(100% - 32px)) !important;
+}
+
+.nav {
+    min-height: 92px !important;
+}
+
+.brand img {
+    height: 40px !important;
+    max-height: 40px !important;
+    width: auto !important;
+    max-width: min(100%, 420px) !important;
+    object-fit: contain !important;
+}
+
+.shell {
+    padding-top: 34px !important;
+}
+
+.title-card {
+    margin-top: 0 !important;
+    margin-bottom: 14px !important;
+    padding: 24px 20px !important;
+}
+
+.grid {
+    margin-top: 14px !important;
+}
+
+.card,
+.adsense-section,
+.title-card {
+    max-width: 1080px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+footer,
+footer.footer {
+    background: #f3f6fb !important;
+    color: #64748b !important;
+    font-size: 13px !important;
+    line-height: 1.55 !important;
+    text-align: center !important;
+    padding: 8px 16px 40px !important;
+}
+
+footer .shell {
+    padding: 0 !important;
+}
+
+footer .src,
+footer nav,
+.institutional-nav {
+    display: none !important;
+}
+
+</style>
 </head>
 <body>
   <div class="topbar" role="navigation" aria-label="Menu principal">
@@ -1124,7 +1246,7 @@
     </section>
   </main>
 
-  <footer>
+      <footer>
     <div class="shell">
       © 2024 – Todos os direitos reservados. Registrado no INPI.<br>
       Ofício de Comparecimento – Atesta Processamento e Automação de Dados Ltda.<br>
@@ -1541,7 +1663,7 @@
       const doc = iframe.contentDocument || iframe.contentWindow.document;
 
       doc.open();
-      doc.write('<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Imprimir declaração</title></head><body><main class="print-wrap"></main></body></html>');
+      doc.write('<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Ofício de Comparecimento</title></head><body><main class="print-wrap"></main></body></html>');
       doc.close();
 
       Array.from(document.querySelectorAll('style, link[rel="stylesheet"]')).forEach(function (node) {
@@ -2038,3 +2160,4 @@
   </script>
 </body>
 </html>
+
