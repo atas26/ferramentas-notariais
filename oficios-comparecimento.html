@@ -127,11 +127,12 @@
 
     <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gerador de ofício para declaração de comparecimento</title>
+  <title>Ofício de Comparecimento</title>
   <meta name="description" content="Ferramenta para gerar ofício de declaração de comparecimento, com preenchimento dos dados, prévia editável, template em PDF e emissão do arquivo final para conferência do usuário." />
   <meta name="robots" content="index,follow" />
   <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
   <link rel="canonical" href="https://portalnotarial.com.br/oficios-comparecimento.html" />
+  <meta name="portal-layout-version" content="oficios-comparecimento-itcmd-r1" />
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1578115877344777"
      crossorigin="anonymous"></script>
@@ -789,59 +790,185 @@
         line-height:1.5;
       }
     }
+  
+    /* oficios-comparecimento-itcmd-r1: padrao visual ITCMD */
+    body{
+      background:#f3f6fb!important;
+      color:#0f172a;
+    }
+
+    .topbar{
+      width:100%;
+      background:#ffffff;
+      border-bottom:1px solid #e5eaf2;
+    }
+
+    .nav{
+      width:min(1220px,calc(100% - 32px));
+      min-height:104px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:28px;
+    }
+
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      text-decoration:none;
+      flex:0 1 auto;
+      min-width:0;
+    }
+
+    .brand img{
+      display:block;
+      height:40px;
+      max-height:40px;
+      width:auto;
+      max-width:min(100%,560px);
+      object-fit:contain;
+    }
+
+    .menu{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:26px;
+      flex-wrap:wrap;
+      font-weight:800;
+    }
+
+    .menu a{
+      color:#111827;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+
+    .menu a:hover{text-decoration:underline}
+
+    .shell{
+      width:min(1220px,calc(100% - 32px));
+      margin:0 auto;
+      padding:42px 0 54px;
+    }
+
+    .title-card{
+      background:#ffffff;
+      border:1px solid #d8dee9;
+      border-radius:18px;
+      box-shadow:0 14px 38px rgba(15,23,42,.05);
+      padding:28px 24px;
+      margin:0 0 16px;
+      text-align:center;
+    }
+
+    .title-card h1{
+      margin:0;
+      color:#1263f1;
+      font-size:clamp(30px,3vw,40px);
+      line-height:1.15;
+      letter-spacing:.01em;
+      font-weight:900;
+      text-transform:uppercase;
+    }
+
+    .grid{
+      margin-top:16px!important;
+      gap:16px;
+    }
+
+    .card{
+      background:#ffffff;
+      border:1px solid #d8dee9;
+      border-radius:18px;
+      box-shadow:0 14px 38px rgba(15,23,42,.05);
+    }
+
+    .card h2,
+    .card-title-row h2{
+      color:#0f172a;
+      font-size:20px;
+      letter-spacing:-.02em;
+    }
+
+    footer.footer,
+    footer{
+      background:#f3f6fb;
+      color:#64748b;
+      font-size:13px;
+      line-height:1.55;
+      text-align:center;
+      padding:10px 16px 44px;
+    }
+
+    footer .shell{
+      width:min(1220px,calc(100% - 32px));
+      padding:0;
+    }
+
+    footer a{
+      color:#0f172a;
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    footer a:hover{text-decoration:underline}
+
+    @media (max-width:900px){
+      .nav{
+        min-height:auto;
+        padding:22px 0;
+        align-items:flex-start;
+        flex-direction:column;
+        gap:16px;
+      }
+
+      .menu{
+        justify-content:flex-start;
+        gap:14px 20px;
+      }
+
+      .brand img{
+        height:36px;
+        max-height:36px;
+      }
+    }
+
+    @media (max-width:620px){
+      .shell{
+        width:min(100% - 22px,1220px);
+        padding-top:28px;
+      }
+
+      .title-card{
+        padding:22px 16px;
+      }
+
+      .title-card h1{
+        font-size:28px;
+      }
+    }
+
   </style>
 </head>
 <body>
+  <div class="topbar" role="navigation" aria-label="Menu principal">
+    <div class="nav">
+      <a class="brand" href="https://portalnotarial.com.br/oficios-comparecimento.html" aria-label="Página inicial do Ofício de Comparecimento">
+        <img src="assets/oficio-comparecimento-logo.png" alt="Ofício de Comparecimento">
+      </a>
+      <div class="menu" aria-label="Links do menu">
+        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
+        <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+      </div>
+    </div>
+  </div>
+
   <main class="shell">
-    <section class="hero" aria-labelledby="titulo">
-      <div class="eyebrow">Ofícios notariais</div>
-      <h1 id="titulo">Gerador de ofício para declaração de comparecimento</h1>
-      <p>
-        Preencha os dados da pessoa atendida, revise a prévia da declaração e gere um PDF no padrão do ofício.
-      </p>
-      <div class="alerta">
-        Revise todos os campos antes de gerar o arquivo final. A ferramenta monta a declaração com base nos dados informados pelo usuário.
-      </div>
-      <div class="hero-actions" aria-label="Atalhos da página">
-        <a class="hero-link primary-link" href="#ferramenta">Ir para a ferramenta</a>
-        <a class="hero-link secondary-link" href="#criterios-fontes">Ver critérios e fontes</a>
-      </div>
-    </section>
-
-    <section class="adsense-section" id="informacoes-ferramenta" aria-labelledby="infoTitulo">
-      <div class="section-kicker">Informações</div>
-      <h2 id="infoTitulo">O que a ferramenta faz</h2>
-      <p>
-        A ferramenta gera uma declaração de comparecimento com base nos dados informados pelo usuário. Ela permite preencher identificação do comparecente, data, horários, cartório, escrevente, assinante, cargo, tipo de assinatura e template do cartório em PDF.
-      </p>
-
-      <div class="info-grid">
-        <article class="info-card">
-          <h3>Quando usar</h3>
-          <p>Use quando for necessário emitir uma declaração simples de comparecimento para comprovar que determinada pessoa esteve no cartório em data e horário informados, para tratar de assuntos particulares.</p>
-        </article>
-        <article class="info-card">
-          <h3>Como interpretar o resultado</h3>
-          <p>O resultado é a prévia da declaração e o PDF final gerado a partir dos campos preenchidos. Antes de usar o arquivo, confira nomes, documentos, data, horários, cargo, assinatura e template aplicado.</p>
-        </article>
-        <article class="info-card">
-          <h3>Limite operacional</h3>
-          <p>A ferramenta não verifica a presença física do comparecente, não consulta sistemas externos e não substitui a conferência do atendimento realizado pela serventia.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="adsense-section" id="como-usar" aria-labelledby="comoUsarTitulo">
-      <div class="section-kicker">Como usar</div>
-      <h2 id="comoUsarTitulo">Como usar a ferramenta</h2>
-      <p>
-        Preencha os campos obrigatórios, selecione o tipo de assinatura, revise a prévia e gere o PDF final. O template do cartório é opcional e pode ser salvo neste navegador para uso posterior.
-      </p>
-      <ol class="use-steps">
-        <li><span class="step-number">1</span><span><strong>Informe os dados.</strong> Preencha protocolo, ano, cartório, escrevente, comparecente, CPF, RG, data, horários, assinante e cargo.</span></li>
-        <li><span class="step-number">2</span><span><strong>Revise a prévia.</strong> Abra a prévia, confira o texto e, se necessário, edite diretamente o conteúdo antes da emissão.</span></li>
-        <li><span class="step-number">3</span><span><strong>Gere ou imprima.</strong> Escolha assinatura digital ou física e use os botões de geração ou impressão da declaração.</span></li>
-      </ol>
+    <section class="title-card" aria-labelledby="titulo">
+      <h1 id="titulo">Ofício de Comparecimento</h1>
     </section>
 
     <section class="grid" id="ferramenta">
@@ -995,82 +1122,16 @@
         </div>
       </div>
     </section>
-
-    <section class="adsense-section" id="criterios-fontes" aria-labelledby="criteriosTitulo">
-      <div class="section-kicker">Critérios e fontes</div>
-      <h2 id="criteriosTitulo">Critérios utilizados</h2>
-      <p>
-        A declaração é formada com os dados digitados pelo usuário, com validação básica de CPF, data e campos obrigatórios. O PDF final pode usar template em PDF indicado pelo usuário e é montado no próprio navegador com as bibliotecas externas carregadas na página.
-      </p>
-
-      <div class="source-grid">
-        <article class="source-box">
-          <h3>Fontes utilizadas pela ferramenta</h3>
-          <ul>
-            <li>Dados preenchidos pelo usuário no formulário.</li>
-            <li>Template do cartório enviado ou salvo no navegador, quando utilizado.</li>
-            <li>Texto da prévia da declaração, inclusive quando editado manualmente pelo usuário.</li>
-            <li>Rotina local de validação do CPF informado.</li>
-          </ul>
-        </article>
-        <article class="source-box">
-          <h3>Limites da ferramenta</h3>
-          <ul>
-            <li>Não confirma comparecimento em sistema externo.</li>
-            <li>Não valida RG em base oficial.</li>
-            <li>Não substitui a conferência do atendimento, da identidade e da finalidade da declaração.</li>
-            <li>Não guarda os dados em servidor próprio. Os dados salvos ficam no navegador do usuário.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="adsense-section" id="faq" aria-labelledby="faqTitulo">
-      <div class="section-kicker">FAQ</div>
-      <h2 id="faqTitulo">Perguntas frequentes</h2>
-
-      <div class="faq-list">
-        <details>
-          <summary>A declaração é emitida automaticamente sem conferência?</summary>
-          <div class="faq-body">Não. O usuário deve conferir todos os dados, a prévia e o PDF final antes de utilizar o documento.</div>
-        </details>
-        <details>
-          <summary>O template do cartório é obrigatório?</summary>
-          <div class="faq-body">Não. O template em PDF é opcional. Quando selecionado ou salvo neste navegador, ele é aplicado como fundo da declaração.</div>
-        </details>
-        <details>
-          <summary>Os dados são enviados para servidor?</summary>
-          <div class="faq-body">A montagem da declaração ocorre no navegador. O salvamento de dados do cartório e template usa recursos locais do navegador, como localStorage e IndexedDB.</div>
-        </details>
-        <details>
-          <summary>A ferramenta verifica a identidade do comparecente?</summary>
-          <div class="faq-body">Não. A ferramenta apenas valida a estrutura do CPF informado. A conferência de identidade e do atendimento deve ser feita pela serventia.</div>
-        </details>
-        <details>
-          <summary>Posso editar o texto antes de gerar o PDF?</summary>
-          <div class="faq-body">Sim. A prévia é editável. Após concluir a edição, o PDF será gerado com o texto exibido na prévia.</div>
-        </details>
-      </div>
-    </section>
   </main>
 
   <footer>
-    <div class="shell">
-      <div class="src">
-        <p>Ferramenta em versão inicial. O usuário deve revisar todos os dados antes de gerar o PDF final.</p>
-        <p>Uso recomendado. Apoio à redação e emissão de declaração de comparecimento. O resultado não substitui a conferência do caso concreto.</p>
-        <p>Projeto apoiado por <a href="https://escriturapublica.substack.com" target="_blank" rel="noopener">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener">Atesta</a></p>
-        <nav class="institutional-nav" aria-label="Links institucionais">
-          <a href="https://portalnotarial.com.br/">Início</a>
-          <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
-          <a href="https://portalnotarial.com.br/contato.html">Contato</a>
-          <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
-          <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
-          <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
-          <a href="https://portalnotarial.com.br/mapa-do-site.html">Mapa do site</a>
-        </nav>
-      </div>
-    </div>
+    © 2024 – Todos os direitos reservados. Registrado no INPI.<br>
+    Cálculo Escritura – Atesta Processamento e Automação de Dados Ltda.<br>
+    CNPJ: 31.527.748/0001-70 • São Paulo/SP<br>
+    <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a> •
+    <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> •
+    <a href="https://portalnotarial.com.br/contato.html">Contato</a><br>
+    Documento meramente informativo. Os valores devem ser conferidos.
   </footer>
 
   <script>
