@@ -9,6 +9,64 @@ import { fileURLToPath } from "url";
 
 const app = express();
 
+
+const PEP_ALLOWED_ORIGINS = new Set([
+  "https://portalnotarial.com.br",
+  "https://www.portalnotarial.com.br",
+  "https://ferramentas.portalnotarial.com.br",
+  "https://app.portalnotarial.com.br",
+  "http://localhost:3000",
+  "http://localhost:5500",
+  "http://127.0.0.1:5500"
+]);
+
+function resolvePepCorsOrigin(req) {
+  const origin = req.headers.origin;
+
+  if (!origin) {
+    return "*";
+  }
+
+  if (PEP_ALLOWED_ORIGINS.has(origin)) {
+    return origin;
+  }
+
+  return "";
+}
+
+app.use((req, res, next) => {
+  const originalSetHeader = res.setHeader.bind(res);
+
+  res.setHeader = function patchedSetHeader(name, value) {
+    if (String(name).toLowerCase() === "access-control-allow-origin") {
+      const allowedOrigin = resolvePepCorsOrigin(req);
+
+      if (allowedOrigin) {
+        return originalSetHeader("Access-Control-Allow-Origin", allowedOrigin);
+      }
+
+      return originalSetHeader("Access-Control-Allow-Origin", "null");
+    }
+
+    return originalSetHeader(name, value);
+  };
+
+  const allowedOrigin = resolvePepCorsOrigin(req);
+
+  if (allowedOrigin) {
+    res.setHeader("Access-Control-Allow-Origin", allowedOrigin);
+  }
+
+  res.setHeader("Vary", "Origin");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+
+  return next();
+});
 const PORT = process.env.PORT || 3000;
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "*";
 
