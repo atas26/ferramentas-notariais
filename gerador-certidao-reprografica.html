@@ -127,7 +127,7 @@
 
     <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gerador de certidão reprográfica</title>
+  <title>Certidão Reprográfica</title>
   <meta name="description" content="Ferramenta auxiliar para montar certidão reprográfica notarial, anexar PDF digitalizado, revisar a prévia, gerar arquivo final e imprimir." />
   <meta name="robots" content="index, follow" />
   <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
@@ -1134,64 +1134,245 @@
       }
     }
 
-  </style>
+  
+
+    /* pn-layout-itcmd-certidao-reprografica-final */
+    body {
+      margin: 0;
+      background: #f4f7fb;
+      color: #0a2540;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .pn-topbar {
+      background: #ffffff;
+      border-bottom: 1px solid #dbe3ef;
+      min-height: 74px;
+    }
+
+    .pn-topbar-inner {
+      max-width: 1120px;
+      min-height: 74px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .pn-logo-link {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      flex: 0 1 auto;
+      min-width: 0;
+    }
+
+    .pn-tool-logo {
+      display: block;
+      height: 40px;
+      width: auto;
+      max-width: min(520px, 48vw);
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    .pn-topbar-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 26px;
+      flex-wrap: wrap;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .pn-topbar-nav a {
+      color: #172033;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .pn-topbar-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .shell.pn-itcmd-shell {
+      width: auto;
+      max-width: 1120px;
+      margin: 34px auto;
+      padding: 0 20px 44px;
+    }
+
+    .pn-title-card {
+      background: #ffffff;
+      border: 1px solid #dbe3ef;
+      border-radius: 18px;
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.06);
+      padding: 30px 22px;
+      margin: 0 0 22px;
+    }
+
+    .pn-title-card h1 {
+      margin: 0;
+      color: rgb(0, 118, 255);
+      text-align: center;
+      font-size: 30px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .card,
+    .card.full {
+      background: #ffffff;
+      border: 1px solid #dbe3ef;
+      border-radius: 18px;
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.05);
+      padding: 22px;
+    }
+
+    .card h2 {
+      margin: 0 0 16px;
+      color: #0f172a;
+      font-size: 20px;
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    input,
+    select,
+    textarea {
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+      padding: 11px 12px;
+      color: #0f172a;
+      background: #ffffff;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgb(0, 118, 255);
+      box-shadow: 0 0 0 3px rgba(0, 118, 255, 0.12);
+    }
+
+    .btn-primary {
+      background: rgb(0, 118, 255);
+      color: #ffffff;
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: #0f172a;
+      border: 1px solid #dbe3ef;
+    }
+
+    .btn-danger {
+      background: #fff1f2;
+      color: #991b1b;
+      border: 1px solid #fecdd3;
+    }
+
+    .status,
+    .template-status,
+    .file-status {
+      background: #f8fafc;
+      border: 1px solid #dbe3ef;
+      border-radius: 12px;
+    }
+
+    .pn-footer {
+      padding: 0 20px 40px;
+      color: #475569;
+      font-size: 14px;
+      text-align: center;
+      background: transparent;
+    }
+
+    .pn-footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      text-align: center;
+    }
+
+    .pn-footer p {
+      margin: 5px 0;
+      line-height: 1.45;
+    }
+
+    .pn-footer a {
+      color: rgb(0, 118, 255);
+      text-decoration: none;
+      font-weight: 400;
+    }
+
+    .pn-footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 760px) {
+      .pn-topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        padding-top: 18px;
+        padding-bottom: 18px;
+      }
+
+      .pn-tool-logo {
+        height: 34px;
+        max-width: 100%;
+      }
+
+      .pn-topbar-nav {
+        justify-content: flex-start;
+        gap: 14px;
+        font-size: 14px;
+      }
+
+      .pn-title-card h1 {
+        font-size: 24px;
+      }
+    }
+
+    @media print {
+      .pn-topbar,
+      .pn-title-card,
+      .pn-footer {
+        display: none !important;
+      }
+    }
+</style>
 </head>
 <body>
-  <main class="shell">
-    <section class="hero" aria-labelledby="titulo">
-      <div>
-        <div class="eyebrow">Certidão reprográfica</div>
-        <h1 id="titulo">Gerador de certidão reprográfica</h1>
-        <p class="lead">
-          Preencha os dados da certidão, envie o ato ou documento digitalizado em PDF e gere um arquivo final com a certidão, as reproduções anexadas e a numeração automática das páginas.
-        </p>
-        <p class="scope">
-          Revise a certidão antes de gerar o arquivo final. A ferramenta monta o texto com base nos dados informados, aplica o template do cartório quando houver e numera o conjunto final.
-        </p>
-
-        <div class="quick-actions" aria-label="Ações rápidas">
-          <a class="primary-link" href="#ferramenta">Ir para a ferramenta</a>
-          <a class="secondary-link" href="https://portalnotarial.com.br/">Voltar à home</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="info-section" aria-label="Informações sobre a ferramenta">
-      <article class="info-card">
-        <h2>O que a ferramenta faz</h2>
-        <p>A ferramenta monta a certidão reprográfica a partir dos dados informados pelo usuário, permite anexar o PDF do ato ou documento digitalizado, aplica template do cartório quando houver e gera um arquivo final com numeração de páginas.</p>
-      </article>
-
-      <article class="info-card">
-        <h2>Quando usar</h2>
-        <p>Use em rotinas internas de preparação de certidão reprográfica, quando houver necessidade de reunir texto certificante, reprodução do ato ou documento digitalizado e conferência prévia antes da impressão ou emissão do arquivo final.</p>
-      </article>
-
-      <article class="info-card">
-        <h2>Como usar</h2>
-        <ol>
-          <li>Envie o PDF do ato ou documento digitalizado.</li>
-          <li>Escolha o modelo de certidão.</li>
-          <li>Preencha os campos exibidos na tela.</li>
-          <li>Revise a prévia da certidão.</li>
-          <li>Escolha o tipo de assinatura e gere o PDF final.</li>
-        </ol>
-      </article>
-
-      <article class="info-card">
-        <h2>Como interpretar o resultado</h2>
-        <p>O resultado é um arquivo operacional gerado com base nos dados inseridos. Antes do uso, confira nomes, datas, livro, páginas, emolumentos, anotações, reprodução anexada, assinatura, template e numeração final.</p>
-      </article>
-
-      <article class="info-card">
-        <h2>Critérios e fontes</h2>
-        <p>A geração usa os campos preenchidos pelo usuário, o PDF anexado, o modelo de certidão selecionado, o template eventualmente salvo no navegador e as regras internas previstas no próprio código da página.</p>
-      </article>
-
-      <article class="info-card">
-        <h2>Limites da ferramenta</h2>
-        <p>A ferramenta não confere autenticidade documental, não valida assinatura digital, não consulta bases externas, não substitui conferência notarial e não afasta a responsabilidade pela revisão final do texto e dos anexos.</p>
-      </article>
+  <header class="pn-topbar" aria-label="Cabeçalho da ferramenta">
+    <div class="pn-topbar-inner">
+      <a class="pn-logo-link" href="https://portalnotarial.com.br/" aria-label="Portal Notarial">
+        <img class="pn-tool-logo" src="assets/certidao-reprografica-logo.png" alt="Certidão Reprográfica" />
+      </a>
+      <nav class="pn-topbar-nav" aria-label="Links institucionais">
+        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
+        <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+      </nav>
+    </div>
+  </header>
+  <main class="shell pn-itcmd-shell">
+    <section class="pn-title-card" aria-labelledby="titulo">
+      <h1 id="titulo">CERTIDÃO REPROGRÁFICA</h1>
     </section>
 
     <section class="grid" id="ferramenta">
@@ -1505,50 +1686,19 @@
       </div>
     </section>
 
-    <section class="faq-section" aria-labelledby="faq-title">
-      <div class="card full">
-        <h2 id="faq-title">Perguntas frequentes</h2>
+      </main>
 
-        <details>
-          <summary>A ferramenta substitui a conferência do cartório?</summary>
-          <p>Não. A ferramenta apenas organiza os dados informados e monta o arquivo final. A conferência do texto, do PDF anexado, dos emolumentos, da assinatura e da adequação ao caso concreto continua sendo necessária.</p>
-        </details>
-
-        <details>
-          <summary>O PDF anexado é enviado para algum servidor?</summary>
-          <p>O processamento do arquivo ocorre no navegador, com as bibliotecas externas carregadas pela página. O usuário deve observar as políticas internas do cartório para tratamento, armazenamento e descarte dos arquivos utilizados.</p>
-        </details>
-
-        <details>
-          <summary>O template do cartório fica salvo onde?</summary>
-          <p>Quando o usuário escolhe salvar o template como modelo, o arquivo fica armazenado no navegador utilizado. A limpeza do navegador ou o uso de outro dispositivo pode exigir novo envio do template.</p>
-        </details>
-
-        <details>
-          <summary>A prévia pode ser editada?</summary>
-          <p>Sim. A página permite visualizar e editar a prévia antes da geração do PDF. As alterações manuais devem ser revisadas antes da emissão do arquivo final.</p>
-        </details>
-
-        <details>
-          <summary>A ferramenta valida os dados preenchidos?</summary>
-          <p>A ferramenta possui validações operacionais de campos e formatos, mas não verifica a correção jurídica ou documental das informações inseridas.</p>
-        </details>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="footer-inner">
-      <div>Ferramenta em versão inicial. O usuário deve revisar todos os dados, o texto da certidão e as reproduções antes de gerar o PDF final.</div>
-      <nav class="footer-links" aria-label="Links institucionais">
-        <a href="https://portalnotarial.com.br/">Início</a>
-        <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
+  <footer class="pn-footer">
+    <div class="pn-footer-inner">
+      <p>&copy; 2024 &ndash; Todos os direitos reservados. Registrado no INPI.</p>
+      <p>C&aacute;lculo Escritura &ndash; Atesta Processamento e Automa&ccedil;&atilde;o de Dados Ltda.</p>
+      <p>CNPJ: 31.527.748/0001-70 &bull; S&atilde;o Paulo/SP</p>
+      <p>
+        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a> &bull;
+        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> &bull;
         <a href="https://portalnotarial.com.br/contato.html">Contato</a>
-        <a href="https://portalnotarial.com.br/mapa-do-site.html">Mapa do site</a>
-        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
-        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
-        <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
-      </nav>
+      </p>
+      <p>Documento meramente informativo. Os dados devem ser conferidos.</p>
     </div>
   </footer>
 
