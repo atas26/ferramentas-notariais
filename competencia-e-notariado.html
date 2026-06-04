@@ -982,6 +982,49 @@ footer.no-print .space-y-3 p{font-size:14px!important;color:#334155!important;li
   }
 </style>
 
+<style id="pn-competencia-ajustes-rolagem-notas">
+  #consulta,
+  main#consulta > .anim-fadeup,
+  footer.no-print,
+  footer.no-print > div {
+    scroll-margin-top: 96px !important;
+  }
+
+  footer.no-print {
+    width: min(100% - 56px, 1100px) !important;
+    max-width: 1100px !important;
+    margin: 18px auto 0 !important;
+    padding: 0 0 18px !important;
+    background: transparent !important;
+    border: 0 !important;
+  }
+
+  footer.no-print > div {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 !important;
+    background: var(--card) !important;
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: var(--shadow) !important;
+    padding: 22px 24px !important;
+  }
+
+  @media (max-width: 720px) {
+    footer.no-print {
+      width: calc(100% - 36px) !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    #consulta,
+    main#consulta > .anim-fadeup,
+    footer.no-print,
+    footer.no-print > div {
+      scroll-margin-top: 112px !important;
+    }
+  }
+</style>
 </head>
 <body class="bg-stone-100 text-slate-900">
 <div class="topbar" role="navigation" aria-label="Menu principal">
@@ -1514,12 +1557,26 @@ function CompetenciaENotariado() {
     const [respostas, setRespostas] = useState([]);
     const [resultadoId, setResultadoId] = useState(null);
     const [excertoAberto, setExcertoAberto] = useState(false);
+    function rolarComOffset(alvoId, behavior = 'smooth') {
+        const alvo = document.getElementById(alvoId);
+        if (!alvo) {
+            return;
+        }
+
+        const topbar = document.querySelector('.topbar');
+        const alturaTopbar = topbar ? Math.ceil(topbar.getBoundingClientRect().height) : 0;
+        const margemVisual = 24;
+        const top = alvo.getBoundingClientRect().top + window.pageYOffset - alturaTopbar - margemVisual;
+
+        window.scrollTo({
+            top: Math.max(0, top),
+            behavior
+        });
+    }
+
     function scrollParaConsulta() {
-        setTimeout(() => {
-            const alvo = document.getElementById('consulta');
-            if (alvo)
-                alvo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 0);
+        setTimeout(() => rolarComOffset('consulta', 'smooth'), 40);
+        setTimeout(() => rolarComOffset('consulta', 'smooth'), 160);
     }
     const passoAtual = historico[historico.length - 1];
     const noAtual = FLUXO[passoAtual];
@@ -1566,12 +1623,7 @@ function CompetenciaENotariado() {
         setExcertoAberto(false);
 
         const rolarParaTipoDeAto = () => {
-            const alvo = document.getElementById('consulta');
-            if (alvo) {
-                alvo.scrollIntoView({ behavior: 'auto', block: 'start' });
-            } else {
-                window.scrollTo({ top: 0, behavior: 'auto' });
-            }
+            rolarComOffset('consulta', 'auto');
         };
 
         setTimeout(rolarParaTipoDeAto, 0);
