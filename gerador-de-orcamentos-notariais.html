@@ -127,7 +127,7 @@
 
   <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gerador de orçamento de atos notariais | Portal Notarial</title>
+<title>Gerador de or&ccedil;amento | Portal Notarial</title>
 <meta name="description" content="Gerador de orçamento estimativo de atos notariais, tributo e registro imobiliário no Estado de São Paulo, com base no valor informado pelo usuário." />
 <meta name="robots" content="index, follow" />
 <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
@@ -1050,55 +1050,430 @@ textarea:focus{
   }
 }
 </style>
+
+<style id="pn-layout-itcmd-orcamento-final">
+  :root {
+    --primary: #0b5fff;
+    --text: #0f172a;
+    --muted: #475569;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --radius: 14px;
+    --shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+    --border: #e5e7eb;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0 !important;
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif !important;
+  }
+
+  .topbar {
+    background: #fff !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 50 !important;
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: none !important;
+  }
+
+  .nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+    justify-content: space-between !important;
+    padding: 12px 18px !important;
+    max-width: 1170px !important;
+    margin: 0 auto !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .brand {
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    line-height: 1 !important;
+    flex: 0 0 auto !important;
+  }
+
+  .brand-logo-box {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 470px !important;
+    min-width: 470px !important;
+    max-width: 470px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+  }
+
+  .brand-logo-img {
+    display: block !important;
+    height: 40px !important;
+    max-height: 40px !important;
+    width: auto !important;
+    max-width: 470px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: #ffffff !important;
+  }
+
+  .menu {
+    display: flex !important;
+    gap: 18px !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    font-size: 16px !important;
+  }
+
+  .menu a {
+    font-weight: 600 !important;
+    color: var(--text) !important;
+    opacity: 0.9 !important;
+    text-decoration: none !important;
+  }
+
+  .container {
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 32px 28px 40px !important;
+    width: auto !important;
+  }
+
+  .card,
+  .panel,
+  .result-card {
+    background: var(--card) !important;
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: var(--shadow) !important;
+  }
+
+  .pn-title-card {
+    padding: 22px 24px !important;
+    margin: 18px 0 !important;
+  }
+
+  .pn-title-card h1 {
+    margin: 8px 0 12px !important;
+    font-family: system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif !important;
+    font-size: 26px !important;
+    line-height: 1.25 !important;
+    color: var(--primary) !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
+    font-weight: 800 !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+
+  #gerador {
+    display: block !important;
+    margin: 18px 0 !important;
+    scroll-margin-top: 96px !important;
+  }
+
+  #gerador > div {
+    display: block !important;
+    width: 100% !important;
+  }
+
+  .panel {
+    padding: 22px 24px !important;
+    overflow: visible !important;
+    margin: 0 !important;
+  }
+
+  .panel > .section-kicker {
+    display: none !important;
+  }
+
+  .panel > .question-title {
+    width: auto !important;
+    margin: 0 0 8px !important;
+    padding: 0 !important;
+    font-family: system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif !important;
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.02em !important;
+    color: var(--text) !important;
+    font-weight: 750 !important;
+  }
+
+  .panel > p {
+    margin: 0 0 18px !important;
+    color: var(--muted) !important;
+    font-size: 15px !important;
+  }
+
+  .form-grid {
+    padding: 0 !important;
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 14px !important;
+  }
+
+  .form-field.full {
+    grid-column: 1 / -1 !important;
+  }
+
+  label {
+    display: block !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: var(--text) !important;
+    margin: 0 0 6px !important;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100% !important;
+    border: 1px solid #d7dce3 !important;
+    background: #fff !important;
+    color: var(--text) !important;
+    border-radius: 10px !important;
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  input,
+  select {
+    height: 48px !important;
+    padding: 0 12px !important;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 4px rgba(11,95,255,.09) !important;
+  }
+
+  .hint {
+    color: var(--muted) !important;
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+  }
+
+  .segmented,
+  .segmented.three {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  .radio-card span {
+    min-height: 96px !important;
+    border: 1px solid #d7dce3 !important;
+    border-radius: 12px !important;
+    background: #fff !important;
+    padding: 16px !important;
+  }
+
+  .radio-card strong {
+    color: var(--primary) !important;
+    font-weight: 800 !important;
+  }
+
+  .radio-card input:checked + span {
+    border-color: var(--primary) !important;
+    box-shadow: inset 0 0 0 1px var(--primary) !important;
+    background: #f8fbff !important;
+  }
+
+  .actions {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    margin: 22px 0 0 !important;
+  }
+
+  .btn {
+    border-radius: 10px !important;
+    padding: 12px 18px !important;
+    min-height: 44px !important;
+    font-weight: 800 !important;
+    font-size: 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid transparent !important;
+    transform: none !important;
+  }
+
+  .btn-primary {
+    background: var(--primary) !important;
+    color: #fff !important;
+  }
+
+  .btn-secondary,
+  .btn-ghost {
+    background: #fff !important;
+    color: var(--text) !important;
+    border-color: #d7dce3 !important;
+  }
+
+  .result-card {
+    margin: 22px 0 0 !important;
+    padding: 22px 24px !important;
+    scroll-margin-top: 96px !important;
+  }
+
+  .result-card h2 {
+    margin: 0 0 14px !important;
+    font-size: 22px !important;
+    color: var(--text) !important;
+  }
+
+  .result-total {
+    border-radius: 12px !important;
+    background: linear-gradient(180deg, var(--primary), #005bd1) !important;
+    box-shadow: none !important;
+    padding: 18px 20px !important;
+  }
+
+  .result-total::after {
+    display: none !important;
+  }
+
+  .result-total .value {
+    font-size: 30px !important;
+    font-weight: 850 !important;
+  }
+
+  .row-item {
+    padding: 12px 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+
+  .status {
+    border-radius: 10px !important;
+  }
+
+  .footer {
+    color: var(--muted) !important;
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    padding: 28px 16px 40px !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    display: block !important;
+    max-width: 1100px !important;
+  }
+
+  .footer a {
+    color: var(--primary) !important;
+    text-decoration: none !important;
+  }
+
+  .footer a:hover {
+    text-decoration: underline !important;
+  }
+
+  .hero,
+  .pn-editorial,
+  .pn-support-section,
+  .pn-hero-actions,
+  .page > .footer,
+  .brand-main,
+  .brand-thin,
+  .brand-tool {
+    display: none !important;
+  }
+
+  @media (max-width: 860px) {
+    .nav {
+      flex-direction: column !important;
+      align-items: center !important;
+      flex-wrap: wrap !important;
+    }
+
+    .menu {
+      width: 100% !important;
+      gap: 12px !important;
+      justify-content: center !important;
+    }
+
+    .container {
+      padding: 24px 18px 32px !important;
+    }
+
+    .brand-logo-box {
+      width: 330px !important;
+      min-width: 330px !important;
+      max-width: 330px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+    }
+
+    .brand-logo-img {
+      height: 36px !important;
+      max-height: 36px !important;
+      max-width: 330px !important;
+    }
+
+    .form-grid,
+    .segmented,
+    .segmented.three {
+      grid-template-columns: 1fr !important;
+    }
+
+    .panel {
+      padding: 20px 18px !important;
+    }
+
+    #gerador,
+    .result-card {
+      scroll-margin-top: 112px !important;
+    }
+  }
+</style>
+
 </head>
+
 <body>
-<main class="page" id="inicio">
-  <section class="hero" aria-labelledby="titulo-principal">
-    <div class="hero-card">
-      <span class="eyebrow">Valor estimado - Estado de São Paulo</span>
-      <h1 id="titulo-principal">Gerador de orçamento de atos notariais</h1>
-      <p class="lead">Preencha os dados do atendimento para gerar um orçamento estimativo com escritura, tributo, registro imobiliário e valores adicionais informados.</p>
-      <div class="pn-hero-actions" aria-label="Ações principais">
-        <a class="pn-primary-link" href="#gerador">Ir para a ferramenta</a>
-        <a href="https://portalnotarial.com.br/">Voltar à home</a>
-      </div>
+<div class="topbar" role="navigation" aria-label="Menu principal">
+  <div class="nav">
+    <a class="brand" href="https://portalnotarial.com.br/" aria-label="Gerador de or&ccedil;amento">
+      <span class="brand-logo-box">
+        <img class="brand-logo-img" src="/assets/gerador-orcamento-logo.png" alt="Gerador de or&ccedil;amento" width="470" height="40">
+      </span>
+    </a>
+    <div class="menu" aria-label="Links do menu">
+      <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a>
+      <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
+      <a href="https://portalnotarial.com.br/contato.html">Contato</a>
     </div>
-  </section>
+  </div>
+</div>
 
-  <section class="pn-editorial" aria-labelledby="sobre-ferramenta">
-    <h2 id="sobre-ferramenta">O que a ferramenta faz</h2>
-    <p>O gerador organiza dados básicos do atendimento e calcula uma estimativa de custo para ato notarial no Estado de São Paulo. O resultado pode incluir emolumentos de escritura, tributo, registro imobiliário e outros valores externos autorizados pelas partes.</p>
-    <div class="pn-info-grid">
-      <div class="pn-info-card">
-        <h3>Quando usar</h3>
-        <p>Use antes do atendimento ou durante a triagem do ato para apresentar uma estimativa inicial ao solicitante, com indicação dos principais componentes do orçamento.</p>
-      </div>
-      <div class="pn-info-card">
-        <h3>Como usar</h3>
-        <p>Preencha os dados do escrevente, cartório, solicitante, natureza do ato, valor base, tipo de tributo, registro imobiliário e outros serviços autorizados.</p>
-      </div>
-      <div class="pn-info-card">
-        <h3>Como interpretar</h3>
-        <p>O total exibido é estimativo. Cada linha mostra o componente aplicado no cálculo, incluindo escritura, tributo, registro e valores externos informados.</p>
-      </div>
-      <div class="pn-info-card">
-        <h3>Critérios e fontes</h3>
-        <p>O cálculo usa faixas internas de emolumentos para Tabelionato de Notas e Registro de Imóveis, alíquota informada para ITBI e alíquota fixa de 4% para ITCMD.</p>
-      </div>
-      <div class="pn-info-card">
-        <h3>Limites da ferramenta</h3>
-        <p>A página não substitui orçamento oficial, conferência fiscal, qualificação notarial, análise registral ou validação da documentação apresentada.</p>
-      </div>
-      <div class="pn-info-card">
-        <h3>Resultado exportável</h3>
-        <p>Após gerar o orçamento, é possível copiar, imprimir ou gerar PDF com os dados do atendimento e a composição estimada do valor.</p>
-      </div>
-    </div>
-    <div class="pn-note">A estimativa depende dos dados informados pelo usuário. Para uso em atendimento real, confira a natureza do ato, a base de cálculo, a incidência tributária, a tabela vigente, a documentação apresentada e eventuais exigências do registro imobiliário.</div>
-    <span class="pn-meta">Última atualização da ferramenta: 04/05/2026.</span>
-  </section>
-
-  <section class="grid" id="gerador">
+<main class="container" id="app-root">
+  <div class="card pn-title-card"><h1>GERADOR DE OR&Ccedil;AMENTO</h1></div>
+<section class="grid" id="gerador">
     <div>
       <section class="panel" aria-labelledby="dados-orcamento">
         <span class="section-kicker">Orçamento</span>
@@ -1234,71 +1609,19 @@ textarea:focus{
     </div>
   </section>
 
-  <section class="pn-support-section" aria-labelledby="passo-a-passo">
-    <h2 id="passo-a-passo">Como usar o gerador</h2>
-    <p>O formulário foi pensado para uso operacional. O usuário informa os dados do atendimento, define a natureza do ato, indica o valor base e seleciona se haverá registro imobiliário.</p>
-    <ol class="pn-steps">
-      <li>Informe escrevente responsável, contato, cartório e solicitante.</li>
-      <li>Selecione a natureza do ato ou descreva o ato no campo próprio.</li>
-      <li>Informe o valor base de cálculo em reais.</li>
-      <li>Escolha a natureza do tributo e informe a alíquota do ITBI quando o ato for oneroso.</li>
-      <li>Indique se o registro imobiliário deve entrar no orçamento.</li>
-      <li>Inclua apenas valores externos previamente autorizados pelas partes no campo de outros serviços.</li>
-      <li>Clique em gerar orçamento e confira a composição antes de copiar, imprimir ou gerar PDF.</li>
-    </ol>
-  </section>
-
-  <section class="pn-support-section" aria-labelledby="criterios-fontes">
-    <h2 id="criterios-fontes">Critérios, fontes e cautelas de uso</h2>
-    <p>O gerador utiliza tabelas internas configuradas no próprio código da página para estimar escritura e registro imobiliário. O ITBI depende da alíquota municipal informada pelo usuário. O ITCMD aparece como 4%, conforme parâmetro configurado na ferramenta.</p>
-    <div class="pn-note">O valor base deve ser definido conforme o caso concreto. Em atos imobiliários, pode ser necessário comparar valor do negócio, valor venal, valor venal de referência, valor fiscal, base tributária ou outro critério exigido pela norma aplicável.</div>
-    <p>Os valores externos devem corresponder apenas a certidões, diligências ou despesas autorizadas, quando necessárias à prática do ato. A ferramenta não verifica isenção, imunidade, redução, acréscimo, gratuidade, incidência de atos acessórios ou peculiaridades da legislação municipal.</p>
-  </section>
-
-  <section class="pn-support-section" aria-labelledby="faq">
-    <h2 id="faq">Perguntas frequentes</h2>
-    <div class="pn-faq-list">
-      <details>
-        <summary>O orçamento gerado é oficial?</summary>
-        <p>Não. O resultado é uma estimativa gerada a partir dos dados informados pelo usuário e das tabelas internas da ferramenta. O orçamento final depende da conferência do caso concreto pelo tabelionato.</p>
-      </details>
-      <details>
-        <summary>Qual valor deve ser usado como base de cálculo?</summary>
-        <p>Use o valor exigido para o ato concreto. Pode ser necessário comparar valor do negócio, valor venal, valor venal de referência, valor fiscal ou outra base prevista na regra aplicável.</p>
-      </details>
-      <details>
-        <summary>A ferramenta calcula ITBI automaticamente?</summary>
-        <p>A ferramenta calcula o ITBI a partir da alíquota informada pelo usuário. A alíquota municipal e a base tributária devem ser conferidas na fonte oficial do município competente.</p>
-      </details>
-      <details>
-        <summary>A ferramenta considera isenção ou imunidade tributária?</summary>
-        <p>Não. Situações de isenção, imunidade, não incidência, redução ou exigência complementar precisam ser analisadas separadamente, com base na legislação aplicável e nos documentos do caso.</p>
-      </details>
-      <details>
-        <summary>O registro imobiliário sempre deve ser incluído?</summary>
-        <p>Não. O usuário deve selecionar se haverá registro imobiliário conforme a natureza do ato e a necessidade de ingresso do título no Registro de Imóveis.</p>
-      </details>
-      <details>
-        <summary>O PDF substitui orçamento formal do cartório?</summary>
-        <p>Não. O PDF serve como resumo da simulação feita na página. O orçamento formal depende de conferência do tabelionato e pode mudar após análise da documentação.</p>
-      </details>
-    </div>
-  </section>
-
-  <section class="print-area" id="areaImpressao" aria-hidden="true"></section>
-
-  <footer class="footer">
-    <nav class="footer-links" aria-label="Links institucionais">
-      <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
-      <a href="https://portalnotarial.com.br/contato.html">Contato</a>
-      <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de privacidade</a>
-      <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de uso</a>
-      <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
-    </nav>
-    <span class="footer-support">Projeto apoiado por <a href="https://escriturapublica.substack.com" target="_blank" rel="noopener noreferrer">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener noreferrer">Atesta</a></span>
-    <span class="footer-small">Portal Notarial. Ferramentas gratuitas de apoio à rotina notarial. O conteúdo não substitui fonte oficial, orçamento formal, qualificação notarial ou análise do caso concreto.</span>
-  </footer>
+  
+<section class="print-area" id="areaImpressao" aria-hidden="true"></section>
 </main>
+
+<footer class="footer">
+  &copy; 2024 &ndash; Todos os direitos reservados. Registrado no INPI.<br>
+  C&aacute;lculo Escritura &ndash; Atesta Processamento e Automa&ccedil;&atilde;o de Dados Ltda.<br>
+  CNPJ: 31.527.748/0001-70 &bull; S&atilde;o Paulo/SP<br>
+  <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a> &bull;
+  <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> &bull;
+  <a href="https://portalnotarial.com.br/contato.html">Contato</a><br>
+  Documento meramente informativo. Os valores devem ser conferidos.
+</footer>
 
 <script>
 // =====================================================================
