@@ -841,34 +841,163 @@
       }
     }
   </style>
+  <style id="pn-layout-itcmd-clean">
+    body {
+      background: #f5f7fb !important;
+      color: #0f172a;
+    }
+
+    .topbar {
+      width: 100%;
+      background: #ffffff;
+      border-bottom: 1px solid #dfe5ee;
+      box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
+    }
+
+    .nav {
+      width: min(1180px, calc(100% - 32px));
+      min-height: 88px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    .brand-logo-img {
+      display: block;
+      height: 48px;
+      max-height: 48px;
+      width: auto;
+      max-width: min(100%, 440px);
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 26px;
+      flex-wrap: wrap;
+      font-weight: 700;
+    }
+
+    .menu a {
+      color: #111827;
+      text-decoration: none;
+    }
+
+    .menu a:hover {
+      color: #0076ff;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 32px));
+      margin: 40px auto 64px;
+    }
+
+    .page-title-card {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .page-title-card h1 {
+      margin: 0;
+      color: #0f172a;
+      font-size: clamp(26px, 3vw, 36px);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      text-transform: none;
+    }
+
+    .card,
+    .panel {
+      background: #ffffff !important;
+      border: 1px solid #dde5f0 !important;
+      border-radius: 18px !important;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08) !important;
+    }
+
+    .left-panel,
+    #resultadoPanel {
+      margin-top: 22px;
+    }
+
+    .hero,
+    .content-section,
+    .anchor-btn {
+      display: none !important;
+    }
+
+    .footer {
+      width: min(1120px, calc(100% - 32px));
+      margin: 48px auto 34px;
+      color: #475569;
+      font-size: 15px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .footer a {
+      color: #005bd1;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 760px) {
+      .nav {
+        min-height: auto;
+        padding: 20px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .brand-logo-img {
+        height: 38px;
+        max-height: 38px;
+        max-width: 300px;
+      }
+
+      .menu {
+        justify-content: flex-start;
+        gap: 14px;
+        font-size: 14px;
+      }
+
+      .container {
+        margin-top: 24px;
+      }
+    }
+  </style>
 </head>
 
 <body data-api="https://consulta-pep-backend.onrender.com">
-  <header>
-    <div class="wrap">
-      <section class="hero" aria-labelledby="titulo">
-        <div>
-          <div class="eyebrow">Consulta PEP</div>
-          <h1 id="titulo">Consulta PEP por CPF</h1>
-
-          <p class="lead">
-            Consulte, de forma auxiliar, registros de Pessoas Expostas Politicamente a partir do CPF informado.
-          </p>
-
-          <p class="scope">
-            A ferramenta utiliza dados do Siscoaf e apresenta os dados localizados para apoio à triagem notarial. O resultado não substitui a conferência do caso concreto.
-          </p>
-
-          <div class="hero-actions" aria-label="Ações rápidas">
-            <a class="anchor-btn" href="#ferramenta">Ir para a ferramenta</a>
-            <a class="anchor-btn secondary" href="#perguntas-frequentes">Ver perguntas frequentes</a>
-          </div>
-        </div>
-      </section>
+    <div class="topbar" role="navigation" aria-label="Menu principal">
+    <div class="nav">
+      <a class="brand" href="https://portalnotarial.com.br/" aria-label="Consulta PEP">
+        <img class="brand-logo-img" src="/assets/consulta-pep-logo.png" alt="Consulta PEP">
+      </a>
+      <div class="menu" aria-label="Links do menu">
+        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
+        <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <main>
+    <main class="container">
+    <section class="card page-title-card" aria-labelledby="titulo">
+      <h1 id="titulo">Consulta PEP por CPF</h1>
+    </section>
     <div class="wrap grid">
       <section class="panel left-panel" id="ferramenta">
         <div class="panel-head">
@@ -951,112 +1080,15 @@
     </div>
   </main>
 
-  <section class="content-section" id="informacoes" aria-labelledby="titulo-informacoes">
-    <div class="content-card">
-      <span class="section-kicker">Informações sobre a ferramenta</span>
-      <h2 id="titulo-informacoes">Consulta auxiliar de Pessoas Expostas Politicamente</h2>
-      <p>A Consulta PEP por CPF auxilia a triagem inicial de pessoas expostas politicamente a partir de dado informado pelo usuário. A página exibe os registros localizados na base consultada, quando houver compatibilidade com o CPF pesquisado.</p>
 
-      <div class="info-grid">
-        <article class="info-item">
-          <h3>O que a ferramenta faz</h3>
-          <p>Pesquisa o CPF informado na base PEP disponível no backend da aplicação e apresenta nome, função, órgão, datas de exercício, fim da carência e data de atualização.</p>
-        </article>
-        <article class="info-item">
-          <h3>Quando usar</h3>
-          <p>Use como etapa auxiliar de triagem cadastral, notarial, registral ou de prevenção à lavagem de dinheiro, antes da conferência completa do caso concreto.</p>
-        </article>
-        <article class="info-item">
-          <h3>Como interpretar o resultado</h3>
-          <p>Resultado localizado indica ocorrência compatível na base consultada. Resultado não localizado indica ausência de registro encontrado naquele momento, sem dispensar outras verificações exigíveis.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="content-section" id="como-usar" aria-labelledby="titulo-como-usar">
-    <div class="content-card">
-      <span class="section-kicker">Como usar</span>
-      <h2 id="titulo-como-usar">Fluxo recomendado de consulta</h2>
-      <ol class="steps-list">
-        <li>Digite o CPF no campo indicado, com ou sem pontuação.</li>
-        <li>Clique em “Consultar” e aguarde o retorno do servidor.</li>
-        <li>Leia o resultado exibido no bloco “Resultado da consulta”.</li>
-        <li>Use “Gerar PDF” ou “Imprimir” apenas quando houver resultado exibido.</li>
-        <li>Registre a conferência complementar no procedimento interno, quando aplicável.</li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="content-section" id="criterios-fontes" aria-labelledby="titulo-criterios-fontes">
-    <div class="content-card">
-      <span class="section-kicker">Critérios e fontes</span>
-      <h2 id="titulo-criterios-fontes">Base consultada e critérios de exibição</h2>
-      <p>A ferramenta usa dados PEP do Siscoaf processados no backend indicado no código da página. A consulta é feita pelo CPF informado pelo usuário e o retorno depende da base disponível no serviço externo configurado.</p>
-      <ul class="source-list">
-        <li>Fonte dos dados: Siscoaf - Sistema de Controle de Atividades Financeiras.</li>
-        <li>Critério de busca: CPF informado pelo usuário, após validação formal dos dígitos.</li>
-        <li>A base consultada retorna os dados disponíveis no serviço configurado. O resultado indica os registros localizados para o CPF pesquisado, conforme a base PEP carregada no backend.</li>
-        <li>A data de atualização exibida corresponde ao dado retornado pela base consultada.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section class="content-section" id="limites" aria-labelledby="titulo-limites">
-    <div class="content-card">
-      <span class="section-kicker">Limites da ferramenta</span>
-      <h2 id="titulo-limites">Resultado auxiliar não substitui conferência do caso concreto</h2>
-      <p>A ferramenta não confirma identidade civil, capacidade, representação, vínculo atual com cargo público, risco do cliente, enquadramento normativo final, obrigação de comunicação ou suficiência da diligência. Também não substitui consulta a fontes oficiais, políticas internas de prevenção à lavagem de dinheiro ou análise profissional do caso concreto.</p>
-      <p>Instabilidade do backend, indisponibilidade temporária da fonte, divergência cadastral e atualização posterior da base podem afetar o resultado exibido.</p>
-    </div>
-  </section>
-
-  <section class="content-section" id="perguntas-frequentes" aria-labelledby="titulo-faq">
-    <div class="content-card">
-      <span class="section-kicker">Perguntas frequentes</span>
-      <h2 id="titulo-faq">Dúvidas comuns sobre a Consulta PEP</h2>
-      <div class="faq-list">
-        <details>
-          <summary>A consulta substitui a análise do tabelião ou do responsável pela triagem?</summary>
-          <p>Não. A consulta é informativa e deve ser usada como apoio. A análise do caso concreto continua necessária.</p>
-        </details>
-        <details>
-          <summary>Resultado não localizado elimina a necessidade de outras diligências?</summary>
-          <p>Não. O resultado não localizado apenas indica que a ferramenta não encontrou registro compatível na base consultada naquele momento.</p>
-        </details>
-        <details>
-          <summary>O CPF é armazenado pela página?</summary>
-          <p>O código da página envia o CPF ao backend configurado para realizar a consulta. A política de privacidade do Portal Notarial deve ser consultada para informações sobre tratamento de dados.</p>
-        </details>
-        <details>
-          <summary>O resultado confirma definitivamente a condição de PEP?</summary>
-          <p>Não. O resultado apresenta os registros localizados na base PEP carregada no backend. A confirmação do caso concreto depende da conferência cadastral, documental e normativa aplicável.</p>
-        </details>
-        <details>
-          <summary>A ferramenta confirma que a pessoa ainda é PEP?</summary>
-          <p>Não. A página exibe os dados retornados, incluindo datas de exercício e fim de carência quando disponíveis. A conclusão sobre o enquadramento depende da norma aplicável e da conferência do caso concreto.</p>
-        </details>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="wrap">
-      <div class="src">
-        <p>Fonte dos dados: Siscoaf - Sistema de Controle de Atividades Financeiras.</p>
-
-        <nav class="institutional-nav" aria-label="Links institucionais">
-          <a href="https://portalnotarial.com.br/">Início</a>
-          <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
-          <a href="https://portalnotarial.com.br/contato.html">Contato</a>
-          <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
-          <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
-          <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
-          <a href="https://portalnotarial.com.br/fontes-normativas.html">Fontes</a>
-          <a href="https://portalnotarial.com.br/mapa-do-site.html">Mapa do site</a>
-        </nav>
-      </div>
-    </div>
+    <footer class="footer">
+    © 2024 – Todos os direitos reservados. Registrado no INPI.<br>
+    Cálculo Escritura – Atesta Processamento e Automação de Dados Ltda.<br>
+    CNPJ: 31.527.748/0001-70 • São Paulo/SP<br>
+    <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a> •
+    <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> •
+    <a href="https://portalnotarial.com.br/contato.html">Contato</a><br>
+    Documento meramente informativo. Os dados devem ser conferidos.
   </footer>
 
   <script>
