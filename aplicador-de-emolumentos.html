@@ -1025,93 +1025,343 @@
       }
     }
   </style>
+
+  <style id="pn-layout-itcmd-aplicador-final">
+    :root{
+      --pn-bg:#f4f7fb;
+      --pn-card:#ffffff;
+      --pn-text:#061f3d;
+      --pn-muted:#52657d;
+      --pn-border:#dfe6ef;
+      --pn-blue:#0b6ff7;
+      --pn-radius:18px;
+      --pn-shadow:0 18px 44px rgba(15,23,42,.08);
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0 !important;
+      min-height:100vh;
+      background:#f4f7fb !important;
+      color:#061f3d !important;
+      font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif !important;
+    }
+
+    .topbar{
+      width:100%;
+      height:96px;
+      padding:0 !important;
+      background:#fff;
+      border-bottom:1px solid #dfe6ef;
+      box-shadow:none;
+      display:flex;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:50;
+    }
+
+    .topbar-inner{
+      width:min(100% - 56px, 1100px);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+    }
+
+    .brand-logo{
+      display:flex;
+      align-items:center;
+      height:48px;
+      min-width:0;
+    }
+
+    .brand-logo img{
+      display:block;
+      height:40px;
+      width:auto;
+      max-width:430px;
+      object-fit:contain;
+      background:#fff;
+    }
+
+    .topbar nav{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:28px;
+      white-space:nowrap;
+    }
+
+    .topbar nav a{
+      color:#0f172a;
+      text-decoration:none;
+      font-size:17px;
+      line-height:1;
+      font-weight:700;
+    }
+
+    .topbar nav a:hover{
+      color:#0b6ff7;
+    }
+
+    .pn-page-shell{
+      width:min(100% - 56px, 1100px);
+      margin:0 auto;
+      padding:34px 0 0;
+    }
+
+    .pn-title-card{
+      background:#fff;
+      border:1px solid #dfe6ef;
+      border-radius:18px;
+      box-shadow:0 18px 44px rgba(15,23,42,.08);
+      padding:30px 24px;
+      text-align:center;
+      margin:0 auto 20px;
+    }
+
+    .pn-title-card h1{
+      margin:0;
+      color:#1169f5;
+      font-size:clamp(22px, 3vw, 30px);
+      font-weight:900;
+      letter-spacing:.04em;
+      line-height:1.2;
+      text-transform:uppercase;
+    }
+
+    main#consulta-ferramenta{
+      width:min(100% - 56px, 1100px);
+      margin:0 auto;
+      padding:0 0 36px !important;
+      scroll-margin-top:112px;
+    }
+
+    main#consulta-ferramenta .wrap{
+      width:100% !important;
+      margin:0 auto !important;
+    }
+
+    .grid{
+      grid-template-columns:420px minmax(0,1fr) !important;
+      gap:18px !important;
+      align-items:start !important;
+    }
+
+    .panel{
+      background:#fff !important;
+      border:1px solid #dfe6ef !important;
+      border-radius:18px !important;
+      box-shadow:0 18px 44px rgba(15,23,42,.08) !important;
+      overflow:hidden;
+    }
+
+    .panel-head{
+      padding:24px 24px 16px !important;
+      border-bottom:1px solid #dfe6ef !important;
+      background:#fff !important;
+    }
+
+    .panel-head h2{
+      margin:0 !important;
+      color:#061f3d !important;
+      font-size:24px !important;
+      font-weight:800 !important;
+      letter-spacing:-.02em !important;
+    }
+
+    .panel-head p,
+    .hint,
+    .muted{
+      color:#52657d !important;
+    }
+
+    .panel-body{
+      padding:24px !important;
+    }
+
+    label{
+      color:#061f3d !important;
+      font-weight:800 !important;
+    }
+
+    input,
+    select,
+    textarea{
+      border:1px solid #d3deeb !important;
+      border-radius:12px !important;
+      background:#fff !important;
+      color:#061f3d !important;
+    }
+
+    .primary,
+    button.primary{
+      background:#1169f5 !important;
+      color:#fff !important;
+      border:1px solid #1169f5 !important;
+      box-shadow:0 12px 28px rgba(17,105,245,.18);
+    }
+
+    .secondary,
+    .ghost,
+    button.secondary,
+    button.ghost{
+      background:#fff !important;
+      color:#061f3d !important;
+      border:1px solid #d3deeb !important;
+      box-shadow:none !important;
+    }
+
+    .total-box{
+      background:#1169f5 !important;
+      border-radius:16px !important;
+      box-shadow:0 12px 28px rgba(17,105,245,.18);
+    }
+
+    .empty{
+      min-height:500px !important;
+    }
+
+    .pn-footer{
+      width:min(100% - 56px, 1100px);
+      margin:0 auto;
+      padding:22px 0 42px;
+      color:#52657d;
+      font-size:14px;
+      line-height:1.55;
+      text-align:center;
+    }
+
+    .pn-footer a{
+      color:#1169f5;
+      text-decoration:none;
+    }
+
+    .pn-footer a:hover{
+      text-decoration:underline;
+    }
+
+    .pn-footer p{
+      margin:4px 0;
+    }
+
+    .pn-footer .pn-footer-links{
+      margin:4px 0;
+    }
+
+    .print-url{
+      display:none !important;
+    }
+
+    @media (max-width:980px){
+      .grid{
+        grid-template-columns:1fr !important;
+      }
+
+      .topbar{
+        height:auto;
+        min-height:88px;
+        padding:14px 0 !important;
+      }
+
+      .topbar-inner{
+        width:calc(100% - 36px);
+        flex-direction:column;
+        align-items:flex-start;
+        gap:14px;
+      }
+
+      .topbar nav{
+        width:100%;
+        justify-content:flex-start;
+        gap:18px;
+        flex-wrap:wrap;
+      }
+
+      .brand-logo img{
+        height:34px;
+        max-width:100%;
+      }
+
+      .pn-page-shell,
+      main#consulta-ferramenta,
+      .pn-footer{
+        width:calc(100% - 36px);
+      }
+    }
+
+    @media (max-width:620px){
+      .topbar nav a{
+        font-size:15px;
+      }
+
+      .pn-title-card{
+        padding:22px 16px;
+      }
+
+      .panel-head,
+      .panel-body{
+        padding:18px !important;
+      }
+    }
+
+    @media print{
+      .topbar,
+      .pn-page-shell,
+      .left-panel,
+      .mini-actions,
+      .pn-footer{
+        display:none !important;
+      }
+
+      main#consulta-ferramenta{
+        width:100% !important;
+        margin:0 !important;
+        padding:0 !important;
+      }
+
+      .wrap,
+      main#consulta-ferramenta .wrap{
+        width:100% !important;
+        max-width:none !important;
+      }
+
+      .grid{
+        display:block !important;
+      }
+
+      .panel{
+        border:0 !important;
+        box-shadow:none !important;
+        border-radius:0 !important;
+      }
+    }
+  </style>
+
 </head>
 <body>
-  <header>
-    <div class="wrap">
-      <section class="hero" aria-labelledby="titulo">
-        <div>
-          <div class="eyebrow">Aplicador da Tabela de Custas e Emolumentos Extrajudicial - Tabelionato de Notas (Capital)</div>
-          <h1 id="titulo">Aplicador inteligente da tabela de emolumentos - São Paulo</h1>
-          <p class="lead">
-            Selecione o ato, informe os valores necessários e obtenha o enquadramento provável, com memória de cálculo, base aplicada, percentual, total estimado e fundamentos.
-          </p>
-          <p class="scope">
-            Os valores correspondem à Tabela I do Tabelionato de Notas da capital do Estado de São Paulo para 2026, com ISS de 2%. Em município com alíquota diversa, o total bruto deve ser recalculado.
-          </p>
-          <div class="hero-actions" aria-label="Atalhos da página">
-            <a class="hero-link primary-link" href="#consulta-ferramenta">Ir para a ferramenta</a>
-            <a class="hero-link secondary-link" href="#criterios-fontes">Ver critérios e fontes</a>
-          </div>
-        </div>
-      </section>
+
+  <header class="topbar" role="banner">
+    <div class="topbar-inner">
+      <a class="brand-logo" href="https://portalnotarial.com.br/" aria-label="Portal Notarial">
+        <img src="assets/aplicador-emolumentos-logo.png" alt="Aplicador de Emolumentos">
+      </a>
+      <nav aria-label="Links institucionais">
+        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a>
+        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
+        <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+      </nav>
     </div>
   </header>
 
-
-  <section class="wrap adsense-section" id="informacoes-ferramenta" aria-labelledby="infoTitulo">
-    <div class="section-kicker">Informações</div>
-    <h2 id="infoTitulo">O que a ferramenta faz</h2>
-    <p>
-      O aplicador organiza hipóteses frequentes de atos notariais e estima o enquadramento provável na Tabela I de Custas e Emolumentos do Estado de São Paulo. A ferramenta calcula faixas, percentuais, atos principais, atos acessórios, reduções e observações cadastradas para apoiar a triagem inicial do atendimento.
-    </p>
-
-    <div class="info-grid">
-      <article class="info-card">
-        <h3>Quando usar</h3>
-        <p>Use antes de preparar orçamento, conferir composição de ato ou comparar hipóteses como compra e venda, doação, inventário, procuração, ata notarial, garantia, testamento, separação ou escritura sem valor declarado.</p>
-      </article>
-      <article class="info-card">
-        <h3>Como interpretar o resultado</h3>
-        <p>O valor indicado é estimativo. Confira a base usada, a faixa da tabela, o percentual aplicado, os fundamentos e as observações técnicas antes de usar o resultado em atendimento ou ato formal.</p>
-      </article>
-      <article class="info-card">
-        <h3>Limite operacional</h3>
-        <p>A ferramenta não substitui conferência jurídica, análise documental, verificação tributária, decisão do tabelião ou atualização normativa posterior à base utilizada.</p>
-      </article>
-    </div>
-  </section>
-
-  <section class="wrap bloco-como-utilizar" id="como-usar">
-    <h2>Como utilizar a ferramenta</h2>
-
-    <p class="intro">
-      A página foi desenvolvida para facilitar a triagem inicial do ato notarial e estimar, de forma prática, o enquadramento provável na Tabela de Custas e Emolumentos Extrajudicial do Tabelionato de Notas.
-    </p>
-
-    <p class="intro">
-      Para obter o resultado, selecione o tipo de ato, informe os valores solicitados e confira a memória de cálculo gerada pela ferramenta.
-    </p>
-
-    <div class="cards">
-      <div class="card">
-        <h3>1. Escolha o ato</h3>
-        <p>
-          Use o campo de busca ou a lista de atos para selecionar a hipótese aplicável, como compra e venda, doação, inventário, ata notarial, procuração, testamento, garantia ou outro ato disponível.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>2. Informe as bases</h3>
-        <p>
-          Preencha os valores pedidos pela ferramenta, como valor do negócio, valor venal, base de ITBI, valor da dívida, valor da partilha ou quantidade de atos, conforme o caso.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>3. Confira o enquadramento</h3>
-        <p>
-          O resultado indicará a composição dos atos, a base adotada, a faixa ou item da tabela, o percentual aplicado, o total estimado, os fundamentos e as observações técnicas.
-        </p>
-      </div>
-    </div>
-
-    <div class="alerta">
-      Antes de utilizar o resultado em atendimento, orçamento ou ato formal, confirme a tabela vigente, a legislação aplicável, a natureza jurídica da operação e as particularidades do caso concreto.
-    </div>
-
-    <div class="atualizacao">
-      Última atualização da ferramenta: 11/05/2026.
+  <section class="pn-page-shell" aria-labelledby="pnTituloAplicador">
+    <div class="pn-title-card">
+      <h1 id="pnTituloAplicador">APLICADOR DE EMOLUMENTOS</h1>
     </div>
   </section>
 
@@ -1225,84 +1475,19 @@
     </div>
   </main>
 
-  <section class="wrap adsense-section" id="criterios-fontes" aria-labelledby="criteriosTitulo">
-    <div class="section-kicker">Critérios e fontes</div>
-    <h2 id="criteriosTitulo">Critérios utilizados no cálculo</h2>
-    <p>
-      A estimativa considera os dados informados pelo usuário, a hipótese de ato escolhida, a base de cálculo aplicável e os itens cadastrados da Tabela I. Em atos com valor declarado, a ferramenta compara as bases informadas e usa o critério de maior valor quando essa regra for aplicável à hipótese selecionada.
+  <footer class="pn-footer">
+    <p>&copy; 2024 &ndash; Todos os direitos reservados. Registrado no INPI.</p>
+    <p>C&aacute;lculo Escritura &ndash; Atesta Processamento e Automa&ccedil;&atilde;o de Dados Ltda.</p>
+    <p>CNPJ: 31.527.748/0001-70 &bull; S&atilde;o Paulo/SP</p>
+    <p class="pn-footer-links">
+      <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a> &bull;
+      <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> &bull;
+      <a href="https://portalnotarial.com.br/contato.html">Contato</a>
     </p>
-
-    <div class="source-grid">
-      <article class="source-box">
-        <h3>Fontes indicadas</h3>
-        <ul>
-          <li>Lei Estadual nº 11.331/2002.</li>
-          <li>Texto consolidado pela Lei nº 18.009/2024.</li>
-          <li>Tabela I dos Tabelionatos de Notas do Estado de São Paulo.</li>
-          <li>Notas explicativas e enunciados notariais cadastrados na ferramenta.</li>
-        </ul>
-      </article>
-      <article class="source-box">
-        <h3>Limites da ferramenta</h3>
-        <ul>
-          <li>Não calcula tributos municipais, estaduais ou federais que não integrem a tabela notarial.</li>
-          <li>Não verifica isenção, gratuidade, dispensa, exigência fiscal ou mudança normativa posterior.</li>
-          <li>Não substitui a conferência do escrevente, do tabelião ou da serventia competente.</li>
-          <li>Não decide casos de dúvida, divergência interpretativa ou particularidade documental.</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <section class="wrap adsense-section" id="faq" aria-labelledby="faqTitulo">
-    <div class="section-kicker">FAQ</div>
-    <h2 id="faqTitulo">Perguntas frequentes</h2>
-
-    <div class="faq-list">
-      <details>
-        <summary>O resultado é orçamento oficial do cartório?</summary>
-        <div class="faq-body">Não. O resultado é uma estimativa técnica para triagem. O orçamento final depende da conferência da serventia, dos documentos apresentados, da natureza jurídica do ato e da tabela vigente na data da prática do ato.</div>
-      </details>
-      <details>
-        <summary>A ferramenta substitui a análise do tabelião?</summary>
-        <div class="faq-body">Não. A ferramenta organiza critérios de cálculo e fundamentos cadastrados, mas não substitui qualificação notarial, análise jurídica, conferência fiscal ou decisão do tabelião responsável.</div>
-      </details>
-      <details>
-        <summary>Por que preciso informar mais de uma base de valor?</summary>
-        <div class="faq-body">Alguns atos exigem comparação entre valor do negócio, valor venal, base de ITBI, valor da dívida, partilha ou outro parâmetro. A ferramenta usa os campos informados para aplicar a regra cadastrada para a hipótese selecionada.</div>
-      </details>
-      <details>
-        <summary>O ISS pode alterar o total?</summary>
-        <div class="faq-body">Sim. A página usa a referência da capital do Estado de São Paulo com ISS de 2%. Em município com alíquota diversa, o total bruto deve ser recalculado.</div>
-      </details>
-      <details>
-        <summary>Como informar erro ou sugerir nova hipótese?</summary>
-        <div class="faq-body">Use a página de contato do Portal Notarial. Informe o tipo de ato, a hipótese de cálculo, a fonte normativa e, se possível, o exemplo que motivou a sugestão.</div>
-      </details>
-    </div>
-  </section>
-
-
-  <footer>
-    <div class="wrap">
-      <div class="src">
-        <p>Base informativa. Lei Estadual nº 11.331 de 26 de dezembro de 2002, texto consolidado pela Lei nº 18.009 de 2024, Tabela I do Tabelionato de Notas da capital para 2026 com ISS de 2%, notas explicativas e enunciados notariais (CNB-SP).</p>
-        <p>Uso recomendado. Triagem e conferência interna. O resultado não substitui a conferência caso a caso pelo escrevente ou tabelião.</p>
-        <p>Projeto apoiado por <a href="https://escriturapublica.substack.com" target="_blank" rel="noopener">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener">Atesta</a></p>
-        <nav class="institutional-nav" aria-label="Links institucionais">
-          <a href="https://portalnotarial.com.br/">Início</a>
-          <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
-          <a href="https://portalnotarial.com.br/contato.html">Contato</a>
-          <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
-          <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
-          <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
-        </nav>
-      </div>
-    </div>
+    <p>Documento meramente informativo. Os valores devem ser conferidos.</p>
   </footer>
 
-
-  <script>
+<script>
     "use strict";
 
     const TABELA_VALOR_DECLARADO = [
