@@ -823,7 +823,6 @@
       background: #f5f7fb !important;
       color: #0f172a !important;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
-      line-height: 1.5 !important;
     }
 
     .topbar {
@@ -855,7 +854,7 @@
       height: 40px !important;
       max-height: 40px !important;
       width: auto !important;
-      max-width: min(100%, 420px) !important;
+      max-width: 420px !important;
       object-fit: contain !important;
     }
 
@@ -894,7 +893,7 @@
 
     .page-title-card {
       padding: 38px 18px !important;
-      margin: 0 0 22px !important;
+      margin: 0 0 24px !important;
       text-align: center !important;
     }
 
@@ -910,30 +909,11 @@
 
     .left-panel,
     #resultadoPanel {
-      margin-top: 22px !important;
+      margin-top: 0 !important;
     }
 
-    .left-panel h2,
-    #resultadoPanel h2,
-    .panel h2 {
-      color: #0f172a !important;
-      font-size: 24px !important;
-      line-height: 1.25 !important;
-      letter-spacing: -0.02em !important;
-    }
-
-    input,
-    select,
-    textarea {
-      border: 1px solid #d6dfec !important;
-      border-radius: 12px !important;
-      background: #ffffff !important;
-    }
-
-    button,
-    .btn,
-    .primary {
-      border-radius: 12px !important;
+    #resultadoPanel {
+      margin-top: 24px !important;
     }
 
     .hero,
@@ -957,10 +937,6 @@
     .footer a {
       color: #005bd1 !important;
       text-decoration: none !important;
-    }
-
-    .footer a:hover {
-      text-decoration: underline !important;
     }
 
     @media (max-width: 760px) {
@@ -995,7 +971,7 @@
 </head>
 
 <body data-api="https://consulta-pep-backend.onrender.com">
-      <div class="topbar" role="navigation" aria-label="Menu principal">
+        <div class="topbar" role="navigation" aria-label="Menu principal">
     <div class="nav">
       <a class="brand" href="https://portalnotarial.com.br/" aria-label="Consulta PEP">
         <img class="brand-logo-img" src="/assets/consulta-pep-logo.png" alt="Consulta PEP">
@@ -1007,14 +983,13 @@
       </div>
     </div>
   </div>
-  <main class="container">
+<main class="container">
+
+
     <section class="card page-title-card" aria-labelledby="titulo">
-      <h1 id="titulo">CONSULTA PEP POR CPF</h1>
+      <h1 id="titulo">ASSISTENTE DE CONSULTA PEP POR CPF</h1>
     </section>
-    <section class="card page-title-card" aria-labelledby="titulo">
-      <h1 id="titulo">Consulta PEP por CPF</h1>
-    </section>
-    <div class="wrap grid">
+<div class="wrap grid">
       <section class="panel left-panel" id="ferramenta">
         <div class="panel-head">
           <h2>Consulta</h2>
@@ -1097,7 +1072,7 @@
   </main>
 
 
-      <footer class="footer">
+        <footer class="footer">
     © 2024 – Todos os direitos reservados. Registrado no INPI.<br>
     Cálculo Escritura – Atesta Processamento e Automação de Dados Ltda.<br>
     CNPJ: 31.527.748/0001-70 • São Paulo/SP<br>
