@@ -127,7 +127,7 @@
 
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Conferência do Selo Digital TJSP</title>
+<title>Valida&ccedil;&atilde;o Selo Digital TJSP</title>
 <meta name="description" content="Ferramenta para conferência do Selo Digital TJSP a partir do QR Code de certidão ou traslado em PDF ou imagem, com leitura local e acesso à consulta oficial do Tribunal de Justiça de São Paulo.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://portalnotarial.com.br/consulta-selo-digital.html">
@@ -506,11 +506,199 @@
     .rodape-inner { align-items: flex-start; flex-direction: column; }
   }
 </style>
+
+<style id="pn-selo-itcmd-seguro">
+  :root {
+    --primary: #0b5fff;
+    --text: #0f172a;
+    --muted: #475569;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --radius: 14px;
+    --shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+    --border: #e5e7eb;
+  }
+
+  body {
+    margin: 0 !important;
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif !important;
+  }
+
+  .topbar {
+    background: #fff !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 50 !important;
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: none !important;
+  }
+
+  .nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+    justify-content: space-between !important;
+    padding: 12px 18px !important;
+    max-width: 1170px !important;
+    margin: 0 auto !important;
+    flex-wrap: wrap !important;
+  }
+
+  .brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+    text-decoration: none !important;
+    line-height: 1 !important;
+    background: #fff !important;
+  }
+
+  .brand img {
+    display: block !important;
+    height: 40px !important;
+    max-height: 40px !important;
+    width: auto !important;
+    max-width: min(100%, 420px) !important;
+    object-fit: contain !important;
+    background: transparent !important;
+  }
+
+  .menu {
+    display: flex !important;
+    gap: 18px !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+  }
+
+  .menu a {
+    font-weight: 600 !important;
+    color: var(--text) !important;
+    opacity: 0.9 !important;
+    text-decoration: none !important;
+  }
+
+  .pagina {
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 32px 28px 40px !important;
+  }
+
+  .cabecalho {
+    background: var(--card) !important;
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: var(--shadow) !important;
+    padding: 22px 24px !important;
+    margin: 18px 0 !important;
+    text-align: center !important;
+  }
+
+  .cabecalho h1 {
+    margin: 8px 0 12px !important;
+    font-size: 26px !important;
+    line-height: 1.25 !important;
+    color: var(--primary) !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
+    font-weight: 800 !important;
+  }
+
+  .cabecalho p {
+    display: none !important;
+  }
+
+  .painel,
+  .bloco-conteudo,
+  .cartao-conteudo,
+  .fonte {
+    border-radius: var(--radius) !important;
+  }
+
+  .painel {
+    background: var(--card) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: var(--shadow) !important;
+    padding: 22px 24px !important;
+    margin: 18px 0 !important;
+  }
+
+  .conteudo,
+  .informacoes,
+  .processamento-local {
+    display: none !important;
+  }
+
+  .rodape,
+  .rodape-inner {
+    display: none !important;
+  }
+
+  .footer {
+    color: var(--muted) !important;
+    font-size: 14px !important;
+    margin-top: 22px !important;
+    text-align: center !important;
+    padding: 28px 16px 40px !important;
+    line-height: 1.7 !important;
+    border-top: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .footer a {
+    color: var(--primary) !important;
+    text-decoration: none !important;
+  }
+
+  .footer a:hover {
+    text-decoration: underline !important;
+  }
+
+  @media (max-width: 720px) {
+    .nav {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+    }
+
+    .menu {
+      width: 100% !important;
+      gap: 12px !important;
+      justify-content: center !important;
+    }
+
+    .pagina {
+      padding: 24px 18px 32px !important;
+    }
+
+    .brand img {
+      height: 36px !important;
+      max-height: 36px !important;
+      max-width: min(100%, 378px) !important;
+    }
+  }
+</style>
+
 </head>
 <body>
+<div class="topbar" role="navigation" aria-label="Menu principal">
+  <div class="nav">
+    <a class="brand" href="https://portalnotarial.com.br/" aria-label="Valida&ccedil;&atilde;o Selo Digital">
+      <img src="/assets/validacao-selo-digital-logo.png" alt="Valida&ccedil;&atilde;o Selo Digital">
+    </a>
+    <div class="menu" aria-label="Links do menu">
+      <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a>
+      <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
+      <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+    </div>
+  </div>
+</div>
 <main class="pagina">
   <header class="cabecalho">
-    <h1>Conferência do Selo Digital TJSP</h1>
+    <h1>VALIDA&Ccedil;&Atilde;O SELO DIGITAL TJSP</h1>
     <p>Selecione o tipo de documento e envie o arquivo. O QR Code é lido localmente no seu navegador e somente a URL oficial encontrada é utilizada para obter o resultado no Tribunal de Justiça de São Paulo.</p>
   </header>
 
@@ -671,19 +859,14 @@
   </section>
 </main>
 
-<footer class="rodape">
-  <div class="rodape-inner">
-    <div>Portal Notarial | Ferramenta de conferência auxiliar</div>
-    <nav class="links-institucionais" aria-label="Links institucionais">
-      <a href="https://portalnotarial.com.br/">Início</a>
-      <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
-      <a href="https://portalnotarial.com.br/contato.html">Contato</a>
-      <a href="https://portalnotarial.com.br/fontes-normativas.html">Fontes</a>
-      <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
-      <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
-      <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
-    </nav>
-  </div>
+<footer class="footer">
+  &copy; 2024 &ndash; Todos os direitos reservados. Registrado no INPI.<br>
+  C&aacute;lculo Escritura &ndash; Atesta Processamento e Automa&ccedil;&atilde;o de Dados Ltda.<br>
+  CNPJ: 31.527.748/0001-70 &bull; S&atilde;o Paulo/SP<br>
+  <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a> &bull;
+  <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> &bull;
+  <a href="https://portalnotarial.com.br/contato.html">Contato</a><br>
+  Documento meramente informativo. Os dados devem ser conferidos.
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js" crossorigin="anonymous"></script>
