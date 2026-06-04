@@ -1343,6 +1343,44 @@
     }
   </style>
 
+
+  <style id="pn-aplicador-ajuste-faixa-logo-r2">
+    /* Ajuste fino solicitado: remove o efeito de marca/pill na coluna Faixa ou item. */
+    #resultadoPanel .pill{
+      display:inline !important;
+      background:transparent !important;
+      color:#061f3d !important;
+      border-radius:0 !important;
+      padding:0 !important;
+      font-size:13px !important;
+      font-weight:700 !important;
+      line-height:1.35 !important;
+      box-shadow:none !important;
+    }
+
+    #resultadoPanel table th:nth-child(3),
+    #resultadoPanel table td:nth-child(3){
+      min-width:170px !important;
+      width:180px !important;
+      overflow-wrap:break-word !important;
+      word-break:normal !important;
+    }
+
+    #resultadoPanel table th,
+    #resultadoPanel table td{
+      background-clip:padding-box;
+    }
+
+    .brand-logo img{
+      height:40px !important;
+      width:auto !important;
+      max-width:430px !important;
+      object-fit:contain !important;
+      background:#fff !important;
+      filter:none !important;
+    }
+  </style>
+
 </head>
 <body>
 
