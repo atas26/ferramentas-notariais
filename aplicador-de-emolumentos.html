@@ -1381,6 +1381,105 @@
     }
   </style>
 
+
+
+  <style id="pn-aplicador-ajuste-disposicao-r3">
+    /* Ajuste fino r3: preserva a topbar do padrão ITCMD e devolve a disposição original da ferramenta. */
+    main#consulta-ferramenta{
+      width:min(1220px, calc(100% - 32px)) !important;
+      margin:0 auto !important;
+      padding:18px 0 54px !important;
+      scroll-margin-top:116px !important;
+    }
+
+    main#consulta-ferramenta .wrap{
+      width:100% !important;
+      max-width:none !important;
+      margin:0 auto !important;
+    }
+
+    main#consulta-ferramenta .grid{
+      display:grid !important;
+      grid-template-columns:430px minmax(0, 1fr) !important;
+      gap:18px !important;
+      align-items:start !important;
+    }
+
+    #resultadoPanel{
+      scroll-margin-top:116px !important;
+    }
+
+    #resultadoPanel .panel-head.result-top{
+      display:grid !important;
+      grid-template-columns:minmax(0, 1fr) auto !important;
+      gap:16px !important;
+      align-items:center !important;
+    }
+
+    #resultadoPanel .table-scroll{
+      overflow-x:auto !important;
+    }
+
+    #resultadoPanel table{
+      table-layout:auto !important;
+      min-width:780px !important;
+    }
+
+    #resultadoPanel table th,
+    #resultadoPanel table td{
+      vertical-align:top !important;
+    }
+
+    #resultadoPanel table th:nth-child(3),
+    #resultadoPanel table td:nth-child(3){
+      min-width:190px !important;
+      width:200px !important;
+      white-space:normal !important;
+    }
+
+    #resultadoPanel .pill{
+      display:inline !important;
+      background:transparent !important;
+      color:#061f3d !important;
+      border-radius:0 !important;
+      padding:0 !important;
+      box-shadow:none !important;
+      line-height:1.35 !important;
+    }
+
+    .panel{
+      overflow:visible !important;
+    }
+
+    .brand-logo img{
+      height:40px !important;
+      width:auto !important;
+      max-width:430px !important;
+      object-fit:contain !important;
+      background:#fff !important;
+      filter:none !important;
+    }
+
+    @media (max-width:980px){
+      main#consulta-ferramenta{
+        width:calc(100% - 36px) !important;
+        padding-top:18px !important;
+      }
+
+      main#consulta-ferramenta .grid{
+        grid-template-columns:1fr !important;
+      }
+
+      #resultadoPanel .panel-head.result-top{
+        grid-template-columns:1fr !important;
+      }
+
+      .total-box{
+        text-align:left !important;
+      }
+    }
+  </style>
+
 </head>
 <body>
 
