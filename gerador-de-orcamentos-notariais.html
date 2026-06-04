@@ -1646,7 +1646,7 @@ textarea:focus{
 </style>
 
 
-<style id="pn-orcamento-ajustes-finais-r6">
+<style id="pn-orcamento-ajustes-finais-r7">
   .currency-field {
     font-variant-numeric: tabular-nums;
   }
@@ -1658,100 +1658,215 @@ textarea:focus{
   @media print {
     @page {
       size: A4 portrait;
-      margin: 8mm;
+      margin: 13mm;
+    }
+
+    html,
+    body {
+      margin: 0 !important;
+      padding: 0 !important;
+      width: auto !important;
+      min-height: 0 !important;
+      height: auto !important;
+      overflow: visible !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+    }
+
+    body > :not(main) {
+      display: none !important;
+    }
+
+    main.container {
+      display: block !important;
+      visibility: visible !important;
+      width: 100% !important;
+      max-width: none !important;
+      min-height: 0 !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: #ffffff !important;
+      box-shadow: none !important;
+      overflow: visible !important;
+    }
+
+    main.container > :not(.print-area) {
+      display: none !important;
+    }
+
+    .print-area,
+    .print-area * {
+      visibility: visible !important;
     }
 
     .print-area {
-      font-size: 9.5px !important;
-      line-height: 1.25 !important;
+      display: block !important;
+      position: static !important;
+      left: auto !important;
+      top: auto !important;
+      width: 100% !important;
+      max-width: none !important;
+      min-height: 0 !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      background: #ffffff !important;
+      color: #0f172a !important;
+      font-size: 12px !important;
+      line-height: 1.42 !important;
+      page-break-after: auto !important;
+      break-after: auto !important;
+      overflow: visible !important;
     }
 
     .print-head {
-      gap: 10px !important;
-      padding-bottom: 6px !important;
-      margin-bottom: 8px !important;
+      display: flex !important;
+      justify-content: space-between !important;
+      gap: 18px !important;
+      align-items: flex-start !important;
+      border-bottom: 1px solid #d7dce3 !important;
+      padding-bottom: 12px !important;
+      margin-bottom: 16px !important;
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
     }
 
     .print-brand-area {
-      min-width: 160px !important;
-      max-width: 210px !important;
-      min-height: 42px !important;
-      max-height: 46px !important;
+      min-width: 220px !important;
+      max-width: 300px !important;
+      min-height: 58px !important;
+      max-height: 68px !important;
+      overflow: hidden !important;
     }
 
     .print-logo-cartorio {
-      max-width: 190px !important;
-      max-height: 40px !important;
+      max-width: 260px !important;
+      max-height: 64px !important;
+      object-fit: contain !important;
+      object-position: left center !important;
+      background: #ffffff !important;
     }
 
     .print-brand {
-      font-size: 13px !important;
+      font-size: 17px !important;
       line-height: 1.2 !important;
+      font-weight: 800 !important;
     }
 
     .print-meta {
-      font-size: 9px !important;
-      line-height: 1.3 !important;
+      font-size: 11px !important;
+      line-height: 1.45 !important;
+      text-align: right !important;
     }
 
     .print-title {
-      font-size: 18px !important;
-      line-height: 1.1 !important;
-      margin: 0 0 8px !important;
+      font-family: Georgia, "Times New Roman", serif !important;
+      font-size: 27px !important;
+      line-height: 1.15 !important;
+      margin: 0 0 16px !important;
+      color: #0f172a !important;
+      font-weight: 700 !important;
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
     }
 
     .print-section {
-      margin: 0 0 8px !important;
+      margin: 0 0 16px !important;
       break-inside: avoid !important;
       page-break-inside: avoid !important;
     }
 
     .print-section h3 {
-      font-size: 10.5px !important;
-      margin: 0 0 5px !important;
+      font-size: 14px !important;
+      margin: 0 0 9px !important;
+      color: #0f172a !important;
     }
 
     .print-grid {
-      gap: 4px 8px !important;
-      font-size: 9px !important;
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: 8px 14px !important;
+      font-size: 12px !important;
     }
 
     .print-field {
-      padding: 5px 6px !important;
-      border-radius: 5px !important;
+      padding: 8px 9px !important;
+      border-radius: 8px !important;
+      border: 1px solid #e5e7eb !important;
+      background: #ffffff !important;
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
     }
 
     .print-field span {
-      font-size: 8px !important;
-      margin-bottom: 1px !important;
+      display: block !important;
+      color: #64748b !important;
+      font-size: 10.5px !important;
+      margin-bottom: 3px !important;
     }
 
     .print-field strong {
-      font-size: 9px !important;
-      line-height: 1.18 !important;
+      display: block !important;
+      font-size: 11.5px !important;
+      line-height: 1.25 !important;
+      color: #0f172a !important;
+      font-weight: 700 !important;
     }
 
     table {
-      font-size: 8.5px !important;
-      line-height: 1.2 !important;
+      width: 100% !important;
+      border-collapse: collapse !important;
+      font-size: 11px !important;
+      line-height: 1.35 !important;
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
     }
 
-    th, td {
-      padding: 4px 5px !important;
+    tr,
+    th,
+    td {
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
+    }
+
+    th,
+    td {
+      padding: 7px 8px !important;
+    }
+
+    .money-cell {
+      white-space: nowrap !important;
+      text-align: right !important;
+      font-weight: 700 !important;
     }
 
     .print-total {
-      margin-top: 7px !important;
-      padding: 8px 9px !important;
-      font-size: 13px !important;
-      border-radius: 7px !important;
+      display: flex !important;
+      justify-content: space-between !important;
+      gap: 14px !important;
+      margin-top: 14px !important;
+      padding: 13px 15px !important;
+      background: #f8fafc !important;
+      border: 1px solid #d7dce3 !important;
+      border-radius: 10px !important;
+      font-size: 18px !important;
+      font-weight: 800 !important;
+      color: #0f172a !important;
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
     }
 
     .print-note {
-      margin-top: 7px !important;
-      padding: 6px 8px !important;
-      font-size: 8.5px !important;
-      line-height: 1.28 !important;
+      margin-top: 13px !important;
+      border-left: 3px solid rgb(0,118,255) !important;
+      background: #f8fafc !important;
+      padding: 10px 11px !important;
+      color: #334155 !important;
+      font-size: 10.5px !important;
+      line-height: 1.45 !important;
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
     }
   }
 </style>
@@ -2634,14 +2749,15 @@ function calcular(rolar = true, validar = rolar){
   const valorOutros = temOutrosServicosSelecionado() ? parseMoeda(el('valorOutros').value) : 0;
   const tipo = tipoTributoSelecionado();
   const incluiRegistro = temRegistroSelecionado();
+  const temAcessorio = temAtoAcessorioSelecionado();
   const faixaEscritura = buscaFaixa(valorBase, TABELA_ESCRITURA);
-  const faixaRegistro = buscaFaixa(valorBase, TABELA_REGISTRO);
   const atosAcessorios = obterAtosAcessorios();
+  const registrosImobiliarios = obterRegistrosImobiliarios();
 
   const escrituraPrincipal = Number(faixaEscritura.valor || 0);
-  const escrituraAcessorios = atosAcessorios.reduce((total, item) => total + Number(item.emolumentos || 0), 0);
+  const escrituraAcessorios = temAcessorio ? atosAcessorios.reduce((total, item) => total + Number(item.emolumentos || 0), 0) : 0;
   const escritura = escrituraPrincipal + escrituraAcessorios;
-  const registro = incluiRegistro ? Number(faixaRegistro.valor || 0) : 0;
+  const registro = incluiRegistro ? registrosImobiliarios.reduce((total, item) => total + Number(item.emolumentos || 0), 0) : 0;
 
   let tributo = 0;
   let criterioTributo = '';
@@ -2665,6 +2781,14 @@ function calcular(rolar = true, validar = rolar){
     criterioTributo = 'N/A';
   }
 
+  const criterioEscrituraAcessorios = temAcessorio
+    ? (atosAcessorios.length ? atosAcessorios.map((item) => item.criterio).join('; ') : 'Ato acessório: valor não informado')
+    : 'N/A';
+
+  const criterioRegistro = incluiRegistro
+    ? (registrosImobiliarios.length ? registrosImobiliarios.map((item) => item.criterio).join('; ') : 'Registro imobiliário: valor não informado')
+    : 'N/A';
+
   const total = escritura + tributo + registro + valorOutros;
 
   ultimoResultado = {
@@ -2673,7 +2797,8 @@ function calcular(rolar = true, validar = rolar){
     escrituraPrincipal,
     escrituraAcessorios,
     atosAcessorios,
-    temAtoAcessorio: temAtoAcessorioSelecionado(),
+    registrosImobiliarios,
+    temAtoAcessorio: temAcessorio,
     temOutrosServicos: temOutrosServicosSelecionado(),
     tributo,
     registro,
@@ -2682,10 +2807,10 @@ function calcular(rolar = true, validar = rolar){
     tipo,
     incluiRegistro,
     criterioTributo,
-    criterioEscritura: [`Ato principal: ${faixaEscritura.rotulo}`].concat(atosAcessorios.map((item) => item.criterio)).join('; '),
+    criterioEscritura: [`Ato principal: ${faixaEscritura.rotulo}`].concat(temAcessorio ? atosAcessorios.map((item) => item.criterio) : []).join('; '),
     criterioEscrituraPrincipal: `Ato principal: ${faixaEscritura.rotulo}`,
-    criterioEscrituraAcessorios: atosAcessorios.length ? atosAcessorios.map((item) => item.criterio).join('; ') : 'Sem ato acessório',
-    criterioRegistro: incluiRegistro ? `Tabela de Registro de Imóveis: ${faixaRegistro.rotulo}` : 'Registro de Imóveis não incluído',
+    criterioEscrituraAcessorios,
+    criterioRegistro,
     naturezaAto: naturezaAtoSelecionada(),
     escrevente: el('escrevente').value.trim(),
     contatoEscrevente: el('contatoEscrevente').value.trim(),
@@ -2722,7 +2847,7 @@ function ocultarResultado(){
 function renderResultado(r){
   el('valorResultado').textContent = formatMoeda(r.valorBase);
   el('escrituraResultado').textContent = formatMoeda(r.escrituraPrincipal ?? r.escritura);
-  el('acessoriosResultado').textContent = formatMoeda(r.escrituraAcessorios || 0);
+  el('acessoriosResultado').textContent = r.temAtoAcessorio ? formatMoeda(r.escrituraAcessorios || 0) : 'N/A';
   el('tributoResultado').textContent = r.tipo === 'nao_aplica' ? 'N/A' : formatMoeda(r.tributo);
   el('registroResultado').textContent = formatMoeda(r.registro);
   el('outrosResultado').textContent = formatMoeda(r.valorOutros);
@@ -2772,15 +2897,15 @@ function montarTextoOrcamento(){
     `Solicitado por: ${r.solicitadoPor}`,
     `Natureza do ato: ${r.naturezaAto}`,
     `Valor base de cálculo: ${formatMoeda(r.valorBase)}`,
-    `Há ato acessório: ${r.temAtoAcessorio ? 'Sim' : 'Não'}`,
-    r.atosAcessorios.length ? `Atos acessórios: ${r.atosAcessorios.map((item) => `Ato ${item.ordem}: base ${formatMoeda(item.valorBase)}; emolumentos ${formatMoeda(item.emolumentos)}`).join(' | ')}` : 'Atos acessórios: não se aplica',
+    `Há ato acessório: ${r.temAtoAcessorio ? 'Sim' : 'N/A'}`,
+    r.temAtoAcessorio && r.atosAcessorios.length ? `Atos acessórios: ${r.atosAcessorios.map((item) => `Ato ${item.ordem}: base ${formatMoeda(item.valorBase)}; emolumentos ${formatMoeda(item.emolumentos)}`).join(' | ')}` : 'Atos acessórios: N/A',
     `Outros serviços autorizados: ${r.temOutrosServicos ? 'Sim' : 'Não'}`,
     `Registro imobiliário: ${r.incluiRegistro ? 'Sim' : 'Não'}`,
     r.registrosImobiliarios.length ? `Registros imobiliários: ${r.registrosImobiliarios.map((item) => `Registro ${item.ordem}: base ${formatMoeda(item.valorBase)}; emolumentos ${formatMoeda(item.emolumentos)}`).join(' | ')}` : 'Registros imobiliários: não se aplica',
     '',
     'Composição estimada:',
     `Tabelionato de Notas, ato principal: ${formatMoeda(r.escrituraPrincipal)}`,
-    `Atos acessórios: ${formatMoeda(r.escrituraAcessorios)}`,
+    `Atos acessórios: ${r.temAtoAcessorio ? formatMoeda(r.escrituraAcessorios) : 'N/A'}`,
     `Tributo: ${r.tipo === 'nao_aplica' ? 'N/A' : formatMoeda(r.tributo)} (${r.criterioTributo})`,
     `Registro de Imóveis: ${formatMoeda(r.registro)} (${r.incluiRegistro ? 'incluído' : 'não incluído'})`,
     `Outros serviços autorizados: ${formatMoeda(r.valorOutros)}`,
@@ -2867,7 +2992,7 @@ function atualizarAreaImpressao(r){
   const linhas = [
     ['Valor base', 'Valor informado pelo usuário', dados.valorBase],
     ['Tabelionato de Notas, ato principal', dados.criterioEscrituraPrincipal || dados.criterioEscritura, dados.escrituraPrincipal ?? dados.escritura],
-    ['Atos acessórios', dados.criterioEscrituraAcessorios || 'Sem ato acessório', dados.escrituraAcessorios || 0],
+    ['Atos acessórios', dados.temAtoAcessorio ? (dados.criterioEscrituraAcessorios || 'Ato acessório: valor não informado') : 'N/A', dados.temAtoAcessorio ? (dados.escrituraAcessorios || 0) : 'N/A'],
     ['Tributo', dados.criterioTributo, dados.tipo === 'nao_aplica' ? 'N/A' : dados.tributo],
     ['Registro de Imóveis', dados.criterioRegistro, dados.registro],
     ['Outros serviços autorizados', dados.temOutrosServicos ? 'Valor informado pelo usuário' : 'Não incluído', dados.valorOutros]
@@ -2895,7 +3020,7 @@ function atualizarAreaImpressao(r){
         <div class="print-field"><span>Solicitado por</span><strong>${escapeHtml(dados.solicitadoPor)}</strong></div>
         <div class="print-field"><span>Natureza do ato</span><strong>${escapeHtml(dados.naturezaAto)}</strong></div>
         <div class="print-field"><span>Registro imobiliário</span><strong>${dados.incluiRegistro ? `${(dados.registrosImobiliarios || []).length || 1} registro(s)` : 'Não incluído'}</strong></div>
-        <div class="print-field"><span>Ato acessório</span><strong>${dados.temAtoAcessorio ? 'Sim' : 'Não'}</strong></div>
+        <div class="print-field"><span>Ato acessório</span><strong>${dados.temAtoAcessorio ? 'Sim' : 'N/A'}</strong></div>
         <div class="print-field"><span>Outros serviços autorizados</span><strong>${dados.temOutrosServicos ? 'Sim' : 'Não'}</strong></div>
       </div>
     </div>
