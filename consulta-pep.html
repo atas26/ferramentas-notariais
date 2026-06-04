@@ -817,110 +817,146 @@
       }
     }
   </style>
-  <style id="pn-layout-itcmd-pep-final">
+  <style id="pn-layout-itcmd-matriz">
+    :root {
+      --primary: #0b5fff;
+      --accent: var(--primary);
+      --accent-600: #094bcc;
+      --accent-100: #e9f1ff;
+      --text: #0f172a;
+      --muted: #475569;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --ok: #0ea5e9;
+      --radius: 14px;
+      --shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --border: #e5e7eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      height: 100%;
+    }
+
     body {
       margin: 0 !important;
-      background: #f5f7fb !important;
-      color: #0f172a !important;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+      background: var(--bg) !important;
+      color: var(--text) !important;
+      font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif !important;
+    }
+
+    a {
+      color: inherit;
     }
 
     .topbar {
-      width: 100% !important;
-      background: #ffffff !important;
-      border-bottom: 1px solid #dfe5ee !important;
+      background: #fff !important;
+      position: sticky !important;
+      top: 0 !important;
+      z-index: 50 !important;
+      border-bottom: 1px solid var(--border) !important;
       box-shadow: none !important;
     }
 
     .nav {
-      width: min(1088px, calc(100% - 32px)) !important;
-      min-height: 92px !important;
-      margin: 0 auto !important;
       display: flex !important;
       align-items: center !important;
+      gap: 18px !important;
       justify-content: space-between !important;
-      gap: 24px !important;
-      padding: 0 !important;
+      padding: 12px 18px !important;
+      max-width: 1170px !important;
+      margin: 0 auto !important;
+      min-height: auto !important;
+      flex-wrap: nowrap !important;
     }
 
     .brand {
-      display: inline-flex !important;
+      display: flex !important;
       align-items: center !important;
+      gap: 10px !important;
+      font-weight: 800 !important;
+      color: var(--primary) !important;
       text-decoration: none !important;
       line-height: 1 !important;
       flex: 0 0 auto !important;
     }
 
+    .brand img,
     .brand-logo-img {
       display: block !important;
       height: 40px !important;
       max-height: 40px !important;
       width: auto !important;
-      max-width: 420px !important;
+      max-width: min(100%, 420px) !important;
       object-fit: contain !important;
     }
 
     .menu {
       display: flex !important;
+      gap: 18px !important;
+      flex-wrap: wrap !important;
       align-items: center !important;
       justify-content: flex-end !important;
-      gap: 26px !important;
-      flex-wrap: wrap !important;
       font-size: 16px !important;
-      font-weight: 700 !important;
     }
 
     .menu a {
-      color: #111827 !important;
+      font-weight: 600 !important;
+      color: var(--text) !important;
+      opacity: 0.9 !important;
       text-decoration: none !important;
     }
 
-    .menu a:hover {
-      color: #0b6ffb !important;
-    }
-
     .container {
-      width: min(1088px, calc(100% - 32px)) !important;
-      margin: 34px auto 56px !important;
-      padding: 0 !important;
+      max-width: 1100px !important;
+      margin: 0 auto !important;
+      padding: 32px 28px 40px !important;
+      width: auto !important;
     }
 
     .card,
     .panel {
-      background: #ffffff !important;
-      border: 1px solid #dfe5ee !important;
-      border-radius: 16px !important;
-      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08) !important;
+      background: var(--card) !important;
+      border-radius: var(--radius) !important;
+      border: 1px solid var(--border) !important;
+      box-shadow: var(--shadow) !important;
+      padding: 22px 24px !important;
+      margin: 18px 0 !important;
     }
 
-    .page-title-card {
-      padding: 38px 18px !important;
-      margin: 0 0 24px !important;
+    .pn-title-card {
+      padding: 22px 24px !important;
+      margin: 18px 0 !important;
+    }
+
+    h1,
+    .pn-title-card h1 {
+      margin: 8px 0 12px !important;
+      font-size: 26px !important;
+      line-height: 1.25 !important;
+      color: var(--primary) !important;
       text-align: center !important;
-    }
-
-    .page-title-card h1 {
-      margin: 0 !important;
-      color: #126df4 !important;
-      font-size: clamp(24px, 2.4vw, 31px) !important;
-      font-weight: 900 !important;
-      line-height: 1.2 !important;
-      letter-spacing: .03em !important;
       text-transform: uppercase !important;
+      letter-spacing: 0.02em !important;
+      font-weight: 800 !important;
     }
 
     .left-panel,
     #resultadoPanel {
-      margin-top: 0 !important;
-    }
-
-    #resultadoPanel {
-      margin-top: 24px !important;
+      margin: 18px 0 !important;
     }
 
     .hero,
     .content-section,
     .anchor-btn,
+    .page-title-card,
     .brand-main,
     .brand-thin,
     .brand-tool {
@@ -928,16 +964,18 @@
     }
 
     .footer {
-      width: min(1088px, calc(100% - 32px)) !important;
-      margin: 48px auto 34px !important;
-      color: #475569 !important;
-      font-size: 15px !important;
+      color: var(--muted) !important;
+      font-size: 14px !important;
       line-height: 1.7 !important;
+      margin-top: 22px !important;
       text-align: center !important;
+      padding: 28px 16px 40px !important;
+      border-top: 0 !important;
+      box-shadow: none !important;
     }
 
     .footer a {
-      color: #005bd1 !important;
+      color: var(--primary) !important;
       text-decoration: none !important;
     }
 
@@ -945,32 +983,28 @@
       text-decoration: underline !important;
     }
 
-    @media (max-width: 760px) {
+    @media (max-width: 720px) {
       .nav {
-        min-height: auto !important;
-        padding: 18px 0 !important;
-        align-items: flex-start !important;
         flex-direction: column !important;
+        align-items: flex-start !important;
+        flex-wrap: wrap !important;
       }
 
+      .menu {
+        width: 100% !important;
+        gap: 12px !important;
+        justify-content: center !important;
+      }
+
+      .container {
+        padding: 24px 18px 32px !important;
+      }
+
+      .brand img,
       .brand-logo-img {
         height: 36px !important;
         max-height: 36px !important;
         max-width: 300px !important;
-      }
-
-      .menu {
-        justify-content: flex-start !important;
-        gap: 14px !important;
-        font-size: 14px !important;
-      }
-
-      .container {
-        margin-top: 24px !important;
-      }
-
-      .page-title-card {
-        padding: 28px 14px !important;
       }
     }
   </style>
@@ -989,11 +1023,7 @@
       </div>
     </div>
   </div>
-<main class="container">
-
-    <section class="card page-title-card" aria-labelledby="titulo">
-      <h1 id="titulo">CONSULTA PEP</h1>
-    </section>
+<main class="container" id="app-root">
 <div class="wrap grid">
       <section class="panel left-panel" id="ferramenta">
         <div class="panel-head">
@@ -1078,14 +1108,14 @@
 
 
           <footer class="footer">
-    © 2024 – Todos os direitos reservados. Registrado no INPI.<br>
-    Cálculo Escritura – Atesta Processamento e Automação de Dados Ltda.<br>
-    CNPJ: 31.527.748/0001-70 • São Paulo/SP<br>
-    <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a> •
-    <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> •
-    <a href="https://portalnotarial.com.br/contato.html">Contato</a><br>
-    Documento meramente informativo. Os dados devem ser conferidos.
-  </footer>
+  © 2024 – Todos os direitos reservados. Registrado no INPI.<br>
+  Cálculo Escritura – Atesta Processamento e Automação de Dados Ltda.<br>
+  CNPJ: 31.527.748/0001-70 • São Paulo/SP<br>
+  <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a> •
+  <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> •
+  <a href="https://portalnotarial.com.br/contato.html">Contato</a><br>
+  Documento meramente informativo. Os dados devem ser conferidos.
+</footer>
 
   <script>
     const API_BASE_URL = document.body.dataset.api;
@@ -1378,3 +1408,5 @@
   </script>
 </body>
 </html>
+ (<main class="container" id="app-root">\s*) $1
+<div class="card pn-title-card"><h1>CONSULTA PEP</h1></div>
