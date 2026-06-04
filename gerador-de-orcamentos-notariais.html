@@ -1564,7 +1564,14 @@ textarea:focus{
               <button type="button" class="btn btn-secondary" id="btnSalvarDadosCartorio">Salvar dados do cartório</button>
               <button type="button" class="btn btn-ghost" id="btnLimparDadosCartorio">Limpar dados salvos</button>
             </div>
-            <span class="hint" id="dadosCartorioStatus">Salva neste navegador: escrevente responsável, contato escrevente e solicitado por.</span>
+            <span class="hint" id="dadosCartorioStatus">Salva neste navegador: escrevente responsável, contato escrevente, solicitado por e logotipo do cartório.</span>
+          </div>
+
+          <div class="form-field full logo-cartorio-field">
+            <label for="logoCartorio">Logotipo do cartório para PDF e impressão</label>
+            <input id="logoCartorio" type="file" accept="image/png,image/jpeg,image/webp" />
+            <div class="logo-cartorio-preview" id="logoCartorioPreview" aria-live="polite">Nenhum logotipo salvo.</div>
+            <span class="hint">O logotipo fica salvo apenas neste navegador, junto com os demais dados do cartório. Use PNG, JPG ou WEBP.</span>
           </div>
 
           <div class="form-field full">
@@ -1650,13 +1657,22 @@ textarea:focus{
             <div class="segmented" role="radiogroup" aria-label="Há registro imobiliário">
               <label class="radio-card">
                 <input type="radio" name="temRegistro" value="sim" checked required />
-                <span><strong>Sim</strong><small>Incluir Registro de Imóveis</small></span>
+                <span><strong>Sim</strong><small>Incluir um ou mais registros imobiliários</small></span>
               </label>
               <label class="radio-card">
                 <input type="radio" name="temRegistro" value="nao" required />
                 <span><strong>Não</strong><small>Não incluir registro no total</small></span>
               </label>
             </div>
+          </div>
+
+          <div class="form-field full" id="campoRegistrosImobiliarios">
+            <label>Registros imobiliários</label>
+            <div class="registry-list" id="listaRegistrosImobiliarios" aria-label="Lista de registros imobiliários"></div>
+            <div class="registry-actions">
+              <button type="button" class="btn btn-secondary" id="btnAdicionarRegistroImobiliario">Adicionar registro imobiliário</button>
+            </div>
+            <span class="hint">Informe o valor base de cada registro imobiliário. Cada valor será enquadrado pela tabela de Registro de Imóveis.</span>
           </div>
 
           <div class="form-field full">
@@ -1685,7 +1701,7 @@ textarea:focus{
           <button type="button" class="btn btn-secondary" id="btnCopiar">Copiar orçamento</button>
           <button type="button" class="btn btn-secondary" id="btnGerarPDF">Gerar PDF</button>
           <button type="button" class="btn btn-secondary" id="btnImprimir">Imprimir</button>
-          <button type="button" class="btn btn-ghost" id="btnLimpar">Novo c&aacute;lculo</button>
+          <button type="button" class="btn btn-ghost" id="btnLimpar">Novo cálculo</button>
         </div>
 
         <aside class="result-card" id="resultado" aria-labelledby="resultado-titulo" hidden style="display:none">
@@ -1820,6 +1836,7 @@ let ultimoResultado = null;
 
 const el = (id) => document.getElementById(id);
 const CHAVE_DADOS_CARTORIO = 'portalNotarial.orcamento.dadosCartorio';
+let logoCartorioBase64 = '';
 const CAMPOS_CAIXA_ALTA = ['escrevente','cartorio','solicitadoPor'];
 const dinheiroInputs = ['valorBase','valorOutros'];
 
@@ -1853,7 +1870,7 @@ document.querySelectorAll('input[name="tipoTributo"]').forEach((radio) => {
 });
 
 document.querySelectorAll('input[name="temRegistro"]').forEach((radio) => {
-  radio.addEventListener('change', () => {});
+  radio.addEventListener('change', () => atualizaCamposRegistros());
 });
 
 document.querySelectorAll('input[name="temAtoAcessorio"]').forEach((radio) => {
@@ -1866,6 +1883,12 @@ document.querySelectorAll('input[name="temOutrosServicos"]').forEach((radio) => 
 
 const btnAdicionarAtoAcessorio = el('btnAdicionarAtoAcessorio');
 if (btnAdicionarAtoAcessorio) btnAdicionarAtoAcessorio.addEventListener('click', () => adicionarAtoAcessorio());
+
+const btnAdicionarRegistroImobiliario = el('btnAdicionarRegistroImobiliario');
+if (btnAdicionarRegistroImobiliario) btnAdicionarRegistroImobiliario.addEventListener('click', () => adicionarRegistroImobiliario());
+
+const inputLogoCartorio = el('logoCartorio');
+if (inputLogoCartorio) inputLogoCartorio.addEventListener('change', tratarUploadLogoCartorio);
 
 el('naturezaAto').addEventListener('change', () => {
   el('campoOutroAto').classList.toggle('hidden', el('naturezaAto').value !== 'outro');
@@ -1885,8 +1908,10 @@ const btnLimparDadosCartorio = el('btnLimparDadosCartorio');
 if (btnLimparDadosCartorio) btnLimparDadosCartorio.addEventListener('click', limparDadosCartorioSalvos);
 
 carregarDadosCartorioSalvos();
+atualizarPreviewLogoCartorio();
 configuraCamposObrigatorios();
 atualizaCamposTributo();
+atualizaCamposRegistros();
 atualizaCamposAcessorios();
 atualizaCamposOutros();
 calcular(false);
@@ -1921,7 +1946,8 @@ function salvarDadosCartorio(){
   const dados = {
     escrevente: el('escrevente')?.value.trim() || '',
     contatoEscrevente: el('contatoEscrevente')?.value.trim() || '',
-    solicitadoPor: el('solicitadoPor')?.value.trim() || ''
+    solicitadoPor: el('solicitadoPor')?.value.trim() || '',
+    logoCartorioBase64: logoCartorioBase64 || ''
   };
 
   try {
@@ -1941,7 +1967,9 @@ function carregarDadosCartorioSalvos(){
     if (dados.escrevente && el('escrevente')) el('escrevente').value = dados.escrevente;
     if (dados.contatoEscrevente && el('contatoEscrevente')) el('contatoEscrevente').value = dados.contatoEscrevente;
     if (dados.solicitadoPor && el('solicitadoPor')) el('solicitadoPor').value = dados.solicitadoPor;
+    if (dados.logoCartorioBase64 && String(dados.logoCartorioBase64).startsWith('data:image/')) logoCartorioBase64 = dados.logoCartorioBase64;
 
+    atualizarPreviewLogoCartorio();
     normalizarCamposCaixaAlta();
     informarStatusDadosCartorio('Dados salvos carregados neste navegador.');
   } catch (error) {
@@ -1952,6 +1980,10 @@ function carregarDadosCartorioSalvos(){
 function limparDadosCartorioSalvos(){
   try {
     localStorage.removeItem(CHAVE_DADOS_CARTORIO);
+    logoCartorioBase64 = '';
+    const inputLogo = el('logoCartorio');
+    if (inputLogo) inputLogo.value = '';
+    atualizarPreviewLogoCartorio();
     informarStatusDadosCartorio('Dados salvos removidos deste navegador.');
   } catch (error) {
     informarStatusDadosCartorio('Não foi possível remover os dados salvos.');
@@ -1993,6 +2025,10 @@ function atualizaObrigatoriedadeCondicional(){
 
   document.querySelectorAll('.valor-ato-acessorio').forEach((campo) => {
     campo.required = temAtoAcessorioSelecionado();
+  });
+
+  document.querySelectorAll('.valor-registro-imobiliario').forEach((campo) => {
+    campo.required = temRegistroSelecionado();
   });
 
   const valorOutros = el('valorOutros');
@@ -2054,6 +2090,26 @@ function validarCamposObrigatorios(){
         campoAcessorio.reportValidity();
         campoAcessorio.scrollIntoView({ behavior:'smooth', block:'center' });
         window.setTimeout(() => campoAcessorio.focus({ preventScroll:true }), 200);
+        return false;
+      }
+    }
+  }
+
+  if (temRegistroSelecionado()) {
+    const camposRegistro = Array.from(document.querySelectorAll('.valor-registro-imobiliario'));
+    if (!camposRegistro.length) {
+      adicionarRegistroImobiliario();
+      return validarCamposObrigatorios();
+    }
+
+    for (const campoRegistro of camposRegistro) {
+      const valorRegistro = parseMoeda(campoRegistro.value);
+      campoRegistro.setCustomValidity('');
+      if (!valorRegistro || valorRegistro <= 0) {
+        campoRegistro.setCustomValidity('Informe o valor base do registro imobiliário.');
+        campoRegistro.reportValidity();
+        campoRegistro.scrollIntoView({ behavior:'smooth', block:'center' });
+        window.setTimeout(() => campoRegistro.focus({ preventScroll:true }), 200);
         return false;
       }
     }
@@ -2197,6 +2253,86 @@ function obterAtosAcessorios(){
     .filter((item) => item.valorBase > 0);
 }
 
+
+function atualizaCamposRegistros(){
+  const campo = el('campoRegistrosImobiliarios');
+  if (!campo) return;
+
+  const deveMostrar = temRegistroSelecionado();
+  campo.classList.toggle('hidden', !deveMostrar);
+
+  if (deveMostrar && !document.querySelectorAll('.valor-registro-imobiliario').length) {
+    adicionarRegistroImobiliario();
+  }
+
+  atualizaObrigatoriedadeCondicional();
+}
+
+function adicionarRegistroImobiliario(valorInicial = ''){
+  const lista = el('listaRegistrosImobiliarios');
+  if (!lista) return;
+
+  const indice = lista.querySelectorAll('.registry-row').length + 1;
+  const linha = document.createElement('div');
+  linha.className = 'registry-row';
+  linha.setAttribute('data-registro-imobiliario-linha', '');
+  linha.innerHTML = `
+    <div class="form-field">
+      <label>Valor base do registro imobiliário ${indice}</label>
+      <input class="valor-registro-imobiliario" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" value="${escapeHtml(valorInicial)}" />
+    </div>
+    <button type="button" class="btn btn-ghost registry-remove" data-remover-registro-imobiliario>Remover</button>
+  `;
+
+  const input = linha.querySelector('.valor-registro-imobiliario');
+  if (input) {
+    input.addEventListener('input', () => mascaraMoeda(input));
+    input.addEventListener('blur', () => {
+      const valor = parseMoeda(input.value);
+      input.value = valor ? formatMoeda(valor) : '';
+    });
+  }
+
+  const remover = linha.querySelector('[data-remover-registro-imobiliario]');
+  if (remover) {
+    remover.addEventListener('click', () => {
+      linha.remove();
+      renumerarRegistrosImobiliarios();
+      if (temRegistroSelecionado() && !document.querySelectorAll('.valor-registro-imobiliario').length) {
+        adicionarRegistroImobiliario();
+      }
+    });
+  }
+
+  lista.appendChild(linha);
+  renumerarRegistrosImobiliarios();
+  atualizaObrigatoriedadeCondicional();
+}
+
+function renumerarRegistrosImobiliarios(){
+  document.querySelectorAll('.registry-row').forEach((linha, index) => {
+    const label = linha.querySelector('label');
+    if (label) label.textContent = `Valor base do registro imobiliário ${index + 1}`;
+  });
+}
+
+function obterRegistrosImobiliarios(){
+  if (!temRegistroSelecionado()) return [];
+
+  return Array.from(document.querySelectorAll('.valor-registro-imobiliario'))
+    .map((campo, index) => {
+      const valorBaseRegistro = parseMoeda(campo.value);
+      const faixa = buscaFaixa(valorBaseRegistro, TABELA_REGISTRO);
+      return {
+        ordem: index + 1,
+        valorBase: valorBaseRegistro,
+        emolumentos: valorBaseRegistro > 0 ? Number(faixa.valor || 0) : 0,
+        criterio: valorBaseRegistro > 0 ? `Registro imobiliário ${index + 1}: ${faixa.rotulo}` : `Registro imobiliário ${index + 1}: valor não informado`
+      };
+    })
+    .filter((item) => item.valorBase > 0);
+}
+
 function naturezaAtoSelecionada(){
   const selecionada = el('naturezaAto').value;
   if (selecionada === 'outro') return el('outroAto').value.trim() || 'Outro ato';
@@ -2247,7 +2383,7 @@ function calcular(rolar = true, validar = rolar){
   if (validar && !validarCamposObrigatorios()) return false;
 
   const valorBase = parseMoeda(el('valorBase').value);
-  const valorOutros = parseMoeda(el('valorOutros').value);
+  const valorOutros = temOutrosServicosSelecionado() ? parseMoeda(el('valorOutros').value) : 0;
   const tipo = tipoTributoSelecionado();
   const incluiRegistro = temRegistroSelecionado();
   const faixaEscritura = buscaFaixa(valorBase, TABELA_ESCRITURA);
@@ -2373,6 +2509,7 @@ function montarTextoOrcamento(){
     temAtoAcessorio: Boolean(ultimoResultado?.temAtoAcessorio),
     temOutrosServicos: Boolean(ultimoResultado?.temOutrosServicos),
     atosAcessorios: ultimoResultado?.atosAcessorios || [],
+    registrosImobiliarios: ultimoResultado?.registrosImobiliarios || [],
     escrituraPrincipal: ultimoResultado?.escrituraPrincipal ?? ultimoResultado?.escritura ?? 0,
     escrituraAcessorios: ultimoResultado?.escrituraAcessorios || 0
   };
@@ -2390,6 +2527,8 @@ function montarTextoOrcamento(){
     `Há ato acessório: ${r.temAtoAcessorio ? 'Sim' : 'Não'}`,
     r.atosAcessorios.length ? `Atos acessórios: ${r.atosAcessorios.map((item) => `Ato ${item.ordem}: base ${formatMoeda(item.valorBase)}; emolumentos ${formatMoeda(item.emolumentos)}`).join(' | ')}` : 'Atos acessórios: não se aplica',
     `Outros serviços autorizados: ${r.temOutrosServicos ? 'Sim' : 'Não'}`,
+    `Registro imobiliário: ${r.incluiRegistro ? 'Sim' : 'Não'}`,
+    r.registrosImobiliarios.length ? `Registros imobiliários: ${r.registrosImobiliarios.map((item) => `Registro ${item.ordem}: base ${formatMoeda(item.valorBase)}; emolumentos ${formatMoeda(item.emolumentos)}`).join(' | ')}` : 'Registros imobiliários: não se aplica',
     '',
     'Composição estimada:',
     `Tabelionato de Notas, ato principal: ${formatMoeda(r.escrituraPrincipal)}`,
@@ -2408,6 +2547,60 @@ function montarTextoOrcamento(){
     '',
     'https://portalnotarial.com.br/'
   ].join('\n');
+}
+
+
+function atualizarPreviewLogoCartorio(){
+  const preview = el('logoCartorioPreview');
+  if (!preview) return;
+
+  if (logoCartorioBase64 && logoCartorioBase64.startsWith('data:image/')) {
+    preview.innerHTML = `<img src="${logoCartorioBase64}" alt="Logotipo do cartório salvo"><span>Logotipo salvo neste navegador.</span>`;
+  } else {
+    preview.textContent = 'Nenhum logotipo salvo.';
+  }
+}
+
+function tratarUploadLogoCartorio(event){
+  const arquivo = event.target.files && event.target.files[0];
+  if (!arquivo) return;
+
+  if (!/^image\/(png|jpeg|webp)$/.test(arquivo.type)) {
+    informarStatusDadosCartorio('Use arquivo PNG, JPG ou WEBP para o logotipo.');
+    event.target.value = '';
+    return;
+  }
+
+  if (arquivo.size > 1024 * 1024) {
+    informarStatusDadosCartorio('Use logotipo com até 1 MB.');
+    event.target.value = '';
+    return;
+  }
+
+  const leitor = new FileReader();
+  leitor.onload = function () {
+    const resultado = String(leitor.result || '');
+    if (!resultado.startsWith('data:image/')) {
+      informarStatusDadosCartorio('Não foi possível carregar o logotipo.');
+      return;
+    }
+
+    logoCartorioBase64 = resultado;
+    atualizarPreviewLogoCartorio();
+    informarStatusDadosCartorio('Logotipo carregado. Clique em salvar dados do cartório para manter neste navegador.');
+  };
+  leitor.onerror = function () {
+    informarStatusDadosCartorio('Não foi possível carregar o logotipo.');
+  };
+  leitor.readAsDataURL(arquivo);
+}
+
+function montarMarcaImpressao(dados){
+  if (logoCartorioBase64 && logoCartorioBase64.startsWith('data:image/')) {
+    return `<img class="print-logo-cartorio" src="${logoCartorioBase64}" alt="${escapeHtml(dados.cartorio || 'Logotipo do cartório')}">`;
+  }
+
+  return `<div><div class="print-brand">${escapeHtml(dados.cartorio || 'Cartório')}</div></div>`;
 }
 
 function atualizarAreaImpressao(r){
@@ -2434,9 +2627,8 @@ function atualizarAreaImpressao(r){
 
   area.innerHTML = `
     <div class="print-head">
-      <div>
-        <div class="print-brand">Portal Notarial</div>
-        <div class="print-url">https://portalnotarial.com.br/</div>
+      <div class="print-brand-area">
+        ${montarMarcaImpressao(dados)}
       </div>
       <div class="print-meta">
         <div>Orçamento estimativo</div>
@@ -2454,7 +2646,7 @@ function atualizarAreaImpressao(r){
         <div class="print-field"><span>Cartório</span><strong>${escapeHtml(dados.cartorio)}</strong></div>
         <div class="print-field"><span>Solicitado por</span><strong>${escapeHtml(dados.solicitadoPor)}</strong></div>
         <div class="print-field"><span>Natureza do ato</span><strong>${escapeHtml(dados.naturezaAto)}</strong></div>
-        <div class="print-field"><span>Registro imobiliário</span><strong>${dados.incluiRegistro ? 'Incluído' : 'Não incluído'}</strong></div>
+        <div class="print-field"><span>Registro imobiliário</span><strong>${dados.incluiRegistro ? `${(dados.registrosImobiliarios || []).length || 1} registro(s)` : 'Não incluído'}</strong></div>
         <div class="print-field"><span>Ato acessório</span><strong>${dados.temAtoAcessorio ? 'Sim' : 'Não'}</strong></div>
         <div class="print-field"><span>Outros serviços autorizados</span><strong>${dados.temOutrosServicos ? 'Sim' : 'Não'}</strong></div>
       </div>
@@ -2524,7 +2716,10 @@ function limpar(){
   el('campoOutroAto').classList.add('hidden');
   const listaAtosAcessorios = el('listaAtosAcessorios');
   if (listaAtosAcessorios) listaAtosAcessorios.innerHTML = '';
+  const listaRegistrosImobiliarios = el('listaRegistrosImobiliarios');
+  if (listaRegistrosImobiliarios) listaRegistrosImobiliarios.innerHTML = '';
   atualizaCamposTributo();
+  atualizaCamposRegistros();
   atualizaCamposAcessorios();
   atualizaCamposOutros();
   calcular(false);
