@@ -1645,6 +1645,117 @@ textarea:focus{
   }
 </style>
 
+
+<style id="pn-orcamento-ajustes-finais-r6">
+  .currency-field {
+    font-variant-numeric: tabular-nums;
+  }
+
+  .logo-cartorio-preview span {
+    line-height: 1.35 !important;
+  }
+
+  @media print {
+    @page {
+      size: A4 portrait;
+      margin: 8mm;
+    }
+
+    .print-area {
+      font-size: 9.5px !important;
+      line-height: 1.25 !important;
+    }
+
+    .print-head {
+      gap: 10px !important;
+      padding-bottom: 6px !important;
+      margin-bottom: 8px !important;
+    }
+
+    .print-brand-area {
+      min-width: 160px !important;
+      max-width: 210px !important;
+      min-height: 42px !important;
+      max-height: 46px !important;
+    }
+
+    .print-logo-cartorio {
+      max-width: 190px !important;
+      max-height: 40px !important;
+    }
+
+    .print-brand {
+      font-size: 13px !important;
+      line-height: 1.2 !important;
+    }
+
+    .print-meta {
+      font-size: 9px !important;
+      line-height: 1.3 !important;
+    }
+
+    .print-title {
+      font-size: 18px !important;
+      line-height: 1.1 !important;
+      margin: 0 0 8px !important;
+    }
+
+    .print-section {
+      margin: 0 0 8px !important;
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
+    }
+
+    .print-section h3 {
+      font-size: 10.5px !important;
+      margin: 0 0 5px !important;
+    }
+
+    .print-grid {
+      gap: 4px 8px !important;
+      font-size: 9px !important;
+    }
+
+    .print-field {
+      padding: 5px 6px !important;
+      border-radius: 5px !important;
+    }
+
+    .print-field span {
+      font-size: 8px !important;
+      margin-bottom: 1px !important;
+    }
+
+    .print-field strong {
+      font-size: 9px !important;
+      line-height: 1.18 !important;
+    }
+
+    table {
+      font-size: 8.5px !important;
+      line-height: 1.2 !important;
+    }
+
+    th, td {
+      padding: 4px 5px !important;
+    }
+
+    .print-total {
+      margin-top: 7px !important;
+      padding: 8px 9px !important;
+      font-size: 13px !important;
+      border-radius: 7px !important;
+    }
+
+    .print-note {
+      margin-top: 7px !important;
+      padding: 6px 8px !important;
+      font-size: 8.5px !important;
+      line-height: 1.28 !important;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -1694,18 +1805,18 @@ textarea:focus{
           </div>
 
           <div class="form-field full saved-data-actions">
-            <div class="saved-actions-row" aria-label="Dados salvos neste navegador">
+            <div class="saved-actions-row" aria-label="Dados do cartório">
               <button type="button" class="btn btn-secondary" id="btnSalvarDadosCartorio">Salvar dados do cartório</button>
               <button type="button" class="btn btn-ghost" id="btnLimparDadosCartorio">Limpar dados salvos</button>
             </div>
-            <span class="hint" id="dadosCartorioStatus">Salva neste navegador: escrevente responsável, contato escrevente, solicitado por e logotipo do cartório.</span>
+            <span class="hint" id="dadosCartorioStatus">Você pode salvar o logotipo junto com os dados do cartório.</span>
           </div>
 
           <div class="form-field full logo-cartorio-field">
             <label for="logoCartorio">Logotipo do cartório para PDF e impressão</label>
             <div class="logo-file-control"><input id="logoCartorio" type="file" accept="image/png,image/jpeg,image/webp" /></div>
             <div class="logo-cartorio-preview" id="logoCartorioPreview" aria-live="polite">Nenhum logotipo salvo.</div>
-            <span class="hint">O logotipo fica salvo apenas neste navegador, junto com os demais dados do cartório. Use PNG, JPG ou WEBP.</span>
+            <span class="hint">O logotipo pode ser salvo junto com os dados do cartório. Use PNG, JPG ou WEBP.</span>
           </div>
 
           <div class="form-field full">
@@ -1730,7 +1841,7 @@ textarea:focus{
 
           <div class="form-field full">
             <label for="valorBase">Valor base de cálculo</label>
-            <input id="valorBase" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" required />
+            <input id="valorBase" class="currency-field" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" required />
             <span class="hint">Use o valor venal de referência, quando aplicável, o valor fiscal (IPTU) ou o valor do negócio, o que for maior.</span>
           </div>
 
@@ -1825,7 +1936,7 @@ textarea:focus{
 
           <div class="form-field full hidden" id="campoValorOutros">
             <label for="valorOutros">Valor dos outros serviços autorizados</label>
-            <input id="valorOutros" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" />
+            <input id="valorOutros" class="currency-field" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" />
             <span class="hint">Certidões, diligências ou valores externos autorizados pelas partes e necessários à realização do ato notarial, nos termos da nota 11 da Tabela de Custas e Emolumentos da Lei Estadual nº 11.331/2002.</span>
           </div>
         </div>
@@ -1991,6 +2102,16 @@ dinheiroInputs.forEach((id) => {
   });
 });
 
+function configurarCampoMoeda(campo){
+  if (!campo) return;
+  campo.classList.add('currency-field');
+  campo.addEventListener('input', () => mascaraMoeda(campo));
+  campo.addEventListener('blur', () => {
+    const valor = parseMoeda(campo.value);
+    campo.value = valor ? formatMoeda(valor) : '';
+  });
+}
+
 ['aliquotaITBI','aliquotaITCMD'].forEach((id) => {
   const campo = el(id);
   if (!campo) return;
@@ -2086,9 +2207,9 @@ function salvarDadosCartorio(){
 
   try {
     localStorage.setItem(CHAVE_DADOS_CARTORIO, JSON.stringify(dados));
-    informarStatusDadosCartorio('Dados salvos neste navegador.');
+    informarStatusDadosCartorio('Dados do cartório salvos.');
   } catch (error) {
-    informarStatusDadosCartorio('Não foi possível salvar os dados neste navegador.');
+    informarStatusDadosCartorio('Não foi possível salvar os dados do cartório.');
   }
 }
 
@@ -2105,7 +2226,7 @@ function carregarDadosCartorioSalvos(){
 
     atualizarPreviewLogoCartorio();
     normalizarCamposCaixaAlta();
-    informarStatusDadosCartorio('Dados salvos carregados neste navegador.');
+    informarStatusDadosCartorio('Dados do cartório carregados.');
   } catch (error) {
     informarStatusDadosCartorio('Não foi possível carregar os dados salvos.');
   }
@@ -2118,7 +2239,7 @@ function limparDadosCartorioSalvos(){
     const inputLogo = el('logoCartorio');
     if (inputLogo) inputLogo.value = '';
     atualizarPreviewLogoCartorio();
-    informarStatusDadosCartorio('Dados salvos removidos deste navegador.');
+    informarStatusDadosCartorio('Dados salvos removidos.');
   } catch (error) {
     informarStatusDadosCartorio('Não foi possível remover os dados salvos.');
   }
@@ -2333,19 +2454,13 @@ function adicionarAtoAcessorio(valorInicial = ''){
   linha.innerHTML = `
     <div class="form-field">
       <label>Valor base do ato acessório ${indice}</label>
-      <input class="valor-ato-acessorio" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" value="${escapeHtml(valorInicial)}" />
+      <input class="valor-ato-acessorio currency-field" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" value="${escapeHtml(valorInicial)}" />
     </div>
     <button type="button" class="btn btn-ghost accessory-remove" data-remover-ato-acessorio>Remover</button>
   `;
 
   const input = linha.querySelector('.valor-ato-acessorio');
-  if (input) {
-    input.addEventListener('input', () => mascaraMoeda(input));
-    input.addEventListener('blur', () => {
-      const valor = parseMoeda(input.value);
-      input.value = valor ? formatMoeda(valor) : '';
-    });
-  }
+  configurarCampoMoeda(input);
 
   const remover = linha.querySelector('[data-remover-ato-acessorio]');
   if (remover) {
@@ -2413,19 +2528,13 @@ function adicionarRegistroImobiliario(valorInicial = ''){
   linha.innerHTML = `
     <div class="form-field">
       <label>Valor base do registro imobiliário ${indice}</label>
-      <input class="valor-registro-imobiliario" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" value="${escapeHtml(valorInicial)}" />
+      <input class="valor-registro-imobiliario currency-field" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" value="${escapeHtml(valorInicial)}" />
     </div>
     <button type="button" class="btn btn-ghost registry-remove" data-remover-registro-imobiliario>Remover</button>
   `;
 
   const input = linha.querySelector('.valor-registro-imobiliario');
-  if (input) {
-    input.addEventListener('input', () => mascaraMoeda(input));
-    input.addEventListener('blur', () => {
-      const valor = parseMoeda(input.value);
-      input.value = valor ? formatMoeda(valor) : '';
-    });
-  }
+  configurarCampoMoeda(input);
 
   const remover = linha.querySelector('[data-remover-registro-imobiliario]');
   if (remover) {
@@ -2495,7 +2604,12 @@ function parsePercentual(valor){
 }
 
 function formatMoeda(valor){
-  return valor.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
+  const numero = Number(valor || 0);
+  return numero.toLocaleString('pt-BR', { style:'currency', currency:'BRL' });
+}
+
+function formatValorOrcamento(valor){
+  return valor === 'N/A' ? 'N/A' : formatMoeda(valor);
 }
 
 function formatPercentual(valorDecimal){
@@ -2548,7 +2662,7 @@ function calcular(rolar = true, validar = rolar){
 
   if (tipo === 'nao_aplica') {
     tributo = 0;
-    criterioTributo = 'Tributo: não se aplica ao orçamento.';
+    criterioTributo = 'N/A';
   }
 
   const total = escritura + tributo + registro + valorOutros;
@@ -2609,7 +2723,7 @@ function renderResultado(r){
   el('valorResultado').textContent = formatMoeda(r.valorBase);
   el('escrituraResultado').textContent = formatMoeda(r.escrituraPrincipal ?? r.escritura);
   el('acessoriosResultado').textContent = formatMoeda(r.escrituraAcessorios || 0);
-  el('tributoResultado').textContent = formatMoeda(r.tributo);
+  el('tributoResultado').textContent = r.tipo === 'nao_aplica' ? 'N/A' : formatMoeda(r.tributo);
   el('registroResultado').textContent = formatMoeda(r.registro);
   el('outrosResultado').textContent = formatMoeda(r.valorOutros);
   el('totalResultado').textContent = formatMoeda(r.total);
@@ -2667,7 +2781,7 @@ function montarTextoOrcamento(){
     'Composição estimada:',
     `Tabelionato de Notas, ato principal: ${formatMoeda(r.escrituraPrincipal)}`,
     `Atos acessórios: ${formatMoeda(r.escrituraAcessorios)}`,
-    `Tributo: ${formatMoeda(r.tributo)} (${r.criterioTributo})`,
+    `Tributo: ${r.tipo === 'nao_aplica' ? 'N/A' : formatMoeda(r.tributo)} (${r.criterioTributo})`,
     `Registro de Imóveis: ${formatMoeda(r.registro)} (${r.incluiRegistro ? 'incluído' : 'não incluído'})`,
     `Outros serviços autorizados: ${formatMoeda(r.valorOutros)}`,
     `Total estimado: ${formatMoeda(r.total)}`,
@@ -2689,9 +2803,9 @@ function atualizarPreviewLogoCartorio(){
   if (!preview) return;
 
   if (logoCartorioBase64 && logoCartorioBase64.startsWith('data:image/')) {
-    preview.innerHTML = `<img src="${logoCartorioBase64}" alt="Logotipo do cartório salvo"><span>Logotipo salvo neste navegador.</span>`;
+    preview.innerHTML = `<img src="${logoCartorioBase64}" alt="Logotipo do cartório"><span>Logotipo carregado.</span>`;
   } else {
-    preview.textContent = 'Nenhum logotipo salvo.';
+    preview.textContent = 'Nenhum logotipo carregado.';
   }
 }
 
@@ -2721,7 +2835,7 @@ function tratarUploadLogoCartorio(event){
 
     logoCartorioBase64 = resultado;
     atualizarPreviewLogoCartorio();
-    informarStatusDadosCartorio('Logotipo carregado. Clique em salvar dados do cartório para manter neste navegador.');
+    informarStatusDadosCartorio('Logotipo carregado. Clique em salvar dados do cartório para mantê-lo junto com os demais dados.');
   };
   leitor.onerror = function () {
     informarStatusDadosCartorio('Não foi possível carregar o logotipo.');
@@ -2754,7 +2868,7 @@ function atualizarAreaImpressao(r){
     ['Valor base', 'Valor informado pelo usuário', dados.valorBase],
     ['Tabelionato de Notas, ato principal', dados.criterioEscrituraPrincipal || dados.criterioEscritura, dados.escrituraPrincipal ?? dados.escritura],
     ['Atos acessórios', dados.criterioEscrituraAcessorios || 'Sem ato acessório', dados.escrituraAcessorios || 0],
-    ['Tributo', dados.criterioTributo, dados.tributo],
+    ['Tributo', dados.criterioTributo, dados.tipo === 'nao_aplica' ? 'N/A' : dados.tributo],
     ['Registro de Imóveis', dados.criterioRegistro, dados.registro],
     ['Outros serviços autorizados', dados.temOutrosServicos ? 'Valor informado pelo usuário' : 'Não incluído', dados.valorOutros]
   ];
@@ -2801,7 +2915,7 @@ function atualizarAreaImpressao(r){
             <tr>
               <td>${escapeHtml(item)}</td>
               <td>${escapeHtml(criterio)}</td>
-              <td class="money-cell">${formatMoeda(valor)}</td>
+              <td class="money-cell">${formatValorOrcamento(valor)}</td>
             </tr>
           `).join('')}
         </tbody>
