@@ -1511,6 +1511,140 @@ textarea:focus{
   }
 </style>
 
+
+<style id="pn-orcamento-logo-upload-ajustes-r5">
+  .logo-cartorio-field {
+    gap: 9px !important;
+  }
+
+  .logo-file-control {
+    width: 100% !important;
+    min-height: 54px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    border: 1px solid var(--border, #d7dce3) !important;
+    border-radius: 12px !important;
+    background: #ffffff !important;
+    padding: 8px 12px !important;
+    overflow: hidden !important;
+  }
+
+  .logo-file-control input[type="file"] {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 38px !important;
+    display: flex !important;
+    align-items: center !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    color: var(--text, #0f172a) !important;
+    font: 15px/1.4 system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif !important;
+  }
+
+  .logo-file-control input[type="file"]::file-selector-button {
+    min-height: 38px !important;
+    margin: 0 12px 0 0 !important;
+    padding: 8px 14px !important;
+    border: 1px solid var(--border, #d7dce3) !important;
+    border-radius: 10px !important;
+    background: #f8fafc !important;
+    color: var(--text, #0f172a) !important;
+    font-weight: 700 !important;
+    cursor: pointer !important;
+  }
+
+  .logo-cartorio-preview {
+    width: 100% !important;
+    min-height: 92px !important;
+    max-height: 112px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 14px !important;
+    overflow: hidden !important;
+    padding: 12px 14px !important;
+    border: 1px dashed var(--border, #d7dce3) !important;
+    border-radius: 14px !important;
+    background: #ffffff !important;
+    color: var(--muted, #475569) !important;
+  }
+
+  .logo-cartorio-preview img {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 280px !important;
+    max-height: 72px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+    background: #ffffff !important;
+    flex: 0 0 auto !important;
+  }
+
+  .logo-cartorio-preview span {
+    display: inline-flex !important;
+    align-items: center !important;
+    min-height: 38px !important;
+    color: var(--muted, #475569) !important;
+  }
+
+  .print-brand-area {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    min-width: 220px !important;
+    max-width: 280px !important;
+    min-height: 68px !important;
+    overflow: hidden !important;
+  }
+
+  .print-logo-cartorio {
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: 240px !important;
+    max-height: 64px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+    background: #ffffff !important;
+  }
+
+  .accessory-row,
+  .registry-row {
+    gap: 14px !important;
+  }
+
+  .accessory-remove,
+  .registry-remove {
+    margin-top: 28px !important;
+    align-self: start !important;
+  }
+
+  @media (max-width: 720px) {
+    .logo-cartorio-preview {
+      min-height: 104px !important;
+      max-height: 124px !important;
+      align-items: flex-start !important;
+      flex-direction: column !important;
+    }
+
+    .logo-cartorio-preview img {
+      max-width: 100% !important;
+      max-height: 70px !important;
+    }
+
+    .accessory-remove,
+    .registry-remove {
+      margin-top: 8px !important;
+      width: 100% !important;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -1569,7 +1703,7 @@ textarea:focus{
 
           <div class="form-field full logo-cartorio-field">
             <label for="logoCartorio">Logotipo do cartório para PDF e impressão</label>
-            <input id="logoCartorio" type="file" accept="image/png,image/jpeg,image/webp" />
+            <div class="logo-file-control"><input id="logoCartorio" type="file" accept="image/png,image/jpeg,image/webp" /></div>
             <div class="logo-cartorio-preview" id="logoCartorioPreview" aria-live="polite">Nenhum logotipo salvo.</div>
             <span class="hint">O logotipo fica salvo apenas neste navegador, junto com os demais dados do cartório. Use PNG, JPG ou WEBP.</span>
           </div>
