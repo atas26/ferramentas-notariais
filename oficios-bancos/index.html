@@ -2485,35 +2485,29 @@
   document.body.appendChild(iframe);
 
   const doc = iframe.contentDocument || iframe.contentWindow.document;
-  const estilos = Array.from(document.querySelectorAll('style, link[rel="stylesheet"]'))
-    .map(function (node) {
-      return node.outerHTML;
-    })
-    .join('\n');
+
+  doc.open();
+  doc.write('<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Impressão do ofício</title></head><body><main class="print-wrap"></main></body></html>');
+  doc.close();
+
+  Array.from(document.querySelectorAll('style, link[rel="stylesheet"]')).forEach(function (node) {
+    try {
+      doc.head.appendChild(node.cloneNode(true));
+    } catch (error) {}
+  });
+
+  const estiloImpressao = doc.createElement('style');
+  estiloImpressao.textContent =
+    '@page { size: A4; margin: 12mm; }' +
+    'html, body { background: #ffffff; }' +
+    'body { margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; color: #111827; }' +
+    '.print-wrap { max-width: 780px; margin: 0 auto; }';
+
+  doc.head.appendChild(estiloImpressao);
 
   const conteudo = ids.previewOficio.cloneNode(true);
   conteudo.removeAttribute('contenteditable');
   conteudo.classList.remove('is-editing');
-
-  doc.open();
-  doc.write(
-    '<!doctype html>' +
-    '<html lang="pt-BR">' +
-    '<head>' +
-    '<meta charset="UTF-8">' +
-    '<title>Ofício para bancos</title>' +
-    estilos +
-    '<style>' +
-    '@page { size: A4; margin: 12mm; }' +
-    'html, body { background: #ffffff; }' +
-    'body { margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; color: #111827; }' +
-    '.print-wrap { max-width: 780px; margin: 0 auto; }' +
-    '</style>' +
-    '</head>' +
-    '<body><main class="print-wrap"></main></body>' +
-    '</html>'
-  );
-  doc.close();
 
   const destino = doc.querySelector('.print-wrap') || doc.body;
   destino.appendChild(doc.importNode(conteudo, true));
