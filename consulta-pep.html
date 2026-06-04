@@ -817,171 +817,185 @@
       }
     }
   </style>
-  <style id="pn-logo-pep">
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      text-decoration: none;
-      line-height: 1;
-    }
-
-    .brand-logo-img {
-      display: block;
-      height: 48px;
-      max-height: 48px;
-      width: auto;
-      max-width: min(100%, 440px);
-    }
-
-    @media (max-width: 760px) {
-      .brand-logo-img {
-        height: 38px;
-        max-height: 38px;
-        max-width: 300px;
-      }
-    }
-  </style>
-  <style id="pn-layout-itcmd-clean">
+  <style id="pn-layout-itcmd-strict">
     body {
+      margin: 0 !important;
       background: #f5f7fb !important;
-      color: #0f172a;
+      color: #0f172a !important;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+      line-height: 1.5 !important;
     }
 
     .topbar {
-      width: 100%;
-      background: #ffffff;
-      border-bottom: 1px solid #dfe5ee;
-      box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
+      width: 100% !important;
+      background: #ffffff !important;
+      border-bottom: 1px solid #dfe5ee !important;
+      box-shadow: none !important;
     }
 
     .nav {
-      width: min(1180px, calc(100% - 32px));
-      min-height: 88px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
+      width: min(1088px, calc(100% - 32px)) !important;
+      min-height: 92px !important;
+      margin: 0 auto !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 24px !important;
     }
 
     .brand {
-      display: inline-flex;
-      align-items: center;
-      text-decoration: none;
-      line-height: 1;
+      display: inline-flex !important;
+      align-items: center !important;
+      text-decoration: none !important;
+      line-height: 1 !important;
     }
 
     .brand-logo-img {
-      display: block;
-      height: 48px;
-      max-height: 48px;
-      width: auto;
-      max-width: min(100%, 440px);
+      display: block !important;
+      height: 40px !important;
+      max-height: 40px !important;
+      width: auto !important;
+      max-width: min(100%, 420px) !important;
+      object-fit: contain !important;
     }
 
     .menu {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 26px;
-      flex-wrap: wrap;
-      font-weight: 700;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      gap: 26px !important;
+      flex-wrap: wrap !important;
+      font-size: 16px !important;
+      font-weight: 700 !important;
     }
 
     .menu a {
-      color: #111827;
-      text-decoration: none;
+      color: #111827 !important;
+      text-decoration: none !important;
     }
 
     .menu a:hover {
-      color: #0076ff;
+      color: #0b6ffb !important;
     }
 
     .container {
-      width: min(1120px, calc(100% - 32px));
-      margin: 40px auto 64px;
-    }
-
-    .page-title-card {
-      text-align: center;
-      margin-bottom: 22px;
-    }
-
-    .page-title-card h1 {
-      margin: 0;
-      color: #0f172a;
-      font-size: clamp(26px, 3vw, 36px);
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-      text-transform: none;
+      width: min(1088px, calc(100% - 32px)) !important;
+      margin: 34px auto 56px !important;
+      padding: 0 !important;
     }
 
     .card,
     .panel {
       background: #ffffff !important;
-      border: 1px solid #dde5f0 !important;
-      border-radius: 18px !important;
+      border: 1px solid #dfe5ee !important;
+      border-radius: 16px !important;
       box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08) !important;
+    }
+
+    .page-title-card {
+      padding: 38px 18px !important;
+      margin: 0 0 22px !important;
+      text-align: center !important;
+    }
+
+    .page-title-card h1 {
+      margin: 0 !important;
+      color: #126df4 !important;
+      font-size: clamp(24px, 2.4vw, 31px) !important;
+      font-weight: 900 !important;
+      line-height: 1.2 !important;
+      letter-spacing: .03em !important;
+      text-transform: uppercase !important;
     }
 
     .left-panel,
     #resultadoPanel {
-      margin-top: 22px;
+      margin-top: 22px !important;
+    }
+
+    .left-panel h2,
+    #resultadoPanel h2,
+    .panel h2 {
+      color: #0f172a !important;
+      font-size: 24px !important;
+      line-height: 1.25 !important;
+      letter-spacing: -0.02em !important;
+    }
+
+    input,
+    select,
+    textarea {
+      border: 1px solid #d6dfec !important;
+      border-radius: 12px !important;
+      background: #ffffff !important;
+    }
+
+    button,
+    .btn,
+    .primary {
+      border-radius: 12px !important;
     }
 
     .hero,
     .content-section,
-    .anchor-btn {
+    .anchor-btn,
+    .brand-main,
+    .brand-thin,
+    .brand-tool {
       display: none !important;
     }
 
     .footer {
-      width: min(1120px, calc(100% - 32px));
-      margin: 48px auto 34px;
-      color: #475569;
-      font-size: 15px;
-      line-height: 1.7;
-      text-align: center;
+      width: min(1088px, calc(100% - 32px)) !important;
+      margin: 48px auto 34px !important;
+      color: #475569 !important;
+      font-size: 15px !important;
+      line-height: 1.7 !important;
+      text-align: center !important;
     }
 
     .footer a {
-      color: #005bd1;
-      text-decoration: none;
+      color: #005bd1 !important;
+      text-decoration: none !important;
     }
 
     .footer a:hover {
-      text-decoration: underline;
+      text-decoration: underline !important;
     }
 
     @media (max-width: 760px) {
       .nav {
-        min-height: auto;
-        padding: 20px 0;
-        align-items: flex-start;
-        flex-direction: column;
+        min-height: auto !important;
+        padding: 18px 0 !important;
+        align-items: flex-start !important;
+        flex-direction: column !important;
       }
 
       .brand-logo-img {
-        height: 38px;
-        max-height: 38px;
-        max-width: 300px;
+        height: 36px !important;
+        max-height: 36px !important;
+        max-width: 300px !important;
       }
 
       .menu {
-        justify-content: flex-start;
-        gap: 14px;
-        font-size: 14px;
+        justify-content: flex-start !important;
+        gap: 14px !important;
+        font-size: 14px !important;
       }
 
       .container {
-        margin-top: 24px;
+        margin-top: 24px !important;
+      }
+
+      .page-title-card {
+        padding: 28px 14px !important;
       }
     }
   </style>
 </head>
 
 <body data-api="https://consulta-pep-backend.onrender.com">
-    <div class="topbar" role="navigation" aria-label="Menu principal">
+      <div class="topbar" role="navigation" aria-label="Menu principal">
     <div class="nav">
       <a class="brand" href="https://portalnotarial.com.br/" aria-label="Consulta PEP">
         <img class="brand-logo-img" src="/assets/consulta-pep-logo.png" alt="Consulta PEP">
@@ -993,8 +1007,10 @@
       </div>
     </div>
   </div>
-
-    <main class="container">
+  <main class="container">
+    <section class="card page-title-card" aria-labelledby="titulo">
+      <h1 id="titulo">CONSULTA PEP POR CPF</h1>
+    </section>
     <section class="card page-title-card" aria-labelledby="titulo">
       <h1 id="titulo">Consulta PEP por CPF</h1>
     </section>
@@ -1081,7 +1097,7 @@
   </main>
 
 
-    <footer class="footer">
+      <footer class="footer">
     © 2024 – Todos os direitos reservados. Registrado no INPI.<br>
     Cálculo Escritura – Atesta Processamento e Automação de Dados Ltda.<br>
     CNPJ: 31.527.748/0001-70 • São Paulo/SP<br>
