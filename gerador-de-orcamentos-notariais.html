@@ -1453,6 +1453,64 @@ textarea:focus{
   }
 </style>
 
+
+<style id="pn-orcamento-tributo-nao-aplica-final">
+  .segmented.three {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  @media (max-width: 980px) {
+    .segmented.three {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>
+
+<style id="pn-orcamento-acessorios-r3">
+  .accessory-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  .accessory-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    align-items: end;
+    padding: 14px;
+    border: 1px solid var(--border, #e5e7eb);
+    border-radius: 14px;
+    background: #fff;
+  }
+
+  .accessory-row .form-field {
+    gap: 7px;
+  }
+
+  .accessory-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .accessory-remove {
+    min-height: 48px;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 720px) {
+    .accessory-row {
+      grid-template-columns: 1fr;
+    }
+
+    .accessory-remove {
+      width: 100%;
+    }
+  }
+</style>
+
 </head>
 
 <body>
@@ -1536,8 +1594,31 @@ textarea:focus{
           </div>
 
           <div class="form-field full">
+            <label>Há ato acessório?</label>
+            <div class="segmented" role="radiogroup" aria-label="Há ato acessório">
+              <label class="radio-card">
+                <input type="radio" name="temAtoAcessorio" value="sim" required />
+                <span><strong>Sim</strong><small>Incluir um ou mais atos acessórios</small></span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="temAtoAcessorio" value="nao" checked required />
+                <span><strong>Não</strong><small>Não incluir ato acessório</small></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-field full hidden" id="campoAtosAcessorios">
+            <label>Atos acessórios</label>
+            <div class="accessory-list" id="listaAtosAcessorios" aria-label="Lista de atos acessórios"></div>
+            <div class="accessory-actions">
+              <button type="button" class="btn btn-secondary" id="btnAdicionarAtoAcessorio">Adicionar ato acessório</button>
+            </div>
+            <span class="hint">Informe o valor base de cálculo de cada ato acessório. Cada valor será enquadrado pela mesma lógica da base de cálculo principal.</span>
+          </div>
+
+          <div class="form-field full">
             <label>Natureza do tributo</label>
-            <div class="segmented" role="radiogroup" aria-label="Natureza do tributo">
+            <div class="segmented three" role="radiogroup" aria-label="Natureza do tributo">
               <label class="radio-card">
                 <input type="radio" name="tipoTributo" value="itbi" checked required />
                 <span><strong>Onerosa</strong><small>ITBI municipal</small></span>
@@ -1545,6 +1626,10 @@ textarea:focus{
               <label class="radio-card">
                 <input type="radio" name="tipoTributo" value="itcmd" required />
                 <span><strong>Não onerosa</strong><small>ITCMD estadual</small></span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="tipoTributo" value="nao_aplica" required />
+                <span><strong>Não se aplica</strong><small>Sem cálculo de tributo</small></span>
               </label>
             </div>
           </div>
@@ -1575,7 +1660,21 @@ textarea:focus{
           </div>
 
           <div class="form-field full">
-            <label for="valorOutros">Outros serviços autorizados</label>
+            <label>Outros serviços autorizados?</label>
+            <div class="segmented" role="radiogroup" aria-label="Outros serviços autorizados">
+              <label class="radio-card">
+                <input type="radio" name="temOutrosServicos" value="sim" required />
+                <span><strong>Sim</strong><small>Incluir valor autorizado</small></span>
+              </label>
+              <label class="radio-card">
+                <input type="radio" name="temOutrosServicos" value="nao" checked required />
+                <span><strong>Não</strong><small>Não incluir outros serviços</small></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-field full hidden" id="campoValorOutros">
+            <label for="valorOutros">Valor dos outros serviços autorizados</label>
             <input id="valorOutros" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" />
             <span class="hint">Certidões, diligências ou valores externos autorizados pelas partes e necessários à realização do ato notarial, nos termos da nota 11 da Tabela de Custas e Emolumentos da Lei Estadual nº 11.331/2002.</span>
           </div>
@@ -1586,7 +1685,7 @@ textarea:focus{
           <button type="button" class="btn btn-secondary" id="btnCopiar">Copiar orçamento</button>
           <button type="button" class="btn btn-secondary" id="btnGerarPDF">Gerar PDF</button>
           <button type="button" class="btn btn-secondary" id="btnImprimir">Imprimir</button>
-          <button type="button" class="btn btn-ghost" id="btnLimpar">Limpar</button>
+          <button type="button" class="btn btn-ghost" id="btnLimpar">Novo c&aacute;lculo</button>
         </div>
 
         <aside class="result-card" id="resultado" aria-labelledby="resultado-titulo" hidden style="display:none">
@@ -1598,6 +1697,7 @@ textarea:focus{
           <div class="breakdown">
             <div class="row-item"><span>Valor base</span><span id="valorResultado">R$ 0,00</span></div>
             <div class="row-item"><span>Tabelionato de Notas</span><span id="escrituraResultado">R$ 0,00</span></div>
+            <div class="row-item"><span>Atos acessórios</span><span id="acessoriosResultado">R$ 0,00</span></div>
             <div class="row-item"><span>Tributo</span><span id="tributoResultado">R$ 0,00</span></div>
             <div class="row-item"><span>Registro de Imóveis</span><span id="registroResultado">R$ 0,00</span></div>
             <div class="row-item"><span>Outros serviços autorizados</span><span id="outrosResultado">R$ 0,00</span></div>
@@ -1756,6 +1856,17 @@ document.querySelectorAll('input[name="temRegistro"]').forEach((radio) => {
   radio.addEventListener('change', () => {});
 });
 
+document.querySelectorAll('input[name="temAtoAcessorio"]').forEach((radio) => {
+  radio.addEventListener('change', () => atualizaCamposAcessorios());
+});
+
+document.querySelectorAll('input[name="temOutrosServicos"]').forEach((radio) => {
+  radio.addEventListener('change', () => atualizaCamposOutros());
+});
+
+const btnAdicionarAtoAcessorio = el('btnAdicionarAtoAcessorio');
+if (btnAdicionarAtoAcessorio) btnAdicionarAtoAcessorio.addEventListener('click', () => adicionarAtoAcessorio());
+
 el('naturezaAto').addEventListener('change', () => {
   el('campoOutroAto').classList.toggle('hidden', el('naturezaAto').value !== 'outro');
   atualizaObrigatoriedadeCondicional();
@@ -1776,6 +1887,8 @@ if (btnLimparDadosCartorio) btnLimparDadosCartorio.addEventListener('click', lim
 carregarDadosCartorioSalvos();
 configuraCamposObrigatorios();
 atualizaCamposTributo();
+atualizaCamposAcessorios();
+atualizaCamposOutros();
 calcular(false);
 ocultarResultado();
 
@@ -1851,7 +1964,7 @@ function configuraCamposObrigatorios(){
     if (campo) campo.required = true;
   });
 
-  document.querySelectorAll('input[name="tipoTributo"], input[name="temRegistro"]').forEach((campo) => {
+  document.querySelectorAll('input[name="tipoTributo"], input[name="temRegistro"], input[name="temAtoAcessorio"], input[name="temOutrosServicos"]').forEach((campo) => {
     campo.required = true;
   });
 
@@ -1877,6 +1990,13 @@ function atualizaObrigatoriedadeCondicional(){
 
   if (aliquotaITBI) aliquotaITBI.required = tipo === 'itbi';
   if (aliquotaITCMD) aliquotaITCMD.required = tipo === 'itcmd';
+
+  document.querySelectorAll('.valor-ato-acessorio').forEach((campo) => {
+    campo.required = temAtoAcessorioSelecionado();
+  });
+
+  const valorOutros = el('valorOutros');
+  if (valorOutros) valorOutros.required = temOutrosServicosSelecionado();
 }
 
 function validarCamposObrigatorios(){
@@ -1891,7 +2011,7 @@ function validarCamposObrigatorios(){
 
   if (tipoTributoSelecionado() === 'itbi') {
     campos.push('aliquotaITBI');
-  } else {
+  } else if (tipoTributoSelecionado() === 'itcmd') {
     campos.push('aliquotaITCMD');
   }
 
@@ -1917,6 +2037,38 @@ function validarCamposObrigatorios(){
     campo.scrollIntoView({ behavior:'smooth', block:'center' });
     window.setTimeout(() => campo.focus({ preventScroll:true }), 200);
     return false;
+  }
+
+  if (temAtoAcessorioSelecionado()) {
+    const camposAcessorios = Array.from(document.querySelectorAll('.valor-ato-acessorio'));
+    if (!camposAcessorios.length) {
+      adicionarAtoAcessorio();
+      return validarCamposObrigatorios();
+    }
+
+    for (const campoAcessorio of camposAcessorios) {
+      const valorAcessorio = parseMoeda(campoAcessorio.value);
+      campoAcessorio.setCustomValidity('');
+      if (!valorAcessorio || valorAcessorio <= 0) {
+        campoAcessorio.setCustomValidity('Informe o valor base de cálculo do ato acessório.');
+        campoAcessorio.reportValidity();
+        campoAcessorio.scrollIntoView({ behavior:'smooth', block:'center' });
+        window.setTimeout(() => campoAcessorio.focus({ preventScroll:true }), 200);
+        return false;
+      }
+    }
+  }
+
+  if (temOutrosServicosSelecionado()) {
+    const valorOutros = temOutrosServicosSelecionado() ? parseMoeda(el('valorOutros').value) : 0;
+    if (!valorOutros || valorOutros <= 0) {
+      const campo = el('valorOutros');
+      campo.setCustomValidity('Informe o valor dos outros serviços autorizados.');
+      campo.reportValidity();
+      campo.scrollIntoView({ behavior:'smooth', block:'center' });
+      window.setTimeout(() => campo.focus({ preventScroll:true }), 200);
+      return false;
+    }
   }
 
   if (tipoTributoSelecionado() === 'itbi') {
@@ -1945,6 +2097,104 @@ function tipoTributoSelecionado(){
 
 function temRegistroSelecionado(){
   return document.querySelector('input[name="temRegistro"]:checked')?.value === 'sim';
+}
+
+function temAtoAcessorioSelecionado(){
+  return document.querySelector('input[name="temAtoAcessorio"]:checked')?.value === 'sim';
+}
+
+function temOutrosServicosSelecionado(){
+  return document.querySelector('input[name="temOutrosServicos"]:checked')?.value === 'sim';
+}
+
+function atualizaCamposAcessorios(){
+  const campo = el('campoAtosAcessorios');
+  if (!campo) return;
+
+  const deveMostrar = temAtoAcessorioSelecionado();
+  campo.classList.toggle('hidden', !deveMostrar);
+
+  if (deveMostrar && !document.querySelectorAll('.valor-ato-acessorio').length) {
+    adicionarAtoAcessorio();
+  }
+
+  atualizaObrigatoriedadeCondicional();
+}
+
+function atualizaCamposOutros(){
+  const campo = el('campoValorOutros');
+  const valorOutros = el('valorOutros');
+  const deveMostrar = temOutrosServicosSelecionado();
+
+  if (campo) campo.classList.toggle('hidden', !deveMostrar);
+  if (!deveMostrar && valorOutros) valorOutros.value = '';
+
+  atualizaObrigatoriedadeCondicional();
+}
+
+function adicionarAtoAcessorio(valorInicial = ''){
+  const lista = el('listaAtosAcessorios');
+  if (!lista) return;
+
+  const indice = lista.querySelectorAll('.accessory-row').length + 1;
+  const linha = document.createElement('div');
+  linha.className = 'accessory-row';
+  linha.setAttribute('data-ato-acessorio-linha', '');
+  linha.innerHTML = `
+    <div class="form-field">
+      <label>Valor base do ato acessório ${indice}</label>
+      <input class="valor-ato-acessorio" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" value="${escapeHtml(valorInicial)}" />
+    </div>
+    <button type="button" class="btn btn-ghost accessory-remove" data-remover-ato-acessorio>Remover</button>
+  `;
+
+  const input = linha.querySelector('.valor-ato-acessorio');
+  if (input) {
+    input.addEventListener('input', () => mascaraMoeda(input));
+    input.addEventListener('blur', () => {
+      const valor = parseMoeda(input.value);
+      input.value = valor ? formatMoeda(valor) : '';
+    });
+  }
+
+  const remover = linha.querySelector('[data-remover-ato-acessorio]');
+  if (remover) {
+    remover.addEventListener('click', () => {
+      linha.remove();
+      renumerarAtosAcessorios();
+      if (temAtoAcessorioSelecionado() && !document.querySelectorAll('.valor-ato-acessorio').length) {
+        adicionarAtoAcessorio();
+      }
+    });
+  }
+
+  lista.appendChild(linha);
+  renumerarAtosAcessorios();
+  atualizaObrigatoriedadeCondicional();
+}
+
+function renumerarAtosAcessorios(){
+  document.querySelectorAll('.accessory-row').forEach((linha, index) => {
+    const label = linha.querySelector('label');
+    if (label) label.textContent = `Valor base do ato acessório ${index + 1}`;
+  });
+}
+
+function obterAtosAcessorios(){
+  if (!temAtoAcessorioSelecionado()) return [];
+
+  return Array.from(document.querySelectorAll('.valor-ato-acessorio'))
+    .map((campo, index) => {
+      const valorBaseAcessorio = parseMoeda(campo.value);
+      const faixa = buscaFaixa(valorBaseAcessorio, TABELA_ESCRITURA);
+      return {
+        ordem: index + 1,
+        valorBase: valorBaseAcessorio,
+        emolumentos: valorBaseAcessorio > 0 ? Number(faixa.valor || 0) : 0,
+        criterio: valorBaseAcessorio > 0 ? `Ato acessório ${index + 1}: ${faixa.rotulo}` : `Ato acessório ${index + 1}: valor não informado`
+      };
+    })
+    .filter((item) => item.valorBase > 0);
 }
 
 function naturezaAtoSelecionada(){
@@ -2002,8 +2252,11 @@ function calcular(rolar = true, validar = rolar){
   const incluiRegistro = temRegistroSelecionado();
   const faixaEscritura = buscaFaixa(valorBase, TABELA_ESCRITURA);
   const faixaRegistro = buscaFaixa(valorBase, TABELA_REGISTRO);
+  const atosAcessorios = obterAtosAcessorios();
 
-  const escritura = Number(faixaEscritura.valor || 0);
+  const escrituraPrincipal = Number(faixaEscritura.valor || 0);
+  const escrituraAcessorios = atosAcessorios.reduce((total, item) => total + Number(item.emolumentos || 0), 0);
+  const escritura = escrituraPrincipal + escrituraAcessorios;
   const registro = incluiRegistro ? Number(faixaRegistro.valor || 0) : 0;
 
   let tributo = 0;
@@ -2023,11 +2276,21 @@ function calcular(rolar = true, validar = rolar){
     criterioTributo = `ITCMD estadual: ${formatPercentual(aliquota)}`;
   }
 
+  if (tipo === 'nao_aplica') {
+    tributo = 0;
+    criterioTributo = 'Tributo: não se aplica ao orçamento.';
+  }
+
   const total = escritura + tributo + registro + valorOutros;
 
   ultimoResultado = {
     valorBase,
     escritura,
+    escrituraPrincipal,
+    escrituraAcessorios,
+    atosAcessorios,
+    temAtoAcessorio: temAtoAcessorioSelecionado(),
+    temOutrosServicos: temOutrosServicosSelecionado(),
     tributo,
     registro,
     valorOutros,
@@ -2035,7 +2298,9 @@ function calcular(rolar = true, validar = rolar){
     tipo,
     incluiRegistro,
     criterioTributo,
-    criterioEscritura: `Tabela de Tabelionato de Notas: ${faixaEscritura.rotulo}`,
+    criterioEscritura: [`Ato principal: ${faixaEscritura.rotulo}`].concat(atosAcessorios.map((item) => item.criterio)).join('; '),
+    criterioEscrituraPrincipal: `Ato principal: ${faixaEscritura.rotulo}`,
+    criterioEscrituraAcessorios: atosAcessorios.length ? atosAcessorios.map((item) => item.criterio).join('; ') : 'Sem ato acessório',
     criterioRegistro: incluiRegistro ? `Tabela de Registro de Imóveis: ${faixaRegistro.rotulo}` : 'Registro de Imóveis não incluído',
     naturezaAto: naturezaAtoSelecionada(),
     escrevente: el('escrevente').value.trim(),
@@ -2072,7 +2337,8 @@ function ocultarResultado(){
 
 function renderResultado(r){
   el('valorResultado').textContent = formatMoeda(r.valorBase);
-  el('escrituraResultado').textContent = formatMoeda(r.escritura);
+  el('escrituraResultado').textContent = formatMoeda(r.escrituraPrincipal ?? r.escritura);
+  el('acessoriosResultado').textContent = formatMoeda(r.escrituraAcessorios || 0);
   el('tributoResultado').textContent = formatMoeda(r.tributo);
   el('registroResultado').textContent = formatMoeda(r.registro);
   el('outrosResultado').textContent = formatMoeda(r.valorOutros);
@@ -2103,7 +2369,12 @@ function montarTextoOrcamento(){
     escrevente: el('escrevente').value.trim() || 'Não informado',
     contatoEscrevente: el('contatoEscrevente').value.trim() || 'Não informado',
     cartorio: el('cartorio').value.trim() || 'Não informado',
-    solicitadoPor: el('solicitadoPor').value.trim() || 'Não informado'
+    solicitadoPor: el('solicitadoPor').value.trim() || 'Não informado',
+    temAtoAcessorio: Boolean(ultimoResultado?.temAtoAcessorio),
+    temOutrosServicos: Boolean(ultimoResultado?.temOutrosServicos),
+    atosAcessorios: ultimoResultado?.atosAcessorios || [],
+    escrituraPrincipal: ultimoResultado?.escrituraPrincipal ?? ultimoResultado?.escritura ?? 0,
+    escrituraAcessorios: ultimoResultado?.escrituraAcessorios || 0
   };
 
   return [
@@ -2116,9 +2387,13 @@ function montarTextoOrcamento(){
     `Solicitado por: ${r.solicitadoPor}`,
     `Natureza do ato: ${r.naturezaAto}`,
     `Valor base de cálculo: ${formatMoeda(r.valorBase)}`,
+    `Há ato acessório: ${r.temAtoAcessorio ? 'Sim' : 'Não'}`,
+    r.atosAcessorios.length ? `Atos acessórios: ${r.atosAcessorios.map((item) => `Ato ${item.ordem}: base ${formatMoeda(item.valorBase)}; emolumentos ${formatMoeda(item.emolumentos)}`).join(' | ')}` : 'Atos acessórios: não se aplica',
+    `Outros serviços autorizados: ${r.temOutrosServicos ? 'Sim' : 'Não'}`,
     '',
     'Composição estimada:',
-    `Tabelionato de Notas: ${formatMoeda(r.escritura)}`,
+    `Tabelionato de Notas, ato principal: ${formatMoeda(r.escrituraPrincipal)}`,
+    `Atos acessórios: ${formatMoeda(r.escrituraAcessorios)}`,
     `Tributo: ${formatMoeda(r.tributo)} (${r.criterioTributo})`,
     `Registro de Imóveis: ${formatMoeda(r.registro)} (${r.incluiRegistro ? 'incluído' : 'não incluído'})`,
     `Outros serviços autorizados: ${formatMoeda(r.valorOutros)}`,
@@ -2150,10 +2425,11 @@ function atualizarAreaImpressao(r){
 
   const linhas = [
     ['Valor base', 'Valor informado pelo usuário', dados.valorBase],
-    ['Tabelionato de Notas', dados.criterioEscritura, dados.escritura],
+    ['Tabelionato de Notas, ato principal', dados.criterioEscrituraPrincipal || dados.criterioEscritura, dados.escrituraPrincipal ?? dados.escritura],
+    ['Atos acessórios', dados.criterioEscrituraAcessorios || 'Sem ato acessório', dados.escrituraAcessorios || 0],
     ['Tributo', dados.criterioTributo, dados.tributo],
     ['Registro de Imóveis', dados.criterioRegistro, dados.registro],
-    ['Outros serviços autorizados', 'Valor informado pelo usuário', dados.valorOutros]
+    ['Outros serviços autorizados', dados.temOutrosServicos ? 'Valor informado pelo usuário' : 'Não incluído', dados.valorOutros]
   ];
 
   area.innerHTML = `
@@ -2179,6 +2455,8 @@ function atualizarAreaImpressao(r){
         <div class="print-field"><span>Solicitado por</span><strong>${escapeHtml(dados.solicitadoPor)}</strong></div>
         <div class="print-field"><span>Natureza do ato</span><strong>${escapeHtml(dados.naturezaAto)}</strong></div>
         <div class="print-field"><span>Registro imobiliário</span><strong>${dados.incluiRegistro ? 'Incluído' : 'Não incluído'}</strong></div>
+        <div class="print-field"><span>Ato acessório</span><strong>${dados.temAtoAcessorio ? 'Sim' : 'Não'}</strong></div>
+        <div class="print-field"><span>Outros serviços autorizados</span><strong>${dados.temOutrosServicos ? 'Sim' : 'Não'}</strong></div>
       </div>
     </div>
 
@@ -2241,8 +2519,14 @@ function limpar(){
   el('aliquotaITCMD').value = '4%';
   document.querySelector('input[name="tipoTributo"][value="itbi"]').checked = true;
   document.querySelector('input[name="temRegistro"][value="sim"]').checked = true;
+  document.querySelector('input[name="temAtoAcessorio"][value="nao"]').checked = true;
+  document.querySelector('input[name="temOutrosServicos"][value="nao"]').checked = true;
   el('campoOutroAto').classList.add('hidden');
+  const listaAtosAcessorios = el('listaAtosAcessorios');
+  if (listaAtosAcessorios) listaAtosAcessorios.innerHTML = '';
   atualizaCamposTributo();
+  atualizaCamposAcessorios();
+  atualizaCamposOutros();
   calcular(false);
   ocultarResultado();
   const campoInicial = el('escrevente');
