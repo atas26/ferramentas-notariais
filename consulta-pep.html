@@ -817,7 +817,7 @@
       }
     }
   </style>
-  <style id="pn-layout-itcmd-strict">
+  <style id="pn-layout-itcmd-final">
     body {
       margin: 0 !important;
       background: #f5f7fb !important;
@@ -840,6 +840,7 @@
       align-items: center !important;
       justify-content: space-between !important;
       gap: 24px !important;
+      padding: 0 !important;
     }
 
     .brand {
@@ -847,6 +848,7 @@
       align-items: center !important;
       text-decoration: none !important;
       line-height: 1 !important;
+      flex: 0 0 auto !important;
     }
 
     .brand-logo-img {
@@ -939,6 +941,10 @@
       text-decoration: none !important;
     }
 
+    .footer a:hover {
+      text-decoration: underline !important;
+    }
+
     @media (max-width: 760px) {
       .nav {
         min-height: auto !important;
@@ -985,9 +991,8 @@
   </div>
 <main class="container">
 
-
     <section class="card page-title-card" aria-labelledby="titulo">
-      <h1 id="titulo">ASSISTENTE DE CONSULTA PEP POR CPF</h1>
+      <h1 id="titulo">CONSULTA PEP</h1>
     </section>
 <div class="wrap grid">
       <section class="panel left-panel" id="ferramenta">
