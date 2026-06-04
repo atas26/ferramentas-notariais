@@ -128,7 +128,7 @@
   <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Competência notarial eletrônica e híbrida | Portal Notarial</title>
+  <title>Compet&ecirc;ncia e-Notariado | Portal Notarial</title>
   <meta name="description" content="Ferramenta de apoio para identificar critérios de competência do tabelião de notas em atos eletrônicos e híbridos no e-Notariado." />
   <meta name="robots" content="index, follow" />
   <meta name="google-adsense-account" content="ca-pub-1578115877344777" />
@@ -659,28 +659,367 @@ footer.no-print .space-y-3 p{font-size:14px!important;color:#334155!important;li
 }
 </style>
 
+
+<style id="pn-layout-itcmd-competencia-final">
+  :root {
+    --primary: #0b5fff;
+    --text: #0f172a;
+    --muted: #475569;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --radius: 14px;
+    --shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+    --border: #e5e7eb;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0 !important;
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif !important;
+  }
+
+  .topbar {
+    background: #fff !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 50 !important;
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: none !important;
+  }
+
+  .nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+    justify-content: space-between !important;
+    padding: 12px 18px !important;
+    max-width: 1170px !important;
+    margin: 0 auto !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .brand {
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    line-height: 1 !important;
+    flex: 0 0 auto !important;
+  }
+
+  .brand-logo-box {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 314px !important;
+    min-width: 314px !important;
+    max-width: 314px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    overflow: hidden !important;
+    background: #fff !important;
+  }
+
+  .brand-logo-img {
+    display: block !important;
+    height: 40px !important;
+    max-height: 40px !important;
+    width: auto !important;
+    max-width: 314px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: #fff !important;
+  }
+
+  .menu {
+    display: flex !important;
+    gap: 18px !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    font-size: 16px !important;
+  }
+
+  .menu a {
+    font-weight: 600 !important;
+    color: var(--text) !important;
+    opacity: 0.9 !important;
+    text-decoration: none !important;
+  }
+
+  .pn-itcmd-container,
+  main#consulta,
+  footer.no-print > div {
+    max-width: 1100px !important;
+    width: auto !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .pn-itcmd-container {
+    padding: 32px 28px 0 !important;
+  }
+
+  main#consulta {
+    padding: 0 28px 18px !important;
+    background: transparent !important;
+  }
+
+  .card,
+  main#consulta > .anim-fadeup,
+  footer.no-print > div,
+  .pn-loading-card {
+    background: var(--card) !important;
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: var(--shadow) !important;
+    padding: 22px 24px !important;
+    margin: 18px 0 !important;
+  }
+
+  .pn-title-card {
+    padding: 22px 24px !important;
+    margin: 18px 0 !important;
+  }
+
+  .pn-title-card h1 {
+    margin: 8px 0 12px !important;
+    font-size: 26px !important;
+    line-height: 1.25 !important;
+    color: var(--primary) !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
+    font-weight: 800 !important;
+    font-family: system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif !important;
+  }
+
+  .pn-loading-card {
+    max-width: 1100px !important;
+    margin: 18px auto !important;
+    color: var(--muted) !important;
+  }
+
+  #root > .min-h-screen {
+    min-height: auto !important;
+    background: transparent !important;
+    color: var(--text) !important;
+  }
+
+  header.no-print,
+  .adsense-section,
+  .bloco-como-utilizar {
+    display: none !important;
+  }
+
+  main#consulta > .anim-fadeup {
+    padding: 22px 24px !important;
+  }
+
+  main#consulta .mb-6 {
+    border-bottom: 1px solid var(--border) !important;
+    padding: 0 0 16px !important;
+    margin: 0 0 18px !important;
+  }
+
+  main#consulta .mb-6 p {
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+    letter-spacing: 0.02em !important;
+    margin: 0 0 7px !important;
+  }
+
+  main#consulta .mb-6 h2,
+  main#consulta h2 {
+    font-size: 22px !important;
+    line-height: 1.25 !important;
+    color: var(--text) !important;
+    letter-spacing: -0.02em !important;
+    font-weight: 800 !important;
+    font-family: system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif !important;
+  }
+
+  .option-card {
+    border: 1px solid #dbe3ef !important;
+    border-radius: 14px !important;
+    background: #fff !important;
+    padding: 18px !important;
+    box-shadow: none !important;
+  }
+
+  .option-card:hover {
+    border-color: var(--primary) !important;
+    box-shadow: 0 12px 28px rgba(15,23,42,.10) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  .option-card .option-icon {
+    background: #eef5ff !important;
+    color: var(--primary) !important;
+    border-radius: 14px !important;
+  }
+
+  .option-card p.font-medium {
+    color: var(--primary) !important;
+    font-weight: 800 !important;
+  }
+
+  .option-card p.text-\[15px\] {
+    color: var(--muted) !important;
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+
+  main#consulta .bg-orange-700 {
+    background: linear-gradient(180deg, var(--primary), #005bd1) !important;
+  }
+
+  main#consulta .text-orange-700,
+  footer.no-print .text-orange-700 {
+    color: var(--primary) !important;
+  }
+
+  footer.no-print {
+    background: transparent !important;
+    border: 0 !important;
+    margin: 0 !important;
+    color: var(--muted) !important;
+    font-size: 14px !important;
+    padding: 0 28px 18px !important;
+  }
+
+  footer.no-print > div {
+    padding: 22px 24px !important;
+  }
+
+  footer.no-print .text-xs.uppercase {
+    letter-spacing: 0.08em !important;
+    color: var(--primary) !important;
+    font-weight: 800 !important;
+  }
+
+  footer.no-print .space-y-3 p {
+    font-size: 14px !important;
+    color: #334155 !important;
+    line-height: 1.65 !important;
+  }
+
+  footer.no-print .pn-footer-final {
+    display: none !important;
+  }
+
+  .footer.pn-institutional-footer {
+    color: var(--muted) !important;
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    margin-top: 0 !important;
+    text-align: center !important;
+    padding: 10px 16px 40px !important;
+    border-top: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+
+  .footer.pn-institutional-footer a {
+    color: var(--primary) !important;
+    text-decoration: none !important;
+  }
+
+  .footer.pn-institutional-footer a:hover {
+    text-decoration: underline !important;
+  }
+
+  @media (max-width: 720px) {
+    .nav {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      flex-wrap: wrap !important;
+    }
+
+    .menu {
+      width: 100% !important;
+      gap: 12px !important;
+      justify-content: center !important;
+    }
+
+    .pn-itcmd-container,
+    main#consulta {
+      padding-left: 18px !important;
+      padding-right: 18px !important;
+    }
+
+    .brand-logo-box {
+      width: 282px !important;
+      min-width: 282px !important;
+      max-width: 282px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
+    }
+
+    .brand-logo-img {
+      height: 36px !important;
+      max-height: 36px !important;
+      max-width: 282px !important;
+    }
+  }
+
+  @media print {
+    .topbar,
+    .pn-competencia-shell,
+    .pn-institutional-footer {
+      display: none !important;
+    }
+  }
+</style>
+
 </head>
 <body class="bg-stone-100 text-slate-900">
-
-<div id="root">
-  <div style="max-width:56rem;margin:0 auto;padding:2rem 1.5rem;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#334155;line-height:1.65;">
-    <p style="margin:0 0 1rem;color:#64748b;font-size:.95rem;">Carregando consulta de competência do e-Notariado...</p>
-    <section aria-label="Informações sobre a ferramenta de competência notarial eletrônica e híbrida" style="background:#fff;border:1px solid #e7e5e4;padding:1.5rem;margin:0 0 1rem;">
-      <h1 style="margin:0 0 .75rem;font-size:2rem;line-height:1.15;color:#0f172a;font-weight:500;">Competência notarial eletrônica e híbrida</h1>
-      <p style="margin:0 0 1rem;">Esta ferramenta auxilia a identificação do tabelião de notas competente para ato notarial eletrônico ou híbrido a partir do tipo de ato e das respostas fornecidas pelo usuário. O resultado apresenta o critério geral aplicável à situação informada.</p>
-      <p style="margin:0 0 1rem;"><a href="#consulta" style="display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:10px 16px;border-radius:999px;background:rgb(0,118,255);color:#fff;text-decoration:none;font-weight:700;font-size:13px;">Ir para a ferramenta</a> <a href="https://portalnotarial.com.br/" style="display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:10px 16px;border-radius:999px;border:1px solid #d6d3d1;color:#0f172a;text-decoration:none;font-weight:700;font-size:13px;margin-left:8px;">Voltar à home</a></p>
-      <h2 style="margin:1rem 0 .35rem;font-size:1rem;color:#0f172a;">O que a ferramenta faz</h2>
-      <p style="margin:0 0 .85rem;">Organiza perguntas sobre o tipo de ato e indica o critério geral de competência do tabelião de notas para atos eletrônicos ou híbridos.</p>
-      <h2 style="margin:1rem 0 .35rem;font-size:1rem;color:#0f172a;">Quando usar</h2>
-      <p style="margin:0 0 .85rem;">Use a consulta antes de lavrar ou solicitar escritura, procuração, ata notarial, reconhecimento de firma, autenticação, apostilamento ou outro ato eletrônico no e-Notariado.</p>
-      <h2 style="margin:1rem 0 .35rem;font-size:1rem;color:#0f172a;">Como interpretar o resultado</h2>
-      <p style="margin:0 0 .85rem;">O resultado indica o critério de competência aplicável, a base normativa e eventual observação interpretativa. Ele não substitui a conferência do caso concreto.</p>
-      <h2 style="margin:1rem 0 .35rem;font-size:1rem;color:#0f172a;">Critérios, fontes e limites</h2>
-      <p style="margin:0 0 .85rem;">A lógica considera o Código Nacional de Normas da Corregedoria Nacional de Justiça e a Lei nº 8.935/1994, nos pontos indicados na própria página. A competência deve ser confirmada pelo tabelião responsável e pela norma vigente.</p>
-      <p style="margin:1rem 0 0;color:#64748b;font-size:.9rem;">Última atualização da ferramenta: 18/05/2026.</p>
-    </section>
+<div class="topbar" role="navigation" aria-label="Menu principal">
+  <div class="nav">
+    <a class="brand" href="https://portalnotarial.com.br/" aria-label="Compet&ecirc;ncia e-Notariado">
+      <span class="brand-logo-box">
+        <img class="brand-logo-img" src="/assets/competencia-e-notariado-logo.png" alt="Compet&ecirc;ncia e-Notariado" width="1820" height="232">
+      </span>
+    </a>
+    <div class="menu" aria-label="Links do menu">
+      <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a>
+      <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
+      <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+    </div>
   </div>
 </div>
+
+<main class="pn-itcmd-container pn-competencia-shell" aria-label="Compet&ecirc;ncia e-Notariado">
+  <section class="card pn-title-card">
+    <h1>COMPET&Ecirc;NCIA E-NOTARIADO</h1>
+  </section>
+</main>
+
+
+<div id="root">
+  <div class="pn-loading-card" role="status">Carregando ferramenta...</div>
+</div>
+
+<footer class="footer pn-institutional-footer">
+  &copy; 2024 &ndash; Todos os direitos reservados. Registrado no INPI.<br>
+  C&aacute;lculo Escritura &ndash; Atesta Processamento e Automa&ccedil;&atilde;o de Dados Ltda.<br>
+  CNPJ: 31.527.748/0001-70 &bull; S&atilde;o Paulo/SP<br>
+  <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a> &bull;
+  <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> &bull;
+  <a href="https://portalnotarial.com.br/contato.html">Contato</a><br>
+  Documento meramente informativo. Os dados devem ser conferidos.
+</footer>
+
 <noscript>
   <div style="max-width:56rem;margin:1rem auto;padding:1.25rem 1.5rem;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#7c2d12;background:#fffbeb;border:1px solid #fde68a;line-height:1.6;">
     <strong>JavaScript necessário.</strong>
@@ -1254,7 +1593,7 @@ function CompetenciaENotariado() {
                     React.createElement("br", null),
                     "por tipo de ato eletr\u00F4nico"),
                 React.createElement("p", { className: "text-slate-600 max-w-2xl leading-relaxed", style: { fontSize: "18px" } }, "Ferramenta destinada a identificar o tabeli\u00E3o de notas competente para realizar o ato notarial eletr\u00F4nico ou h\u00EDbrido. Selecione o tipo de ato e responda \u00E0s perguntas contextuais."))),
-        React.createElement(BlocoExplicativoCompetencia, null),
+        null,
         React.createElement("main", { id: "consulta", className: "max-w-4xl mx-auto px-6 py-10 grain" },
             false && respostas.length > 0 && !resultado && (React.createElement("div", { className: "mb-8 anim-fadeup" },
                 React.createElement("p", { className: "text-xs uppercase tracking-widest text-slate-500 mb-3 font-medium" }, "Respostas registradas"),
@@ -1315,8 +1654,8 @@ function CompetenciaENotariado() {
                         React.createElement("div", { className: "flex-1" },
                             React.createElement("p", { className: "text-slate-500 text-xs" }, r.pergunta),
                             React.createElement("p", { className: "text-slate-900" }, r.escolha)))))))))),
-        React.createElement(CriteriosFontesCompetencia, null),
-        React.createElement(FaqCompetencia, null),
+        null,
+        null,
         React.createElement("footer", { className: "no-print border-t border-stone-300 bg-stone-50 mt-16" },
             React.createElement("div", { className: "max-w-4xl mx-auto px-6 py-10" },
                 React.createElement("p", { className: "text-xs uppercase tracking-[0.25em] text-orange-700 mb-4 font-medium" }, "Notas de leitura"),
