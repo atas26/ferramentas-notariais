@@ -128,7 +128,7 @@
     <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Consulta PEP por CPF</title>
+  <title>Consulta PEP</title>
   <meta name="description" content="Consulta auxiliar de Pessoas Expostas Politicamente por CPF, com base em arquivo PEP do Siscoaf, para apoio à triagem notarial e cadastral." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://portalnotarial.com.br/consulta-pep.html" />
@@ -817,213 +817,220 @@
       }
     }
   </style>
-  <style id="pn-layout-itcmd-matriz">
-    :root {
-      --primary: #0b5fff;
-      --accent: var(--primary);
-      --accent-600: #094bcc;
-      --accent-100: #e9f1ff;
-      --text: #0f172a;
-      --muted: #475569;
-      --bg: #f8fafc;
-      --card: #ffffff;
-      --ok: #0ea5e9;
-      --radius: 14px;
-      --shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --border: #e5e7eb;
-    }
+<style id="pn-layout-itcmd-matriz-final">
+  :root {
+    --primary: #0b5fff;
+    --text: #0f172a;
+    --muted: #475569;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --radius: 14px;
+    --shadow: 0 12px 30px rgba(2, 6, 23, 0.08);
+    --border: #e5e7eb;
+  }
 
-    * {
-      box-sizing: border-box;
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    html,
-    body {
-      height: 100%;
-    }
+  body {
+    margin: 0 !important;
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif !important;
+  }
 
-    body {
-      margin: 0 !important;
-      background: var(--bg) !important;
-      color: var(--text) !important;
-      font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial, sans-serif !important;
-    }
+  .topbar {
+    background: #fff !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 50 !important;
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: none !important;
+  }
 
-    a {
-      color: inherit;
-    }
+  .nav {
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+    justify-content: space-between !important;
+    padding: 12px 18px !important;
+    max-width: 1170px !important;
+    margin: 0 auto !important;
+    flex-wrap: nowrap !important;
+  }
 
-    .topbar {
-      background: #fff !important;
-      position: sticky !important;
-      top: 0 !important;
-      z-index: 50 !important;
-      border-bottom: 1px solid var(--border) !important;
-      box-shadow: none !important;
-    }
+  .brand {
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    line-height: 1 !important;
+    flex: 0 0 auto !important;
+  }
 
+  .brand-logo-box {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 314px !important;
+    min-width: 314px !important;
+    max-width: 314px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    overflow: hidden !important;
+  }
+
+  .brand-logo-img {
+    display: block !important;
+    height: 40px !important;
+    max-height: 40px !important;
+    width: auto !important;
+    max-width: 314px !important;
+    object-fit: contain !important;
+    object-position: left center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+  }
+
+  .menu {
+    display: flex !important;
+    gap: 18px !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    font-size: 16px !important;
+  }
+
+  .menu a {
+    font-weight: 600 !important;
+    color: var(--text) !important;
+    opacity: 0.9 !important;
+    text-decoration: none !important;
+  }
+
+  .container {
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+    padding: 32px 28px 40px !important;
+    width: auto !important;
+  }
+
+  .card,
+  .panel {
+    background: var(--card) !important;
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: var(--shadow) !important;
+    padding: 22px 24px !important;
+    margin: 18px 0 !important;
+  }
+
+  .pn-title-card {
+    padding: 22px 24px !important;
+    margin: 18px 0 !important;
+  }
+
+  .pn-title-card h1 {
+    margin: 8px 0 12px !important;
+    font-size: 26px !important;
+    line-height: 1.25 !important;
+    color: var(--primary) !important;
+    text-align: center !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.02em !important;
+    font-weight: 800 !important;
+  }
+
+  .left-panel,
+  #resultadoPanel {
+    margin: 18px 0 !important;
+  }
+
+  .hero,
+  .content-section,
+  .anchor-btn,
+  .page-title-card,
+  .brand-main,
+  .brand-thin,
+  .brand-tool {
+    display: none !important;
+  }
+
+  .footer {
+    color: var(--muted) !important;
+    font-size: 14px !important;
+    line-height: 1.7 !important;
+    margin-top: 22px !important;
+    text-align: center !important;
+    padding: 28px 16px 40px !important;
+    border-top: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .footer a {
+    color: var(--primary) !important;
+    text-decoration: none !important;
+  }
+
+  .footer a:hover {
+    text-decoration: underline !important;
+  }
+
+  @media (max-width: 720px) {
     .nav {
-      display: flex !important;
-      align-items: center !important;
-      gap: 18px !important;
-      justify-content: space-between !important;
-      padding: 12px 18px !important;
-      max-width: 1170px !important;
-      margin: 0 auto !important;
-      min-height: auto !important;
-      flex-wrap: nowrap !important;
-    }
-
-    .brand {
-      display: flex !important;
-      align-items: center !important;
-      gap: 10px !important;
-      font-weight: 800 !important;
-      color: var(--primary) !important;
-      text-decoration: none !important;
-      line-height: 1 !important;
-      flex: 0 0 auto !important;
-    }
-
-    .brand img,
-    .brand-logo-img {
-      display: block !important;
-      height: 40px !important;
-      max-height: 40px !important;
-      width: auto !important;
-      max-width: min(100%, 420px) !important;
-      object-fit: contain !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      flex-wrap: wrap !important;
     }
 
     .menu {
-      display: flex !important;
-      gap: 18px !important;
-      flex-wrap: wrap !important;
-      align-items: center !important;
-      justify-content: flex-end !important;
-      font-size: 16px !important;
-    }
-
-    .menu a {
-      font-weight: 600 !important;
-      color: var(--text) !important;
-      opacity: 0.9 !important;
-      text-decoration: none !important;
+      width: 100% !important;
+      gap: 12px !important;
+      justify-content: center !important;
     }
 
     .container {
-      max-width: 1100px !important;
-      margin: 0 auto !important;
-      padding: 32px 28px 40px !important;
-      width: auto !important;
+      padding: 24px 18px 32px !important;
     }
 
-    .card,
-    .panel {
-      background: var(--card) !important;
-      border-radius: var(--radius) !important;
-      border: 1px solid var(--border) !important;
-      box-shadow: var(--shadow) !important;
-      padding: 22px 24px !important;
-      margin: 18px 0 !important;
+    .brand-logo-box {
+      width: 282px !important;
+      min-width: 282px !important;
+      max-width: 282px !important;
+      height: 36px !important;
+      min-height: 36px !important;
+      max-height: 36px !important;
     }
 
-    .pn-title-card {
-      padding: 22px 24px !important;
-      margin: 18px 0 !important;
+    .brand-logo-img {
+      height: 36px !important;
+      max-height: 36px !important;
+      max-width: 282px !important;
     }
-
-    h1,
-    .pn-title-card h1 {
-      margin: 8px 0 12px !important;
-      font-size: 26px !important;
-      line-height: 1.25 !important;
-      color: var(--primary) !important;
-      text-align: center !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.02em !important;
-      font-weight: 800 !important;
-    }
-
-    .left-panel,
-    #resultadoPanel {
-      margin: 18px 0 !important;
-    }
-
-    .hero,
-    .content-section,
-    .anchor-btn,
-    .page-title-card,
-    .brand-main,
-    .brand-thin,
-    .brand-tool {
-      display: none !important;
-    }
-
-    .footer {
-      color: var(--muted) !important;
-      font-size: 14px !important;
-      line-height: 1.7 !important;
-      margin-top: 22px !important;
-      text-align: center !important;
-      padding: 28px 16px 40px !important;
-      border-top: 0 !important;
-      box-shadow: none !important;
-    }
-
-    .footer a {
-      color: var(--primary) !important;
-      text-decoration: none !important;
-    }
-
-    .footer a:hover {
-      text-decoration: underline !important;
-    }
-
-    @media (max-width: 720px) {
-      .nav {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        flex-wrap: wrap !important;
-      }
-
-      .menu {
-        width: 100% !important;
-        gap: 12px !important;
-        justify-content: center !important;
-      }
-
-      .container {
-        padding: 24px 18px 32px !important;
-      }
-
-      .brand img,
-      .brand-logo-img {
-        height: 36px !important;
-        max-height: 36px !important;
-        max-width: 300px !important;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 
 <body data-api="https://consulta-pep-backend.onrender.com">
-        <div class="topbar" role="navigation" aria-label="Menu principal">
-    <div class="nav">
-      <a class="brand" href="https://portalnotarial.com.br/" aria-label="Consulta PEP">
-        <img class="brand-logo-img" src="/assets/consulta-pep-logo.png" alt="Consulta PEP">
-      </a>
-      <div class="menu" aria-label="Links do menu">
-        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a>
-        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
-        <a href="https://portalnotarial.com.br/contato.html">Contato</a>
-      </div>
+<div class="topbar" role="navigation" aria-label="Menu principal">
+  <div class="nav">
+    <a class="brand" href="https://portalnotarial.com.br/" aria-label="Consulta PEP">
+      <span class="brand-logo-box">
+        <img class="brand-logo-img" src="/assets/consulta-pep-logo.png" alt="Consulta PEP" width="1820" height="232">
+      </span>
+    </a>
+    <div class="menu" aria-label="Links do menu">
+      <a href="https://portalnotarial.com.br/politica-de-privacidade.html">PolÃ­tica de Privacidade</a>
+      <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
+      <a href="https://portalnotarial.com.br/contato.html">Contato</a>
     </div>
   </div>
+</div>
 <main class="container" id="app-root">
+
+<div class="card pn-title-card"><h1>CONSULTA PEP</h1></div>
 <div class="wrap grid">
       <section class="panel left-panel" id="ferramenta">
         <div class="panel-head">
@@ -1108,11 +1115,11 @@
 
 
           <footer class="footer">
-  © 2024 – Todos os direitos reservados. Registrado no INPI.<br>
-  Cálculo Escritura – Atesta Processamento e Automação de Dados Ltda.<br>
-  CNPJ: 31.527.748/0001-70 • São Paulo/SP<br>
-  <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a> •
-  <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> •
+  Â© 2024 â€“ Todos os direitos reservados. Registrado no INPI.<br>
+  CÃ¡lculo Escritura â€“ Atesta Processamento e AutomaÃ§Ã£o de Dados Ltda.<br>
+  CNPJ: 31.527.748/0001-70 â€¢ SÃ£o Paulo/SP<br>
+  <a href="https://portalnotarial.com.br/politica-de-privacidade.html">PolÃ­tica de Privacidade</a> â€¢
+  <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> â€¢
   <a href="https://portalnotarial.com.br/contato.html">Contato</a><br>
   Documento meramente informativo. Os dados devem ser conferidos.
 </footer>
@@ -1408,5 +1415,3 @@
   </script>
 </body>
 </html>
- (<main class="container" id="app-root">\s*) $1
-<div class="card pn-title-card"><h1>CONSULTA PEP</h1></div>
