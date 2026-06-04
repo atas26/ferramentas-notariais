@@ -1970,6 +1970,11 @@
       return valor || '[' + campo + ']';
     }
 
+    function montarLinhaEmolumentos(valor) {
+      const conteudo = String(valor || '').trim().replace(/^Emolumentos\s*:\s*/i, '');
+      return marcarNegrito('Emolumentos:') + ' ' + (conteudo || '[EMOLUMENTOS]');
+    }
+
 
     function formatarCargoAssinaturaFisica(cargo) {
       return String(cargo || '')
@@ -2152,7 +2157,7 @@
       }
 
       blocos.push({ tipo: 'space' });
-      blocos.push({ tipo: 'paragraph', texto: dados.emolumentos, semNegritoMarcadores: true });
+      blocos.push({ tipo: 'paragraph', texto: montarLinhaEmolumentos(dados.emolumentos), justificar: false });
       blocos.push({ tipo: 'space' });
       blocos.push({ tipo: 'rightLine', texto: dados.cidade + ', ' + dados.dataCertidao, semNegritoMarcadores: true });
       blocos.push({ tipo: 'space' });
