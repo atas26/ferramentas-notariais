@@ -97,7 +97,7 @@
     .menu a:hover{text-decoration:underline}
 
     .shell{
-      width:min(1220px,calc(100% - 32px));
+      width:min(1100px,calc(100% - 32px));
       margin:0 auto;
       padding:34px 0 54px;
     }
@@ -115,10 +115,10 @@
     .title-card h1{
       margin:0;
       color:#1263f1;
-      font-size:clamp(30px,3vw,40px);
-      line-height:1.15;
-      letter-spacing:.01em;
-      font-weight:900;
+      font-size:26px;
+      line-height:1.25;
+      letter-spacing:.02em;
+      font-weight:800;
       text-transform:uppercase;
     }
 
@@ -165,16 +165,12 @@
 
     @media (max-width:620px){
       .shell{
-        width:min(100% - 22px,1220px);
+        width:min(100% - 22px,1100px);
         padding-top:22px;
       }
 
       .title-card{
         padding:22px 16px;
-      }
-
-      .title-card h1{
-        font-size:28px;
       }
     }
 
@@ -340,7 +336,7 @@
     a{color:var(--brand-dark)}
 
     .shell{
-      width:min(1220px,calc(100% - 32px));
+      width:min(1100px,calc(100% - 32px));
       margin:0 auto;
       padding:34px 0 54px;
     }
@@ -860,7 +856,7 @@
     }
 
     footer .shell{
-      width:min(1220px,calc(100% - 32px));
+      width:min(1100px,calc(100% - 32px));
       margin:0 auto;
       padding:0;
     }
@@ -903,7 +899,7 @@
     }
 
     @media (max-width:620px){
-      .shell{width:min(100% - 22px,1220px);padding-top:22px}
+      .shell{width:min(100% - 22px,1100px);padding-top:22px}
       .hero,.adsense-section,.card{padding:18px}
       .actions,.cartorio-actions,.template-actions{grid-template-columns:1fr}
       .hero h1,h1{font-size:30px}
@@ -1106,62 +1102,6 @@
       </div>
     </section>
 
-    <section class="adsense-section" id="criterios-fontes" aria-labelledby="criteriosTitulo">
-      <div class="section-kicker">Critérios e fontes</div>
-      <h2 id="criteriosTitulo">Critérios utilizados</h2>
-      <p>
-        A declaração é formada com os dados digitados pelo usuário, com validação básica de CPF, data e campos obrigatórios. O PDF final pode usar template em PDF indicado pelo usuário e é montado no próprio navegador com as bibliotecas externas carregadas na página.
-      </p>
-
-      <div class="source-grid">
-        <article class="source-box">
-          <h3>Fontes utilizadas pela ferramenta</h3>
-          <ul>
-            <li>Dados preenchidos pelo usuário no formulário.</li>
-            <li>Template do cartório enviado ou salvo no navegador, quando utilizado.</li>
-            <li>Texto da prévia da declaração, inclusive quando editado manualmente pelo usuário.</li>
-            <li>Rotina local de validação do CPF informado.</li>
-          </ul>
-        </article>
-        <article class="source-box">
-          <h3>Limites da ferramenta</h3>
-          <ul>
-            <li>Não confirma comparecimento em sistema externo.</li>
-            <li>Não valida RG em base oficial.</li>
-            <li>Não substitui a conferência do atendimento, da identidade e da finalidade da declaração.</li>
-            <li>Não guarda os dados em servidor próprio. Os dados salvos ficam no navegador do usuário.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="adsense-section" id="faq" aria-labelledby="faqTitulo">
-      <div class="section-kicker">FAQ</div>
-      <h2 id="faqTitulo">Perguntas frequentes</h2>
-
-      <div class="faq-list">
-        <details>
-          <summary>A declaração é emitida automaticamente sem conferência?</summary>
-          <div class="faq-body">Não. O usuário deve conferir todos os dados, a prévia e o PDF final antes de utilizar o documento.</div>
-        </details>
-        <details>
-          <summary>O template do cartório é obrigatório?</summary>
-          <div class="faq-body">Não. O template em PDF é opcional. Quando selecionado ou salvo neste navegador, ele é aplicado como fundo da declaração.</div>
-        </details>
-        <details>
-          <summary>Os dados são enviados para servidor?</summary>
-          <div class="faq-body">A montagem da declaração ocorre no navegador. O salvamento de dados do cartório e template usa recursos locais do navegador, como localStorage e IndexedDB.</div>
-        </details>
-        <details>
-          <summary>A ferramenta verifica a identidade do comparecente?</summary>
-          <div class="faq-body">Não. A ferramenta apenas valida a estrutura do CPF informado. A conferência de identidade e do atendimento deve ser feita pela serventia.</div>
-        </details>
-        <details>
-          <summary>Posso editar o texto antes de gerar o PDF?</summary>
-          <div class="faq-body">Sim. A prévia é editável. Após concluir a edição, o PDF será gerado com o texto exibido na prévia.</div>
-        </details>
-      </div>
-    </section>
   </main>
   <footer class="footer">
   © 2024 – Todos os direitos reservados. Registrado no INPI.<br>
