@@ -196,8 +196,62 @@
 
     a{color:var(--brand-dark)}
 
+    .topbar{
+      width:100%;
+      background:#ffffff;
+      position:sticky;
+      top:0;
+      z-index:50;
+      border-bottom:1px solid #e5eaf2;
+    }
+
+    .nav{
+      max-width:1170px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:12px 18px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:inline-flex;
+      align-items:center;
+      text-decoration:none;
+      flex:0 1 auto;
+      min-width:0;
+    }
+
+    .brand img{
+      display:block;
+      height:40px;
+      max-height:40px;
+      width:auto;
+      max-width:min(100%,420px);
+      object-fit:contain;
+    }
+
+    .menu{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:26px;
+      flex-wrap:wrap;
+      font-weight:800;
+    }
+
+    .menu a{
+      color:#111827;
+      text-decoration:none;
+      white-space:nowrap;
+    }
+
+    .menu a:hover{text-decoration:underline}
+
     .shell{
-      width:min(1220px,calc(100% - 32px));
+      width:min(1100px,calc(100% - 32px));
       margin:0 auto;
       padding:34px 0 54px;
     }
@@ -659,17 +713,23 @@
       line-height:1.65;
     }
 
-    footer{
+    footer.footer{
+      background:#f3f6fb;
       color:#64748b;
-      font-size:13px;
-      padding:0 0 44px;
+      font-size:14px;
+      line-height:1.7;
+      text-align:center;
+      margin-top:22px;
+      padding:28px 16px 40px;
     }
 
-    footer .shell{
-      width:min(1220px,calc(100% - 32px));
-      margin:0 auto;
-      padding:0;
+    footer.footer a{
+      color:#0f172a;
+      font-weight:700;
+      text-decoration:none;
     }
+
+    footer.footer a:hover{text-decoration:underline}
 
     .src{
       background:#fff;
@@ -709,7 +769,7 @@
     }
 
     @media (max-width:620px){
-      .shell{width:min(100% - 22px,1220px);padding-top:22px}
+      .shell{width:min(100% - 22px,1100px);padding-top:22px}
       .hero,.adsense-section,.card{padding:18px}
       .actions,.cartorio-actions,.template-actions{grid-template-columns:1fr}
       .hero h1,h1{font-size:30px}
@@ -742,9 +802,21 @@
   </style>
 </head>
 <body>
+  <div class="topbar" role="navigation" aria-label="Menu principal">
+    <div class="nav">
+      <a class="brand" href="https://portalnotarial.com.br/oficios-outros-cartorios.html" aria-label="Página inicial do Ofício para Cartórios">
+        <img src="assets/oficio-outros-cartorios-logo.png" alt="Ofício para Cartórios" width="1863" height="184">
+      </a>
+      <div class="menu" aria-label="Links do menu">
+        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a>
+        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
+        <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+      </div>
+    </div>
+  </div>
+
   <main class="shell">
     <section class="hero" aria-labelledby="titulo">
-      <div class="eyebrow">Ofícios notariais</div>
       <h1 id="titulo">Gerador de ofício para outros cartórios</h1>
       <p>
         Preencha os dados do ato comunicado, revise a prévia do ofício e gere um PDF com o ofício e o traslado lavrado.
@@ -754,44 +826,7 @@
       </div>
       <div class="hero-actions" aria-label="Atalhos da página">
         <a class="hero-link primary-link" href="#ferramenta">Ir para a ferramenta</a>
-        <a class="hero-link secondary-link" href="#criterios-fontes">Ver critérios e fontes</a>
       </div>
-    </section>
-
-    <section class="adsense-section" id="informacoes-ferramenta" aria-labelledby="infoTitulo">
-      <div class="section-kicker">Informações</div>
-      <h2 id="infoTitulo">O que a ferramenta faz</h2>
-      <p>
-        A ferramenta gera ofício de comunicação dirigido a outro cartório, com dados do ato notarial comunicado, dados do ato praticado no cartório emissor, prévia editável, template em PDF e anexação do traslado lavrado.
-      </p>
-
-      <div class="info-grid">
-        <article class="info-card">
-          <h3>Quando usar</h3>
-          <p>Use quando for necessário comunicar a outro cartório a retificação, dissolução, restabelecimento, revogação, substabelecimento ou renúncia relacionada a ato anteriormente lavrado.</p>
-        </article>
-        <article class="info-card">
-          <h3>Como interpretar o resultado</h3>
-          <p>O resultado é a prévia do ofício e o PDF final formado pelo ofício e pelo traslado anexado. Antes de usar, confira destinatário, ato comunicado, livro, folhas, situação do ato, assinatura e arquivo anexado.</p>
-        </article>
-        <article class="info-card">
-          <h3>Limite operacional</h3>
-          <p>A ferramenta não consulta sistemas externos, não valida o conteúdo do traslado e não substitui a conferência jurídica, documental e notarial do caso concreto.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="adsense-section" id="como-usar" aria-labelledby="comoUsarTitulo">
-      <div class="section-kicker">Como usar</div>
-      <h2 id="comoUsarTitulo">Como usar a ferramenta</h2>
-      <p>
-        Informe os dados do ofício, anexe o traslado lavrado, revise a prévia e gere o PDF final. O template do cartório é opcional e pode ser salvo neste navegador para uso posterior.
-      </p>
-      <ol class="use-steps">
-        <li><span class="step-number">1</span><span><strong>Anexe e preencha.</strong> Selecione o traslado lavrado em PDF e informe número do ofício, data, protocolo, cartório comunicado, ato comunicado e ato praticado.</span></li>
-        <li><span class="step-number">2</span><span><strong>Revise a prévia.</strong> Abra a prévia do ofício, confira o texto e, se necessário, edite diretamente o conteúdo antes da emissão.</span></li>
-        <li><span class="step-number">3</span><span><strong>Gere o PDF.</strong> O arquivo final será montado com o ofício e, em seguida, com as páginas do traslado lavrado selecionado pelo usuário.</span></li>
-      </ol>
     </section>
 
     <section class="grid" id="ferramenta">
@@ -963,82 +998,17 @@
       </div>
     </section>
 
-    <section class="adsense-section" id="criterios-fontes" aria-labelledby="criteriosTitulo">
-      <div class="section-kicker">Critérios e fontes</div>
-      <h2 id="criteriosTitulo">Critérios utilizados</h2>
-      <p>
-        O ofício é formado com os dados digitados pelo usuário, com validação básica de campos obrigatórios. O PDF final pode usar template em PDF indicado pelo usuário e é montado no próprio navegador com as bibliotecas externas carregadas na página.
-      </p>
-
-      <div class="source-grid">
-        <article class="source-box">
-          <h3>Fontes utilizadas pela ferramenta</h3>
-          <ul>
-            <li>Dados preenchidos pelo usuário no formulário.</li>
-            <li>Traslado lavrado em PDF selecionado pelo usuário.</li>
-            <li>Template do cartório enviado ou salvo no navegador, quando utilizado.</li>
-            <li>Texto da prévia do ofício, inclusive quando editado manualmente pelo usuário.</li>
-          </ul>
-        </article>
-        <article class="source-box">
-          <h3>Limites da ferramenta</h3>
-          <ul>
-            <li>Não valida o conteúdo do traslado anexado.</li>
-            <li>Não consulta sistemas externos nem confirma o recebimento pelo cartório destinatário.</li>
-            <li>Não substitui a conferência do ato comunicado, do ato praticado e da pertinência da comunicação.</li>
-            <li>Não guarda os dados em servidor próprio. Os dados salvos ficam no navegador do usuário.</li>
-          </ul>
-        </article>
-      </div>
-    </section>
-
-    <section class="adsense-section" id="faq" aria-labelledby="faqTitulo">
-      <div class="section-kicker">FAQ</div>
-      <h2 id="faqTitulo">Perguntas frequentes</h2>
-
-      <div class="faq-list">
-        <details>
-          <summary>O ofício é enviado automaticamente ao cartório comunicado?</summary>
-          <div class="faq-body">Não. A ferramenta apenas gera o PDF. O envio ao cartório destinatário deve ser feito pelo usuário pelo meio adequado.</div>
-        </details>
-        <details>
-          <summary>O traslado em PDF é obrigatório?</summary>
-          <div class="faq-body">Sim. Para gerar o PDF final, o usuário deve selecionar o traslado lavrado, que será anexado depois do ofício.</div>
-        </details>
-        <details>
-          <summary>O template do cartório é obrigatório?</summary>
-          <div class="faq-body">Não. O template em PDF é opcional. Quando selecionado ou salvo neste navegador, ele é aplicado como fundo do ofício.</div>
-        </details>
-        <details>
-          <summary>Posso editar o texto antes de gerar o PDF?</summary>
-          <div class="faq-body">Sim. A prévia é editável. Após concluir a edição, o PDF será gerado com o texto exibido na prévia.</div>
-        </details>
-        <details>
-          <summary>A ferramenta confere se o ato deve ser comunicado?</summary>
-          <div class="faq-body">Não. A ferramenta apoia a redação do ofício. A conferência da necessidade, do fundamento e do conteúdo da comunicação deve ser feita pela serventia.</div>
-        </details>
-      </div>
-    </section>
   </main>
 
-  <footer>
-    <div class="shell">
-      <div class="src">
-        <p>Ferramenta em versão inicial. O usuário deve revisar todos os dados antes de gerar o PDF final.</p>
-        <p>Uso recomendado. Apoio à redação de ofício de comunicação entre cartórios. O resultado não substitui a conferência do caso concreto.</p>
-        <p>Projeto apoiado por <a href="https://escriturapublica.substack.com" target="_blank" rel="noopener">Escritura Pública</a> | <a href="https://www.atesta.com.br" target="_blank" rel="noopener">Atesta</a></p>
-        <nav class="institutional-nav" aria-label="Links institucionais">
-          <a href="https://portalnotarial.com.br/">Início</a>
-          <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
-          <a href="https://portalnotarial.com.br/contato.html">Contato</a>
-          <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
-          <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos</a>
-          <a href="https://portalnotarial.com.br/aviso-legal.html">Aviso legal</a>
-          <a href="https://portalnotarial.com.br/mapa-do-site.html">Mapa do site</a>
-        </nav>
-      </div>
-    </div>
-  </footer>
+  <footer class="footer">
+  © 2024 – Todos os direitos reservados. Registrado no INPI.<br>
+  Ofício para Cartórios – Atesta Processamento e Automação de Dados Ltda.<br>
+  CNPJ: 31.527.748/0001-70 • São Paulo/SP<br>
+  <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a> •
+  <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a> •
+  <a href="https://portalnotarial.com.br/contato.html">Contato</a><br>
+  Documento meramente informativo. O conteúdo deve ser conferido pelo usuário.
+</footer>
 
   <script>
 const ids = {
