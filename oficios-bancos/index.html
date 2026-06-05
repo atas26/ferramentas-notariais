@@ -2384,6 +2384,19 @@
       });
     }
 
+    function focarCampo(campo) {
+      if (!campo) return;
+      try { campo.focus({ preventScroll: true }); } catch (e) { campo.focus(); }
+      const topbar = document.querySelector('.topbar');
+      const offset = (topbar ? topbar.getBoundingClientRect().height : 0) + 16;
+      const reposicionar = function () {
+        const y = campo.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'smooth' });
+      };
+      reposicionar();
+      window.requestAnimationFrame(reposicionar);
+    }
+
     function validarCamposAntesDeGerar() {
       const form = document.getElementById('formOficio');
 
@@ -2396,22 +2409,25 @@
       validarCampoCPF(document.getElementById('cpfAutorizado'));
       validarCampoEmail(document.getElementById('emailCartorio'));
 
-      if (!form.reportValidity()) {
+      if (!form.checkValidity()) {
+        const invalido = form.querySelector(':invalid');
+        form.reportValidity();
+        if (invalido) focarCampo(invalido);
         setStatus('Confira os campos obrigatórios antes de gerar o PDF final.');
         return false;
       }
 
       if (!getTipoAssinatura()) {
+        const primeiroTipo = document.getElementById('tipoAssinaturaDigital');
+        if (primeiroTipo) focarCampo(primeiroTipo);
         alert('Selecione o tipo da assinatura do ofício.');
         setStatus('Selecione o tipo da assinatura do ofício antes de gerar ou imprimir.');
-        const primeiroTipo = document.getElementById('tipoAssinaturaDigital');
-        if (primeiroTipo) primeiroTipo.focus();
         return false;
       }
 
       if (!ids.certidaoPdf.files[0]) {
+        focarCampo(ids.certidaoPdf);
         alert('Selecione a certidão de óbito em PDF antes de gerar o PDF final.');
-        ids.certidaoPdf.focus();
         setStatus('Selecione a certidão de óbito em PDF antes de gerar o PDF final.');
         return false;
       }
