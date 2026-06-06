@@ -763,6 +763,13 @@
       color: var(--texto-suave);
       line-height: 1.55;
       font-size: 15px;
+      flex: 1 1 auto;
+      white-space: nowrap;
+    }
+
+    .notice-inner .button {
+      flex: 0 0 auto;
+      white-space: nowrap;
     }
 
     .notice-inner strong {
@@ -828,6 +835,10 @@
       .notice-inner {
         align-items: flex-start;
         flex-direction: column;
+      }
+
+      .notice-inner p {
+        white-space: normal;
       }
     }
 
@@ -1657,7 +1668,7 @@
             <span class="section-eyebrow">Ferramentas e serviços de apoio</span>
             <h2 class="section-title" id="titulo-ferramentas">Um painel único para rotinas recorrentes.</h2>
             <p class="section-lead">
-              O Portal Notarial Pro reúne ferramentas de apoio operacional para cálculo, triagem, conferência técnica, emolumentos, ofícios e consultas auxiliares. Serviços externos são identificados em seção própria.
+              O Portal Notarial Pro reúne ferramentas de apoio operacional para cálculo, triagem, conferência técnica, emolumentos, ofícios e consultas auxiliares. Serviços parceiros são identificados em seção própria.
             </p>
 
             <div class="tools-category" aria-label="Mais acessados">
@@ -1819,21 +1830,21 @@
             </div>
 
 
-            <div class="tools-category tools-category-external" aria-label="Serviços externos úteis">
+            <div class="tools-category tools-category-external" aria-label="Serviço parceiro">
               <div class="tools-category-head">
                 <div>
-                  <h3>Serviços externos úteis</h3>
-                  <p class="tools-category-note">Serviços com cadastro, planos, preços e contratação próprios no site do fornecedor.</p>
+                  <h3>Serviço parceiro</h3>
+                  <p class="tools-category-note">Serviços com cadastro, planos, preços e contratação próprios no site do parceiro.</p>
                 </div>
               </div>
-              <div class="tools-grid" aria-label="Serviços externos úteis">
+              <div class="tools-grid" aria-label="Serviço parceiro">
                 <a class="tool-card tool-card-link tool-card-external" href="https://www.atesta.com.br" target="_blank" rel="noopener noreferrer">
-                  <span class="tool-card-badge">Serviço externo</span>
+                  <span class="tool-card-badge">Serviço parceiro</span>
                   <div class="tool-card-icon tone-green" aria-hidden="true">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4h6l3 3v13a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 6.5 20V5.5A1.5 1.5 0 0 1 8 4z"></path><path d="M13.5 4v4h3"></path><path d="M9 13l2 2 4-4"></path><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
                   </div>
                   <h3>Atesta</h3>
-                  <p>Emissão de certidões em fontes públicas. O acesso, o cadastro e os preços são definidos no site do fornecedor.</p>
+                  <p>Emissão de certidões em fontes públicas. Cadastro, planos, preços e contratação no site do parceiro.</p>
                   <span class="tool-card-action">Acessar o Atesta →</span>
                 </a>
               </div>
@@ -1880,9 +1891,7 @@
 
       <section class="notice-panel" aria-label="Aviso sobre limites das ferramentas">
         <div class="notice-inner">
-          <p>
-            <strong>Aviso legal.</strong> As ferramentas são recursos de apoio operacional. Os resultados dependem dos dados informados e não substituem a análise do caso concreto.
-          </p>
+          <p><strong>Aviso legal.</strong> As ferramentas são recursos de apoio operacional. Os resultados dependem dos dados informados e não substituem a análise do caso concreto.</p>
           <a class="button" href="aviso-legal.html">Aviso legal</a>
         </div>
       </section>
