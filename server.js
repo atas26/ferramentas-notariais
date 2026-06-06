@@ -213,6 +213,10 @@ app.use(express.static(__dirname, {
   }
 }));
 
+app.get(['/sobre', '/sobre.html'], (_req, res) => {
+  res.sendFile(path.join(__dirname, 'sobre.html'));
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
