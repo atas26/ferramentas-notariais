@@ -600,6 +600,47 @@
       overflow-wrap: anywhere;
     }
 
+
+    .tools-category-note {
+      margin: 6px 0 0;
+      color: var(--texto-suave);
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+
+    .tool-card-link {
+      text-decoration: none;
+    }
+
+    .tool-card-external {
+      position: relative;
+      color: inherit;
+    }
+
+    .tool-card-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 0 10px;
+      margin: 0 0 14px;
+      border-radius: 999px;
+      background: rgba(11, 95, 255, 0.08);
+      color: var(--azul);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .tool-card-action {
+      display: inline-flex;
+      margin-top: auto;
+      padding-top: 18px;
+      color: var(--azul);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: -0.01em;
+    }
+
     .pro-strip {
       display: flex;
       align-items: center;
@@ -1613,10 +1654,10 @@
       <section class="section" id="ferramentas" aria-labelledby="titulo-ferramentas">
         <div class="section-panel">
           <div class="section-content">
-            <span class="section-eyebrow">Ferramentas incluídas</span>
+            <span class="section-eyebrow">Ferramentas e serviços de apoio</span>
             <h2 class="section-title" id="titulo-ferramentas">Um painel único para rotinas recorrentes.</h2>
             <p class="section-lead">
-              O Portal Notarial Pro reúne ferramentas de apoio operacional para cálculo, triagem, conferência técnica, emolumentos, ofícios e consultas auxiliares.
+              O Portal Notarial Pro reúne ferramentas de apoio operacional para cálculo, triagem, conferência técnica, emolumentos, ofícios e consultas auxiliares. Serviços externos são identificados em seção própria.
             </p>
 
             <div class="tools-category" aria-label="Mais acessados">
@@ -1637,13 +1678,6 @@
                 </div>
                 <h3>ITCMD</h3>
                 <p>Cálculo estimativo de ITCMD, com juros e multa quando aplicáveis.</p>
-              </article>
-              <article class="tool-card">
-                <div class="tool-card-icon tone-green" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4h6l3 3v13a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 6.5 20V5.5A1.5 1.5 0 0 1 8 4z"></path><path d="M13.5 4v4h3"></path><path d="M9 13l2 2 4-4"></path><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
-                </div>
-                <h3>Atesta</h3>
-                <p>Emissão de certidões em fontes públicas.</p>
               </article>
               </div>
             </div>
@@ -1701,13 +1735,6 @@
                 </div>
                 <h3>Tarifas da Conta Notarial</h3>
                 <p>Cálculo estimativo de tarifas da conta notarial.</p>
-              </article>
-              <article class="tool-card">
-                <div class="tool-card-icon tone-green" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4h6l3 3v13a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 6.5 20V5.5A1.5 1.5 0 0 1 8 4z"></path><path d="M13.5 4v4h3"></path><path d="M9 13l2 2 4-4"></path><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
-                </div>
-                <h3>Atesta</h3>
-                <p>Emissão de certidões em fontes públicas.</p>
               </article>
               </div>
             </div>
@@ -1788,6 +1815,27 @@
                 <h3>Gerador de certidões</h3>
                 <p>Geração de certidões a partir de dados e modelos informados.</p>
               </article>
+              </div>
+            </div>
+
+
+            <div class="tools-category tools-category-external" aria-label="Serviços externos úteis">
+              <div class="tools-category-head">
+                <div>
+                  <h3>Serviços externos úteis</h3>
+                  <p class="tools-category-note">Serviços com cadastro, planos, preços e contratação próprios no site do fornecedor.</p>
+                </div>
+              </div>
+              <div class="tools-grid" aria-label="Serviços externos úteis">
+                <a class="tool-card tool-card-link tool-card-external" href="https://www.atesta.com.br" target="_blank" rel="noopener noreferrer">
+                  <span class="tool-card-badge">Serviço externo</span>
+                  <div class="tool-card-icon tone-green" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4h6l3 3v13a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 6.5 20V5.5A1.5 1.5 0 0 1 8 4z"></path><path d="M13.5 4v4h3"></path><path d="M9 13l2 2 4-4"></path><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
+                  </div>
+                  <h3>Atesta</h3>
+                  <p>Emissão de certidões em fontes públicas. O acesso, o cadastro e os preços são definidos no site do fornecedor.</p>
+                  <span class="tool-card-action">Acessar o Atesta →</span>
+                </a>
               </div>
             </div>
 
