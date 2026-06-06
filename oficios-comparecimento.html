@@ -928,7 +928,307 @@
         line-height:1.5;
       }
     }
-  </style>
+  
+:root{--pn-logo-box-height:36px;--pn-logo-mobile-height:32px;--pn-logo-max-width:430px;}
+
+/* Portal Notarial - padrão visual global v30
+   Referência: página Cálculo Escrituras.
+   Escopo: topbar, logotipo, menu, container, cards, título principal e rodapé. */
+:root {
+  --pn-primary: #1273ea;
+  --pn-title: #1a56db;
+  --pn-text: #0f172a;
+  --pn-muted: #475569;
+  --pn-bg: #f8fafc;
+  --pn-card: #ffffff;
+  --pn-border: #e5e7eb;
+  --pn-radius: 14px;
+  --pn-shadow: 0 12px 30px rgba(2, 6, 23, .08);
+  --pn-nav-width: 1170px;
+  --pn-content-width: 1100px;
+  --pn-topbar-height: 68px;
+  --pn-logo-box-height: 36px;
+  --pn-logo-max-width: 420px;
+  --pn-title-size: 28px;
+}
+
+body {
+  background: var(--pn-bg) !important;
+  color: var(--pn-text) !important;
+}
+
+.topbar,
+.pn-topbar,
+.pn-tool-topbar {
+  width: 100% !important;
+  background: #ffffff !important;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 50 !important;
+  border-bottom: 1px solid var(--pn-border) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+
+.nav,
+.pn-topbar-inner,
+.pn-topbar__inner,
+.pn-tool-topbar-inner {
+  width: 100% !important;
+  max-width: var(--pn-nav-width) !important;
+  height: var(--pn-topbar-height) !important;
+  min-height: var(--pn-topbar-height) !important;
+  margin: 0 auto !important;
+  padding: 0 18px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 18px !important;
+  flex-wrap: nowrap !important;
+  box-sizing: border-box !important;
+}
+
+.brand,
+.pn-logo-link,
+.pn-tool-logo-link {
+  display: inline-flex !important;
+  align-items: center !important;
+  min-width: 0 !important;
+  line-height: 0 !important;
+  text-decoration: none !important;
+  color: var(--pn-primary) !important;
+}
+
+.brand img,
+.brand-logo,
+.pn-logo,
+.pn-tool-logo {
+  display: block !important;
+  height: var(--pn-logo-box-height) !important;
+  max-height: var(--pn-logo-box-height) !important;
+  width: auto !important;
+  max-width: min(100%, var(--pn-logo-max-width)) !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  background: transparent !important;
+}
+
+.pn-logo-text {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  gap: 7px !important;
+  height: 36px !important;
+  font-size: 29px !important;
+  line-height: 36px !important;
+  font-weight: 700 !important;
+  letter-spacing: .02em !important;
+  color: var(--pn-primary) !important;
+  white-space: nowrap !important;
+}
+
+.pn-logo-text span {
+  font-weight: 300 !important;
+  letter-spacing: .04em !important;
+}
+
+.menu,
+.pn-menu,
+.pn-tool-nav {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 18px !important;
+  flex-wrap: wrap !important;
+  white-space: nowrap !important;
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+}
+
+.menu a,
+.pn-menu a,
+.pn-tool-nav a {
+  color: var(--pn-text) !important;
+  opacity: .9 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+  text-decoration: none !important;
+}
+
+.menu a:hover,
+.menu a:focus,
+.pn-menu a:hover,
+.pn-menu a:focus,
+.pn-tool-nav a:hover,
+.pn-tool-nav a:focus {
+  color: var(--pn-primary) !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+.container,
+main.container,
+main.pn-page,
+.pagina,
+.shell {
+  width: 100% !important;
+  max-width: var(--pn-content-width) !important;
+  margin: 0 auto !important;
+  padding: 28px !important;
+  box-sizing: border-box !important;
+}
+
+.card,
+.hero-card,
+.pn-title-card,
+.pn-shell,
+.painel,
+.cabecalho,
+.pn-tool-title-card,
+.info-card,
+.bloco-conteudo {
+  background: var(--pn-card) !important;
+  border: 1px solid var(--pn-border) !important;
+  border-radius: var(--pn-radius) !important;
+  box-shadow: var(--pn-shadow) !important;
+}
+
+.card,
+.hero-card,
+.pn-title-card,
+.pn-shell,
+.cabecalho,
+.pn-tool-title-card {
+  padding: 26px !important;
+  margin: 18px 0 !important;
+}
+
+.card > h1,
+.hero-card > h1,
+.cabecalho > h1,
+.pn-title-card > h1,
+.pn-shell > h1,
+.pn-tool-title-card > h1,
+#titulo,
+#titulo-verificador-tecnico {
+  text-align: center !important;
+  font-size: var(--pn-title-size) !important;
+  line-height: 1.25 !important;
+  color: var(--pn-title) !important;
+  font-weight: 800 !important;
+  margin: 10px 0 18px !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+
+.footer,
+.pn-footer,
+.rodape,
+footer {
+  color: var(--pn-muted) !important;
+  font-size: 14px !important;
+  margin: 22px auto 0 !important;
+  text-align: center !important;
+  padding: 28px !important;
+  border-top: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  line-height: 1.65 !important;
+  max-width: var(--pn-content-width) !important;
+}
+
+.footer a,
+.pn-footer a,
+.rodape a,
+footer a {
+  color: var(--pn-primary) !important;
+  text-decoration: none !important;
+}
+
+.footer a:hover,
+.pn-footer a:hover,
+.rodape a:hover,
+footer a:hover {
+  text-decoration: underline !important;
+}
+
+@media (max-width: 760px) {
+  .nav,
+  .pn-topbar-inner,
+  .pn-topbar__inner,
+  .pn-tool-topbar-inner {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 12px 18px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+    flex-wrap: wrap !important;
+  }
+
+  .brand img,
+  .brand-logo,
+  .pn-logo,
+  .pn-tool-logo {
+    height: var(--pn-logo-mobile-height, 32px) !important;
+    max-height: var(--pn-logo-mobile-height, 32px) !important;
+    max-width: min(100%, 82vw) !important;
+  }
+
+  .pn-logo-text {
+    height: 32px !important;
+    font-size: 25px !important;
+    line-height: 32px !important;
+  }
+
+  .menu,
+  .pn-menu,
+  .pn-tool-nav {
+    width: 100% !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+    white-space: normal !important;
+    font-size: 14px !important;
+  }
+
+  .menu a,
+  .pn-menu a,
+  .pn-tool-nav a {
+    font-size: 14px !important;
+  }
+
+  .container,
+  main.container,
+  main.pn-page,
+  .pagina,
+  .shell {
+    padding: 24px 18px !important;
+  }
+
+  .card,
+  .hero-card,
+  .pn-title-card,
+  .pn-shell,
+  .cabecalho,
+  .pn-tool-title-card {
+    padding: 22px 18px !important;
+  }
+
+  .card > h1,
+  .hero-card > h1,
+  .cabecalho > h1,
+  .pn-title-card > h1,
+  .pn-shell > h1,
+  .pn-tool-title-card > h1,
+  #titulo,
+  #titulo-verificador-tecnico {
+    font-size: 24px !important;
+  }
+}
+
+
+</style>
   <meta name="portal-layout-version" content="oficios-comparecimento-itcmd-r5" />
 </head>
 <body>
