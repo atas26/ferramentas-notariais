@@ -747,14 +747,14 @@
 
     .notice-inner {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr) max-content;
       align-items: center;
-      gap: 32px;
+      column-gap: 48px;
       width: 100%;
       border: 1px solid rgba(10,37,64,0.10);
       border-radius: 24px;
       background: rgba(255,255,255,0.86);
-      padding: 22px 34px 22px 24px;
+      padding: 22px 56px 22px 24px;
       box-shadow: 0 10px 28px rgba(10,37,64,0.045);
     }
 
@@ -772,9 +772,14 @@
     }
 
     .notice-inner .button {
+      width: auto;
+      min-width: 156px;
       flex: 0 0 auto;
-      white-space: nowrap;
-      min-width: 128px;
+      white-space: nowrap !important;
+      word-break: normal;
+      overflow-wrap: normal;
+      padding-left: 24px;
+      padding-right: 24px;
     }
 
     footer {
@@ -835,7 +840,16 @@
       .pro-strip,
       .notice-inner {
         align-items: flex-start;
-        flex-direction: column;
+      }
+
+      .notice-inner {
+        grid-template-columns: 1fr;
+        row-gap: 16px;
+        padding: 22px 24px;
+      }
+
+      .notice-inner p {
+        white-space: normal;
       }
     }
 
@@ -923,6 +937,11 @@
 
       .button {
         width: 100%;
+      }
+
+      .notice-inner .button {
+        width: 100%;
+        min-width: 0;
       }
 
       .button.publish-style {
@@ -1946,11 +1965,10 @@
 
     <footer>
       <div class="footer-inner">
-        <div>Portal Notarial Pro | Ferramentas notariais em área logada.</div>
+        <div>Portal Notarial Pro | Ferramentas notariais para o dia a dia.</div>
         <div class="footer-links" aria-label="Links institucionais">
           <a href="sobre.html">Sobre</a>
           <a href="contato.html">Contato</a>
-          <a href="mapa-do-site.html">Mapa do site</a>
           <a href="termos-de-uso.html">Termos</a>
           <a href="politica-de-privacidade.html">Privacidade</a>
           <a href="aviso-legal.html">Aviso legal</a>
