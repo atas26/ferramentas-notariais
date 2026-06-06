@@ -2003,6 +2003,59 @@ footer a:hover {
 }
 
 
+
+/* Ajuste fino global r31 */
+.topbar {
+  height: 68px !important;
+  min-height: 68px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+.topbar-inner {
+  width: min(100% - 36px, 1170px) !important;
+  height: 68px !important;
+  min-height: 68px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 18px !important;
+  margin: 0 auto !important;
+}
+.brand-logo {
+  height: 68px !important;
+  display: flex !important;
+  align-items: center !important;
+  line-height: 0 !important;
+  min-width: 0 !important;
+}
+.brand-logo img {
+  height: 66px !important;
+  max-height: 66px !important;
+  width: auto !important;
+  max-width: 640px !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  background: transparent !important;
+}
+.topbar nav {
+  height: 68px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 18px !important;
+}
+.topbar nav a {
+  font-size: 16px !important;
+  line-height: 1.4 !important;
+  font-weight: 600 !important;
+}
+@media (max-width: 760px) {
+  .topbar { height: auto !important; min-height: 0 !important; }
+  .topbar-inner { height: auto !important; min-height: 0 !important; padding: 12px 0 !important; flex-direction: column !important; align-items: flex-start !important; }
+  .brand-logo, .topbar nav { height: auto !important; min-height: 0 !important; }
+  .brand-logo img { height: 50px !important; max-height: 50px !important; max-width: 86vw !important; }
+}
 </style>
 
 </head>

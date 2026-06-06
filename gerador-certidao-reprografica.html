@@ -1355,6 +1355,44 @@
         display: none !important;
       }
     }
+
+/* Ajuste fino global r31 */
+.pn-topbar {
+  min-height: 68px !important;
+}
+.pn-topbar-inner {
+  max-width: 1170px !important;
+  height: 68px !important;
+  min-height: 68px !important;
+  padding: 0 18px !important;
+  gap: 18px !important;
+  align-items: center !important;
+}
+.pn-tool-logo {
+  height: 56px !important;
+  max-height: 56px !important;
+  max-width: none !important;
+  background: transparent !important;
+}
+.pn-title-card h1 {
+  color: #1a56db !important;
+  font-size: 28px !important;
+  line-height: 1.25 !important;
+  font-weight: 800 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
+}
+.grid {
+  gap: 14px !important;
+}
+.grid > .card,
+.grid > .card.full {
+  margin: 0 !important;
+}
+@media (max-width: 760px) {
+  .pn-topbar-inner { height: auto !important; min-height: 0 !important; padding: 12px 18px !important; }
+  .pn-tool-logo { height: 42px !important; max-height: 42px !important; max-width: 86vw !important; }
+}
 </style>
 </head>
 <body>
@@ -1372,7 +1410,7 @@
   </header>
   <main class="shell pn-itcmd-shell">
     <section class="pn-title-card" aria-labelledby="titulo">
-      <h1 id="titulo">CERTIDÃO REPROGRÁFICA</h1>
+      <h1 id="titulo">Certidão Reprográfica</h1>
     </section>
 
     <section class="grid" id="ferramenta">
