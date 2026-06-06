@@ -1333,6 +1333,119 @@ footer a:hover {
   .brand-logo-box { height: 34px !important; min-height: 34px !important; max-height: 34px !important; max-width: 82vw !important; }
   .brand-logo-img { height: 34px !important; max-height: 34px !important; max-width: 82vw !important; }
 }
+
+
+/* Ajuste fino global r32: logotipos no padrão visual do Cálculo Escrituras.
+   Escopo restrito: altura da topbar, caixa do logotipo e alinhamento vertical. */
+:root{
+  --pn-logo-box-height:36px !important;
+  --pn-logo-mobile-height:32px !important;
+  --pn-logo-max-width:420px !important;
+  --pn-topbar-height:68px !important;
+}
+.topbar,
+.pn-topbar,
+.pn-tool-topbar{
+  height:var(--pn-topbar-height) !important;
+  min-height:var(--pn-topbar-height) !important;
+  padding:0 !important;
+  display:flex !important;
+  align-items:center !important;
+  overflow:visible !important;
+}
+.nav,
+.topbar-inner,
+.pn-topbar-inner,
+.pn-topbar__inner,
+.pn-tool-topbar-inner{
+  height:var(--pn-topbar-height) !important;
+  min-height:var(--pn-topbar-height) !important;
+  padding:0 18px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:18px !important;
+  overflow:visible !important;
+  box-sizing:border-box !important;
+}
+.brand,
+.brand-logo,
+.pn-logo-link,
+.pn-tool-logo-link{
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  line-height:0 !important;
+  overflow:visible !important;
+}
+.brand-logo-box{
+  height:var(--pn-logo-box-height) !important;
+  min-height:0 !important;
+  max-height:var(--pn-logo-box-height) !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  line-height:0 !important;
+  overflow:visible !important;
+}
+.brand img,
+.brand-logo img,
+.brand-logo-img,
+.pn-logo,
+.pn-tool-logo{
+  display:block !important;
+  height:var(--pn-logo-box-height) !important;
+  max-height:var(--pn-logo-box-height) !important;
+  width:auto !important;
+  max-width:min(100%,var(--pn-logo-max-width)) !important;
+  object-fit:contain !important;
+  object-position:left center !important;
+  background:transparent !important;
+  overflow:visible !important;
+}
+.topbar nav,
+.menu,
+.pn-topbar-nav,
+.pn-tool-nav{
+  height:auto !important;
+  min-height:0 !important;
+  display:flex !important;
+  align-items:center !important;
+}
+@media (max-width:760px){
+  .topbar,
+  .pn-topbar,
+  .pn-tool-topbar{
+    height:auto !important;
+    min-height:0 !important;
+  }
+  .nav,
+  .topbar-inner,
+  .pn-topbar-inner,
+  .pn-topbar__inner,
+  .pn-tool-topbar-inner{
+    height:auto !important;
+    min-height:0 !important;
+    padding:12px 18px !important;
+    flex-direction:column !important;
+    align-items:flex-start !important;
+  }
+  .brand img,
+  .brand-logo img,
+  .brand-logo-img,
+  .pn-logo,
+  .pn-tool-logo{
+    height:var(--pn-logo-mobile-height) !important;
+    max-height:var(--pn-logo-mobile-height) !important;
+    max-width:min(100%,82vw) !important;
+  }
+  .brand-logo-box{
+    height:var(--pn-logo-mobile-height) !important;
+    max-height:var(--pn-logo-mobile-height) !important;
+  }
+}
+
 </style>
 </head>
 
