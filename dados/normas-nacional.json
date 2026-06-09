@@ -1,8 +1,8 @@
 {
-  "source": "https://atos.cnj.jus.br/files/compilado125557202605216a0f00dd960d8.pdf",
-  "updatedAt": "2026-06-08T08:01:01.158235+00:00",
-  "sha256": "77d3e8fbdea47fff98a1688013456ac21493bf7084779bd294a154fec808eb56",
-  "totalItems": 844,
+  "source": "https://atos.cnj.jus.br/files/compilado235605202606086a275695a672c.pdf",
+  "updatedAt": "2026-06-09T08:01:07.738046+00:00",
+  "sha256": "e023296bb9c983f03e10111de06237ec305858f39d02cf1057d93a5c891c4afd",
+  "totalItems": 845,
   "parserVersion": "cnj-hierarchy-v5",
   "articles": [
     {
@@ -9694,7 +9694,63 @@
           "type": "section-title"
         }
       ],
-      "texto": "Art. 125. As certidões dos imóveis que já forem objeto de matrícula eletrônica, após a “primeira qualificação eletrônica”, serão expedidas, independentemente de indicação de finalidade, em formato nato-digital estruturado, contendo a situação jurídica atual do imóvel, ou seja, a sua descrição, a titularidade e os ônus reais não cancelados.\n\nParágrafo único. A expedição de certidão de atos anteriores da cadeia filiatória do imóvel depende de identificação segura do requerente e de indicação da finalidade. Art. 126. O atendimento a requisições de buscas fundadas exclusivamente no indicador pessoal ou real pressupõe a identificação segura do solicitante, bem como a indicação da finalidade, de tudo mantendo-se o registro em meio físico ou virtual."
+      "texto": "Art. 125. As certidões dos imóveis que já forem objeto de matrícula eletrônica, após a “primeira qualificação eletrônica”, serão expedidas, independentemente de indicação de finalidade, em formato nato-digital estruturado, contendo a situação jurídica atual do imóvel, ou seja, a sua descrição, a titularidade e os ônus reais não cancelados.\n\nParágrafo único. A expedição de certidão de atos anteriores da cadeia filiatória do imóvel depende de identificação segura do requerente e de indicação da finalidade."
+    },
+    {
+      "id": "cnj-art-126",
+      "numero": "Art. 126",
+      "ordem": 126,
+      "tipo": "artigo",
+      "capitulo": "Código Nacional de Normas",
+      "secao": "Seção XIV",
+      "areas": [
+        "Registro de Imóveis",
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO I",
+      "livroTitulo": "DO REGIME JURÍDICO ADMINISTRATIVO",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DO LIVRO III DA PARTE GERAL DESTE CÓDIGO DE NORMAS, DA CORREGEDORIA NACIONAL",
+      "capituloNumero": "",
+      "capituloTitulo": "",
+      "secaoTitulo": "Do Registro de Imóveis e a Proteção de Dados",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO I",
+          "type": "upper"
+        },
+        {
+          "text": "DO REGIME JURÍDICO ADMINISTRATIVO",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DO LIVRO III DA PARTE GERAL DESTE CÓDIGO DE NORMAS, DA CORREGEDORIA NACIONAL",
+          "type": "title"
+        },
+        {
+          "text": "Seção XIV",
+          "type": "section"
+        },
+        {
+          "text": "Do Registro de Imóveis e a Proteção de Dados",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 126. O atendimento a requisições de buscas fundadas exclusivamente no indicador pessoal ou real pressupõe a identificação segura do solicitante, bem como a indicação da finalidade, de tudo mantendo-se o registro em meio físico ou virtual."
     },
     {
       "id": "cnj-art-127",
@@ -20307,646 +20363,7 @@
           "type": "section-title"
         }
       ],
-      "texto": "Art. 236-A. Os mandados judiciais a serem cumpridos pelos oficiais de registro civil das pessoas naturais serão enviados eletronicamente pelos respectivos juízos de origem, por meio de módulo disponibilizado pelo ON-RCPN, devendo a parte interessada efetuar o pagamento dos emolumentos, caso não seja beneficiária da justiça gratuita. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 1º. O registrador poderá rejeitar o recebimento de mandados judiciais enviados por via diversa da prevista no caputdeste artigo. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 2º. O mandado judicial advindo de juízo de comarca diversa do oficial de registro civil destinatário da ordem é dispensado do recebimento do “Cumpra-se” do juízo local, desde que seja possível a verificação de sua autenticidade. (incluído pelo Provimento n. 180, de 16.8.2024)"
-    },
-    {
-      "id": "cnj-art-263-a",
-      "numero": "Art. 263-A",
-      "ordem": 263.01,
-      "tipo": "artigo",
-      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
-      "areas": [
-        "Registro Civil das Pessoas Naturais",
-        "Tabelionato de Protesto"
-      ],
-      "temas": [],
-      "norma": true,
-      "notas": [],
-      "parte": "PARTE GERAL",
-      "livro": "LIVRO IV",
-      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-      "titulo": "TÍTULO II",
-      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-      "capituloNumero": "CAPÍTULO III",
-      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
-      "subsecao": "",
-      "subsecaoTitulo": "",
-      "estrutura": [
-        {
-          "text": "PARTE GERAL",
-          "type": "upper"
-        },
-        {
-          "text": "LIVRO IV",
-          "type": "upper"
-        },
-        {
-          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "TÍTULO II",
-          "type": "upper"
-        },
-        {
-          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "CAPÍTULO III",
-          "type": "upper"
-        },
-        {
-          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-          "type": "title"
-        },
-        {
-          "text": "Seção II",
-          "type": "section"
-        },
-        {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
-          "type": "section-title"
-        }
-      ],
-      "texto": "Art. 263-A. Fica instituída a obrigatoriedade de comunicação contínua, estruturada e padronizada de dados relativos ao cumprimento de decisões judiciais que determinem a suspensão, o cancelamento provisório ou definitivo, ou qualquer forma de supressão da publicidade de protestos de títulos e outros documentos de dívida, bem como de informações correlatas necessárias à análise dos efeitos dessas decisões sobre o acervo de protestos e sobre o ambiente de crédito. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nParágrafo único. A obrigação de comunicação de que trata o caput será cumprida, em nível operacional, pelos Tabeliães de Protesto, mediante alimentação contínua da base de dados da Central Nacional de Serviços Eletrônicos Compartilhados dos Tabeliães de Protesto (CENPROT), incumbindo a esta a consolidação, o tratamento e a disponibilização analítica das informações em âmbito nacional. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
-    },
-    {
-      "id": "cnj-art-263-b",
-      "numero": "Art. 263-B",
-      "ordem": 263.02,
-      "tipo": "artigo",
-      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
-      "areas": [
-        "Registro Civil das Pessoas Naturais",
-        "Tabelionato de Protesto"
-      ],
-      "temas": [],
-      "norma": true,
-      "notas": [],
-      "parte": "PARTE GERAL",
-      "livro": "LIVRO IV",
-      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-      "titulo": "TÍTULO II",
-      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-      "capituloNumero": "CAPÍTULO III",
-      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
-      "subsecao": "",
-      "subsecaoTitulo": "",
-      "estrutura": [
-        {
-          "text": "PARTE GERAL",
-          "type": "upper"
-        },
-        {
-          "text": "LIVRO IV",
-          "type": "upper"
-        },
-        {
-          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "TÍTULO II",
-          "type": "upper"
-        },
-        {
-          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "CAPÍTULO III",
-          "type": "upper"
-        },
-        {
-          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-          "type": "title"
-        },
-        {
-          "text": "Seção II",
-          "type": "section"
-        },
-        {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
-          "type": "section-title"
-        }
-      ],
-      "texto": "Art. 263-B. Para os fins desta Seção, considera-se: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – litigância abusiva: o exercício do direito de ação ou de defesa com desvio de finalidade, excesso manifesto ou utilização do processo como instrumento de obtenção de vantagem indevida, em desconformidade com os deveres de boa-fé objetiva, cooperação e lealdade processual; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – litigância predatória: a prática reiterada, sistemática ou massificada de atos processuais, individuais ou coletivos, com potencial de gerar efeitos artificiais ou desproporcionais sobre a publicidade dos protestos, o ambiente de crédito ou a atividade extrajudicial, independentemente da análise do mérito das decisões judiciais proferidas; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIII – abuso de direito por credores: o exercício de prerrogativas legais ou contratuais relacionadas ao protesto de títulos e documentos de dívida em desconformidade com a função econômica e social do crédito, caracterizado, dentre outras hipóteses, pela utilização reiterada de expedientes formais com finalidade de constrangimento indevido, distorção informacional ou indução a erro quanto à existência, exigibilidade ou extensão da obrigação. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
-    },
-    {
-      "id": "cnj-art-263-c",
-      "numero": "Art. 263-C",
-      "ordem": 263.03,
-      "tipo": "artigo",
-      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
-      "areas": [
-        "Registro Civil das Pessoas Naturais",
-        "Tabelionato de Protesto"
-      ],
-      "temas": [],
-      "norma": true,
-      "notas": [],
-      "parte": "PARTE GERAL",
-      "livro": "LIVRO IV",
-      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-      "titulo": "TÍTULO II",
-      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-      "capituloNumero": "CAPÍTULO III",
-      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
-      "subsecao": "",
-      "subsecaoTitulo": "",
-      "estrutura": [
-        {
-          "text": "PARTE GERAL",
-          "type": "upper"
-        },
-        {
-          "text": "LIVRO IV",
-          "type": "upper"
-        },
-        {
-          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "TÍTULO II",
-          "type": "upper"
-        },
-        {
-          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "CAPÍTULO III",
-          "type": "upper"
-        },
-        {
-          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-          "type": "title"
-        },
-        {
-          "text": "Seção II",
-          "type": "section"
-        },
-        {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
-          "type": "section-title"
-        }
-      ],
-      "texto": "Art. 263-C. A Central Nacional de Serviços Eletrônicos Compartilhados dos Tabeliães de Protesto (CENPROT) deverá disponibilizar, à Corregedoria Nacional de Justiça e às Corregedorias dos Tribunais de Justiça dos Estados e do Distrito Federal, relatório analítico e estruturado contendo os dados das ordens judiciais de que trata o art. 263-A, organizados de modo a permitir a identificação de padrões relacionados à litigância abusiva, à litigância predatória e ao abuso de direito por credores. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§ 1º A obrigatoriedade recai especialmente sobre determinações oriundas de: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – ações coletivas; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – ações individuais que, segundo parâmetros objetivos de análise de dados, revelem padrões relevantes de repetição, distribuição ou concentração, aptos a produzir efeitos sistêmicos sobre a publicidade dos registros de protesto; e (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIII – práticas que, amparadas ou não por decisões judiciais, consideradas isoladamente ou em conjunto, revelem, a partir da análise agregada dos dados, padrões relevantes de atuação de credores, indicativos de exercício abusivo de prerrogativas relacionadas ao protesto. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§2º O exercício regular do direito de cobrança de obrigações inadimplidas, ainda que realizado de forma massificada, desde que observados os requisitos da Lei n. 9.492/1997, não caracteriza exercício abusivo. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º Os tabeliães de protesto deverão alimentar a base de dados da CENPROT em tempo real ou na periodicidade estipulada pela Central, garantindo a completude, atualidade e a fidedignidade das informações. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º O sistema de inteligência da CENPROT deverá consolidar as informações em âmbito nacional, com vistas à identificação de padrões relevantes de concentração, dispersão territorial e recorrência de demandas, permitindo a análise integrada de impactos sobre a publicidade dos protestos e sobre o ambiente de crédito. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§5º A identificação de padrões relevantes deverá observar critérios objetivos de recorrência, concentração, dispersão territorial, impacto quantitativo, variação temporal e correlação estatística, vedada a atribuição automatizada de ilicitude, abuso ou irregularidade sem validação analítica humana. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
-    },
-    {
-      "id": "cnj-art-263-d",
-      "numero": "Art. 263-D",
-      "ordem": 263.04,
-      "tipo": "artigo",
-      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
-      "areas": [
-        "Registro Civil das Pessoas Naturais",
-        "Tabelionato de Protesto"
-      ],
-      "temas": [],
-      "norma": true,
-      "notas": [],
-      "parte": "PARTE GERAL",
-      "livro": "LIVRO IV",
-      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-      "titulo": "TÍTULO II",
-      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-      "capituloNumero": "CAPÍTULO III",
-      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
-      "subsecao": "",
-      "subsecaoTitulo": "",
-      "estrutura": [
-        {
-          "text": "PARTE GERAL",
-          "type": "upper"
-        },
-        {
-          "text": "LIVRO IV",
-          "type": "upper"
-        },
-        {
-          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "TÍTULO II",
-          "type": "upper"
-        },
-        {
-          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "CAPÍTULO III",
-          "type": "upper"
-        },
-        {
-          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-          "type": "title"
-        },
-        {
-          "text": "Seção II",
-          "type": "section"
-        },
-        {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
-          "type": "section-title"
-        }
-      ],
-      "texto": "Art. 263-D. O Instituto de Estudos de Protesto de Títulos do Brasil (IEPTB), na qualidade de gestor da CENPROT, poderá, diante de indícios consistentes de descumprimento dos deveres previstos nesta Seção, requerer à Corregedoria Nacional de Justiça a adoção de medidas de bloqueio provisório ou permanente: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – de credores específicos, para fins de suspensão de acesso ou de remessa de novos títulos à CENPROT; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – de títulos determinados, quando houver indícios de irregularidade material ou informacional. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§1º O requerimento deverá indicar, de forma fundamentada, os elementos objetivos que evidenciem potencial risco à regularidade do ambiente de crédito, à integridade da publicidade dos protestos ou à confiabilidade das informações constantes da CENPROT. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§2º O bloqueio provisório terá natureza cautelar e poderá ser determinado inaudita altera parte, pelo prazo necessário à apuração dos fatos. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º O bloqueio permanente dependerá de decisão fundamentada da Corregedoria Nacional de Justiça, assegurados o contraditório e a ampla defesa. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º As medidas previstas neste artigo não afastam a responsabilidade do credor nem impedem a adoção de outras providências administrativas, civis ou penais cabíveis (incluído pelo Provimento CN n. 225, de 20.5.2026)"
-    },
-    {
-      "id": "cnj-art-263-e",
-      "numero": "Art. 263-E",
-      "ordem": 263.05,
-      "tipo": "artigo",
-      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
-      "areas": [
-        "Registro Civil das Pessoas Naturais",
-        "Tabelionato de Protesto"
-      ],
-      "temas": [],
-      "norma": true,
-      "notas": [],
-      "parte": "PARTE GERAL",
-      "livro": "LIVRO IV",
-      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-      "titulo": "TÍTULO II",
-      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-      "capituloNumero": "CAPÍTULO III",
-      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
-      "subsecao": "",
-      "subsecaoTitulo": "",
-      "estrutura": [
-        {
-          "text": "PARTE GERAL",
-          "type": "upper"
-        },
-        {
-          "text": "LIVRO IV",
-          "type": "upper"
-        },
-        {
-          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "TÍTULO II",
-          "type": "upper"
-        },
-        {
-          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "CAPÍTULO III",
-          "type": "upper"
-        },
-        {
-          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-          "type": "title"
-        },
-        {
-          "text": "Seção II",
-          "type": "section"
-        },
-        {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
-          "type": "section-title"
-        }
-      ],
-      "texto": "Art. 263-E. As informações de que trata esta Seção terão caráter exclusivamente correcional, destinando-se à identificação de padrões e ao monitoramento de efeitos sistêmicos sobre a publicidade dos protestos, à formulação e ao aperfeiçoamento de políticas públicas e ao aprimoramento da atividade correcional, sendo em regra vedado o uso para outros fins, inclusive antecipação de juízo quanto à legitimidade, à validade, o conteúdo ou o alcance de decisões judiciais. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nParágrafo único. A utilização dos dados deverá observar critérios de proporcionalidade, prudência, economicidade e eficiência, sendo vedada a adoção de medidas automatizadas sem validação analítica prévia. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
-    },
-    {
-      "id": "cnj-art-263-f",
-      "numero": "Art. 263-F",
-      "ordem": 263.06,
-      "tipo": "artigo",
-      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
-      "areas": [
-        "Registro Civil das Pessoas Naturais"
-      ],
-      "temas": [],
-      "norma": true,
-      "notas": [],
-      "parte": "PARTE GERAL",
-      "livro": "LIVRO IV",
-      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-      "titulo": "TÍTULO II",
-      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-      "capituloNumero": "CAPÍTULO III",
-      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
-      "subsecao": "",
-      "subsecaoTitulo": "",
-      "estrutura": [
-        {
-          "text": "PARTE GERAL",
-          "type": "upper"
-        },
-        {
-          "text": "LIVRO IV",
-          "type": "upper"
-        },
-        {
-          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "TÍTULO II",
-          "type": "upper"
-        },
-        {
-          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "CAPÍTULO III",
-          "type": "upper"
-        },
-        {
-          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-          "type": "title"
-        },
-        {
-          "text": "Seção II",
-          "type": "section"
-        },
-        {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
-          "type": "section-title"
-        }
-      ],
-      "texto": "Art. 263-F. A transmissão, o armazenamento e o tratamento dos dados observarão as diretrizes da Lei n. 13.709/2018, devendo a CENPROT e as Corregedorias adotar medidas técnicas e administrativas aptas a assegurar a segurança da informação, a prevenção de acessos não autorizados, a rastreabilidade das operações e, quando cabível para fins estatísticos, a anonimização ou pseudonimização dos dados. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
-    },
-    {
-      "id": "cnj-art-263-g",
-      "numero": "Art. 263-G",
-      "ordem": 263.07,
-      "tipo": "artigo",
-      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
-      "areas": [
-        "Registro Civil das Pessoas Naturais"
-      ],
-      "temas": [],
-      "norma": true,
-      "notas": [],
-      "parte": "PARTE GERAL",
-      "livro": "LIVRO IV",
-      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-      "titulo": "TÍTULO II",
-      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-      "capituloNumero": "CAPÍTULO III",
-      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
-      "subsecao": "",
-      "subsecaoTitulo": "",
-      "estrutura": [
-        {
-          "text": "PARTE GERAL",
-          "type": "upper"
-        },
-        {
-          "text": "LIVRO IV",
-          "type": "upper"
-        },
-        {
-          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "TÍTULO II",
-          "type": "upper"
-        },
-        {
-          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "CAPÍTULO III",
-          "type": "upper"
-        },
-        {
-          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-          "type": "title"
-        },
-        {
-          "text": "Seção II",
-          "type": "section"
-        },
-        {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
-          "type": "section-title"
-        }
-      ],
-      "texto": "Art. 263-G. O tratamento, o cruzamento, a consolidação e a análise dos dados previstos nesta Seção observarão os princípios da finalidade correcional, da transparência metodológica, da rastreabilidade, da auditabilidade, da verificabilidade técnica, da supervisão humana, da proporcionalidade e da mitigação de distorções analíticas indevidas. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nParágrafo único. Os modelos analíticos, mecanismos automatizados e ferramentas computacionais utilizados deverão permitir verificação posterior dos critérios de processamento, agregação, classificação, correlação e tratamento dos dados empregados na geração dos resultados analíticos. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
-    },
-    {
-      "id": "cnj-art-263-h",
-      "numero": "Art. 263-H",
-      "ordem": 263.08,
-      "tipo": "artigo",
-      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
-      "areas": [
-        "Registro Civil das Pessoas Naturais",
-        "Tabelionato de Protesto"
-      ],
-      "temas": [],
-      "norma": true,
-      "notas": [],
-      "parte": "PARTE GERAL",
-      "livro": "LIVRO IV",
-      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-      "titulo": "TÍTULO II",
-      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-      "capituloNumero": "CAPÍTULO III",
-      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
-      "subsecao": "",
-      "subsecaoTitulo": "",
-      "estrutura": [
-        {
-          "text": "PARTE GERAL",
-          "type": "upper"
-        },
-        {
-          "text": "LIVRO IV",
-          "type": "upper"
-        },
-        {
-          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "TÍTULO II",
-          "type": "upper"
-        },
-        {
-          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "CAPÍTULO III",
-          "type": "upper"
-        },
-        {
-          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-          "type": "title"
-        },
-        {
-          "text": "Seção II",
-          "type": "section"
-        },
-        {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
-          "type": "section-title"
-        }
-      ],
-      "texto": "Art. 263-H. O formato, a estrutura de dados e os metadados obrigatórios das remessas eletrônicas e dos relatórios padronizados constam do Anexo VIII deste Código, devendo sua implementação observar integração sistêmica por Interface de Programação de Aplicações (API). (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§1º Os relatórios destinados às Corregedorias dos Tribunais de Justiça dos Estados e do Distrito Federal serão encaminhados bimestralmente, sempre que identificadas ocorrências, inconsistências, padrões ou variações com potencial relevância correicional, estatística, regulatória ou sistêmica no respectivo período de referência, em formato estruturado e padronizado, devendo conter, no mínimo: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – consolidação territorial das decisões judiciais comunicadas no período; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – quantitativos de protestos afetados; (incluído pelo Provimento CN n. 225, de 20.5.2026) III – valores globais impactados sobre a publicidade dos protestos; (incluído pelo Provimento CN n. 225, de 20.5.2026) IV – indicadores de recorrência, concentração e dispersão territorial; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nV – identificação de variações relevantes observadas no período; e (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVI – registros de inconsistências informacionais, falhas de alimentação ou padrões anômalos identificados; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVII – indicação das situações que, em razão de relevância quantitativa, territorial ou estatística, possam demandar atuação correicional. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§2º Os relatórios destinados à Corregedoria Nacional de Justiça serão encaminhados quadrimestralmente, sempre que identificados padrões, tendências, impactos sistêmicos ou outras informações de relevância nacional, em formato estruturado e padronizado, devendo conter, no mínimo: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – consolidação nacional dos dados; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – séries históricas comparativas; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIII – indicadores agregados de impacto sistêmico sobre a publicidade dos protestos e sobre o ambiente de crédito; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIV – análise comparativa entre unidades da federação; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nV – identificação de padrões nacionais relevantes de recorrência, concentração ou dispersão territorial; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVI – indicadores estatísticos relativos à litigância abusiva, à litigância predatória e ao exercício abusivo de prerrogativas relacionadas ao protesto; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVII – avaliação consolidada de riscos, tendências e distorções estruturais identificadas no período; e (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVIII – registros de situações relevantes comunicadas às Corregedorias dos Tribunais de Justiça e das providências adotadas ou conhecidas. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º Independentemente da periodicidade ordinária prevista nos §§1º e 2º, deverão ser encaminhadas comunicações extraordinárias sempre que identificados padrões, ocorrências ou situações com potencial impacto sistêmico, risco relevante ao ambiente de crédito ou necessidade de atuação correicional imediata. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º Verificada ausência de adoção, em tempo razoável, de providências potencialmente cabíveis pelas Corregedorias dos Tribunais de Justiça, a CENPROT poderá cientificar a Corregedoria Nacional de Justiça mediante encaminhamento de relatório circunstanciado. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§5º A consolidação nacional e as consolidações territoriais deverão observar critérios uniformes de agregação, consistência, comparabilidade e rastreabilidade dos dados, de modo a permitir análise integrada e distribuída no tempo dos efeitos sistêmicos das decisões judiciais sobre a publicidade dos protestos e sobre o ambiente de crédito. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§6º Os relatórios e comunicações previstos neste artigo terão caráter exclusivamente informacional, estatístico e correcional, vedada sua utilização para antecipação de juízo quanto à legitimidade, à validade, ao conteúdo ou ao alcance de decisões judiciais. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
-    },
-    {
-      "id": "cnj-art-263-i",
-      "numero": "Art. 263-I",
-      "ordem": 263.09,
-      "tipo": "artigo",
-      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
-      "areas": [
-        "Registro Civil das Pessoas Naturais",
-        "Tabelionato de Protesto",
-        "Tecnologia e proteção de dados"
-      ],
-      "temas": [],
-      "norma": true,
-      "notas": [],
-      "parte": "PARTE GERAL",
-      "livro": "LIVRO IV",
-      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-      "titulo": "TÍTULO II",
-      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-      "capituloNumero": "CAPÍTULO III",
-      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
-      "subsecao": "",
-      "subsecaoTitulo": "",
-      "estrutura": [
-        {
-          "text": "PARTE GERAL",
-          "type": "upper"
-        },
-        {
-          "text": "LIVRO IV",
-          "type": "upper"
-        },
-        {
-          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "TÍTULO II",
-          "type": "upper"
-        },
-        {
-          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "CAPÍTULO III",
-          "type": "upper"
-        },
-        {
-          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-          "type": "title"
-        },
-        {
-          "text": "Seção II",
-          "type": "section"
-        },
-        {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
-          "type": "section-title"
-        }
-      ],
-      "texto": "Art. 263-I. A publicidade das informações coletadas e tratadas nos termos desta Seção observará, cumulativamente, as disposições das Leis n. 12.527/2011 e 13.709/2018, restringindo-se à divulgação de dados agregados e anonimizados, vedada, em qualquer hipótese, a exposição de dados pessoais ou de elementos que permitam identificação direta ou indireta de pessoas naturais. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§ 1º A disponibilização pública das informações limitar-se-á a indicadores estatísticos, séries históricas, distribuições territoriais e demais dados agregados que expressem efeitos sistêmicos sobre a publicidade dos protestos, vedada a individualização de processos, partes ou representantes processuais. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§ 2º Os dados relativos à identificação de partes, representantes processuais ou quaisquer outros elementos individualizantes permanecerão restritos às camadas internas de tratamento, exclusivamente para fins correcionais, de inteligência institucional e de formulação de políticas públicas. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º A anonimização dos dados deverá observar técnicas aptas a impedir a reidentificação, considerada a utilização de meios técnicos razoáveis e disponíveis à época de seu tratamento, nos termos da legislação vigente. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º A Corregedoria Nacional de Justiça poderá estabelecer critérios complementares de anonimização, agregação e divulgação, com vistas a assegurar o equilíbrio entre transparência pública e proteção de dados pessoais. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
-    },
-    {
-      "id": "cnj-art-263-j",
-      "numero": "Art. 263-J",
-      "ordem": 263.1,
-      "tipo": "artigo",
-      "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
-      "areas": [
-        "Registro Civil das Pessoas Naturais",
-        "Tabelionato de Protesto"
-      ],
-      "temas": [],
-      "norma": true,
-      "notas": [],
-      "parte": "PARTE GERAL",
-      "livro": "LIVRO IV",
-      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-      "titulo": "TÍTULO II",
-      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-      "capituloNumero": "CAPÍTULO III",
-      "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
-      "subsecao": "",
-      "subsecaoTitulo": "",
-      "estrutura": [
-        {
-          "text": "PARTE GERAL",
-          "type": "upper"
-        },
-        {
-          "text": "LIVRO IV",
-          "type": "upper"
-        },
-        {
-          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "TÍTULO II",
-          "type": "upper"
-        },
-        {
-          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
-          "type": "title"
-        },
-        {
-          "text": "CAPÍTULO III",
-          "type": "upper"
-        },
-        {
-          "text": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-          "type": "title"
-        },
-        {
-          "text": "Seção II",
-          "type": "section"
-        },
-        {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
-          "type": "section-title"
-        }
-      ],
-      "texto": "Art. 263-J. O descumprimento das disposições desta Seção, a omissão ou o envio de informações inverídicas sujeitará os Tabeliães de Protesto e, no que couber, os responsáveis pela gestão da CENPROT, às sanções disciplinares previstas no art. 31 da Lei n. 8.935/1994, sem prejuízo de outras penalidades legais. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+      "texto": "Art. 236-A. Os mandados judiciais a serem cumpridos pelos oficiais de registro civil das pessoas naturais serão enviados eletronicamente pelos respectivos juízos de origem, por meio de módulo disponibilizado pelo ON-RCPN, devendo a parte interessada efetuar o pagamento dos emolumentos, caso não seja beneficiária da justiça gratuita. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 1º. O registrador poderá rejeitar o recebimento de mandados judiciais enviados por via diversa da prevista no caput deste artigo. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 2º. O mandado judicial advindo de juízo de comarca diversa do oficial de registro civil destinatário da ordem é dispensado do recebimento do “Cumpra-se” do juízo local, desde que seja possível a verificação de sua autenticidade. (incluído pelo Provimento n. 180, de 16.8.2024)"
     },
     {
       "id": "cnj-art-237",
@@ -20954,7 +20371,7 @@
       "ordem": 237,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
+      "secao": "Seção I",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -20968,7 +20385,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -21001,11 +20418,11 @@
           "type": "title"
         },
         {
-          "text": "Seção II",
+          "text": "Seção I",
           "type": "section"
         },
         {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
           "type": "section-title"
         }
       ],
@@ -21017,7 +20434,7 @@
       "ordem": 238,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
+      "secao": "Seção I",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -21031,7 +20448,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -21064,11 +20481,11 @@
           "type": "title"
         },
         {
-          "text": "Seção II",
+          "text": "Seção I",
           "type": "section"
         },
         {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
           "type": "section-title"
         }
       ],
@@ -21080,7 +20497,7 @@
       "ordem": 239,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
+      "secao": "Seção I",
       "areas": [
         "Registro Civil das Pessoas Naturais",
         "Tecnologia e proteção de dados"
@@ -21095,7 +20512,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -21128,11 +20545,11 @@
           "type": "title"
         },
         {
-          "text": "Seção II",
+          "text": "Seção I",
           "type": "section"
         },
         {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
           "type": "section-title"
         }
       ],
@@ -21144,7 +20561,7 @@
       "ordem": 240,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
+      "secao": "Seção I",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -21158,7 +20575,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -21191,11 +20608,11 @@
           "type": "title"
         },
         {
-          "text": "Seção II",
+          "text": "Seção I",
           "type": "section"
         },
         {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
           "type": "section-title"
         }
       ],
@@ -21207,7 +20624,7 @@
       "ordem": 241,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
+      "secao": "Seção I",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -21221,7 +20638,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -21254,11 +20671,11 @@
           "type": "title"
         },
         {
-          "text": "Seção II",
+          "text": "Seção I",
           "type": "section"
         },
         {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
           "type": "section-title"
         }
       ],
@@ -21270,7 +20687,7 @@
       "ordem": 242,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
+      "secao": "Seção I",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -21284,7 +20701,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -21317,11 +20734,11 @@
           "type": "title"
         },
         {
-          "text": "Seção II",
+          "text": "Seção I",
           "type": "section"
         },
         {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
           "type": "section-title"
         }
       ],
@@ -21333,7 +20750,7 @@
       "ordem": 243,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
+      "secao": "Seção I",
       "areas": [
         "Registro Civil das Pessoas Naturais",
         "Tecnologia e proteção de dados"
@@ -21348,7 +20765,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -21381,11 +20798,11 @@
           "type": "title"
         },
         {
-          "text": "Seção II",
+          "text": "Seção I",
           "type": "section"
         },
         {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
           "type": "section-title"
         }
       ],
@@ -21397,7 +20814,7 @@
       "ordem": 244,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
+      "secao": "Seção I",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -21411,7 +20828,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -21444,11 +20861,11 @@
           "type": "title"
         },
         {
-          "text": "Seção II",
+          "text": "Seção I",
           "type": "section"
         },
         {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
           "type": "section-title"
         }
       ],
@@ -21460,7 +20877,7 @@
       "ordem": 245,
       "tipo": "artigo",
       "capitulo": "CAPÍTULO III - DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secao": "Seção II",
+      "secao": "Seção I",
       "areas": [
         "Registro Civil das Pessoas Naturais"
       ],
@@ -21474,7 +20891,7 @@
       "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
       "capituloNumero": "CAPÍTULO III",
       "capituloTitulo": "DO REGISTRO CIVIL DAS PESSOAS NATURAIS",
-      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "secaoTitulo": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
       "subsecao": "",
       "subsecaoTitulo": "",
       "estrutura": [
@@ -21507,11 +20924,11 @@
           "type": "title"
         },
         {
-          "text": "Seção II",
+          "text": "Seção I",
           "type": "section"
         },
         {
-          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "text": "Da Central de Informações de Registro Civil das Pessoas Naturais (CRC)",
           "type": "section-title"
         }
       ],
@@ -22652,6 +22069,637 @@
         }
       ],
       "texto": "Art. 263. A prestação de serviços a terceiros com a utilização de dados existentes na CENPROT se dará mediante convênio/termo de adesão que deverá conter cláusulas de responsabilidade recíprocas, contendo forma, prazo e taxas administrativas livremente ajustadas entre as partes."
+    },
+    {
+      "id": "cnj-art-263-a",
+      "numero": "Art. 263-A",
+      "ordem": 263.01,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO V - DO TABELIONATO DE PROTESTO",
+      "secao": "Seção II",
+      "areas": [
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO V",
+      "capituloTitulo": "DO TABELIONATO DE PROTESTO",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO V",
+          "type": "upper"
+        },
+        {
+          "text": "DO TABELIONATO DE PROTESTO",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-A. Fica instituída a obrigatoriedade de comunicação contínua, estruturada e padronizada de dados relativos ao cumprimento de decisões judiciais que determinem a suspensão, o cancelamento provisório ou definitivo, ou qualquer forma de supressão da publicidade de protestos de títulos e outros documentos de dívida, bem como de informações correlatas necessárias à análise dos efeitos dessas decisões sobre o acervo de protestos e sobre o ambiente de crédito. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nParágrafo único. A obrigação de comunicação de que trata o caput será cumprida, em nível operacional, pelos Tabeliães de Protesto, mediante alimentação contínua da base de dados da Central Nacional de Serviços Eletrônicos Compartilhados dos Tabeliães de Protesto (CENPROT), incumbindo a esta a consolidação, o tratamento e a disponibilização analítica das informações em âmbito nacional. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-b",
+      "numero": "Art. 263-B",
+      "ordem": 263.02,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO V - DO TABELIONATO DE PROTESTO",
+      "secao": "Seção II",
+      "areas": [
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO V",
+      "capituloTitulo": "DO TABELIONATO DE PROTESTO",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO V",
+          "type": "upper"
+        },
+        {
+          "text": "DO TABELIONATO DE PROTESTO",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-B. Para os fins desta Seção, considera-se: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – litigância abusiva: o exercício do direito de ação ou de defesa com desvio de finalidade, excesso manifesto ou utilização do processo como instrumento de obtenção de vantagem indevida, em desconformidade com os deveres de boa-fé objetiva, cooperação e lealdade processual; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – litigância predatória: a prática reiterada, sistemática ou massificada de atos processuais, individuais ou coletivos, com potencial de gerar efeitos artificiais ou desproporcionais sobre a publicidade dos protestos, o ambiente de crédito ou a atividade extrajudicial, independentemente da análise do mérito das decisões judiciais proferidas; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIII – abuso de direito por credores: o exercício de prerrogativas legais ou contratuais relacionadas ao protesto de títulos e documentos de dívida em desconformidade com a função econômica e social do crédito, caracterizado, dentre outras hipóteses, pela utilização reiterada de expedientes formais com finalidade de constrangimento indevido, distorção informacional ou indução a erro quanto à existência, exigibilidade ou extensão da obrigação. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-c",
+      "numero": "Art. 263-C",
+      "ordem": 263.03,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO V - DO TABELIONATO DE PROTESTO",
+      "secao": "Seção II",
+      "areas": [
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO V",
+      "capituloTitulo": "DO TABELIONATO DE PROTESTO",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO V",
+          "type": "upper"
+        },
+        {
+          "text": "DO TABELIONATO DE PROTESTO",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-C. A Central Nacional de Serviços Eletrônicos Compartilhados dos Tabeliães de Protesto (CENPROT) deverá disponibilizar, à Corregedoria Nacional de Justiça e às Corregedorias dos Tribunais de Justiça dos Estados e do Distrito Federal, relatório analítico e estruturado contendo os dados das ordens judiciais de que trata o art. 263-A, organizados de modo a permitir a identificação de padrões relacionados à litigância abusiva, à litigância predatória e ao abuso de direito por credores. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§ 1º A obrigatoriedade recai especialmente sobre determinações oriundas de: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – ações coletivas; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – ações individuais que, segundo parâmetros objetivos de análise de dados, revelem padrões relevantes de repetição, distribuição ou concentração, aptos a produzir efeitos sistêmicos sobre a publicidade dos registros de protesto; e (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIII – práticas que, amparadas ou não por decisões judiciais, consideradas isoladamente ou em conjunto, revelem, a partir da análise agregada dos dados, padrões relevantes de atuação de credores, indicativos de exercício abusivo de prerrogativas relacionadas ao protesto. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§2º O exercício regular do direito de cobrança de obrigações inadimplidas, ainda que realizado de forma massificada, desde que observados os requisitos da Lei n. 9.492/1997, não caracteriza exercício abusivo. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º Os tabeliães de protesto deverão alimentar a base de dados da CENPROT em tempo real ou na periodicidade estipulada pela Central, garantindo a completude, atualidade e a fidedignidade das informações. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º O sistema de inteligência da CENPROT deverá consolidar as informações em âmbito nacional, com vistas à identificação de padrões relevantes de concentração, dispersão territorial e recorrência de demandas, permitindo a análise integrada de impactos sobre a publicidade dos protestos e sobre o ambiente de crédito. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§5º A identificação de padrões relevantes deverá observar critérios objetivos de recorrência, concentração, dispersão territorial, impacto quantitativo, variação temporal e correlação estatística, vedada a atribuição automatizada de ilicitude, abuso ou irregularidade sem validação analítica humana. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-d",
+      "numero": "Art. 263-D",
+      "ordem": 263.04,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO V - DO TABELIONATO DE PROTESTO",
+      "secao": "Seção II",
+      "areas": [
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO V",
+      "capituloTitulo": "DO TABELIONATO DE PROTESTO",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO V",
+          "type": "upper"
+        },
+        {
+          "text": "DO TABELIONATO DE PROTESTO",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-D. O Instituto de Estudos de Protesto de Títulos do Brasil (IEPTB), na qualidade de gestor da CENPROT, poderá, diante de indícios consistentes de descumprimento dos deveres previstos nesta Seção, requerer à Corregedoria Nacional de Justiça a adoção de medidas de bloqueio provisório ou permanente: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – de credores específicos, para fins de suspensão de acesso ou de remessa de novos títulos à CENPROT; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – de títulos determinados, quando houver indícios de irregularidade material ou informacional. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§1º O requerimento deverá indicar, de forma fundamentada, os elementos objetivos que evidenciem potencial risco à regularidade do ambiente de crédito, à integridade da publicidade dos protestos ou à confiabilidade das informações constantes da CENPROT. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§2º O bloqueio provisório terá natureza cautelar e poderá ser determinado inaudita altera parte, pelo prazo necessário à apuração dos fatos. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º O bloqueio permanente dependerá de decisão fundamentada da Corregedoria Nacional de Justiça, assegurados o contraditório e a ampla defesa. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º As medidas previstas neste artigo não afastam a responsabilidade do credor nem impedem a adoção de outras providências administrativas, civis ou penais cabíveis (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-e",
+      "numero": "Art. 263-E",
+      "ordem": 263.05,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO V - DO TABELIONATO DE PROTESTO",
+      "secao": "Seção II",
+      "areas": [
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO V",
+      "capituloTitulo": "DO TABELIONATO DE PROTESTO",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO V",
+          "type": "upper"
+        },
+        {
+          "text": "DO TABELIONATO DE PROTESTO",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-E. As informações de que trata esta Seção terão caráter exclusivamente correcional, destinando-se à identificação de padrões e ao monitoramento de efeitos sistêmicos sobre a publicidade dos protestos, à formulação e ao aperfeiçoamento de políticas públicas e ao aprimoramento da atividade correcional, sendo em regra vedado o uso para outros fins, inclusive antecipação de juízo quanto à legitimidade, à validade, o conteúdo ou o alcance de decisões judiciais. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nParágrafo único. A utilização dos dados deverá observar critérios de proporcionalidade, prudência, economicidade e eficiência, sendo vedada a adoção de medidas automatizadas sem validação analítica prévia. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-f",
+      "numero": "Art. 263-F",
+      "ordem": 263.06,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO V - DO TABELIONATO DE PROTESTO",
+      "secao": "Seção II",
+      "areas": [
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO V",
+      "capituloTitulo": "DO TABELIONATO DE PROTESTO",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO V",
+          "type": "upper"
+        },
+        {
+          "text": "DO TABELIONATO DE PROTESTO",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-F. A transmissão, o armazenamento e o tratamento dos dados observarão as diretrizes da Lei n. 13.709/2018, devendo a CENPROT e as Corregedorias adotar medidas técnicas e administrativas aptas a assegurar a segurança da informação, a prevenção de acessos não autorizados, a rastreabilidade das operações e, quando cabível para fins estatísticos, a anonimização ou pseudonimização dos dados. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-g",
+      "numero": "Art. 263-G",
+      "ordem": 263.07,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO V - DO TABELIONATO DE PROTESTO",
+      "secao": "Seção II",
+      "areas": [
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO V",
+      "capituloTitulo": "DO TABELIONATO DE PROTESTO",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO V",
+          "type": "upper"
+        },
+        {
+          "text": "DO TABELIONATO DE PROTESTO",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-G. O tratamento, o cruzamento, a consolidação e a análise dos dados previstos nesta Seção observarão os princípios da finalidade correcional, da transparência metodológica, da rastreabilidade, da auditabilidade, da verificabilidade técnica, da supervisão humana, da proporcionalidade e da mitigação de distorções analíticas indevidas. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nParágrafo único. Os modelos analíticos, mecanismos automatizados e ferramentas computacionais utilizados deverão permitir verificação posterior dos critérios de processamento, agregação, classificação, correlação e tratamento dos dados empregados na geração dos resultados analíticos. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-h",
+      "numero": "Art. 263-H",
+      "ordem": 263.08,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO V - DO TABELIONATO DE PROTESTO",
+      "secao": "Seção II",
+      "areas": [
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO V",
+      "capituloTitulo": "DO TABELIONATO DE PROTESTO",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO V",
+          "type": "upper"
+        },
+        {
+          "text": "DO TABELIONATO DE PROTESTO",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-H. O formato, a estrutura de dados e os metadados obrigatórios das remessas eletrônicas e dos relatórios padronizados constam do Anexo VIII deste Código, devendo sua implementação observar integração sistêmica por Interface de Programação de Aplicações (API). (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§1º Os relatórios destinados às Corregedorias dos Tribunais de Justiça dos Estados e do Distrito Federal serão encaminhados bimestralmente, sempre que identificadas ocorrências, inconsistências, padrões ou variações com potencial relevância correicional, estatística, regulatória ou sistêmica no respectivo período de referência, em formato estruturado e padronizado, devendo conter, no mínimo: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – consolidação territorial das decisões judiciais comunicadas no período; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – quantitativos de protestos afetados; (incluído pelo Provimento CN n. 225, de 20.5.2026) III – valores globais impactados sobre a publicidade dos protestos; (incluído pelo Provimento CN n. 225, de 20.5.2026) IV – indicadores de recorrência, concentração e dispersão territorial; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nV – identificação de variações relevantes observadas no período; e (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVI – registros de inconsistências informacionais, falhas de alimentação ou padrões anômalos identificados; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVII – indicação das situações que, em razão de relevância quantitativa, territorial ou estatística, possam demandar atuação correicional. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§2º Os relatórios destinados à Corregedoria Nacional de Justiça serão encaminhados quadrimestralmente, sempre que identificados padrões, tendências, impactos sistêmicos ou outras informações de relevância nacional, em formato estruturado e padronizado, devendo conter, no mínimo: (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nI – consolidação nacional dos dados; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nII – séries históricas comparativas; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIII – indicadores agregados de impacto sistêmico sobre a publicidade dos protestos e sobre o ambiente de crédito; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nIV – análise comparativa entre unidades da federação; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nV – identificação de padrões nacionais relevantes de recorrência, concentração ou dispersão territorial; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVI – indicadores estatísticos relativos à litigância abusiva, à litigância predatória e ao exercício abusivo de prerrogativas relacionadas ao protesto; (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVII – avaliação consolidada de riscos, tendências e distorções estruturais identificadas no período; e (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\nVIII – registros de situações relevantes comunicadas às Corregedorias dos Tribunais de Justiça e das providências adotadas ou conhecidas. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º Independentemente da periodicidade ordinária prevista nos §§1º e 2º, deverão ser encaminhadas comunicações extraordinárias sempre que identificados padrões, ocorrências ou situações com potencial impacto sistêmico, risco relevante ao ambiente de crédito ou necessidade de atuação correicional imediata. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º Verificada ausência de adoção, em tempo razoável, de providências potencialmente cabíveis pelas Corregedorias dos Tribunais de Justiça, a CENPROT poderá cientificar a Corregedoria Nacional de Justiça mediante encaminhamento de relatório circunstanciado. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§5º A consolidação nacional e as consolidações territoriais deverão observar critérios uniformes de agregação, consistência, comparabilidade e rastreabilidade dos dados, de modo a permitir análise integrada e distribuída no tempo dos efeitos sistêmicos das decisões judiciais sobre a publicidade dos protestos e sobre o ambiente de crédito. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§6º Os relatórios e comunicações previstos neste artigo terão caráter exclusivamente informacional, estatístico e correcional, vedada sua utilização para antecipação de juízo quanto à legitimidade, à validade, ao conteúdo ou ao alcance de decisões judiciais. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-i",
+      "numero": "Art. 263-I",
+      "ordem": 263.09,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO V - DO TABELIONATO DE PROTESTO",
+      "secao": "Seção II",
+      "areas": [
+        "Tabelionato de Protesto",
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO V",
+      "capituloTitulo": "DO TABELIONATO DE PROTESTO",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO V",
+          "type": "upper"
+        },
+        {
+          "text": "DO TABELIONATO DE PROTESTO",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-I. A publicidade das informações coletadas e tratadas nos termos desta Seção observará, cumulativamente, as disposições das Leis n. 12.527/2011 e 13.709/2018, restringindo-se à divulgação de dados agregados e anonimizados, vedada, em qualquer hipótese, a exposição de dados pessoais ou de elementos que permitam identificação direta ou indireta de pessoas naturais. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§ 1º A disponibilização pública das informações limitar-se-á a indicadores estatísticos, séries históricas, distribuições territoriais e demais dados agregados que expressem efeitos sistêmicos sobre a publicidade dos protestos, vedada a individualização de processos, partes ou representantes processuais. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§ 2º Os dados relativos à identificação de partes, representantes processuais ou quaisquer outros elementos individualizantes permanecerão restritos às camadas internas de tratamento, exclusivamente para fins correcionais, de inteligência institucional e de formulação de políticas públicas. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§3º A anonimização dos dados deverá observar técnicas aptas a impedir a reidentificação, considerada a utilização de meios técnicos razoáveis e disponíveis à época de seu tratamento, nos termos da legislação vigente. (incluído pelo Provimento CN n. 225, de 20.5.2026)\n\n§4º A Corregedoria Nacional de Justiça poderá estabelecer critérios complementares de anonimização, agregação e divulgação, com vistas a assegurar o equilíbrio entre transparência pública e proteção de dados pessoais. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
+    },
+    {
+      "id": "cnj-art-263-j",
+      "numero": "Art. 263-J",
+      "ordem": 263.1,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO V - DO TABELIONATO DE PROTESTO",
+      "secao": "Seção II",
+      "areas": [
+        "Tabelionato de Protesto"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO V",
+      "capituloTitulo": "DO TABELIONATO DE PROTESTO",
+      "secaoTitulo": "Do Sistema de Monitoramento de Ordens Judiciais e",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO V",
+          "type": "upper"
+        },
+        {
+          "text": "DO TABELIONATO DE PROTESTO",
+          "type": "title"
+        },
+        {
+          "text": "Seção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Sistema de Monitoramento de Ordens Judiciais e",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 263-J. O descumprimento das disposições desta Seção, a omissão ou o envio de informações inverídicas sujeitará os Tabeliães de Protesto e, no que couber, os responsáveis pela gestão da CENPROT, às sanções disciplinares previstas no art. 31 da Lei n. 8.935/1994, sem prejuízo de outras penalidades legais. (incluído pelo Provimento CN n. 225, de 20.5.2026)"
     },
     {
       "id": "cnj-art-264",
