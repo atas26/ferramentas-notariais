@@ -2610,7 +2610,7 @@ footer a:hover {
             <div class="row-item"><span>Tabelionato de Notas</span><span id="escrituraResultado">R$ 0,00</span></div>
             <div class="row-item" id="linhaAcessoriosResultado"><span>Atos acessórios</span><span id="acessoriosResultado">R$ 0,00</span></div>
             <div class="row-item"><span>Tributo</span><span id="tributoResultado">R$ 0,00</span></div>
-            <div class="row-item"><span>Registro de Imóveis</span><span id="registroResultado">R$ 0,00</span></div>
+            <div id="registrosResultadoLista"><div class="row-item"><span>Registro de Imóveis</span><span id="registroResultado">R$ 0,00</span></div></div>
             <div class="row-item"><span>Serviços adicionais necessários</span><span id="outrosResultado">R$ 0,00</span></div>
             <div class="row-item"><span>Total</span><span id="totalLinhaResultado">R$ 0,00</span></div>
           </div>
@@ -3424,7 +3424,20 @@ function renderResultado(r){
   if (linhaAcessorios) linhaAcessorios.style.display = r.temAtoAcessorio ? '' : 'none';
   el('acessoriosResultado').textContent = r.temAtoAcessorio ? formatMoeda(r.escrituraAcessorios || 0) : 'N/A';
   el('tributoResultado').textContent = r.tipo === 'nao_aplica' ? 'N/A' : formatMoeda(r.tributo);
-  el('registroResultado').textContent = formatMoeda(r.registro);
+  const registrosResultadoLista = el('registrosResultadoLista');
+  const registrosValidosResultado = Array.isArray(r.registrosImobiliarios)
+    ? r.registrosImobiliarios.filter((item) => Number(item.valorBase || 0) > 0)
+    : [];
+
+  if (registrosResultadoLista && r.incluiRegistro && registrosValidosResultado.length > 1) {
+    registrosResultadoLista.innerHTML = registrosValidosResultado.map((item) => `
+      <div class="row-item"><span>${escapeHtml(`Registro de Imóveis ${item.ordem || ''}`.trim())}</span><span>${escapeHtml(formatMoeda(Number(item.emolumentos || 0)))}</span></div>
+    `).join('');
+  } else if (registrosResultadoLista) {
+    registrosResultadoLista.innerHTML = `<div class="row-item"><span>Registro de Imóveis</span><span id="registroResultado">${escapeHtml(formatMoeda(r.registro))}</span></div>`;
+  } else {
+    el('registroResultado').textContent = formatMoeda(r.registro);
+  }
   el('outrosResultado').textContent = formatMoeda(r.valorOutros);
   el('totalResultado').textContent = formatMoeda(r.total);
   el('totalLinhaResultado').textContent = formatMoeda(r.total);
