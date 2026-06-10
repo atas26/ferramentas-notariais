@@ -2440,6 +2440,16 @@ footer a:hover {
           </div>
 
           <div class="form-field">
+            <label for="telefoneCartorio">Telefone</label>
+            <input id="telefoneCartorio" inputmode="tel" autocomplete="tel" placeholder="Telefone do cartório" />
+          </div>
+
+          <div class="form-field">
+            <label for="emailCartorio">Email</label>
+            <input id="emailCartorio" type="email" autocomplete="email" placeholder="Email do cartório" />
+          </div>
+
+          <div class="form-field">
             <label for="solicitadoPor">Solicitado por</label>
             <input id="solicitadoPor" class="uppercase-field" autocomplete="name" placeholder="Nome completo do solicitante" required />
           </div>
@@ -2561,21 +2571,21 @@ footer a:hover {
           </div>
 
           <div class="form-field full">
-            <label>Outros serviços autorizados?</label>
-            <div class="segmented" role="radiogroup" aria-label="Outros serviços autorizados">
+            <label>Serviços adicionais necessários?</label>
+            <div class="segmented" role="radiogroup" aria-label="Serviços adicionais necessários">
               <label class="radio-card">
                 <input type="radio" name="temOutrosServicos" value="sim" required />
-                <span><strong>Sim</strong><small>Incluir valor autorizado</small></span>
+                <span><strong>Sim</strong><small>Incluir valor necessário</small></span>
               </label>
               <label class="radio-card">
                 <input type="radio" name="temOutrosServicos" value="nao" checked required />
-                <span><strong>Não</strong><small>Não incluir outros serviços</small></span>
+                <span><strong>Não</strong><small>Não incluir serviços adicionais</small></span>
               </label>
             </div>
           </div>
 
           <div class="form-field full hidden" id="campoValorOutros">
-            <label for="valorOutros">Valor dos outros serviços autorizados</label>
+            <label for="valorOutros">Valor dos serviços adicionais necessários</label>
             <input id="valorOutros" class="currency-field" inputmode="decimal" autocomplete="off" placeholder="R$ 0,00" />
             <span class="hint">Certidões, diligências ou valores externos autorizados pelas partes e necessários à realização do ato notarial, nos termos da nota 11 da Tabela de Custas e Emolumentos da Lei Estadual nº 11.331/2002.</span>
           </div>
@@ -2598,10 +2608,10 @@ footer a:hover {
           <div class="breakdown">
             <div class="row-item"><span>Valor base</span><span id="valorResultado">R$ 0,00</span></div>
             <div class="row-item"><span>Tabelionato de Notas</span><span id="escrituraResultado">R$ 0,00</span></div>
-            <div class="row-item"><span>Atos acessórios</span><span id="acessoriosResultado">R$ 0,00</span></div>
+            <div class="row-item" id="linhaAcessoriosResultado"><span>Atos acessórios</span><span id="acessoriosResultado">R$ 0,00</span></div>
             <div class="row-item"><span>Tributo</span><span id="tributoResultado">R$ 0,00</span></div>
             <div class="row-item"><span>Registro de Imóveis</span><span id="registroResultado">R$ 0,00</span></div>
-            <div class="row-item"><span>Outros serviços autorizados</span><span id="outrosResultado">R$ 0,00</span></div>
+            <div class="row-item"><span>Serviços adicionais necessários</span><span id="outrosResultado">R$ 0,00</span></div>
             <div class="row-item"><span>Total</span><span id="totalLinhaResultado">R$ 0,00</span></div>
           </div>
           <div class="status" id="statusCalculo"></div>
@@ -2637,7 +2647,6 @@ const TABELA_ESCRITURA = [
   { faixa: 'd', de: 9603.01, ate: 19210.00, valor: 1189.68, rotulo: 'D — de R$ 9.603,01 até R$ 19.210,00' },
   { faixa: 'e', de: 19210.01, ate: 38420.00, valor: 1608.08, rotulo: 'E — de R$ 19.210,01 até R$ 38.420,00' },
   { faixa: 'f', de: 38420.01, ate: 76840.00, valor: 1907.60, rotulo: 'F — de R$ 38.420,01 até R$ 76.840,00' },
-  { faixa: 'g', de: 76840.01, ate: 115260.00, valor: 2264.49, rotulo: 'G — de R$ 76.840,01 até R$ 115.260,00' },
   { faixa: 'h', de: 115260.01, ate: 153680.00, valor: 2682.90, rotulo: 'H — de R$ 115.260,01 até R$ 153.680,00' },
   { faixa: 'i', de: 153680.01, ate: 192100.00, valor: 3039.89, rotulo: 'I — de R$ 153.680,01 até R$ 192.100,00' },
   { faixa: 'j', de: 192100.01, ate: 230520.00, valor: 3400.86, rotulo: 'J — de R$ 192.100,01 até R$ 230.520,00' },
@@ -2843,6 +2852,8 @@ function salvarDadosCartorio(){
     escrevente: el('escrevente')?.value.trim() || '',
     contatoEscrevente: el('contatoEscrevente')?.value.trim() || '',
     cartorio: el('cartorio')?.value.trim() || '',
+    telefoneCartorio: el('telefoneCartorio')?.value.trim() || '',
+    emailCartorio: el('emailCartorio')?.value.trim() || '',
     solicitadoPor: el('solicitadoPor')?.value.trim() || '',
     logoCartorioBase64: logoCartorioBase64 || ''
   };
@@ -2864,6 +2875,8 @@ function carregarDadosCartorioSalvos(){
     if (dados.escrevente && el('escrevente')) el('escrevente').value = dados.escrevente;
     if (dados.contatoEscrevente && el('contatoEscrevente')) el('contatoEscrevente').value = dados.contatoEscrevente;
     if (dados.cartorio && el('cartorio')) el('cartorio').value = dados.cartorio;
+    if (dados.telefoneCartorio && el('telefoneCartorio')) el('telefoneCartorio').value = dados.telefoneCartorio;
+    if (dados.emailCartorio && el('emailCartorio')) el('emailCartorio').value = dados.emailCartorio;
     if (dados.solicitadoPor && el('solicitadoPor')) el('solicitadoPor').value = dados.solicitadoPor;
     if (dados.logoCartorioBase64 && String(dados.logoCartorioBase64).startsWith('data:image/')) logoCartorioBase64 = dados.logoCartorioBase64;
 
@@ -3017,7 +3030,7 @@ function validarCamposObrigatorios(){
     const valorOutros = temOutrosServicosSelecionado() ? parseMoeda(el('valorOutros').value) : 0;
     if (!valorOutros || valorOutros <= 0) {
       const campo = el('valorOutros');
-      campo.setCustomValidity('Informe o valor dos outros serviços autorizados.');
+      campo.setCustomValidity('Informe o valor dos serviços adicionais necessários.');
       campo.reportValidity();
       campo.scrollIntoView({ behavior:'smooth', block:'center' });
       window.setTimeout(() => campo.focus({ preventScroll:true }), 200);
@@ -3373,6 +3386,8 @@ function calcular(rolar = true, validar = rolar){
     escrevente: el('escrevente').value.trim(),
     contatoEscrevente: el('contatoEscrevente').value.trim(),
     cartorio: el('cartorio').value.trim(),
+    telefoneCartorio: el('telefoneCartorio')?.value.trim() || '',
+    emailCartorio: el('emailCartorio')?.value.trim() || '',
     solicitadoPor: el('solicitadoPor').value.trim(),
     aviso
   };
@@ -3405,6 +3420,8 @@ function ocultarResultado(){
 function renderResultado(r){
   el('valorResultado').textContent = formatMoeda(r.valorBase);
   el('escrituraResultado').textContent = formatMoeda(r.escrituraPrincipal ?? r.escritura);
+  const linhaAcessorios = el('linhaAcessoriosResultado');
+  if (linhaAcessorios) linhaAcessorios.style.display = r.temAtoAcessorio ? '' : 'none';
   el('acessoriosResultado').textContent = r.temAtoAcessorio ? formatMoeda(r.escrituraAcessorios || 0) : 'N/A';
   el('tributoResultado').textContent = r.tipo === 'nao_aplica' ? 'N/A' : formatMoeda(r.tributo);
   el('registroResultado').textContent = formatMoeda(r.registro);
@@ -3436,6 +3453,8 @@ function montarTextoOrcamento(){
     escrevente: el('escrevente').value.trim() || 'Não informado',
     contatoEscrevente: el('contatoEscrevente').value.trim() || 'Não informado',
     cartorio: el('cartorio').value.trim() || 'Não informado',
+    telefoneCartorio: el('telefoneCartorio')?.value.trim() || 'Não informado',
+    emailCartorio: el('emailCartorio')?.value.trim() || 'Não informado',
     solicitadoPor: el('solicitadoPor').value.trim() || 'Não informado',
     temAtoAcessorio: Boolean(ultimoResultado?.temAtoAcessorio),
     temOutrosServicos: Boolean(ultimoResultado?.temOutrosServicos),
@@ -3452,22 +3471,26 @@ function montarTextoOrcamento(){
     `Escrevente responsável: ${r.escrevente}`,
     `Contato escrevente: ${r.contatoEscrevente}`,
     `Cartório: ${r.cartorio}`,
+    `Telefone: ${r.telefoneCartorio}`,
+    `Email: ${r.emailCartorio}`,
     `Solicitado por: ${r.solicitadoPor}`,
     `Número do orçamento: ${garantirNumeroOrcamento()}`,
     `Natureza do ato: ${r.naturezaAto}`,
     `Valor base de cálculo: ${formatMoeda(r.valorBase)}`,
-    `Há ato acessório: ${r.temAtoAcessorio ? 'Sim' : 'N/A'}`,
-    r.temAtoAcessorio && r.atosAcessorios.length ? `Atos acessórios: ${r.atosAcessorios.map((item) => `Ato ${item.ordem}: base ${formatMoeda(item.valorBase)}; emolumentos ${formatMoeda(item.emolumentos)}`).join(' | ')}` : 'Atos acessórios: N/A',
-    `Outros serviços autorizados: ${r.temOutrosServicos ? 'Sim' : 'Não'}`,
+    ...(r.temAtoAcessorio ? [
+      `Há ato acessório: Sim`,
+      r.atosAcessorios.length ? `Atos acessórios: ${r.atosAcessorios.map((item) => `Ato ${item.ordem}: base ${formatMoeda(item.valorBase)}; emolumentos ${formatMoeda(item.emolumentos)}`).join(' | ')}` : 'Atos acessórios: valor não informado'
+    ] : []),
+    `Serviços adicionais necessários: ${r.temOutrosServicos ? 'Sim' : 'Não'}`,
     `Registro imobiliário: ${r.incluiRegistro ? 'Sim' : 'Não'}`,
     r.registrosImobiliarios.length ? `Registros imobiliários: ${r.registrosImobiliarios.map((item) => `Registro ${item.ordem}: base ${formatMoeda(item.valorBase)}; emolumentos ${formatMoeda(item.emolumentos)}`).join(' | ')}` : 'Registros imobiliários: não se aplica',
     '',
-    'Composição estimada:',
+    'Orçamento estimado:',
     `Tabelionato de Notas, ato principal: ${formatMoeda(r.escrituraPrincipal)}`,
-    `Atos acessórios: ${r.temAtoAcessorio ? formatMoeda(r.escrituraAcessorios) : 'N/A'}`,
+    ...(r.temAtoAcessorio ? [`Atos acessórios: ${formatMoeda(r.escrituraAcessorios)}`] : []),
     `Tributo: ${r.tipo === 'nao_aplica' ? 'N/A' : formatMoeda(r.tributo)} (${r.criterioTributo})`,
     `Registro de Imóveis: ${formatMoeda(r.registro)} (${r.incluiRegistro ? 'incluído' : 'não incluído'})`,
-    `Outros serviços autorizados: ${formatMoeda(r.valorOutros)}`,
+    `Serviços adicionais necessários: ${formatMoeda(r.valorOutros)}`,
     `Total estimado: ${formatMoeda(r.total)}`,
     '',
     'Critérios utilizados:',
@@ -3546,16 +3569,18 @@ function atualizarAreaImpressao(r){
     escrevente: el('escrevente').value.trim() || 'Não informado',
     contatoEscrevente: el('contatoEscrevente').value.trim() || 'Não informado',
     cartorio: el('cartorio').value.trim() || 'Não informado',
+    telefoneCartorio: el('telefoneCartorio')?.value.trim() || 'Não informado',
+    emailCartorio: el('emailCartorio')?.value.trim() || 'Não informado',
     solicitadoPor: el('solicitadoPor').value.trim() || 'Não informado'
   };
 
   const linhas = [
     ['Valor base', 'Valor informado pelo usuário', dados.valorBase],
     ['Tabelionato de Notas, ato principal', dados.criterioEscrituraPrincipal || dados.criterioEscritura, dados.escrituraPrincipal ?? dados.escritura],
-    ['Atos acessórios', dados.temAtoAcessorio ? (dados.criterioEscrituraAcessorios || 'Ato acessório: valor não informado') : 'N/A', dados.temAtoAcessorio ? (dados.escrituraAcessorios || 0) : 'N/A'],
+    ...(dados.temAtoAcessorio ? [['Atos acessórios', dados.criterioEscrituraAcessorios || 'Ato acessório: valor não informado', dados.escrituraAcessorios || 0]] : []),
     ['Tributo', dados.criterioTributo, dados.tipo === 'nao_aplica' ? 'N/A' : dados.tributo],
     ['Registro de Imóveis', dados.criterioRegistro, dados.registro],
-    ['Outros serviços autorizados', dados.temOutrosServicos ? 'Valor informado pelo usuário' : 'Não incluído', dados.valorOutros]
+    ['Serviços adicionais necessários', dados.temOutrosServicos ? 'Incluído' : 'Não incluído', dados.valorOutros]
   ];
 
   area.innerHTML = `
@@ -3578,17 +3603,19 @@ function atualizarAreaImpressao(r){
         <div class="print-field"><span>Escrevente responsável</span><strong>${escapeHtml(dados.escrevente)}</strong></div>
         <div class="print-field"><span>Contato escrevente</span><strong>${escapeHtml(dados.contatoEscrevente)}</strong></div>
         <div class="print-field"><span>Cartório</span><strong>${escapeHtml(dados.cartorio)}</strong></div>
+        <div class="print-field"><span>Telefone</span><strong>${escapeHtml(dados.telefoneCartorio)}</strong></div>
+        <div class="print-field"><span>Email</span><strong>${escapeHtml(dados.emailCartorio)}</strong></div>
         <div class="print-field"><span>Solicitado por</span><strong>${escapeHtml(dados.solicitadoPor)}</strong></div>
         <div class="print-field"><span>Natureza do ato</span><strong>${escapeHtml(dados.naturezaAto)}</strong></div>
         <div class="print-field"><span>Registro imobiliário</span><strong>${dados.incluiRegistro ? `${(dados.registrosImobiliarios || []).length || 1} registro(s)` : 'Não incluído'}</strong></div>
-        <div class="print-field"><span>Ato acessório</span><strong>${dados.temAtoAcessorio ? 'Sim' : 'N/A'}</strong></div>
-        <div class="print-field"><span>Outros serviços autorizados</span><strong>${dados.temOutrosServicos ? 'Sim' : 'Não'}</strong></div>
+        ${dados.temAtoAcessorio ? '<div class="print-field"><span>Ato acessório</span><strong>Sim</strong></div>' : ''}
+        <div class="print-field"><span>Serviços adicionais necessários</span><strong>${dados.temOutrosServicos ? 'Sim' : 'Não'}</strong></div>
       </div>
     </div>
 
     <div class="print-section">
-      <h3>Composição estimada</h3>
-      <table aria-label="Composição estimada do orçamento">
+      <h3>Orçamento estimado</h3>
+      <table aria-label="Orçamento estimado">
         <thead>
           <tr>
             <th>Item</th>
@@ -3626,21 +3653,406 @@ function imprimirOrcamento(){
   window.print();
 }
 
-function gerarPDF(){
+async function gerarPDF(){
   numeroOrcamentoAtual = gerarNumeroOrcamento();
   if (!calcular(false, true)) return;
   mostrarResultado(false);
-  const tituloAnterior = document.title;
-  document.title = montarNomeArquivoPDF();
-  window.setTimeout(() => {
-    window.print();
-    document.title = tituloAnterior;
-  }, 80);
+
+  try {
+    const dados = montarDadosPDFOrcamento();
+    const logoPDF = await carregarLogoComoJPEG(logoCartorioBase64);
+    const arquivoPDF = montarArquivoPDFOrcamento(dados, logoPDF);
+    baixarArquivoPDF(arquivoPDF, `${montarNomeArquivoPDF()}.pdf`);
+    mostrarAvisoTemporario('PDF gerado.');
+  } catch (error) {
+    console.error(error);
+    mostrarAvisoTemporario('Não foi possível gerar o PDF. Use o botão Imprimir como alternativa.');
+  }
+}
+
+function montarDadosPDFOrcamento(){
+  const base = ultimoResultado || {};
+  const dados = {
+    ...base,
+    naturezaAto: naturezaAtoSelecionada(),
+    numeroOrcamento: garantirNumeroOrcamento(),
+    escrevente: el('escrevente')?.value.trim() || 'Não informado',
+    contatoEscrevente: el('contatoEscrevente')?.value.trim() || 'Não informado',
+    cartorio: el('cartorio')?.value.trim() || 'Não informado',
+    telefoneCartorio: el('telefoneCartorio')?.value.trim() || 'Não informado',
+    emailCartorio: el('emailCartorio')?.value.trim() || 'Não informado',
+    solicitadoPor: el('solicitadoPor')?.value.trim() || 'Não informado',
+    atosAcessorios: base.atosAcessorios || [],
+    registrosImobiliarios: base.registrosImobiliarios || [],
+    escrituraPrincipal: base.escrituraPrincipal ?? base.escritura ?? 0,
+    escrituraAcessorios: base.escrituraAcessorios || 0
+  };
+
+  dados.linhasOrcamento = [
+    ['Valor base', 'Valor informado pelo usuário', dados.valorBase],
+    ['Tabelionato de Notas, ato principal', dados.criterioEscrituraPrincipal || dados.criterioEscritura, dados.escrituraPrincipal ?? dados.escritura],
+    ...(dados.temAtoAcessorio ? [['Atos acessórios', dados.criterioEscrituraAcessorios || 'Ato acessório: valor não informado', dados.escrituraAcessorios || 0]] : []),
+    ['Tributo', dados.criterioTributo, dados.tipo === 'nao_aplica' ? 'N/A' : dados.tributo],
+    ['Registro de Imóveis', dados.criterioRegistro, dados.registro],
+    ['Serviços adicionais necessários', dados.temOutrosServicos ? 'Incluído' : 'Não incluído', dados.valorOutros]
+  ];
+
+  return dados;
+}
+
+function carregarLogoComoJPEG(dataUrl){
+  return new Promise((resolve) => {
+    if (!dataUrl || !String(dataUrl).startsWith('data:image/')) {
+      resolve(null);
+      return;
+    }
+
+    const imagem = new Image();
+    imagem.onload = function () {
+      try {
+        const largura = imagem.naturalWidth || imagem.width;
+        const altura = imagem.naturalHeight || imagem.height;
+        if (!largura || !altura) {
+          resolve(null);
+          return;
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = largura;
+        canvas.height = altura;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, largura, altura);
+        ctx.drawImage(imagem, 0, 0, largura, altura);
+
+        const jpegDataUrl = canvas.toDataURL('image/jpeg', 0.92);
+        const base64 = jpegDataUrl.split(',')[1] || '';
+        resolve({
+          largura,
+          altura,
+          binario: atob(base64)
+        });
+      } catch (error) {
+        resolve(null);
+      }
+    };
+    imagem.onerror = function () {
+      resolve(null);
+    };
+    imagem.src = dataUrl;
+  });
+}
+
+function montarArquivoPDFOrcamento(dados, logoPDF){
+  const larguraPagina = 595.28;
+  const alturaPagina = 841.89;
+  const margem = 42;
+  const objetos = [];
+  const paginasConteudo = [];
+  let comandos = [];
+  let y = alturaPagina - margem;
+
+  function adicionarObjeto(conteudo){
+    objetos.push(conteudo || '');
+    return objetos.length;
+  }
+
+  const catalogoRef = adicionarObjeto('');
+  const paginasRef = adicionarObjeto('');
+  const fonteRegularRef = adicionarObjeto('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
+  const fonteNegritoRef = adicionarObjeto('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+  const imagemRef = logoPDF ? adicionarObjeto(`<< /Type /XObject /Subtype /Image /Width ${logoPDF.largura} /Height ${logoPDF.altura} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${logoPDF.binario.length} >>\nstream\n${logoPDF.binario}\nendstream`) : null;
+
+  function cmd(linha){
+    comandos.push(linha);
+  }
+
+  function textoPDF(valor){
+    return String(valor ?? '')
+      .replace(/[–—]/g, '-')
+      .replace(/[“”]/g, '"')
+      .replace(/[‘’]/g, "'")
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  function byteWinAnsi(caractere){
+    const codigo = caractere.charCodeAt(0);
+    if (codigo <= 255) return codigo;
+    const mapa = {
+      0x20ac: 128,
+      0x201a: 130,
+      0x0192: 131,
+      0x201e: 132,
+      0x2026: 133,
+      0x2020: 134,
+      0x2021: 135,
+      0x02c6: 136,
+      0x2030: 137,
+      0x0160: 138,
+      0x2039: 139,
+      0x0152: 140,
+      0x017d: 142,
+      0x2018: 145,
+      0x2019: 146,
+      0x201c: 147,
+      0x201d: 148,
+      0x2022: 149,
+      0x2013: 150,
+      0x2014: 151,
+      0x02dc: 152,
+      0x2122: 153,
+      0x0161: 154,
+      0x203a: 155,
+      0x0153: 156,
+      0x017e: 158,
+      0x0178: 159
+    };
+    return mapa[codigo] || 63;
+  }
+
+  function escaparStringPDF(valor){
+    let saida = '';
+    const texto = textoPDF(valor);
+    for (const caractere of texto) {
+      const byte = byteWinAnsi(caractere);
+      if (byte === 40 || byte === 41 || byte === 92) {
+        saida += '\\' + String.fromCharCode(byte);
+      } else if (byte < 32 || byte > 126) {
+        saida += '\\' + byte.toString(8).padStart(3, '0');
+      } else {
+        saida += String.fromCharCode(byte);
+      }
+    }
+    return saida;
+  }
+
+  function texto(linha, x, yTexto, tamanho = 10, fonte = 'F1'){
+    cmd(`BT /${fonte} ${tamanho} Tf 1 0 0 1 ${x.toFixed(2)} ${yTexto.toFixed(2)} Tm (${escaparStringPDF(linha)}) Tj ET`);
+  }
+
+  function linha(x1, y1, x2, y2){
+    cmd(`${x1.toFixed(2)} ${y1.toFixed(2)} m ${x2.toFixed(2)} ${y2.toFixed(2)} l S`);
+  }
+
+  function retangulo(x, yRet, w, h){
+    cmd(`${x.toFixed(2)} ${yRet.toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re S`);
+  }
+
+  function larguraTextoAproximada(valor, tamanho = 10){
+    return textoPDF(valor).length * tamanho * 0.52;
+  }
+
+  function quebrarTexto(valor, larguraMaxima, tamanho = 10){
+    const textoBase = textoPDF(valor) || ' ';
+    const palavras = textoBase.split(' ');
+    const linhas = [];
+    let atual = '';
+
+    palavras.forEach((palavra) => {
+      const candidata = atual ? `${atual} ${palavra}` : palavra;
+      if (larguraTextoAproximada(candidata, tamanho) <= larguraMaxima || !atual) {
+        atual = candidata;
+      } else {
+        linhas.push(atual);
+        atual = palavra;
+      }
+    });
+
+    if (atual) linhas.push(atual);
+    return linhas.length ? linhas : [''];
+  }
+
+  function novaPagina(){
+    if (comandos.length) paginasConteudo.push(comandos.join('\n'));
+    comandos = [];
+    y = alturaPagina - margem;
+    cmd('0.15 0.21 0.32 RG 0.15 0.21 0.32 rg');
+  }
+
+  function garantirEspaco(alturaNecessaria){
+    if (y - alturaNecessaria < margem + 36) {
+      novaPagina();
+      desenharCabecalho(false);
+    }
+  }
+
+  function desenharCabecalho(comLogo = true){
+    if (comLogo && imagemRef) {
+      const maxW = 170;
+      const maxH = 48;
+      const escala = Math.min(maxW / logoPDF.largura, maxH / logoPDF.altura);
+      const w = logoPDF.largura * escala;
+      const h = logoPDF.altura * escala;
+      cmd(`q ${w.toFixed(2)} 0 0 ${h.toFixed(2)} ${margem.toFixed(2)} ${(alturaPagina - margem - h).toFixed(2)} cm /Im1 Do Q`);
+    } else {
+      texto(dados.cartorio || 'Cartório', margem, alturaPagina - margem - 14, 12, 'F2');
+    }
+
+    const metaX = larguraPagina - margem - 190;
+    texto('Orçamento estimativo', metaX, alturaPagina - margem - 8, 10, 'F2');
+    texto(`Nº: ${dados.numeroOrcamento}`, metaX, alturaPagina - margem - 23, 9, 'F1');
+    texto(`Data: ${hojeFormatado()}`, metaX, alturaPagina - margem - 37, 9, 'F1');
+    linha(margem, alturaPagina - margem - 58, larguraPagina - margem, alturaPagina - margem - 58);
+    y = alturaPagina - margem - 84;
+  }
+
+  function titulo(valor){
+    garantirEspaco(30);
+    texto(valor, margem, y, 16, 'F2');
+    y -= 28;
+  }
+
+  function subtitulo(valor){
+    garantirEspaco(24);
+    texto(valor, margem, y, 12, 'F2');
+    y -= 18;
+  }
+
+  function campo(label, valor, x, yCampo, larguraCampo){
+    texto(label, x, yCampo, 8, 'F2');
+    const linhas = quebrarTexto(valor || 'Não informado', larguraCampo, 9).slice(0, 2);
+    linhas.forEach((parte, index) => texto(parte, x, yCampo - 13 - (index * 11), 9, 'F1'));
+  }
+
+  function gradeCampos(campos){
+    const colGap = 18;
+    const colW = (larguraPagina - (margem * 2) - colGap) / 2;
+    const alturaCampo = 42;
+
+    for (let i = 0; i < campos.length; i += 2) {
+      garantirEspaco(alturaCampo + 8);
+      const yLinha = y;
+      campo(campos[i][0], campos[i][1], margem, yLinha, colW);
+      if (campos[i + 1]) campo(campos[i + 1][0], campos[i + 1][1], margem + colW + colGap, yLinha, colW);
+      y -= alturaCampo;
+    }
+  }
+
+  function cabecalhoTabela(){
+    garantirEspaco(34);
+    const tableX = margem;
+    const wItem = 145;
+    const wCriterio = 250;
+    const wValor = larguraPagina - (margem * 2) - wItem - wCriterio;
+    cmd('0.94 0.96 0.99 rg');
+    cmd(`${tableX.toFixed(2)} ${(y - 18).toFixed(2)} ${(larguraPagina - margem * 2).toFixed(2)} 24 re f`);
+    cmd('0.15 0.21 0.32 RG 0.15 0.21 0.32 rg');
+    retangulo(tableX, y - 18, larguraPagina - margem * 2, 24);
+    texto('Item', tableX + 6, y - 3, 9, 'F2');
+    texto('Critério', tableX + wItem + 6, y - 3, 9, 'F2');
+    texto('Valor', tableX + wItem + wCriterio + 6, y - 3, 9, 'F2');
+    y -= 24;
+    return { tableX, wItem, wCriterio, wValor };
+  }
+
+  function tabelaOrcamento(linhas){
+    let medidas = cabecalhoTabela();
+
+    linhas.forEach(([item, criterio, valor]) => {
+      const itemLinhas = quebrarTexto(item, medidas.wItem - 12, 9);
+      const criterioLinhas = quebrarTexto(criterio, medidas.wCriterio - 12, 9);
+      const valorTexto = formatValorOrcamento(valor);
+      const alturaLinha = Math.max(itemLinhas.length, criterioLinhas.length, 1) * 11 + 14;
+
+      if (y - alturaLinha < margem + 58) {
+        novaPagina();
+        desenharCabecalho(false);
+        medidas = cabecalhoTabela();
+      }
+
+      retangulo(medidas.tableX, y - alturaLinha + 6, larguraPagina - margem * 2, alturaLinha);
+      itemLinhas.forEach((parte, index) => texto(parte, medidas.tableX + 6, y - 8 - (index * 11), 9, 'F1'));
+      criterioLinhas.forEach((parte, index) => texto(parte, medidas.tableX + medidas.wItem + 6, y - 8 - (index * 11), 9, 'F1'));
+      texto(valorTexto, medidas.tableX + medidas.wItem + medidas.wCriterio + 6, y - 8, 9, 'F1');
+      y -= alturaLinha;
+    });
+  }
+
+  novaPagina();
+  desenharCabecalho(true);
+  titulo('Gerador de orçamento de atos notariais');
+
+  subtitulo('Dados do atendimento');
+  const camposAtendimento = [
+    ['Escrevente responsável', dados.escrevente],
+    ['Contato escrevente', dados.contatoEscrevente],
+    ['Cartório', dados.cartorio],
+    ['Telefone', dados.telefoneCartorio],
+    ['Email', dados.emailCartorio],
+    ['Solicitado por', dados.solicitadoPor],
+    ['Natureza do ato', dados.naturezaAto],
+    ['Registro imobiliário', dados.incluiRegistro ? `${(dados.registrosImobiliarios || []).length || 1} registro(s)` : 'Não incluído'],
+    ['Serviços adicionais necessários', dados.temOutrosServicos ? 'Sim' : 'Não']
+  ];
+  if (dados.temAtoAcessorio) camposAtendimento.push(['Ato acessório', 'Sim']);
+  gradeCampos(camposAtendimento);
+
+  subtitulo('Orçamento estimado');
+  tabelaOrcamento(dados.linhasOrcamento || []);
+
+  garantirEspaco(50);
+  linha(margem, y - 6, larguraPagina - margem, y - 6);
+  texto('Total estimado', margem, y - 24, 12, 'F2');
+  texto(formatMoeda(dados.total), larguraPagina - margem - 150, y - 24, 12, 'F2');
+  y -= 55;
+
+  garantirEspaco(60);
+  subtitulo('Observação');
+  quebrarTexto('Orçamento meramente estimativo, sujeito à conferência da documentação, da legislação tributária aplicável, da tabela vigente, da qualificação notarial e de eventuais exigências do Registro de Imóveis.', larguraPagina - (margem * 2), 9)
+    .forEach((parte) => {
+      garantirEspaco(14);
+      texto(parte, margem, y, 9, 'F1');
+      y -= 13;
+    });
+
+  paginasConteudo.push(comandos.join('\n'));
+
+  const paginaRefs = [];
+  paginasConteudo.forEach((conteudo) => {
+    const conteudoRef = adicionarObjeto(`<< /Length ${conteudo.length} >>\nstream\n${conteudo}\nendstream`);
+    const recursosImagem = imagemRef ? `/XObject << /Im1 ${imagemRef} 0 R >>` : '';
+    const paginaRef = adicionarObjeto(`<< /Type /Page /Parent ${paginasRef} 0 R /MediaBox [0 0 ${larguraPagina} ${alturaPagina}] /Resources << /Font << /F1 ${fonteRegularRef} 0 R /F2 ${fonteNegritoRef} 0 R >> ${recursosImagem} >> /Contents ${conteudoRef} 0 R >>`);
+    paginaRefs.push(paginaRef);
+  });
+
+  objetos[catalogoRef - 1] = `<< /Type /Catalog /Pages ${paginasRef} 0 R >>`;
+  objetos[paginasRef - 1] = `<< /Type /Pages /Kids [${paginaRefs.map((ref) => `${ref} 0 R`).join(' ')}] /Count ${paginaRefs.length} >>`;
+
+  let saida = '%PDF-1.4\n%\xE2\xE3\xCF\xD3\n';
+  const offsets = [0];
+  objetos.forEach((conteudo, index) => {
+    offsets[index + 1] = saida.length;
+    saida += `${index + 1} 0 obj\n${conteudo}\nendobj\n`;
+  });
+  const inicioXref = saida.length;
+  saida += `xref\n0 ${objetos.length + 1}\n0000000000 65535 f \n`;
+  for (let i = 1; i <= objetos.length; i += 1) {
+    saida += `${String(offsets[i]).padStart(10, '0')} 00000 n \n`;
+  }
+  saida += `trailer\n<< /Size ${objetos.length + 1} /Root ${catalogoRef} 0 R >>\nstartxref\n${inicioXref}\n%%EOF`;
+
+  const bytes = new Uint8Array(saida.length);
+  for (let i = 0; i < saida.length; i += 1) {
+    bytes[i] = saida.charCodeAt(i) & 0xff;
+  }
+  return new Blob([bytes], { type: 'application/pdf' });
+}
+
+function baixarArquivoPDF(blob, nomeArquivo){
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = nomeArquivo;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 function limpar(){
   numeroOrcamentoAtual = '';
-  ['escrevente','contatoEscrevente','cartorio','solicitadoPor','outroAto','valorBase','aliquotaITBI','valorOutros'].forEach((id) => {
+  ['escrevente','contatoEscrevente','cartorio','telefoneCartorio','emailCartorio','solicitadoPor','outroAto','valorBase','aliquotaITBI','valorOutros'].forEach((id) => {
     const campo = el(id);
     if (campo) campo.value = '';
   });
