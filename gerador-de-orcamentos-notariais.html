@@ -3152,7 +3152,7 @@ function obterAtosAcessorios(){
         ordem: index + 1,
         valorBase: valorBaseAcessorio,
         emolumentos: valorBaseAcessorio > 0 ? Number(faixa.valor || 0) : 0,
-        criterio: valorBaseAcessorio > 0 ? `Ato acessório ${index + 1}: ${faixa.rotulo}` : `Ato acessório ${index + 1}: valor não informado`
+        criterio: valorBaseAcessorio > 0 ? `Ato acessório ${index + 1}` : `Ato acessório ${index + 1}: valor não informado`
       };
     })
     .filter((item) => item.valorBase > 0);
@@ -3226,7 +3226,7 @@ function obterRegistrosImobiliarios(){
         ordem: index + 1,
         valorBase: valorBaseRegistro,
         emolumentos: valorBaseRegistro > 0 ? Number(faixa.valor || 0) : 0,
-        criterio: valorBaseRegistro > 0 ? `Registro imobiliário ${index + 1}: ${faixa.rotulo}` : `Registro imobiliário ${index + 1}: valor não informado`
+        criterio: valorBaseRegistro > 0 ? `Registro imobiliário ${index + 1}` : `Registro imobiliário ${index + 1}: valor não informado`
       };
     })
     .filter((item) => item.valorBase > 0);
@@ -3378,8 +3378,8 @@ function calcular(rolar = true, validar = rolar){
     tipo,
     incluiRegistro,
     criterioTributo,
-    criterioEscritura: [`Ato principal: ${faixaEscritura.rotulo}`].concat(temAcessorio ? atosAcessorios.map((item) => item.criterio) : []).join('; '),
-    criterioEscrituraPrincipal: `Ato principal: ${faixaEscritura.rotulo}`,
+    criterioEscritura: ['Ato principal'].concat(temAcessorio ? atosAcessorios.map((item) => item.criterio) : []).join('; '),
+    criterioEscrituraPrincipal: 'Ato principal',
     criterioEscrituraAcessorios,
     criterioRegistro,
     naturezaAto: naturezaAtoSelecionada(),
@@ -3746,7 +3746,8 @@ function carregarLogoComoJPEG(dataUrl){
 function montarArquivoPDFOrcamento(dados, logoPDF){
   const larguraPagina = 595.28;
   const alturaPagina = 841.89;
-  const margem = 42;
+  const margem = 40;
+  const larguraUtil = larguraPagina - (margem * 2);
   const objetos = [];
   const paginasConteudo = [];
   let comandos = [];
@@ -3761,6 +3762,7 @@ function montarArquivoPDFOrcamento(dados, logoPDF){
   const paginasRef = adicionarObjeto('');
   const fonteRegularRef = adicionarObjeto('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>');
   const fonteNegritoRef = adicionarObjeto('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>');
+  const fonteTituloRef = adicionarObjeto('<< /Type /Font /Subtype /Type1 /BaseFont /Times-Bold /Encoding /WinAnsiEncoding >>');
   const imagemRef = logoPDF ? adicionarObjeto(`<< /Type /XObject /Subtype /Image /Width ${logoPDF.largura} /Height ${logoPDF.altura} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${logoPDF.binario.length} >>\nstream\n${logoPDF.binario}\nendstream`) : null;
 
   function cmd(linha){
@@ -3827,20 +3829,46 @@ function montarArquivoPDFOrcamento(dados, logoPDF){
     return saida;
   }
 
-  function texto(linha, x, yTexto, tamanho = 10, fonte = 'F1'){
+  function rgb(hex){
+    const limpo = String(hex || '#000000').replace('#', '');
+    const r = parseInt(limpo.slice(0, 2), 16) / 255;
+    const g = parseInt(limpo.slice(2, 4), 16) / 255;
+    const b = parseInt(limpo.slice(4, 6), 16) / 255;
+    return `${r.toFixed(3)} ${g.toFixed(3)} ${b.toFixed(3)}`;
+  }
+
+  function preencher(cor){
+    cmd(`${rgb(cor)} rg`);
+  }
+
+  function contorno(cor){
+    cmd(`${rgb(cor)} RG`);
+  }
+
+  function texto(linha, x, yTexto, tamanho = 10, fonte = 'F1', cor = '#0f172a'){
+    preencher(cor);
     cmd(`BT /${fonte} ${tamanho} Tf 1 0 0 1 ${x.toFixed(2)} ${yTexto.toFixed(2)} Tm (${escaparStringPDF(linha)}) Tj ET`);
   }
 
-  function linha(x1, y1, x2, y2){
+  function linha(x1, y1, x2, y2, cor = '#d7dce3', largura = 0.8){
+    contorno(cor);
+    cmd(`${largura.toFixed(2)} w`);
     cmd(`${x1.toFixed(2)} ${y1.toFixed(2)} m ${x2.toFixed(2)} ${y2.toFixed(2)} l S`);
   }
 
-  function retangulo(x, yRet, w, h){
+  function retangulo(x, yRet, w, h, cor = '#e5e7eb', largura = 0.8){
+    contorno(cor);
+    cmd(`${largura.toFixed(2)} w`);
     cmd(`${x.toFixed(2)} ${yRet.toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re S`);
   }
 
+  function retanguloPreenchido(x, yRet, w, h, cor){
+    preencher(cor);
+    cmd(`${x.toFixed(2)} ${yRet.toFixed(2)} ${w.toFixed(2)} ${h.toFixed(2)} re f`);
+  }
+
   function larguraTextoAproximada(valor, tamanho = 10){
-    return textoPDF(valor).length * tamanho * 0.52;
+    return textoPDF(valor).length * tamanho * 0.50;
   }
 
   function quebrarTexto(valor, larguraMaxima, tamanho = 10){
@@ -3867,81 +3895,82 @@ function montarArquivoPDFOrcamento(dados, logoPDF){
     if (comandos.length) paginasConteudo.push(comandos.join('\n'));
     comandos = [];
     y = alturaPagina - margem;
-    cmd('0.15 0.21 0.32 RG 0.15 0.21 0.32 rg');
+    preencher('#0f172a');
+    contorno('#0f172a');
   }
 
   function garantirEspaco(alturaNecessaria){
-    if (y - alturaNecessaria < margem + 36) {
+    if (y - alturaNecessaria < margem + 28) {
       novaPagina();
       desenharCabecalho(false);
     }
   }
 
   function desenharCabecalho(comLogo = true){
+    const topo = alturaPagina - margem;
     if (comLogo && imagemRef) {
-      const maxW = 170;
-      const maxH = 48;
-      const escala = Math.min(maxW / logoPDF.largura, maxH / logoPDF.altura);
+      const maxW = 130;
+      const maxH = 58;
+      const escala = Math.min(maxW / logoPDF.largura, maxH / logoPDF.altura, 1);
       const w = logoPDF.largura * escala;
       const h = logoPDF.altura * escala;
-      cmd(`q ${w.toFixed(2)} 0 0 ${h.toFixed(2)} ${margem.toFixed(2)} ${(alturaPagina - margem - h).toFixed(2)} cm /Im1 Do Q`);
+      cmd(`q ${w.toFixed(2)} 0 0 ${h.toFixed(2)} ${margem.toFixed(2)} ${(topo - h).toFixed(2)} cm /Im1 Do Q`);
     } else {
-      texto(dados.cartorio || 'Cartório', margem, alturaPagina - margem - 14, 12, 'F2');
+      texto(dados.cartorio || 'Cartório', margem, topo - 20, 12, 'F2', '#0f172a');
     }
 
-    const metaX = larguraPagina - margem - 190;
-    texto('Orçamento estimativo', metaX, alturaPagina - margem - 8, 10, 'F2');
-    texto(`Nº: ${dados.numeroOrcamento}`, metaX, alturaPagina - margem - 23, 9, 'F1');
-    texto(`Data: ${hojeFormatado()}`, metaX, alturaPagina - margem - 37, 9, 'F1');
-    linha(margem, alturaPagina - margem - 58, larguraPagina - margem, alturaPagina - margem - 58);
-    y = alturaPagina - margem - 84;
+    const metaX = larguraPagina - margem - 150;
+    texto('Orçamento estimativo', metaX, topo - 8, 10, 'F1', '#475569');
+    texto(`Nº: ${dados.numeroOrcamento}`, metaX, topo - 22, 9, 'F1', '#475569');
+    texto(`Data: ${hojeFormatado()}`, metaX, topo - 35, 9, 'F1', '#475569');
+    linha(margem, topo - 66, larguraPagina - margem, topo - 66, '#d7dce3', 0.8);
+    y = topo - 90;
   }
 
   function titulo(valor){
-    garantirEspaco(30);
-    texto(valor, margem, y, 16, 'F2');
-    y -= 28;
+    garantirEspaco(34);
+    texto(valor, margem, y, 22, 'F3', '#0f172a');
+    y -= 32;
   }
 
   function subtitulo(valor){
-    garantirEspaco(24);
-    texto(valor, margem, y, 12, 'F2');
-    y -= 18;
+    garantirEspaco(22);
+    texto(valor, margem, y, 12.5, 'F2', '#0f172a');
+    y -= 16;
   }
 
-  function campo(label, valor, x, yCampo, larguraCampo){
-    texto(label, x, yCampo, 8, 'F2');
-    const linhas = quebrarTexto(valor || 'Não informado', larguraCampo, 9).slice(0, 2);
-    linhas.forEach((parte, index) => texto(parte, x, yCampo - 13 - (index * 11), 9, 'F1'));
+  function campo(label, valor, x, yCampo, larguraCampo, alturaCampo){
+    retangulo(x, yCampo - alturaCampo + 7, larguraCampo, alturaCampo - 4, '#e5e7eb', 0.8);
+    texto(label, x + 8, yCampo - 8, 8, 'F1', '#64748b');
+    const linhas = quebrarTexto(valor || 'Não informado', larguraCampo - 16, 9).slice(0, 2);
+    linhas.forEach((parte, index) => texto(parte, x + 8, yCampo - 22 - (index * 10), 9, 'F2', '#0f172a'));
   }
 
   function gradeCampos(campos){
-    const colGap = 18;
-    const colW = (larguraPagina - (margem * 2) - colGap) / 2;
-    const alturaCampo = 42;
+    const colGap = 14;
+    const colW = (larguraUtil - colGap) / 2;
+    const alturaCampo = 44;
 
     for (let i = 0; i < campos.length; i += 2) {
-      garantirEspaco(alturaCampo + 8);
+      garantirEspaco(alturaCampo + 4);
       const yLinha = y;
-      campo(campos[i][0], campos[i][1], margem, yLinha, colW);
-      if (campos[i + 1]) campo(campos[i + 1][0], campos[i + 1][1], margem + colW + colGap, yLinha, colW);
+      campo(campos[i][0], campos[i][1], margem, yLinha, colW, alturaCampo);
+      if (campos[i + 1]) campo(campos[i + 1][0], campos[i + 1][1], margem + colW + colGap, yLinha, colW, alturaCampo);
       y -= alturaCampo;
     }
   }
 
   function cabecalhoTabela(){
-    garantirEspaco(34);
+    garantirEspaco(30);
     const tableX = margem;
-    const wItem = 145;
-    const wCriterio = 250;
-    const wValor = larguraPagina - (margem * 2) - wItem - wCriterio;
-    cmd('0.94 0.96 0.99 rg');
-    cmd(`${tableX.toFixed(2)} ${(y - 18).toFixed(2)} ${(larguraPagina - margem * 2).toFixed(2)} 24 re f`);
-    cmd('0.15 0.21 0.32 RG 0.15 0.21 0.32 rg');
-    retangulo(tableX, y - 18, larguraPagina - margem * 2, 24);
-    texto('Item', tableX + 6, y - 3, 9, 'F2');
-    texto('Critério', tableX + wItem + 6, y - 3, 9, 'F2');
-    texto('Valor', tableX + wItem + wCriterio + 6, y - 3, 9, 'F2');
+    const wItem = 165;
+    const wValor = 105;
+    const wCriterio = larguraUtil - wItem - wValor;
+    retanguloPreenchido(tableX, y - 20, larguraUtil, 22, '#f1f5f9');
+    linha(tableX, y - 20, larguraPagina - margem, y - 20, '#e5e7eb', 0.7);
+    texto('Item', tableX + 8, y - 10, 8.5, 'F2', '#334155');
+    texto('Critério', tableX + wItem + 8, y - 10, 8.5, 'F2', '#334155');
+    texto('Valor', tableX + wItem + wCriterio + 8, y - 10, 8.5, 'F2', '#334155');
     y -= 24;
     return { tableX, wItem, wCriterio, wValor };
   }
@@ -3950,10 +3979,10 @@ function montarArquivoPDFOrcamento(dados, logoPDF){
     let medidas = cabecalhoTabela();
 
     linhas.forEach(([item, criterio, valor]) => {
-      const itemLinhas = quebrarTexto(item, medidas.wItem - 12, 9);
-      const criterioLinhas = quebrarTexto(criterio, medidas.wCriterio - 12, 9);
+      const itemLinhas = quebrarTexto(item, medidas.wItem - 16, 9);
+      const criterioLinhas = quebrarTexto(criterio, medidas.wCriterio - 16, 9);
       const valorTexto = formatValorOrcamento(valor);
-      const alturaLinha = Math.max(itemLinhas.length, criterioLinhas.length, 1) * 11 + 14;
+      const alturaLinha = Math.max(itemLinhas.length, criterioLinhas.length, 1) * 10 + 14;
 
       if (y - alturaLinha < margem + 58) {
         novaPagina();
@@ -3961,10 +3990,10 @@ function montarArquivoPDFOrcamento(dados, logoPDF){
         medidas = cabecalhoTabela();
       }
 
-      retangulo(medidas.tableX, y - alturaLinha + 6, larguraPagina - margem * 2, alturaLinha);
-      itemLinhas.forEach((parte, index) => texto(parte, medidas.tableX + 6, y - 8 - (index * 11), 9, 'F1'));
-      criterioLinhas.forEach((parte, index) => texto(parte, medidas.tableX + medidas.wItem + 6, y - 8 - (index * 11), 9, 'F1'));
-      texto(valorTexto, medidas.tableX + medidas.wItem + medidas.wCriterio + 6, y - 8, 9, 'F1');
+      linha(medidas.tableX, y - alturaLinha + 6, larguraPagina - margem, y - alturaLinha + 6, '#e5e7eb', 0.7);
+      itemLinhas.forEach((parte, index) => texto(parte, medidas.tableX + 8, y - 8 - (index * 10), 9, 'F1', '#0f172a'));
+      criterioLinhas.forEach((parte, index) => texto(parte, medidas.tableX + medidas.wItem + 8, y - 8 - (index * 10), 9, 'F1', '#0f172a'));
+      texto(valorTexto, medidas.tableX + medidas.wItem + medidas.wCriterio + 8, y - 8, 9, 'F2', '#0f172a');
       y -= alturaLinha;
     });
   }
@@ -3982,29 +4011,30 @@ function montarArquivoPDFOrcamento(dados, logoPDF){
     ['Email', dados.emailCartorio],
     ['Solicitado por', dados.solicitadoPor],
     ['Natureza do ato', dados.naturezaAto],
-    ['Registro imobiliário', dados.incluiRegistro ? `${(dados.registrosImobiliarios || []).length || 1} registro(s)` : 'Não incluído'],
-    ['Serviços adicionais necessários', dados.temOutrosServicos ? 'Sim' : 'Não']
+    ['Registro imobiliário', dados.incluiRegistro ? `${(dados.registrosImobiliarios || []).length || 1} registro(s)` : 'Não incluído']
   ];
   if (dados.temAtoAcessorio) camposAtendimento.push(['Ato acessório', 'Sim']);
+  camposAtendimento.push(['Serviços adicionais necessários', dados.temOutrosServicos ? 'Sim' : 'Não']);
   gradeCampos(camposAtendimento);
+  y -= 10;
 
   subtitulo('Orçamento estimado');
   tabelaOrcamento(dados.linhasOrcamento || []);
 
-  garantirEspaco(50);
-  linha(margem, y - 6, larguraPagina - margem, y - 6);
-  texto('Total estimado', margem, y - 24, 12, 'F2');
-  texto(formatMoeda(dados.total), larguraPagina - margem - 150, y - 24, 12, 'F2');
-  y -= 55;
+  garantirEspaco(56);
+  y -= 12;
+  retanguloPreenchido(margem, y - 36, larguraUtil, 38, '#f8fafc');
+  retangulo(margem, y - 36, larguraUtil, 38, '#d7dce3', 0.8);
+  texto('Total estimado', margem + 12, y - 14, 16, 'F2', '#0f172a');
+  texto(formatMoeda(dados.total), larguraPagina - margem - 95, y - 14, 16, 'F2', '#0f172a');
+  y -= 58;
 
-  garantirEspaco(60);
-  subtitulo('Observação');
-  quebrarTexto('Orçamento meramente estimativo, sujeito à conferência da documentação, da legislação tributária aplicável, da tabela vigente, da qualificação notarial e de eventuais exigências do Registro de Imóveis.', larguraPagina - (margem * 2), 9)
-    .forEach((parte) => {
-      garantirEspaco(14);
-      texto(parte, margem, y, 9, 'F1');
-      y -= 13;
-    });
+  garantirEspaco(54);
+  retanguloPreenchido(margem, y - 38, larguraUtil, 38, '#f8fafc');
+  retanguloPreenchido(margem, y - 38, 3, 38, '#0076ff');
+  quebrarTexto('Orçamento meramente estimativo, sujeito à conferência da documentação, da legislação tributária aplicável, da tabela vigente, da qualificação notarial e de eventuais exigências do Registro de Imóveis.', larguraUtil - 24, 8.5)
+    .forEach((parte, index) => texto(parte, margem + 12, y - 13 - (index * 11), 8.5, 'F1', '#334155'));
+  y -= 50;
 
   paginasConteudo.push(comandos.join('\n'));
 
@@ -4012,7 +4042,7 @@ function montarArquivoPDFOrcamento(dados, logoPDF){
   paginasConteudo.forEach((conteudo) => {
     const conteudoRef = adicionarObjeto(`<< /Length ${conteudo.length} >>\nstream\n${conteudo}\nendstream`);
     const recursosImagem = imagemRef ? `/XObject << /Im1 ${imagemRef} 0 R >>` : '';
-    const paginaRef = adicionarObjeto(`<< /Type /Page /Parent ${paginasRef} 0 R /MediaBox [0 0 ${larguraPagina} ${alturaPagina}] /Resources << /Font << /F1 ${fonteRegularRef} 0 R /F2 ${fonteNegritoRef} 0 R >> ${recursosImagem} >> /Contents ${conteudoRef} 0 R >>`);
+    const paginaRef = adicionarObjeto(`<< /Type /Page /Parent ${paginasRef} 0 R /MediaBox [0 0 ${larguraPagina} ${alturaPagina}] /Resources << /Font << /F1 ${fonteRegularRef} 0 R /F2 ${fonteNegritoRef} 0 R /F3 ${fonteTituloRef} 0 R >> ${recursosImagem} >> /Contents ${conteudoRef} 0 R >>`);
     paginaRefs.push(paginaRef);
   });
 
