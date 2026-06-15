@@ -1,7 +1,6 @@
 import express from 'express';
 import path from 'node:path';
 import crypto from 'node:crypto';
-import fs from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 const app = express();
@@ -128,23 +127,6 @@ function portalIsAssetPath(pathname) {
   return /\.(css|js|mjs|map|png|jpg|jpeg|gif|webp|svg|ico|woff|woff2|ttf|eot)$/i.test(pathname);
 }
 
-function portalEnhancePublicIndexHtml(html) {
-  let output = String(html || '');
-
-  const cssTag = '<link rel="stylesheet" href="/public-index-categorias.css?v=1.0.0" />';
-  const jsTag = '<script src="/public-index-categorias.js?v=1.0.0"></script>';
-
-  if (!output.includes('/public-index-categorias.css')) {
-    output = output.replace('</head>', `  ${cssTag}\n</head>`);
-  }
-
-  if (!output.includes('/public-index-categorias.js')) {
-    output = output.replace('</body>', `  ${jsTag}\n</body>`);
-  }
-
-  return output;
-}
-
 const PROTECTED_ROUTES = new Map([
   ['/aplicador-de-emolumentos.html', 'aplicador-emolumentos'],
   ['/aplicador-de-emolumentos', 'aplicador-emolumentos'],
@@ -221,15 +203,6 @@ app.get('/api/portal-protection-health', (_req, res) => {
 });
 
 app.use(portalProtectedStaticMiddleware);
-
-app.get(['/', '/index.html'], async (_req, res, next) => {
-  try {
-    const html = await fs.readFile(path.join(__dirname, 'index.html'), 'utf8');
-    res.type('html').send(portalEnhancePublicIndexHtml(html));
-  } catch (error) {
-    next(error);
-  }
-});
 
 app.use(express.static(__dirname, {
   etag: false,
