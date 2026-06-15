@@ -1,0 +1,13 @@
+/* Cards em breve da index pública. */
+.tool-card-coming-soon {
+  cursor: default;
+}
+
+.tool-card-coming-soon:hover {
+  transform: none;
+}
+
+.tool-card-coming-soon .tool-card-badge {
+  background: rgba(11, 95, 255, 0.08);
+  color: var(--azul);
+}
