@@ -1,8 +1,8 @@
 {
-  "source": "https://atos.cnj.jus.br/files/compilado235605202606086a275695a672c.pdf",
-  "updatedAt": "2026-06-18T08:01:31.989032+00:00",
-  "sha256": "e023296bb9c983f03e10111de06237ec305858f39d02cf1057d93a5c891c4afd",
-  "totalItems": 845,
+  "source": "https://atos.cnj.jus.br/files/compilado174140202606186a342dd42e101.pdf",
+  "updatedAt": "2026-06-19T08:01:20.014192+00:00",
+  "sha256": "8290bdef63bd4c323eb9960168f967485d02859071003dfa1c40dfa90649e9c2",
+  "totalItems": 862,
   "parserVersion": "cnj-hierarchy-v5",
   "articles": [
     {
@@ -17066,7 +17066,7 @@
           "type": "section-title"
         }
       ],
-      "texto": "Art. 208. Os oficiais de registro e os tabeliães deverão recepcionar diretamente títulos e documentos nato-digitais ou digitalizados, observado o seguinte: (redação dada pelo Provimento n. 180, de 16.8.2024)\n\nI – a recepção pelos tabeliães de notas e de protestos ocorrerá por meio que comprove a autoria e integridade do arquivo; (incluído pelo Provimento n. 180, de 16.8.2024)\n\nII – a recepção pelos oficiais de registro ocorrerá por meio: (incluído pelo Provimento n. 180, de 16.8.2024)\n\na) preferencialmente, do Sistema Eletrônico dos Registros Públicos – Serp e dos sistemas que o integra (especialmente os indicados nos incisos I a III do § 1º do art. 211 deste Código); ou (incluído pelo Provimento n. 180, de 16.8.2024)\n\nb) de sistema ou plataforma facultativamente mantidos em suas próprias serventias, desde que tenham sido produzidos por meios que permitam certeza quanto à autoria e integridade. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 1º Consideram-se títulos nato-digitais, para todas as atividades, sem prejuízo daqueles previstos em lei específica: (incluído pelo Provimento n. 180, de 16.8.2024)\n\nI – o documento público ou particular gerado eletronicamente em PDF/A e assinado, por todos os signatários (inclusive testemunhas), com assinatura eletrônica qualificada ou com assinatura eletrônica avançada admitida perante os serviços notariais e registrais (art. 17, §§ 1º e 2º, da Lei n. 6.015/1973; art. 38, § 2º, da Lei n. 11.977/2009; art. 285, I, deste Código); (incluído pelo Provimento n. 180, de 16.8.2024)\n\nII – o documento público ou particular para qual seja exigível a assinatura apenas do apresentante, desde que gerado eletronicamente em PDF/A e assinado por aquele com assinatura eletrônica qualificada ou com assinatura eletrônica avançada admitida perante os serviços notariais e registrais (art. 17, §§ 1º e 2º, da Lei n. 6.015/1973; art. 38, § 2º, da Lei n. 11.977/2009; art. 285, I, deste Código); (incluído pelo Provimento n. 180, de 16.8.2024)\n\nIII - a certidão ou o traslado notarial gerado eletronicamente em PDF/A ou XML e assinado por tabelião de notas, seu substituto ou preposto; (incluído pelo Provimento n. 180, de 16.8.2024)\n\nIV — os documentos desmaterializados por qualquer notário ou registrador, gerados em PDF/A e assinados por ele, seus substitutos ou prepostos com assinatura qualificada ou avançada; (incluído pelo Provimento n. 180, de 16.8.2024)\n\nV - cartas de sentença, formais de partilha, cartas de adjudicação, os mandados de registro, de averbação e de retificação, obtidos na forma do inciso I ou por acesso direto do oficial do registro ao processo judicial eletrônico, a requerimento do interessado; (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§2.º Consideram-se títulos digitalizados com padrões técnicos aqueles que forem digitalizados em conformidade com os critérios estabelecidos no art. 5.º do Decreto n. 10.278, de 18 de março de 2020, inclusive os que utilizem assinatura eletrônica qualificada ou avançada admitida perante os registros públicos (art. 17, §§ 1º e 2º, da Lei n. 6.015/1973; art. 38, § 2º, da Lei n. 11.977/2009; art. 285, I, deste Código). (incluído pelo Provimento n. 180, de 16.8.2024)"
+      "texto": "Art. 208. Os oficiais de registro e os tabeliães deverão recepcionar diretamente títulos e documentos nato-digitais ou digitalizados, observado o seguinte: (redação dada pelo Provimento n. 180, de 16.8.2024)\n\nI – a recepção pelos tabeliães de notas e de protestos ocorrerá por meio que comprove a autoria e integridade do arquivo; (incluído pelo Provimento n. 180, de 16.8.2024)\n\nII – a recepção pelos oficiais de registro ocorrerá por meio: (incluído pelo Provimento n. 180, de 16.8.2024)\n\na) preferencialmente, do Sistema Eletrônico dos Registros Públicos – Serp e dos sistemas que o integra (especialmente os indicados nos incisos I a III do § 1º do art. 211 deste Código); ou (incluído pelo Provimento n. 180, de 16.8.2024)\n\nb) de sistema ou plataforma facultativamente mantidos em suas próprias serventias, desde que tenham sido produzidos por meios que permitam certeza quanto à autoria e integridade, sejam interoperáveis com o Serp e comunicados ao ONR todos os protocolos recebidos e seus andamentos, nos termos estabelecidos em ITN a ser editada para este fim, para fins de estatística e acompanhamento registral on-line. (redação dada pelo Provimento n. 228, de 16.6.2026)\n\n§ 1º Consideram-se títulos nato-digitais, para todas as atividades, sem prejuízo daqueles previstos em lei específica: (incluído pelo Provimento n. 180, de 16.8.2024)\n\nI – o documento público ou particular gerado eletronicamente em PDF/A e assinado, por todos os signatários (inclusive testemunhas), com assinatura eletrônica qualificada ou com assinatura eletrônica avançada admitida perante os serviços notariais e registrais (art. 17, §§ 1º e 2º, da Lei n. 6.015/1973; art. 38, § 2º, da Lei n. 11.977/2009; art. 285, I, deste Código); (incluído pelo Provimento n. 180, de 16.8.2024)\n\nII – o documento público ou particular para qual seja exigível a assinatura apenas do apresentante, desde que gerado eletronicamente em PDF/A e assinado por aquele com assinatura eletrônica qualificada ou com assinatura eletrônica avançada admitida perante os serviços notariais e registrais (art. 17, §§ 1º e 2º, da Lei n. 6.015/1973; art. 38, § 2º, da Lei n. 11.977/2009; art. 285, I, deste Código); (incluído pelo Provimento n. 180, de 16.8.2024)\n\nIII - a certidão ou o traslado notarial gerado eletronicamente em PDF/A ou XML e assinado por tabelião de notas, seu substituto ou preposto; (incluído pelo Provimento n. 180, de 16.8.2024)\n\nIV — os documentos desmaterializados por qualquer notário ou registrador, gerados em PDF/A e assinados por ele, seus substitutos ou prepostos com assinatura qualificada ou avançada; (incluído pelo Provimento n. 180, de 16.8.2024)\n\nV - cartas de sentença, formais de partilha, cartas de adjudicação, os mandados de registro, de averbação e de retificação, obtidos na forma do inciso I ou por acesso direto do oficial do registro ao processo judicial eletrônico, a requerimento do interessado; (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§2.º Consideram-se títulos digitalizados com padrões técnicos aqueles que forem digitalizados em conformidade com os critérios estabelecidos no art. 5.º do Decreto n. 10.278, de 18 de março de 2020, inclusive os que utilizem assinatura eletrônica qualificada ou avançada admitida perante os registros públicos (art. 17, §§ 1º e 2º, da Lei n. 6.015/1973; art. 38, § 2º, da Lei n. 11.977/2009; art. 285, I, deste Código). (incluído pelo Provimento n. 180, de 16.8.2024)"
     },
     {
       "id": "cnj-art-209",
@@ -17193,6 +17193,1215 @@
         }
       ],
       "texto": "Art. 210. Os oficiais de registro ou tabeliães, quando recepcionarem título ou documento digitalizado, poderão exigir a apresentação do original e, em caso de dúvida, poderão requerer, ao juiz, na forma da lei, providências para esclarecimento da autenticidade e integridade. (redação dada pelo Provimento n. 180, de 16.8.2024)"
+    },
+    {
+      "id": "cnj-art-210-a",
+      "numero": "Art. 210-A",
+      "ordem": 210.01,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção I",
+      "subsecaoTitulo": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção I",
+          "type": "section"
+        },
+        {
+          "text": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-A. Esta Seção regulamenta os critérios e procedimentos para a utilização de extratos eletrônicos como instrumentos auxiliares de organização informacional e de apoio ao processamento eletrônico de títulos destinados ao registro ou à averbação de fatos, atos e negócios jurídicos, sem prejuízo da qualificação registral, nos termos da legislação aplicável. (incluído pelo Provimento n. 228, de 16.6.2026)\n\nParágrafo único. Para os fins previstos neste Código de Normas, considera-se: (incluído pelo Provimento n. 228, de 16.6.2026)\n\nI - extrato eletrônico: representação estruturada, padronizada e interoperável de dados juridicamente relevantes referentes ao título que lhe dá origem, apta a subsidiar a qualificação registral, podendo, exclusivamente nas hipóteses expressamente previstas em lei, constituir base suficiente para o exame dos elementos, cláusulas e condições do título, sem prejuízo da verificação dos requisitos legais de registrabilidade e da compatibilidade com a matrícula; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nII – repositório confiável de documentos eletrônicos - RCDE: banco de dados, sob gestão do ONR, que armazena documentos eletrônicos em suporte aos atos registrais, para fins de atendimento ao disposto no inciso VIII do art. 3º da Lei 14.382/2022; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nIII – apresentante: pessoa física ou jurídica devidamente credenciada, responsável pelo encaminhamento do extrato eletrônico para registro ou averbação de fatos, atos ou negócios jurídicos no serviço de registro de imóveis; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nIV – emitente: pessoa física ou jurídica devidamente credenciada, responsável pela geração do extrato eletrônico ou documento eletrônico original, assumindo responsabilidade civil e criminal pela fiel correspondência entre os dados inseridos no extrato eletrônico e o instrumento que lhe deu origem. (incluído pelo Provimento n. 228, de 16.6.2026)\n\nV - requisitos legais de registrabilidade: conjunto de condições jurídicas e formais exigidas pela legislação para o ingresso do título, representado ou não por extrato, no fólio real, compreendendo a regularidade formal do instrumento, a validade do negócio jurídico, a compatibilidade com a matrícula e a observância dos princípios registrais, notadamente os da continuidade, especialidade e disponibilidade, bem como o cumprimento de eventuais exigências legais específicas. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-b",
+      "numero": "Art. 210-B",
+      "ordem": 210.02,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis",
+        "Tabelionato de Notas"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção I",
+      "subsecaoTitulo": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção I",
+          "type": "section"
+        },
+        {
+          "text": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-B. São legitimados a encaminhar extrato eletrônico ao Registro de Imóveis competente, exclusivamente para fins de prática de atos de suas atribuições legais, relativos a direitos reais, garantias ou averbações com repercussão imobiliária: (incluído pelo Provimento n. 228, de 16.6.2026)\n\nI – tabeliães de notas; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nII – instituições financeiras que atuem com crédito imobiliário autorizadas a celebrar instrumentos particulares com caráter de escritura pública; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nIII – companhias de habitação e fundações habitacionais integrantes da administração pública; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nIV – entes federativos, nos casos de contrato, termo administrativo, certidões de dívida ativa, certidões de regularização fundiária e outros; e (incluído pelo Provimento n. 228, de 16.6.2026)\n\nV – instituição financeira ou entidade autorizada pelo Banco Central do Brasil ou pela Comissão de Valores Mobiliários a exercer as atividades de escrituração, registro ou depósito centralizado de ativos financeiros e de valores mobiliários, no caso do título decorrente de operação de crédito realizada por produtor rural, no âmbito da Lei n. 13.986, de 7 de abril de 2020, bem como os relativos a garantias de crédito rural em cédulas e títulos de crédito do agronegócio. (incluído pelo Provimento n. 228, de 16.6.2026)\n\nParágrafo único. Os requisitos para credenciamento de pessoas e entidades elencadas neste artigo, aptas à emissão de extratos eletrônicos, serão objeto de ITN emitida pelo ONR. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-c",
+      "numero": "Art. 210-C",
+      "ordem": 210.03,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção I",
+      "subsecaoTitulo": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção I",
+          "type": "section"
+        },
+        {
+          "text": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-C. O extrato eletrônico conterá os campos e cláusulas obrigatórias de acordo com cada tipo de fato, ato ou negócio jurídico e os padrões de formato de arquivo e leiautes especificados em ITN emitida pelo ONR. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§1º As alterações de leiaute e da estrutura de dados serão controladas através da atribuição de número de versão. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§2º As diferentes versões e o histórico de versões deverão ser publicamente disponibilizados no sítio eletrônico do ONR. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§3º A recepção formal de extratos eletrônicos para fins de prenotação e processamento registral ocorrerá, obrigatoriamente, por meio do Sistema Eletrônico dos Registros Públicos – SERP, mediante utilização dos sistemas implementados e geridos pelo ONR, admitida a utilização, pelas serventias, de sistemas ou plataformas próprias exclusivamente como interfaces internas de apoio, desde que interoperáveis e em conformidade com as normas técnicas aplicáveis. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§4º A conformidade do extrato eletrônico com os padrões técnicos definidos em ITN limita-se à aferição de regularidade estrutural e de integridade dos dados, não implicando presunção de veracidade material, validade jurídica, eficácia ou registrabilidade do título, nem vinculando o juízo jurídico do oficial. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§5º As Instruções Técnicas de Normalização limitar-se-ão à padronização técnica e operacional, não podendo alterar os requisitos legais de registrabilidade. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-d",
+      "numero": "Art. 210-D",
+      "ordem": 210.04,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção I",
+      "subsecaoTitulo": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção I",
+          "type": "section"
+        },
+        {
+          "text": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-D. O emitente do extrato eletrônico deverá ter procuração outorgada pela entidade credenciada com poderes específicos para emissão do extrato correspondente ao instrumento contratual que lhe deu origem, podendo para tanto fazer as declarações previstas no artigo 210-M deste Código de Normas, ressalvadas as hipóteses em que o emitente atue por vínculo estatutário, funcional ou contratual que lhe confira poderes para tanto. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-e",
+      "numero": "Art. 210-E",
+      "ordem": 210.05,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis",
+        "Tabelionato de Notas"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção I",
+      "subsecaoTitulo": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção I",
+          "type": "section"
+        },
+        {
+          "text": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-E. Os extratos eletrônicos serão apresentados ao registro de imóveis por meio do SERP e deverão observar, quanto ao arquivamento do instrumento contratual que lhes deu origem, o seguinte: (incluído pelo Provimento n. 228, de 16.6.2026)\n\nI – tratando-se de extratos eletrônicos relativos a bens imóveis, deverão ser acompanhados do arquivamento da íntegra do instrumento contratual, em cópia simples, exceto se apresentados por tabelião de notas; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nII – tratando-se de extratos eletrônicos relativos a bens imóveis apresentados por instituição financeira autorizada a celebrar instrumentos com caráter de escritura pública ou no caso de garantias de crédito rural em cédulas e títulos de crédito do agronegócio, o emitente promoverá o arquivamento do instrumento ou título em pasta propria, sem prejuízo do arquivamento no registro de imóveis; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nIII – tratando-se de extratos eletrônicos relativos a bens móveis, o arquivamento da íntegra do instrumento contratual será facultativo, a critério do requerente; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nIV – o instrumento contratual referido nos incisos anteriores poderá ser apresentado em formato eletrônico ou digitalizado, acompanhado de declaração assinada eletronicamente de que seu conteúdo corresponde ao original firmado pelas partes assumindo, o declarante, responsabilidade civil e criminal pela fidelidade da reprodução. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-f",
+      "numero": "Art. 210-F",
+      "ordem": 210.06,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção I",
+      "subsecaoTitulo": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção I",
+          "type": "section"
+        },
+        {
+          "text": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-F. Nos casos de extratos eletrônicos relativos a bens imóveis, fica dispensada a atualização prévia da matrícula quanto aos dados objetivos ou subjetivos previstos no art. 176 da Lei nº 6.015, de 31 de dezembro de 1973, exceto quanto aos dados imprescindíveis à verificação da subsunção do objeto e das partes aos elementos constantes do título apresentado, observadas as seguintes condições: (incluído pelo Provimento n. 228, de 16.6.2026)\n\nI – não poderá ser criada nova unidade imobiliária por fusão ou desmembramento sem observância do princípio da especialidade; e (incluído pelo Provimento n. 228, de 16.6.2026)\n\nII – a dispensa de atualização condiciona-se à correspondência suficiente dos dados descritivos do imóvel e dos titulares entre o título e a matrícula, apta a permitir a identificação inequívoca do objeto e das partes. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-g",
+      "numero": "Art. 210-G",
+      "ordem": 210.07,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção I",
+      "subsecaoTitulo": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção I",
+          "type": "section"
+        },
+        {
+          "text": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-G. Recebidos o extrato eletrônico e, quando exigido, o instrumento contratual correspondente, o oficial procederá à prenotação e à qualificação registral, observando a correspondência entre os dados estruturados e os elementos do título, quando aplicável. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-h",
+      "numero": "Art. 210-H",
+      "ordem": 210.08,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção I",
+      "subsecaoTitulo": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção I",
+          "type": "section"
+        },
+        {
+          "text": "Da transmissão, recepção e protocolo dos extratos eletrônicos",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-H. Fica dispensada, no âmbito do registro de imóveis, a apresentação da escritura de pacto antenupcial, desde que os dados de seu registro e o regime de bens estejam indicados no extrato eletrônico, com a informação sobre a existência ou não de cláusulas especiais, devendo o oficial, quando necessário à qualificação registral, exigir a apresentação do respectivo instrumento ou certidão comprobatória. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-i",
+      "numero": "Art. 210-I",
+      "ordem": 210.09,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção II",
+      "subsecaoTitulo": "Qualificação no Ofício de Registro de Imóveis",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção II",
+          "type": "section"
+        },
+        {
+          "text": "Qualificação no Ofício de Registro de Imóveis",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-I. Após a prenotação, o oficial de registro de imóveis procederá à qualificação registral mediante exame dos elementos, cláusulas e condições constantes do extrato eletrônico e, sempre que reputar necessário ao exercício da qualificação registral, do instrumento que lhe deu origem, com vistas à verificação de sua registrabilidade nos termos da legislação de regência. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§1º A utilização de extratos eletrônicos não autoriza a dispensa da análise dos requisitos legais relativos à continuidade, especialidade, disponibilidade e compatibilidade com a matrícula, ressalvadas as hipóteses previstas em lei. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§2º As disposições deste artigo aplicam-se igualmente aos títulos relativos a garantias, direitos reais ou atos com repercussão imobiliária, quando produzam efeitos com repercussão no fólio real. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§3º A exceção de arquivamento do instrumento contratual prevista no inciso I do art. 210-E não impede que o oficial de registro de imóveis exija, a qualquer tempo durante a qualificação registral, a apresentação do instrumento que deu origem ao extrato eletrônico, sempre que reputar sua análise necessária ao exercício da qualificação registral, hipótese em que o emitente deverá disponibilizá-lo por meio eletrônico em prazo compatível com o procedimento registral. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-j",
+      "numero": "Art. 210-J",
+      "ordem": 210.1,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção II",
+      "subsecaoTitulo": "Qualificação no Ofício de Registro de Imóveis",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção II",
+          "type": "section"
+        },
+        {
+          "text": "Qualificação no Ofício de Registro de Imóveis",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-J. A existência de erro formal, omissão ou inconsistência no extrato eletrônico não constitui, por si só, fundamento para negativa de registro ou averbação, desde que, à luz dos elementos disponíveis, estejam presentes os requisitos legais para a prática do ato, sem prejuízo da comunicação ao emitente e ao ONR para correção e aperfeiçoamento dos dados estruturados. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-k",
+      "numero": "Art. 210-K",
+      "ordem": 210.11,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção II",
+      "subsecaoTitulo": "Qualificação no Ofício de Registro de Imóveis",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção II",
+          "type": "section"
+        },
+        {
+          "text": "Qualificação no Ofício de Registro de Imóveis",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-K. A conformidade formal do extrato eletrônico com os padrões técnicos não afasta o dever do oficial de registro de imóveis de formular exigências, suscitar dúvida ou negar o registro ou a averbação sempre que, do exame do título, resultar desconformidade com a lei, violação a princípios registrais, defeito de representação, indício de fraude ou incompatibilidade com os atos constantes da matrícula. (incluído pelo Provimento n. 228, de 16.6.2026)\n\nParágrafo único. Constatada divergência relevante entre o conteúdo do título e os dados constantes do extrato eletrônico, o oficial consignará tal circunstância na nota devolutiva ou na decisão de qualificação, sem prejuízo da comunicação ao ONR para fins de monitoramento, correção e aperfeiçoamento sistêmico. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-l",
+      "numero": "Art. 210-L",
+      "ordem": 210.12,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção II",
+      "subsecaoTitulo": "Qualificação no Ofício de Registro de Imóveis",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção II",
+          "type": "section"
+        },
+        {
+          "text": "Qualificação no Ofício de Registro de Imóveis",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-L. Realizado o registro ou a averbação, o oficial de registro de imóveis disponibilizará ao requerente, em formato eletrônico, as informações relativas à certificação do ato praticado, nos termos da legislação aplicável. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-m",
+      "numero": "Art. 210-M",
+      "ordem": 210.13,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção III",
+      "subsecaoTitulo": "Declarações do emitente dos extratos eletrônicos",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção III",
+          "type": "section"
+        },
+        {
+          "text": "Declarações do emitente dos extratos eletrônicos",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-M. Os extratos eletrônicos conterão as seguintes cláusulas declaratórias de assunção de responsabilidade civil e criminal pelo emitente: (incluído pelo Provimento n. 228, de 16.6.2026)\n\nI – declaração de que foi conferida a identificação e a regularidade da representação das partes que firmaram assinaturas manuscritas ou eletrônicas no instrumento que deu origem ao extrato eletrônico; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nII – declaração de que constam no instrumento que deu origem ao extrato eletrônico todas as cláusulas obrigatórias ao negócio jurídico correspondente; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nIII – declaração de que as partes autorizam todas as averbações necessárias para a prática do ato registral objeto do extrato eletrônico, assim como o encerramento ou abertura de novas matrículas, se for o caso; e (incluído pelo Provimento n. 228, de 16.6.2026)\n\nIV - declaração de que os dados estruturados constantes do extrato eletrônico correspondem fielmente ao conteúdo do instrumento que lhe deu origem, inexistindo omissão, acréscimo ou alteração de cláusulas, condições ou elementos juridicamente relevantes. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§1º Quando cabível, a comprovação do recolhimento de tributos poderá ser realizada por meio eletrônico, inclusive mediante indicação de endereço oficial para verificação pelo registrador. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§2º Os extratos eletrônicos poderão representar títulos formalizados com base em documentos-modelo ou instrumentos padronizados, previamente estruturados, nos quais permaneçam em aberto apenas os campos destinados ao preenchimento dos dados de qualificação das partes e dos demais elementos variáveis de identificação do negócio jurídico e do objeto, desde que tais modelos estejam disponíveis em repositório específico mantido pelo ONR, acompanhados de pareceres jurídicos, notas técnicas e outras análises de apoio informacional à qualificação registral. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-n",
+      "numero": "Art. 210-N",
+      "ordem": 210.14,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção III",
+      "subsecaoTitulo": "Declarações do emitente dos extratos eletrônicos",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção III",
+          "type": "section"
+        },
+        {
+          "text": "Declarações do emitente dos extratos eletrônicos",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-N. O emitente do extrato eletrônico responde civil e criminalmente pela fidelidade informacional do extrato em relação ao título que lhe deu origem, sem prejuízo da responsabilidade funcional do oficial de registro de imóveis por atos decorrentes da qualificação jurídica do título. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-o",
+      "numero": "Art. 210-O",
+      "ordem": 210.15,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção IV",
+      "subsecaoTitulo": "Do Repositório de Documentos-Modelo, Instrumentos Padronizados e Suporte",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção IV",
+          "type": "section"
+        },
+        {
+          "text": "Do Repositório de Documentos-Modelo, Instrumentos Padronizados e Suporte",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-O. O ONR manterá repositório específico de documentos- modelo e instrumentos padronizados, bem como de pareceres jurídicos, notas técnicas e outras análises a eles associados, destinados a oferecer suporte informacional e técnico aos oficiais de registro de imóveis no exercício da qualificação registral. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§1º Os documentos-modelo deverão observar padrões mínimos de estruturação jurídica e clareza redacional, compatíveis com a legislação aplicável e com os princípios registrais. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§2º O conteúdo do repositório terá caráter meramente informativo e orientativo, não vinculando o juízo jurídico do oficial de registro de imóveis, nem afastando sua independência funcional e sua responsabilidade pela qualificação registral nos termos da legislação de regência. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§3º O ONR deverá assegurar mecanismos de versionamento, rastreabilidade e publicidade dos documentos e pareceres disponibilizados, garantindo disponibilidade, transparência e atualização contínua. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-p",
+      "numero": "Art. 210-P",
+      "ordem": 210.16,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção V",
+      "subsecaoTitulo": "Do Monitoramento, da Consolidação de Dados Estatísticos e da Supervisão",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção V",
+          "type": "section"
+        },
+        {
+          "text": "Do Monitoramento, da Consolidação de Dados Estatísticos e da Supervisão",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-P. Cumprirá ao ONR implementar, manter e operar mecanismos permanentes de monitoramento, auditoria e análise dos fluxos de extratos eletrônicos encaminhados e processados no âmbito das serventias de registro de imóveis, como instrumento de governança regulatória, supervisão sistêmica e prevenção de riscos, com vistas à identificação de padrões atípicos, falhas sistêmicas, inconsistências recorrentes, indícios de uso, recepção e/ou processamento inadequados, irregularidades operacionais ou quaisquer anomalias que possam comprometer a regularidade, a segurança, a eficiência, a eficácia, a confiabilidade ou a uniformidade do sistema. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§1º Identificadas anomalias, cuja repercussão se restrinja ao âmbito de uma única serventia, ou à circunscrição territorial de uma única unidade da federação, o ONR deverá comunicar o fato, de forma circunstanciada e tempestiva, ao Juízo Corregedor Permanente e à respectiva Corregedoria local, instruindo a comunicação com os elementos técnicos e informacionais necessários à adequada apuração e adoção das providências cabíveis. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§2º Verificadas anomalias que revelem impacto potencial ou efetivo de natureza estadual, distrital, regional ou nacional, que possam afetar a interoperabilidade, a padronização, a integridade dos dados, a segurança jurídica dos atos registrais ou a regular e eficaz prestação do serviço em mais de uma unidade da federação, o ONR deverá comunicar o ocorrido à Corregedoria Nacional de Justiça. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§3º As comunicações previstas neste artigo deverão conter descrição objetiva do evento identificado, delimitação de sua extensão territorial, análise preliminar de causas e riscos, indicação das medidas técnicas adotadas ou recomendadas e, quando cabível, proposta de aperfeiçoamento normativo, procedimental ou tecnológico. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§4º O dever de monitoramento e de comunicação não afasta a competência fiscalizatória das Corregedorias dos Tribunais de Justiça, nem substitui os deveres funcionais dos oficiais de registro de imóveis, constituindo instrumento complementar de supervisão sistêmica, prevenção de falhas e aprimoramento contínuo do ambiente nacional de recepção, confiabilidade e processamento de extratos eletrônicos. (incluído pelo Provimento n. 228, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-210-q",
+      "numero": "Art. 210-Q",
+      "ordem": 210.17,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO I - DAS NORMAS COMUNS",
+      "secao": "Seção III",
+      "areas": [
+        "Registro de Imóveis"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO I",
+      "capituloTitulo": "DAS NORMAS COMUNS",
+      "secaoTitulo": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+      "subsecao": "Subseção V",
+      "subsecaoTitulo": "Do Monitoramento, da Consolidação de Dados Estatísticos e da Supervisão",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO I",
+          "type": "upper"
+        },
+        {
+          "text": "DAS NORMAS COMUNS",
+          "type": "title"
+        },
+        {
+          "text": "Seção III",
+          "type": "section"
+        },
+        {
+          "text": "Dos Extratos Eletrônicos para Registro ou Averbação de atos no Registro de",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção V",
+          "type": "section"
+        },
+        {
+          "text": "Do Monitoramento, da Consolidação de Dados Estatísticos e da Supervisão",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 210-Q. O ONR deverá implementar e manter sistema de coleta, consolidação e disponibilização de dados estatísticos relativos aos extratos eletrônicos encaminhados às serventias de registro de imóveis, com vistas ao acompanhamento institucional e à supervisão sistêmica pelas Corregedorias dos Tribunais de Justiça e pela Corregedoria Nacional de Justiça. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§1º O sistema deverá permitir a apuração, no mínimo, dos seguintes indicadores, por período, unidade da federação, circunscrição registral e entidade emitente: (incluído pelo Provimento n. 228, de 16.6.2026) I – quantidade total de extratos eletrônicos enviados às serventias; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nII – quantidade de extratos eletrônicos objeto de qualificação registral positiva, com a prática do respectivo ato de registro ou averbação; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nIII – quantidade de extratos eletrônicos objeto de qualificação registral negativa, com emissão de nota devolutiva; (incluído pelo Provimento n. 228, de 16.6.2026)\n\nIV – quantidade de extratos eletrônicos pendentes de qualificação registral, considerados aqueles ainda não submetidos à decisão final pelo oficial de registro de imóveis. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§2º Para fins do disposto neste artigo, os dados deverão ser estruturados de forma a permitir a identificação dos fluxos de tramitação dos extratos eletrônicos, desde o seu encaminhamento até a decisão final de qualificação, assegurada a rastreabilidade dos eventos e a integridade das informações. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§3º O ONR disponibilizará às Corregedorias, conforme respectivas áreas de atuação, acesso contínuo, atualizado e parametrizável aos dados consolidados, inclusive por meio de painéis de controle e relatórios analíticos, aptos a subsidiar atividades de monitoramento, avaliação de desempenho e identificação de padrões atípicos ou de riscos sistêmicos. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§4º A coleta e a consolidação de dados previstos neste artigo não implicam interferência no exercício da qualificação registral, nem vinculam o juízo jurídico do oficial de registro de imóveis, limitando-se à produção de informações estatísticas para fins de governança e supervisão institucional. (incluído pelo Provimento n. 228, de 16.6.2026)\n\n§5º Os parâmetros técnicos de estruturação, transmissão e atualização dos dados estatísticos serão definidos em ITN, observado o disposto neste Provimento e assegurada a interoperabilidade entre sistemas eletrônicos. (incluído pelo Provimento n. 228, de 16.6.2026)"
     },
     {
       "id": "cnj-art-211",
