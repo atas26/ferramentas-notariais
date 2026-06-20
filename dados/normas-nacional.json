@@ -1,8 +1,8 @@
 {
-  "source": "https://atos.cnj.jus.br/files/compilado174140202606186a342dd42e101.pdf",
-  "updatedAt": "2026-06-19T08:01:20.014192+00:00",
-  "sha256": "8290bdef63bd4c323eb9960168f967485d02859071003dfa1c40dfa90649e9c2",
-  "totalItems": 862,
+  "source": "https://atos.cnj.jus.br/files/compilado210240202606196a35ae7075dea.pdf",
+  "updatedAt": "2026-06-20T08:01:24.060048+00:00",
+  "sha256": "267170f5cb433d8e3979dd0ad11abcaf74a9b8e556ec9bb4979a06f9b150248c",
+  "totalItems": 883,
   "parserVersion": "cnj-hierarchy-v5",
   "articles": [
     {
@@ -20941,6 +20941,1459 @@
         }
       ],
       "texto": "Art. 228-I. O ONSERP, ONR, ON-RCPN e ON-RTDPJ disporão de órgão técnico, dentro de suas respectivas estruturas, denominados Comitê de Normas Técnicas, com a sigla CNT seguida da sigla de cada Operador, incumbidos da edição de Instruções Técnicas de Normalização (ITNs) destinadas ao detalhamento de orientações aos oficiais de registros públicos sobre o cumprimento de determinações legais ou normativos que digam respeito às plataformas, sistemas e serviços eletrônicos. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 1º As Instruções Técnicas de Normalização (ITNs) aprovadas pelo ONSERP, ONR, ON-RCPN e ONRTDPJ entram em vigor imediatamente após a publicação pelo respectivo Operador, independentemente de homologação do Agente Regulador. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 2º Concomitantemente com a publicação, as ITNs deverão ter seu acesso disponibilizado de forma eletrônica ao Agente Regulador, com aviso ou alerta sobre a inclusão no sistema dos Operadores. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 3º As ITNs ficam sujeitas, a qualquer tempo, à suspensão cautelar e à cassação, caso exorbitem da atribuição de normalização dos Operadores ou incorram em colidência com disposição legal ou normativa, o que pode ser feito de ofício pelo Agente Regulador ou a requerimento de qualquer interessado. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 4º Cada Operador deverá manter registro das ITNs, atualizado e de fácil acesso ao público e ao Agente Regulador, com histórico de alterações, revogações, suspensões ou cassações. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 5º As matérias que não possam ser objeto de ITN poderão ser encaminhadas ao Agente Regulador como proposta de alteração ou edição de norma administrativa. (incluído pelo Provimento n. 180, de 16.8.2024)\n\n§ 6º Caso seja recorrente a extrapolação de atribuições por qualquer dos Operadores, a edição de ITNs poderá ser suspensa pelo Agente Regulador, e toda a pretensão regulatória deverá ser objeto de proposta de provimento ou decisão normativa, conforme § 5º. (incluído pelo Provimento n. 180, de 16.8.2024)"
+    },
+    {
+      "id": "cnj-art-228-j",
+      "numero": "Art. 228-J",
+      "ordem": 228.1,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-J. Esta Seção estabelece diretrizes mínimas para a implantação, o funcionamento, a integração, a interoperabilidade, o acompanhamento e o monitoramento do ecossistema do Sistema Eletrônico dos Registros Públicos - Serp. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nParágrafo único. As disposições desta Seção não afastam a observância da legislação aplicável aos registros públicos, das normas próprias de cada especialidade registral, das tabelas estaduais de emolumentos e dos atos normativos do Conselho Nacional de Justiça. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-k",
+      "numero": "Art. 228-K",
+      "ordem": 228.11,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-K. O Sistema Eletrônico dos Registros Públicos - Serp, preservada sua denominação legal e técnica, adotará, para fins de interface com o usuário, comunicação institucional e identidade de marca, a denominação “Meu Registro”, destinada a prover experiência unificada de acesso aos serviços registrais eletrônicos. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º A denominação “Meu Registro” constitui identidade de interface, comunicação institucional e experiência do usuário vinculada ao Serp, sem criação de nova pessoa jurídica, alteração de competência registral, substituição dos Operadores Nacionais, centralização de atribuições das unidades registrais ou modificação do regime jurídico dos serviços de registros públicos. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º A identidade visual, a comunicação institucional e os padrões de acessibilidade, usabilidade e orientação ao usuário serão definidos em ato da Corregedoria Nacional de Justiça, podendo o detalhamento meramente técnico ser objeto de ITN, manual de identidade visual ou documentação técnica oficialmente publicada, observada a legislação aplicável. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§3º A titularidade, a criação e a proteção da marca “Meu Registro” competem ao Conselho Nacional de Justiça, vedada a delegação dessas definições a ato meramente técnico. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-l",
+      "numero": "Art. 228-L",
+      "ordem": 228.12,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Registro de Títulos e Documentos e Civil das Pessoas Jurídicas",
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-L. Compõem o ecossistema do Serp: (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nI – o Operador Nacional do Sistema Eletrônico dos Registros Públicos (ONSERP); (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nII – o Operador Nacional do Sistema de Registro Eletrônico de Imóveis (ONR); (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIII – o Operador Nacional do Registro Civil de Pessoas Naturais (ON- RCPN); (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIV – o Operador Nacional do Registro de Títulos e Documentos e Civil de Pessoas Jurídicas (ON-RTDPJ); (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nV – as unidades dos serviços registrais a eles vinculadas, respeitadas as competências legais de cada especialidade. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-m",
+      "numero": "Art. 228-M",
+      "ordem": 228.13,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-M. Para fins desta Seção, adotam-se as seguintes definições: (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nI – Número Registral (NR): código identificador único, irrepetível, nacional e rastreável, gerado para protocolo, solicitação, procedimento, atendimento ou pedido de serviço eletrônico no ecossistema Serp, destinado à identificação e ao acompanhamento da respectiva jornada eletrônica do usuário; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nII – Interoperabilidade Horizontal: capacidade técnica de consulta, comunicação, integração, intercâmbio de dados, transmissão de eventos, validação e atualização de informações e tramitação eletrônica entre os componentes do ecossistema Serp; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIII – Cartório Orquestrador: unidade registral responsável pelo pedido principal, incumbida de conduzir a tramitação, solicitar providências complementares ou suplementares e concluir o procedimento; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIV – Cartório de Apoio: unidade registral demandada pelo cartório orquestrador para a prestação de serviço, informação ou providência complementar ou suplementar vinculada ao pedido principal; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nV – Serviço Principal: ato ou conjunto de atos registrais que constitui o objeto central e a finalidade jurídica predominante do pedido do usuário perante o Cartório Orquestrador, ainda que sua execução dependa de buscas, registros, averbações, certidões ou outras providências acessórias junto a órgãos e cartórios de apoio; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nVI – Arquivo Eletrônico Estruturado: arquivo digital em formato padronizado, legível por máquina, dotado de campos, metadados, leiautes, regras de validação, integridade, autenticidade, versionamento e rastreabilidade definidos tecnicamente em Instruções Técnicas de Normalização (ITN); (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nVII – Evento Sistêmico: registro eletrônico padronizado de ocorrência relevante no ciclo de vida de protocolo, solicitação, procedimento, atendimento ou pedido de serviço eletrônico, incluindo, entre outros, criação, recebimento, distribuição, encaminhamento, atualização, exigência, resposta, emissão, conclusão, cancelamento, indisponibilidade ou encerramento; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nVIII – Acompanhamento Registral Online: funcionalidade que permite ao usuário, mediante o Número Registral e os meios de autenticação aplicáveis, acompanhar o andamento eletrônico de protocolo, solicitação, procedimento, atendimento ou pedido de serviço no ecossistema Serp; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIX – Módulo de Inspeção Remota: funcionalidade destinada a disponibilizar à Corregedoria Nacional de Justiça e às Corregedorias-Gerais da Justiça dos Estados e do Distrito Federal informações, indicadores, painéis, relatórios, logs e dados operacionais necessários à fiscalização, ao acompanhamento e à avaliação dos serviços registrais eletrônicos. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-n",
+      "numero": "Art. 228-N",
+      "ordem": 228.14,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "",
+      "subsecaoTitulo": "",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-N. A operação da Plataforma Serp (“Meu Registro”) e a atuação dos Operadores Nacionais observarão os princípios da legalidade, segurança jurídica, celeridade, eficiência, acessibilidade, linguagem simples, continuidade, rastreabilidade, interoperabilidade sistêmica, autogestão e melhoria contínua da experiência do usuário. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-o",
+      "numero": "Art. 228-O",
+      "ordem": 228.15,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção I",
+      "subsecaoTitulo": "Da Estrutura do Número Registral e da Atualização",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção I",
+          "type": "section"
+        },
+        {
+          "text": "Da Estrutura do Número Registral e da Atualização",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-O. Fica instituído o Número Registral (NR) como identificador eletrônico único destinado à rastreabilidade de protocolos, solicitações, procedimentos, atendimentos ou pedidos de serviço realizados no ecossistema dos registros públicos eletrônicos. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º A estrutura alfanumérica, a sequência técnica, o dígito verificador, as regras de geração, validação, vinculação, cancelamento, controle e demais parâmetros técnicos do NR serão definidos por ITN. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º O NR será mantido durante a jornada eletrônica do pedido em suas fases de tramitação, inclusive em providências complementares e suplementares vinculadas, garantindo o Acompanhamento Registral Online para o usuário, observadas as restrições legais de acesso e a proteção de dados pessoais. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§3º O NR não substitui os números de protocolo, prenotação, matrícula, registro, averbação, certidão, processo interno, ordem de serviço ou demais identificadores próprios previstos na legislação ou nas normas de cada especialidade registral, salvo disposição normativa específica. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§4º A geração do NR não implica prenotação, prioridade, qualificação positiva, aceite do título, deferimento do pedido, início de prazo legal ou reconhecimento de competência da unidade registral. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-p",
+      "numero": "Art. 228-P",
+      "ordem": 228.16,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção I",
+      "subsecaoTitulo": "Da Estrutura do Número Registral e da Atualização",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção I",
+          "type": "section"
+        },
+        {
+          "text": "Da Estrutura do Número Registral e da Atualização",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-P. O usuário poderá acompanhar o andamento dos pedidos registrais por meio da Plataforma Serp (“Meu Registro”), a partir do Número Registral (NR). (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º A consulta será disponibilizada, preferencialmente, em ambiente de acesso restrito, mediante autenticação do usuário por meio dos modos admitidos na Lista de Serviços Eletrônicos Confiáveis emitida pelo ONSERP. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º Poderá ser disponibilizada consulta em ambiente de acesso público, hipótese em que serão exibidas exclusivamente informações gerais, andamentos procedimentais e dados não protegidos por restrição legal, sigilo, segurança da informação ou proteção de dados pessoais. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§3º O Acompanhamento Registral Online não substitui certidão, informação registral formal, nota devolutiva, exigência, decisão do oficial ou documento próprio previsto na legislação ou nas normas da respectiva especialidade. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-q",
+      "numero": "Art. 228-Q",
+      "ordem": 228.17,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção I",
+      "subsecaoTitulo": "Da Estrutura do Número Registral e da Atualização",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção I",
+          "type": "section"
+        },
+        {
+          "text": "Da Estrutura do Número Registral e da Atualização",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-Q. Incumbe às unidades registrais e aos Operadores Nacionais promover a atualização dos Eventos Sistêmicos e a transmissão diária dos status eletrônicos relacionados aos serviços abrangidos pelo ecossistema Serp, conforme padrões técnicos e periodicidade definidos em ITN. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º As atualizações sistêmicas deverão ocorrer por mecanismos tecnológicos aptos a assegurar a comunicação, a integração, a transmissão de eventos, a rastreabilidade e a continuidade operacional entre as plataformas, conforme especificações estabelecidas em ITN. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º Toda alteração de status deverá gerar Evento Sistêmico auditável, com indicações técnicas e padrões definidos em ITN. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§3º A atualização de Eventos Sistêmicos e status eletrônicos não substitui a prática dos atos registrais, a qualificação jurídica, a emissão de documentos formais ou a observância dos prazos previstos na legislação e nas normas próprias de cada especialidade. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-r",
+      "numero": "Art. 228-R",
+      "ordem": 228.18,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção II",
+      "subsecaoTitulo": "Do Acesso Obrigatório e Fiscalização",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Acesso Obrigatório e Fiscalização",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-R. É obrigatória a adesão, o acesso e o monitoramento operacional diário dos oficiais de registros públicos às plataformas do Serp e de seus respectivos Operadores Nacionais. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º O monitoramento operacional às plataformas deverá assegurar a ciência tempestiva dos pedidos, exigências, comunicações, respostas, pendências e prazos, com acesso preferencialmente no início e no final de cada expediente, ressalvada a possibilidade de utilização de sistemas automatizados. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º O descumprimento reiterado de prazos, a ausência de acesso ou monitoramento operacional, a omissão no tratamento das solicitações ou a falta de atualização de status serão comunicados à Corregedoria competente e sujeitarão o oficial às providências cabíveis, nos termos da legislação e das normas disciplinares aplicáveis. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-s",
+      "numero": "Art. 228-S",
+      "ordem": 228.19,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção II",
+      "subsecaoTitulo": "Do Acesso Obrigatório e Fiscalização",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção II",
+          "type": "section"
+        },
+        {
+          "text": "Do Acesso Obrigatório e Fiscalização",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-S. Para viabilizar a fiscalização, e em harmonia com o arcabouço de monitoramento e inspeção remota já previsto neste Código e no marco regulatório do Serp, o ONSERP e os Operadores Nacionais deverão disponibilizar às Corregedorias competentes e à Corregedoria Nacional de Justiça Módulo de Inspeção Remota, com painéis, relatórios automatizados, logs, indicadores e dados operacionais relativos aos serviços registrais eletrônicos, sem duplicação de obrigações já existentes. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º O Módulo de Inspeção Remota deverá contemplar indicadores de logs de acesso, monitoramento operacional, tempo médio de resposta, prazos vencidos, pedidos pendentes, pedidos suspensos quando houver previsão normativa específica, volumetria de serviços, indisponibilidades, falhas de integração, reclamações, eventos alterados manualmente e desempenho por serventia, especialidade e Operador Nacional. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º O acesso ao Módulo de Inspeção Remota observará perfis de autorização, finalidade correcional, rastreabilidade de consultas, sigilo legal, segurança da informação e proteção de dados pessoais. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§3º A disponibilização do Módulo de Inspeção Remota não substitui as atribuições fiscalizatórias das Corregedorias nem impede a requisição de informações complementares, documentos, relatórios ou esclarecimentos às unidades registrais, ao ONSERP ou aos Operadores Nacionais. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-t",
+      "numero": "Art. 228-T",
+      "ordem": 228.2,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção III",
+      "subsecaoTitulo": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção III",
+          "type": "section"
+        },
+        {
+          "text": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-T. É vedado ao Cartório Orquestrador transferir ao usuário o ônus de diligenciar a obtenção de buscas, certidões ou providências de caráter estritamente registral e sistêmico que sejam complementares e indispensáveis à análise ou à conclusão do pedido principal, devendo o oficial adotá-las pela via da interoperabilidade horizontal, ressalvada a faculdade de o usuário apresentar diretamente documentos e certidões de que já disponha e preservado o direito de livre escolha do serviço, quando legalmente cabível. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º A interoperabilidade horizontal terá por objetivo reduzir a fragmentação da jornada do usuário, favorecer a tramitação eletrônica de providências complementares ou suplementares, viabilizar a padronização de eventos e permitir o acompanhamento integrado dos pedidos por meio do Número Registral. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º A interoperabilidade horizontal prevista nesta Subseção tem caráter técnico-procedimental e não implica transferência de atribuição, alteração de competência registral, substituição da qualificação jurídica, modificação de prazos legais, criação ou transferências de obrigações econômicas, tributárias ou previdenciárias, instituição de regime de responsabilidade específico ou produção de efeitos de protocolo, prenotação ou prioridade. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-u",
+      "numero": "Art. 228-U",
+      "ordem": 228.21,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção III",
+      "subsecaoTitulo": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção III",
+          "type": "section"
+        },
+        {
+          "text": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-U. Na interoperabilidade horizontal, compete ao Cartório Orquestrador: (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nI – receber o pedido principal e analisar os elementos; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nII – quando o pedido houver sido protocolado pelo usuário em unidade incompetente, orientar o usuário e encaminhar o pedido à serventia legalmente competente, observadas a competência territorial, sem que a orquestração implique a prática, pelo Cartório Orquestrador, de ato reservado à competência de outra unidade; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIII – solicitar providências complementares ou assessórias às serventias de apoio, vinculando-as ao Número Registral do pedido principal; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIV – informar ao usuário, de forma clara, prévia e discriminada, os valores, orçamentos, a forma de pagamento e as exigências aplicáveis ao pedido, inclusive quanto aos emolumentos, acréscimos legais, tarifas autorizadas e demais valores incidentes, observadas a legislação aplicável, as tabelas estaduais e as normas da respectiva especialidade, bem como as diretrizes técnicas de padronização fixadas pelos Operadores Nacionais em ITNs; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nV – acompanhar as respostas dos Cartórios de Apoio; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nVI – concluir o procedimento e disponibilizar os serviços ao usuário. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-v",
+      "numero": "Art. 228-V",
+      "ordem": 228.22,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção III",
+      "subsecaoTitulo": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção III",
+          "type": "section"
+        },
+        {
+          "text": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-V. Na interoperabilidade horizontal, compete ao Cartório de Apoio, nos limites das funcionalidades implantadas e da regulamentação aplicável: (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nI – receber a solicitação do Cartório Orquestrador pela plataforma oficial; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nII – validar os dados mínimos necessários ao tratamento técnico da solicitação; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIII – prestar informação, praticar ato, realizar busca ou emitir certidão no âmbito de sua competência legal; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIV – responder por meio eletrônico, com indicação de exigências, impossibilidades técnicas ou negativas fundamentadas, quando aplicável; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nV – disponibilizar documento eletrônico, dado estruturado ou informação correspondente no formato definido tecnicamente por ITN. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nParágrafo único. A atuação do Cartório Orquestrador e do Cartório de Apoio não altera suas competências legais, sua responsabilidade funcional própria nem as normas aplicáveis à especialidade registral correspondente. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-w",
+      "numero": "Art. 228-W",
+      "ordem": 228.23,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção III",
+      "subsecaoTitulo": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção III",
+          "type": "section"
+        },
+        {
+          "text": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-W. Compete aos Operadores Nacionais, no âmbito de suas atribuições, manter os mecanismos tecnológicos necessários à interoperabilidade, autenticação, autorização, comunicação, integração, rastreabilidade, homologação, monitoramento e evolução contínua das plataformas integrantes do ecossistema Serp. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º Os Operadores Nacionais deverão cooperar tecnicamente para a definição de padrões mínimos de integração, comunicação, rastreabilidade, segurança, registro de eventos e monitoramento eletrônico entre as plataformas oficiais do ecossistema Serp. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º O detalhamento de orientações técnicas da cooperação poderá ser formalizado por ITN. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-x",
+      "numero": "Art. 228-X",
+      "ordem": 228.24,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção III",
+      "subsecaoTitulo": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção III",
+          "type": "section"
+        },
+        {
+          "text": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-X. Os prazos legais para a prática dos atos registrais são regidos pela legislação aplicável e pelas regras de validade e prorrogação da prenotação. Não se imputará ao Cartório Orquestrador, para fins disciplinares, o descumprimento de prazo que decorra exclusivamente da pendência de resposta obrigatória de Cartório de Apoio, enquanto subsistir essa dependência, sem prejuízo dos prazos e dos efeitos legais da prenotação. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º Na hipótese do caput, o Cartório Orquestrador deverá impulsionar a tramitação e exigir dos Cartórios de Apoio tempestividade nas respostas, bem como de manter o usuário informado e os eventos sistêmicos atualizados. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º O cumprimento dos prazos máximos de resposta dos Cartórios de Apoio será monitorado, em tempo real, pelo respectivo Operador, que adotará as providências necessárias para a regularização do pedido, inclusive mediante comunicação à Corregedoria local competente. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§3º Os níveis de serviço, os fluxos operacionais e as medidas de comunicação entre o Cartório Orquestrador e os Cartórios de Apoio deverão observar critérios de tempestividade, rastreabilidade, auditabilidade, atualização dos eventos sistêmicos e adequada informação ao usuário, cabendo às ITNs a padronização técnica e operacionalização sistêmica. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-y",
+      "numero": "Art. 228-Y",
+      "ordem": 228.25,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção III",
+      "subsecaoTitulo": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção III",
+          "type": "section"
+        },
+        {
+          "text": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-Y. As plataformas deverão manter perfis de acesso, registro de eventos, trilhas de auditoria e controles contra consultas abusivas ou incompatíveis com a finalidade do serviço para preservação da integridade, validação de identidade dos usuários, rastreabilidade das operações, prestação de contas e proteção de dados pessoais, em conformidade com a legislação aplicável. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-z",
+      "numero": "Art. 228-Z",
+      "ordem": 228.26,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção III",
+      "subsecaoTitulo": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção III",
+          "type": "section"
+        },
+        {
+          "text": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-Z. Para as solicitações realizadas por meio do Serp, a plataforma deverá gerar recibo ou comprovante eletrônico, em linguagem simples e acessível, com a identificação do serviço, das serventias envolvidas, dos emolumentos, acréscimos legais, tarifas autorizadas e demais valores incidentes, discriminados por ato ou serviço, do Número Registral e das informações necessárias ao acompanhamento pelo usuário, conforme orientações técnicas estabelecidas em ITN. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-a",
+      "numero": "Art. 228-A",
+      "ordem": 228.01,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Tabelionato de Protesto",
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção III",
+      "subsecaoTitulo": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção III",
+          "type": "section"
+        },
+        {
+          "text": "Da Operação e Responsabilidades na Interoperabilidade Horizontal",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-AA. O ONSERP poderá celebrar Acordos de Cooperação Técnica — ACTs, convênios, protocolos de integração ou instrumentos equivalentes com órgãos públicos, entidades privadas, serviços notariais, tabelionatos de protesto, juntas comerciais, bases cadastrais, componentes do ecossistema Serp, plataformas oficiais e demais sistemas de interesse público ou institucional. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º As integrações previstas no caput deverão atender ao interesse público e terão por finalidade ampliar a interoperabilidade, simplificar o acesso do usuário e viabilizar a solicitação, tramitação, obtenção e resposta de certidões, documentos, informações ou providências complementares. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º O Cartório Orquestrador poderá, quando necessário à prática do ato registral ou à conclusão do serviço solicitado, encaminhar solicitações diretamente aos órgãos, entidades, serviços ou plataformas integradas, observadas as regras do respectivo ACT, ITN, manual técnico ou instrumento de integração. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§3º As integrações previstas neste artigo deverão observar a legislação de proteção de dados pessoais, limitando-se ao necessário para a finalidade institucional da integração, sendo vedado o uso dos dados para destinação diversa da prevista no respectivo instrumento de cooperação. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§4º As integrações de que trata este artigo não alteram as competências legais e a autonomia próprias dos serviços e órgãos integrados, notadamente dos tabelionatos de protesto (Lei n. 9.492/1997) e das juntas comerciais (Lei n. 8.934/1994), e observarão os regimes e os instrumentos de integração já previstos no marco regulatório do Serp. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-a",
+      "numero": "Art. 228-A",
+      "ordem": 228.01,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção IV",
+      "subsecaoTitulo": "Dos Emolumentos, Pagamentos, Créditos e Repasses",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção IV",
+          "type": "section"
+        },
+        {
+          "text": "Dos Emolumentos, Pagamentos, Créditos e Repasses",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-AB. No âmbito da Plataforma Serp (“Meu Registro”), o cálculo e a exigibilidade dos emolumentos, taxas e acréscimos legais observarão a legislação estadual aplicável e a respectiva tabela, tomando-se como marco temporal a data legalmente prevista, correspondente à data da protocolização (prenotação) válida do pedido no respectivo serviço registral, respeitadas as hipóteses legais de não incidência, isenção e gratuidade, vedada qualquer inovação quanto ao regime de emolumentos por ato infralegal. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-a",
+      "numero": "Art. 228-A",
+      "ordem": 228.01,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Disposições gerais"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção IV",
+      "subsecaoTitulo": "Dos Emolumentos, Pagamentos, Créditos e Repasses",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção IV",
+          "type": "section"
+        },
+        {
+          "text": "Dos Emolumentos, Pagamentos, Créditos e Repasses",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-AC. Nos serviços que demandem interoperabilidade horizontal, as orientações técnicas relativas aos fluxos eletrônicos de autorização, processamento, conciliação, liquidação, repasse e confirmação de pagamentos poderão ser disciplinadas em ITN pelos Operadores Nacionais. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º O usuário que mantiver provisão de fundos nas plataformas poderá autorizar previamente o custeio dos pedidos complementares, mediante dedução direta de seu crédito aportado, até o limite previamente autorizado no requerimento. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º Quando o valor dos pedidos complementares superar o valor previamente autorizado, o Cartório Orquestrador deverá aguardar autorização expressa do usuário para prosseguimento, salvo hipótese de urgência legal. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§3º Inexistindo saldo prévio, o Cartório Orquestrador poderá gerar meio eletrônico único de cobrança e enviá-lo diretamente ao usuário. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§4º O Cartório de Apoio somente estará obrigado a disponibilizar a certidão ou o documento após a confirmação do pagamento ou a garantia sistêmica de repasse, ressalvadas as hipóteses legais de não incidência, isenção e gratuidade, nas quais a disponibilização independerá de pagamento prévio. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
+    },
+    {
+      "id": "cnj-art-228-a",
+      "numero": "Art. 228-A",
+      "ordem": 228.01,
+      "tipo": "artigo",
+      "capitulo": "CAPÍTULO VII - DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secao": "Seção VII",
+      "areas": [
+        "Tecnologia e proteção de dados"
+      ],
+      "temas": [],
+      "norma": true,
+      "notas": [],
+      "parte": "PARTE GERAL",
+      "livro": "LIVRO IV",
+      "livroTitulo": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+      "titulo": "TÍTULO II",
+      "tituloTitulo": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+      "capituloNumero": "CAPÍTULO VII",
+      "capituloTitulo": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+      "secaoTitulo": "Das Disposições Gerais e do Ecossistema",
+      "subsecao": "Subseção V",
+      "subsecaoTitulo": "Das Instruções Técnicas de Normalização",
+      "estrutura": [
+        {
+          "text": "PARTE GERAL",
+          "type": "upper"
+        },
+        {
+          "text": "LIVRO IV",
+          "type": "upper"
+        },
+        {
+          "text": "DA ORGANIZAÇÃO DIGITAL DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "TÍTULO II",
+          "type": "upper"
+        },
+        {
+          "text": "DOS SISTEMAS DIGITAIS DOS SERVIÇOS",
+          "type": "title"
+        },
+        {
+          "text": "CAPÍTULO VII",
+          "type": "upper"
+        },
+        {
+          "text": "DO TÍTULO II DO LIVRO IV DA PARTE GERAL DESTE CÓDIGO DE NORMAS.",
+          "type": "title"
+        },
+        {
+          "text": "Seção VII",
+          "type": "section"
+        },
+        {
+          "text": "Das Disposições Gerais e do Ecossistema",
+          "type": "section-title"
+        },
+        {
+          "text": "Subseção V",
+          "type": "section"
+        },
+        {
+          "text": "Das Instruções Técnicas de Normalização",
+          "type": "section-title"
+        }
+      ],
+      "texto": "Art. 228-AD. O ONSERP e os Operadores Nacionais editarão, no âmbito de suas atribuições, Instruções Técnicas de Normalização (ITNs) destinadas ao detalhamento operacional e tecnológico das disposições desta Seção, observado o disposto neste Código. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§1º As ITNs poderão disciplinar, entre outros aspectos de natureza técnica, sobre:\n\nI – APIs, leiautes, arquivos estruturados, catálogos de eventos e padrões de interoperabilidade; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nII – autenticação, autorização, rastreabilidade, segurança da informação e resposta a incidentes; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIII – fluxos sistêmicos de comunicação, atualização de eventos, monitoramento e integração entre plataformas; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIV – padrões de acessibilidade, usabilidade, identidade visual e apresentação das informações ao usuário; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nV – conciliação, liquidação, faturamento, repasse e demais rotinas de processamento operacional dos fluxos financeiros; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nVI – níveis técnicos de serviço, continuidade operacional, ambientes de homologação, versionamento, documentação técnica e suporte técnico; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nVII – adequações técnicas em sistemas internos das serventias necessárias à interoperabilidade, à atualização de eventos, à segurança da informação e à rastreabilidade das operações. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§2º As ITNs possuem natureza instrumental e vinculada, destinando-se exclusivamente à especificação técnica, operacional ou tecnológica necessária à execução da legislação aplicável e dos atos normativos da Corregedoria Nacional de Justiça, podendo estabelecer padrões técnicos, especificações de interoperabilidade, cronogramas e prazos operacionais indispensáveis à adaptação sistêmica. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§3º A elaboração, a revisão e a atualização das ITNs observarão mecanismos de governança que assegurem histórico e controle de versões, publicidade, transparência, previsibilidade das alterações e adequada gestão de mudanças, de modo a promover estabilidade operacional, interoperabilidade, segurança da informação e rastreabilidade dos processos e dados. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§4º É vedado às ITNs inovar quanto a competências legais, hipóteses de responsabilidade civil, funcional ou disciplinar, regime de emolumentos, tarifas, gratuidades, isenções, sigilo, proteção de dados pessoais, requisitos de qualificação registral, prazos legais e demais matérias reservadas a ato normativo da Corregedoria Nacional de Justiça ou à legislação aplicável. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§5º As ITNs que disciplinem plataformas, integrações ou serviços eletrônicos do ecossistema Serp deverão estabelecer níveis de serviço, contemplando, no mínimo: (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nI – disponibilidade operacional; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nII – tempo máximo de resposta das integrações; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIII – prazo de recuperação em caso de indisponibilidade; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nIV – procedimentos de contingência; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nV – indicadores de desempenho, monitoramento e continuidade operacional; (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nVI – critérios de comunicação de incidentes e gestão de mudanças; e (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\nVII – metodologia de apuração, divulgação e auditoria dos indicadores de desempenho e disponibilidade. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§6º As especificações técnicas previstas nas Instruções Técnicas de Normalização deverão privilegiar soluções baseadas em padrões abertos, interoperáveis, escaláveis, auditáveis e neutros sob perspectiva tecnológica, vedada a imposição de arquitetura, fornecedor, linguagem de programação, plataforma computacional ou tecnologia específica, salvo quando objetivamente demonstrada sua indispensabilidade para a segurança, a continuidade ou a interoperabilidade do ecossistema Serp. (incluído pelo Provimento CN n. 229, de 16.6.2026)\n\n§7º A edição, a vigência, a comunicação ao Agente Regulador e a eventual suspensão das ITNs de que trata este artigo observarão o regime do art. 228-I deste Código, aplicando-se as disposições nele previstas, inclusive quanto à disponibilização concomitante do acesso ao Agente Regulador e à suspensão em caso de conflito normativo ou extrapolação de atribuições. (incluído pelo Provimento CN n. 229, de 16.6.2026)"
     },
     {
       "id": "cnj-art-229",
