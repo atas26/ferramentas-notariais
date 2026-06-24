@@ -2647,6 +2647,7 @@ const TABELA_ESCRITURA = [
   { faixa: 'd', de: 9603.01, ate: 19210.00, valor: 1189.68, rotulo: 'D — de R$ 9.603,01 até R$ 19.210,00' },
   { faixa: 'e', de: 19210.01, ate: 38420.00, valor: 1608.08, rotulo: 'E — de R$ 19.210,01 até R$ 38.420,00' },
   { faixa: 'f', de: 38420.01, ate: 76840.00, valor: 1907.60, rotulo: 'F — de R$ 38.420,01 até R$ 76.840,00' },
+  { faixa: 'g', de: 76840.01, ate: 115260.00, valor: 2264.49, rotulo: 'G — de R$ 76.840,01 até R$ 115.260,00' },
   { faixa: 'h', de: 115260.01, ate: 153680.00, valor: 2682.90, rotulo: 'H — de R$ 115.260,01 até R$ 153.680,00' },
   { faixa: 'i', de: 153680.01, ate: 192100.00, valor: 3039.89, rotulo: 'I — de R$ 153.680,01 até R$ 192.100,00' },
   { faixa: 'j', de: 192100.01, ate: 230520.00, valor: 3400.86, rotulo: 'J — de R$ 192.100,01 até R$ 230.520,00' },
@@ -3307,8 +3308,10 @@ function montarNomeArquivoPDF(){
 }
 
 function buscaFaixa(valorBase, tabela){
-  if (!valorBase || valorBase <= 0) return { valor:0, rotulo:'aguardando valor base' };
-  const faixa = tabela.find((item) => valorBase <= item.ate) || tabela[tabela.length - 1];
+  let base = Number(valorBase);
+  if (!Number.isFinite(base) || base <= 0) return { valor:0, rotulo:'aguardando valor base' };
+  base = Math.round(base * 100) / 100; // normaliza a centavos para evitar lacunas entre faixas
+  const faixa = tabela.find((item) => base <= item.ate) || tabela[tabela.length - 1];
   return faixa || { valor:0, rotulo:'sem faixa configurada' };
 }
 

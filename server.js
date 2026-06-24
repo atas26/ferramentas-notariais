@@ -10,6 +10,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.disable('x-powered-by');
+// Atrás do proxy do Render: permite que req.secure/req.protocol reflitam o https real.
+app.set('trust proxy', 1);
 
 function portalEnvBool(name, defaultValue = false) {
   const value = String(process.env[name] ?? '').trim().toLowerCase();
@@ -107,7 +109,7 @@ function portalParseCookies(req) {
 }
 
 function portalSerializeCookie(name, value, maxAgeSeconds, req) {
-  const secure = req.secure || req.headers['x-forwarded-proto'] === 'https';
+  const secure = process.env.NODE_ENV === 'production' || req.secure || req.headers['x-forwarded-proto'] === 'https';
   const attrs = [
     `${name}=${encodeURIComponent(value)}`,
     `Max-Age=${maxAgeSeconds}`,
@@ -194,22 +196,24 @@ function portalProtectedStaticMiddleware(req, res, next) {
 }
 
 app.get('/api/portal-protection-health', (_req, res) => {
-  res.json({
-    ok: true,
-    service: 'ferramentas-notariais',
-    protectedRoutes: Array.from(PROTECTED_ROUTES.keys()),
-    portalToolSecretConfigured: Boolean(process.env.PORTAL_TOOL_ACCESS_SECRET)
-  });
+  // Não expõe a lista de rotas protegidas nem estado do segredo (evita reconhecimento).
+  res.json({ ok: true, service: 'ferramentas-notariais' });
 });
 
 app.use(portalProtectedStaticMiddleware);
 
 app.use(express.static(__dirname, {
-  etag: false,
-  lastModified: false,
+  etag: true,
+  lastModified: true,
   maxAge: 0,
-  setHeaders: (res) => {
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+  setHeaders: (res, filePath) => {
+    // Assets estáticos (css/js/imagens/fontes) podem ser cacheados para poupar banda.
+    // Conteúdo protegido (HTML/PDF) permanece sem cache para não vazar via cache compartilhado.
+    if (portalIsAssetPath(filePath)) {
+      res.setHeader('Cache-Control', 'public, max-age=86400');
+    } else {
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    }
   }
 }));
 

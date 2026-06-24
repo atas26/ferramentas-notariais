@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import rateLimit from "express-rate-limit";
+import crypto from "crypto";
 import fs from "fs";
 import fsp from "fs/promises";
 import path from "path";
@@ -397,39 +398,77 @@ async function carregarBasePep() {
   }
 }
 
+// =====================================================================
+// Controle de acesso (LGPD): valida o token HMAC emitido pelo Portal.
+// Gated por env: só é exigido quando PEP_AUTH_REQUIRED estiver ligado
+// (default desligado, para não interromper o serviço já em produção).
+// Use o MESMO PORTAL_TOOL_ACCESS_SECRET do Portal/servidor de proteção.
+// =====================================================================
+function pepBase64UrlDecode(value) {
+  return Buffer.from(value, "base64url").toString("utf8");
+}
+
+function pepAssinar(payloadB64, secret) {
+  return crypto.createHmac("sha256", secret).update(payloadB64).digest("hex");
+}
+
+function pepCompararSeguro(a, b) {
+  const bufA = Buffer.from(String(a || ""));
+  const bufB = Buffer.from(String(b || ""));
+  if (bufA.length !== bufB.length) return false;
+  return crypto.timingSafeEqual(bufA, bufB);
+}
+
+function pepVerificarToken(token, slugEsperado) {
+  const secret = process.env.PORTAL_TOOL_ACCESS_SECRET || "";
+  if (!secret || !token || !token.includes(".")) return false;
+  try {
+    const [payloadB64, assinatura] = token.split(".", 2);
+    if (!pepCompararSeguro(assinatura, pepAssinar(payloadB64, secret))) return false;
+    const payload = JSON.parse(pepBase64UrlDecode(payloadB64));
+    if (slugEsperado && payload.slug !== slugEsperado) return false;
+    const exp = Number(payload.exp || 0);
+    if (!exp || exp < Math.floor(Date.now() / 1000)) return false;
+    return true;
+  } catch (_erro) {
+    return false;
+  }
+}
+
+function extrairTokenDaRequisicao(req) {
+  const auth = String(req.headers.authorization || "");
+  if (auth.toLowerCase().startsWith("bearer ")) return auth.slice(7).trim();
+  if (req.query && req.query.pn_token) return String(req.query.pn_token);
+  return "";
+}
+
+function exigirAcessoPep(req, res, next) {
+  const authRequired = ["1", "true", "yes", "sim", "on"].includes(
+    String(process.env.PEP_AUTH_REQUIRED || "").trim().toLowerCase()
+  );
+  if (!authRequired) return next();
+
+  const slugEsperado = process.env.PEP_TOOL_SLUG || "consulta-pep";
+  const token = extrairTokenDaRequisicao(req);
+
+  if (!pepVerificarToken(token, slugEsperado)) {
+    return res.status(401).json({ erro: "Acesso não autorizado. Abra a ferramenta pelo Portal Notarial." });
+  }
+  return next();
+}
+
 app.get("/", (req, res) => {
+  // Status mínimo; não expõe caminho do arquivo, mensagem de erro interna,
+  // campos detectados nem contagens (evita reconhecimento e vazamento operacional).
   res.json({
     status: "online",
     servico: "Consulta PEP por CPF",
-    modo: "consulta local em base CSV oficial",
-    observacao: "CPFs do arquivo são normalizados para 11 dígitos, com zeros à esquerda quando necessário.",
     fonte: "Arquivo PEP do Siscoaf",
-    baseStatus,
-    baseErro,
-    arquivoBase,
-    baseCarregadaEm,
-    ultimaModificacaoArquivo,
-    totalRegistros,
-    totalCpfsIndexados,
-    camposDetectados
+    baseStatus
   });
 });
 
-app.get("/debug-base", (req, res) => {
-  res.json({
-    baseStatus,
-    baseErro,
-    caminhoEsperadoDoArquivo: CSV_PATH,
-    arquivoBase,
-    baseCarregadaEm,
-    ultimaModificacaoArquivo,
-    totalRegistros,
-    totalCpfsIndexados,
-    camposDetectados
-  });
-});
-
-app.get("/api/pep", (req, res) => {
+app.get("/api/pep", exigirAcessoPep, (req, res) => {
   try {
     if (baseStatus === "carregando" || baseStatus === "iniciando") {
       return res.status(503).json({
@@ -440,9 +479,7 @@ app.get("/api/pep", (req, res) => {
 
     if (baseStatus === "erro") {
       return res.status(500).json({
-        erro: "Base PEP não foi carregada no servidor.",
-        detalhe: baseErro,
-        caminhoEsperadoDoArquivo: CSV_PATH
+        erro: "Base PEP não foi carregada no servidor."
       });
     }
 
@@ -481,9 +518,9 @@ app.get("/api/pep", (req, res) => {
       resultado
     });
   } catch (erro) {
+    console.error("Erro interno ao consultar PEP:", erro);
     return res.status(500).json({
-      erro: "Erro interno ao consultar PEP.",
-      detalhe: erro.message
+      erro: "Erro interno ao consultar PEP."
     });
   }
 });

@@ -1784,7 +1784,11 @@ footer a:hover {
       try {
         const url = `${API_BASE_URL}/api/pep?cpf=${encodeURIComponent(cpf)}&pagina=1`;
 
-        const resposta = await fetch(url);
+        let tokenAcesso = "";
+        try { tokenAcesso = sessionStorage.getItem("pn_tool_token_consulta-pep") || ""; } catch (e) { tokenAcesso = ""; }
+        const opcoesFetch = tokenAcesso ? { headers: { Authorization: "Bearer " + tokenAcesso } } : undefined;
+
+        const resposta = await fetch(url, opcoesFetch);
         const dados = await resposta.json();
 
         if (!resposta.ok) {

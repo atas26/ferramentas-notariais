@@ -1169,7 +1169,7 @@ footer a:hover {
   Documento meramente informativo. Os dados devem ser conferidos.
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js" integrity="sha384-b5Ya4Bq3qCyz39m2ISh+4DxjAIljdeFwK/BsXLuj9gugaNwAcj/ia15fxNZL9Nlx" crossorigin="anonymous"></script>
 <script type="module">
 import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs";
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs";
@@ -1392,6 +1392,18 @@ function validarUrlOficial(texto) {
     if (!url.searchParams.get("r")) return null;
     return url.toString();
   } catch (erro) { return null; }
+}
+// Defesa em profundidade: só aceita links https para o host oficial do TJSP
+// (qualquer caminho). Bloqueia javascript:/data:/host externo que um backend
+// comprometido pudesse injetar no href. Cai para a consulta manual oficial.
+function urlOficialSegura(texto) {
+  try {
+    const url = new URL(String(texto || "").trim());
+    if (url.protocol === "https:" && url.hostname.toLowerCase() === "selodigital.tjsp.jus.br") {
+      return url.toString();
+    }
+  } catch (erro) { /* ignora e usa fallback */ }
+  return CONSULTA_MANUAL_URL;
 }
 function extrairSeloDaUrl(urlTexto) {
   try {
@@ -1817,7 +1829,7 @@ function mostrarConsultaManual(dados) {
   resgateLeitura.classList.remove("visivel");
   acoesConsultaManual.classList.add("visivel");
   seloManual.textContent = dados.selo || "Não identificado";
-  abrirConsultaOficial.href = dados.url_consulta_oficial;
+  abrirConsultaOficial.href = urlOficialSegura(dados.url_consulta_oficial);
   abrirConsultaOficial.classList.remove("desabilitado");
   abrirConsultaOficial.removeAttribute("aria-disabled");
   abrirConsultaOficial.textContent = dados.rotulo_botao || "Abrir consulta oficial com o selo preenchido";
