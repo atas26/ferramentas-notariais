@@ -138,14 +138,21 @@ HMAC-SHA256 token→cookie. Pontos bons: segredo fora do repo, `timingSafeEqual`
 - **selo-digital** — `href` do link oficial revalidado (`urlOficialSegura`) contra `javascript:`/host externo.
 - **oficios** — validações de hora (comparecimento) e data de óbito (bancos).
 
-### ⏳ Pendente — exige decisão sua ou refatoração maior
-1. **SRI em todas as CDNs** — requer fixar versões (Carlito `@main`, Tesseract `@5`) e calcular hashes. (Cross-cutting.)
-2. **PEP — autenticação server-side + LGPD** — validar token do Portal no backend; base legal, log de auditoria, minimização de campos; **remover `pep.csv` do git e purgar histórico**; versionar a IaC do serviço PEP. (Decisão de arquitetura/infra.)
-3. **Governança das tabelas 2026** — exibir vigência ao usuário + processo de atualização anual + externalizar valores. (Decisão de UI/processo.)
-4. **Reduzir peso** — externalizar fontes base64 (certidao, ~1,14 MB) e logos base64 (oficios outros-cartorios/bancos); consolidar engine duplicada dos ofícios. (Refatoração.)
-5. **PEP — anti-enumeração** — rate limit por token + CAPTCHA. (Depende de #2.)
-6. **selo-digital — auto-correção silenciosa do dígito verificador no OCR** — mudança de comportamento de uma ferramenta de conferência; requer sua decisão.
-7. **CSP** nas páginas que injetam scripts de terceiros.
+### ✅ Corrigido e validado (2ª rodada)
+- **SRI** — `integrity`+`crossorigin` nas libs fixadas (pdf-lib, fontkit, jsQR, react, react-dom); hashes computados dos tarballs oficiais do npm.
+- **PEP — autenticação server-side** — validação de token HMAC no backend, *gated* por `PEP_AUTH_REQUIRED` (default off, para não derrubar produção); frontend encaminha o token. Ativação requer setar a env no serviço PEP.
+- **Redução de peso** — logos base64 dos ofícios externalizados (outros-cartórios 381→70 KB; bancos 511→123 KB) e fontes Carlito da certidão externalizadas (1,26 MB→160 KB). Todos cacheáveis.
+
+### ⏳ Pendente — exige DECISÃO sua
+1. **PEP — remover `pep.csv` do git + purgar histórico** — destrutivo e dependente da infra do serviço PEP (se ele faz deploy a partir do git, removê-lo quebra a base). Precisa da sua confirmação e do plano de provisionamento do CSV.
+2. **PEP — ativar a auth** — setar `PEP_AUTH_REQUIRED=true` e `PORTAL_TOOL_ACCESS_SECRET` no serviço do backend PEP; + base legal/log de auditoria/minimização (LGPD).
+3. **selo-digital — auto-correção silenciosa do dígito verificador no OCR** — já existe um gate de confirmação manual; mudar isso altera o comportamento da conferência. **Recomendo** tornar o aviso mais enfático em vez de remover. Aguardo sua decisão.
+
+### ⏳ Pendente — refatoração/governança (sem urgência)
+4. **Tesseract `@5` e Carlito `@main`** — fixar versão antes de aplicar SRI (sub-recursos dinâmicos).
+5. **Governança das tabelas 2026** — exibir vigência + processo de atualização anual + externalizar valores.
+6. **Consolidar a engine duplicada dos 3 ofícios** (`oficios-core.js`).
+7. **PEP — anti-enumeração** (rate limit por token + CAPTCHA) e **CSP** nas páginas com scripts de terceiros.
 
 ---
 
