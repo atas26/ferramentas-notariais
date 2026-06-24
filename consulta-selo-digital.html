@@ -1393,6 +1393,18 @@ function validarUrlOficial(texto) {
     return url.toString();
   } catch (erro) { return null; }
 }
+// Defesa em profundidade: só aceita links https para o host oficial do TJSP
+// (qualquer caminho). Bloqueia javascript:/data:/host externo que um backend
+// comprometido pudesse injetar no href. Cai para a consulta manual oficial.
+function urlOficialSegura(texto) {
+  try {
+    const url = new URL(String(texto || "").trim());
+    if (url.protocol === "https:" && url.hostname.toLowerCase() === "selodigital.tjsp.jus.br") {
+      return url.toString();
+    }
+  } catch (erro) { /* ignora e usa fallback */ }
+  return CONSULTA_MANUAL_URL;
+}
 function extrairSeloDaUrl(urlTexto) {
   try {
     const valor = new URL(urlTexto).searchParams.get("r") || "";
@@ -1817,7 +1829,7 @@ function mostrarConsultaManual(dados) {
   resgateLeitura.classList.remove("visivel");
   acoesConsultaManual.classList.add("visivel");
   seloManual.textContent = dados.selo || "Não identificado";
-  abrirConsultaOficial.href = dados.url_consulta_oficial;
+  abrirConsultaOficial.href = urlOficialSegura(dados.url_consulta_oficial);
   abrirConsultaOficial.classList.remove("desabilitado");
   abrirConsultaOficial.removeAttribute("aria-disabled");
   abrirConsultaOficial.textContent = dados.rotulo_botao || "Abrir consulta oficial com o selo preenchido";
