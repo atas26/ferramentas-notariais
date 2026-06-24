@@ -840,8 +840,10 @@ function formatPercentual(valorDecimal){
 }
 
 function buscaFaixa(valorBase, tabela){
-  if (!valorBase || valorBase <= 0) return { valor:0, rotulo:'aguardando valor base' };
-  const faixa = tabela.find((item) => valorBase <= item.ate) || tabela[tabela.length - 1];
+  let base = Number(valorBase);
+  if (!Number.isFinite(base) || base <= 0) return { valor:0, rotulo:'aguardando valor base' };
+  base = Math.round(base * 100) / 100; // normaliza a centavos para evitar lacunas entre faixas
+  const faixa = tabela.find((item) => base <= item.ate) || tabela[tabela.length - 1];
   return faixa || { valor:0, rotulo:'sem faixa configurada' };
 }
 

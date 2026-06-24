@@ -2620,8 +2620,12 @@ footer a:hover {
     }
 
     function localizarFaixa(base){
-      const valor = Number(base) || 0;
-      return TABELA_VALOR_DECLARADO.find(r => valor >= r.min && valor <= r.max) || TABELA_VALOR_DECLARADO[TABELA_VALOR_DECLARADO.length - 1];
+      let valor = Number(base);
+      if (!Number.isFinite(valor) || valor < 0) valor = 0;
+      valor = Math.round(valor * 100) / 100; // normaliza a centavos para evitar lacunas entre faixas
+      // Faixas contíguas: usa o teto da faixa para enquadrar, evitando que valores
+      // fracionários "entre centavos" caiam no fallback (faixa máxima).
+      return TABELA_VALOR_DECLARADO.find(r => valor <= r.max) || TABELA_VALOR_DECLARADO[TABELA_VALOR_DECLARADO.length - 1];
     }
 
     function faixaTexto(faixa){
