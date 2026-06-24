@@ -398,34 +398,13 @@ async function carregarBasePep() {
 }
 
 app.get("/", (req, res) => {
+  // Status mínimo; não expõe caminho do arquivo, mensagem de erro interna,
+  // campos detectados nem contagens (evita reconhecimento e vazamento operacional).
   res.json({
     status: "online",
     servico: "Consulta PEP por CPF",
-    modo: "consulta local em base CSV oficial",
-    observacao: "CPFs do arquivo são normalizados para 11 dígitos, com zeros à esquerda quando necessário.",
     fonte: "Arquivo PEP do Siscoaf",
-    baseStatus,
-    baseErro,
-    arquivoBase,
-    baseCarregadaEm,
-    ultimaModificacaoArquivo,
-    totalRegistros,
-    totalCpfsIndexados,
-    camposDetectados
-  });
-});
-
-app.get("/debug-base", (req, res) => {
-  res.json({
-    baseStatus,
-    baseErro,
-    caminhoEsperadoDoArquivo: CSV_PATH,
-    arquivoBase,
-    baseCarregadaEm,
-    ultimaModificacaoArquivo,
-    totalRegistros,
-    totalCpfsIndexados,
-    camposDetectados
+    baseStatus
   });
 });
 
@@ -440,9 +419,7 @@ app.get("/api/pep", (req, res) => {
 
     if (baseStatus === "erro") {
       return res.status(500).json({
-        erro: "Base PEP não foi carregada no servidor.",
-        detalhe: baseErro,
-        caminhoEsperadoDoArquivo: CSV_PATH
+        erro: "Base PEP não foi carregada no servidor."
       });
     }
 
@@ -481,9 +458,9 @@ app.get("/api/pep", (req, res) => {
       resultado
     });
   } catch (erro) {
+    console.error("Erro interno ao consultar PEP:", erro);
     return res.status(500).json({
-      erro: "Erro interno ao consultar PEP.",
-      detalhe: erro.message
+      erro: "Erro interno ao consultar PEP."
     });
   }
 });
