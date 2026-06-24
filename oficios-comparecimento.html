@@ -1920,6 +1920,15 @@ footer a:hover {
         return false;
       }
 
+      const campoHoraInicio = document.getElementById('horaInicio');
+      const campoHoraFim = document.getElementById('horaFim');
+      if (campoHoraInicio && campoHoraFim && campoHoraInicio.value && campoHoraFim.value && campoHoraFim.value < campoHoraInicio.value) {
+        alert('A hora fim deve ser igual ou posterior à hora início.');
+        setStatus('Corrija o período: a hora fim não pode ser anterior à hora início.');
+        campoHoraFim.focus();
+        return false;
+      }
+
       if (!getTipoAssinatura()) {
         alert('Selecione o tipo da assinatura do ofício.');
         setStatus('Selecione o tipo da assinatura do ofício antes de gerar ou imprimir.');

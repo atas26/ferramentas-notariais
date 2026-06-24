@@ -2854,6 +2854,24 @@ footer a:hover {
         return false;
       }
 
+      const campoDataFalecimento = document.getElementById('dataFalecimento');
+      const campoDataOficioBanco = document.getElementById('dataOficio');
+      if (campoDataFalecimento && campoDataFalecimento.value) {
+        const hojeISO = new Date().toISOString().slice(0, 10);
+        if (campoDataFalecimento.value > hojeISO) {
+          alert('A data do falecimento não pode ser futura.');
+          setStatus('Corrija a data do falecimento: não pode ser uma data futura.');
+          focarCampo(campoDataFalecimento);
+          return false;
+        }
+        if (campoDataOficioBanco && campoDataOficioBanco.value && campoDataFalecimento.value > campoDataOficioBanco.value) {
+          alert('A data do falecimento não pode ser posterior à data do ofício.');
+          setStatus('Corrija as datas: o falecimento não pode ser posterior à data do ofício.');
+          focarCampo(campoDataFalecimento);
+          return false;
+        }
+      }
+
       if (!getTipoAssinatura()) {
         const primeiroTipo = document.getElementById('tipoAssinaturaDigital');
         if (primeiroTipo) focarCampo(primeiroTipo);
