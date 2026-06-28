@@ -1,6 +1,6 @@
 {
   "source": "https://api.tjsp.jus.br/Handlers/Handler/FileFetch.ashx?codigo=179577",
-  "updatedAt": "2026-06-27T08:01:00.998069+00:00",
+  "updatedAt": "2026-06-28T08:01:01.174660+00:00",
   "sha256": "95c9cb2d40060537743167169e3e4dc366d4558df48e27b00acb958ad3e0a196",
   "totalItems": 2051,
   "parserVersion": "sp-pymupdf-footnotes-v4-uppercase-hierarchy",
