@@ -1109,6 +1109,19 @@
       color: var(--azul);
     }
   </style>
+  <style id="pn-cardfx">
+    @property --pn-a{syntax:'<angle>';inherits:false;initial-value:0deg}
+    .tool-card{position:relative}
+    .tool-card::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;
+      background:conic-gradient(from var(--pn-a), transparent 0deg, #0b5fff 60deg, #7aa8ff 110deg, transparent 200deg);
+      -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor;mask-composite:exclude;
+      opacity:0;transition:opacity .25s ease;pointer-events:none;z-index:1}
+    .tool-card:hover{transform:translateY(-2px);box-shadow:0 18px 40px rgba(11,95,255,.12)}
+    .tool-card:hover::after{opacity:1;animation:pnCardSpin 2.6s linear infinite}
+    @keyframes pnCardSpin{to{--pn-a:360deg}}
+    @media (prefers-reduced-motion: reduce){ .tool-card{transition:none} .tool-card:hover::after{animation:none} }
+  </style>
 </head>
 <body>
   <div class="page">
