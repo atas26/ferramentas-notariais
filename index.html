@@ -1131,12 +1131,6 @@
     </nav>
 
     <header class="hero">
-      <canvas id="pn-hero-fx" aria-hidden="true"></canvas>
-      <style>
-        .hero{position:relative;overflow:hidden}
-        #pn-hero-fx{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
-        .hero-inner{position:relative;z-index:1}
-      </style>
       <div class="hero-inner">
         <div class="quote-rotator" aria-live="polite">
           <div class="quote-text">
@@ -1161,6 +1155,647 @@
             </div>
           </section>
 
+          <!-- ANIMAÇÃO PORTAL NOTARIAL — VERSÃO DARK -->
+          <style>
+            .pn-portal-motion {
+              --pn-blue: rgb(11, 95, 255);
+              --pn-blue-soft: rgb(58, 93, 208);
+              --pn-surface: rgba(11, 23, 39, 0.03);
+              --pn-surface-strong: rgba(11, 23, 39, 0.06);
+              --pn-text: #0b1727;
+              --pn-muted: rgba(11, 23, 39, 0.6);
+              --pn-line: rgba(11, 23, 39, 0.10);
+              --pn-line-soft: rgba(11, 23, 39, 0.05);
+
+              position: relative;
+              width: min(100%, 720px);
+              height: 440px;
+              margin: 0 auto;
+              overflow: hidden;
+              border-radius: 30px;
+              background:
+                radial-gradient(circle at 50% 8%, rgba(11, 95, 255, 0.10), transparent 36%),
+                radial-gradient(circle at 85% 80%, rgba(11, 95, 255, 0.06), transparent 42%),
+                linear-gradient(180deg, #ffffff 0%, #f4f6fa 100%);
+              font-family: Arial, Helvetica, sans-serif;
+              isolation: isolate;
+              border: 1px solid rgba(11, 23, 39, 0.08);
+              perspective: 1200px;
+              transform: translateZ(0);
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+              text-rendering: optimizeLegibility;
+            }
+
+            .pn-portal-motion::before {
+              content: "";
+              position: absolute;
+              inset: 0;
+              z-index: 0;
+              background-image:
+                linear-gradient(rgba(11, 23, 39, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(11, 23, 39, 0.04) 1px, transparent 1px);
+              background-size: 42px 42px;
+              pointer-events: none;
+              mask-image: radial-gradient(circle at 50% 40%, black 40%, transparent 80%);
+            }
+
+            .pn-portal-motion * {
+              box-sizing: border-box;
+            }
+
+            .pn-portal-star,
+            .pn-orbit,
+            .pn-main-card,
+            .pn-tool-row,
+            .pn-side-badge,
+            .pn-avatar,
+            .pn-tool-cloud,
+            .pn-cloud-pill,
+            .pn-flow-dot,
+            .pn-line-node {
+              will-change: transform, opacity;
+              backface-visibility: hidden;
+              -webkit-backface-visibility: hidden;
+              transform-style: preserve-3d;
+            }
+
+            .pn-connection-lines {
+              position: absolute;
+              inset: 0;
+              z-index: 2;
+              width: 100%;
+              height: 100%;
+              pointer-events: none;
+              overflow: visible;
+            }
+
+            .pn-line-path {
+              fill: none;
+              stroke: var(--pn-blue);
+              stroke-width: 1.5;
+              stroke-linecap: round;
+              stroke-dasharray: 5 8;
+              opacity: 0.35;
+              animation: pnLineFlow 4.8s linear infinite;
+            }
+
+            .pn-line-path-soft {
+              opacity: 0.22;
+              stroke-width: 1.2;
+            }
+
+            .pn-line-node {
+              fill: #ffffff;
+              stroke: var(--pn-blue);
+              stroke-width: 1.5;
+              opacity: 0.9;
+              transform-box: fill-box;
+              transform-origin: center;
+              animation: pnNodePulse 3.6s ease-in-out infinite;
+            }
+
+            .pn-flow-dot {
+              fill: var(--pn-blue);
+              opacity: 1;
+            }
+
+            .pn-portal-star {
+              position: absolute;
+              top: 26px;
+              left: 50%;
+              z-index: 8;
+              width: 38px;
+              height: 38px;
+              transform: translate3d(-50%, 0, 0);
+              border-radius: 50%;
+              background: var(--pn-blue);
+              display: grid;
+              place-items: center;
+              box-shadow:
+                0 0 0 6px rgba(11, 95, 255, 0.10),
+                0 0 28px rgba(11, 95, 255, 0.28),
+                0 12px 28px rgba(11, 95, 255, 0.20);
+              animation: pnStarPulseActive 2.8s ease-in-out infinite;
+            }
+
+            .pn-portal-star svg {
+              width: 20px;
+              height: 20px;
+              fill: #ffffff;
+            }
+
+            .pn-orbit {
+              position: absolute;
+              top: 70px;
+              left: 112px;
+              z-index: 1;
+              width: 410px;
+              height: 410px;
+              border: 1px solid rgba(11, 95, 255, 0.18);
+              border-radius: 999px;
+              animation: pnOrbitActive 5.5s ease-in-out infinite;
+            }
+
+            .pn-orbit-small {
+              top: 128px;
+              left: 172px;
+              width: 285px;
+              height: 285px;
+              border-color: rgba(11, 95, 255, 0.12);
+              opacity: 0.7;
+              animation: pnOrbitActive 4.6s ease-in-out infinite reverse;
+            }
+
+            .pn-main-card {
+              position: absolute;
+              top: 98px;
+              left: 112px;
+              z-index: 5;
+              width: 305px;
+              height: 320px;
+              padding: 22px 16px 16px;
+              border: 1px solid var(--pn-line);
+              border-radius: 18px;
+              background: linear-gradient(180deg, #ffffff, #f7f9fc);
+              box-shadow:
+                0 18px 40px rgba(11, 23, 39, 0.10),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+              overflow: hidden;
+              contain: layout paint style;
+            }
+
+            .pn-card-title {
+              margin: 0 0 18px 0;
+              padding-left: 0;
+              max-width: 265px;
+              font-size: 18px;
+              line-height: 1.26;
+              font-weight: 700;
+              letter-spacing: -0.02em;
+              color: var(--pn-blue);
+            }
+
+            .pn-tool-row {
+              position: relative;
+              height: 52px;
+              margin-top: 10px;
+              display: flex;
+              align-items: center;
+              gap: 12px;
+              padding: 0 14px;
+              border-radius: 14px;
+              background: rgba(11, 95, 255, 0.08);
+              border: 1px solid rgba(11, 95, 255, 0.18);
+              overflow: hidden;
+            }
+
+            .pn-tool-row:nth-of-type(2) {
+              opacity: 0.62;
+              width: 226px;
+              animation-delay: 0.45s;
+            }
+
+            .pn-tool-row:nth-of-type(3) {
+              opacity: 0.38;
+              width: 176px;
+              animation-delay: 0.9s;
+            }
+
+            .pn-tool-icon {
+              flex: 0 0 30px;
+              width: 30px;
+              height: 30px;
+              border-radius: 10px;
+              background: var(--pn-blue);
+              display: grid;
+              place-items: center;
+              color: #ffffff;
+              font-size: 14px;
+              font-weight: 700;
+              box-shadow: 0 4px 12px rgba(11, 95, 255, 0.25);
+            }
+
+            .pn-tool-copy strong {
+              display: block;
+              font-size: 12.5px;
+              line-height: 1.15;
+              color: var(--pn-text);
+            }
+
+            .pn-tool-copy small {
+              display: block;
+              margin-top: 3px;
+              font-size: 11px;
+              line-height: 1.15;
+              color: var(--pn-muted);
+            }
+
+            .pn-side-badge {
+              position: absolute;
+              z-index: 7;
+              width: 48px;
+              height: 48px;
+              border-radius: 50%;
+              background: #ffffff;
+              display: grid;
+              place-items: center;
+              border: 1px solid rgba(11, 95, 255, 0.22);
+              box-shadow:
+                0 12px 28px rgba(11, 23, 39, 0.10),
+                0 0 18px rgba(11, 95, 255, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+              color: var(--pn-blue);
+              font-size: 22px;
+              font-weight: 700;
+              contain: layout paint style;
+              animation: pnBadgeFloatActive 4.2s ease-in-out infinite;
+            }
+
+            .pn-badge-left {
+              top: 108px;
+              left: 62px;
+            }
+
+            .pn-badge-doc {
+              top: 252px;
+              left: 96px;
+              width: 36px;
+              height: 36px;
+              font-size: 18px;
+              animation-delay: 0.4s;
+            }
+
+            .pn-badge-bottom {
+              top: 384px;
+              left: 260px;
+              width: 34px;
+              height: 34px;
+              font-size: 14px;
+              animation-delay: 0.8s;
+            }
+
+            .pn-avatar {
+              position: absolute;
+              top: 160px;
+              left: 455px;
+              z-index: 7;
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              background:
+                radial-gradient(circle at 50% 35%, #c98d67 0 10%, transparent 11%),
+                radial-gradient(circle at 50% 68%, var(--pn-blue) 0 25%, transparent 26%),
+                linear-gradient(180deg, #e6ecf4, #d6deea);
+              border: 1px solid rgba(11, 95, 255, 0.18);
+              box-shadow:
+                0 14px 34px rgba(11, 23, 39, 0.10),
+                0 0 18px rgba(11, 95, 255, 0.10);
+              contain: layout paint style;
+              animation: pnAvatarFloatActive 4.6s ease-in-out infinite;
+            }
+
+            .pn-avatar::before {
+              content: "";
+              position: absolute;
+              top: 12px;
+              left: 15px;
+              width: 20px;
+              height: 14px;
+              border-radius: 50% 50% 42% 42%;
+              background: #7d4836;
+            }
+
+            .pn-avatar::after {
+              content: "";
+              position: absolute;
+              left: 13px;
+              bottom: 7px;
+              width: 24px;
+              height: 18px;
+              border-radius: 14px 14px 7px 7px;
+              background: var(--pn-blue);
+            }
+
+            .pn-tool-cloud {
+              position: absolute;
+              top: 114px;
+              right: 42px;
+              z-index: 3;
+              width: 180px;
+              display: grid;
+              gap: 10px;
+            }
+
+            .pn-cloud-pill {
+              height: 38px;
+              display: flex;
+              align-items: center;
+              gap: 9px;
+              padding: 0 12px;
+              border: 1px solid rgba(11, 95, 255, 0.18);
+              border-radius: 999px;
+              background: #ffffff;
+              box-shadow:
+                0 10px 24px rgba(11, 23, 39, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+              font-size: 12px;
+              color: var(--pn-text);
+              opacity: 0.96;
+              contain: layout paint style;
+            }
+
+            .pn-cloud-pill:nth-child(2) {
+              margin-left: 22px;
+              animation-delay: 0.6s;
+            }
+
+            .pn-cloud-pill:nth-child(3) {
+              margin-left: 6px;
+              animation-delay: 1.2s;
+            }
+
+            .pn-cloud-dot {
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background: var(--pn-blue);
+              box-shadow: 0 0 8px rgba(11, 95, 255, 0.5);
+            }
+
+            .pn-pause {
+              position: absolute;
+              right: 24px;
+              bottom: 16px;
+              z-index: 12;
+              width: 48px;
+              height: 48px;
+              border: 0;
+              border-radius: 50%;
+              background: #ffffff;
+              cursor: pointer;
+              box-shadow:
+                0 10px 26px rgba(11, 23, 39, 0.12),
+                0 0 22px rgba(11, 95, 255, 0.15);
+            }
+
+            .pn-pause::before {
+              content: "";
+              position: absolute;
+              inset: 0;
+              border-radius: 50%;
+              background: conic-gradient(var(--pn-blue) 0deg 100deg, rgba(11, 95, 255, 0.18) 100deg 360deg);
+              animation: pnRingActive 3.8s linear infinite;
+            }
+
+            .pn-pause::after {
+              content: "";
+              position: absolute;
+              inset: 4px;
+              border-radius: 50%;
+              background: #ffffff;
+            }
+
+            .pn-pause-icon {
+              position: relative;
+              z-index: 2;
+              width: 14px;
+              height: 16px;
+              margin: 16px auto 0;
+              display: flex;
+              justify-content: center;
+              gap: 4px;
+            }
+
+            .pn-pause-icon span {
+              display: block;
+              width: 4px;
+              height: 16px;
+              border-radius: 2px;
+              background: var(--pn-blue);
+            }
+
+            .pn-portal-motion.is-paused *,
+            .pn-portal-motion.is-paused .pn-orbit,
+            .pn-portal-motion.is-paused .pn-pause::before {
+              animation-play-state: paused !important;
+            }
+
+            .pn-portal-motion.is-paused .pn-pause-icon {
+              width: 0;
+              height: 0;
+              margin-top: 14px;
+              border-left: 14px solid var(--pn-blue);
+              border-top: 9px solid transparent;
+              border-bottom: 9px solid transparent;
+            }
+
+            .pn-portal-motion.is-paused .pn-pause-icon span {
+              display: none;
+            }
+
+            @keyframes pnLineFlow {
+              to { stroke-dashoffset: -26; }
+            }
+
+            @keyframes pnNodePulse {
+              0%, 100% { transform: scale(0.75); opacity: 0.65; }
+              50% { transform: scale(1.1); opacity: 1; }
+            }
+
+            @keyframes pnStarPulseActive {
+              0%, 100% { transform: translate3d(-50%, 0, 0) scale(1); }
+              50% { transform: translate3d(-50%, 0, 0) scale(1.16); }
+            }
+
+            @keyframes pnOrbitActive {
+              0%, 100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.78; }
+              50% { transform: translate3d(0, 0, 0) scale(1.08); opacity: 0.28; }
+            }
+
+            @keyframes pnCardFloatActive {
+              0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
+              50% { transform: translate3d(0, -18px, 0) rotate(-0.6deg); }
+            }
+
+            @keyframes pnRowMoveActive {
+              0%, 100% { transform: translate3d(0, 0, 0); }
+              50% { transform: translate3d(18px, -4px, 0); }
+            }
+
+            @keyframes pnBadgeFloatActive {
+              0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+              50% { transform: translate3d(8px, -18px, 0) scale(1.05); }
+            }
+
+            @keyframes pnAvatarFloatActive {
+              0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+              50% { transform: translate3d(-14px, -18px, 0) scale(1.04); }
+            }
+
+            @keyframes pnCloudFloatActive {
+              0%, 100% { transform: translate3d(0, 0, 0); }
+              50% { transform: translate3d(-18px, -14px, 0); }
+            }
+
+            @keyframes pnPillPulseActive {
+              0%, 100% { opacity: 0.85; transform: translate3d(0, 0, 0); }
+              50% { opacity: 1; transform: translate3d(-14px, 0, 0); }
+            }
+
+            @keyframes pnRingActive {
+              to { transform: translate3d(0, 0, 0) rotate(360deg); }
+            }
+
+            @media (max-width: 720px) {
+              .pn-portal-motion { height: 410px; border-radius: 24px; }
+              .pn-connection-lines { opacity: 0.72; }
+              .pn-line-cloud, .pn-node-cloud, .pn-dot-cloud { display: none; }
+              .pn-orbit { left: 50%; top: 70px; width: 340px; height: 340px; margin-left: -170px; }
+              .pn-orbit-small { left: 50%; top: 126px; width: 240px; height: 240px; margin-left: -120px; }
+              .pn-main-card { left: 50%; top: 96px; width: 290px; margin-left: -145px; }
+              .pn-badge-left { left: calc(50% - 188px); }
+              .pn-badge-doc { left: calc(50% - 146px); }
+              .pn-badge-bottom { left: calc(50% + 10px); top: 384px; }
+              .pn-avatar { left: calc(50% + 142px); width: 44px; height: 44px; }
+              .pn-tool-cloud { display: none; }
+              .pn-pause { right: 16px; bottom: 12px; }
+            }
+
+            @media (max-width: 430px) {
+              .pn-portal-motion { height: 395px; }
+              .pn-main-card { width: 272px; height: 318px; margin-left: -136px; }
+              .pn-card-title { font-size: 17px; }
+              .pn-badge-left { left: calc(50% - 158px); }
+              .pn-badge-doc { left: calc(50% - 124px); }
+              .pn-avatar { left: calc(50% + 116px); }
+            }
+
+    .tool-card-coming-soon {
+      cursor: default;
+    }
+
+    .tool-card-coming-soon:hover {
+      transform: none;
+    }
+
+    .tool-card-coming-soon .tool-card-badge {
+      background: rgba(11, 95, 255, 0.08);
+      color: var(--azul);
+    }
+  </style>
+
+          <div class="pn-portal-motion" aria-label="Animação visual do Portal Notarial">
+            <div class="pn-orbit"></div>
+            <div class="pn-orbit pn-orbit-small"></div>
+
+            <svg class="pn-connection-lines" viewBox="0 0 720 440" aria-hidden="true">
+              <path id="pnPathPen" class="pn-line-path" d="M110 132 C132 124, 146 118, 166 118"></path>
+              <path id="pnPathAt" class="pn-line-path" d="M118 270 C144 256, 164 247, 190 246"></path>
+              <path id="pnPathCheck" class="pn-line-path pn-line-path-soft" d="M276 402 C298 390, 312 371, 326 346"></path>
+              <path id="pnPathAvatar" class="pn-line-path" d="M397 180 C420 176, 439 174, 458 178"></path>
+              <path id="pnPathCloud" class="pn-line-path pn-line-path-soft pn-line-cloud" d="M396 136 C452 104, 520 108, 584 136"></path>
+              <path id="pnPathCloudTwo" class="pn-line-path pn-line-path-soft pn-line-cloud" d="M398 244 C460 232, 510 232, 582 248"></path>
+
+              <circle class="pn-line-node" cx="110" cy="132" r="4"></circle>
+              <circle class="pn-line-node" cx="166" cy="118" r="4"></circle>
+              <circle class="pn-line-node" cx="118" cy="270" r="4"></circle>
+              <circle class="pn-line-node" cx="190" cy="246" r="4"></circle>
+              <circle class="pn-line-node" cx="326" cy="346" r="4"></circle>
+              <circle class="pn-line-node" cx="458" cy="178" r="4"></circle>
+              <circle class="pn-line-node pn-node-cloud" cx="584" cy="136" r="4"></circle>
+              <circle class="pn-line-node pn-node-cloud" cx="582" cy="248" r="4"></circle>
+
+              <circle class="pn-flow-dot" r="3">
+                <animateMotion dur="3.2s" repeatCount="indefinite">
+                  <mpath href="#pnPathPen"></mpath>
+                </animateMotion>
+              </circle>
+
+              <circle class="pn-flow-dot" r="3">
+                <animateMotion dur="3.6s" begin="0.4s" repeatCount="indefinite">
+                  <mpath href="#pnPathAt"></mpath>
+                </animateMotion>
+              </circle>
+
+              <circle class="pn-flow-dot" r="3">
+                <animateMotion dur="4s" begin="0.8s" repeatCount="indefinite">
+                  <mpath href="#pnPathAvatar"></mpath>
+                </animateMotion>
+              </circle>
+
+              <circle class="pn-flow-dot pn-dot-cloud" r="3">
+                <animateMotion dur="4.2s" begin="1s" repeatCount="indefinite">
+                  <mpath href="#pnPathCloud"></mpath>
+                </animateMotion>
+              </circle>
+
+              <circle class="pn-flow-dot pn-dot-cloud" r="3">
+                <animateMotion dur="4.4s" begin="1.3s" repeatCount="indefinite">
+                  <mpath href="#pnPathCloudTwo"></mpath>
+                </animateMotion>
+              </circle>
+            </svg>
+
+            <div class="pn-portal-star" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2.5c.8 4.8 3.7 7.7 8.5 8.5-4.8.8-7.7 3.7-8.5 8.5-.8-4.8-3.7-7.7-8.5-8.5 4.8-.8 7.7-3.7 8.5-8.5Z"></path>
+              </svg>
+            </div>
+
+            <div class="pn-side-badge pn-badge-left" aria-hidden="true">✒</div>
+            <div class="pn-side-badge pn-badge-doc" aria-hidden="true">@</div>
+            <div class="pn-side-badge pn-badge-bottom" aria-hidden="true">✓</div>
+
+            <div class="pn-main-card">
+              <p class="pn-card-title">
+                Ferramentas notariais em área logada para apoio à rotina extrajudicial.
+              </p>
+
+              <div class="pn-tool-row">
+                <div class="pn-tool-icon">1</div>
+                <div class="pn-tool-copy">
+                  <strong>Competência e-Notariado</strong>
+                  <small>Atos eletrônicos e híbridos</small>
+                </div>
+              </div>
+
+              <div class="pn-tool-row">
+                <div class="pn-tool-icon">2</div>
+                <div class="pn-tool-copy">
+                  <strong>Aplicador de Emolumentos</strong>
+                  <small>Enquadramento estimado por ato</small>
+                </div>
+              </div>
+
+              <div class="pn-tool-row">
+                <div class="pn-tool-icon">3</div>
+                <div class="pn-tool-copy">
+                  <strong>Triagem Notarial</strong>
+                  <small>Organize dados e documentos</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="pn-avatar" aria-hidden="true"></div>
+
+            <div class="pn-tool-cloud" aria-hidden="true">
+              <div class="pn-cloud-pill">
+                <span class="pn-cloud-dot"></span>
+                PDF/A, ICP-Brasil e e-Gov
+              </div>
+
+              <div class="pn-cloud-pill">
+                <span class="pn-cloud-dot"></span>
+                Escritura, tributo e registro
+              </div>
+
+              <div class="pn-cloud-pill">
+                <span class="pn-cloud-dot"></span>
+                Gerador de ofícios
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -1898,131 +2533,6 @@
     }
 
     typeQuote();
-  </script>
-  <script src="assets/three.min.js"></script>
-  <script>
-(function(){
-    if(typeof THREE==='undefined'){return;}
-    if(!document.getElementById('pn-hero-fx')){return;}
-    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const canvas=document.getElementById('pn-hero-fx'), hero=document.querySelector('.hero');
-    let W=hero.clientWidth,H=hero.clientHeight; const dpr=Math.min(window.devicePixelRatio||1,2);
-    const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
-    renderer.setPixelRatio(dpr); renderer.setClearColor(0x000000,0); renderer.setSize(W,H,false);
-    const scene=new THREE.Scene();
-    const camera=new THREE.OrthographicCamera(0,W,0,H,-10,10); camera.position.z=1;
-
-    let N=Math.round(W*H/520); N=Math.max(700,Math.min(2200,N));
-    const base=new Float32Array(N*2), seed=new Float32Array(N*2), col=new Float32Array(N*3), alp=new Float32Array(N);
-    // paleta discreta (cinza-claro, cinza, azul) — leve
-    const P=[[0.62,0.66,0.72],[0.30,0.35,0.44],[0.043,0.37,1.0]];
-    for(let i=0;i<N;i++){
-      const ang=Math.random()*6.2832, rad=Math.sqrt(Math.random()); // disco uniforme
-      base[i*2]=Math.cos(ang)*rad; base[i*2+1]=Math.sin(ang)*rad;
-      seed[i*2]=Math.random(); seed[i*2+1]=0.25+Math.random()*0.9; // .y = escala do ponto
-      const r=Math.random(), c=r<0.15?P[2]:(r<0.55?P[0]:P[1]);
-      col[i*3]=c[0];col[i*3+1]=c[1];col[i*3+2]=c[2];
-      alp[i]=(r<0.15?0.45+Math.random()*0.3:0.18+Math.random()*0.34);
-    }
-    const geo=new THREE.BufferGeometry();
-    geo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(N*3),3)); // placeholder p/ Points
-    geo.setAttribute('aBase', new THREE.BufferAttribute(base,2));
-    geo.setAttribute('aSeed', new THREE.BufferAttribute(seed,2));
-    geo.setAttribute('aColor', new THREE.BufferAttribute(col,3));
-    geo.setAttribute('aAlpha', new THREE.BufferAttribute(alp,1));
-
-    const NOISE=`
-      vec3 mod289(vec3 x){return x-floor(x*(1.0/289.0))*289.0;}
-      vec4 mod289(vec4 x){return x-floor(x*(1.0/289.0))*289.0;}
-      vec4 permute(vec4 x){return mod289(((x*34.0)+1.0)*x);}
-      vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-0.85373472095314*r;}
-      float snoise(vec3 v){
-        const vec2 C=vec2(1.0/6.0,1.0/3.0); const vec4 D=vec4(0.0,0.5,1.0,2.0);
-        vec3 i=floor(v+dot(v,C.yyy)); vec3 x0=v-i+dot(i,C.xxx);
-        vec3 g=step(x0.yzx,x0.xyz); vec3 l=1.0-g; vec3 i1=min(g.xyz,l.zxy); vec3 i2=max(g.xyz,l.zxy);
-        vec3 x1=x0-i1+C.xxx; vec3 x2=x0-i2+C.yyy; vec3 x3=x0-D.yyy;
-        i=mod289(i);
-        vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));
-        float n_=0.142857142857; vec3 ns=n_*D.wyz-D.xzx;
-        vec4 j=p-49.0*floor(p*ns.z*ns.z);
-        vec4 x_=floor(j*ns.z); vec4 y_=floor(j-7.0*x_);
-        vec4 x=x_*ns.x+ns.yyyy; vec4 y=y_*ns.x+ns.yyyy; vec4 h=1.0-abs(x)-abs(y);
-        vec4 b0=vec4(x.xy,y.xy); vec4 b1=vec4(x.zw,y.zw);
-        vec4 s0=floor(b0)*2.0+1.0; vec4 s1=floor(b1)*2.0+1.0; vec4 sh=-step(h,vec4(0.0));
-        vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy; vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
-        vec3 p0=vec3(a0.xy,h.x); vec3 p1=vec3(a0.zw,h.y); vec3 p2=vec3(a1.xy,h.z); vec3 p3=vec3(a1.zw,h.w);
-        vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));
-        p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
-        vec4 m=max(0.6-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0); m=m*m;
-        return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
-      }`;
-
-    const uniforms={
-      uTime:{value:0}, uPixelRatio:{value:dpr}, uParticleScale:{value:1.9},
-      uCenter:{value:new THREE.Vector2(W*0.6,H*0.46)},
-      uRadius:{value:Math.hypot(W,H)*0.62},
-      uMouse:{value:new THREE.Vector2(0,0)}, uMouseVel:{value:new THREE.Vector2(0,0)},
-      uHover:{value:0}
-    };
-    const mat=new THREE.ShaderMaterial({
-      uniforms, transparent:true, depthTest:false, depthWrite:false, blending:THREE.NormalBlending,
-      vertexShader:NOISE+`
-        attribute vec2 aBase; attribute vec2 aSeed; attribute vec3 aColor; attribute float aAlpha;
-        uniform float uTime,uPixelRatio,uParticleScale,uRadius,uHover;
-        uniform vec2 uCenter,uMouse,uMouseVel;
-        varying vec3 vC; varying float vA;
-        void main(){
-          vec2 pos=aBase;
-          // deriva grossa (sempre) — igual antigravity
-          float nX2=snoise(vec3(pos*0.5, uTime*0.15+45.0));
-          float nY2=snoise(vec3(pos*0.5, uTime*0.15+87.0));
-          pos.x+=nX2*0.02; pos.y+=nY2*0.02;
-          // deriva fina (quando há interação)
-          float nX=snoise(vec3(pos*10.0, uTime*0.2+100.0));
-          float nY=snoise(vec3(pos*10.0, uTime*0.2));
-          pos.x+=nX*0.006*uHover; pos.y+=nY*0.006*uHover;
-          // fluxo do cursor: empurra na direção do movimento, mais perto = mais forte
-          float md=distance(pos,uMouse); float infl=smoothstep(0.55,0.0,md);
-          pos+=uMouseVel*infl*0.35;
-          vec2 world=uCenter+pos*uRadius;
-          gl_Position=projectionMatrix*modelViewMatrix*vec4(world,0.0,1.0);
-          gl_PointSize=((aSeed.y*7.0)*(uPixelRatio*0.5)*uParticleScale)+(0.25*uPixelRatio);
-          vC=aColor; vA=aAlpha;
-        }`,
-      fragmentShader:`
-        precision mediump float; varying vec3 vC; varying float vA;
-        void main(){ float r=length(gl_PointCoord-vec2(0.5));
-          float a=smoothstep(0.5,0.08,r)*vA; if(a<=0.002) discard; gl_FragColor=vec4(vC,a); }`
-    });
-    const points=new THREE.Points(geo,mat); scene.add(points);
-
-    const cur={x:0,y:0,vx:0,vy:0,last:-9999};
-    function toDisc(px,py){ return [ (px-uniforms.uCenter.value.x)/uniforms.uRadius.value,
-                                     (py-uniforms.uCenter.value.y)/uniforms.uRadius.value ]; }
-    function pointer(e){const q=e.touches?e.touches[0]:e;const r=canvas.getBoundingClientRect();
-      const nx=q.clientX-r.left, ny=q.clientY-r.top; const [dx,dy]=toDisc(nx,ny);
-      cur.vx=0.5*cur.vx+0.5*(dx-cur.x); cur.vy=0.5*cur.vy+0.5*(dy-cur.y);
-      cur.x=dx;cur.y=dy;cur.last=performance.now();}
-    window.addEventListener('mousemove',pointer);
-    window.addEventListener('touchmove',pointer,{passive:true});
-    window.addEventListener('resize',()=>{W=hero.clientWidth;H=hero.clientHeight;renderer.setSize(W,H,false);
-      camera.right=W;camera.bottom=H;camera.updateProjectionMatrix();
-      uniforms.uCenter.value.set(W*0.6,H*0.46); uniforms.uRadius.value=Math.hypot(W,H)*0.62;});
-
-    let t=0;
-    function frame(now){
-      t+=0.016; uniforms.uTime.value=t;
-      const active=(now-cur.last)<900;
-      uniforms.uHover.value += ((active?1:0)-uniforms.uHover.value)*0.08; // suaviza
-      cur.vx*=0.88; cur.vy*=0.88;
-      uniforms.uMouse.value.set(cur.x,cur.y);
-      uniforms.uMouseVel.value.set(cur.vx,cur.vy);
-      renderer.render(scene,camera);
-      if(!reduce) requestAnimationFrame(frame);
-    }
-    if(reduce) renderer.render(scene,camera); else requestAnimationFrame(frame);
-    window.__ready=true;
-  })();
   </script>
 </body>
 </html>
