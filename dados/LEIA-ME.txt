@@ -3,7 +3,13 @@ COMO PUBLICAR / DESPUBLICAR FERRAMENTAS NA HOME (portalnotarial.com.br)
 
 O "quadro" de ferramentas fica no arquivo:  dados/ferramentas.json
 
-Cada ferramenta tem um campo "publicado":
+O arquivo tem DUAS listas:
+  - "ferramentas": os cards de ferramentas (seções "Mais acessados",
+    "Serviços avulsos", "Para cartórios...").
+  - "normas": os cards da seção "Consulta aberta" (Código Nacional de
+    Normas e Normas da Corregedoria de São Paulo).
+
+Cada item (dos dois grupos) tem um campo "publicado":
   - "publicado": true   -> o card APARECE na home
   - "publicado": false  -> o card SOME da home (em todas as seções)
 

@@ -1480,7 +1480,7 @@
             <span class="section-eyebrow">Consulta aberta</span>
             <h2 class="section-title" id="titulo-normas">Normas para consulta rápida.</h2>
             <div class="normas-grid">
-              <a class="norma-card" href="codigo-de-normas-nacional.html">
+              <a class="norma-card" data-tool-id="codigo-nacional-de-normas" href="codigo-de-normas-nacional.html">
                 <div>
                   <span>Normas</span>
                   <h3>Código Nacional de Normas</h3>
@@ -1489,7 +1489,7 @@
                 <div class="arrow" aria-hidden="true">→</div>
               </a>
 
-              <a class="norma-card" href="codigo-de-normas-de-sao-paulo.html">
+              <a class="norma-card" data-tool-id="normas-da-corregedoria-de-sao-paulo" href="codigo-de-normas-de-sao-paulo.html">
                 <div>
                   <span>Normas</span>
                   <h3>Normas da Corregedoria de São Paulo</h3>
@@ -1933,9 +1933,10 @@
       .then(function(data){
         if(!data || !Array.isArray(data.ferramentas)) return;
         var off = {};
-        data.ferramentas.forEach(function(f){ if(f && f.publicado === false && f.id) off[f.id] = true; });
+        var _lists = (data.ferramentas||[]).concat(data.normas||[]);
+        _lists.forEach(function(f){ if(f && f.publicado === false && f.id) off[f.id] = true; });
         if(Object.keys(off).length){
-          document.querySelectorAll('.tool-card[data-tool-id]').forEach(function(c){
+          document.querySelectorAll('[data-tool-id]').forEach(function(c){
             if(off[c.getAttribute('data-tool-id')]) c.remove();
           });
         }
@@ -1943,6 +1944,8 @@
         document.querySelectorAll('.tools-category').forEach(function(cat){
           if(!cat.querySelector('.tool-card')) cat.style.display = 'none';
         });
+        var _ng = document.querySelector('.normas-grid');
+        if(_ng && !_ng.querySelector('.norma-card')){ var _s=_ng.closest('.section'); if(_s) _s.style.display='none'; }
       })
       .catch(function(){ /* fail-safe: mantém tudo visível */ });
   })();
