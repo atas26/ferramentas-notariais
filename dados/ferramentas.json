@@ -1,0 +1,115 @@
+{
+  "_instrucoes": "Quadro de ferramentas do Portal. Para tirar uma ferramenta do ar, mude 'publicado' para false. Para publicar de novo, volte para true. As alterações valem no próximo carregamento da home.",
+  "ferramentas": [
+    {
+      "id": "calculadora-avancada",
+      "nome": "Calculadora Avançada",
+      "publicado": true
+    },
+    {
+      "id": "itcmd",
+      "nome": "ITCMD",
+      "publicado": true
+    },
+    {
+      "id": "agenda-notarial",
+      "nome": "Agenda Notarial",
+      "publicado": true
+    },
+    {
+      "id": "atesta-certidoes",
+      "nome": "Atesta - Certidões",
+      "publicado": true
+    },
+    {
+      "id": "classificador-de-arquivos-eletronicos",
+      "nome": "Classificador de Arquivos Eletrônicos",
+      "publicado": true
+    },
+    {
+      "id": "consulta-de-obito-por-cpf-rf",
+      "nome": "Consulta de óbito por CPF/RF",
+      "publicado": true
+    },
+    {
+      "id": "analisador-de-exigencias-imobiliarias",
+      "nome": "Analisador de exigências imobiliárias",
+      "publicado": true
+    },
+    {
+      "id": "aplicador-de-emolumentos",
+      "nome": "Aplicador de Emolumentos",
+      "publicado": true
+    },
+    {
+      "id": "competencia-e-notariado",
+      "nome": "Competência e-Notariado",
+      "publicado": true
+    },
+    {
+      "id": "ganho-de-capital",
+      "nome": "Ganho de Capital",
+      "publicado": true
+    },
+    {
+      "id": "tarifas-da-conta-notarial",
+      "nome": "Tarifas da Conta Notarial",
+      "publicado": true
+    },
+    {
+      "id": "triagem-notarial",
+      "nome": "Triagem Notarial",
+      "publicado": true
+    },
+    {
+      "id": "verificador-tecnico",
+      "nome": "Verificador técnico",
+      "publicado": true
+    },
+    {
+      "id": "certidao-reprografica",
+      "nome": "Certidão reprográfica",
+      "publicado": true
+    },
+    {
+      "id": "conferencia-inteligente",
+      "nome": "Conferência inteligente",
+      "publicado": true
+    },
+    {
+      "id": "consulta-pep-por-cpf",
+      "nome": "Consulta PEP por CPF",
+      "publicado": true
+    },
+    {
+      "id": "gerador-de-certidoes",
+      "nome": "Gerador de certidões",
+      "publicado": true
+    },
+    {
+      "id": "gerador-de-orcamento",
+      "nome": "Gerador de orçamento",
+      "publicado": true
+    },
+    {
+      "id": "oficio-de-comparecimento",
+      "nome": "Ofício de comparecimento",
+      "publicado": true
+    },
+    {
+      "id": "oficio-para-bancos-em-inventario",
+      "nome": "Ofício para bancos em inventário",
+      "publicado": true
+    },
+    {
+      "id": "oficio-para-cartorios",
+      "nome": "Ofício para cartórios",
+      "publicado": true
+    },
+    {
+      "id": "validacao-selo-digital-tjsp",
+      "nome": "Validação Selo Digital TJSP",
+      "publicado": true
+    }
+  ]
+}
