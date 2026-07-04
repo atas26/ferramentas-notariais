@@ -34,17 +34,17 @@
     {
       "id": "analisador-de-exigencias-imobiliarias",
       "nome": "Analisador de exigências imobiliárias",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "aplicador-de-emolumentos",
       "nome": "Aplicador de Emolumentos",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "competencia-e-notariado",
       "nome": "Competência e-Notariado",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "ganho-de-capital",
@@ -59,17 +59,17 @@
     {
       "id": "triagem-notarial",
       "nome": "Triagem Notarial",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "verificador-tecnico",
       "nome": "Verificador técnico",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "certidao-reprografica",
       "nome": "Certidão reprográfica",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "conferencia-inteligente",
@@ -84,7 +84,7 @@
     {
       "id": "gerador-de-certidoes",
       "nome": "Gerador de certidões",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "gerador-de-orcamento",
@@ -94,22 +94,22 @@
     {
       "id": "oficio-de-comparecimento",
       "nome": "Ofício de comparecimento",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "oficio-para-bancos-em-inventario",
       "nome": "Ofício para bancos em inventário",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "oficio-para-cartorios",
       "nome": "Ofício para cartórios",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "validacao-selo-digital-tjsp",
       "nome": "Validação Selo Digital TJSP",
-      "publicado": true
+      "publicado": false
     }
   ]
 }
