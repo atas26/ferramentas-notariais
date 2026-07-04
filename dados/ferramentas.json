@@ -111,5 +111,17 @@
       "nome": "Validação Selo Digital TJSP",
       "publicado": false
     }
+  ],
+  "normas": [
+    {
+      "id": "codigo-nacional-de-normas",
+      "nome": "Código Nacional de Normas",
+      "publicado": true
+    },
+    {
+      "id": "normas-da-corregedoria-de-sao-paulo",
+      "nome": "Normas da Corregedoria de São Paulo",
+      "publicado": true
+    }
   ]
 }
