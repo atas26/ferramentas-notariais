@@ -116,12 +116,12 @@
     {
       "id": "codigo-nacional-de-normas",
       "nome": "Código Nacional de Normas",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "normas-da-corregedoria-de-sao-paulo",
       "nome": "Normas da Corregedoria de São Paulo",
-      "publicado": true
+      "publicado": false
     }
   ]
 }
