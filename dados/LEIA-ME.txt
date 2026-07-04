@@ -1,0 +1,39 @@
+COMO PUBLICAR / DESPUBLICAR FERRAMENTAS NA HOME (portalnotarial.com.br)
+======================================================================
+
+O "quadro" de ferramentas fica no arquivo:  dados/ferramentas.json
+
+Cada ferramenta tem um campo "publicado":
+  - "publicado": true   -> o card APARECE na home
+  - "publicado": false  -> o card SOME da home (em todas as seções)
+
+Exemplo:
+  {
+    "id": "consulta-pep-por-cpf",
+    "nome": "Consulta PEP por CPF",
+    "publicado": false
+  }
+
+
+PASSO A PASSO (editando direto no GitHub)
+-----------------------------------------
+1. Abra o arquivo dados/ferramentas.json no GitHub.
+2. Clique no lápis (Edit this file).
+3. Troque true por false (ou o contrário) na ferramenta desejada.
+4. Em "Commit changes", ESCOLHA:
+   "Commit directly to the main branch".
+5. Aguarde alguns minutos: o Render republica a home automaticamente.
+
+
+IMPORTANTE
+----------
+- A publicação só vale quando a alteração está na branch "main".
+  Se você editar em outra branch, NÃO vai ao ar até ser mesclada na main.
+- Se uma seção ficar sem nenhum card publicado, ela some sozinha.
+- Se o arquivo ficar com erro de digitação (JSON inválido), o site,
+  por segurança, mostra TODAS as ferramentas. Então mantenha o formato:
+  vírgulas, aspas e chaves como no exemplo.
+- Não é preciso mexer no index.html; só neste arquivo de dados.
+
+Dúvida ou quer que alguém faça por você? É só pedir
+"despublica a ferramenta X" / "publica a ferramenta Y".
