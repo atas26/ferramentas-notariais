@@ -221,42 +221,34 @@
     }
 
     .quote-rotator {
-      width: min(100%, 1040px);
-      min-height: 86px;
-      margin: 0 0 32px;
-      padding: 0;
-      position: relative;
+      width: min(100%, 720px);
+      min-height: 72px;
+      margin: 0 0 30px;
+      padding: 0 0 0 16px;
+      border-left: 3px solid rgba(11, 95, 255, 0.28);
+      transition: opacity 0.5s ease;
+    }
+
+    .quote-rotator.is-fading {
+      opacity: 0;
     }
 
     .quote-text {
-      min-height: 0;
+      margin: 0;
       color: var(--texto-suave);
-      font-size: clamp(16px, 1.7vw, 23px);
-      line-height: 1.45;
-      letter-spacing: -0.015em;
+      font-size: clamp(15px, 1.35vw, 18px);
+      font-style: italic;
+      line-height: 1.5;
+      letter-spacing: -0.01em;
     }
 
     .quote-author {
-      min-height: 18px;
-      margin-top: 2px;
+      min-height: 16px;
+      margin-top: 6px;
       color: var(--texto-fraco);
-      font-size: 13px;
+      font-size: 12.5px;
+      font-weight: 700;
       line-height: 1.4;
-    }
-
-    .typing-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1em;
-      margin-left: 4px;
-      vertical-align: -0.12em;
-      background: var(--verde);
-      animation: blink 0.9s steps(2, start) infinite;
-    }
-
-    @keyframes blink {
-      0%, 45% { opacity: 1; }
-      46%, 100% { opacity: 0; }
     }
 
     .hero-grid {
@@ -715,6 +707,33 @@
       font-size: 14px;
     }
 
+    .pro-strip-cta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .pro-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .pro-price-value {
+      font-size: 30px;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+    }
+
+    .pro-price-per {
+      font-size: 14px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.74);
+    }
+
     .normas-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(260px, 1fr));
@@ -1147,12 +1166,10 @@
 
     <header class="hero">
       <div class="hero-inner">
-        <div class="quote-rotator" aria-live="polite">
-          <div class="quote-text">
-            <span id="quoteText"></span><span class="typing-cursor" aria-hidden="true"></span>
-          </div>
-          <div class="quote-author" id="quoteAuthor"></div>
-        </div>
+        <figure class="quote-rotator" id="quoteRotator" aria-label="Citação sobre o notariado">
+          <blockquote class="quote-text"><span id="quoteText"></span></blockquote>
+          <figcaption class="quote-author" id="quoteAuthor"></figcaption>
+        </figure>
 
         <div class="hero-grid">
           <section class="hero-content">
@@ -1166,7 +1183,14 @@
             </p>
 
             <div class="hero-actions">
+              <a class="button primary" href="https://app.portalnotarial.com.br">Assinar agora</a>
               <a class="button" href="#ferramentas">Ver ferramentas incluídas</a>
+            </div>
+
+            <div class="hero-badges" aria-label="Destaques do plano">
+              <span>Cancele quando quiser</span>
+              <span>Acesso imediato pelo painel</span>
+              <span>Dados protegidos — LGPD</span>
             </div>
           </section>
 
@@ -1466,9 +1490,14 @@
             <div class="pro-strip">
               <div>
                 <strong>Portal Notarial Pro</strong>
-                <p>O acesso às ferramentas protegidas é feito pelo painel do assinante.</p>
+                <p>Todas as ferramentas do plano em um painel único. Sem fidelidade — cancele quando quiser.</p>
               </div>
-              <a class="button publish-style" href="https://app.portalnotarial.com.br">Assinar | Acessar</a>
+              <div class="pro-strip-cta">
+                <div class="pro-price">
+                  <span class="pro-price-value">R$ 49</span><span class="pro-price-per">/mês</span>
+                </div>
+                <a class="button publish-style" href="https://app.portalnotarial.com.br">Assinar agora</a>
+              </div>
             </div>
           </div>
         </div>
@@ -1883,48 +1912,34 @@
       }
     ];
 
+    const quoteRotator = document.getElementById("quoteRotator");
     const quoteTextElement = document.getElementById("quoteText");
     const quoteAuthorElement = document.getElementById("quoteAuthor");
     let quoteIndex = 0;
-    let letterIndex = 0;
-    let deleting = false;
 
-    function typeQuote() {
-      if (!quoteTextElement || !quoteAuthorElement) return;
-
-      const item = frasesNotariais[quoteIndex];
-      const fullText = item.texto;
-
-      if (!deleting) {
-        letterIndex += 1;
-        quoteTextElement.textContent = fullText.slice(0, letterIndex);
-        quoteAuthorElement.textContent = letterIndex === fullText.length ? item.autor : "";
-
-        if (letterIndex === fullText.length) {
-          deleting = true;
-          window.setTimeout(typeQuote, 2600);
-          return;
-        }
-
-        window.setTimeout(typeQuote, 34);
-        return;
-      }
-
-      letterIndex -= 1;
-      quoteTextElement.textContent = fullText.slice(0, letterIndex);
-      quoteAuthorElement.textContent = "";
-
-      if (letterIndex === 0) {
-        deleting = false;
-        quoteIndex = (quoteIndex + 1) % frasesNotariais.length;
-        window.setTimeout(typeQuote, 360);
-        return;
-      }
-
-      window.setTimeout(typeQuote, 12);
+    function renderQuote(index) {
+      const item = frasesNotariais[index];
+      quoteTextElement.textContent = "“" + item.texto + "”";
+      quoteAuthorElement.textContent = "— " + item.autor;
     }
 
-    typeQuote();
+    function rotateQuote() {
+      if (!quoteRotator) return;
+      quoteRotator.classList.add("is-fading");
+      window.setTimeout(function () {
+        quoteIndex = (quoteIndex + 1) % frasesNotariais.length;
+        renderQuote(quoteIndex);
+        quoteRotator.classList.remove("is-fading");
+      }, 500);
+    }
+
+    if (quoteTextElement && quoteAuthorElement) {
+      renderQuote(quoteIndex);
+      const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!prefersReduced) {
+        window.setInterval(rotateQuote, 6500);
+      }
+    }
   </script>
   <script>
   (function(){
