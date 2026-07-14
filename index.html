@@ -1127,6 +1127,26 @@
       background: rgba(11, 95, 255, 0.08);
       color: var(--azul);
     }
+
+    /* Segurança e privacidade */
+    .trust-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 26px; }
+    .trust-item { background: #fff; border: 1px solid var(--linha); border-radius: 20px; padding: 22px; }
+    .trust-ic { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgba(11,95,255,0.08); color: var(--azul); margin-bottom: 14px; }
+    .trust-ic svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .trust-item h3 { margin: 0 0 6px; font-size: 17px; letter-spacing: -0.02em; color: var(--texto); }
+    .trust-item p { margin: 0; color: var(--texto-suave); font-size: 14px; line-height: 1.55; }
+    .trust-item a { color: var(--azul); font-weight: 700; }
+
+    /* FAQ */
+    .faq-list { margin-top: 26px; display: grid; gap: 12px; }
+    details.faq { border: 1px solid var(--linha); border-radius: 16px; background: #fff; overflow: hidden; }
+    details.faq summary { list-style: none; cursor: pointer; padding: 18px 20px; font-weight: 800; color: var(--texto); letter-spacing: -0.02em; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    details.faq summary::-webkit-details-marker { display: none; }
+    details.faq summary::after { content: '+'; color: var(--azul); font-weight: 800; font-size: 20px; line-height: 1; }
+    details.faq[open] summary::after { content: '\2013'; }
+    details.faq .faq-body { padding: 0 20px 18px; color: var(--texto-suave); font-size: 15px; line-height: 1.62; }
+    details.faq .faq-body a { color: var(--azul); font-weight: 700; }
+    @media (max-width: 760px) { .trust-grid { grid-template-columns: 1fr; } }
   </style>
   <style id="pn-cardfx">
     @property --pn-a{syntax:'<angle>';inherits:false;initial-value:0deg}
@@ -1452,6 +1472,48 @@
                 </div>
                 <div class="arrow" aria-hidden="true">→</div>
               </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="seguranca" aria-labelledby="titulo-seguranca">
+        <div class="section-panel">
+          <div class="section-content">
+            <span class="section-eyebrow">Segurança e privacidade</span>
+            <h2 class="section-title" id="titulo-seguranca">Seus dados tratados com cuidado.</h2>
+            <div class="trust-grid">
+              <div class="trust-item">
+                <div class="trust-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></div>
+                <h3>Acesso protegido</h3>
+                <p>Ferramentas em área logada, liberadas pela assinatura do Portal Notarial Pro.</p>
+              </div>
+              <div class="trust-item">
+                <div class="trust-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"></path><path d="M9 12l2 2 4-4"></path></svg></div>
+                <h3>Conexão segura</h3>
+                <p>Tráfego criptografado (HTTPS) em todas as páginas do portal.</p>
+              </div>
+              <div class="trust-item">
+                <div class="trust-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 3.5h6l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 20V5A1.5 1.5 0 0 1 7.5 3.5z"></path><path d="M14 3.5V8h4"></path><path d="M9 13h6"></path><path d="M9 16h4"></path></svg></div>
+                <h3>Conforme a LGPD</h3>
+                <p>Os dados consultados nas ferramentas não são armazenados. Tratamento conforme a nossa <a href="/politica-de-privacidade.html">Política de Privacidade</a>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq" aria-labelledby="titulo-faq">
+        <div class="section-panel">
+          <div class="section-content">
+            <span class="section-eyebrow">Perguntas frequentes</span>
+            <h2 class="section-title" id="titulo-faq">Dúvidas comuns antes de assinar.</h2>
+            <div class="faq-list">
+              <details class="faq"><summary>As calculadoras substituem o orçamento ou o sistema oficial?</summary><div class="faq-body">Não. São ferramentas de apoio para triagem e conferência. O resultado depende dos dados informados e não substitui a análise do caso concreto.</div></details>
+              <details class="faq"><summary>As tabelas valem para qual estado?</summary><div class="faq-body">As ferramentas de cálculo seguem as tabelas e a legislação do estado de São Paulo. Confirme sempre a regra vigente aplicável ao seu atendimento.</div></details>
+              <details class="faq"><summary>Como acesso as ferramentas?</summary><div class="faq-body">Pelo painel do assinante, após a assinatura. As ferramentas protegidas abrem pelo app do Portal Notarial.</div></details>
+              <details class="faq"><summary>Preciso instalar algo?</summary><div class="faq-body">Não. Tudo funciona pelo navegador, no computador ou no celular.</div></details>
+              <details class="faq"><summary>Tem fidelidade? Posso cancelar?</summary><div class="faq-body">Sem fidelidade — você cancela quando quiser. Veja a <a href="/politica-de-cancelamento.html">política de cancelamento</a>.</div></details>
             </div>
           </div>
         </div>
