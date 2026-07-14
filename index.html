@@ -1147,6 +1147,28 @@
     details.faq .faq-body { padding: 0 20px 18px; color: var(--texto-suave); font-size: 15px; line-height: 1.62; }
     details.faq .faq-body a { color: var(--azul); font-weight: 700; }
     @media (max-width: 760px) { .trust-grid { grid-template-columns: 1fr; } }
+
+    /* Prévia do painel (mock) */
+    .mock-window { margin-top: 26px; border: 1px solid var(--linha); border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 30px 60px rgba(10,37,64,0.10); }
+    .mock-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #f4f7fb; border-bottom: 1px solid var(--linha); }
+    .mock-dot { width: 11px; height: 11px; border-radius: 50%; background: #cfd6e2; }
+    .mock-dot:nth-child(1){ background:#ff5f57; } .mock-dot:nth-child(2){ background:#febc2e; } .mock-dot:nth-child(3){ background:#28c840; }
+    .mock-url { margin-left: 10px; flex: 1; max-width: 320px; background: #fff; border: 1px solid var(--linha); border-radius: 8px; padding: 5px 12px; font-size: 12px; color: var(--texto-fraco); }
+    .mock-body { padding: 22px; background: linear-gradient(180deg, #ffffff, #f7f9fd); }
+    .mock-hero { display: flex; align-items: center; justify-content: space-between; gap: 18px; background: linear-gradient(135deg, rgba(11,95,255,0.06), rgba(0,144,157,0.05)); border: 1px solid var(--linha); border-radius: 14px; padding: 20px 22px; }
+    .mock-kicker { font-size: 11px; font-weight: 800; letter-spacing: 0.16em; color: var(--azul); }
+    .mock-h1 { margin-top: 6px; font-size: 22px; font-weight: 850; letter-spacing: -0.03em; color: var(--texto); }
+    .mock-status { text-align: right; border-left: 1px solid var(--linha); padding-left: 18px; }
+    .mock-status span { display: block; font-size: 10px; font-weight: 800; letter-spacing: 0.14em; color: var(--texto-fraco); }
+    .mock-status strong { font-size: 15px; color: #0f9669; }
+    .mock-catlabel { margin: 20px 0 12px; font-size: 13px; font-weight: 800; color: var(--texto); }
+    .mock-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .mock-card { background: #fff; border: 1px solid var(--linha); border-radius: 12px; padding: 14px; }
+    .mock-ic { width: 30px; height: 30px; border-radius: 9px; background: rgba(11,95,255,0.08); margin-bottom: 10px; }
+    .mock-card b { display: block; font-size: 13px; color: var(--texto); letter-spacing: -0.01em; }
+    .mock-card span { display: block; margin-top: 8px; font-size: 11px; font-weight: 800; color: var(--azul); }
+    .mock-note { margin: 12px 0 0; font-size: 12.5px; color: var(--texto-fraco); }
+    @media (max-width: 760px) { .mock-grid { grid-template-columns: repeat(2, 1fr); } .mock-hero { flex-direction: column; align-items: flex-start; } .mock-status { text-align: left; border-left: 0; padding-left: 0; } }
   </style>
   <style id="pn-cardfx">
     @property --pn-a{syntax:'<angle>';inherits:false;initial-value:0deg}
@@ -1445,6 +1467,36 @@
                 <a class="button publish-style" href="https://app.portalnotarial.com.br">Assinar agora</a>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="painel" aria-labelledby="titulo-painel">
+        <div class="section-panel">
+          <div class="section-content">
+            <span class="section-eyebrow">Por dentro do painel</span>
+            <h2 class="section-title" id="titulo-painel">Tudo em uma área logada só sua.</h2>
+            <p class="section-lead">Depois de assinar, você acessa as ferramentas do plano em um painel único, organizado por tipo de uso.</p>
+            <div class="mock-window" role="img" aria-label="Prévia ilustrativa do painel do assinante">
+              <div class="mock-bar"><span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span><div class="mock-url">app.portalnotarial.com.br</div></div>
+              <div class="mock-body">
+                <div class="mock-hero">
+                  <div>
+                    <div class="mock-kicker">ÁREA DE ASSINANTES</div>
+                    <div class="mock-h1">Ferramentas notariais exclusivas.</div>
+                  </div>
+                  <div class="mock-status"><span>STATUS</span><strong>Acesso liberado</strong></div>
+                </div>
+                <div class="mock-catlabel">Para cartórios, advogados e imobiliárias</div>
+                <div class="mock-grid">
+                  <div class="mock-card"><div class="mock-ic"></div><b>Calculadora Avançada</b><span>Abrir ferramenta →</span></div>
+                  <div class="mock-card"><div class="mock-ic"></div><b>Ganho de Capital</b><span>Abrir ferramenta →</span></div>
+                  <div class="mock-card"><div class="mock-ic"></div><b>ITCMD</b><span>Abrir ferramenta →</span></div>
+                  <div class="mock-card"><div class="mock-ic"></div><b>Tarifas da Conta Notarial</b><span>Abrir ferramenta →</span></div>
+                </div>
+              </div>
+            </div>
+            <p class="mock-note">Imagem ilustrativa do painel do assinante.</p>
           </div>
         </div>
       </section>
