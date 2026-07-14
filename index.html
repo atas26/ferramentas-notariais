@@ -85,11 +85,7 @@
       overflow-x: hidden;
       position: relative;
       padding-top: 76px;
-      background:
-        radial-gradient(circle at 15% 18%, rgba(11, 95, 255, 0.08), transparent 32%),
-        radial-gradient(circle at 88% 28%, rgba(0, 144, 157, 0.07), transparent 34%),
-        radial-gradient(circle at 72% 82%, rgba(232, 57, 70, 0.04), transparent 32%),
-        linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
+      background: linear-gradient(180deg, #ffffff 0%, #f4f7fb 100%);
     }
 
     .page::before {
@@ -497,22 +493,10 @@
       background:
         radial-gradient(circle at 82% 0%, rgba(11, 95, 255, 0.07), transparent 42%),
         linear-gradient(145deg, #ffffff, #f7f9fc);
-      box-shadow: 0 16px 40px rgba(10,37,64,0.06);
+      box-shadow: 0 8px 24px rgba(10,37,64,0.05);
       padding: 34px;
       overflow: hidden;
       position: relative;
-    }
-
-    .section-panel::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(10,37,64,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(10,37,64,0.025) 1px, transparent 1px);
-      background-size: 42px 42px;
-      opacity: 0.45;
     }
 
     .section-content {
@@ -1185,7 +1169,7 @@
     @media (max-width: 760px) { .trust-grid { grid-template-columns: 1fr; } }
 
     /* Prévia do painel (mock) */
-    .mock-window { margin-top: 26px; border: 1px solid var(--linha); border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 30px 60px rgba(10,37,64,0.10); }
+    .mock-window { margin-top: 26px; border: 1px solid var(--linha); border-radius: 18px; overflow: hidden; background: #fff; box-shadow: 0 14px 30px rgba(10,37,64,0.08); }
     .mock-bar { display: flex; align-items: center; gap: 8px; padding: 12px 16px; background: #f4f7fb; border-bottom: 1px solid var(--linha); }
     .mock-dot { width: 11px; height: 11px; border-radius: 50%; background: #cfd6e2; }
     .mock-dot:nth-child(1){ background:#ff5f57; } .mock-dot:nth-child(2){ background:#febc2e; } .mock-dot:nth-child(3){ background:#28c840; }
