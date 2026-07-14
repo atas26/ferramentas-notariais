@@ -20,6 +20,10 @@
   <meta name="twitter:description" content="Mapa do site do Portal Notarial, com links para páginas públicas, área Pro, fontes normativas, atualizações e políticas do site." />
 
 <style>
+    /* pn-inter-face */
+    @font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("fonts/inter-latin-wght-normal.woff2") format("woff2");}
+    @font-face{font-family:"Inter";font-style:italic;font-weight:100 900;font-display:swap;src:url("fonts/inter-latin-wght-italic.woff2") format("woff2");}
+
 
     :root {
       --azul: rgb(11, 95, 255);
@@ -40,7 +44,7 @@
     html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       background: var(--fundo);
       color: var(--texto);
     }
