@@ -310,6 +310,14 @@
       color: var(--azul);
     }
 
+    /* Evita quebras feias: títulos equilibrados e parágrafos sem palavra órfã */
+    h1, .section-title, .intro-title, .quote-text {
+      text-wrap: balance;
+    }
+    .lead, .section-lead, .tool-card p, .trust-item p, .faq-body, .notice-inner p {
+      text-wrap: pretty;
+    }
+
     .lead {
       max-width: 680px;
       margin: 24px 0 0;
@@ -477,7 +485,11 @@
     }
 
     .section-panel {
-      width: 100%;
+      width: auto;
+      /* alinha o conteúdo do painel (título e cards) com o bloco do hero:
+         o painel "sangra" para fora exatamente o valor do seu recuo interno */
+      margin-left: -35px;
+      margin-right: -35px;
       border: 1px solid rgba(10,37,64,0.10);
       border-radius: 32px;
       background:
@@ -1000,6 +1012,8 @@
       .section-panel {
         padding: 22px;
         border-radius: 24px;
+        margin-left: 0;
+        margin-right: 0;
       }
 
       .section-title {
@@ -1241,18 +1255,13 @@
             </h1>
 
             <p class="lead">
-              Menos tempo em cálculo e conferência, mais segurança na prática do ato. Emolumentos, ITCMD e conta notarial, triagem e validação de documentos, ofícios e consultas auxiliares — reunidos em um painel único, por assinatura mensal.
+              Menos tempo em cálculo e conferência, mais segurança na prática do ato. Emolumentos, ITCMD e conta notarial, triagem e validação de documentos, ofícios e consultas auxiliares - reunidos em um painel único, por assinatura mensal.
             </p>
-
-            <div class="hero-actions">
-              <a class="button primary" href="https://app.portalnotarial.com.br">Assinar agora</a>
-              <a class="button" href="#ferramentas">Ver ferramentas incluídas</a>
-            </div>
 
             <div class="hero-badges" aria-label="Destaques do plano">
               <span>Cancele quando quiser</span>
               <span>Acesso imediato pelo painel</span>
-              <span>Dados protegidos — LGPD</span>
+              <span>Dados protegidos - LGPD</span>
             </div>
           </section>
 
@@ -1478,7 +1487,7 @@
             <div class="pro-strip">
               <div>
                 <strong>Portal Notarial Pro</strong>
-                <p>Todas as ferramentas do plano em um painel único. Sem fidelidade — cancele quando quiser.</p>
+                <p>Todas as ferramentas do plano em um painel único. Sem fidelidade - cancele quando quiser.</p>
               </div>
               <div class="pro-strip-cta">
                 <div class="pro-price">
@@ -1585,7 +1594,7 @@
               <details class="faq"><summary>As tabelas valem para qual estado?</summary><div class="faq-body">As ferramentas de cálculo seguem as tabelas e a legislação do estado de São Paulo. Confirme sempre a regra vigente aplicável ao seu atendimento.</div></details>
               <details class="faq"><summary>Como acesso as ferramentas?</summary><div class="faq-body">Pelo painel do assinante, após a assinatura. As ferramentas protegidas abrem pelo app do Portal Notarial.</div></details>
               <details class="faq"><summary>Preciso instalar algo?</summary><div class="faq-body">Não. Tudo funciona pelo navegador, no computador ou no celular.</div></details>
-              <details class="faq"><summary>Tem fidelidade? Posso cancelar?</summary><div class="faq-body">Sem fidelidade — você cancela quando quiser. Veja a <a href="/politica-de-cancelamento.html">política de cancelamento</a>.</div></details>
+              <details class="faq"><summary>Tem fidelidade? Posso cancelar?</summary><div class="faq-body">Sem fidelidade - você cancela quando quiser. Veja a <a href="/politica-de-cancelamento.html">política de cancelamento</a>.</div></details>
             </div>
           </div>
         </div>
@@ -1596,7 +1605,6 @@
           <p>
             <strong>Aviso legal.</strong> As ferramentas são recursos de apoio operacional. Os resultados dependem dos dados informados e não substituem a análise do caso concreto.
           </p>
-          <a class="button" href="/aviso-legal.html">Aviso legal</a>
         </div>
       </section>
     </main>
@@ -1980,7 +1988,7 @@
     function renderQuote(index) {
       const item = frasesNotariais[index];
       quoteTextElement.textContent = "“" + item.texto + "”";
-      quoteAuthorElement.textContent = "— " + item.autor;
+      quoteAuthorElement.textContent = "- " + item.autor;
     }
 
     function rotateQuote() {
