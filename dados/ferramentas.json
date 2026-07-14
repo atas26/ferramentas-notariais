@@ -14,12 +14,12 @@
     {
       "id": "agenda-notarial",
       "nome": "Agenda Notarial",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "atesta-certidoes",
       "nome": "Atesta - Certidões",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "classificador-de-arquivos-eletronicos",
@@ -74,7 +74,7 @@
     {
       "id": "conferencia-inteligente",
       "nome": "Conferência inteligente",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "consulta-pep-por-cpf",
