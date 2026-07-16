@@ -876,12 +876,12 @@
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    width: 314px !important;
-    min-width: 314px !important;
-    max-width: 314px !important;
-    height: 40px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
+    width: 260px !important;
+    min-width: 260px !important;
+    max-width: 260px !important;
+    height: 61px !important;
+    min-height: 61px !important;
+    max-height: 61px !important;
     overflow: hidden !important;
   }
 
@@ -945,6 +945,7 @@
     text-transform: uppercase !important;
     letter-spacing: 0.02em !important;
     font-weight: 800 !important;
+    text-wrap: balance;
   }
 
   .left-panel,
@@ -1015,7 +1016,7 @@
     }
   }
 
-:root{--pn-logo-box-height:36px;--pn-logo-mobile-height:32px;--pn-logo-max-width:430px;}
+:root{--pn-logo-box-height:61px;--pn-logo-mobile-height:41px;--pn-logo-max-width:430px;}
 
 /* Portal Notarial - padrão visual global v30
    Referência: página Cálculo Escrituras.
@@ -1032,8 +1033,8 @@
   --pn-shadow: 0 12px 30px rgba(2, 6, 23, .08);
   --pn-nav-width: 1170px;
   --pn-content-width: 1100px;
-  --pn-topbar-height: 68px;
-  --pn-logo-box-height: 36px;
+  --pn-topbar-height: 90px;
+  --pn-logo-box-height: 61px;
   --pn-logo-max-width: 420px;
   --pn-title-size: 28px;
 }
@@ -1342,10 +1343,10 @@ footer a:hover {
 /* Ajuste fino global r32: logotipos no padrão visual do Cálculo Escrituras.
    Escopo restrito: altura da topbar, caixa do logotipo e alinhamento vertical. */
 :root{
-  --pn-logo-box-height:36px !important;
-  --pn-logo-mobile-height:32px !important;
+  --pn-logo-box-height:61px !important;
+  --pn-logo-mobile-height:41px !important;
   --pn-logo-max-width:420px !important;
-  --pn-topbar-height:68px !important;
+  --pn-topbar-height:90px !important;
 }
 .topbar,
 .pn-topbar,
@@ -1456,15 +1457,15 @@ footer a:hover {
 <body data-api="https://consulta-pep-backend.onrender.com">
 <div class="topbar" role="navigation" aria-label="Menu principal">
   <div class="nav">
-    <a class="brand" href="https://portalnotarial.com.br/" aria-label="Consulta PEP">
+    <a class="brand" href="https://portalnotarial.com.br/" aria-label="Portal Notarial - Início">
       <span class="brand-logo-box">
-        <img class="brand-logo-img" src="/assets/consulta-pep-logo.png" alt="Consulta PEP" width="1820" height="232">
+        <img class="brand-logo-img" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgICAgdmlld0JveD0iLTQwIC0xODAgOTAwIDIyMCIKICAgICB3aWR0aD0iOTAwIiBoZWlnaHQ9IjIyMCIKICAgICByb2xlPSJpbWciCiAgICAgYXJpYS1sYWJlbD0iUG9ydGFsIE5vdGFyaWFsIj4KICA8dGl0bGU+UG9ydGFsIE5vdGFyaWFsPC90aXRsZT4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Imlua0JsZWVkIiB4PSItNTAlIiB5PSItNTAlIiB3aWR0aD0iMjAwJSIgaGVpZ2h0PSIyMDAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMS41Ii8+CiAgICA8L2ZpbHRlcj4KICAgIDxmaWx0ZXIgaWQ9ImhhbG9TcHJlYWQiIHg9Ii01MCUiIHk9Ii01MCUiIHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiPgogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSI0Ii8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHRleHQgeD0iMCIgeT0iLTEzMCIKICAgICAgICBmb250LWZhbWlseT0iTWFucm9wZSwgJ0hlbHZldGljYSBOZXVlJywgQXJpYWwsIHNhbnMtc2VyaWYiCiAgICAgICAgZm9udC13ZWlnaHQ9IjUwMCIgZm9udC1zaXplPSIyNiIgbGV0dGVyLXNwYWNpbmc9IjE0IgogICAgICAgIGZpbGw9IiM2QjdBOEYiPlBPUlRBTDwvdGV4dD4KICA8dGV4dCB4PSIwIiB5PSIwIgogICAgICAgIGZvbnQtZmFtaWx5PSJNYW5yb3BlLCAnSGVsdmV0aWNhIE5ldWUnLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgICAgICBmb250LXdlaWdodD0iOTAwIiBmb250LXNpemU9IjE2OCIgbGV0dGVyLXNwYWNpbmc9Ii04IgogICAgICAgIGZpbGw9IiMwQTI1NDAiPm5vdGFyaWFsPC90ZXh0PgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDgwMCwgMCkiPgogICAgPGVsbGlwc2UgY3g9IjAiIGN5PSIwIiByeD0iMzIiIHJ5PSIyOCIgZmlsbD0iIzNBNUREMCIgb3BhY2l0eT0iMC4zMCIgZmlsdGVyPSJ1cmwoI2hhbG9TcHJlYWQpIi8+CiAgICA8cGF0aCBkPSJNIC0yMiwtMiBRIC0yNSwtMjAgLTcsLTI1IFEgMTIsLTI3IDI1LC0xNSBRIDMyLDIgMjUsMTcgUSAxMiwyNyAtNSwyNSBRIC0yMiwyMCAtMjIsLTIgWiIKICAgICAgICAgIGZpbGw9IiMzQTVERDAiIGZpbHRlcj0idXJsKCNpbmtCbGVlZCkiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="Portal Notarial" width="300" height="73">
       </span>
     </a>
     <div class="menu" aria-label="Links do menu">
-      <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Pol&iacute;tica de Privacidade</a>
-      <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
+      <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
       <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+      <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
     </div>
   </div>
 </div>
