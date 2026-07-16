@@ -187,9 +187,9 @@
 
     /* Cabeçalho */
     .site-head{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line)}
-    .head-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;flex-wrap:wrap}
+    .head-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0;flex-wrap:wrap}
     .brand{display:inline-flex;align-items:center}
-    .brand img{height:38px;width:auto;display:block}
+    .brand img{width:250px;height:auto;display:block}
     .head-nav{display:flex;gap:22px;flex-wrap:wrap}
     .head-nav a{color:#1f2b3d;font-weight:700;font-size:15px}
     .head-nav a:hover{color:var(--brand)}
@@ -197,7 +197,9 @@
     main{padding:26px 0 40px}
     .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 24px;margin:0 0 18px}
 
-    .intro-title{margin:0;text-align:center;color:var(--brand);font-size:clamp(24px,4.4vw,32px);font-weight:800;line-height:1.15;letter-spacing:-.01em}
+    .intro-title{margin:0;text-align:center;color:var(--brand);font-size:clamp(24px,4.4vw,32px);font-weight:800;line-height:1.15;letter-spacing:-.02em;text-wrap:balance}
+    .intro-lead,.intro-scope,.card p.blk,.hint,.note-inline,.aviso,.faq .fb{text-wrap:pretty}
+    h2.blk,.step .txt h3,.result-head h3{text-wrap:balance}
     .intro-lead{margin:16px 0 0;color:#334155;font-size:16px;line-height:1.7}
     .intro-scope{margin:14px 0 0;color:#5b6676;font-size:14px;line-height:1.6}
 
@@ -263,7 +265,7 @@
       .card{padding:20px 16px}
       .btn-row{grid-template-columns:1fr}
       .head-nav{gap:14px}
-      .brand{font-size:22px}
+      .brand img{width:188px}
     }
     @media print{
       .site-head,.actions,footer,.aviso,.faq-card,.info-card-blk{display:none!important}
@@ -278,9 +280,9 @@
     <div class="wrap head-inner">
       <a class="brand" href="https://portalnotarial.com.br/" aria-label="Portal Notarial - Início"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgICAgdmlld0JveD0iLTQwIC0xODAgOTAwIDIyMCIKICAgICB3aWR0aD0iOTAwIiBoZWlnaHQ9IjIyMCIKICAgICByb2xlPSJpbWciCiAgICAgYXJpYS1sYWJlbD0iUG9ydGFsIE5vdGFyaWFsIj4KICA8dGl0bGU+UG9ydGFsIE5vdGFyaWFsPC90aXRsZT4KICA8ZGVmcz4KICAgIDxmaWx0ZXIgaWQ9Imlua0JsZWVkIiB4PSItNTAlIiB5PSItNTAlIiB3aWR0aD0iMjAwJSIgaGVpZ2h0PSIyMDAlIj4KICAgICAgPGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iMS41Ii8+CiAgICA8L2ZpbHRlcj4KICAgIDxmaWx0ZXIgaWQ9ImhhbG9TcHJlYWQiIHg9Ii01MCUiIHk9Ii01MCUiIHdpZHRoPSIyMDAlIiBoZWlnaHQ9IjIwMCUiPgogICAgICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSI0Ii8+CiAgICA8L2ZpbHRlcj4KICA8L2RlZnM+CiAgPHRleHQgeD0iMCIgeT0iLTEzMCIKICAgICAgICBmb250LWZhbWlseT0iTWFucm9wZSwgJ0hlbHZldGljYSBOZXVlJywgQXJpYWwsIHNhbnMtc2VyaWYiCiAgICAgICAgZm9udC13ZWlnaHQ9IjUwMCIgZm9udC1zaXplPSIyNiIgbGV0dGVyLXNwYWNpbmc9IjE0IgogICAgICAgIGZpbGw9IiM2QjdBOEYiPlBPUlRBTDwvdGV4dD4KICA8dGV4dCB4PSIwIiB5PSIwIgogICAgICAgIGZvbnQtZmFtaWx5PSJNYW5yb3BlLCAnSGVsdmV0aWNhIE5ldWUnLCBBcmlhbCwgc2Fucy1zZXJpZiIKICAgICAgICBmb250LXdlaWdodD0iOTAwIiBmb250LXNpemU9IjE2OCIgbGV0dGVyLXNwYWNpbmc9Ii04IgogICAgICAgIGZpbGw9IiMwQTI1NDAiPm5vdGFyaWFsPC90ZXh0PgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDgwMCwgMCkiPgogICAgPGVsbGlwc2UgY3g9IjAiIGN5PSIwIiByeD0iMzIiIHJ5PSIyOCIgZmlsbD0iIzNBNUREMCIgb3BhY2l0eT0iMC4zMCIgZmlsdGVyPSJ1cmwoI2hhbG9TcHJlYWQpIi8+CiAgICA8cGF0aCBkPSJNIC0yMiwtMiBRIC0yNSwtMjAgLTcsLTI1IFEgMTIsLTI3IDI1LC0xNSBRIDMyLDIgMjUsMTcgUSAxMiwyNyAtNSwyNSBRIC0yMiwyMCAtMjIsLTIgWiIKICAgICAgICAgIGZpbGw9IiMzQTVERDAiIGZpbHRlcj0idXJsKCNpbmtCbGVlZCkiLz4KICA8L2c+Cjwvc3ZnPgo=" alt="Portal Notarial"   loading="eager" decoding="async"></a>
       <nav class="head-nav" aria-label="Institucional">
-        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Política de Privacidade</a>
-        <a href="https://portalnotarial.com.br/termos-de-uso.html">Termos de Uso</a>
+        <a href="https://portalnotarial.com.br/sobre.html">Sobre</a>
         <a href="https://portalnotarial.com.br/contato.html">Contato</a>
+        <a href="https://portalnotarial.com.br/politica-de-privacidade.html">Privacidade</a>
       </nav>
     </div>
   </header>
