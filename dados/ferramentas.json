@@ -74,7 +74,7 @@
     {
       "id": "conferencia-inteligente",
       "nome": "Conferência inteligente",
-      "publicado": false
+      "publicado": true
     },
     {
       "id": "consulta-pep-por-cpf",
