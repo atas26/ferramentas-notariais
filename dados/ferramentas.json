@@ -19,7 +19,7 @@
     {
       "id": "atesta-certidoes",
       "nome": "Atesta - Certidões",
-      "publicado": false
+      "publicado": true
     },
     {
       "id": "classificador-de-arquivos-eletronicos",
