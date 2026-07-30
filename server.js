@@ -225,6 +225,9 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`Portal Notarial público iniciado na porta ${PORT}.`);
+// HOST controla a interface de escuta. No Contabo definimos HOST=127.0.0.1 para que o
+// site só seja acessível via Apache (TLS); no Render, HOST fica indefinido = 0.0.0.0.
+const HOST = process.env.HOST || undefined;
+app.listen(PORT, HOST, () => {
+  console.log(`Portal Notarial público iniciado em ${HOST || '0.0.0.0'}:${PORT}.`);
 });
