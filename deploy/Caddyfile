@@ -1,0 +1,28 @@
+# Caddy = proxy reverso + HTTPS automático (Let's Encrypt) para todos os serviços.
+# Troque os domínios pelos reais. Cada bloco aponta para um container do compose.
+#
+# IMPORTANTE: só ative um domínio aqui DEPOIS que o DNS dele apontar para o IP do Contabo,
+# senão o Caddy não consegue emitir o certificado.
+
+# Site principal (este repo)
+ferramentas.portalnotarial.com.br {
+	reverse_proxy site:3000
+}
+
+# App de login/assinatura (portal-notarial-app)
+app.portalnotarial.com.br {
+	reverse_proxy portal-app:PORTA_DO_APP
+}
+
+# Backends das ferramentas (ajuste nomes/portas conforme cada container)
+pep.portalnotarial.com.br {
+	reverse_proxy consulta-pep:PORTA
+}
+selo.portalnotarial.com.br {
+	reverse_proxy selo-digital:PORTA
+}
+cpf-rf.portalnotarial.com.br {
+	reverse_proxy cpf-rf:PORTA
+}
+# ... repita para: agenda-cartorios, calculadoras, ganho-de-capital,
+#     itcmd-sp, organizador-de-arquivos, exigencia-imob, pagina-inicial
