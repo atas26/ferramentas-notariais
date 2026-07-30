@@ -1,0 +1,5 @@
+.git
+node_modules
+deploy
+*.md
+backend/data/*.csv
