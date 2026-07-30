@@ -48,14 +48,18 @@ services:
     expose:
       - "3000"
 
-  # 4) Backend Consulta PEP (código em ./backend deste repo) - quase pronto
+  # 4) Backend Consulta PEP (código em ./backend deste repo) - PRONTO
   consulta-pep:
     build:
       context: ../backend
-      dockerfile: Dockerfile        # criar um Dockerfile simples em backend/ (ver MIGRACAO.md)
+      dockerfile: Dockerfile
     restart: unless-stopped
     environment:
       PORT: "8000"
+      PORTAL_TOOL_ACCESS_SECRET: ${PORTAL_TOOL_ACCESS_SECRET}   # o backend também valida o token
+    volumes:
+      # A base pep.csv fica no HOST (fora do Git e fora da imagem) - ajuste o caminho:
+      - /srv/portal/pep-data/pep.csv:/app/data/pep.csv:ro
     expose:
       - "8000"
 
