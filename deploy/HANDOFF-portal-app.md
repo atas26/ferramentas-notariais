@@ -9,6 +9,41 @@ para liberar o acesso às ferramentas. **Isso não pode quebrar na migração.**
 
 ---
 
+## 0. STATUS ATUAL (atualizado — leia primeiro)
+
+A migração Render → Contabo **já foi feita para todas as ferramentas e o site**. Falta
+**só o app** (`portal-notarial-app`) — que é o alvo desta sessão.
+
+**Já no Contabo (89.117.73.91), domínios de produção virados no registro.br:**
+- `itcmd.portalnotarial.com.br` (ITCMD) · `ganhodecapital.portalnotarial.com.br` (Ganho)
+- `classificadordearquivos.portalnotarial.com.br` (Classificador) · `agenda.portalnotarial.com.br` (Agenda)
+- `calculadora.portalnotarial.com.br` (Calculadora Avançada)
+- **Site:** `portalnotarial.com.br` (apex) + `www` + `ferramentas` → Node no Contabo, **guard ativo** (Tarifas/Emolumentos agora protegidas)
+- Padrão do servidor: **Apache + Gunicorn/Node (socket ou porta local) + certbot**. Redis já ativo. Sem Docker.
+- Segredo `PORTAL_TOOL_ACCESS_SECRET` já replicado em todas as ferramentas (o MESMO do app).
+
+**Ainda no Render:**
+- 🔴 **`app.portalnotarial.com.br` → portal-notarial-app.onrender.com — ESTE (o hub).**
+- ⚪ `cpf-rf`, `triagem`, `verificador` — ferramentas não-prioritárias, **suspensas**, migração posterior.
+
+### ⚠️ ALERTA CRÍTICO antes de virar o app
+1. **NÃO suspenda o app no Render antes de migrá-lo.** Hoje TODAS as ferramentas dependem dele:
+   nenhuma abre sem o `pn_token` que só ele emite para assinante ativo.
+2. **O Classificador faz VERIFY REMOTO** direto em `https://app.portalnotarial.com.br/api/tool-ticket/verify-get`
+   a cada acesso. Se esse endpoint sair do ar ou mudar de contrato, **o Classificador para na hora**.
+   Mantenha o endpoint e o segredo idênticos durante e depois da virada.
+3. A virada do app é a **última e mais delicada** (leva junto Supabase→próprio e Stripe→Mercado Pago,
+   com dados reais de assinantes e cobrança). Faça com os gates: plano no MP, E2E sandbox, `pg_dump`
+   do Supabase, reautorização dos assinantes atuais. Só então troque o DNS `app` (CNAME→Render) por
+   **A → 89.117.73.91** e desligue o app no Render.
+
+### Receita de deploy já validada (no repo `ferramentas-notariais`)
+- `deploy/RECEITA-site-node.md` (Node) e `deploy/RECEITA-tool-python.md` (Django/Gunicorn) — o app é Node,
+  então o padrão do site serve de molde: systemd rodando `node server.js` com `HOST=127.0.0.1`, Apache
+  `ProxyPass` para a porta local, `RequestHeader set X-Forwarded-Proto "https"`, certbot.
+
+---
+
 ## 1. Arquitetura atual (11 ativos no Render + 2 fora dos prints)
 
 | Serviço (Render) | Runtime | Papel |
@@ -70,11 +105,25 @@ Tudo assinado com a variável **`PORTAL_TOOL_ACCESS_SECRET`** (a MESMA nos dois 
 > `verify-get` exatamente como acima.** Se isso mudar, as 10 ferramentas param.
 
 ### 2.5 Slugs válidos (têm que bater em todos os lugares)
+
+**Páginas servidas pelo site Node** (`PROTECTED_ROUTES` do `server.js`):
 ```
 aplicador-emolumentos, selo-digital-tjsp, gerador-orcamento, consulta-pep,
 competencia-e-notariado, tarifas-conta-notarial, certidao-reprografica,
 oficio-comparecimento, oficio-cartorios, oficio-bancos-inventario
 ```
+
+**Ferramentas standalone (confirmados na migração — o app deve emitir o token com ESTE slug):**
+```
+itcmd                 -> ITCMD              (HMAC local)   itcmd.portalnotarial.com.br
+ganho-de-capital      -> Ganho de Capital   (HMAC local)   ganhodecapital.portalnotarial.com.br
+agenda-cartorios      -> Agenda Notarial    (HMAC local)   agenda.portalnotarial.com.br
+classificador-arquivos-eletronicos -> Classificador (VERIFY REMOTO) classificadordearquivos.portalnotarial.com.br
+```
+> ⚠️ O **Classificador** valida por **verify remoto** (chama o `verify-get` do app); os demais
+> validam o `pn_token` por **HMAC local**. A Calculadora Avançada foi migrada em sessão própria
+> (confirmar o slug dela no repo `calculadoras`). Confirme cada slug com o `PORTAL_TOOL_SLUG` do
+> `/etc/default/<tool>` no Contabo antes de emitir.
 
 ### 2.6 Variáveis de ambiente do site (para replicar no Contabo)
 ```
