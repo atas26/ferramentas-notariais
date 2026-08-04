@@ -29,7 +29,7 @@
     {
       "id": "consulta-de-obito-por-cpf-rf",
       "nome": "Consulta de óbito por CPF/RF",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "analisador-de-exigencias-imobiliarias",
@@ -89,7 +89,7 @@
     {
       "id": "gerador-de-orcamento",
       "nome": "Gerador de orçamento",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "oficio-de-comparecimento",

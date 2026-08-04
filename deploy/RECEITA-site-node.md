@@ -122,8 +122,8 @@ sudo tee /etc/apache2/sites-available/ferramentas-teste-le-ssl.conf > /dev/null 
 EOF
 sudo a2ensite ferramentas-teste-le-ssl.conf
 sudo apache2ctl configtest && sudo systemctl reload apache2
-curl -sS -o /dev/null -w "%{http_code}\n" https://SUB/                                  # 200 (home)
-curl -sS -o /dev/null -w "%{http_code}\n" https://SUB/calculadora-tarifas-conta-notarial.html  # 302 (protegida)
+curl -sS -o /dev/null -w "%{http_code}\n" "https://$SUB/"                                  # 200 (home)
+curl -sS -o /dev/null -w "%{http_code}\n" "https://$SUB/calculadora-tarifas-conta-notarial.html"  # 302 (protegida)
 ```
 > `RequestHeader set X-Forwarded-Proto "https"` é essencial: o `server.js` usa isso (com
 > `trust proxy`) pra marcar o cookie como `Secure` e reconhecer o HTTPS real.
