@@ -24,7 +24,7 @@
     {
       "id": "classificador-de-arquivos-eletronicos",
       "nome": "Classificador de Arquivos Eletrônicos",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "consulta-de-obito-por-cpf-rf",
@@ -79,7 +79,7 @@
     {
       "id": "consulta-pep-por-cpf",
       "nome": "Consulta PEP por CPF",
-      "publicado": true
+      "publicado": false
     },
     {
       "id": "gerador-de-certidoes",
