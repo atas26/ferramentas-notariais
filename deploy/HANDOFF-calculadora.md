@@ -1,5 +1,11 @@
 # Handoff — migração da Calculadora Avançada (repo `atas26/calculadoras`) para o Contabo
 
+> ✅ **STATUS: MIGRAÇÃO CONCLUÍDA (31/07/2026).** A Calculadora Avançada **já está em produção no
+> Contabo** (`https://calculadora.portalnotarial.com.br`), com Postgres local + dados preservados,
+> pn_token validado e reboot-safe (feito na sessão do repo `calculadoras`). **O texto abaixo é
+> histórico** — era o briefing feito ANTES da virada (descreve o estado no Render e o plano). Mantido
+> como registro; não executar como se estivesse pendente.
+
 > **Para quem é isto:** a **sessão Claude do repositório `calculadoras`**.
 > **Quem escreveu:** a sessão do repositório `ferramentas-notariais` (o site do Portal), que já
 > migrou 4 ferramentas para o Contabo (ITCMD, Ganho de Capital, Classificador, Agenda) usando o

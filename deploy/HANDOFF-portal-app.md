@@ -11,36 +11,55 @@ para liberar o acesso às ferramentas. **Isso não pode quebrar na migração.**
 
 ## 0. STATUS ATUAL (atualizado — leia primeiro)
 
-A migração Render → Contabo **já foi feita para todas as ferramentas e o site**. Falta
-**só o app** (`portal-notarial-app`) — que é o alvo desta sessão.
+**MIGRAÇÃO CONCLUÍDA (31/07/2026).** Todas as ferramentas, o site **e o app** já estão no
+Contabo, em produção. O Render foi **suspenso** (fora as 3 ferramentas paradas). O app foi
+migrado por **lift-and-shift (opção A)**: saiu do Render **mantendo Supabase + Stripe**.
 
-**Já no Contabo (89.117.73.91), domínios de produção virados no registro.br:**
+### App no Contabo — como está e cuidados
+- **Local:** `/home/fernando/portal-app` · **serviço:** `portal-app.service` (systemd) ·
+  **porta:** `127.0.0.1:8091` (atrás do Apache, vhost `app.conf`/`app-le-ssl.conf`) ·
+  **domínio:** `app.portalnotarial.com.br` (A → 89.117.73.91).
+- **Node 22** foi necessário: o `@supabase/supabase-js` (realtime) exige **WebSocket nativo**,
+  que só existe no Node ≥ 22 (no Node 20 o boot quebra com "Node.js 20 detected without native WebSocket").
+- **Patches:** o `package.json start` roda 16 `scripts/apply-*-patch.mjs` que **editam o `server.js`
+  a cada boot**. Rodar isso em loop **corrompe o `server.js`** (um patch não é idempotente). Por isso
+  o systemd roda **`node server.js` direto**, com os 16 patches aplicados **UMA vez** na instalação.
+  ⚠️ **Se atualizar o app (`git pull`): `git checkout -- server.js`, reaplicar os 16 patches na ordem
+  do `start`, reaplicar o bind `127.0.0.1` (`sed`), e só então reiniciar.**
+- **Bind travado em `127.0.0.1`** (edição local no `server.js`: `app.listen(PORT, '127.0.0.1', ...)`)
+  para não expor a porta publicamente. Idealmente virar suporte a `HOST` no repo do app.
+- **Env:** `/etc/default/portal-app` (640 root:fernando) — Supabase + Stripe + `PORTAL_TOOL_ACCESS_SECRET`
+  (o mesmo do hub) + `PORTAL_TOOL_ALLOWED_ORIGINS` com os domínios novos. `APP_URL=https://app.portalnotarial.com.br`.
+- **Stripe webhook:** `https://app.portalnotarial.com.br/api/stripe-webhook` — como o domínio não mudou,
+  o Stripe já entrega no Contabo (nenhuma mudança no painel do Stripe).
+
+### O que AINDA falta (projeto B — dedicado, sem pressa)
+Trocar **Supabase → Postgres/auth próprio** e **Stripe → Mercado Pago** (preapproval + webhooks).
+Isso é reescrita de código no repo do app (não estava feito — o código ainda é Supabase+Stripe).
+Fazer com gates: plano no MP, E2E sandbox, `pg_dump` do Supabase, reautorização dos assinantes.
+
+### Domínios já no Contabo (89.117.73.91) — tudo em produção
+- `app.portalnotarial.com.br` (**o hub** — este app)
 - `itcmd.portalnotarial.com.br` (ITCMD) · `ganhodecapital.portalnotarial.com.br` (Ganho)
 - `classificadordearquivos.portalnotarial.com.br` (Classificador) · `agenda.portalnotarial.com.br` (Agenda)
 - `calculadora.portalnotarial.com.br` (Calculadora Avançada)
-- **Site:** `portalnotarial.com.br` (apex) + `www` + `ferramentas` → Node no Contabo, **guard ativo** (Tarifas/Emolumentos agora protegidas)
+- **Site:** `portalnotarial.com.br` (apex) + `www` + `ferramentas` → Node no Contabo, **guard ativo**
 - Padrão do servidor: **Apache + Gunicorn/Node (socket ou porta local) + certbot**. Redis já ativo. Sem Docker.
-- Segredo `PORTAL_TOOL_ACCESS_SECRET` já replicado em todas as ferramentas (o MESMO do app).
+- Segredo `PORTAL_TOOL_ACCESS_SECRET` idêntico no app e em todas as ferramentas.
 
-**Ainda no Render:**
-- 🔴 **`app.portalnotarial.com.br` → portal-notarial-app.onrender.com — ESTE (o hub).**
-- ⚪ `cpf-rf`, `triagem`, `verificador` — ferramentas não-prioritárias, **suspensas**, migração posterior.
+**Ainda no Render (suspensos, migração futura):** `cpf-rf`, `triagem`, `verificador`, e o backend
+da Consulta PEP (`backend/` deste repo, com `pep.csv`/LGPD).
 
-### ⚠️ ALERTA CRÍTICO antes de virar o app
-1. **NÃO suspenda o app no Render antes de migrá-lo.** Hoje TODAS as ferramentas dependem dele:
-   nenhuma abre sem o `pn_token` que só ele emite para assinante ativo.
-2. **O Classificador faz VERIFY REMOTO** direto em `https://app.portalnotarial.com.br/api/tool-ticket/verify-get`
+### ⚠️ Dependências que não podem quebrar (valem pra sempre)
+1. **O Classificador faz VERIFY REMOTO** em `https://app.portalnotarial.com.br/api/tool-ticket/verify-get`
    a cada acesso. Se esse endpoint sair do ar ou mudar de contrato, **o Classificador para na hora**.
-   Mantenha o endpoint e o segredo idênticos durante e depois da virada.
-3. A virada do app é a **última e mais delicada** (leva junto Supabase→próprio e Stripe→Mercado Pago,
-   com dados reais de assinantes e cobrança). Faça com os gates: plano no MP, E2E sandbox, `pg_dump`
-   do Supabase, reautorização dos assinantes atuais. Só então troque o DNS `app` (CNAME→Render) por
-   **A → 89.117.73.91** e desligue o app no Render.
+   Mantenha o endpoint e o segredo idênticos em qualquer mudança futura (inclusive no projeto B).
+2. Todas as ferramentas dependem do app emitir o `pn_token` — se o app cair, nada abre.
 
 ### Receita de deploy já validada (no repo `ferramentas-notariais`)
-- `deploy/RECEITA-site-node.md` (Node) e `deploy/RECEITA-tool-python.md` (Django/Gunicorn) — o app é Node,
-  então o padrão do site serve de molde: systemd rodando `node server.js` com `HOST=127.0.0.1`, Apache
-  `ProxyPass` para a porta local, `RequestHeader set X-Forwarded-Proto "https"`, certbot.
+- `deploy/RECEITA-site-node.md` (Node) e `deploy/RECEITA-tool-python.md` (Django/Gunicorn). O app seguiu
+  o molde do site Node (systemd + Apache `ProxyPass` p/ porta local + `X-Forwarded-Proto https` + certbot),
+  com os cuidados extras da Seção "App no Contabo" acima (Node 22, patches uma vez, bind 127.0.0.1).
 
 ---
 
