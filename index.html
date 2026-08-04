@@ -228,11 +228,11 @@
 
     .quote-rotator {
       width: 100%;
-      max-width: 100%;
-      min-height: 46px;
-      margin: 0 0 30px;
-      padding: 0 0 0 16px;
-      border-left: 3px solid rgba(11, 95, 255, 0.28);
+      max-width: 560px;
+      min-height: 0;
+      margin: 30px 0 0;
+      padding: 0 0 0 14px;
+      border-left: 2px solid rgba(11, 95, 255, 0.22);
       transition: opacity 0.5s ease;
     }
 
@@ -242,10 +242,10 @@
 
     .quote-text {
       margin: 0;
-      color: var(--texto-suave);
-      font-size: clamp(15px, 1.35vw, 18px);
+      color: var(--texto-fraco);
+      font-size: clamp(12.5px, 1.05vw, 14px);
       font-style: italic;
-      line-height: 1.5;
+      line-height: 1.45;
       letter-spacing: -0.01em;
       white-space: nowrap;
       overflow: hidden;
@@ -502,8 +502,9 @@
     /* Variante levemente azulada para criar ritmo entre seções (evita monotonia de painéis brancos iguais). */
     .section-panel.tinted {
       background:
-        radial-gradient(circle at 82% 0%, rgba(11, 95, 255, 0.10), transparent 42%),
-        linear-gradient(145deg, #eef3fb, #e7eef8);
+        radial-gradient(circle at 82% 0%, rgba(11, 95, 255, 0.13), transparent 45%),
+        linear-gradient(145deg, #e6eefb, #d9e5f6);
+      border-color: rgba(11, 95, 255, 0.14);
     }
 
     .section-content {
@@ -1236,11 +1237,6 @@
 
     <header class="hero">
       <div class="hero-inner">
-        <figure class="quote-rotator" id="quoteRotator" aria-label="Citação sobre o notariado">
-          <blockquote class="quote-text"><span id="quoteText"></span></blockquote>
-          <figcaption class="quote-author" id="quoteAuthor"></figcaption>
-        </figure>
-
         <div class="hero-grid">
           <section class="hero-content">
             <p class="hero-kicker">Portal Notarial Pro</p>
@@ -1257,6 +1253,11 @@
               <span>Acesso imediato pelo painel</span>
               <span>Dados protegidos - LGPD</span>
             </div>
+
+            <figure class="quote-rotator" id="quoteRotator" aria-label="Citação sobre o notariado">
+              <blockquote class="quote-text"><span id="quoteText"></span></blockquote>
+              <figcaption class="quote-author" id="quoteAuthor"></figcaption>
+            </figure>
           </section>
 
         </div>
