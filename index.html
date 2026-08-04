@@ -545,7 +545,6 @@
 
     /* mock e barra de preço: centralizados no bloco, mas com conteúdo interno alinhado à esquerda */
     .mock-window { max-width: 900px; margin-left: auto; margin-right: auto; text-align: left; }
-    .pro-strip { text-align: left; }
     .tools-category-head { text-align: center; }
 
     .tools-category {
@@ -710,15 +709,20 @@
 
     .pro-strip {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      margin-top: 18px;
-      border-radius: 22px;
-      background: linear-gradient(135deg, var(--texto) 0%, #15395f 100%);
-      color: #fff;
-      padding: 20px 22px;
+      text-align: center;
+      gap: 14px;
+      margin-top: 52px;
+      border-radius: 0;
+      background: transparent;
+      color: var(--texto);
+      padding: 0;
     }
+    .pro-strip > div:first-child { order: 2; }
+    .pro-strip > div:first-child strong { font-size: 15px; }
+    .pro-strip > div:first-child p { margin: 4px 0 0; font-size: 13px; color: var(--texto-fraco); }
+    .pro-strip-cta { order: 1; display: flex; flex-direction: column; align-items: center; gap: 14px; }
 
     .pro-strip strong {
       display: block;
@@ -1157,16 +1161,17 @@
 
     /* Segurança e privacidade */
     .trust-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 26px; }
-    .trust-item { background: #fff; border: 1px solid var(--linha); border-radius: 20px; padding: 22px; }
-    .trust-ic { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgba(11,95,255,0.08); color: var(--azul); margin-bottom: 14px; }
+    .trust-item { background: transparent; border: 0; border-radius: 0; padding: 8px; text-align: center; }
+    .trust-ic { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; background: rgba(11,95,255,0.08); color: var(--azul); margin: 0 auto 14px; }
+    .trust-item p { max-width: 34ch; margin-left: auto; margin-right: auto; }
     .trust-ic svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
     .trust-item h3 { margin: 0 0 6px; font-size: 17px; letter-spacing: -0.02em; color: var(--texto); }
     .trust-item p { margin: 0; color: var(--texto-suave); font-size: 14px; line-height: 1.55; }
     .trust-item a { color: var(--azul); font-weight: 700; }
 
     /* FAQ */
-    .faq-list { margin-top: 26px; display: grid; gap: 12px; }
-    details.faq { border: 1px solid var(--linha); border-radius: 16px; background: #fff; overflow: hidden; }
+    .faq-list { margin-top: 40px; display: block; max-width: 760px; margin-left: auto; margin-right: auto; text-align: left; border-top: 1px solid var(--linha); }
+    details.faq { border: 0; border-bottom: 1px solid var(--linha); border-radius: 0; background: transparent; overflow: hidden; }
     details.faq summary { list-style: none; cursor: pointer; padding: 18px 20px; font-weight: 800; color: var(--texto); letter-spacing: -0.02em; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
     details.faq summary::-webkit-details-marker { display: none; }
     details.faq summary::after { content: '+'; color: var(--azul); font-weight: 800; font-size: 20px; line-height: 1; }
