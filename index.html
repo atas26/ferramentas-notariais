@@ -2034,5 +2034,22 @@
       .catch(function(){ /* fail-safe: mantém tudo visível */ });
   })();
   </script>
+  <script>
+  /* Ordena os cards de cada grupo em ordem alfabética (pt-BR), pelo título (h3). */
+  (function(){
+    document.querySelectorAll('.tools-grid').forEach(function(grid){
+      var cards = Array.prototype.slice.call(grid.children).filter(function(el){
+        return el.classList && el.classList.contains('tool-card');
+      });
+      cards.sort(function(a,b){
+        var ha = a.querySelector('h3'), hb = b.querySelector('h3');
+        var ta = (ha ? ha.textContent : '').trim();
+        var tb = (hb ? hb.textContent : '').trim();
+        return ta.localeCompare(tb, 'pt-BR', { sensitivity: 'base' });
+      });
+      cards.forEach(function(c){ grid.appendChild(c); });
+    });
+  })();
+  </script>
 </body>
 </html>
