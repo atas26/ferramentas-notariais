@@ -541,6 +541,21 @@
       text-wrap: pretty;
     }
 
+    .section-detail-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 18px auto 0;
+      color: var(--azul);
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: gap .18s ease, color .18s ease;
+    }
+    .section-detail-link:hover { color: var(--azul-escuro); gap: 10px; }
+    .section-detail-link .arrow { transition: transform .18s ease; }
+    .section-detail-link:hover .arrow { transform: translateX(2px); }
+
     /* Faixa escura de destaque (Apple-like) */
     .section.band-dark .section-eyebrow { color: #6f9dff; }
     .section.band-dark .section-title { color: #ffffff; }
@@ -1276,6 +1291,9 @@
             <p class="section-lead">
               O Portal Notarial Pro reúne ferramentas de apoio operacional para cálculo, certidões e conferência técnica de documentos. Cada card indica se está incluído no plano ou tem cobrança própria.
             </p>
+            <a class="section-detail-link" href="https://app.portalnotarial.com.br/catalogo.html">
+              Conheça cada ferramenta em detalhe <span class="arrow" aria-hidden="true">→</span>
+            </a>
 
 
             <div class="tools-category" aria-label="Para cartórios, advogados e imobiliárias">
