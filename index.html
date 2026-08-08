@@ -954,7 +954,6 @@
         grid-template-columns: 1fr;
       }
 
-      .pro-strip,
       .notice-inner {
         align-items: flex-start;
       }
@@ -2010,8 +2009,18 @@
       quoteAuthorElement.textContent = "- " + item.autor;
     }
 
+    function prefersReducedMotion() {
+      return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+
     function rotateQuote() {
       if (!quoteRotator) return;
+      // Com "reduzir movimento" ligado, trocamos a frase sem o fade (mas continuamos rodando).
+      if (prefersReducedMotion()) {
+        quoteIndex = (quoteIndex + 1) % frasesNotariais.length;
+        renderQuote(quoteIndex);
+        return;
+      }
       quoteRotator.classList.add("is-fading");
       window.setTimeout(function () {
         quoteIndex = (quoteIndex + 1) % frasesNotariais.length;
@@ -2022,10 +2031,7 @@
 
     if (quoteTextElement && quoteAuthorElement) {
       renderQuote(quoteIndex);
-      const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!prefersReduced) {
-        window.setInterval(rotateQuote, 6500);
-      }
+      window.setInterval(rotateQuote, 6500);
     }
   </script>
   <script>
