@@ -394,17 +394,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 // Na faixa 1, sem percentual aplicável, adota-se o valor mínimo da tarifa.
 // =====================================================================
 const TABELA_TARIFAS = [
-  { faixa: '1', de: 0.00, ate: 99999.99, percentual: null, valorMinimo: 500.00, rotulo: 'Faixa 1 — até R$ 99.999,99' },
-  { faixa: '2', de: 100000.00, ate: 299999.99, percentual: 0.0045, valorMinimo: 500.00, rotulo: 'Faixa 2 — de R$ 100.000,00 até R$ 299.999,99' },
-  { faixa: '3', de: 300000.00, ate: 499999.99, percentual: 0.0035, valorMinimo: 1350.00, rotulo: 'Faixa 3 — de R$ 300.000,00 até R$ 499.999,99' },
-  { faixa: '4', de: 500000.00, ate: 699999.99, percentual: 0.0032, valorMinimo: 1750.00, rotulo: 'Faixa 4 — de R$ 500.000,00 até R$ 699.999,99' },
-  { faixa: '5', de: 700000.00, ate: 999999.99, percentual: 0.0031, valorMinimo: 2240.00, rotulo: 'Faixa 5 — de R$ 700.000,00 até R$ 999.999,99' },
-  { faixa: '6', de: 1000000.00, ate: 1999999.99, percentual: 0.0023, valorMinimo: 3100.00, rotulo: 'Faixa 6 — de R$ 1.000.000,00 até R$ 1.999.999,99' },
-  { faixa: '7', de: 2000000.00, ate: 2999999.99, percentual: 0.0017, valorMinimo: 4600.00, rotulo: 'Faixa 7 — de R$ 2.000.000,00 até R$ 2.999.999,99' },
-  { faixa: '8', de: 3000000.00, ate: 3999999.99, percentual: 0.0016, valorMinimo: 5100.00, rotulo: 'Faixa 8 — de R$ 3.000.000,00 até R$ 3.999.999,99' },
-  { faixa: '9', de: 4000000.00, ate: 4999999.99, percentual: 0.0015, valorMinimo: 6400.00, rotulo: 'Faixa 9 — de R$ 4.000.000,00 até R$ 4.999.999,99' },
-  { faixa: '10', de: 5000000.00, ate: 5999999.99, percentual: 0.0014, valorMinimo: 7500.00, rotulo: 'Faixa 10 — de R$ 5.000.000,00 até R$ 5.999.999,99' },
-  { faixa: '11', de: 6000000.00, ate: Infinity, percentual: 0.0013, valorMinimo: 8400.00, rotulo: 'Faixa 11 — a partir de R$ 6.000.000,00' },
+  { faixa: '1', de: 0.00, ate: 99999.99, percentual: null, valorMinimo: 500.00, rotulo: 'Faixa 1 - até R$ 99.999,99' },
+  { faixa: '2', de: 100000.00, ate: 299999.99, percentual: 0.0045, valorMinimo: 500.00, rotulo: 'Faixa 2 - de R$ 100.000,00 até R$ 299.999,99' },
+  { faixa: '3', de: 300000.00, ate: 499999.99, percentual: 0.0035, valorMinimo: 1350.00, rotulo: 'Faixa 3 - de R$ 300.000,00 até R$ 499.999,99' },
+  { faixa: '4', de: 500000.00, ate: 699999.99, percentual: 0.0032, valorMinimo: 1750.00, rotulo: 'Faixa 4 - de R$ 500.000,00 até R$ 699.999,99' },
+  { faixa: '5', de: 700000.00, ate: 999999.99, percentual: 0.0031, valorMinimo: 2240.00, rotulo: 'Faixa 5 - de R$ 700.000,00 até R$ 999.999,99' },
+  { faixa: '6', de: 1000000.00, ate: 1999999.99, percentual: 0.0023, valorMinimo: 3100.00, rotulo: 'Faixa 6 - de R$ 1.000.000,00 até R$ 1.999.999,99' },
+  { faixa: '7', de: 2000000.00, ate: 2999999.99, percentual: 0.0017, valorMinimo: 4600.00, rotulo: 'Faixa 7 - de R$ 2.000.000,00 até R$ 2.999.999,99' },
+  { faixa: '8', de: 3000000.00, ate: 3999999.99, percentual: 0.0016, valorMinimo: 5100.00, rotulo: 'Faixa 8 - de R$ 3.000.000,00 até R$ 3.999.999,99' },
+  { faixa: '9', de: 4000000.00, ate: 4999999.99, percentual: 0.0015, valorMinimo: 6400.00, rotulo: 'Faixa 9 - de R$ 4.000.000,00 até R$ 4.999.999,99' },
+  { faixa: '10', de: 5000000.00, ate: 5999999.99, percentual: 0.0014, valorMinimo: 7500.00, rotulo: 'Faixa 10 - de R$ 5.000.000,00 até R$ 5.999.999,99' },
+  { faixa: '11', de: 6000000.00, ate: Infinity, percentual: 0.0013, valorMinimo: 8400.00, rotulo: 'Faixa 11 - a partir de R$ 6.000.000,00' },
 ];
 
 let ultimoResultado = null;
