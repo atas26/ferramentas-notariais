@@ -593,9 +593,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     .tools-category-head {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
       margin-bottom: 14px;
     }
 
@@ -1329,18 +1329,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </a>
 
 
-            <div class="tools-category" aria-label="Para cartórios, advogados e imobiliárias">
+            <div class="tools-category" aria-label="Incluídas no seu plano">
               <div class="tools-category-head">
-                <h3>Para cartórios, advogados e imobiliárias</h3>
+                <h3>Incluídas no seu plano</h3>
+                <p class="tools-category-note">Abrem no seu painel, com o login do Portal — já no valor da assinatura.</p>
               </div>
-              <div class="tools-grid" aria-label="Para cartórios, advogados e imobiliárias">
-              <a class="tool-card tool-card-external" data-tool-id="coleta-de-evidencia-digital" href="https://atesta.portalnotarial.com.br/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
-                <div class="tool-card-topline"><div class="tool-card-icon tone-blue" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-2.7 7.4-7 10-4.3-2.6-7-5.5-7-10V6l7-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
-                </div><span class="tool-card-badge tool-card-badge-right">Novo</span></div><h3>Ata notarial e prova digital</h3>
-                <p>Transcrição de áudio com precisão.<br>Captura automatizada de página web e de fotos em diligências.</p>
-                <p class="tool-card-apart">Produto à parte · cadastro próprio ↗</p>
-              </a>
+              <div class="tools-grid" aria-label="Incluídas no seu plano">
               <article class="tool-card" data-tool-id="calculadora-avancada">
                 <div class="tool-card-icon tone-blue" aria-hidden="true">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3.5" width="12" height="17" rx="2.5"></rect><line x1="8.5" y1="8" x2="15.5" y2="8"></line><line x1="9" y1="11.5" x2="9" y2="11.5"></line><line x1="12" y1="11.5" x2="12" y2="11.5"></line><line x1="15" y1="11.5" x2="15" y2="11.5"></line><line x1="9" y1="15" x2="9" y2="15"></line><line x1="12" y1="15" x2="12" y2="15"></line><line x1="15" y1="15" x2="15" y2="15"></line></svg>
@@ -1365,14 +1359,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Calculadora de ITCMD, inclusive com juros e multa - Estado de SP.</p>
                 <span class="tool-card-included">Incluído no plano</span>
               </article>
-              <article class="tool-card" data-tool-id="consulta-de-obito-por-cpf-rf">
-                <div class="tool-card-icon tone-blue" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 7 20V5A1.5 1.5 0 0 1 8.5 3.5z"></path><path d="M14 3.5V8h4"></path><circle cx="11" cy="13" r="2.5"></circle><path d="M13 15l2.5 2.5"></path><path d="M9.5 18l1.3 1.3 2.7-2.7"></path></svg>
-                </div>
-                <h3>Consulta de óbito por CPF/RF</h3>
-                <p>Indicativo de óbito por CPF antes da prática do ato.</p>
-                <p class="tool-card-price" style="margin-top:auto;padding-top:14px">R$ 0,80 / consulta</p>
-              </article>
               <article class="tool-card tool-card-coming-soon" data-tool-id="analisador-de-exigencias-imobiliarias" aria-disabled="true">
                 <div class="tool-card-topline">
                   <div class="tool-card-icon tone-blue" aria-hidden="true">
@@ -1383,7 +1369,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <h3>Analisador de exigências imobiliárias</h3>
                 <p>Análise assistida de notas devolutivas e exigências imobiliárias.</p>
               </article>
-<article class="tool-card" data-tool-id="aplicador-de-emolumentos">
+              <article class="tool-card" data-tool-id="aplicador-de-emolumentos">
                 <div class="tool-card-icon tone-green" aria-hidden="true">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7h8"></path><path d="M9 4h6v6H9z"></path><path d="M6 13l6-2 6 2"></path><path d="M8.5 13v5h7v-5"></path></svg>
                 </div>
@@ -1391,7 +1377,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Apoio ao enquadramento de emolumentos por tipo de ato.</p>
                 <span class="tool-card-included">Incluído no plano</span>
               </article>
-<article class="tool-card" data-tool-id="competencia-e-notariado">
+              <article class="tool-card" data-tool-id="competencia-e-notariado">
                 <div class="tool-card-icon tone-green" aria-hidden="true">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="12" r="2"></circle><circle cx="18" cy="7" r="2"></circle><circle cx="18" cy="17" r="2"></circle><path d="M8 12h5"></path><path d="M14.5 10L16.5 8"></path><path d="M14.5 14L16.5 16"></path></svg>
                 </div>
@@ -1399,7 +1385,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Apoio à análise de competência no e-Notariado.</p>
                 <span class="tool-card-included">Incluído no plano</span>
               </article>
-<article class="tool-card" data-tool-id="ganho-de-capital">
+              <article class="tool-card" data-tool-id="ganho-de-capital">
                 <div class="tool-card-icon tone-blue" aria-hidden="true">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="5,15 10,10 13,13 19,7"></polyline><polyline points="15,7 19,7 19,11"></polyline><line x1="5" y1="19" x2="19" y2="19"></line></svg>
                 </div>
@@ -1407,7 +1393,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Calculadora de lucro imobiliário na alienação de imóvel.</p>
                 <span class="tool-card-included">Incluído no plano</span>
               </article>
-<article class="tool-card" data-tool-id="tarifas-da-conta-notarial">
+              <article class="tool-card" data-tool-id="tarifas-da-conta-notarial">
                 <div class="tool-card-icon tone-blue" aria-hidden="true">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16"></path><path d="M16 7.5c0-1.7-1.8-3-4-3s-4 1.3-4 3 1.3 2.6 4 3 4 1.3 4 3-1.8 3-4 3-4-1.3-4-3"></path></svg>
                 </div>
@@ -1415,7 +1401,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Calculadora de tarifas da conta notarial.</p>
                 <span class="tool-card-included">Incluído no plano</span>
               </article>
-<article class="tool-card" data-tool-id="triagem-notarial">
+              <article class="tool-card" data-tool-id="triagem-notarial">
                 <div class="tool-card-icon tone-green" aria-hidden="true">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4" width="12" height="16" rx="2"></rect><path d="M9 9h6"></path><path d="M9 13h6"></path><path d="M9 17h4"></path><path d="M8 2.5h8"></path></svg>
                 </div>
@@ -1423,23 +1409,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Checklist documental e normativo para atos notariais.</p>
                 <span class="tool-card-included">Incluído no plano</span>
               </article>
-              <a class="tool-card tool-card-external" data-tool-id="atesta-certidoes" href="https://apicertidoes.minutasinteligentes.com.br/painel/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
-                <div class="tool-card-icon tone-green" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4h6l3 3v13a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 6.5 20V5.5A1.5 1.5 0 0 1 8 4z"></path><path d="M13.5 4v4h3"></path><path d="M9 13l2 2 4-4"></path><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
-                  </div>
-                <h3>API de Certidões</h3>
-                <p>Emissão automatizada de certidões em fontes públicas oficiais.</p>
-                <p class="tool-card-apart">Produto à parte · cadastro próprio ↗</p>
-              </a>
-              </div>
-            </div>
-
-            <div class="tools-category" aria-label="Para cartórios de notas e registro de imóveis">
-              <div class="tools-category-head">
-                <h3>Para cartórios de notas e registro de imóveis</h3>
-              </div>
-              <div class="tools-grid" aria-label="Para cartórios de notas e registro de imóveis">
-<article class="tool-card" data-tool-id="verificador-tecnico">
+              <article class="tool-card" data-tool-id="verificador-tecnico">
                 <div class="tool-card-icon tone-blue" aria-hidden="true">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-2.7 7.4-7 10-4.3-2.6-7-5.5-7-10V6l7-3z"></path><path d="M9 12.5l2 2 4-4"></path></svg>
                 </div>
@@ -1447,22 +1417,87 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Conferência técnica de PDF/A e assinaturas digitais.</p>
                 <span class="tool-card-included">Incluído no plano</span>
               </article>
+              <article class="tool-card" data-tool-id="certidao-reprografica">
+                <div class="tool-card-icon tone-green" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 7 20V5A1.5 1.5 0 0 1 8.5 3.5z"></path><path d="M14 3.5V8h4"></path><path d="M9 13l2 2 4-4"></path></svg>
+                </div>
+                <h3>Certidão reprográfica</h3>
+                <p>Apoio à geração de certidão reprográfica.</p>
+                <span class="tool-card-included">Incluído no plano</span>
+              </article>
+              <article class="tool-card" data-tool-id="consulta-pep-por-cpf">
+                <div class="tool-card-icon tone-blue" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="4"></circle><path d="M16.5 16.5L21 21"></path><path d="M7 17.5c1-.7 2-.9 3-.9s2 .2 3 .9"></path></svg>
+                </div>
+                <h3>Consulta PEP por CPF</h3>
+                <p>Consulta auxiliar de pessoa exposta politicamente.</p>
+                <span class="tool-card-included">Incluído no plano</span>
+              </article>
+              <article class="tool-card" data-tool-id="gerador-de-certidoes">
+                <div class="tool-card-icon tone-blue" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 7 20V5A1.5 1.5 0 0 1 8.5 3.5z"></path><path d="M14 3.5V8h4"></path><path d="M9.5 12.5h5"></path><path d="M9.5 16h3.5"></path></svg>
+                </div>
+                <h3>Gerador de certidões</h3>
+                <p>Geração de certidões a partir de dados e modelos informados.</p>
+                <span class="tool-card-included">Incluído no plano</span>
+              </article>
+              <article class="tool-card" data-tool-id="gerador-de-orcamento">
+                <div class="tool-card-icon tone-green" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 7 20V5A1.5 1.5 0 0 1 8.5 3.5z"></path><path d="M14 3.5V8h4"></path><path d="M9.5 12h5"></path><path d="M9.5 15h5"></path></svg>
+                </div>
+                <h3>Gerador de orçamento</h3>
+                <p>Geração de orçamento estimativo para atos notariais.</p>
+                <span class="tool-card-included">Incluído no plano</span>
+              </article>
+              <article class="tool-card" data-tool-id="oficio-de-comparecimento">
+                <div class="tool-card-icon tone-blue" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"></circle><path d="M6.5 18c1.2-2.3 3.3-3.5 5.5-3.5s4.3 1.2 5.5 3.5"></path><path d="M18.5 7.5l1.2 1.2 2.3-2.3"></path></svg>
+                </div>
+                <h3>Ofício de comparecimento</h3>
+                <p>Geração de ofício de comparecimento.</p>
+                <span class="tool-card-included">Incluído no plano</span>
+              </article>
+              <article class="tool-card" data-tool-id="oficio-para-bancos-em-inventario">
+                <div class="tool-card-icon tone-blue" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5L12 5l8 4.5"></path><path d="M5 10h14"></path><path d="M6.5 10v7"></path><path d="M10.5 10v7"></path><path d="M14.5 10v7"></path><path d="M18.5 10v7"></path><path d="M4 19h16"></path></svg>
+                </div>
+                <h3>Ofício para bancos em inventário</h3>
+                <p>Geração de ofício bancário para inventário.</p>
+                <span class="tool-card-included">Incluído no plano</span>
+              </article>
+              <article class="tool-card" data-tool-id="oficio-para-cartorios">
+                <div class="tool-card-icon tone-green" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"></path><path d="M6 20V8l6-4 6 4v12"></path><path d="M9 11h2"></path><path d="M13 11h2"></path><path d="M9 15h2"></path><path d="M13 15h2"></path></svg>
+                </div>
+                <h3>Ofício para cartórios</h3>
+                <p>Geração de ofício para serventias extrajudiciais.</p>
+                <span class="tool-card-included">Incluído no plano</span>
+              </article>
+              <article class="tool-card" data-tool-id="validacao-selo-digital-tjsp">
+                <div class="tool-card-icon tone-blue" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="5"></circle><path d="M9.5 14.5L8 20l4-2 4 2-1.5-5.5"></path><path d="M10.2 10.2l1.2 1.2 2.4-2.4"></path></svg>
+                </div>
+                <h3>Validação Selo Digital TJSP</h3>
+                <p>Conferência auxiliar de selo digital do TJSP.</p>
+                <span class="tool-card-included">Incluído no plano</span>
+              </article>
               </div>
             </div>
 
-            <div class="tools-category" aria-label="Para cartórios de notas">
+            <div class="tools-category" aria-label="Cobrança por uso">
               <div class="tools-category-head">
-                <h3>Para cartórios de notas</h3>
+                <h3>Cobrança por uso</h3>
+                <p class="tools-category-note">Abrem no seu painel; você paga só o que usar.</p>
               </div>
-              <div class="tools-grid" aria-label="Para cartórios de notas">
-              <a class="tool-card tool-card-external" data-tool-id="atendimento-omnichannel" href="https://atendimento.portalnotarial.com.br" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+              <div class="tools-grid" aria-label="Cobrança por uso">
+              <article class="tool-card" data-tool-id="consulta-de-obito-por-cpf-rf">
                 <div class="tool-card-icon tone-blue" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4.5H4a1.5 1.5 0 0 0-1.5 1.5v9A1.5 1.5 0 0 0 4 16.5h3v3l4-3h9a1.5 1.5 0 0 0 1.5-1.5V6A1.5 1.5 0 0 0 20 4.5z"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path></svg>
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 7 20V5A1.5 1.5 0 0 1 8.5 3.5z"></path><path d="M14 3.5V8h4"></path><circle cx="11" cy="13" r="2.5"></circle><path d="M13 15l2.5 2.5"></path><path d="M9.5 18l1.3 1.3 2.7-2.7"></path></svg>
                 </div>
-                <h3>Atendimento inteligente</h3>
-                <p>WhatsApp do cartório com atendimento por inteligência artificial.</p>
-                <p class="tool-card-apart">Produto à parte · cadastro próprio ↗</p>
-              </a>
+                <h3>Consulta de óbito por CPF/RF</h3>
+                <p>Indicativo de óbito por CPF antes da prática do ato.</p>
+                <p class="tool-card-price" style="margin-top:auto;padding-top:14px">R$ 0,80 / consulta</p>
+              </article>
               <article class="tool-card" data-tool-id="classificador-de-arquivos-eletronicos">
                 <div class="tool-card-icon tone-green" aria-hidden="true">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4H10l2 2h5.5A2.5 2.5 0 0 1 20 8.5v7A2.5 2.5 0 0 1 17.5 18h-11A2.5 2.5 0 0 1 4 15.5z"></path><path d="M9 12h6"></path><path d="M9 15h4"></path></svg>
@@ -1479,14 +1514,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Organize e gerencie a agenda de atendimento.</p>
                 <p class="tool-card-price" style="margin-top:auto;padding-top:14px">R$ 80,00 / mês</p>
               </article>
-<article class="tool-card" data-tool-id="certidao-reprografica">
+              </div>
+            </div>
+
+            <div class="tools-category" aria-label="Produtos à parte">
+              <div class="tools-category-head">
+                <h3>Produtos à parte</h3>
+                <p class="tools-category-note">Cada um tem cadastro e cobrança próprios. O Portal reúne o acesso a eles aqui.</p>
+              </div>
+              <div class="tools-grid" aria-label="Produtos à parte">
+              <a class="tool-card tool-card-external" data-tool-id="coleta-de-evidencia-digital" href="https://atesta.portalnotarial.com.br/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+                <div class="tool-card-topline"><div class="tool-card-icon tone-blue" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-2.7 7.4-7 10-4.3-2.6-7-5.5-7-10V6l7-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
+                </div><span class="tool-card-badge tool-card-badge-right">Novo</span></div><h3>Ata notarial e prova digital</h3>
+                <p>Transcrição de áudio com precisão.<br>Captura automatizada de página web e de fotos em diligências.</p>
+                <p class="tool-card-apart">Produto à parte · cadastro próprio ↗</p>
+              </a>
+              <a class="tool-card tool-card-external" data-tool-id="atesta-certidoes" href="https://apicertidoes.minutasinteligentes.com.br/painel/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
                 <div class="tool-card-icon tone-green" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 7 20V5A1.5 1.5 0 0 1 8.5 3.5z"></path><path d="M14 3.5V8h4"></path><path d="M9 13l2 2 4-4"></path></svg>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4h6l3 3v13a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 6.5 20V5.5A1.5 1.5 0 0 1 8 4z"></path><path d="M13.5 4v4h3"></path><path d="M9 13l2 2 4-4"></path><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
+                  </div>
+                <h3>API de Certidões</h3>
+                <p>Emissão automatizada de certidões em fontes públicas oficiais.</p>
+                <p class="tool-card-apart">Produto à parte · cadastro próprio ↗</p>
+              </a>
+              <a class="tool-card tool-card-external" data-tool-id="atendimento-omnichannel" href="https://atendimento.portalnotarial.com.br" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+                <div class="tool-card-icon tone-blue" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4.5H4a1.5 1.5 0 0 0-1.5 1.5v9A1.5 1.5 0 0 0 4 16.5h3v3l4-3h9a1.5 1.5 0 0 0 1.5-1.5V6A1.5 1.5 0 0 0 20 4.5z"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path></svg>
                 </div>
-                <h3>Certidão reprográfica</h3>
-                <p>Apoio à geração de certidão reprográfica.</p>
-                <span class="tool-card-included">Incluído no plano</span>
-              </article>
+                <h3>Atendimento inteligente</h3>
+                <p>WhatsApp do cartório com atendimento por inteligência artificial.</p>
+                <p class="tool-card-apart">Produto à parte · cadastro próprio ↗</p>
+              </a>
               <a class="tool-card tool-card-external" data-tool-id="conferencia-inteligente" href="https://conferenciainteligente.com.br/ia-notarial/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
                 <div class="tool-card-topline">
                   <div class="tool-card-icon tone-blue" aria-hidden="true">
@@ -1498,62 +1557,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Conferência técnica e jurídica de atos notariais, com o cruzamento da minuta e dos documentos.</p>
                 <p class="tool-card-apart">Produto à parte · cadastro próprio ↗</p>
               </a>
-<article class="tool-card" data-tool-id="consulta-pep-por-cpf">
-                <div class="tool-card-icon tone-blue" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="10" r="4"></circle><path d="M16.5 16.5L21 21"></path><path d="M7 17.5c1-.7 2-.9 3-.9s2 .2 3 .9"></path></svg>
-                </div>
-                <h3>Consulta PEP por CPF</h3>
-                <p>Consulta auxiliar de pessoa exposta politicamente.</p>
-                <span class="tool-card-included">Incluído no plano</span>
-              </article>
-<article class="tool-card" data-tool-id="gerador-de-certidoes">
-                <div class="tool-card-icon tone-blue" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 7 20V5A1.5 1.5 0 0 1 8.5 3.5z"></path><path d="M14 3.5V8h4"></path><path d="M9.5 12.5h5"></path><path d="M9.5 16h3.5"></path></svg>
-                </div>
-                <h3>Gerador de certidões</h3>
-                <p>Geração de certidões a partir de dados e modelos informados.</p>
-                <span class="tool-card-included">Incluído no plano</span>
-              </article>
-<article class="tool-card" data-tool-id="gerador-de-orcamento">
-                <div class="tool-card-icon tone-green" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3.5h6l4 4V20a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 7 20V5A1.5 1.5 0 0 1 8.5 3.5z"></path><path d="M14 3.5V8h4"></path><path d="M9.5 12h5"></path><path d="M9.5 15h5"></path></svg>
-                </div>
-                <h3>Gerador de orçamento</h3>
-                <p>Geração de orçamento estimativo para atos notariais.</p>
-                <span class="tool-card-included">Incluído no plano</span>
-              </article>
-<article class="tool-card" data-tool-id="oficio-de-comparecimento">
-                <div class="tool-card-icon tone-blue" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"></circle><path d="M6.5 18c1.2-2.3 3.3-3.5 5.5-3.5s4.3 1.2 5.5 3.5"></path><path d="M18.5 7.5l1.2 1.2 2.3-2.3"></path></svg>
-                </div>
-                <h3>Ofício de comparecimento</h3>
-                <p>Geração de ofício de comparecimento.</p>
-                <span class="tool-card-included">Incluído no plano</span>
-              </article>
-<article class="tool-card" data-tool-id="oficio-para-bancos-em-inventario">
-                <div class="tool-card-icon tone-blue" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5L12 5l8 4.5"></path><path d="M5 10h14"></path><path d="M6.5 10v7"></path><path d="M10.5 10v7"></path><path d="M14.5 10v7"></path><path d="M18.5 10v7"></path><path d="M4 19h16"></path></svg>
-                </div>
-                <h3>Ofício para bancos em inventário</h3>
-                <p>Geração de ofício bancário para inventário.</p>
-                <span class="tool-card-included">Incluído no plano</span>
-              </article>
-<article class="tool-card" data-tool-id="oficio-para-cartorios">
-                <div class="tool-card-icon tone-green" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"></path><path d="M6 20V8l6-4 6 4v12"></path><path d="M9 11h2"></path><path d="M13 11h2"></path><path d="M9 15h2"></path><path d="M13 15h2"></path></svg>
-                </div>
-                <h3>Ofício para cartórios</h3>
-                <p>Geração de ofício para serventias extrajudiciais.</p>
-                <span class="tool-card-included">Incluído no plano</span>
-              </article>
-<article class="tool-card" data-tool-id="validacao-selo-digital-tjsp">
-                <div class="tool-card-icon tone-blue" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="10" r="5"></circle><path d="M9.5 14.5L8 20l4-2 4 2-1.5-5.5"></path><path d="M10.2 10.2l1.2 1.2 2.4-2.4"></path></svg>
-                </div>
-                <h3>Validação Selo Digital TJSP</h3>
-                <p>Conferência auxiliar de selo digital do TJSP.</p>
-                <span class="tool-card-included">Incluído no plano</span>
-              </article>
               </div>
             </div>
 
