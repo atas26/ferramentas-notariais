@@ -704,6 +704,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .tool-card-external {
       position: relative;
       color: inherit;
+      background: rgba(180, 90, 0, 0.045);
+      border-color: rgba(180, 90, 0, 0.22);
     }
 
     .tool-card-badge {
@@ -1246,6 +1248,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     @media (prefers-reduced-motion: reduce){ .tool-card{transition:none} .tool-card:hover::after{animation:none} }
 .tool-card-included{margin-top:auto;padding-top:14px;color:#0f9669;font-size:12px;font-weight:800;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:6px}
     .tool-card-included::before{content:'';width:7px;height:7px;border-radius:50%;background:#0f9669}
+    .tool-card-apart{margin-top:auto;padding-top:14px;color:#b25a00;font-size:12px;font-weight:800;letter-spacing:-.01em;display:inline-flex;align-items:center;gap:6px}
+    .acesso-legenda{list-style:none;margin:18px auto 0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 18px;max-width:780px}
+    .acesso-legenda li{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:var(--texto-suave);line-height:1.4}
+    .acesso-legenda li::before{content:'';width:8px;height:8px;border-radius:50%;flex:0 0 8px}
+    .acesso-legenda .leg-plano::before{background:#0f9669}
+    .acesso-legenda .leg-uso::before{background:var(--azul)}
+    .acesso-legenda .leg-apart::before{background:#b25a00;border-radius:2px}
   </style>
 </head>
 <body>
@@ -1310,8 +1319,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="section-eyebrow">Ferramentas e serviços de apoio</span>
             <h2 class="section-title" id="titulo-ferramentas">Um painel único para rotinas recorrentes.</h2>
             <p class="section-lead">
-              O Portal Notarial Pro reúne ferramentas de apoio operacional para cálculo, certidões e conferência técnica de documentos. Cada card indica se está incluído no plano ou tem cobrança própria.
+              O Portal Notarial Pro reúne numa página só as ferramentas da sua rotina. Algumas já vêm no seu plano e abrem aqui dentro, com o login do Portal; outras são <strong>produtos à parte</strong>, com cadastro e cobrança próprios. O selo de cada card mostra qual é qual.
             </p>
+            <ul class="acesso-legenda" aria-label="Como ler os selos dos cards">
+              <li class="leg-plano">Incluídas no plano — abrem no seu painel</li>
+              <li class="leg-uso">Cobrança por uso — abrem no painel, paga só o que usar</li>
+              <li class="leg-apart">Produtos à parte — cadastro e cobrança próprios ↗</li>
+            </ul>
             <a class="section-detail-link" href="https://app.portalnotarial.com.br/catalogo.html">
               Conheça cada ferramenta em detalhe <span class="link-arrow" aria-hidden="true">→</span>
             </a>
@@ -1322,12 +1336,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <h3>Para cartórios, advogados e imobiliárias</h3>
               </div>
               <div class="tools-grid" aria-label="Para cartórios, advogados e imobiliárias">
-              <a class="tool-card" data-tool-id="coleta-de-evidencia-digital" href="https://atesta.portalnotarial.com.br/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+              <a class="tool-card tool-card-external" data-tool-id="coleta-de-evidencia-digital" href="https://atesta.portalnotarial.com.br/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
                 <div class="tool-card-topline"><div class="tool-card-icon tone-blue" aria-hidden="true">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-2.7 7.4-7 10-4.3-2.6-7-5.5-7-10V6l7-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
                 </div><span class="tool-card-badge tool-card-badge-right">Novo</span></div><h3>Ata notarial e prova digital</h3>
                 <p>Transcrição de áudio com precisão.<br>Captura automatizada de página web e de fotos em diligências.</p>
-                <p class="tool-card-price" style="margin-top:auto;padding-top:14px">Serviço com cadastro próprio</p>
+                <p class="tool-card-apart">Produto à parte · cadastro próprio ↗</p>
               </a>
               <article class="tool-card" data-tool-id="calculadora-avancada">
                 <div class="tool-card-icon tone-blue" aria-hidden="true">
@@ -1411,13 +1425,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Checklist documental e normativo para atos notariais.</p>
                 <span class="tool-card-included">Incluído no plano</span>
               </article>
-              <a class="tool-card" data-tool-id="atesta-certidoes" href="https://apicertidoes.minutasinteligentes.com.br/painel/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+              <a class="tool-card tool-card-external" data-tool-id="atesta-certidoes" href="https://apicertidoes.minutasinteligentes.com.br/painel/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
                 <div class="tool-card-icon tone-green" aria-hidden="true">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.5 4h6l3 3v13a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 6.5 20V5.5A1.5 1.5 0 0 1 8 4z"></path><path d="M13.5 4v4h3"></path><path d="M9 13l2 2 4-4"></path><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
                   </div>
                 <h3>API de Certidões</h3>
                 <p>Emissão automatizada de certidões em fontes públicas oficiais.</p>
-                <p class="tool-card-price" style="margin-top:auto;padding-top:14px">Serviço com cadastro próprio</p>
+                <p class="tool-card-apart">Produto à parte · cadastro próprio ↗</p>
               </a>
               </div>
             </div>
@@ -1443,13 +1457,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <h3>Para cartórios de notas</h3>
               </div>
               <div class="tools-grid" aria-label="Para cartórios de notas">
-              <a class="tool-card" data-tool-id="atendimento-omnichannel" href="https://atendimento.portalnotarial.com.br" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+              <a class="tool-card tool-card-external" data-tool-id="atendimento-omnichannel" href="https://atendimento.portalnotarial.com.br" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
                 <div class="tool-card-icon tone-blue" aria-hidden="true">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4.5H4a1.5 1.5 0 0 0-1.5 1.5v9A1.5 1.5 0 0 0 4 16.5h3v3l4-3h9a1.5 1.5 0 0 0 1.5-1.5V6A1.5 1.5 0 0 0 20 4.5z"></path><path d="M8 10h.01"></path><path d="M12 10h.01"></path><path d="M16 10h.01"></path></svg>
                 </div>
                 <h3>Atendimento inteligente</h3>
                 <p>WhatsApp do cartório com atendimento por inteligência artificial.</p>
-                <p class="tool-card-price" style="margin-top:auto;padding-top:14px">Serviço com cadastro próprio</p>
+                <p class="tool-card-apart">Produto à parte · cadastro próprio ↗</p>
               </a>
               <article class="tool-card" data-tool-id="classificador-de-arquivos-eletronicos">
                 <div class="tool-card-icon tone-green" aria-hidden="true">
@@ -1475,7 +1489,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p>Apoio à geração de certidão reprográfica.</p>
                 <span class="tool-card-included">Incluído no plano</span>
               </article>
-              <a class="tool-card" data-tool-id="conferencia-inteligente" href="https://conferenciainteligente.com.br/ia-notarial/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
+              <a class="tool-card tool-card-external" data-tool-id="conferencia-inteligente" href="https://conferenciainteligente.com.br/ia-notarial/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
                 <div class="tool-card-topline">
                   <div class="tool-card-icon tone-blue" aria-hidden="true">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8a2 2 0 0 1 2 2v14H6V6a2 2 0 0 1 2-2z"></path><path d="M9 10l2 2 4-4"></path><path d="M9 16h6"></path><path d="M19.5 4.5l.5-1 .5 1 1 .5-1 .5-.5 1-.5-1-1-.5z"></path></svg>
@@ -1484,7 +1498,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <h3>Conferência Inteligente</h3>
                 <p>Conferência técnica e jurídica de atos notariais, com o cruzamento da minuta e dos documentos.</p>
-                <p class="tool-card-price" style="margin-top:auto;padding-top:14px">Serviço com cadastro próprio</p>
+                <p class="tool-card-apart">Produto à parte · cadastro próprio ↗</p>
               </a>
 <article class="tool-card" data-tool-id="consulta-pep-por-cpf">
                 <div class="tool-card-icon tone-blue" aria-hidden="true">
@@ -1650,9 +1664,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span class="section-eyebrow">Perguntas frequentes</span>
             <h2 class="section-title" id="titulo-faq">Dúvidas comuns antes de assinar.</h2>
             <div class="faq-list">
+              <details class="faq"><summary>Assinar o Portal já libera todas as ferramentas?</summary><div class="faq-body">Não. A assinatura libera as ferramentas marcadas como "Incluídas no plano", que abrem no seu painel. As marcadas como "Produto à parte" (ex.: API de Certidões, Atendimento, Conferência Inteligente) têm cadastro e cobrança próprios — o Portal reúne o acesso a elas numa página só, mas cada uma é contratada à parte.</div></details>
               <details class="faq"><summary>As calculadoras substituem o orçamento ou o sistema oficial?</summary><div class="faq-body">Não. São ferramentas de apoio para triagem e conferência. O resultado depende dos dados informados e não substitui a análise do caso concreto.</div></details>
               <details class="faq"><summary>As tabelas valem para qual estado?</summary><div class="faq-body">As ferramentas de cálculo seguem as tabelas e a legislação do estado de São Paulo. Confirme sempre a regra vigente aplicável ao seu atendimento.</div></details>
-              <details class="faq"><summary>Como acesso as ferramentas?</summary><div class="faq-body">Pelo painel do assinante, após a assinatura. As ferramentas protegidas abrem pelo app do Portal Notarial.</div></details>
+              <details class="faq"><summary>Como acesso as ferramentas?</summary><div class="faq-body">Depende do selo do card. As "Incluídas no plano" abrem no seu painel de assinante, com o login do Portal. Os "Produtos à parte" (ex.: API de Certidões, Atendimento) são contratados e acessados separadamente, cada um com cadastro próprio.</div></details>
               <details class="faq"><summary>Preciso instalar algo?</summary><div class="faq-body">Não. Tudo funciona pelo navegador, no computador ou no celular.</div></details>
               <details class="faq"><summary>Tem fidelidade? Posso cancelar?</summary><div class="faq-body">Sem fidelidade - você cancela quando quiser. Veja a <a href="/politica-de-cancelamento.html">política de cancelamento</a>.</div></details>
             </div>
