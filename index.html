@@ -782,6 +782,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       flex-wrap: wrap;
     }
 
+    .pro-strip-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Mantém "Assinar agora" e "Entrar" lado a lado mesmo no mobile,
+       onde .button e .button.publish-style viram width:100%. Especificidade
+       maior (3 classes para o publish-style) para vencer a regra do @media. */
+    .pro-strip-actions .button,
+    .pro-strip-actions .button.publish-style {
+      width: auto;
+      min-width: 128px;
+    }
+
     .pro-price {
       display: flex;
       align-items: baseline;
@@ -1297,7 +1314,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="hero-badges" aria-label="Destaques do plano">
               <span>Cancele quando quiser</span>
-              <span>Acesso imediato pelo painel</span>
               <span>Dados protegidos - LGPD</span>
             </div>
           </section>
@@ -1493,7 +1509,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="pro-price">
                   <span class="pro-price-value">R$ 49,40</span><span class="pro-price-per">/mês</span>
                 </div>
-                <a class="button publish-style" href="https://app.portalnotarial.com.br">Assinar agora</a>
+                <div class="pro-strip-actions">
+                  <a class="button publish-style" href="https://app.portalnotarial.com.br">Assinar agora</a>
+                  <a class="button" href="https://app.portalnotarial.com.br/">Entrar</a>
+                </div>
               </div>
             </div>
 
