@@ -1255,6 +1255,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .mock-card span { display: block; margin-top: 8px; font-size: 11px; font-weight: 800; color: var(--azul); }
     .mock-note { margin: 12px 0 0; font-size: 12.5px; color: var(--texto-fraco); }
     @media (max-width: 760px) { .mock-grid { grid-template-columns: repeat(2, 1fr); } .mock-hero { flex-direction: column; align-items: flex-start; } .mock-status { text-align: left; border-left: 0; padding-left: 0; } }
+    /* Vídeo "Veja como funciona" */
+    .video-wrap { max-width: 920px; margin: 30px auto 0; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #000; box-shadow: 0 20px 55px rgba(10,37,64,0.16); border: 1px solid var(--linha); }
+    .video-player { display: block; width: 100%; height: 100%; object-fit: contain; background: #000; }
+    @media (max-width: 760px) { .video-wrap { margin-top: 22px; border-radius: 12px; } }
   </style>
   <style id="pn-cardfx">
     @property --pn-a{syntax:'<angle>';inherits:false;initial-value:0deg}
@@ -1327,6 +1331,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </header>
 
     <main>
+      <section class="section" id="video" aria-labelledby="titulo-video">
+        <div class="section-panel">
+          <div class="section-content">
+            <span class="section-eyebrow">Veja como funciona</span>
+            <h2 class="section-title" id="titulo-video">Do cálculo ao PDF, em segundos.</h2>
+            <p class="section-lead">
+              Em menos de 3 minutos, veja o Portal Notarial Pro calcular emolumentos, tributos e registro — e gerar o PDF com conferência pública para entregar ao cliente.
+            </p>
+            <div class="video-wrap">
+              <video class="video-player" controls preload="none" playsinline poster="/videos/portal-poster.jpg">
+                <source src="/videos/portal.mp4" type="video/mp4" />
+                Seu navegador não reproduz este vídeo. <a href="/videos/portal.mp4">Baixe o vídeo</a>.
+              </video>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section band-gray" id="ferramentas" aria-labelledby="titulo-ferramentas">
         <div class="section-panel">
           <div class="section-content">
