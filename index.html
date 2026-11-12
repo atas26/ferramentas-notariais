@@ -1616,76 +1616,62 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
       </section>
 
-      <section class="section band-gray" id="video-certidoes" aria-labelledby="titulo-video-certidoes">
+      <section class="section band-white" id="video-produtos" aria-labelledby="titulo-video-produtos">
         <div class="section-panel">
           <div class="section-content">
-            <span class="section-eyebrow">API de Certidões</span>
-            <h2 class="section-title" id="titulo-video-certidoes">Um catálogo, vários atos.</h2>
-            <p class="section-lead">
-              Veja a API de Certidões em ação: consultas e certidões de pessoa física e jurídica, processos na Justiça, imóvel rural e muito mais — reunidas em dossiês prontos.
-            </p>
-            <div class="video-wrap">
-              <video class="video-player" controls preload="none" playsinline poster="/videos/certidoes-poster.jpg">
-                <source src="/videos/certidoes.mp4" type="video/mp4" />
-                Seu navegador não reproduz este vídeo. <a href="/videos/certidoes.mp4">Baixe o vídeo</a>.
-              </video>
-            </div>
-          </div>
-        </div>
-      </section>
+            <span class="section-eyebrow">Produtos à parte</span>
+            <h2 class="section-title" id="titulo-video-produtos">Os produtos à parte em ação.</h2>
+            <p class="section-lead">Cada um é contratado à parte. Escolha um para ver funcionando:</p>
 
-      <section class="section band-white" id="video-conferencia" aria-labelledby="titulo-video-conferencia">
-        <div class="section-panel">
-          <div class="section-content">
-            <span class="section-eyebrow">Conferência Inteligente</span>
-            <h2 class="section-title" id="titulo-video-conferencia">Confira atos em minutos, com segurança.</h2>
-            <p class="section-lead">
-              A IA Notarial, da Conferência Inteligente, foi feita para o cartório: conferência de atos notariais, matrícula imobiliária, procuração pública, contrato ou estatuto social e revisão técnica.
-            </p>
-            <div class="video-wrap">
-              <video class="video-player" controls preload="none" playsinline poster="/videos/ia-notarial-poster.jpg">
-                <source src="/videos/ia-notarial.mp4" type="video/mp4" />
-                Seu navegador não reproduz este vídeo. <a href="/videos/ia-notarial.mp4">Baixe o vídeo</a>.
-              </video>
-            </div>
-          </div>
-        </div>
-      </section>
+            <style>
+              .vtabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:24px 0 14px;}
+              .vtab{appearance:none;-webkit-appearance:none;border:1px solid var(--linha);background:#fff;color:var(--texto);font-family:inherit;font-weight:800;font-size:13.5px;line-height:1;padding:11px 16px;border-radius:999px;cursor:pointer;transition:background .15s,color .15s,border-color .15s;}
+              .vtab:hover{border-color:var(--azul);color:var(--azul);}
+              .vtab[aria-pressed="true"]{background:var(--azul);border-color:var(--azul);color:#fff;}
+              .vtab:focus-visible{outline:2px solid var(--azul);outline-offset:2px;}
+              .vtab-desc{text-align:center;color:var(--texto-suave);max-width:640px;margin:0 auto 4px;font-size:15px;line-height:1.5;}
+            </style>
 
-      <section class="section band-gray" id="video-atesta" aria-labelledby="titulo-video-atesta">
-        <div class="section-panel">
-          <div class="section-content">
-            <span class="section-eyebrow">Atesta</span>
-            <h2 class="section-title" id="titulo-video-atesta">Evidência digital com integridade verificável.</h2>
-            <p class="section-lead">
-              O Atesta coleta a evidência digital com integridade verificável: transcrição de áudio, captura automatizada de páginas web e de fotos em diligências — prova pronta para o ato.
-            </p>
-            <div class="video-wrap">
-              <video class="video-player" controls preload="none" playsinline poster="/videos/atesta-poster.jpg">
-                <source src="/videos/atesta.mp4" type="video/mp4" />
-                Seu navegador não reproduz este vídeo. <a href="/videos/atesta.mp4">Baixe o vídeo</a>.
-              </video>
+            <div class="vtabs" role="group" aria-label="Escolha o produto para ver em vídeo">
+              <button type="button" class="vtab" aria-pressed="true" data-key="certidoes">API de Certidões</button>
+              <button type="button" class="vtab" aria-pressed="false" data-key="conferencia">Conferência Inteligente</button>
+              <button type="button" class="vtab" aria-pressed="false" data-key="atesta">Atesta</button>
+              <button type="button" class="vtab" aria-pressed="false" data-key="atendimento">Atendimento inteligente</button>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section class="section band-white" id="video-atendimento" aria-labelledby="titulo-video-atendimento">
-        <div class="section-panel">
-          <div class="section-content">
-            <span class="section-eyebrow">Atendimento inteligente</span>
-            <h2 class="section-title" id="titulo-video-atendimento">O WhatsApp do cartório, com IA.</h2>
-            <p class="section-lead">
-              O Atendimento inteligente responde no WhatsApp do cartório com inteligência artificial — a partir das fontes que o próprio cartório cadastra.
-            </p>
-            <div class="video-wrap">
-              <video class="video-player" controls preload="none" playsinline poster="/videos/chat-notarial-poster.jpg">
-                <source src="/videos/chat-notarial.mp4" type="video/mp4" />
-                Seu navegador não reproduz este vídeo. <a href="/videos/chat-notarial.mp4">Baixe o vídeo</a>.
-              </video>
+            <p class="vtab-desc" id="vprod-desc">Consultas e certidões de pessoa física e jurídica, processos na Justiça, imóvel rural e mais — reunidas em dossiês prontos.</p>
+
+            <div class="video-wrap" aria-live="polite">
+              <video class="video-player" id="vprod-video" controls preload="none" playsinline
+                     poster="/videos/certidoes-poster.jpg" src="/videos/certidoes.mp4"></video>
             </div>
           </div>
         </div>
+
+        <script>
+          (function () {
+            var P = {
+              certidoes:   { src: '/videos/certidoes.mp4',     poster: '/videos/certidoes-poster.jpg',     desc: 'Consultas e certidões de pessoa física e jurídica, processos na Justiça, imóvel rural e mais — reunidas em dossiês prontos.' },
+              conferencia: { src: '/videos/ia-notarial.mp4',   poster: '/videos/ia-notarial-poster.jpg',   desc: 'A IA Notarial confere atos notariais, matrícula imobiliária, procuração, contrato ou estatuto social e revisão técnica — em minutos.' },
+              atesta:      { src: '/videos/atesta.mp4',        poster: '/videos/atesta-poster.jpg',        desc: 'Evidência digital com integridade verificável: transcrição de áudio e captura de páginas web e de fotos em diligências.' },
+              atendimento: { src: '/videos/chat-notarial.mp4', poster: '/videos/chat-notarial-poster.jpg', desc: 'O WhatsApp do cartório com inteligência artificial, a partir das fontes que o próprio cartório cadastra.' }
+            };
+            var root = document.getElementById('video-produtos');
+            var tabs = Array.prototype.slice.call(root.querySelectorAll('.vtab'));
+            var video = document.getElementById('vprod-video');
+            var desc = document.getElementById('vprod-desc');
+            tabs.forEach(function (tab) {
+              tab.addEventListener('click', function () {
+                var d = P[tab.getAttribute('data-key')];
+                if (!d) return;
+                tabs.forEach(function (t) { t.setAttribute('aria-pressed', t === tab ? 'true' : 'false'); });
+                try { video.pause(); } catch (e) {}
+                video.src = d.src; video.poster = d.poster; video.load();
+                desc.textContent = d.desc;
+              });
+            });
+          })();
+        </script>
       </section>
 
       <section class="section band-white" id="normas" aria-labelledby="titulo-normas">
@@ -1754,6 +1740,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <details class="faq"><summary>Como acesso as ferramentas?</summary><div class="faq-body">Depende do selo do card. As "Incluídas no plano" abrem no seu painel de assinante, com o login do Portal. Os "Produtos à parte" (ex.: API de Certidões, Atendimento) são contratados e acessados separadamente, cada um com cadastro próprio.</div></details>
               <details class="faq"><summary>Preciso instalar algo?</summary><div class="faq-body">Não. Tudo funciona pelo navegador, no computador ou no celular.</div></details>
               <details class="faq"><summary>Tem fidelidade? Posso cancelar?</summary><div class="faq-body">Sem fidelidade - você cancela quando quiser. Veja a <a href="/politica-de-cancelamento.html">política de cancelamento</a>.</div></details>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section band-dark" id="cta-final" aria-labelledby="titulo-cta-final">
+        <div class="section-panel">
+          <div class="section-content" style="text-align:center">
+            <span class="section-eyebrow">Portal Notarial Pro</span>
+            <h2 class="section-title" id="titulo-cta-final">Comece a ganhar tempo hoje.</h2>
+            <p class="section-lead" style="margin-left:auto;margin-right:auto">
+              Todas as ferramentas do plano num painel único, por R$ 49,40/mês. Sem fidelidade — cancele quando quiser.
+            </p>
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px">
+              <a class="button publish-style" href="https://app.portalnotarial.com.br/criar-conta.html">Assinar agora</a>
+              <a class="button" href="https://app.portalnotarial.com.br/entrar.html">Entrar</a>
             </div>
           </div>
         </div>
