@@ -1260,7 +1260,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .video-wrap { position: relative; max-width: 920px; margin: 30px auto 0; aspect-ratio: 16 / 9; border-radius: 20px; overflow: hidden; background: #0a1526; box-shadow: 0 0 0 1px rgba(10,37,64,0.06), 0 28px 64px -22px rgba(10,37,64,0.42), 0 10px 26px -14px rgba(11,95,255,0.20); }
     .video-player { display: block; width: 100%; height: 100%; object-fit: contain; background: #0a1526; }
     .vplay { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); width: 84px; height: 84px; border: 0; border-radius: 50%; cursor: pointer; display: grid; place-items: center; background: rgba(11,95,255,0.94); box-shadow: 0 12px 30px rgba(11,95,255,0.45), 0 0 0 10px rgba(255,255,255,0.14); transition: transform .18s ease, opacity .25s ease, box-shadow .18s ease; }
-    .vplay svg { width: 30px; height: 30px; margin-left: 4px; fill: #fff; }
+    .vplay svg { width: 30px; height: 30px; fill: #fff; }
+    /* Em tela cheia (do contêiner), o overlay sai — controles nativos assumem. */
+    .video-wrap:fullscreen .vplay, .video-wrap:-webkit-full-screen .vplay { display: none; }
+    .video-wrap:fullscreen .video-player, .video-wrap:-webkit-full-screen .video-player { width: 100%; height: 100%; }
     .vplay:hover { transform: translate(-50%,-50%) scale(1.06); box-shadow: 0 16px 38px rgba(11,95,255,0.55), 0 0 0 14px rgba(255,255,255,0.16); }
     .vplay:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
     .video-wrap.is-playing .vplay { opacity: 0; pointer-events: none; transform: translate(-50%,-50%) scale(.82); }
@@ -2228,15 +2231,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   })();
   </script>
   <script>
-  // Botão de play premium: toca o vídeo e some; reaparece ao terminar.
+  // Botão de play premium: toca o vídeo e some na hora; reaparece ao terminar.
   (function () {
+    function hideAll(){ document.querySelectorAll('.video-wrap').forEach(function(w){ w.classList.add('is-playing'); }); }
     document.querySelectorAll('.video-wrap').forEach(function (wrap) {
       var v = wrap.querySelector('video');
       var btn = wrap.querySelector('.vplay');
       if (!v || !btn) return;
-      btn.addEventListener('click', function () { var p = v.play(); if (p && p.catch) p.catch(function(){}); });
+      btn.addEventListener('click', function () { wrap.classList.add('is-playing'); var p = v.play(); if (p && p.catch) p.catch(function(){}); });
       v.addEventListener('play', function () { wrap.classList.add('is-playing'); });
       v.addEventListener('ended', function () { wrap.classList.remove('is-playing'); });
+      v.addEventListener('webkitbeginfullscreen', function () { wrap.classList.add('is-playing'); });
+    });
+    ['fullscreenchange','webkitfullscreenchange'].forEach(function (ev) {
+      document.addEventListener(ev, function () { if (document.fullscreenElement || document.webkitFullscreenElement) hideAll(); });
     });
   })();
   </script>
